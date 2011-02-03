@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sicemed.Web", "Sicemed.Web\Sicemed.Web.csproj", "{D438A259-8A7A-4237-A21F-5CF72DB0A843}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sicemed.Tests", "Sicemed.Tests\Sicemed.Tests.csproj", "{FEAAF7C9-FB77-46F4-B442-0B191D47ABA5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D438A259-8A7A-4237-A21F-5CF72DB0A843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D438A259-8A7A-4237-A21F-5CF72DB0A843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D438A259-8A7A-4237-A21F-5CF72DB0A843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D438A259-8A7A-4237-A21F-5CF72DB0A843}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEAAF7C9-FB77-46F4-B442-0B191D47ABA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEAAF7C9-FB77-46F4-B442-0B191D47ABA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEAAF7C9-FB77-46F4-B442-0B191D47ABA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEAAF7C9-FB77-46F4-B442-0B191D47ABA5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
