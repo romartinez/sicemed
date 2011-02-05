@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using NUnit.Framework;
-using Sicemed.Web;
 using Sicemed.Web.Controllers;
 
-namespace Sicemed.Tests.Controllers {
+namespace Sicemed.Tests.Web.Controllers {
     [TestFixture]
     public class HomeControllerTest {
         [Test]

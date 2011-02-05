@@ -5,11 +5,10 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using NUnit.Framework;
-using Sicemed.Web;
 using Sicemed.Web.Controllers;
 using Sicemed.Web.Models;
 
-namespace Sicemed.Tests.Controllers {
+namespace Sicemed.Tests.Web.Controllers {
 
     [TestFixture]
     public class AccountControllerTest {

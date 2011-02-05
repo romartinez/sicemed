@@ -24,7 +24,7 @@ namespace Sicemed.Web.Plumbing.Facilities {
                     .LifeStyle.PerWebRequest);
         }
 
-        private Configuration BuildDatabaseConfiguration() {
+        public Configuration BuildDatabaseConfiguration() {
             return Fluently.Configure()
                 .Database(SetupDatabase)
                 .Mappings(m => m.AutoMappings.Add(CreateMappingModel()))
