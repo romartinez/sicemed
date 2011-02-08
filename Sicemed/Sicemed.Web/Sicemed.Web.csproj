@@ -97,6 +97,9 @@
     <Reference Include="MvcContrib">
       <HintPath>..\packages\MvcContrib.Mvc3-ci.3.0.57.0\lib\MvcContrib.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Json.NET4.0r1\Net\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\packages\NHibernate.3.0.0.4000\lib\NHibernate.dll</HintPath>
     </Reference>
@@ -135,18 +138,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationServices\Account\FormsAuthenticationApplicationService.cs" />
+    <Compile Include="ApplicationServices\Account\UserDiscoveringApplicationService.cs" />
     <Compile Include="AppStart_Combres.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\UrlHelperExtensions.cs" />
+    <Compile Include="ModelBinders\ComplexObjectModelBinder.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ViewModelBase.cs" />
+    <Compile Include="Plumbing\AsyncUserAwareRequestDispatcher.cs" />
+    <Compile Include="Plumbing\BaseController.cs" />
     <Compile Include="Plumbing\DoNotMapAttribute.cs" />
     <Compile Include="Plumbing\Facilities\PersistenceFacility.cs" />
+    <Compile Include="Plumbing\Installers\ApplicationServicesInstaller.cs" />
     <Compile Include="Plumbing\Installers\ControllersInstaller.cs" />
     <Compile Include="Plumbing\Installers\LoggerInstaller.cs" />
     <Compile Include="Plumbing\Installers\PersistenceInstaller.cs" />
+    <Compile Include="Plumbing\UserAwareRequestDispatcher.cs" />
     <Compile Include="Plumbing\WindsorControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -240,9 +252,21 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sicemed.Common\Sicemed.Common.csproj">
+      <Project>{529C8D29-2B8D-490B-A4E5-7835C2D734F3}</Project>
+      <Name>Sicemed.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sicemed.Model\Sicemed.Model.csproj">
       <Project>{86010954-0ACA-457A-A0DF-AD59EF3595C0}</Project>
       <Name>Sicemed.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sicemed.Services.Handlers\Sicemed.Services.Handlers.csproj">
+      <Project>{2A1B26CD-1D77-4936-ACE7-9E4644FA59FA}</Project>
+      <Name>Sicemed.Services.Handlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sicemed.Services\Sicemed.Services.csproj">
+      <Project>{CB2D44EA-D898-47A0-A22A-7A5B95A914E7}</Project>
+      <Name>Sicemed.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

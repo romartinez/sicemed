@@ -56,6 +56,7 @@
       <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -64,10 +65,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CastleContainer.cs" />
+    <Compile Include="Dispatchers\AsyncRequestDispatcher.cs" />
+    <Compile Include="Dispatchers\RequestDispatcher.cs" />
+    <Compile Include="Exceptions\ActivableExceptionInfo.cs" />
+    <Compile Include="Handlers\BaseRequestHandler.cs" />
+    <Compile Include="Processors\ClientExceptionRequestProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RR\AuthenticatedRequest.cs" />
+    <Compile Include="RR\BaseRequest.cs" />
+    <Compile Include="RR\BaseResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sicemed.Common\Sicemed.Common.csproj">
+      <Project>{529C8D29-2B8D-490B-A4E5-7835C2D734F3}</Project>
+      <Name>Sicemed.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sicemed.Model\Sicemed.Model.csproj">
+      <Project>{86010954-0ACA-457A-A0DF-AD59EF3595C0}</Project>
+      <Name>Sicemed.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

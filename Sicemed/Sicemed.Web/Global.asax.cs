@@ -1,10 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Security;
+using Agatha.ServiceLayer;
 using Castle.Core.Logging;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using Newtonsoft.Json;
+using Sicemed.Model;
+using Sicemed.Services;
+using Sicemed.Services.Handlers;
+using Sicemed.Services.Processors;
+using Sicemed.Services.RR;
+using Sicemed.Web.ModelBinders;
 using Sicemed.Web.Plumbing;
 
 namespace Sicemed.Web {
@@ -38,17 +48,41 @@ namespace Sicemed.Web {
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
+            System.Web.Mvc.ModelBinders.Binders.DefaultBinder = new ComplexObjectModelBinder();
+
             //Windsor
             BootstrapContainer();
+
+            //Agatha
+            BootstrapAgatha();
+        }
+
+        protected void Application_Error(object sender, EventArgs e) {
+            if (_logger.IsFatalEnabled)
+                _logger.FatalFormat("Error no atrapado. Exc: {0}", Server.GetLastError());
         }
 
         protected void Application_End() {
-            Container.Dispose();
+            _container.Dispose();
         }
 
-        protected void Application_Error(object sender, EventArgs args) {
-            if (Logger.IsFatalEnabled)
-                _logger.FatalFormat("An unhandled error happened. Exc: {0}", Server.GetLastError());
+        protected void Application_AuthenticateRequest(Object sender, EventArgs e) {
+            // Get the authentication cookie
+            var cookieName = FormsAuthentication.FormsCookieName;
+            var authCookie = Context.Request.Cookies[cookieName];
+
+            // If the cookie can't be found, don't issue the ticket
+            if (authCookie == null) return;
+
+            // Get the authentication ticket and rebuild the principal 
+            // & identity
+            var authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+            var roles = authTicket.UserData.Split(new[] { '|' });
+            var identity = new IdentityBase(authTicket.Name);
+            var extendedData = JsonConvert.DeserializeObject<Dictionary<string, object>>(authTicket.UserData);
+            identity.ExtendedData = extendedData;
+            var userPrincipal = new PrincipalBase(identity, roles);
+            Context.User = userPrincipal;
         }
 
         private static void BootstrapContainer() {
@@ -56,8 +90,20 @@ namespace Sicemed.Web {
                 .Install(FromAssembly.This());
             var controllerFactory = new WindsorControllerFactory(_container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
-
             _logger = _container.Resolve<ILogger>();
+        }
+
+        private static void BootstrapAgatha() {
+            //Para cambiar a otro proveedor de DMS, o a WCF modificar aquí
+            var config = new ServiceLayerAndClientConfiguration(
+                    typeof(BaseRequestImplementationHandler<BaseRequest, BaseResponse>).Assembly,
+                    typeof(BaseRequest).Assembly,
+                    new CastleContainer(_container)) {
+                        RequestProcessorImplementation = typeof(ClientExceptionRequestProcessor),
+                        RequestDispatcherImplementation = typeof(UserAwareRequestDispatcher),
+                        AsyncRequestDispatcherImplementation = typeof(AsyncUserAwareRequestDispatcher)
+                    };
+            config.Initialize();
         }
     }
 }
