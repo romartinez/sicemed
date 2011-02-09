@@ -5,12 +5,13 @@ using Castle.MicroKernel.Registration;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using FluentNHibernate.Conventions.Helpers;
+using FluentNHibernate.Conventions.Helpers.Builders;
 using NHibernate;
 using NHibernate.ByteCode.Castle;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using Sicemed.Model;
+using Sicemed.Model.Components;
 
 namespace Sicemed.Web.Plumbing.Facilities {
     public class PersistenceFacility : AbstractFacility {
@@ -34,11 +35,11 @@ namespace Sicemed.Web.Plumbing.Facilities {
         }
 
         protected virtual AutoPersistenceModel CreateMappingModel() {
-            var m = AutoMap.Assembly(typeof(EntityBase).Assembly)
-                .Where(IsDomainEntity)
+            var m = AutoMap.Assembly(typeof (EntityBase).Assembly)
+                .Where(IsDomainEntity)                
                 .OverrideAll(ShouldIgnoreProperty)
-                .IgnoreBase<EntityBase>();
-
+                .IgnoreBase<EntityBase>()
+                .Conventions.Add(new ComponentConventionBuilder().Always(x => x.Insert()));
             return m;
         }
 

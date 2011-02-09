@@ -8,5 +8,29 @@ namespace Sicemed.Model {
         public virtual IdentityBase IdentityBase {
             get { return (IdentityBase) Identity; }
         }
+
+        public bool IsSecretaria { 
+            get {
+                return this.IsInRole(Roles.SECRETARIA.ToString());
+            }
+        }
+
+        public bool IsAdmin {
+            get {
+                return this.IsInRole(Roles.ADMIN.ToString());
+            }
+        }
+
+        public bool IsPaciente {
+            get {
+                return this.IsInRole(Roles.PACIENTE.ToString());
+            }
+        }
+
+        public bool IsProfesional {
+            get {
+                return this.IsInRole(Roles.PROFESIONAL.ToString());
+            }        
+        }
     }
 }

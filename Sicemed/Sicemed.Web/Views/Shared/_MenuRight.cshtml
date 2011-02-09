@@ -1,14 +1,16 @@
-﻿<div class='box'>
-    <h3>
-        <a href='single.html'>HTML Template „Elementia“</a></h3>
-    <p>
-        Lorem ipsum dolor sit
-        amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo conse.
-    </p>
-    <!-- end box -->
-</div>
+﻿@if (User.GetCustom().IsAdmin) {
+    <div class='box'>
+        <h3>
+            <a href='single.html'>HTML Template „Elementia“</a></h3>
+        <p>
+            Lorem ipsum dolor sit
+            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            laboris nisi ut aliquip ex ea commodo conse.
+        </p>
+        <!-- end box -->
+    </div>
+}
 <div class='box'>
     <h3>
         Miscellaneous</h3>

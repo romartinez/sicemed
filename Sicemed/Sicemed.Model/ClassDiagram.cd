@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Sicemed.Model.Consultorio">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAgAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Consultorio.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.Usuario" Collapsed="true">
+    <Position X="9.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAgAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.DiaAtencionEspecialidadProfesional">
+    <Position X="18.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAIAIAgAAEAAAEAAAAAAAAAQAAApAAAAAA=</HashCode>
+      <FileName>DiaAtencionEspecialidadProfesional.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.Especialidad" Collapsed="true">
+    <Position X="29.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAABAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Especialidad.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.EspecialidadProfesional">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAEAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EspecialidadProfesional.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.Feriado" Collapsed="true">
+    <Position X="11.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAQAAAAAAAAAgAABAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Feriado.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.IdentityBase" Collapsed="true">
+    <Position X="36.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IdentityBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.Localidad" Collapsed="true">
+    <Position X="25.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAABAAAAAAAAAAgAAACCQAQAAACAAAAAAAAAA=</HashCode>
+      <FileName>Localidad.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.ObraSocial" Collapsed="true">
+    <Position X="32" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAACAAAAAAAAAEAAAAAAIAAgAAAgA=</HashCode>
+      <FileName>ObraSocial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.Paciente" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAARAAACBgAAAgA=</HashCode>
+      <FileName>Paciente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.Parametro">
+    <Position X="14" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Parametro.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.Plan">
+    <Position X="20.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAgAABAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Plan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.PrincipalBase" Collapsed="true">
+    <Position X="38.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>PrincipalBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.Profesional" Collapsed="true">
+    <Position X="34.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAACAAAAEAAAAAAQAAAAAAAAgA=</HashCode>
+      <FileName>Profesional.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.Provincia" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provincia.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.Secretaria">
+    <Position X="16.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAEAAACAAAAAAAAAAAAAAABAAAAgA=</HashCode>
+      <FileName>Secretaria.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.Turno" Collapsed="true">
+    <Position X="23" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACABIAAIAAAAABAAAAAABAAAgIAAAAEAAAAAA=</HashCode>
+      <FileName>Turno.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Model.Calendario" Collapsed="true">
+    <Position X="27.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAgAABAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Calendario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -22,9 +22,9 @@ namespace Sicemed.Model {
 
         public virtual DiaAtencionEspecialidadProfesional DiaAtencionEspecialidadProfesional { get; set; }
 
-        public virtual Paciente Paciente { get; set; }
+        public virtual Usuario Paciente { get; set; }
 
-        public virtual Secretaria Secretaria { get; set; }
+        public virtual Usuario Secretaria { get; set; }
 
         #endregion
     }

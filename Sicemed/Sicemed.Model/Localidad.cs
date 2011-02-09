@@ -16,14 +16,6 @@ namespace Sicemed.Model {
 
         public virtual Provincia Provincia { get; set; }
 
-        public virtual ISet<ObraSocial> ObrasSociales { get; set; }
-
-        public virtual ISet<Paciente> Pacientes { get; set; }
-
-        public virtual ISet<Profesional> Profesionales { get; set; }
-
-        public virtual ISet<Secretaria> Secretarias { get; set; }
-
         #endregion
     }
 }

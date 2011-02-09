@@ -8,7 +8,7 @@ namespace Sicemed.Model {
 
         public virtual Especialidad Especialidad { get; set; }
 
-        public virtual Profesional Profesional { get; set; }
+        public virtual Usuario Profesional { get; set; }
 
         #endregion
     }
