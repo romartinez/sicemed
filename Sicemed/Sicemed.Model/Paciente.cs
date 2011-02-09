@@ -20,7 +20,7 @@ namespace Sicemed.Model {
 
         public virtual Plan Plan { get; set; }
 
-        public virtual Usuario Usuario { get; set; }
+        //public virtual Usuario Usuario { get; set; }
 
         public virtual ISet<Turno> Turnos { get; set; }
 

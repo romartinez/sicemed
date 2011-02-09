@@ -72,6 +72,8 @@
     <Compile Include="Handlers\BaseRequestHandler.cs" />
     <Compile Include="Processors\ClientExceptionRequestProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RR\Accounts\RegisterUserRequest.cs" />
+    <Compile Include="RR\Accounts\RegisterUserResponse.cs" />
     <Compile Include="RR\AuthenticatedRequest.cs" />
     <Compile Include="RR\BaseRequest.cs" />
     <Compile Include="RR\BaseResponse.cs" />

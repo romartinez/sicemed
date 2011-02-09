@@ -18,7 +18,7 @@ namespace Sicemed.Model {
 
         public virtual Localidad Localidad { get; set; }
 
-        public virtual Usuario Usuario { get; set; }
+        //public virtual Usuario Usuario { get; set; }
 
         #endregion
     }

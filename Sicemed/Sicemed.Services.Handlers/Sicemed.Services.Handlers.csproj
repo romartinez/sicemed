@@ -55,6 +55,9 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.3.0.0.4000\lib\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -64,13 +67,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseRequestImplementationHandler.cs" />
+    <Compile Include="NHibernateBaseRequestHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterUserHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sicemed.Model\Sicemed.Model.csproj">
+      <Project>{86010954-0ACA-457A-A0DF-AD59EF3595C0}</Project>
+      <Name>Sicemed.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sicemed.Persistence\Sicemed.Persistence.csproj">
+      <Project>{D5B5E5E2-F684-45D1-9880-94DF19CD77BB}</Project>
+      <Name>Sicemed.Persistence</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sicemed.Services\Sicemed.Services.csproj">
       <Project>{CB2D44EA-D898-47A0-A22A-7A5B95A914E7}</Project>
       <Name>Sicemed.Services</Name>

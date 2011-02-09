@@ -96,7 +96,7 @@ namespace Sicemed.Web {
         private static void BootstrapAgatha() {
             //Para cambiar a otro proveedor de DMS, o a WCF modificar aquí
             var config = new ServiceLayerAndClientConfiguration(
-                    typeof(BaseRequestImplementationHandler<BaseRequest, BaseResponse>).Assembly,
+                    typeof(NHibernateBaseRequestHandler<BaseRequest, BaseResponse>).Assembly,
                     typeof(BaseRequest).Assembly,
                     new CastleContainer(_container)) {
                         RequestProcessorImplementation = typeof(ClientExceptionRequestProcessor),

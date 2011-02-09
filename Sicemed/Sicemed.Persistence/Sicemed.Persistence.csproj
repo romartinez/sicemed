@@ -74,9 +74,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sicemed.Model\Sicemed.Model.csproj">
+      <Project>{86010954-0ACA-457A-A0DF-AD59EF3595C0}</Project>
+      <Name>Sicemed.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -14,11 +14,11 @@ namespace Sicemed.Model {
 
         #region Navigation Properties
 
-        public virtual Paciente Paciente { get; set; }
+        //public virtual Paciente Paciente { get; set; }
 
-        public virtual Profesional Profesional { get; set; }
+        //public virtual Profesional Profesional { get; set; }
 
-        public virtual Secretaria Secretaria { get; set; }
+        //public virtual Secretaria Secretaria { get; set; }
 
         #endregion
     }

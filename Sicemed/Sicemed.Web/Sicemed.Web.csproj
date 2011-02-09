@@ -57,9 +57,6 @@
     <Reference Include="Castle.Services.Logging.Log4netIntegration">
       <HintPath>..\packages\Castle.Core-log4net.2.5.2\lib\Castle.Services.Logging.Log4netIntegration.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Services.Transaction">
-      <HintPath>..\packages\Castle.Services.Transaction.2.5.0\lib\NET40\Castle.Services.Transaction.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.2.5.2\lib\NET40\Castle.Windsor.dll</HintPath>
     </Reference>
