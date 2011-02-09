@@ -1,11 +1,9 @@
 ﻿using System.Web.Mvc;
-using Castle.Core.Logging;
 using Sicemed.Services.RR.Accounts;
 using Sicemed.Web.Plumbing;
 
 namespace Sicemed.Web.Controllers {
     public class HomeController : BaseController {
-        public ILogger Logger { get; set; }
 
         public ActionResult Index() {
             Logger.FatalFormat("ERRORRRRR!!!");

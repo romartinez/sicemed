@@ -5,6 +5,7 @@ using Castle.MicroKernel.Registration;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Conventions.Helpers;
 using NHibernate;
 using NHibernate.ByteCode.Castle;
 using NHibernate.Cfg;
