@@ -8,7 +8,7 @@ namespace Sicemed.Model {
 
         public virtual DateTime? FechaNacimiento { get; set; }
 
-        public virtual Documento Documento { get; set; }
+        //public virtual Documento Documento { get; set; }
 
         public virtual DateTime? FechaIngreso { get; set; }
 

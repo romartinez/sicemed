@@ -1,4 +1,6 @@
 ﻿using System.Web.Mvc;
+using Castle.Core.Logging;
+using Moq;
 using NUnit.Framework;
 using Sicemed.Web.Controllers;
 
@@ -9,6 +11,8 @@ namespace Sicemed.Tests.Web.Controllers {
         public void Index() {
             // Arrange
             HomeController controller = new HomeController();
+            var logger = new Mock<ILogger>();
+            controller.Logger = logger.Object;
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -21,6 +25,8 @@ namespace Sicemed.Tests.Web.Controllers {
         public void About() {
             // Arrange
             HomeController controller = new HomeController();
+            var logger = new Mock<ILogger>();
+            controller.Logger = logger.Object;
 
             // Act
             ViewResult result = controller.About() as ViewResult;

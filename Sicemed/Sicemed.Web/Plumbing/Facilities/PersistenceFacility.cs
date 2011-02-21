@@ -11,7 +11,6 @@ using NHibernate.ByteCode.Castle;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using Sicemed.Model;
-using Sicemed.Model.Components;
 
 namespace Sicemed.Web.Plumbing.Facilities {
     public class PersistenceFacility : AbstractFacility {
