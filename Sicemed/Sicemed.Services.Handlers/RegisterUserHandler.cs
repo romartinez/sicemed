@@ -9,7 +9,7 @@ namespace Sicemed.Services.Handlers {
         
         public override Response Handle(RegisterUserRequest request) {
             var newUser = new Usuario() {
-                FechaNacimiento = DateTime.Now, Documento = new Dni(){ Numero= 21444445}
+                FechaNacimiento = DateTime.Now //, Documento = new Dni(){ Numero= 21444445}
             };
             Session.Save(newUser);
             return new RegisterUserResponse();
