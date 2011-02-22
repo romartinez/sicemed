@@ -33,7 +33,6 @@ namespace Sicemed.Tests.Persistence {
         }
 
         protected virtual IPersistenceConfigurer SetupDatabase() {
-            Console.WriteLine("Connection String: {0}", ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
             return MsSqlConfiguration.MsSql2008
                 .UseOuterJoin()
                 .ProxyFactoryFactory(typeof(ProxyFactoryFactory))
@@ -56,9 +55,11 @@ namespace Sicemed.Tests.Persistence {
         
         [Test]
         public void CanCreateSchema() {
-            var config = BuildDatabaseConfiguration();
-            var exporter = new SchemaExport(config);
-            exporter.Create(true, true);
+            Console.WriteLine("Connection String: {0}", ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
+            Console.WriteLine("Environment: {0}", ConfigurationManager.AppSettings["Environment"]);
+            //var config = BuildDatabaseConfiguration();
+            //var exporter = new SchemaExport(config);
+            //exporter.Create(true, true);
         }
     }
 }
