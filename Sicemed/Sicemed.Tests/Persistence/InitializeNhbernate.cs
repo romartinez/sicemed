@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Configuration;
 using Castle.Core.Internal;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions.Helpers.Builders;
 using NHibernate.ByteCode.Castle;
-using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
 using Sicemed.Model;
 using Sicemed.Web.Plumbing;
+using Configuration = NHibernate.Cfg.Configuration;
 
 namespace Sicemed.Tests.Persistence {
     [TestFixture]
@@ -32,6 +33,7 @@ namespace Sicemed.Tests.Persistence {
         }
 
         protected virtual IPersistenceConfigurer SetupDatabase() {
+            Console.WriteLine("Connection String: {0}", ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString);
             return MsSqlConfiguration.MsSql2008
                 .UseOuterJoin()
                 .ProxyFactoryFactory(typeof(ProxyFactoryFactory))
