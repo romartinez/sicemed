@@ -1,5 +1,0 @@
-C:\Projects\sicemed\Sicemed\Sicemed.Common\bin\Debug\Sicemed.Common.dll
-C:\Projects\sicemed\Sicemed\Sicemed.Common\bin\Debug\Sicemed.Common.pdb
-C:\Projects\sicemed\Sicemed\Sicemed.Common\obj\Debug\ResolveAssemblyReference.cache
-C:\Projects\sicemed\Sicemed\Sicemed.Common\obj\Debug\Sicemed.Common.dll
-C:\Projects\sicemed\Sicemed\Sicemed.Common\obj\Debug\Sicemed.Common.pdb
