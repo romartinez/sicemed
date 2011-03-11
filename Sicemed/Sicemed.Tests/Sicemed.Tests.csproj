@@ -43,6 +43,9 @@
     <Reference Include="Castle.Services.Logging.Log4netIntegration">
       <HintPath>..\packages\Castle.Windsor.2.5.2\lib\NET40\Castle.Services.Logging.Log4netIntegration.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EFCodeFirst.0.8\lib\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\packages\FluentNHibernate.1.1.1.694\lib\FluentNHibernate.dll</HintPath>
     </Reference>
