@@ -1,5 +1,4 @@
-﻿using System.Web.Mvc;
-using Agatha.Common;
+﻿using Agatha.Common;
 using Castle.Core.Logging;
 
 namespace Sicemed.Web.Plumbing {

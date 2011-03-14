@@ -1,9 +1,9 @@
 ﻿using System.Text;
+using System.Web.Mvc;
 using Newtonsoft.Json;
-using Sicemed.Common.Helpers;
 
 // ReSharper disable CheckNamespace
-namespace System.Web.Mvc {
+namespace Sicemed.Web.Helpers {
 // ReSharper restore CheckNamespace
     public static class UrlHelperExtensions {
         public static T Deserialize<T>(string hexEncodedObject) {

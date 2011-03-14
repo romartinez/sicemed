@@ -1,5 +1,5 @@
 using System.Web;
-using Sicemed.Model;
+using Sicemed.Web.Models;
 
 namespace Sicemed.Web.ApplicationServices.Account {
     public interface IUserDiscoveringApplicationService {

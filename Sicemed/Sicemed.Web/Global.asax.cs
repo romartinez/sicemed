@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using Agatha.ServiceLayer;
@@ -9,12 +8,12 @@ using Castle.Core.Logging;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Newtonsoft.Json;
-using Sicemed.Model;
 using Sicemed.Services;
 using Sicemed.Services.Handlers;
 using Sicemed.Services.Processors;
 using Sicemed.Services.RR;
 using Sicemed.Web.ModelBinders;
+using Sicemed.Web.Models;
 using Sicemed.Web.Plumbing;
 
 namespace Sicemed.Web {

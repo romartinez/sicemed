@@ -8,7 +8,7 @@ using FluentNHibernate.Conventions.Helpers.Builders;
 using NHibernate.ByteCode.Castle;
 using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
-using Sicemed.Model;
+using Sicemed.Web.Models;
 using Sicemed.Web.Plumbing;
 using Configuration = NHibernate.Cfg.Configuration;
 

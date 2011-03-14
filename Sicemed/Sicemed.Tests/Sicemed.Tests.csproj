@@ -100,10 +100,6 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sicemed.Model\Sicemed.Model.csproj">
-      <Project>{86010954-0ACA-457A-A0DF-AD59EF3595C0}</Project>
-      <Name>Sicemed.Model</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Sicemed.Web\Sicemed.Web.csproj">
       <Project>{D438A259-8A7A-4237-A21F-5CF72DB0A843}</Project>
       <Name>Sicemed.Web</Name>

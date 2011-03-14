@@ -143,9 +143,32 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HexEncoding.cs" />
     <Compile Include="Helpers\UrlHelperExtensions.cs" />
+    <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="ModelBinders\ComplexObjectModelBinder.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Calendario.cs" />
+    <Compile Include="Models\Components\Cuil.cs" />
+    <Compile Include="Models\Components\Cuit.cs" />
+    <Compile Include="Models\Components\Dni.cs" />
+    <Compile Include="Models\Components\Documento.cs" />
+    <Compile Include="Models\Components\ValueTypeBase.cs" />
+    <Compile Include="Models\Consultorio.cs" />
+    <Compile Include="Models\DiaAtencionEspecialidadProfesional.cs" />
+    <Compile Include="Models\EntityBase.cs" />
+    <Compile Include="Models\Especialidad.cs" />
+    <Compile Include="Models\EspecialidadProfesional.cs" />
+    <Compile Include="Models\Feriado.cs" />
+    <Compile Include="Models\IdentityBase.cs" />
+    <Compile Include="Models\Localidad.cs" />
+    <Compile Include="Models\ObraSocial.cs" />
+    <Compile Include="Models\Parametro.cs" />
+    <Compile Include="Models\Plan.cs" />
+    <Compile Include="Models\PrincipalBase.cs" />
+    <Compile Include="Models\Provincia.cs" />
+    <Compile Include="Models\Turno.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Plumbing\AsyncUserAwareRequestDispatcher.cs" />
     <Compile Include="Plumbing\BaseController.cs" />
@@ -249,24 +272,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sicemed.Common\Sicemed.Common.csproj">
-      <Project>{529C8D29-2B8D-490B-A4E5-7835C2D734F3}</Project>
-      <Name>Sicemed.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sicemed.Model\Sicemed.Model.csproj">
-      <Project>{86010954-0ACA-457A-A0DF-AD59EF3595C0}</Project>
-      <Name>Sicemed.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sicemed.Services.Handlers\Sicemed.Services.Handlers.csproj">
-      <Project>{2A1B26CD-1D77-4936-ACE7-9E4644FA59FA}</Project>
-      <Name>Sicemed.Services.Handlers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sicemed.Services\Sicemed.Services.csproj">
-      <Project>{CB2D44EA-D898-47A0-A22A-7A5B95A914E7}</Project>
-      <Name>Sicemed.Services</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -276,6 +281,7 @@
     <Content Include="Views\Shared\_MenuRight.cshtml" />
     <Content Include="Views\Shared\_Breadcrumb.cshtml" />
     <Content Include="Views\Shared\_MenuFooter.cshtml" />
+    <None Include="Models\ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

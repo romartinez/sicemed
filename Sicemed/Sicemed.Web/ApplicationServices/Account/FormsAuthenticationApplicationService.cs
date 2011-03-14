@@ -2,7 +2,7 @@ using System;
 using System.Web;
 using System.Web.Security;
 using Newtonsoft.Json;
-using Sicemed.Model;
+using Sicemed.Web.Models;
 
 namespace Sicemed.Web.ApplicationServices.Account {
     public interface IFormsAuthenticationApplicationService {

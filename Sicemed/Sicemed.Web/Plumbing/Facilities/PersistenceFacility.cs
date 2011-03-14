@@ -10,7 +10,7 @@ using NHibernate;
 using NHibernate.ByteCode.Castle;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using Sicemed.Model;
+using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Plumbing.Facilities {
     public class PersistenceFacility : AbstractFacility {

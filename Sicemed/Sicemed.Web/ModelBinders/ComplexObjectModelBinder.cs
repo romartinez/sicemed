@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+﻿using Sicemed.Web.Helpers;
 using Sicemed.Web.Models;
 
 namespace Sicemed.Web.ModelBinders {

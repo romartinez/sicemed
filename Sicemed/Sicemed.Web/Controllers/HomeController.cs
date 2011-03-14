@@ -1,5 +1,4 @@
-﻿using System.Web.Mvc;
-using Sicemed.Services.RR.Accounts;
+﻿using Sicemed.Services.RR.Accounts;
 using Sicemed.Web.Plumbing;
 
 namespace Sicemed.Web.Controllers {
