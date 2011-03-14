@@ -1,5 +1,4 @@
-namespace Sicemed.Web.Models {
-    public class ViewModelBase {
-        
-    }
+namespace Sicemed.Web.Models
+{
+    public class ViewModelBase {}
 }

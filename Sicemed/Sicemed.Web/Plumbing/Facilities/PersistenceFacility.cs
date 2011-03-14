@@ -12,10 +12,13 @@ using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using Sicemed.Web.Models;
 
-namespace Sicemed.Web.Plumbing.Facilities {
-    public class PersistenceFacility : AbstractFacility {
-        protected override void Init() {
-            var config = BuildDatabaseConfiguration();
+namespace Sicemed.Web.Plumbing.Facilities
+{
+    public class PersistenceFacility : AbstractFacility
+    {
+        protected override void Init()
+        {
+            Configuration config = BuildDatabaseConfiguration();
 
             Kernel.Register(
                 Component.For<ISessionFactory>()
@@ -25,7 +28,8 @@ namespace Sicemed.Web.Plumbing.Facilities {
                     .LifeStyle.PerWebRequest);
         }
 
-        public Configuration BuildDatabaseConfiguration() {
+        public Configuration BuildDatabaseConfiguration()
+        {
             return Fluently.Configure()
                 .Database(SetupDatabase)
                 .Mappings(m => m.AutoMappings.Add(CreateMappingModel()))
@@ -33,32 +37,37 @@ namespace Sicemed.Web.Plumbing.Facilities {
                 .BuildConfiguration();
         }
 
-        protected virtual AutoPersistenceModel CreateMappingModel() {
-            var m = AutoMap.Assembly(typeof (EntityBase).Assembly)
-                .Where(IsDomainEntity)                
+        protected virtual AutoPersistenceModel CreateMappingModel()
+        {
+            AutoPersistenceModel m = AutoMap.Assembly(typeof (EntityBase).Assembly)
+                .Where(IsDomainEntity)
                 .OverrideAll(ShouldIgnoreProperty)
                 .IgnoreBase<EntityBase>()
                 .Conventions.Add(new ComponentConventionBuilder().Always(x => x.Insert()));
             return m;
         }
 
-        protected virtual IPersistenceConfigurer SetupDatabase() {
+        protected virtual IPersistenceConfigurer SetupDatabase()
+        {
             return MsSqlConfiguration.MsSql2008
                 .UseOuterJoin()
-                .ProxyFactoryFactory(typeof(ProxyFactoryFactory))
+                .ProxyFactoryFactory(typeof (ProxyFactoryFactory))
                 .ConnectionString(x => x.FromConnectionStringWithKey("ApplicationServices"))
                 .ShowSql();
         }
 
-        protected virtual void ConfigurePersistence(Configuration config) {
+        protected virtual void ConfigurePersistence(Configuration config)
+        {
             SchemaMetadataUpdater.QuoteTableAndColumns(config);
         }
 
-        protected virtual bool IsDomainEntity(Type t) {
-            return typeof(EntityBase).IsAssignableFrom(t);
+        protected virtual bool IsDomainEntity(Type t)
+        {
+            return typeof (EntityBase).IsAssignableFrom(t);
         }
 
-        private void ShouldIgnoreProperty(IPropertyIgnorer property) {
+        private void ShouldIgnoreProperty(IPropertyIgnorer property)
+        {
             property.IgnoreProperties(p => p.MemberInfo.HasAttribute<DoNotMapAttribute>());
         }
     }

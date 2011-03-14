@@ -1,5 +1,7 @@
-namespace Sicemed.Web.Models {
-    public class Parametro : EntityBase {
+namespace Sicemed.Web.Models
+{
+    public class Parametro : EntityBase
+    {
         #region Primitive Properties
 
         public virtual string Key { get; set; }

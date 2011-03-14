@@ -1,10 +1,12 @@
-﻿using Agatha.Common;
+﻿using System.Web.Mvc;
 using Castle.Core.Logging;
+using NHibernate;
 
-namespace Sicemed.Web.Plumbing {
-    public class BaseController : Controller{
-        public IRequestDispatcher RequestDispatcher { get; set; }
-        public IAsyncRequestDispatcher AsyncRequestDispatcher { get; set; }
+namespace Sicemed.Web.Plumbing
+{
+    public class BaseController : Controller
+    {
         public ILogger Logger { get; set; }
+        public ISessionFactory SessionFactory { get; set; }
     }
 }

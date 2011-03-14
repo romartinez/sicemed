@@ -1,7 +1,9 @@
 using System;
 
-namespace Sicemed.Web.Models {
-    public class Turno : EntityBase {
+namespace Sicemed.Web.Models
+{
+    public class Turno : EntityBase
+    {
         #region Primitive Properties
 
         public virtual DateTime FechaGeneracion { get; set; }

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <!--
   This file contains basic settings needed for most web apps.
   For full Combres settings (with explanation), refer to the sample definition file: combres_full_with_annotation.xml
@@ -23,21 +24,8 @@
       <param name="LineBreakPosition" type="int" value="-1" />
     </minifier>
   </jsMinifiers>
-  <resourceSets url="~/combres.axd"
-              defaultDuration="30"
-              defaultVersion="auto"
-              defaultDebugEnabled="false"
-              defaultIgnorePipelineWhenDebug="true"
-              localChangeMonitorInterval="30"
-              remoteChangeMonitorInterval="60"
-                >
-    <resourceSet name="siteCss"
-                 type="css"
-                 duration="15"
-                 minifierRef="yui"
-                 debugEnabled="false"
-                 ignorePipelineWhenDebug="true"
-                 compressionEnabled="true">
+  <resourceSets url="~/combres.axd" defaultDuration="30" defaultVersion="auto" defaultDebugEnabled="false" defaultIgnorePipelineWhenDebug="true" localChangeMonitorInterval="30" remoteChangeMonitorInterval="60">
+    <resourceSet name="siteCss" type="css" duration="15" minifierRef="yui" debugEnabled="false" ignorePipelineWhenDebug="true" compressionEnabled="true">
       <resource path="~/Content/css/kriframework.css" />
       <resource path="~/Content/css/style.css" />
       <resource path="~/Content/css/style1.css" />

@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 
-namespace Sicemed.Web.Models {
-    public class Plan : EntityBase {
+namespace Sicemed.Web.Models
+{
+    public class Plan : EntityBase
+    {
         #region Primitive Properties
 
         public virtual string Nombre { get; set; }

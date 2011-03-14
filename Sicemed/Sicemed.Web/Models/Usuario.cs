@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace Sicemed.Web.Models {
-    public class Usuario : EntityBase{
+namespace Sicemed.Web.Models
+{
+    public class Usuario : EntityBase
+    {
         #region Primitive Properties
 
         public virtual DateTime? FechaNacimiento { get; set; }

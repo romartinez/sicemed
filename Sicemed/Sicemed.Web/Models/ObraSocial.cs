@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 
-namespace Sicemed.Web.Models {
-    public class ObraSocial : EntityBase {
+namespace Sicemed.Web.Models
+{
+    public class ObraSocial : EntityBase
+    {
         #region Primitive Properties
 
         public virtual string RazonSocial { get; set; }

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace Sicemed.Web.Models {
-    public class Calendario : EntityBase {
+namespace Sicemed.Web.Models
+{
+    public class Calendario : EntityBase
+    {
         #region Primitive Properties
 
         public virtual DateTime Anio { get; set; }

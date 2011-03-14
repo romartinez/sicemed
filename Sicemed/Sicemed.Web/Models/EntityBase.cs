@@ -1,54 +1,67 @@
 using System;
 
-namespace Sicemed.Web.Models {
+namespace Sicemed.Web.Models
+{
     [Serializable]
-    public abstract class EntityBase : IEquatable<EntityBase> {
-
+    public abstract class EntityBase : IEquatable<EntityBase>
+    {
         // Methods
 
-        public virtual bool Equals(EntityBase obj) {
-            if (object.ReferenceEquals(null, obj)) {
+        public virtual long Id { get; private set; }
+
+        #region IEquatable<EntityBase> Members
+
+        public virtual bool Equals(EntityBase obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
                 return false;
             }
-            if (object.ReferenceEquals(this, obj)) {
+            if (ReferenceEquals(this, obj))
+            {
                 return true;
             }
-            if (base.GetType() != obj.GetType()) {
+            if (base.GetType() != obj.GetType())
+            {
                 return false;
             }
-            return (obj.Id == this.Id);
+            return (obj.Id == Id);
         }
 
-        public override bool Equals(object obj) {
-            if (object.ReferenceEquals(null, obj)) {
+        #endregion
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
                 return false;
             }
-            if (object.ReferenceEquals(this, obj)) {
+            if (ReferenceEquals(this, obj))
+            {
                 return true;
             }
-            if (base.GetType() != obj.GetType()) {
+            if (base.GetType() != obj.GetType())
+            {
                 return false;
             }
-            return this.Equals((EntityBase)obj);
+            return Equals((EntityBase) obj);
         }
 
-        public override int GetHashCode() {
-            return ((this.Id.GetHashCode() * 0x18d) ^ base.GetType().GetHashCode());
+        public override int GetHashCode()
+        {
+            return ((Id.GetHashCode()*0x18d) ^ base.GetType().GetHashCode());
         }
 
-        public static bool operator ==(EntityBase left, EntityBase right) {
-            return object.Equals(left, right);
+        public static bool operator ==(EntityBase left, EntityBase right)
+        {
+            return Equals(left, right);
         }
 
-        public static bool operator !=(EntityBase left, EntityBase right) {
-            return !object.Equals(left, right);
+        public static bool operator !=(EntityBase left, EntityBase right)
+        {
+            return !Equals(left, right);
         }
 
         // Properties
-        public virtual long Id {
-            get;
-            private set;
-        }
     }
-
 }

@@ -1,4 +1,4 @@
-﻿namespace Sicemed.Web.Models.Components {
-    public class ValueTypeBase {
-    }
+namespace Sicemed.Web.Models.Components
+{
+    public class ValueTypeBase {}
 }

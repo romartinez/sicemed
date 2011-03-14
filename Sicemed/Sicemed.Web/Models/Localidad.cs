@@ -1,5 +1,7 @@
-namespace Sicemed.Web.Models {
-    public class Localidad : EntityBase {
+namespace Sicemed.Web.Models
+{
+    public class Localidad : EntityBase
+    {
         #region Primitive Properties
 
         public virtual string Nombre { get; set; }

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace Sicemed.Web.Models {
-    public class DiaAtencionEspecialidadProfesional : EntityBase {
+namespace Sicemed.Web.Models
+{
+    public class DiaAtencionEspecialidadProfesional : EntityBase
+    {
         #region Primitive Properties
 
         public virtual int DiaSemanaNumero { get; set; }

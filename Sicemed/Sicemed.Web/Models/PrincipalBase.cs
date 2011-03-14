@@ -1,11 +1,13 @@
-﻿using System.Security.Principal;
+using System.Security.Principal;
 
-namespace Sicemed.Web.Models {
-    public class PrincipalBase : GenericPrincipal {
-        public PrincipalBase(IdentityBase identity, string[] roles) : base(identity, roles) {
-        }
+namespace Sicemed.Web.Models
+{
+    public class PrincipalBase : GenericPrincipal
+    {
+        public PrincipalBase(IdentityBase identity, string[] roles) : base(identity, roles) {}
 
-        public virtual IdentityBase IdentityBase {
+        public virtual IdentityBase IdentityBase
+        {
             get { return (IdentityBase) Identity; }
         }
 

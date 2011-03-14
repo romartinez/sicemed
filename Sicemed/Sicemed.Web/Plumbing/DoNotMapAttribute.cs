@@ -1,7 +1,7 @@
 using System;
 
-namespace Sicemed.Web.Plumbing {
+namespace Sicemed.Web.Plumbing
+{
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public class DoNotMapAttribute : Attribute {
-    }
+    public class DoNotMapAttribute : Attribute {}
 }
