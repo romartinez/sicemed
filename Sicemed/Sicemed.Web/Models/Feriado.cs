@@ -8,8 +8,6 @@ namespace Sicemed.Web.Models
 
         public virtual string Nombre { get; set; }
 
-        public virtual string Descripcion { get; set; }
-
         public virtual DateTime? FechaAjustada { get; set; }
 
         public virtual DateTime FechaOriginal { get; set; }

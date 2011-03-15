@@ -163,6 +163,7 @@
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Plumbing\BaseController.cs" />
+    <Compile Include="Plumbing\NHibernateMappingExtensions.cs" />
     <Compile Include="Plumbing\SessionFactoryProvider.cs" />
     <Compile Include="Plumbing\Facilities\PersistenceFacility.cs" />
     <Compile Include="Plumbing\HttpModules\NHibernateSessionModule.cs" />
@@ -274,7 +275,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CodeTemplates\Scaffolders\Sicemed.Scaffolders.AjaxGrid\jQGridView.cs.t4" />
+    <None Include="CodeTemplates\Scaffolders\Sicemed.Scaffolders.AjaxGrid\GridView.cs.t4" />
     <None Include="CodeTemplates\Scaffolders\Sicemed.Scaffolders.AjaxGrid\Sicemed.Scaffolders.AjaxGrid.ps1" />
     <None Include="CodeTemplates\Scaffolders\Sicemed.Scaffolders.AjaxGrid\ControllerWithContext.cs.t4" />
     <None Include="combres.readme" />

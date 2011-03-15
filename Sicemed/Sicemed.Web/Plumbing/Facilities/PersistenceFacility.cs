@@ -66,11 +66,13 @@ namespace Sicemed.Web.Plumbing.Facilities
                 db.Timeout = 10;
                 db.HqlToSqlSubstitutions = "true 1, false 0, yes 'Y', no 'N'";
             });
-            configuration.AddDeserializedMapping(GetMapping(), "Sicemed_Domain");
+            var mappings = GetMapping();
+            NHibernateMappingsExtensions.WriteAllXmlMapping(new[] { mappings });
+            configuration.AddDeserializedMapping(mappings, "Sicemed_Domain");
             SchemaMetadataUpdater.QuoteTableAndColumns(configuration);
 
             configuration.Properties[Environment.CurrentSessionContextClass]
-                = typeof(LazySessionContext).AssemblyQualifiedName; 
+                = typeof(LazySessionContext).AssemblyQualifiedName;
 
             return configuration;
         }
@@ -109,6 +111,8 @@ namespace Sicemed.Web.Plumbing.Facilities
             orm.TablePerClass(entities);
             orm.Cascade<Usuario, EspecialidadProfesional>(Cascade.None);
             orm.Cascade<Especialidad, EspecialidadProfesional>(Cascade.None);
+            mapper.Customize<Calendario>(
+                c => c.Collection(d => d.Feriados, m => m.Access(ConfOrm.Mappers.Accessor.Field)));
             return mapper.CompileMappingFor(entities);
         }
 

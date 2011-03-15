@@ -17,7 +17,7 @@ namespace Sicemed.Web.Plumbing
 
         protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
         {
-            var result = new JsonResult() { ContentEncoding = contentEncoding, ContentType = contentType, JsonRequestBehavior = behavior };
+            var result = new JsonResult() { ContentEncoding = System.Text.Encoding.UTF8, ContentType = "application/json", JsonRequestBehavior = behavior };
             var settings = new JsonSerializerSettings();
             settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             result.Data = JsonConvert.SerializeObject(data, Formatting.None, settings);

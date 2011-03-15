@@ -11,14 +11,33 @@ namespace Sicemed.Web.Models
 
         public virtual string Nombre { get; set; }
 
-        public virtual string Descripcion { get; set; }
-
         #endregion
 
         #region Navigation Properties
 
-        public virtual ISet<Feriado> Feriados { get; set; }
+        private ISet<Feriado> _feriados;
+        public virtual ISet<Feriado> Feriados
+        {
+            get { return new ImmutableSet<Feriado>(_feriados); }
+            private set { _feriados = value; }
+        }
+        #endregion
 
+        #region Ctos
+        public Calendario()
+        {
+            _feriados = new HashedSet<Feriado>();
+        }
+        #endregion
+
+        #region Methods
+        public virtual Calendario AddFeriado(Feriado feriado)
+        {
+            if(_feriados.Contains(feriado)) return this;
+            _feriados.Add(feriado);
+            feriado.Calendario = this;
+            return this;
+        }
         #endregion
     }
 }
