@@ -15,7 +15,7 @@ namespace Sicemed.Web.Plumbing
 
         public override void ReleaseController(IController controller)
         {
-            _kernel.ReleaseComponent(controller);
+            //_kernel.ReleaseComponent(controller);
         }
 
         public override IController CreateController(RequestContext requestContext, string controllerName)

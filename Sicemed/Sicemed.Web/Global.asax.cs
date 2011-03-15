@@ -5,6 +5,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using Castle.Core.Logging;
+using Castle.Facilities.FactorySupport;
+using Castle.Facilities.TypedFactory;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Newtonsoft.Json;
@@ -93,8 +95,10 @@ namespace Sicemed.Web
 
         private static void BootstrapContainer()
         {
-            _container = new WindsorContainer()
-                .Install(FromAssembly.This());
+            _container = new WindsorContainer();
+            _container.AddFacility<TypedFactoryFacility>();            
+            _container.Install(FromAssembly.This());
+            
             var controllerFactory = new WindsorControllerFactory(_container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
             _logger = _container.Resolve<ILogger>();

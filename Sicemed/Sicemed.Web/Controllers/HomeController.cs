@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Sicemed.Web.Models;
 using Sicemed.Web.Plumbing;
 
 namespace Sicemed.Web.Controllers
@@ -7,9 +8,15 @@ namespace Sicemed.Web.Controllers
     {
         public ActionResult Index()
         {
-            Logger.FatalFormat("ERRORRRRR!!!");
+            Logger.Debug("ERRORRRRR!!!");
+            using(var session = SessionFactory.GetCurrentSession())
+            using(var tx = session.BeginTransaction())
+            {
+                var cal = session.QueryOver<Calendario>().Where(x => x.Id == 1).SingleOrDefault();
+                ViewBag.Message = cal.Nombre;
 
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
+                tx.Commit();
+            }
 
             return View();
         }

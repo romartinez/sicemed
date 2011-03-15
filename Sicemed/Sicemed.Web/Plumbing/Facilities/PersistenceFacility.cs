@@ -1,16 +1,30 @@
 using System;
-using Castle.Core.Internal;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Facilities;
 using Castle.MicroKernel.Registration;
-using FluentNHibernate.Automapping;
-using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
-using FluentNHibernate.Conventions.Helpers.Builders;
+using ConfOrm;
+using ConfOrm.NH;
+using ConfOrm.Patterns;
+using ConfOrm.Shop.CoolNaming;
+using ConfOrm.Shop.InflectorNaming;
+using ConfOrm.Shop.Inflectors;
+using ConfOrm.Shop.Packs;
+using ConfOrm.Shop.Patterns;
 using NHibernate;
 using NHibernate.ByteCode.Castle;
 using NHibernate.Cfg;
+using NHibernate.Cfg.Loquacious;
+using NHibernate.Cfg.MappingSchema;
+using NHibernate.Dialect;
+using NHibernate.Driver;
 using NHibernate.Tool.hbm2ddl;
 using Sicemed.Web.Models;
+using Sicemed.Web.Plumbing.HttpModules;
+using Environment = NHibernate.Cfg.Environment;
 
 namespace Sicemed.Web.Plumbing.Facilities
 {
@@ -18,57 +32,85 @@ namespace Sicemed.Web.Plumbing.Facilities
     {
         protected override void Init()
         {
-            Configuration config = BuildDatabaseConfiguration();
 
-            Kernel.Register(
-                Component.For<ISessionFactory>()
-                    .UsingFactoryMethod(config.BuildSessionFactory),
-                Component.For<ISession>()
-                    .UsingFactoryMethod(k => k.Resolve<ISessionFactory>().OpenSession())
-                    .LifeStyle.PerWebRequest);
+            Kernel.Register(Component.For<ISessionFactory>()
+                                           .UsingFactoryMethod(k => BuildDatabaseConfiguration().BuildSessionFactory()));
+
+            Kernel.Register(Component.For<NHibernateSessionModule>());
+
+            Kernel.Register(Component.For<ISessionFactoryProvider>().AsFactory());
+
+            Kernel.Register(Component.For<IEnumerable<ISessionFactory>>()
+                                        .UsingFactoryMethod(k => k.ResolveAll<ISessionFactory>()));
+
+            HttpContext.Current.Application[SessionFactoryProvider.Key]
+                            = Kernel.Resolve<ISessionFactoryProvider>();
+
         }
 
-        public Configuration BuildDatabaseConfiguration()
+        public static Configuration BuildDatabaseConfiguration()
         {
-            return Fluently.Configure()
-                .Database(SetupDatabase)
-                .Mappings(m => m.AutoMappings.Add(CreateMappingModel()))
-                .ExposeConfiguration(ConfigurePersistence)
-                .BuildConfiguration();
+            var configuration = new Configuration();
+            configuration.Proxy(p =>
+            {
+                p.Validation = false;
+                p.ProxyFactoryFactory<ProxyFactoryFactory>();
+            });
+            configuration.DataBaseIntegration(db =>
+            {
+                db.Dialect<MsSql2008Dialect>();
+                db.Driver<SqlClientDriver>();
+                db.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
+                db.IsolationLevel = IsolationLevel.ReadCommitted;
+                db.ConnectionStringName = "ApplicationServices";
+                db.Timeout = 10;
+                db.HqlToSqlSubstitutions = "true 1, false 0, yes 'Y', no 'N'";
+            });
+            configuration.AddDeserializedMapping(GetMapping(), "Sicemed_Domain");
+            SchemaMetadataUpdater.QuoteTableAndColumns(configuration);
+
+            configuration.Properties[Environment.CurrentSessionContextClass]
+                = typeof(LazySessionContext).AssemblyQualifiedName; 
+
+            return configuration;
         }
 
-        protected virtual AutoPersistenceModel CreateMappingModel()
+
+        private static HbmMapping GetMapping()
         {
-            AutoPersistenceModel m = AutoMap.Assembly(typeof (EntityBase).Assembly)
-                .Where(IsDomainEntity)
-                .OverrideAll(ShouldIgnoreProperty)
-                .IgnoreBase<EntityBase>()
-                .Conventions.Add(new ComponentConventionBuilder().Always(x => x.Insert()));
-            return m;
+            var orm = new ObjectRelationalMapper();
+
+            // Remove one of not required patterns
+            orm.Patterns.ManyToOneRelations.Remove(
+                    orm.Patterns.ManyToOneRelations.Single(p => p.GetType() == typeof(OneToOneUnidirectionalToManyToOnePattern)));
+
+
+            // Creation of inflector adding some special class name translation
+            var inflector = new SpanishInflector();
+
+            IPatternsAppliersHolder patternsAppliers =
+                    (new SafePropertyAccessorPack())
+                            .Merge(new OneToOneRelationPack(orm))
+                            .Merge(new BidirectionalManyToManyRelationPack(orm))
+                            .Merge(new BidirectionalOneToManyRelationPack(orm))
+                            .Merge(new DiscriminatorValueAsClassNamePack(orm))
+                            .Merge(new CoolTablesAndColumnsNamingPack(orm))
+                            .Merge(new TablePerClassPack())
+                            .Merge(new EnumAsStringPack())
+                            .Merge(new PluralizedTablesPack(orm, inflector)) // <=== 
+                            .Merge(new ListIndexAsPropertyPosColumnNameApplier());
+
+            orm.Patterns.PoidStrategies.Add(new HighLowPoidPattern());
+            orm.Patterns.Sets.Add(new UseSetWhenGenericCollectionPattern());
+
+            var entities = new List<Type>();
+            entities.AddRange(typeof(EntityBase).Assembly.GetTypes().Where(t => typeof(EntityBase).IsAssignableFrom(t) && !(t.GetType() == typeof(EntityBase))));
+            var mapper = new Mapper(orm, patternsAppliers);
+            orm.TablePerClass(entities);
+            orm.Cascade<Usuario, EspecialidadProfesional>(Cascade.None);
+            orm.Cascade<Especialidad, EspecialidadProfesional>(Cascade.None);
+            return mapper.CompileMappingFor(entities);
         }
 
-        protected virtual IPersistenceConfigurer SetupDatabase()
-        {
-            return MsSqlConfiguration.MsSql2008
-                .UseOuterJoin()
-                .ProxyFactoryFactory(typeof (ProxyFactoryFactory))
-                .ConnectionString(x => x.FromConnectionStringWithKey("ApplicationServices"))
-                .ShowSql();
-        }
-
-        protected virtual void ConfigurePersistence(Configuration config)
-        {
-            SchemaMetadataUpdater.QuoteTableAndColumns(config);
-        }
-
-        protected virtual bool IsDomainEntity(Type t)
-        {
-            return typeof (EntityBase).IsAssignableFrom(t);
-        }
-
-        private void ShouldIgnoreProperty(IPropertyIgnorer property)
-        {
-            property.IgnoreProperties(p => p.MemberInfo.HasAttribute<DoNotMapAttribute>());
-        }
     }
 }
