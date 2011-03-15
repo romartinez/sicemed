@@ -1,0 +1,88 @@
+<#@ template language="C#" HostSpecific="True"  inherits="DynamicTransform" #>
+<#@ Output Extension="cs" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="EnvDTE" #>
+using System;
+using System.Web.Mvc;
+using Sicemed.Web.Plumbing;
+using Sicemed.Web.Models;
+
+namespace <#= Model.ControllerNamespace #>
+{   
+<#  
+	var modelType = (CodeType)Model.ModelType; 
+	var modelName = modelType.Name; 
+	var modelNamePlural = Model.ModelTypePluralized; 
+	var modelVariable = modelName.ToLower(); 
+	var relatedEntities = ((IEnumerable)Model.RelatedEntities).OfType<RelatedEntityInfo>();
+	var primaryKeyProperty = modelType.VisibleMembers().OfType<CodeProperty>().Single(x => x.Name == Model.PrimaryKey); 
+#>
+    public class <#= Model.ControllerName #> : BaseController
+    {
+        //
+        // GET: /<#= modelName #>/
+
+        public ViewResult Index()
+        {
+            return View();
+        }
+
+        //
+        // GET: /<#= modelName #>/GridData
+
+        public JsonResult GridData(int rows, int page)
+        {
+			var session = SessionFactory.GetCurrentSession();
+			var count = session.QueryOver<<#=modelName#>>().RowCountInt64();
+			var pageData = session.QueryOver<<#=modelName#>>().Skip((page - 1) * rows ).Take(rows).List();
+			return Json(new {
+				page,
+				records = count,
+				rows = pageData,
+				total = Math.Ceiling((decimal) count / rows)
+			}, JsonRequestBehavior.AllowGet);
+        }
+
+        //
+        // POST: /<#= modelName #>/Create
+
+        [HttpPost]
+        public void Create(<#= modelName #> <#= modelVariable #>)
+        {
+            if (ModelState.IsValid)
+            {
+<# if(primaryKeyProperty.Type.AsString == "System.Guid") { #>
+				<#= modelVariable #>.<#= primaryKeyProperty.Name #> = Guid.NewGuid();
+<# } #>
+				var session = SessionFactory.GetCurrentSession();
+				session.Save(<#= modelVariable #>);
+            }
+        }
+        
+        //
+        // POST: /<#= modelName #>/Edit/5
+
+        [HttpPost]
+        public void Edit(<#= modelName #> <#= modelVariable #>)
+        {
+            if (ModelState.IsValid)
+            {
+				var session = SessionFactory.GetCurrentSession();
+				session.Update(<#= modelVariable #>);
+            }
+        }
+
+        //
+        // POST: /<#= modelName #>/Delete/5
+		[HttpPost]
+        public void Delete(<#= primaryKeyProperty.Type.AsString #> id)
+        {
+			var session = SessionFactory.GetCurrentSession();
+			var <#= modelVariable #> = session.QueryOver<<#=modelName#>>().Where(x => x.<#= primaryKeyProperty.Name #> == id).SingleOrDefault();
+			session.Delete(<#= modelVariable #>);
+        }
+
+    }
+}

@@ -1,0 +1,22 @@
+DEBUG 11 NHibernate.Transaction.AdoTransaction - IDbTransaction Committed
+DEBUG 11 NHibernate.Impl.SessionImpl - transaction completion
+DEBUG 11 NHibernate.AdoNet.ConnectionManager - aggressively releasing database connection
+DEBUG 11 NHibernate.Connection.ConnectionProvider - Closing connection
+DEBUG 11 NHibernate.Transaction.AdoTransaction - IDbTransaction disposed.
+DEBUG 11 NHibernate.Impl.SessionImpl - [session-id=f4804af8-6ce6-439d-8f65-a704ea6380ba] running ISession.Dispose()
+DEBUG 11 NHibernate.Impl.SessionImpl - [session-id=f4804af8-6ce6-439d-8f65-a704ea6380ba] executing real Dispose(True)
+DEBUG 11 NHibernate.Impl.SessionImpl - closing session
+DEBUG 11 NHibernate.AdoNet.AbstractBatcher - running BatcherImpl.Dispose(true)
+DEBUG 11 Combres.Configuration - Reload Combres settings
+DEBUG 5 Combres.ChangeMonitor - Dynamic resource change monitor thread starts...
+DEBUG 11 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: 
+DEBUG 11 Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/css/kriframework.css' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/css/style.css' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/css/style1.css' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Retrieving new content for Resource '~/Content/themes/base/jquery-ui.css' (Mode: Static)
+DEBUG 11 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 1477475186
+DEBUG 11 Combres.ChangeMonitor - Watch new settings
+DEBUG 11 Combres.Configuration - Elapsed time for 'ReloadSettings': 217 ms
+DEBUG 11 NHibernate.Impl.SessionImpl - [session-id=f4804af8-6ce6-439d-8f65-a704ea6380ba] running ISession.Dispose()
+INFO 4 NHibernate.Impl.SessionFactoryImpl - Closing
+DEBUG 4 NHibernate.Connection.ConnectionProvider - Disposing of ConnectionProvider.
