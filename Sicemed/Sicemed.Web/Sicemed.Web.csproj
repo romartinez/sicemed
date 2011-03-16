@@ -217,6 +217,7 @@
     <Content Include="Scripts\geosans.js" />
     <Content Include="Scripts\i18n\grid.locale-es.js" />
     <Content Include="Scripts\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\jsonv3.js" />
     <Content Include="Scripts\sicemed.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

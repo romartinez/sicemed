@@ -37,6 +37,7 @@
       <resource path="~/Scripts/cufon.js" />
       <resource path="~/Scripts/geosans.js" />
       <resource path="~/Scripts/jquery-ui.js" />
+      <resource path="~/Scripts/jsonv3.js" />
       <resource path="~/Scripts/sicemed.js" />
       <resource path="~/Scripts/jquery.validate.js" />
       <resource path="~/Scripts/i18n/grid.locale-es.js" />
