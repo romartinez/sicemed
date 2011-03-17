@@ -205,8 +205,7 @@ jQuery.extend($.fn.fmatter, {
 });
 
 jQuery.extend($.fn.fmatter.dateFormatter, {
-    unformat: function (cellvalue, options) {
-        console.log(cellvalue);
+    unformat: function (cellvalue, options) {        
         return new Date(cellvalue);
     }
 });

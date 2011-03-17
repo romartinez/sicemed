@@ -48,12 +48,19 @@ namespace Sicemed.Web.Controllers
         // POST: /Calendario/Edit/5
 
         [HttpPost]
-        public void Edit(Calendario calendario)
+        public void Edit(long id, Calendario calendario)
         {
             if (ModelState.IsValid)
             {
 				var session = SessionFactory.GetCurrentSession();
-				session.Update(calendario);
+                var calendarioDb = session.Get<Calendario>(id);
+                if(TryUpdateModel(calendarioDb))
+                {
+                    session.Update(calendarioDb);                    
+                }else
+                {
+                    throw new Exception("No update");
+                }
             }
         }
 
