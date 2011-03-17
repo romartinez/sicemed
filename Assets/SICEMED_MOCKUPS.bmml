@@ -1,0 +1,27 @@
+<mockup version="1.0" skin="sketch" measuredW="1061" measuredH="676" mockupW="749" mockupH="633">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="302" y="33" w="749" h="633" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>SICEMED%0Ahttp%3A//www.sicemed.com.ar</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::ButtonBar" x="375" y="205" w="581" h="31" measuredW="175" measuredH="31" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>One%2C%20Two%2C%20Three</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Title" x="467" y="119" w="494" h="-1" measuredW="194" measuredH="62" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>SICEMED</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Image" x="375" y="111" w="-1" h="-1" measuredW="77" measuredH="79" zOrder="3" locked="false" isInGroup="-1"/>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Accordion" x="375" y="236" w="150" h="376" measuredW="150" measuredH="250" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Item%20One%0AItem%20Two%0A-%20Sub-Item%202.1%0A-%20Sub-Item%202.2%0AItem%20Three%0AItem%20Four</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::HSplitter" x="525" y="236" w="-1" h="376" measuredW="12" measuredH="100" zOrder="5" locked="false" isInGroup="-1"/>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::ComboBox" x="549" y="248" w="177" h="-1" measuredW="92" measuredH="25" zOrder="6" locked="false" isInGroup="-1"/>
+  </controls>
+</mockup>

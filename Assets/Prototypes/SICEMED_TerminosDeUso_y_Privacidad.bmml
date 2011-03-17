@@ -1,0 +1,44 @@
+<mockup version="1.0" skin="sketch" measuredW="1500" measuredH="1048" mockupW="1280" mockupH="1024">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="210" y="14" w="1280" h="1024" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>Ce.M.I%20-%20Centro%20M%E9dico%20Integral%20Velez%20Sarsfield%0Ahttp%3A//www.cemivelezsarsfield.com.ar/</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="367" y="108" w="1000" h="100" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="-1"/>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Title" x="367" y="254" w="-1" h="-1" measuredW="571" measuredH="62" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>T%E9rminos%20de%20uso%20y%20privacidad</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::LinkBar" x="367" y="223" w="-1" h="-1" measuredW="517" measuredH="25" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>-1</selectedIndex>
+        <text>Inicio%2C%20Institucional%2C%20Especialidades%2C%20Obras%20Sociales%2C%20Turnos%2C%20Contacto</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Link" x="1193" y="347" w="-1" h="-1" measuredW="161" measuredH="32" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Obtenga%20un%20Turno</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Canvas" x="1181" y="261" w="186" h="259" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="-1"/>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Image" x="1234" y="268" w="-1" h="-1" measuredW="77" measuredH="79" zOrder="6" locked="false" isInGroup="-1"/>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Link" x="1186" y="214" w="-1" h="-1" measuredW="90" measuredH="25" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Iniciar%20Sesi%F3n</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::Link" x="1289" y="213" w="-1" h="-1" measuredW="78" measuredH="25" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Registrarse</text>
+      </controlProperties>
+    </control>
+    <control controlID="55" controlTypeID="com.balsamiq.mockups::Paragraph" x="367" y="320" w="719" h="398" measuredW="200" measuredH="140" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit.%20Etiam%20porta%20congue%20lorem%20ac%20posuere.%20Sed%20sollicitudin%20enim%20id%20libero%20consectetur%20auctor.%20In%20vulputate%20risus%20et%20urna%20facilisis%20vel%20pulvinar%20nibh%20eleifend.%20Aliquam%20elementum%20gravida%20nibh%2C%20ac%20consequat%20nulla%20pretium%20malesuada.%20Etiam%20vitae%20sagittis%20orci.%20Pellentesque%20quis%20lectus%20sed%20ipsum%20pharetra%20euismod%20sed%20in%20eros.%20Sed%20dolor%20diam%2C%20consectetur%20at%20rhoncus%20mattis%2C%20accumsan%20eget%20magna.%20Etiam%20euismod%20vulputate%20sollicitudin.%20Nunc%20quis%20lorem%20neque.%20Praesent%20euismod%20lorem%20sit%20amet%20sapien%20vehicula%20sed%20aliquet%20urna%20semper.%20Nulla%20placerat%20ultrices%20dui%2C%20non%20lacinia%20diam%20rutrum%20vel.%20Sed%20quis%20odio%20suscipit%20neque%20iaculis%20aliquam%20eu%20eget%20tortor.%20Cras%20vel%20porttitor%20turpis.%0A%20%0AIn%20hac%20habitasse%20platea%20dictumst.%20Suspendisse%20scelerisque%20dui%20condimentum%20dolor%20tristique%20et%20gravida%20eros%20feugiat.%20Nam%20magna%20risus%2C%20consequat%20at%20commodo%20id%2C%20euismod%20nec%20mi.%20Cum%20sociis%20natoque%20penatibus%20et%20magnis%20dis%20parturient%20montes%2C%20nascetur%20ridiculus%20mus.%20Nulla%20id%20lectus%20eu%20orci%20elementum%20sagittis%20a%20et%20lorem.%20Duis%20sit%20amet%20mi%20nunc%2C%20sit%20amet%20vehicula%20orci.%20Pellentesque%20iaculis%2C%20risus%20et%20suscipit%20molestie%2C%20eros%20velit%20hendrerit%20purus%2C%20eget%20imperdiet%20odio%20quam%20non%20urna.%20Quisque%20vehicula%20blandit%20euismod.%20Class%20aptent%20taciti%20sociosqu%20ad%20litora%20torquent%20per%20conubia%20nostra%2C%20per%20inceptos%20himenaeos.%20Sed%20nulla%20est%2C%20laoreet%20ac%20fermentum%20tempus%2C%20vulputate%20et%20risus.%20Sed%20sit%20amet%20enim%20libero%2C%20at%20fringilla%20dui.%20Pellentesque%20porta%20lorem%20vel%20purus%20tincidunt%20commodo.%20Aliquam%20erat%20volutpat.%20Nulla%20facilisi.%20Duis%20eget%20nibh%20leo.%20Suspendisse%20potenti.%20Nulla%20mi%20eros%2C%20venenatis%20eget%20feugiat%20et%2C%20pulvinar%20vitae%20sem.%0A%20%0ACras%20eleifend%20condimentum%20semper.%20Vestibulum%20eget%20nibh%20felis.%20Maecenas%20ut%20mollis%20diam.%20Cras%20consequat%2C%20nunc%20sed%20aliquam%20hendrerit%2C%20urna%20urna%20lobortis%20tellus%2C%20sit%20amet%20luctus%20tellus%20massa%20porttitor%20sapien.%20Mauris%20ut%20lectus%20ac%20dui%20porta%20rutrum.%20Morbi%20eget%20porta%20arcu.%20Integer%20condimentum%20rutrum%20vulputate.%20Quisque%20leo%20lacus%2C%20iaculis%20molestie%20facilisis%20id%2C%20cursus%20eget%20ipsum.%20Vestibulum%20elementum%20dolor%20nec%20libero%20ultricies%20vel%20consectetur%20massa%20elementum.%20Aliquam%20a%20massa%20non%20nisl%20pharetra%20facilisis%20sed%20a%20nisl.%20Morbi%20id%20feugiat%20odio.%20Curabitur%20eget%20sapien%20lorem.%20Integer%20iaculis%2C%20lacus%20nec%20euismod%20varius%2C%20odio%20risus%20mollis%20turpis%2C%20id%20ullamcorper%20felis%20nulla%20vel%20erat.%20Aenean%20nunc%20lorem%2C%20pellentesque%20vel%20tincidunt%20vel%2C%20pulvinar%20vitae%20diam.%20In%20nec%20erat%20ac%20mi%20consequat%20mattis%20a%20ut%20ipsum.%20Maecenas%20ut%20viverra%20elit.%20Ut%20id%20mattis%20justo.</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

@@ -1,0 +1,78 @@
+<mockup version="1.0" skin="sketch" measuredW="1500" measuredH="1048" mockupW="1280" mockupH="1024">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="210" y="14" w="1280" h="1024" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>Ce.M.I%20-%20Centro%20M%E9dico%20Integral%20Velez%20Sarsfield%0Ahttp%3A//www.cemivelezsarsfield.com.ar/</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="367" y="108" w="1000" h="100" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="-1"/>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Title" x="367" y="301" w="-1" h="-1" measuredW="532" measuredH="62" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Administraci%F3n%20Consultorios</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::LinkBar" x="367" y="223" w="-1" h="-1" measuredW="631" measuredH="25" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>6</selectedIndex>
+        <text>Inicio%2C%20Institucional%2C%20Especialidades%2C%20Obras%20Sociales%2C%20Turnos%2C%20Contacto%2C%20Administraci%F3n</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Link" x="1193" y="347" w="-1" h="-1" measuredW="161" measuredH="32" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Obtenga%20un%20Turno</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Canvas" x="1181" y="261" w="186" h="259" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="-1"/>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Link" x="1193" y="473" w="-1" h="-1" measuredW="67" measuredH="32" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Agenda</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Link" x="1241" y="222" w="-1" h="-1" measuredW="126" measuredH="25" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Walter%20Gast%F3n%20Poch</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Image" x="1234" y="268" w="-1" h="-1" measuredW="77" measuredH="79" zOrder="8" locked="false" isInGroup="-1"/>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::Image" x="1234" y="389" w="-1" h="-1" measuredW="77" measuredH="79" zOrder="9" locked="false" isInGroup="-1"/>
+    <control controlID="90" controlTypeID="com.balsamiq.mockups::LinkBar" x="367" y="261" w="-1" h="-1" measuredW="804" measuredH="20" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>0</selectedIndex>
+        <size>10</size>
+        <text>Consultorios%2C%20Especialidades%2C%20Obras%20Sociales%2C%20Planes%20Obras%20Sociales%2C%20Datos%20y%20Pol%EDticas%20Instituci%F3n%2C%20Usuarios%2C%20Bit%E1coras%2C%20Tablero%20De%20Control</text>
+      </controlProperties>
+    </control>
+    <control controlID="96" controlTypeID="__group__" x="367" y="379" w="-1" h="-1" measuredW="539" measuredH="355" zOrder="11" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::DataGrid" x="0" y="0" w="539" h="330" measuredW="171" measuredH="118" zOrder="0" locked="false" isInGroup="96">
+          <controlProperties>
+            <text>Nombre%2C%20Ubicaci%F3n%0AConsultorio%201%2C%201er%20piso%0AConsultorio%201%2C%201er%20piso%0AConsultorio%201%2C%201er%20piso</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::IconLabel" x="0" y="330" w="-1" h="-1" measuredW="82" measuredH="25" zOrder="1" locked="false" isInGroup="96">
+          <controlProperties>
+            <icon>CircledPlusIcon%7Csmall</icon>
+            <labelPosition>right</labelPosition>
+            <text>Agregar</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::IconLabel" x="82" y="329" w="-1" h="-1" measuredW="92" measuredH="25" zOrder="2" locked="false" isInGroup="96">
+          <controlProperties>
+            <icon>PencilIcon%7Csmall</icon>
+            <labelPosition>right</labelPosition>
+            <text>Modificar</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::IconLabel" x="174" y="329" w="-1" h="-1" measuredW="80" measuredH="25" zOrder="3" locked="false" isInGroup="96">
+          <controlProperties>
+            <icon>TrashIcon%7Csmall</icon>
+            <labelPosition>right</labelPosition>
+            <text>Eliminar</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>
