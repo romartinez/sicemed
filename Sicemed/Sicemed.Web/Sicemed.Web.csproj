@@ -125,6 +125,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionResults\NewtonJsonResult.cs" />
     <Compile Include="ApplicationServices\Account\FormsAuthenticationApplicationService.cs" />
     <Compile Include="ApplicationServices\Account\UserDiscoveringApplicationService.cs" />
     <Compile Include="AppStart_Combres.cs" />
@@ -177,7 +178,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\combres.xml" />
+    <Content Include="App_Data\combres.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\css\ellipsis-xbl.xml" />
     <Content Include="Content\css\kriframework.css" />
     <Content Include="Content\css\style.css" />
@@ -217,7 +220,7 @@
     <Content Include="Scripts\geosans.js" />
     <Content Include="Scripts\i18n\grid.locale-es.js" />
     <Content Include="Scripts\jquery.jqGrid.min.js" />
-    <Content Include="Scripts\jsonv3.js" />
+    <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\sicemed.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

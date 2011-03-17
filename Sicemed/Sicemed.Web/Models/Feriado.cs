@@ -1,4 +1,5 @@
 using System;
+using System.Web.Script.Serialization;
 
 namespace Sicemed.Web.Models
 {
@@ -15,7 +16,7 @@ namespace Sicemed.Web.Models
         #endregion
 
         #region Navigation Properties
-
+        [ScriptIgnore]
         public virtual Calendario Calendario { get; set; }
 
         #endregion

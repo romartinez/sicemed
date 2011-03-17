@@ -15,3 +15,22 @@ function font_improvement($selectors) {
     Cufon.replace($selectors, { fontFamily: 'geosans' });
 }
 
+
+function isoDateReviver(key, value) {
+    if (typeof value === 'string') {
+        var a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)(?:([\+-])(\d{2})\:(\d{2}))?Z?$/.exec(value);
+        console.log(a);
+        if (a) {
+            var utcMilliseconds = Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4], +a[5], +a[6]);
+            return new Date(utcMilliseconds);
+        }
+    }
+    return value;
+}
+
+jQuery.extend(jQuery, {
+    parseJSON: function (data) {
+        console.log(data);
+        return JSON.parse(data, isoDateReviver);
+    }
+});
