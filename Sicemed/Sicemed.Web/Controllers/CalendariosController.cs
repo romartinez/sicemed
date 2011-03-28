@@ -1,5 +1,7 @@
 using System;
+using System.Text;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using Sicemed.Web.Plumbing;
 using Sicemed.Web.Models;
 
@@ -18,17 +20,20 @@ namespace Sicemed.Web.Controllers
         //
         // GET: /Calendario/GridData
 
-        public JsonResult GridData(int rows, int page)
+        public ActionResult GridData(int rows, int page)
         {
 			var session = SessionFactory.GetCurrentSession();
 			var count = session.QueryOver<Calendario>().RowCountInt64();
 			var pageData = session.QueryOver<Calendario>().Fetch(x=>x.Feriados).Default.Skip((page - 1) * rows ).Take(rows).List();
-			return Json(new {
-				page,
-				records = count,
-				rows = pageData,
-				total = Math.Ceiling((decimal) count / rows)
-			}, JsonRequestBehavior.AllowGet);
+            var settings = new JsonSerializerSettings();
+            settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            return Json(new
+            {
+                page,
+                records = count,
+                rows = pageData,
+                total = Math.Ceiling((decimal)count / rows)
+            },"application/json",Encoding.UTF8, JsonRequestBehavior.AllowGet);
         }
 
         //

@@ -10,12 +10,15 @@
 <div id="ajaxGridPager"></div>
 
 <script type="text/javascript">
-	jQuery(document).ready(function($){
-		$("#ajaxGrid").jqGrid({
-			url: '@Url.Action("GridData")',
-			datatype: "json",
-			jsonReader: {repeatitems: false, id: "Id"},
-			colNames: [
+    jQuery(document).ready(function ($) {
+        $("#ajaxGrid").jqGrid({
+            url: '@Url.Action("GridData")',
+            datatype: "json",
+            loadComplete: function (xhr) {
+                alert("AA");
+            },
+            jsonReader: { repeatitems: false, id: "Id" },
+            colNames: [
 				"Id",
 				"Nombre",
 				"Descripcion",
@@ -23,29 +26,29 @@
 				"FechaOriginal",
 				"Calendario",
 			],
-			colModel: [
-				{name: "Id", editable: true, sortable: false, hidden: true },
-				{name: "Nombre", editable: true, sortable: false, hidden: false },
-				{name: "Descripcion", editable: true, sortable: false, hidden: false },
-				{name: "FechaAjustada", editable: true, sortable: false, hidden: false },
-				{name: "FechaOriginal", editable: true, sortable: false, hidden: false },
-				{name: "Calendario", editable: true, sortable: false, hidden: false },
+            colModel: [
+				{ name: "Id", editable: true, sortable: false, hidden: true },
+				{ name: "Nombre", editable: true, sortable: false, hidden: false },
+				{ name: "Descripcion", editable: true, sortable: false, hidden: false },
+				{ name: "FechaAjustada", editable: true, sortable: false, hidden: false },
+				{ name: "FechaOriginal", editable: true, sortable: false, hidden: false },
+				{ name: "Calendario", editable: true, sortable: false, hidden: false },
 			],
-			rowNum: 5,
-			pager: "#ajaxGridPager",
-			width: "600px",
-			height: "10.5em"
-		});
+            rowNum: 5,
+            pager: "#ajaxGridPager",
+            width: "600px",
+            height: "10.5em"
+        });
 
-		$("#ajaxGrid").jqGrid("navGrid", "#ajaxGridPager",
-			{search: false, refresh: false},
-			//Edit
-			{url: '@Url.Action("Edit")', closeAfterEdit: true},
-			//Create
-			{url: '@Url.Action("Create")', closeAfterAdd: true},
-			//Delete
-			{url: '@Url.Action("Delete")'}
+        $("#ajaxGrid").jqGrid("navGrid", "#ajaxGridPager",
+			{ search: false, refresh: false },
+        //Edit
+			{url: '@Url.Action("Edit")', closeAfterEdit: true },
+        //Create
+			{url: '@Url.Action("Create")', closeAfterAdd: true },
+        //Delete
+			{url: '@Url.Action("Delete")' }
 		);
-	});
+    });
 </script>
 

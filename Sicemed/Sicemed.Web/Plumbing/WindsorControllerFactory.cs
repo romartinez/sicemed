@@ -21,6 +21,7 @@ namespace Sicemed.Web.Plumbing
         public override IController CreateController(RequestContext requestContext, string controllerName)
         {
             string controllerComponentName = controllerName + "Controller";
+            
             return _kernel.Resolve<IController>(controllerComponentName);
         }
     }
