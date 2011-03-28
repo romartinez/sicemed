@@ -1,94 +1,237 @@
-﻿jQuery.noConflict();
+﻿var S = (function (my, $) {
 
-jQuery(document).ready(function () {
-    // cufon font replacement
-    font_improvement('h1, #featured:not(.curtain, .accordion, .newsslider) .sliderheading');
-});
+    /* Public Methods
+    *********************************/
+    /* Helpers */
+    var helpers = my.helpers = my.helpers || {};
 
-function font_improvement($selectors) {
-
-    jQuery($selectors).each(function () {
-        $size = parseInt(jQuery(this).css('fontSize'));
-        jQuery(this).css('fontSize', $size * 1.4)
-    });
-
-    Cufon.replace($selectors, { fontFamily: 'geosans' });
-}
-
-
-
-/*!
-* jQuery.parseJSON() extension (supports ISO & Asp.net date conversion)
-*
-* Version 1.0 (13 Jan 2011)
-*
-* Copyright (c) 2011 Robert Koritnik
-* Licensed under the terms of the MIT license
-* http://www.opensource.org/licenses/mit-license.php
-*/
-(function ($) {
-
-    // JSON RegExp
-    var rvalidchars = /^[\],:{}\s]*$/;
-    var rvalidescape = /\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g;
-    var rvalidtokens = /"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g;
-    var rvalidbraces = /(?:^|:|,)(?:\s*\[)+/g;
-    var dateISO = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:[.,]\d+)?Z/i;
-    var dateNet = /\/Date\((\d+)(?:-\d+)?\)\//i;
-
-    // replacer RegExp
-    var replaceISO = /"(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:[.,](\d+))?Z"/i;
-    var replaceNet = /"\\\/Date\((\d+)(?:-\d+)?\)\\\/"/i;
-
-    // determine JSON native support
-    var nativeJSON = (window.JSON && window.JSON.parse) ? true : false;
-    var extendedJSON = nativeJSON && window.JSON.parse('{"x":9}', function (k, v) { return "Y"; }) === "Y";
-
-    var jsonDateConverter = function (key, value) {
-        if (typeof (value) === "string") {
-            if (dateISO.test(value)) {
-                return new Date(value);
-            }
-            if (dateNet.test(value)) {
-                return new Date(parseInt(dateNet.exec(value)[1], 10));
+    helpers.evalDate = function (key, value) {
+        if (typeof value === 'string') {
+            var a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)(?:([\+-])(\d{2})\:(\d{2}))?Z?$/.exec(value);
+            if (a) {
+                var utcMilliseconds = Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4], +a[5], +a[6]);
+                return new Date(utcMilliseconds);
             }
         }
         return value;
     };
 
-    $.extend({
-        parseJSON: function (data, convertDates) {
-            /// <summary>Takes a well-formed JSON string and returns the resulting JavaScript object.</summary>
-            /// <param name="data" type="String">The JSON string to parse.</param>
-            /// <param name="convertDates" optional="true" type="Boolean">Set to true when you want ISO/Asp.net dates to be auto-converted to dates.</param>
+    helpers.getAntiForgeryToken = function () {
+        var token = $.getAntiForgeryToken();
+        if (token) return token.value;
+        return undefined;
+    };
 
-            if (typeof data !== "string" || !data) {
-                return null;
-            }
+    helpers.formatDate = function (date) {
+        return $.datepicker.formatDate("dd/mm/yy", date);
+    };
 
-            // Make sure leading/trailing whitespace is removed (IE can't handle it)
-            data = $.trim(data);
 
-            // Make sure the incoming data is actual JSON
-            // Logic borrowed from http://json.org/json2.js
-            if (rvalidchars.test(data
-                .replace(rvalidescape, "@")
-                .replace(rvalidtokens, "]")
-                .replace(rvalidbraces, ""))) {
-                // Try to use the native JSON parser
-                if (extendedJSON || (nativeJSON && convertDates !== true)) {
-                    return window.JSON.parse(data, convertDates === true ? jsonDateConverter : undefined);
+    /* UI */
+    var ui = my.ui = my.ui || {};
+
+    ui.showDialog = function (options, callback) {
+        var defaults = {
+            modal: true,
+            title: 'SICEMED - ',
+            message: '',
+            buttons: {
+                "Aceptar": function () {
+                    $(this).dialog("close");
+                    if (callback && $.isFunction(callback)) callback();
                 }
-                else {
-                    data = convertDates === true ?
-                        data.replace(replaceISO, "new Date(parseInt('$1',10),parseInt('$2',10)-1,parseInt('$3',10),parseInt('$4',10),parseInt('$5',10),parseInt('$6',10),(function(s){return parseInt(s,10)||0;})('$7'))")
-                            .replace(replaceNet, "new Date($1)") :
-                        data;
-                    return (new Function("return " + data))();
-                }
-            } else {
-                $.error("Invalid JSON: " + data);
             }
+        };
+        $.extend(defaults, options);
+        var selector = "#" + defaults.container.id;
+        var div = $(selector);
+        if (div.size() === 0) {
+            div = $('<div id="' + defaults.container.id + '" title="' + defaults.container.title + '" class="ui-helper-hidden"><div class="' + defaults.container.clazz + ' ui-corner-all" style="padding: 0 .7em;"><p><span class="ui-icon ' + defaults.container.icon + '" style="float: left; margin-right: .3em;"></span><span></span></p></div></div>');
+            div.appendTo($(document));
         }
+
+        div.find("p span:eq(1)").html(defaults.message);
+
+        div.dialog(defaults);
+    };
+
+    ui.showError = function (options, callback) {
+        var defaults = {
+            message: 'Se ha producido un error desconocido.<br/> Por favor intentelo nuevamente.',
+            container: {
+                id: 'dialog-error-desconocido',
+                title: 'Error',
+                clazz: 'ui-state-error',
+                icon: 'ui-icon-alert'
+            }
+        };
+        if (typeof (options) === "string") {
+            defaults.message = options;
+        } else {
+            $.extend(defaults, options);
+        }
+        this.showDialog(defaults, callback);
+    };
+
+
+    ui.showMessage = function (options, callback) {
+        var defaults = {
+            message: '',
+            container: {
+                id: 'dialog-ok',
+                title: '',
+                clazz: '',
+                icon: 'ui-icon-info'
+            }
+        };
+        if (typeof (options) === "string") {
+            defaults.message = options;
+        } else {
+            $.extend(defaults, options);
+        }
+        this.showDialog(defaults, callback);
+    };
+
+    ui.showSuccess = function (options, callback) {
+        var defaults = {
+            message: 'La operaci&oacute;n fue realizada con &eacute;xito.',
+            container: {
+                id: 'dialog-ok',
+                title: '&Eacute;xito',
+                clazz: 'ui-state-highlight',
+                icon: 'ui-icon-circle-check'
+            }
+        };
+        if (typeof (options) === "string") {
+            defaults.message = options;
+        } else {
+            $.extend(defaults, options);
+        }
+        this.showDialog(defaults, callback);
+    };
+
+    ui.showConfirmation = function (options, callback) {
+        var defaults = {
+            message: '',
+            container: {
+                id: 'dialog-confirm',
+                title: 'Confirmaci&oacute;n',
+                clazz: '',
+                icon: 'ui-icon-info'
+            },
+            buttons: {
+                "Aceptar": function () {
+                    $(this).dialog("close");
+                    if (callback && $.isFunction(callback)) callback();
+                },
+                "Cancelar": function () {
+                    $(this).dialog("close");
+                }
+            }
+        };
+        if (typeof (options) === "string") {
+            defaults.message = options;
+        } else {
+            $.extend(defaults, options);
+        }
+        this.showDialog(defaults, callback);
+    };
+
+    /* Private Methods
+    *********************************/
+    var font_improvement = function ($selectors) {
+        jQuery($selectors).each(function () {
+            $size = parseInt(jQuery(this).css('fontSize'));
+            jQuery(this).css('fontSize', $size * 1.4)
+        });
+
+        Cufon.replace($selectors, { fontFamily: 'geosans' });
+    };
+
+
+    /* Ready 
+    *********************************/
+    jQuery(document).ready(function () {
+        // cufon font replacement
+        font_improvement('h1, #featured:not(.curtain, .accordion, .newsslider) .sliderheading');
     });
-})(jQuery);
+
+    return my;
+
+} (S || {}, jQuery));
+
+
+jQuery.extend(jQuery, {
+    parseJSON: function (data) {
+        return JSON.parse(data, isoDateReviver);
+    }
+});
+
+
+/* Ajax defaults
+*********************************/
+jQuery(document).ajaxError(function (event, xhr, ajaxOptions, thrownError) {
+    jQuery.unblockUI();
+    var msg = "Se ha producido el siguiente error: <br/>" + thrownError;
+    S.ui.showError(msg);
+});
+
+jQuery.parseJSON = function (str) {
+    return JSON.parse(str, S.helpers.evalDate);
+};
+
+
+/* Overwrite common window methods
+*********************************/
+function alert(content) {
+    S.ui.showMessage(content);
+}
+
+function confirm(content) {
+    S.ui.showConfirmation(content, function () { });
+}
+
+function confirm(content, callback) {
+    S.ui.showConfirmation(content, callback);
+}
+
+
+/* jqGrid Formatters
+*********************************/
+jQuery.extend($.fn.fmatter, {
+    dateFormatter: function (cellvalue, options, rowdata) {
+        return S.helpers.formatDate(cellvalue);
+    }
+});
+
+jQuery.extend($.fn.fmatter.dateFormatter, {
+    unformat: function (cellvalue, options) {        
+        return new Date(cellvalue);
+    }
+});
+
+jQuery.extend($.fn.fmatter, {
+    booleanFormatter: function (cellvalue, options, rowdata) {
+        return cellvalue === true ? "Si" : "No";
+    }
+});
+
+jQuery.extend($.fn.fmatter.booleanFormatter, {
+    unformat: function (cellvalue, options) {
+        return (cellvalue === "Si").toString(); //Fix de los checkboxes
+    }
+});
+
+/* jqGrid general options
+*********************************/
+jQuery.extend(jQuery.jgrid.defaults, {
+    datatype: "json",
+    jsonReader: { repeatitems: false, id: "Id" },
+    postData: {
+        __RequestVerificationToken: S.helpers.getAntiForgeryToken
+    },
+    rowNum: 5,
+    pager: "#ajaxGridPager",
+    width: "600px",
+    height: "10.5em"
+});

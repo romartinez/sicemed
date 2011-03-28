@@ -22,7 +22,7 @@ namespace Sicemed.Web.Controllers
         {
 			var session = SessionFactory.GetCurrentSession();
 			var count = session.QueryOver<Feriado>().RowCountInt64();
-			var pageData = session.QueryOver<Feriado>().Fetch(x=>x.Calendario).Eager.Skip((page - 1) * rows ).Take(rows).List();
+			var pageData = session.QueryOver<Feriado>().Skip((page - 1) * rows ).Take(rows).List();
 			return Json(new {
 				page,
 				records = count,

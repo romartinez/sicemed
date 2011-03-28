@@ -2,6 +2,7 @@
 using Castle.Core.Logging;
 using Newtonsoft.Json;
 using NHibernate;
+using Sicemed.Web.ActionResults;
 
 namespace Sicemed.Web.Plumbing
 {
@@ -10,18 +11,9 @@ namespace Sicemed.Web.Plumbing
         public ILogger Logger { get; set; }
         public ISessionFactory SessionFactory { get; set; }
 
-        protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding)
-        {
-            return Json(data, contentType, contentEncoding, JsonRequestBehavior.DenyGet);
-        }
-
         protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
         {
-            var result = new JsonResult() { ContentEncoding = contentEncoding, ContentType = contentType, JsonRequestBehavior = behavior };
-            var settings = new JsonSerializerSettings();
-            settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            result.Data = JsonConvert.SerializeObject(data, Formatting.None, settings);
-            return result;
+            return new NewtonJsonResult(base.Json(data, contentType, contentEncoding, behavior));
         }
     }
 }

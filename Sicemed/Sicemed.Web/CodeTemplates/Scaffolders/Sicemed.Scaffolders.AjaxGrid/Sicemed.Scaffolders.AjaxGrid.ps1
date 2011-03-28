@@ -7,11 +7,14 @@ param(
 	[switch]$Force = $false
 )
 
-Scaffold MvcScaffolding.Controller $ModelType -Project $Poject `
-	-CodeLanguage $CodeLanguage -OverrideTemplateFolders $TemplateFolders `
+$inflector = new-object ConfOrm.Shop.Inflectors.SpanishInflector
+
+$controllerName = $inflector.Pluralize($ModelType)
+
+Scaffold MvcScaffolding.Controller ($controllerName+"Controller") -Project $Poject `
+	-Template GridController -CodeLanguage $CodeLanguage -OverrideTemplateFolders $TemplateFolders `
 	-NoChildItems -Force:$Force
 
-$controllerName = Get-PluralizedWord $ModelType
 Scaffold MvcScaffolding.RazorView $controllerName Index -ModelType $ModelType `
-	-Template jQGridView -Project $Project -CodeLanguage $CodeLanguage `
+	-Template GridView  -Project $Project -CodeLanguage $CodeLanguage `
 	-OverrideTemplateFolders $TemplateFolders -Force:$Force

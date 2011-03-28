@@ -14,6 +14,7 @@
     <AssemblyName>Sicemed.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -125,6 +126,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionResults\NewtonJsonResult.cs" />
     <Compile Include="ApplicationServices\Account\FormsAuthenticationApplicationService.cs" />
     <Compile Include="ApplicationServices\Account\UserDiscoveringApplicationService.cs" />
     <Compile Include="AppStart_Combres.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Plumbing\BaseController.cs" />
+    <Compile Include="Plumbing\NHibernateMappingExtensions.cs" />
     <Compile Include="Plumbing\SessionFactoryProvider.cs" />
     <Compile Include="Plumbing\Facilities\PersistenceFacility.cs" />
     <Compile Include="Plumbing\HttpModules\NHibernateSessionModule.cs" />
@@ -176,7 +179,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\combres.xml" />
+    <Content Include="App_Data\combres.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\css\ellipsis-xbl.xml" />
     <Content Include="Content\css\kriframework.css" />
     <Content Include="Content\css\style.css" />
@@ -212,10 +217,13 @@
     <Content Include="Content\images\skin1\video.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\ajaxAntiForgery.js" />
+    <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Scripts\cufon.js" />
     <Content Include="Scripts\geosans.js" />
     <Content Include="Scripts\i18n\grid.locale-es.js" />
     <Content Include="Scripts\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\sicemed.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -274,7 +282,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CodeTemplates\Scaffolders\Sicemed.Scaffolders.AjaxGrid\jQGridView.cs.t4" />
+    <None Include="CodeTemplates\Scaffolders\Sicemed.Scaffolders.AjaxGrid\GridView.cs.t4" />
     <None Include="CodeTemplates\Scaffolders\Sicemed.Scaffolders.AjaxGrid\Sicemed.Scaffolders.AjaxGrid.ps1" />
     <None Include="CodeTemplates\Scaffolders\Sicemed.Scaffolders.AjaxGrid\ControllerWithContext.cs.t4" />
     <None Include="combres.readme" />
@@ -304,8 +312,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>56711</DevelopmentServerPort>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>6666</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

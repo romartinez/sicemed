@@ -13,11 +13,6 @@
     jQuery(document).ready(function ($) {
         $("#ajaxGrid").jqGrid({
             url: '@Url.Action("GridData")',
-            datatype: "jsonstring",
-            jsonReader: { repeatitems: false, id: "Id" },
-            loadComplete: function (xhr) {
-                console.log(xhr);
-            },
             colNames: [
             "Id",
             "Anio",
@@ -26,14 +21,10 @@
 			],
             colModel: [
             { name: "Id", editable: true, sortable: false, hidden: true },
-            { name: "Anio", editable: true, sortable: false, hidden: false },
+            { name: "Anio", editable: true, sortable: false, hidden: false, formatter: "dateFormatter" },
             { name: "Nombre", editable: true, sortable: false, hidden: false },
             { name: "Descripcion", editable: true, sortable: false, hidden: false }
-			],
-            rowNum: 5,
-            pager: "#ajaxGridPager",
-            width: "600px",
-            height: "10.5em"
+			]
         });
 
         $("#ajaxGrid").jqGrid("navGrid", "#ajaxGridPager",
