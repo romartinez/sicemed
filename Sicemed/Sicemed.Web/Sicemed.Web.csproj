@@ -295,6 +295,7 @@
     <Content Include="scaffolding.config" />
     <Content Include="Views\Calendarios\Index.cshtml" />
     <Content Include="Views\Feriados\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutRightColumn.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
