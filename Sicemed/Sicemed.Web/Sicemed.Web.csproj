@@ -129,19 +129,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\Recursos.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Recursos.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Public\PublicAreaRegistration.cs" />
     <Compile Include="Services\ApplicationServices\Cuenta\AccountMembershipApplicationService.cs" />
     <Compile Include="Plumbing\Helpers\AccountValidation.cs" />
     <Compile Include="Services\ApplicationServices\Cuenta\IMembershipApplicationService.cs" />
-    <Compile Include="Areas\Public\Models\Cuenta\LoginViewModel.cs" />
+    <Compile Include="Areas\Public\Models\Cuenta\IniciarSesionViewModel.cs" />
     <Compile Include="Areas\Public\Models\Cuenta\RegistroViewModel.cs" />
     <Compile Include="Plumbing\Attributes\ValidatePasswordLengthAttribute.cs" />
     <Compile Include="Plumbing\ActionResults\NewtonJsonResult.cs" />
     <Compile Include="Services\ApplicationServices\Cuenta\FormsAuthenticationApplicationService.cs" />
     <Compile Include="Services\ApplicationServices\Cuenta\IFormsAuthenticationApplicationService.cs" />
     <Compile Include="AppStart_Combres.cs" />
-    <Compile Include="Areas\Public\Controllers\CuentaController.cs" />
+    <Compile Include="Areas\Public\Controllers\UsuariosController.cs" />
     <Compile Include="Areas\Admin\Controllers\CalendariosController.cs" />
     <Compile Include="Areas\Admin\Controllers\FeriadosController.cs" />
     <Compile Include="Areas\Public\Controllers\HomeController.cs" />
@@ -279,12 +284,12 @@
     <Content Include="public\js\MicrosoftMvcValidation.js" />
     <Content Include="public\js\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Public\Views\Cuenta\ChangePassword.cshtml" />
-    <Content Include="Areas\Public\Views\Cuenta\ChangePasswordSuccess.cshtml" />
-    <Content Include="Areas\Public\Views\Cuenta\LogOn.cshtml" />
-    <Content Include="Areas\Public\Views\Cuenta\Register.cshtml" />
-    <Content Include="Areas\Public\Views\Home\About.cshtml" />
-    <Content Include="Areas\Public\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Public\Views\Usuarios\CambiarPassword.cshtml" />
+    <Content Include="Areas\Public\Views\Usuarios\CambioPasswordExito.cshtml" />
+    <Content Include="Areas\Public\Views\Usuarios\IniciarSesion.cshtml" />
+    <Content Include="Areas\Public\Views\Usuarios\Registrar.cshtml" />
+    <Content Include="Areas\Public\Views\Home\Acerca.cshtml" />
+    <Content Include="Areas\Public\Views\Home\Inicio.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -307,14 +312,20 @@
     <Content Include="Views\Shared\_Breadcrumb.cshtml" />
     <Content Include="Views\Shared\_MenuFooter.cshtml" />
     <Content Include="scaffolding.config" />
-    <Content Include="Areas\Admin\Views\Calendarios\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Feriados\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Calendarios\Inicio.cshtml" />
+    <Content Include="Areas\Admin\Views\Feriados\Inicio.cshtml" />
     <Content Include="Views\Shared\_LayoutRightColumn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Public\Views\Shared\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Recursos.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Recursos.designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

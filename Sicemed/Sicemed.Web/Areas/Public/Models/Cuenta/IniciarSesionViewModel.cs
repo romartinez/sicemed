@@ -2,18 +2,18 @@
 
 namespace Sicemed.Web.Areas.Public.Models.Cuenta
 {
-    public class LoginViewModel
+    public class IniciarSesionViewModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Display(Name = "Nombre de Usuario")]
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
+        [Display(Name = "Recordarme?")]
+        public bool Recordarme { get; set; }
     }
 }

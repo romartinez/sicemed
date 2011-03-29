@@ -12,7 +12,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         //
         // GET: /Calendario/
 
-        public ViewResult Index()
+        public ViewResult Inicio()
         {
             return View();
         }

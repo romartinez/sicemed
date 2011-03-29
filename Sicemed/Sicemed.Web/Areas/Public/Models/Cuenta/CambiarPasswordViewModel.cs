@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Resources;
 using Sicemed.Web.Plumbing.Attributes;
 
 namespace Sicemed.Web.Areas.Public.Models.Cuenta
@@ -8,18 +9,20 @@ namespace Sicemed.Web.Areas.Public.Models.Cuenta
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
-        public string OldPassword { get; set; }
+        [Display(Name = "Password Actual")]
+        public string PasswordViejo { get; set; }
 
         [Required]
         [ValidatePasswordLength]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
-        public string NewPassword { get; set; }
+        [Display(Name = "Nuevo Password")]
+        public string PasswordNuevo { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        [Display(Name = "Confirme Nuevo Password")]
+        [Compare("Password",
+            ErrorMessageResourceName = "VALIDATOR_PASSWORD_PASSWORDCONFIRMATION_NOT_EQUALS",
+            ErrorMessageResourceType = typeof(Recursos))]
+        public string PasswordNuevoConfirmacion { get; set; }
     }
 }

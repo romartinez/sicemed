@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Resources;
 using Sicemed.Web.Plumbing.Attributes;
 
 namespace Sicemed.Web.Areas.Public.Models.Cuenta
@@ -7,12 +8,12 @@ namespace Sicemed.Web.Areas.Public.Models.Cuenta
     public class RegistroViewModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Display(Name = "Nombre de Usuario")]
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email address")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
@@ -23,7 +24,9 @@ namespace Sicemed.Web.Areas.Public.Models.Cuenta
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        [Compare("Password", 
+            ErrorMessageResourceName = "VALIDATOR_PASSWORD_PASSWORDCONFIRMATION_NOT_EQUALS",
+            ErrorMessageResourceType = typeof(Recursos))]
+        public string PasswordConfirmacion { get; set; }
     }
 }

@@ -56,7 +56,7 @@ namespace Sicemed.Web.Services.ApplicationServices.Cuenta
             if (String.IsNullOrEmpty(newPassword))
                 throw new ArgumentException("Value cannot be null or empty.", "newPassword");
 
-            // The underlying ChangePassword() will throw an exception rather
+            // The underlying CambiarPassword() will throw an exception rather
             // than return false in certain failure scenarios.
             try
             {

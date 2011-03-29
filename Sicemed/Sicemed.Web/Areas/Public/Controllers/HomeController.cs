@@ -5,20 +5,15 @@ namespace Sicemed.Web.Areas.Public.Controllers
 {
     public class HomeController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Inicio()
         {
             Logger.Debug("ERRORRRRR!!!");
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Acerca()
         {
             return View();
-        }
-
-        public ActionResult Register()
-        {
-            return RedirectToAction("About");
         }
     }
 }

@@ -17,12 +17,12 @@ namespace Sicemed.Web.Areas.Public
             context.MapRoute(
                 "Public_As_default",
                 "{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                new { controller = "Home", action = "Inicio", id = UrlParameter.Optional }
             );
             context.MapRoute(
                 "Public_default",
                 "Public/{controller}/{action}/{id}",
-                new { controller= "Home", action = "Index", id = UrlParameter.Optional }
+                new { controller= "Home", action = "Inicio", id = UrlParameter.Optional }
             );
         }
     }
