@@ -1,11 +1,9 @@
 using System;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Sicemed.Web.ActionResults
+namespace Sicemed.Web.Plumbing.ActionResults
 {
     public class NewtonJsonResult : JsonResult
     {

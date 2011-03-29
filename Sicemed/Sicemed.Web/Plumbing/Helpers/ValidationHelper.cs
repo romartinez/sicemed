@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq;
 
-namespace Sicemed.Web.Helpers
+namespace Sicemed.Web.Plumbing.Helpers
 {
     public static class ValidationHelper
     {

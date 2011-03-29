@@ -1,13 +1,8 @@
 using System.Web;
 using Sicemed.Web.Models;
 
-namespace Sicemed.Web.ApplicationServices.Account
+namespace Sicemed.Web.Services.ApplicationServices.Account
 {
-    public interface IUserDiscoveringApplicationService
-    {
-        PrincipalBase GetCurrentUser();
-    }
-
     public class UserDiscoveringApplicationService : IUserDiscoveringApplicationService
     {
         #region IUserDiscoveringApplicationService Members

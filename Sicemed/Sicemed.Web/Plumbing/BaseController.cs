@@ -1,8 +1,8 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 using Castle.Core.Logging;
 using Newtonsoft.Json;
 using NHibernate;
-using Sicemed.Web.ActionResults;
+using Sicemed.Web.Plumbing.ActionResults;
 
 namespace Sicemed.Web.Plumbing
 {

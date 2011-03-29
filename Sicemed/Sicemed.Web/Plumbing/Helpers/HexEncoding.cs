@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace Sicemed.Web.Helpers
+namespace Sicemed.Web.Plumbing.Helpers
 {
     public static class HexEncoding
     {

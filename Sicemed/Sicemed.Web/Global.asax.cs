@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
@@ -10,9 +10,9 @@ using Castle.Facilities.TypedFactory;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Newtonsoft.Json;
-using Sicemed.Web.ModelBinders;
 using Sicemed.Web.Models;
 using Sicemed.Web.Plumbing;
+using Sicemed.Web.Plumbing.ModelBinders;
 
 namespace Sicemed.Web
 {

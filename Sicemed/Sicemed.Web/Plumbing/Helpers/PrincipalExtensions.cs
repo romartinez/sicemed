@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Principal;
-using System.Web;
-using Sicemed.Model;
+using Sicemed.Web.Models;
 
 // ReSharper disable CheckNamespace
-namespace System.Web {
+namespace Sicemed.Web.Plumbing.Helpers {
 // ReSharper restore CheckNamespace
     public static class PrincipalExtensions {
         public static PrincipalBase GetCustom(this IPrincipal principal) {

@@ -1,9 +1,9 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Web.Mvc;
-using Sicemed.Web.Helpers;
 using Sicemed.Web.Models;
+using Sicemed.Web.Plumbing.Helpers;
 
-namespace Sicemed.Web.ModelBinders
+namespace Sicemed.Web.Plumbing.ModelBinders
 {
     public class ComplexObjectModelBinder : DefaultModelBinder
     {

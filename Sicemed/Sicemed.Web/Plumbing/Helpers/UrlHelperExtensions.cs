@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 // ReSharper disable CheckNamespace
 
-namespace Sicemed.Web.Helpers
+namespace Sicemed.Web.Plumbing.Helpers
 {
 // ReSharper restore CheckNamespace
     public static class UrlHelperExtensions

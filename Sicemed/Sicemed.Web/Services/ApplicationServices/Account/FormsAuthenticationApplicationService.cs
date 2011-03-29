@@ -4,14 +4,8 @@ using System.Web.Security;
 using Newtonsoft.Json;
 using Sicemed.Web.Models;
 
-namespace Sicemed.Web.ApplicationServices.Account
+namespace Sicemed.Web.Services.ApplicationServices.Account
 {
-    public interface IFormsAuthenticationApplicationService
-    {
-        void SignIn(PrincipalBase principal);
-        void SignOut();
-    }
-
     public class FormsAuthenticationApplicationService : IFormsAuthenticationApplicationService
     {
         #region IFormsAuthenticationApplicationService Members
