@@ -36,8 +36,8 @@
     </div>
     <div class="wrap_fullwidth small_margin" id='main'>
         <div class='center'>
-            <div class='content_fullwidth' id='content_wrap'>
-                <div class='content_fullwidth entry'>
+            <div class='content_two_third' id='content_wrap'>
+                <div class='content_two_third entry'>
                     <h1>@ViewBag.Title</h1>
                     <div class="entry_content">
                         @RenderBody()
@@ -46,6 +46,15 @@
                     <!-- end entry -->
                 </div>
                 <!-- end content_wrap -->
+            </div>
+            <div class='content_one_third' id='sidebar'>
+                <span id='sidebar_top'>
+                    <!-- needed for smooth start of sidebar background-->
+                </span><span id='sidebar_bottom'>
+                    <!-- needed for smooth end of sidebar background-->
+                </span>
+                @Html.Partial("_MenuRight")
+                <!--end sidebar -->
             </div>
             <!-- end center -->
         </div>
