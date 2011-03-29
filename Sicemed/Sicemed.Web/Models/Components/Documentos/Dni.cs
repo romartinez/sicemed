@@ -1,4 +1,4 @@
-namespace Sicemed.Web.Models.Components
+namespace Sicemed.Web.Models.Components.Documentos
 {
     public class Dni : Documento
     {

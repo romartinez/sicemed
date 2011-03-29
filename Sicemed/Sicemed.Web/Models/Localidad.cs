@@ -1,6 +1,6 @@
 namespace Sicemed.Web.Models
 {
-    public class Localidad : EntityBase
+    public class Localidad : Entity
     {
         #region Primitive Properties
 

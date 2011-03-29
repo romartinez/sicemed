@@ -1,7 +1,7 @@
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Sicemed.Web.Services.ApplicationServices.Account;
+using Sicemed.Web.Services.ApplicationServices.Cuenta;
 
 namespace Sicemed.Web.Plumbing.Installers
 {

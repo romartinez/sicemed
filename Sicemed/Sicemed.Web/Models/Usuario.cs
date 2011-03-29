@@ -3,7 +3,7 @@ using Iesi.Collections.Generic;
 
 namespace Sicemed.Web.Models
 {
-    public class Usuario : EntityBase
+    public class Usuario : Entity
     {
         #region Primitive Properties
 

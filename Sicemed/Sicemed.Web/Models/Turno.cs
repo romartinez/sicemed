@@ -2,7 +2,7 @@ using System;
 
 namespace Sicemed.Web.Models
 {
-    public class Turno : EntityBase
+    public class Turno : Entity
     {
         #region Primitive Properties
 

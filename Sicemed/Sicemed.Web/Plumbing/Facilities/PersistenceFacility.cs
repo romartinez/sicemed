@@ -106,7 +106,7 @@ namespace Sicemed.Web.Plumbing.Facilities
             orm.Patterns.Sets.Add(new UseSetWhenGenericCollectionPattern());
 
             var entities = new List<Type>();
-            entities.AddRange(typeof(EntityBase).Assembly.GetTypes().Where(t => typeof(EntityBase).IsAssignableFrom(t) && !(t.GetType() == typeof(EntityBase))));
+            entities.AddRange(typeof(Entity).Assembly.GetTypes().Where(t => typeof(Entity).IsAssignableFrom(t) && !(t.GetType() == typeof(Entity))));
             var mapper = new Mapper(orm, patternsAppliers);
             orm.TablePerClass(entities);
             orm.Cascade<Usuario, EspecialidadProfesional>(Cascade.None);

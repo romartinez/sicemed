@@ -3,7 +3,7 @@ using Iesi.Collections.Generic;
 
 namespace Sicemed.Web.Models
 {
-    public class Calendario : EntityBase
+    public class Calendario : Entity
     {
         #region Primitive Properties
 

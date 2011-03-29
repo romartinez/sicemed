@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Web.Mvc;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.ViewModels;
 using Sicemed.Web.Plumbing.Helpers;
 
 namespace Sicemed.Web.Plumbing.ModelBinders

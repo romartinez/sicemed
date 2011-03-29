@@ -1,21 +1,23 @@
 ﻿using System;
+using System.Web;
 using System.Web.Security;
+using Sicemed.Web.Plumbing;
 
-namespace Sicemed.Web.Models
+namespace Sicemed.Web.Services.ApplicationServices.Cuenta
 {
-    public class AccountMembershipService : IMembershipService
+    public class AccountMembershipApplicationService : IMembershipApplicationService
     {
         private readonly MembershipProvider _provider;
 
-        public AccountMembershipService()
+        public AccountMembershipApplicationService()
             : this(null) {}
 
-        public AccountMembershipService(MembershipProvider provider)
+        public AccountMembershipApplicationService(MembershipProvider provider)
         {
             _provider = provider ?? Membership.Provider;
         }
 
-        #region IMembershipService Members
+        #region IMembershipApplicationService Members
 
         public int MinPasswordLength
         {
@@ -67,6 +69,12 @@ namespace Sicemed.Web.Models
             {
                 return false;
             }
+        }
+
+        public PrincipalBase GetCurrentUser()
+        {
+            if(!HttpContext.Current.User.Identity.IsAuthenticated) return null;
+            return (PrincipalBase)HttpContext.Current.User;
         }
 
         #endregion

@@ -6,7 +6,10 @@ using System.Web.Routing;
 using System.Web.Security;
 using NUnit.Framework;
 using Sicemed.Web.Controllers;
-using Sicemed.Web.Models;
+using Sicemed.Web.Models.ViewModels;
+using Sicemed.Web.Models.ViewModels.Cuenta;
+using Sicemed.Web.Plumbing;
+using Sicemed.Web.Services.ApplicationServices.Cuenta;
 
 namespace Sicemed.Tests.Web.Controllers
 {
@@ -19,7 +22,7 @@ namespace Sicemed.Tests.Web.Controllers
             var controller = new AccountController
                              {
                                  FormsService = new MockFormsAuthenticationService(),
-                                 MembershipService = new MockMembershipService(),
+                                 MembershipApplicationService = new MockMembershipApplicationService(),
                                  Url = new UrlHelper(requestContext),
                              };
             controller.ControllerContext = new ControllerContext
@@ -30,7 +33,7 @@ namespace Sicemed.Tests.Web.Controllers
             return controller;
         }
 
-        private class MockFormsAuthenticationService : IFormsAuthenticationService
+        private class MockFormsAuthenticationService : IFormsAuthenticationApplicationService
         {
             public bool SignIn_WasCalled;
             public bool SignOut_WasCalled;
@@ -81,9 +84,9 @@ namespace Sicemed.Tests.Web.Controllers
             }
         }
 
-        private class MockMembershipService : IMembershipService
+        private class MockMembershipApplicationService : IMembershipApplicationService
         {
-            #region IMembershipService Members
+            #region IMembershipApplicationService Members
 
             public int MinPasswordLength
             {
@@ -112,6 +115,11 @@ namespace Sicemed.Tests.Web.Controllers
             public bool ChangePassword(string userName, string oldPassword, string newPassword)
             {
                 return (userName == "someUser" && oldPassword == "goodOldPassword" && newPassword == "goodNewPassword");
+            }
+
+            public PrincipalBase GetCurrentUser()
+            {
+                throw new NotImplementedException();
             }
 
             #endregion
@@ -149,7 +157,7 @@ namespace Sicemed.Tests.Web.Controllers
         {
             // Arrange
             AccountController controller = GetAccountController();
-            var model = new ChangePasswordModel
+            var model = new CambiarPasswordViewModel
                         {
                             OldPassword = "goodOldPassword",
                             NewPassword = "goodNewPassword",
@@ -170,7 +178,7 @@ namespace Sicemed.Tests.Web.Controllers
         {
             // Arrange
             AccountController controller = GetAccountController();
-            var model = new ChangePasswordModel
+            var model = new CambiarPasswordViewModel
                         {
                             OldPassword = "goodOldPassword",
                             NewPassword = "badNewPassword",
@@ -194,7 +202,7 @@ namespace Sicemed.Tests.Web.Controllers
         {
             // Arrange
             AccountController controller = GetAccountController();
-            var model = new ChangePasswordModel
+            var model = new CambiarPasswordViewModel
                         {
                             OldPassword = "goodOldPassword",
                             NewPassword = "goodNewPassword",
@@ -248,7 +256,7 @@ namespace Sicemed.Tests.Web.Controllers
         {
             // Arrange
             AccountController controller = GetAccountController();
-            var model = new LogOnModel
+            var model = new LoginViewModel
                         {
                             UserName = "someUser",
                             Password = "goodPassword",
@@ -271,7 +279,7 @@ namespace Sicemed.Tests.Web.Controllers
         {
             // Arrange
             AccountController controller = GetAccountController();
-            var model = new LogOnModel
+            var model = new LoginViewModel
                         {
                             UserName = "someUser",
                             Password = "goodPassword",
@@ -295,7 +303,7 @@ namespace Sicemed.Tests.Web.Controllers
         {
             // Arrange
             AccountController controller = GetAccountController();
-            var model = new LogOnModel
+            var model = new LoginViewModel
                         {
                             UserName = "someUser",
                             Password = "goodPassword",
@@ -319,7 +327,7 @@ namespace Sicemed.Tests.Web.Controllers
         {
             // Arrange
             AccountController controller = GetAccountController();
-            var model = new LogOnModel
+            var model = new LoginViewModel
                         {
                             UserName = "someUser",
                             Password = "goodPassword",
@@ -341,7 +349,7 @@ namespace Sicemed.Tests.Web.Controllers
         {
             // Arrange
             AccountController controller = GetAccountController();
-            var model = new LogOnModel
+            var model = new LoginViewModel
                         {
                             UserName = "someUser",
                             Password = "badPassword",
@@ -378,7 +386,7 @@ namespace Sicemed.Tests.Web.Controllers
         {
             // Arrange
             AccountController controller = GetAccountController();
-            var model = new RegisterModel
+            var model = new RegistroViewModel
                         {
                             UserName = "someUser",
                             Email = "goodEmail",
@@ -401,7 +409,7 @@ namespace Sicemed.Tests.Web.Controllers
         {
             // Arrange
             AccountController controller = GetAccountController();
-            var model = new RegisterModel
+            var model = new RegistroViewModel
                         {
                             UserName = "someUser",
                             Email = "goodEmail",
@@ -425,7 +433,7 @@ namespace Sicemed.Tests.Web.Controllers
         {
             // Arrange
             AccountController controller = GetAccountController();
-            var model = new RegisterModel
+            var model = new RegistroViewModel
                         {
                             UserName = "duplicateUser",
                             Email = "goodEmail",

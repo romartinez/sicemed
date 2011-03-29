@@ -1,6 +1,6 @@
 ﻿using System.Web.Security;
 
-namespace Sicemed.Web.Models
+namespace Sicemed.Web.Plumbing.Helpers
 {
     public static class AccountValidation
     {

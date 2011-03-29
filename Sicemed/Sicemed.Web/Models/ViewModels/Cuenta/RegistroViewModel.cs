@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Sicemed.Web.Plumbing.Attributes;
 
-namespace Sicemed.Web.Models
+namespace Sicemed.Web.Models.ViewModels.Cuenta
 {
-    public class RegisterModel
+    public class RegistroViewModel
     {
         [Required]
         [Display(Name = "User name")]

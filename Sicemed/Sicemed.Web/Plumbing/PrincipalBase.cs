@@ -1,6 +1,6 @@
 using System.Security.Principal;
 
-namespace Sicemed.Web.Models
+namespace Sicemed.Web.Plumbing
 {
     public class PrincipalBase : GenericPrincipal
     {

@@ -3,7 +3,7 @@ using Iesi.Collections.Generic;
 
 namespace Sicemed.Web.Models
 {
-    public class EspecialidadProfesional : EntityBase
+    public class EspecialidadProfesional : Entity
     {
         #region Navigation Properties
 

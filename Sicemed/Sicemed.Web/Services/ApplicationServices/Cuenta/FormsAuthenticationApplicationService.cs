@@ -2,26 +2,26 @@ using System;
 using System.Web;
 using System.Web.Security;
 using Newtonsoft.Json;
-using Sicemed.Web.Models;
+using Sicemed.Web.Plumbing;
 
-namespace Sicemed.Web.Services.ApplicationServices.Account
+namespace Sicemed.Web.Services.ApplicationServices.Cuenta
 {
     public class FormsAuthenticationApplicationService : IFormsAuthenticationApplicationService
     {
         #region IFormsAuthenticationApplicationService Members
 
-        public void SignIn(PrincipalBase principal)
+        public void SignIn(string userName, bool createPersistentCookie)
         {
-            if (principal == null) throw new ArgumentException("Value cannot be null.", "principal");
+            if (string.IsNullOrWhiteSpace(userName)) throw new ArgumentException("Value cannot be null nor empty.", "userName");
 
             // Create and tuck away the cookie
-            string serializedIdentity = JsonConvert.SerializeObject(principal.IdentityBase.ExtendedData);
+            //string serializedIdentity = JsonConvert.SerializeObject(principal.IdentityBase.ExtendedData);
             var authTicket = new FormsAuthenticationTicket(1,
-                                                           principal.Identity.Name,
+                                                           userName,
                                                            DateTime.Now,
                                                            DateTime.Now.AddMinutes(15),
-                                                           false,
-                                                           serializedIdentity);
+                                                           createPersistentCookie, 
+                                                           string.Empty);//serializedIdentity);
             string encTicket = FormsAuthentication.Encrypt(authTicket);
             var faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
             HttpContext.Current.Response.Cookies.Add(faCookie);

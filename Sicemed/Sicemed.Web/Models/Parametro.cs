@@ -1,6 +1,6 @@
 namespace Sicemed.Web.Models
 {
-    public class Parametro : EntityBase
+    public class Parametro : Entity
     {
         #region Primitive Properties
 

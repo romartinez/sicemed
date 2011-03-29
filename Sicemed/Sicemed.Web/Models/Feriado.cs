@@ -3,7 +3,7 @@ using System.Web.Script.Serialization;
 
 namespace Sicemed.Web.Models
 {
-    public class Feriado : EntityBase
+    public class Feriado : Entity
     {
         #region Primitive Properties
 

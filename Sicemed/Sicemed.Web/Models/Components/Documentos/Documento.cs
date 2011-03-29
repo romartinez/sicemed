@@ -1,6 +1,6 @@
-namespace Sicemed.Web.Models.Components
+namespace Sicemed.Web.Models.Components.Documentos
 {
-    public abstract class Documento : ValueTypeBase
+    public abstract class Documento : ComponentBase
     {
         public abstract string Descripcion { get; }
         public abstract string DescripcionCorta { get; }

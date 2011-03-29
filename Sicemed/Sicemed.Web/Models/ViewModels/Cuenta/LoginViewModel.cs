@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Sicemed.Web.Models
+namespace Sicemed.Web.Models.ViewModels.Cuenta
 {
-    public class LogOnModel
+    public class LoginViewModel
     {
         [Required]
         [Display(Name = "User name")]
