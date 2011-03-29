@@ -14,7 +14,7 @@
     <AssemblyName>Sicemed.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -145,6 +145,12 @@
     </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Public\PublicAreaRegistration.cs" />
+    <Compile Include="Models\Components\Domicilio.cs" />
+    <Compile Include="Models\Components\Telefono.cs" />
+    <Compile Include="Models\Roles\Paciente.cs" />
+    <Compile Include="Models\Roles\Profesional.cs" />
+    <Compile Include="Models\Roles\Rol.cs" />
+    <Compile Include="Models\Roles\Secretaria.cs" />
     <Compile Include="Public.HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -189,12 +195,10 @@
     <Compile Include="Models\Especialidad.cs" />
     <Compile Include="Models\EspecialidadProfesional.cs" />
     <Compile Include="Models\Feriado.cs" />
-    <Compile Include="Plumbing\IdentityBase.cs" />
     <Compile Include="Models\Localidad.cs" />
     <Compile Include="Models\ObraSocial.cs" />
     <Compile Include="Models\Parametro.cs" />
     <Compile Include="Models\Plan.cs" />
-    <Compile Include="Plumbing\PrincipalBase.cs" />
     <Compile Include="Models\Provincia.cs" />
     <Compile Include="Models\Turno.cs" />
     <Compile Include="Models\Usuario.cs" />
@@ -376,12 +380,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>8533</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:8533/</IISUrl>
           <NTLMAuthentication>True</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

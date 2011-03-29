@@ -1,25 +1,26 @@
 using System;
+using System.Linq;
+using System.Security.Principal;
 using Iesi.Collections.Generic;
+using Sicemed.Web.Models.Components;
+using Sicemed.Web.Models.Components.Documentos;
+using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Models
 {
-    public class Usuario : Entity
+    public class Usuario : Entity, IIdentity, IPrincipal
     {
         #region Primitive Properties
 
         public virtual DateTime? FechaNacimiento { get; set; }
 
-        //public virtual Documento Documento { get; set; }
-
-        public virtual DateTime? FechaIngreso { get; set; }
-
-        public virtual string Domicilio { get; set; }
-
-        public virtual string NumeroMatricula { get; set; }
+        public virtual Documento Documento { get; set; }
+        
+        public virtual Domicilio Domicilio { get; set; }
 
         public virtual bool? EstaHabilitadoTurnosWeb { get; set; }
 
-        public virtual string Telefono { get; set; }
+        public virtual Telefono Telefono { get; set; }
 
         public virtual int InasistenciasContinuas { get; set; }
 
@@ -29,14 +30,32 @@ namespace Sicemed.Web.Models
 
         #region Navigation Properties
 
-        public virtual Localidad Localidad { get; set; }
-
         public virtual ISet<Turno> Turnos { get; set; }
 
-        public virtual ISet<EspecialidadProfesional> EspecialidadProfesional { get; set; }
-
-        public virtual Plan Plan { get; set; }
+        public virtual ISet<Rol> Roles { get; set; }
 
         #endregion
+
+        public string Name { get; set; }
+
+        public string AuthenticationType
+        {
+            get { return "SICEMED"; }
+        }
+
+        public bool IsAuthenticated
+        {
+            get { return !string.IsNullOrWhiteSpace(Name); }
+        }
+
+        public bool IsInRole(string role)
+        {
+            return Roles.Any(rol => string.Equals(role, rol.Nombre, StringComparison.CurrentCultureIgnoreCase));
+        }
+
+        public IIdentity Identity
+        {
+            get { return this; }
+        }
     }
 }

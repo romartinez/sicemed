@@ -29,9 +29,9 @@ namespace Sicemed.Web.Areas.Public.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_membershipApplicationService.ValidateUser(model.Username, model.Password))
+                if (_membershipApplicationService.ValidarUsuario(model.Username, model.Password))
                 {
-                    _formsApplicationService.SignIn(model.Username, model.Recordarme);
+                    _formsApplicationService.IniciarSesion(model.Username, model.Recordarme);
                     if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
@@ -51,7 +51,7 @@ namespace Sicemed.Web.Areas.Public.Controllers
 
         public virtual ActionResult CerrarSesion()
         {
-            _formsApplicationService.SignOut();
+            _formsApplicationService.CerrarSesion();
 
             return RedirectToAction(MVC.Public.Home.Inicio());
         }
@@ -59,7 +59,7 @@ namespace Sicemed.Web.Areas.Public.Controllers
 
         public virtual ActionResult Registrar()
         {
-            ViewBag.PasswordLength = _membershipApplicationService.MinPasswordLength;
+            ViewBag.PasswordLength = _membershipApplicationService.LargoMinimoPassword;
             return View();
         }
 
@@ -69,12 +69,12 @@ namespace Sicemed.Web.Areas.Public.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                MembershipCreateStatus createStatus = _membershipApplicationService.CreateUser(model.Username, model.Password,
+                MembershipCreateStatus createStatus = _membershipApplicationService.CrearUsuario(model.Username, model.Password,
                                                                                    model.Email);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    _formsApplicationService.SignIn(model.Username, false /* createPersistentCookie */);
+                    _formsApplicationService.IniciarSesion(model.Username, false /* createPersistentCookie */);
                     return RedirectToAction(MVC.Public.Home.Inicio());
                 } else
                 {
@@ -83,14 +83,14 @@ namespace Sicemed.Web.Areas.Public.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            ViewBag.PasswordLength = _membershipApplicationService.MinPasswordLength;
+            ViewBag.PasswordLength = _membershipApplicationService.LargoMinimoPassword;
             return View(model);
         }
 
         [Authorize]
         public virtual ActionResult CambiarPassword()
         {
-            ViewBag.PasswordLength = _membershipApplicationService.MinPasswordLength;
+            ViewBag.PasswordLength = _membershipApplicationService.LargoMinimoPassword;
             return View();
         }
 
@@ -100,7 +100,7 @@ namespace Sicemed.Web.Areas.Public.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_membershipApplicationService.ChangePassword(User.Identity.Name, viewModel.PasswordViejo, viewModel.PasswordNuevo))
+                if (_membershipApplicationService.CambiarPassword(User.Identity.Name, viewModel.PasswordViejo, viewModel.PasswordNuevo))
                 {
                     return RedirectToAction(this.CambioPasswordExito());
                 } else
@@ -110,7 +110,7 @@ namespace Sicemed.Web.Areas.Public.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            ViewBag.PasswordLength = _membershipApplicationService.MinPasswordLength;
+            ViewBag.PasswordLength = _membershipApplicationService.LargoMinimoPassword;
             return View(viewModel);
         }
 

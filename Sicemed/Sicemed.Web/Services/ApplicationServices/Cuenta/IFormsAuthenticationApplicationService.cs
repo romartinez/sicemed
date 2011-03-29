@@ -2,7 +2,7 @@
 {
     public interface IFormsAuthenticationApplicationService
     {
-        void SignIn(string userName, bool createPersistentCookie);
-        void SignOut();
+        void IniciarSesion(string nombreUsuario, bool recordarme);
+        void CerrarSesion();
     }
 }

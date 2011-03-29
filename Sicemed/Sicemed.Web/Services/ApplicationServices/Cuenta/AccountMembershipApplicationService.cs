@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using System.Web.Security;
+using Sicemed.Web.Models;
 using Sicemed.Web.Plumbing;
 
 namespace Sicemed.Web.Services.ApplicationServices.Cuenta
@@ -19,49 +20,49 @@ namespace Sicemed.Web.Services.ApplicationServices.Cuenta
 
         #region IMembershipApplicationService Members
 
-        public int MinPasswordLength
+        public int LargoMinimoPassword
         {
             get { return _provider.MinRequiredPasswordLength; }
         }
 
-        public bool ValidateUser(string userName, string password)
+        public bool ValidarUsuario(string nombreUsuario, string password)
         {
-            if (String.IsNullOrEmpty(userName))
-                throw new ArgumentException("Value cannot be null or empty.", "userName");
+            if (String.IsNullOrEmpty(nombreUsuario))
+                throw new ArgumentException("Value cannot be null or empty.", "nombreUsuario");
             if (String.IsNullOrEmpty(password))
                 throw new ArgumentException("Value cannot be null or empty.", "password");
 
-            return _provider.ValidateUser(userName, password);
+            return _provider.ValidateUser(nombreUsuario, password);
         }
 
-        public MembershipCreateStatus CreateUser(string userName, string password, string email)
+        public MembershipCreateStatus CrearUsuario(string nombreUsuario, string password, string email)
         {
-            if (String.IsNullOrEmpty(userName))
-                throw new ArgumentException("Value cannot be null or empty.", "userName");
+            if (String.IsNullOrEmpty(nombreUsuario))
+                throw new ArgumentException("Value cannot be null or empty.", "nombreUsuario");
             if (String.IsNullOrEmpty(password))
                 throw new ArgumentException("Value cannot be null or empty.", "password");
             if (String.IsNullOrEmpty(email)) throw new ArgumentException("Value cannot be null or empty.", "email");
 
             MembershipCreateStatus status;
-            _provider.CreateUser(userName, password, email, null, null, true, null, out status);
+            _provider.CreateUser(nombreUsuario, password, email, null, null, true, null, out status);
             return status;
         }
 
-        public bool ChangePassword(string userName, string oldPassword, string newPassword)
+        public bool CambiarPassword(string nombreUsuario, string passwordViejo, string passwordNuevo)
         {
-            if (String.IsNullOrEmpty(userName))
-                throw new ArgumentException("Value cannot be null or empty.", "userName");
-            if (String.IsNullOrEmpty(oldPassword))
-                throw new ArgumentException("Value cannot be null or empty.", "oldPassword");
-            if (String.IsNullOrEmpty(newPassword))
-                throw new ArgumentException("Value cannot be null or empty.", "newPassword");
+            if (String.IsNullOrEmpty(nombreUsuario))
+                throw new ArgumentException("Value cannot be null or empty.", "nombreUsuario");
+            if (String.IsNullOrEmpty(passwordViejo))
+                throw new ArgumentException("Value cannot be null or empty.", "passwordViejo");
+            if (String.IsNullOrEmpty(passwordNuevo))
+                throw new ArgumentException("Value cannot be null or empty.", "passwordNuevo");
 
             // The underlying CambiarPassword() will throw an exception rather
             // than return false in certain failure scenarios.
             try
             {
-                MembershipUser currentUser = _provider.GetUser(userName, true /* userIsOnline */);
-                return currentUser.ChangePassword(oldPassword, newPassword);
+                MembershipUser currentUser = _provider.GetUser(nombreUsuario, true /* userIsOnline */);
+                return currentUser.ChangePassword(passwordViejo, passwordNuevo);
             } catch (ArgumentException)
             {
                 return false;
@@ -71,10 +72,10 @@ namespace Sicemed.Web.Services.ApplicationServices.Cuenta
             }
         }
 
-        public PrincipalBase GetCurrentUser()
+        public Usuario GetCurrentUser()
         {
             if(!HttpContext.Current.User.Identity.IsAuthenticated) return null;
-            return (PrincipalBase)HttpContext.Current.User;
+            return (Usuario)HttpContext.Current.User;
         }
 
         #endregion

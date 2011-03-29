@@ -1,14 +1,15 @@
 ﻿using System.Web.Security;
+using Sicemed.Web.Models;
 using Sicemed.Web.Plumbing;
 
 namespace Sicemed.Web.Services.ApplicationServices.Cuenta
 {
     public interface IMembershipApplicationService
     {
-        int MinPasswordLength { get; }
-        bool ValidateUser(string userName, string password);
-        MembershipCreateStatus CreateUser(string userName, string password, string email);
-        bool ChangePassword(string userName, string oldPassword, string newPassword);
-        PrincipalBase GetCurrentUser();
+        int LargoMinimoPassword { get; }
+        bool ValidarUsuario(string nombreUsuario, string password);
+        MembershipCreateStatus CrearUsuario(string nombreUsuario, string password, string email);
+        bool CambiarPassword(string nombreUsuario, string passwordViejo, string passwordNuevo);
+        Usuario GetCurrentUser();
     }
 }

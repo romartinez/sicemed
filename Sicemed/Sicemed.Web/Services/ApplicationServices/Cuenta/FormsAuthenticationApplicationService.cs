@@ -10,24 +10,24 @@ namespace Sicemed.Web.Services.ApplicationServices.Cuenta
     {
         #region IFormsAuthenticationApplicationService Members
 
-        public void SignIn(string userName, bool createPersistentCookie)
+        public void IniciarSesion(string nombreUsuario, bool recordarme)
         {
-            if (string.IsNullOrWhiteSpace(userName)) throw new ArgumentException("Value cannot be null nor empty.", "userName");
+            if (string.IsNullOrWhiteSpace(nombreUsuario)) throw new ArgumentException("Value cannot be null nor empty.", "nombreUsuario");
 
             // Create and tuck away the cookie
             //string serializedIdentity = JsonConvert.SerializeObject(principal.IdentityBase.ExtendedData);
             var authTicket = new FormsAuthenticationTicket(1,
-                                                           userName,
+                                                           nombreUsuario,
                                                            DateTime.Now,
                                                            DateTime.Now.AddMinutes(15),
-                                                           createPersistentCookie, 
+                                                           recordarme, 
                                                            string.Empty);//serializedIdentity);
             string encTicket = FormsAuthentication.Encrypt(authTicket);
             var faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
             HttpContext.Current.Response.Cookies.Add(faCookie);
         }
 
-        public void SignOut()
+        public void CerrarSesion()
         {
             FormsAuthentication.SignOut();
         }

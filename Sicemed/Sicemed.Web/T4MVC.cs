@@ -301,6 +301,162 @@ public class T4MVC_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult {
 
 
 namespace Links {
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public static class @public {
+        private const string URLPATH = "~/public";
+        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class css {
+            private const string URLPATH = "~/public/css";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string ellipsis_xbl_xml = Url("ellipsis-xbl.xml")+"?"+T4Extensions.TimestampString(URLPATH + "/ellipsis-xbl.xml");
+            public static readonly string kriframework_css = Url("kriframework.css")+"?"+T4Extensions.TimestampString(URLPATH + "/kriframework.css");
+            public static readonly string style_css = Url("style.css")+"?"+T4Extensions.TimestampString(URLPATH + "/style.css");
+            public static readonly string style1_css = Url("style1.css")+"?"+T4Extensions.TimestampString(URLPATH + "/style1.css");
+            public static readonly string ui_jqgrid_css = Url("ui.jqgrid.css")+"?"+T4Extensions.TimestampString(URLPATH + "/ui.jqgrid.css");
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class images {
+            private const string URLPATH = "~/public/images";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class skin1 {
+                private const string URLPATH = "~/public/images/skin1";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string arrow_png = Url("arrow.png")+"?"+T4Extensions.TimestampString(URLPATH + "/arrow.png");
+                public static readonly string bg_png = Url("bg.png")+"?"+T4Extensions.TimestampString(URLPATH + "/bg.png");
+                public static readonly string bg_featured_png = Url("bg_featured.png")+"?"+T4Extensions.TimestampString(URLPATH + "/bg_featured.png");
+                public static readonly string bg_footer_shadow_png = Url("bg_footer_shadow.png")+"?"+T4Extensions.TimestampString(URLPATH + "/bg_footer_shadow.png");
+                public static readonly string bg_sidebar_bottom_png = Url("bg_sidebar_bottom.png")+"?"+T4Extensions.TimestampString(URLPATH + "/bg_sidebar_bottom.png");
+                public static readonly string bg_sidebar_center_png = Url("bg_sidebar_center.png")+"?"+T4Extensions.TimestampString(URLPATH + "/bg_sidebar_center.png");
+                public static readonly string bg_sidebar_top_png = Url("bg_sidebar_top.png")+"?"+T4Extensions.TimestampString(URLPATH + "/bg_sidebar_top.png");
+                public static readonly string bullet_png = Url("bullet.png")+"?"+T4Extensions.TimestampString(URLPATH + "/bullet.png");
+                public static readonly string bullet2_png = Url("bullet2.png")+"?"+T4Extensions.TimestampString(URLPATH + "/bullet2.png");
+                public static readonly string earth_png = Url("earth.png")+"?"+T4Extensions.TimestampString(URLPATH + "/earth.png");
+                public static readonly string facebook_16_png = Url("facebook_16.png")+"?"+T4Extensions.TimestampString(URLPATH + "/facebook_16.png");
+                public static readonly string flickr_16_png = Url("flickr_16.png")+"?"+T4Extensions.TimestampString(URLPATH + "/flickr_16.png");
+                public static readonly string icon_category_png = Url("icon_category.png")+"?"+T4Extensions.TimestampString(URLPATH + "/icon_category.png");
+                public static readonly string icon_comments_png = Url("icon_comments.png")+"?"+T4Extensions.TimestampString(URLPATH + "/icon_comments.png");
+                public static readonly string icon_date_png = Url("icon_date.png")+"?"+T4Extensions.TimestampString(URLPATH + "/icon_date.png");
+                public static readonly string icon_next_png = Url("icon_next.png")+"?"+T4Extensions.TimestampString(URLPATH + "/icon_next.png");
+                public static readonly string logo_png = Url("logo.png")+"?"+T4Extensions.TimestampString(URLPATH + "/logo.png");
+                public static readonly string magnify_png = Url("magnify.png")+"?"+T4Extensions.TimestampString(URLPATH + "/magnify.png");
+                public static readonly string overlay_png = Url("overlay.png")+"?"+T4Extensions.TimestampString(URLPATH + "/overlay.png");
+                public static readonly string preload_gif = Url("preload.gif")+"?"+T4Extensions.TimestampString(URLPATH + "/preload.gif");
+                public static readonly string rss_16_png = Url("rss_16.png")+"?"+T4Extensions.TimestampString(URLPATH + "/rss_16.png");
+                public static readonly string say_png = Url("say.png")+"?"+T4Extensions.TimestampString(URLPATH + "/say.png");
+                public static readonly string search_png = Url("search.png")+"?"+T4Extensions.TimestampString(URLPATH + "/search.png");
+                public static readonly string skype_16_png = Url("skype_16.png")+"?"+T4Extensions.TimestampString(URLPATH + "/skype_16.png");
+                public static readonly string slide_controlls_png = Url("slide_controlls.png")+"?"+T4Extensions.TimestampString(URLPATH + "/slide_controlls.png");
+                public static readonly string top_png = Url("top.png")+"?"+T4Extensions.TimestampString(URLPATH + "/top.png");
+                public static readonly string twitter_16_png = Url("twitter_16.png")+"?"+T4Extensions.TimestampString(URLPATH + "/twitter_16.png");
+                public static readonly string video_png = Url("video.png")+"?"+T4Extensions.TimestampString(URLPATH + "/video.png");
+            }
+        
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class js {
+            private const string URLPATH = "~/public/js";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string ajaxAntiForgery_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ajaxAntiForgery.min.js") ? Url("ajaxAntiForgery.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/ajaxAntiForgery.js") : Url("ajaxAntiForgery.js")+"?"+T4Extensions.TimestampString(URLPATH + "/ajaxAntiForgery.js");
+                          
+            public static readonly string cufon_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/cufon.min.js") ? Url("cufon.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/cufon.js") : Url("cufon.js")+"?"+T4Extensions.TimestampString(URLPATH + "/cufon.js");
+                          
+            public static readonly string geosans_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/geosans.min.js") ? Url("geosans.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/geosans.js") : Url("geosans.js")+"?"+T4Extensions.TimestampString(URLPATH + "/geosans.js");
+                          
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class i18n {
+                private const string URLPATH = "~/public/js/i18n";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string grid_locale_es_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/grid.locale-es.min.js") ? Url("grid.locale-es.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/grid.locale-es.js") : Url("grid.locale-es.js")+"?"+T4Extensions.TimestampString(URLPATH + "/grid.locale-es.js");
+                              
+            }
+        
+            public static readonly string jquery_1_4_4_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.4.4-vsdoc.min.js") ? Url("jquery-1.4.4-vsdoc.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery-1.4.4-vsdoc.js") : Url("jquery-1.4.4-vsdoc.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery-1.4.4-vsdoc.js");
+                          
+            public static readonly string jquery_1_4_4_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.4.4.min.js") ? Url("jquery-1.4.4.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery-1.4.4.js") : Url("jquery-1.4.4.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery-1.4.4.js");
+                          
+            public static readonly string jquery_1_4_4_min_js = Url("jquery-1.4.4.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery-1.4.4.min.js");
+            public static readonly string jquery_ui_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui.min.js") ? Url("jquery-ui.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery-ui.js") : Url("jquery-ui.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery-ui.js");
+                          
+            public static readonly string jquery_ui_min_js = Url("jquery-ui.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery-ui.min.js");
+            public static readonly string jquery_blockUI_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.blockUI.min.js") ? Url("jquery.blockUI.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery.blockUI.js") : Url("jquery.blockUI.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery.blockUI.js");
+                          
+            public static readonly string jquery_jqGrid_min_js = Url("jquery.jqGrid.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery.jqGrid.min.js");
+            public static readonly string jquery_unobtrusive_ajax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.unobtrusive-ajax.min.js") ? Url("jquery.unobtrusive-ajax.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery.unobtrusive-ajax.js") : Url("jquery.unobtrusive-ajax.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery.unobtrusive-ajax.js");
+                          
+            public static readonly string jquery_unobtrusive_ajax_min_js = Url("jquery.unobtrusive-ajax.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery.unobtrusive-ajax.min.js");
+            public static readonly string jquery_validate_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate-vsdoc.min.js") ? Url("jquery.validate-vsdoc.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery.validate-vsdoc.js") : Url("jquery.validate-vsdoc.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery.validate-vsdoc.js");
+                          
+            public static readonly string jquery_validate_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate.min.js") ? Url("jquery.validate.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery.validate.js") : Url("jquery.validate.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery.validate.js");
+                          
+            public static readonly string jquery_validate_min_js = Url("jquery.validate.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery.validate.min.js");
+            public static readonly string jquery_validate_unobtrusive_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate.unobtrusive.min.js") ? Url("jquery.validate.unobtrusive.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery.validate.unobtrusive.js") : Url("jquery.validate.unobtrusive.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery.validate.unobtrusive.js");
+                          
+            public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery.validate.unobtrusive.min.js");
+            public static readonly string json2_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/json2.min.js") ? Url("json2.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/json2.js") : Url("json2.js")+"?"+T4Extensions.TimestampString(URLPATH + "/json2.js");
+                          
+            public static readonly string MicrosoftAjax_debug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftAjax.debug.min.js") ? Url("MicrosoftAjax.debug.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/MicrosoftAjax.debug.js") : Url("MicrosoftAjax.debug.js")+"?"+T4Extensions.TimestampString(URLPATH + "/MicrosoftAjax.debug.js");
+                          
+            public static readonly string MicrosoftAjax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftAjax.min.js") ? Url("MicrosoftAjax.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/MicrosoftAjax.js") : Url("MicrosoftAjax.js")+"?"+T4Extensions.TimestampString(URLPATH + "/MicrosoftAjax.js");
+                          
+            public static readonly string MicrosoftMvcAjax_debug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftMvcAjax.debug.min.js") ? Url("MicrosoftMvcAjax.debug.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/MicrosoftMvcAjax.debug.js") : Url("MicrosoftMvcAjax.debug.js")+"?"+T4Extensions.TimestampString(URLPATH + "/MicrosoftMvcAjax.debug.js");
+                          
+            public static readonly string MicrosoftMvcAjax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftMvcAjax.min.js") ? Url("MicrosoftMvcAjax.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/MicrosoftMvcAjax.js") : Url("MicrosoftMvcAjax.js")+"?"+T4Extensions.TimestampString(URLPATH + "/MicrosoftMvcAjax.js");
+                          
+            public static readonly string MicrosoftMvcValidation_debug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftMvcValidation.debug.min.js") ? Url("MicrosoftMvcValidation.debug.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/MicrosoftMvcValidation.debug.js") : Url("MicrosoftMvcValidation.debug.js")+"?"+T4Extensions.TimestampString(URLPATH + "/MicrosoftMvcValidation.debug.js");
+                          
+            public static readonly string MicrosoftMvcValidation_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftMvcValidation.min.js") ? Url("MicrosoftMvcValidation.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/MicrosoftMvcValidation.js") : Url("MicrosoftMvcValidation.js")+"?"+T4Extensions.TimestampString(URLPATH + "/MicrosoftMvcValidation.js");
+                          
+            public static readonly string sicemed_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/sicemed.min.js") ? Url("sicemed.min.js")+"?"+T4Extensions.TimestampString(URLPATH + "/sicemed.js") : Url("sicemed.js")+"?"+T4Extensions.TimestampString(URLPATH + "/sicemed.js");
+                          
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class themes {
+            private const string URLPATH = "~/public/themes";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class @base {
+                private const string URLPATH = "~/public/themes/base";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class images {
+                    private const string URLPATH = "~/public/themes/base/images";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string ui_bg_flat_0_aaaaaa_40x100_png = Url("ui-bg_flat_0_aaaaaa_40x100.png")+"?"+T4Extensions.TimestampString(URLPATH + "/ui-bg_flat_0_aaaaaa_40x100.png");
+                    public static readonly string ui_bg_flat_75_ffffff_40x100_png = Url("ui-bg_flat_75_ffffff_40x100.png")+"?"+T4Extensions.TimestampString(URLPATH + "/ui-bg_flat_75_ffffff_40x100.png");
+                    public static readonly string ui_bg_glass_55_fbf9ee_1x400_png = Url("ui-bg_glass_55_fbf9ee_1x400.png")+"?"+T4Extensions.TimestampString(URLPATH + "/ui-bg_glass_55_fbf9ee_1x400.png");
+                    public static readonly string ui_bg_glass_65_ffffff_1x400_png = Url("ui-bg_glass_65_ffffff_1x400.png")+"?"+T4Extensions.TimestampString(URLPATH + "/ui-bg_glass_65_ffffff_1x400.png");
+                    public static readonly string ui_bg_glass_75_dadada_1x400_png = Url("ui-bg_glass_75_dadada_1x400.png")+"?"+T4Extensions.TimestampString(URLPATH + "/ui-bg_glass_75_dadada_1x400.png");
+                    public static readonly string ui_bg_glass_75_e6e6e6_1x400_png = Url("ui-bg_glass_75_e6e6e6_1x400.png")+"?"+T4Extensions.TimestampString(URLPATH + "/ui-bg_glass_75_e6e6e6_1x400.png");
+                    public static readonly string ui_bg_glass_95_fef1ec_1x400_png = Url("ui-bg_glass_95_fef1ec_1x400.png")+"?"+T4Extensions.TimestampString(URLPATH + "/ui-bg_glass_95_fef1ec_1x400.png");
+                    public static readonly string ui_bg_highlight_soft_75_cccccc_1x100_png = Url("ui-bg_highlight-soft_75_cccccc_1x100.png")+"?"+T4Extensions.TimestampString(URLPATH + "/ui-bg_highlight-soft_75_cccccc_1x100.png");
+                    public static readonly string ui_icons_222222_256x240_png = Url("ui-icons_222222_256x240.png")+"?"+T4Extensions.TimestampString(URLPATH + "/ui-icons_222222_256x240.png");
+                    public static readonly string ui_icons_2e83ff_256x240_png = Url("ui-icons_2e83ff_256x240.png")+"?"+T4Extensions.TimestampString(URLPATH + "/ui-icons_2e83ff_256x240.png");
+                    public static readonly string ui_icons_454545_256x240_png = Url("ui-icons_454545_256x240.png")+"?"+T4Extensions.TimestampString(URLPATH + "/ui-icons_454545_256x240.png");
+                    public static readonly string ui_icons_888888_256x240_png = Url("ui-icons_888888_256x240.png")+"?"+T4Extensions.TimestampString(URLPATH + "/ui-icons_888888_256x240.png");
+                    public static readonly string ui_icons_cd0a0a_256x240_png = Url("ui-icons_cd0a0a_256x240.png")+"?"+T4Extensions.TimestampString(URLPATH + "/ui-icons_cd0a0a_256x240.png");
+                }
+            
+                public static readonly string jquery_ui_css = Url("jquery-ui.css")+"?"+T4Extensions.TimestampString(URLPATH + "/jquery-ui.css");
+            }
+        
+        }
+    
+    }
+
 }
 
 static class T4MVCHelpers {

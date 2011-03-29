@@ -9,6 +9,7 @@ using Castle.Facilities.TypedFactory;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Newtonsoft.Json;
+using Sicemed.Web.Models;
 using Sicemed.Web.Plumbing;
 using Sicemed.Web.Plumbing.ModelBinders;
 
@@ -76,13 +77,9 @@ namespace Sicemed.Web
 
             // Get the authentication ticket and rebuild the principal 
             // & identity
-            FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
-            string[] roles = authTicket.UserData.Split(new[] {'|'});
-            var identity = new IdentityBase(authTicket.Name);
-            var extendedData = JsonConvert.DeserializeObject<Dictionary<string, object>>(authTicket.UserData);
-            identity.ExtendedData = extendedData;
-            var userPrincipal = new PrincipalBase(identity, roles);
-            Context.User = userPrincipal;
+            var authTicket = FormsAuthentication.Decrypt(authCookie.Value);            
+            var usuario = JsonConvert.DeserializeObject<Usuario>(authTicket.UserData);            
+            Context.User = usuario;
         }
 
         private static void BootstrapContainer()
