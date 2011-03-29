@@ -1,8 +1,7 @@
 ﻿using System.Web.Mvc;
-using Sicemed.Web.Models;
 using Sicemed.Web.Plumbing;
 
-namespace Sicemed.Web.Controllers
+namespace Sicemed.Web.Areas.Public.Controllers
 {
     public class HomeController : BaseController
     {

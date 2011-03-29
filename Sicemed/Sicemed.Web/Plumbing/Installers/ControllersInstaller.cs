@@ -2,7 +2,7 @@ using System.Web.Mvc;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Sicemed.Web.Controllers;
+using Sicemed.Web.Areas.Public.Controllers;
 
 namespace Sicemed.Web.Plumbing.Installers
 {
@@ -26,8 +26,7 @@ namespace Sicemed.Web.Plumbing.Installers
         private BasedOnDescriptor FindControllers()
         {
             return AllTypes.FromThisAssembly()
-                .BasedOn<IController>()
-                .If(Component.IsInSameNamespaceAs<HomeController>())
+                .BasedOn<IController>()                
                 .If(t => t.Name.EndsWith("Controller"));
         }
     }

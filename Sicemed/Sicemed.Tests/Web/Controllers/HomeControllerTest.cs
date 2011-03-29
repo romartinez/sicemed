@@ -2,7 +2,7 @@
 using Castle.Core.Logging;
 using Moq;
 using NUnit.Framework;
-using Sicemed.Web.Controllers;
+using Sicemed.Web.Areas.Public.Controllers;
 
 namespace Sicemed.Tests.Web.Controllers
 {

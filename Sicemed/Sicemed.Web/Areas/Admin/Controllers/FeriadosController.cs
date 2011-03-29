@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using Sicemed.Web.Plumbing;
 using Sicemed.Web.Models;
 
-namespace Sicemed.Web.Controllers
+namespace Sicemed.Web.Areas.Admin.Controllers
 {   
     public class FeriadosController : BaseController
     {

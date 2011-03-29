@@ -5,9 +5,9 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using NUnit.Framework;
-using Sicemed.Web.Controllers;
+using Sicemed.Web.Areas.Public.Controllers;
+using Sicemed.Web.Areas.Public.Models.Cuenta;
 using Sicemed.Web.Models.ViewModels;
-using Sicemed.Web.Models.ViewModels.Cuenta;
 using Sicemed.Web.Plumbing;
 using Sicemed.Web.Services.ApplicationServices.Cuenta;
 
@@ -16,10 +16,10 @@ namespace Sicemed.Tests.Web.Controllers
     [TestFixture]
     public class AccountControllerTest
     {
-        private static AccountController GetAccountController()
+        private static CuentaController GetAccountController()
         {
             var requestContext = new RequestContext(new MockHttpContext(), new RouteData());
-            var controller = new AccountController
+            var controller = new CuentaController
                              {
                                  FormsService = new MockFormsAuthenticationService(),
                                  MembershipApplicationService = new MockMembershipApplicationService(),
@@ -129,7 +129,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void ChangePasswordSuccess_ReturnsView()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
 
             // Act
             ActionResult result = controller.ChangePasswordSuccess();
@@ -142,7 +142,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void ChangePassword_Get_ReturnsView()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
 
             // Act
             ActionResult result = controller.ChangePassword();
@@ -156,7 +156,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void ChangePassword_Post_ReturnsRedirectOnSuccess()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
             var model = new CambiarPasswordViewModel
                         {
                             OldPassword = "goodOldPassword",
@@ -177,7 +177,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void ChangePassword_Post_ReturnsViewIfChangePasswordFails()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
             var model = new CambiarPasswordViewModel
                         {
                             OldPassword = "goodOldPassword",
@@ -201,7 +201,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void ChangePassword_Post_ReturnsViewIfModelStateIsInvalid()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
             var model = new CambiarPasswordViewModel
                         {
                             OldPassword = "goodOldPassword",
@@ -224,7 +224,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void LogOff_LogsOutAndRedirects()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
 
             // Act
             ActionResult result = controller.LogOff();
@@ -242,7 +242,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void LogOn_Get_ReturnsView()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
 
             // Act
             ActionResult result = controller.LogOn();
@@ -255,7 +255,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void LogOn_Post_ReturnsRedirectOnSuccess_WithLocalReturnUrl()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
             var model = new LoginViewModel
                         {
                             UserName = "someUser",
@@ -278,7 +278,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void LogOn_Post_ReturnsRedirectOnSuccess_WithoutReturnUrl()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
             var model = new LoginViewModel
                         {
                             UserName = "someUser",
@@ -302,7 +302,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void LogOn_Post_ReturnsRedirectToHomeOnSuccess_WithExternalReturnUrl()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
             var model = new LoginViewModel
                         {
                             UserName = "someUser",
@@ -326,7 +326,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void LogOn_Post_ReturnsViewIfModelStateIsInvalid()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
             var model = new LoginViewModel
                         {
                             UserName = "someUser",
@@ -348,7 +348,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void LogOn_Post_ReturnsViewIfValidateUserFails()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
             var model = new LoginViewModel
                         {
                             UserName = "someUser",
@@ -371,7 +371,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void Register_Get_ReturnsView()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
 
             // Act
             ActionResult result = controller.Register();
@@ -385,7 +385,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void Register_Post_ReturnsRedirectOnSuccess()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
             var model = new RegistroViewModel
                         {
                             UserName = "someUser",
@@ -408,7 +408,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void Register_Post_ReturnsViewIfModelStateIsInvalid()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
             var model = new RegistroViewModel
                         {
                             UserName = "someUser",
@@ -432,7 +432,7 @@ namespace Sicemed.Tests.Web.Controllers
         public void Register_Post_ReturnsViewIfRegistrationFails()
         {
             // Arrange
-            AccountController controller = GetAccountController();
+            CuentaController controller = GetAccountController();
             var model = new RegistroViewModel
                         {
                             UserName = "duplicateUser",

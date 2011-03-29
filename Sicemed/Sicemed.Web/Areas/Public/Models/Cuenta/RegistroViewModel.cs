@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using Sicemed.Web.Plumbing.Attributes;
 
-namespace Sicemed.Web.Models.ViewModels.Cuenta
+namespace Sicemed.Web.Areas.Public.Models.Cuenta
 {
     public class RegistroViewModel
     {

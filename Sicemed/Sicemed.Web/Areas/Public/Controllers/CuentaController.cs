@@ -1,16 +1,14 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
-using Sicemed.Web.Models;
-using Sicemed.Web.Models.ViewModels;
-using Sicemed.Web.Models.ViewModels.Cuenta;
+using Sicemed.Web.Areas.Public.Models.Cuenta;
 using Sicemed.Web.Plumbing;
 using Sicemed.Web.Plumbing.Helpers;
 using Sicemed.Web.Services.ApplicationServices.Cuenta;
 
-namespace Sicemed.Web.Controllers
+namespace Sicemed.Web.Areas.Public.Controllers
 {
-    public class AccountController : BaseController
+    public class CuentaController : BaseController
     {
         public IFormsAuthenticationApplicationService FormsService { get; set; }
         public IMembershipApplicationService MembershipApplicationService { get; set; }

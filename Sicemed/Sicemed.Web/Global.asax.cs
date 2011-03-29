@@ -5,12 +5,10 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using Castle.Core.Logging;
-using Castle.Facilities.FactorySupport;
 using Castle.Facilities.TypedFactory;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Newtonsoft.Json;
-using Sicemed.Web.Models;
 using Sicemed.Web.Plumbing;
 using Sicemed.Web.Plumbing.ModelBinders;
 
@@ -39,7 +37,7 @@ namespace Sicemed.Web
         }
 
         public static void RegisterRoutes(RouteCollection routes)
-        {
+        {            
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
@@ -56,7 +54,7 @@ namespace Sicemed.Web
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            System.Web.Mvc.ModelBinders.Binders.DefaultBinder = new ComplexObjectModelBinder();
+            ModelBinders.Binders.DefaultBinder = new ComplexObjectModelBinder();
 
             //Windsor
             BootstrapContainer();

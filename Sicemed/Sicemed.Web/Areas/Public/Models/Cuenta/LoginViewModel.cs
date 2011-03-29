@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Sicemed.Web.Models.ViewModels.Cuenta
+namespace Sicemed.Web.Areas.Public.Models.Cuenta
 {
     public class LoginViewModel
     {
