@@ -8,7 +8,7 @@ using Sicemed.Web.Services.ApplicationServices.Cuenta;
 
 namespace Sicemed.Web.Areas.Public.Controllers
 {
-    public class UsuariosController : BaseController
+    public partial class UsuariosController : BaseController
     {
         private readonly IFormsAuthenticationApplicationService _formsApplicationService;
         private readonly IMembershipApplicationService _membershipApplicationService;
@@ -19,13 +19,13 @@ namespace Sicemed.Web.Areas.Public.Controllers
             _membershipApplicationService = membershipApplicationService;
         }
 
-        public ActionResult IniciarSesion()
+        public virtual ActionResult IniciarSesion()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult IniciarSesion(IniciarSesionViewModel model, string returnUrl)
+        public virtual ActionResult IniciarSesion(IniciarSesionViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -37,7 +37,7 @@ namespace Sicemed.Web.Areas.Public.Controllers
                         return Redirect(returnUrl);
                     } else
                     {
-                        return RedirectToAction("Inicio", "Home");
+                        return RedirectToAction(MVC.Public.Home.Inicio());
                     }
                 } else
                 {
@@ -49,22 +49,22 @@ namespace Sicemed.Web.Areas.Public.Controllers
             return View(model);
         }
 
-        public ActionResult CerrarSesion()
+        public virtual ActionResult CerrarSesion()
         {
             _formsApplicationService.SignOut();
 
-            return RedirectToAction("Inicio", "Home");
+            return RedirectToAction(MVC.Public.Home.Inicio());
         }
 
 
-        public ActionResult Registrar()
+        public virtual ActionResult Registrar()
         {
             ViewBag.PasswordLength = _membershipApplicationService.MinPasswordLength;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Registrar(RegistroViewModel model)
+        public virtual ActionResult Registrar(RegistroViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace Sicemed.Web.Areas.Public.Controllers
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     _formsApplicationService.SignIn(model.Username, false /* createPersistentCookie */);
-                    return RedirectToAction("Inicio", "Home");
+                    return RedirectToAction(MVC.Public.Home.Inicio());
                 } else
                 {
                     ModelState.AddModelError(string.Empty, AccountValidation.ErrorCodeToString(createStatus));
@@ -88,7 +88,7 @@ namespace Sicemed.Web.Areas.Public.Controllers
         }
 
         [Authorize]
-        public ActionResult CambiarPassword()
+        public virtual ActionResult CambiarPassword()
         {
             ViewBag.PasswordLength = _membershipApplicationService.MinPasswordLength;
             return View();
@@ -96,13 +96,13 @@ namespace Sicemed.Web.Areas.Public.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult CambiarPassword(CambiarPasswordViewModel viewModel)
+        public virtual ActionResult CambiarPassword(CambiarPasswordViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
                 if (_membershipApplicationService.ChangePassword(User.Identity.Name, viewModel.PasswordViejo, viewModel.PasswordNuevo))
                 {
-                    return RedirectToAction("CambioPasswordExito");
+                    return RedirectToAction(this.CambioPasswordExito());
                 } else
                 {
                     ModelState.AddModelError(string.Empty, Recursos.USUARIOS_PASSWORD_INVALIDO_O_NUEVO_INCORRECTO);
@@ -114,7 +114,7 @@ namespace Sicemed.Web.Areas.Public.Controllers
             return View(viewModel);
         }
 
-        public ActionResult CambioPasswordExito()
+        public virtual ActionResult CambioPasswordExito()
         {
             return View();
         }

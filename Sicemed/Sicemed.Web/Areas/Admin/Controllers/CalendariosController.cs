@@ -6,13 +6,13 @@ using Sicemed.Web.Plumbing;
 using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
-{   
-    public class CalendariosController : BaseController
+{
+    public partial class CalendariosController : BaseController
     {
         //
         // GET: /Calendario/
 
-        public ViewResult Inicio()
+        public virtual ViewResult Inicio()
         {
             return View();
         }
@@ -20,7 +20,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         //
         // GET: /Calendario/GridData
 
-        public ActionResult GridData(int rows, int page)
+        public virtual ActionResult GridData(int rows, int page)
         {
 			var session = SessionFactory.GetCurrentSession();
 			var count = session.QueryOver<Calendario>().RowCountInt64();

@@ -3,15 +3,15 @@ using Sicemed.Web.Plumbing;
 
 namespace Sicemed.Web.Areas.Public.Controllers
 {
-    public class HomeController : BaseController
+    public partial class HomeController : BaseController
     {
-        public ActionResult Inicio()
+        public virtual ActionResult Inicio()
         {
             Logger.Debug("ERRORRRRR!!!");
             return View();
         }
 
-        public ActionResult Acerca()
+        public virtual ActionResult Acerca()
         {
             return View();
         }

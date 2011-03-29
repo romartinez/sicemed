@@ -4,13 +4,13 @@ using Sicemed.Web.Plumbing;
 using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
-{   
-    public class FeriadosController : BaseController
+{
+    public partial class FeriadosController : BaseController
     {
         //
         // GET: /Feriado/
 
-        public ViewResult Inicio()
+        public virtual ViewResult Inicio()
         {
             return View();
         }
@@ -18,7 +18,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         //
         // GET: /Feriado/GridData
 
-        public JsonResult GridData(int rows, int page)
+        public virtual JsonResult GridData(int rows, int page)
         {
 			var session = SessionFactory.GetCurrentSession();
 			var count = session.QueryOver<Feriado>().RowCountInt64();

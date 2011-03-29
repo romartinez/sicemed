@@ -20,3 +20,4 @@ StyleCop.Cache
 aspnet_client
 Thumbs.db
 TestResults
+*.generated.cs
