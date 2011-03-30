@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 
@@ -26,6 +29,14 @@ namespace Sicemed.Web.Plumbing.Helpers
         public static string Serialize(this UrlHelper urlHelper, object @object)
         {
             return Serialize(@object);
+        }
+
+        public static IEnumerable<SiteMapNode> GetSiteMapNodes()
+        {
+            return
+                typeof(BaseController).Assembly.GetTypes().Where(
+                    t => typeof(BaseController).IsAssignableFrom(t) && !t.IsAbstract).OrderBy(x => x.Namespace).Select(
+                        c => new SiteMapNode(new SicemedSiteMapProvider(), c.Name));
         }
     }
 }

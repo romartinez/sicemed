@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using Castle.Core.Logging;
 using Castle.Facilities.TypedFactory;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Sicemed.Web.Plumbing;
@@ -36,7 +39,7 @@ namespace Sicemed.Web
         }
 
         public static void RegisterRoutes(RouteCollection routes)
-        {            
+        {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
         }
 
@@ -80,9 +83,9 @@ namespace Sicemed.Web
         private static void BootstrapContainer()
         {
             _container = new WindsorContainer();
-            _container.AddFacility<TypedFactoryFacility>();            
+            _container.AddFacility<TypedFactoryFacility>();
             _container.Install(FromAssembly.This());
-            
+
             var controllerFactory = new WindsorControllerFactory(_container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
             _logger = _container.Resolve<ILogger>();

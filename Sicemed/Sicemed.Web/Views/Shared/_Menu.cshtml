@@ -1,4 +1,8 @@
-﻿<ul id="nav">
+﻿@foreach (var node in Sicemed.Web.Plumbing.Helpers.UrlHelperExtensions.GetSiteMapNodes())
+{
+    @node.Key
+}
+<ul id="nav">
 	<li><a href="index-2.html">Home</a>
 	<ul>
 		<li><a href="index-2.html">Index - Curtain Slider</a></li>

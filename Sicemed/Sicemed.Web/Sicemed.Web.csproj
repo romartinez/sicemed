@@ -145,10 +145,12 @@
     <Compile Include="Models\Roles\Profesional.cs" />
     <Compile Include="Models\Roles\Rol.cs" />
     <Compile Include="Models\Roles\Secretaria.cs" />
+    <Compile Include="Plumbing\Attributes\AuthorizeAttribute.cs" />
     <Compile Include="Plumbing\DesignByContract.cs" />
     <Compile Include="Plumbing\Queries\IQuery.cs" />
     <Compile Include="Plumbing\Queries\Parametros\ConsultaParametro.cs" />
     <Compile Include="Plumbing\Queries\Usuarios\UsuariosPorIdConRolesYPermisosQuery.cs" />
+    <Compile Include="Plumbing\SicemedSiteMapProvider.cs" />
     <Compile Include="Public.HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -174,7 +176,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Plumbing\Helpers\HexEncoding.cs" />
-    <Compile Include="Plumbing\Helpers\PrincipalExtensions.cs" />
     <Compile Include="Plumbing\Helpers\UrlHelperExtensions.cs" />
     <Compile Include="Plumbing\Helpers\ValidationHelper.cs" />
     <Compile Include="Plumbing\ModelBinders\ComplexObjectModelBinder.cs" />
