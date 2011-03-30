@@ -2,6 +2,7 @@
 using System.Web.Security;
 using Resources;
 using Sicemed.Web.Areas.Public.Models.Cuenta;
+using Sicemed.Web.Models;
 using Sicemed.Web.Plumbing;
 using Sicemed.Web.Plumbing.Helpers;
 using Sicemed.Web.Services.ApplicationServices.Cuenta;
@@ -29,9 +30,10 @@ namespace Sicemed.Web.Areas.Public.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_membershipApplicationService.ValidarUsuario(model.Username, model.Password))
+                var usuario = _membershipApplicationService.ValidarUsuario(model.Username, model.Password);
+                if (usuario != default(Usuario))
                 {
-                    _formsApplicationService.IniciarSesion(model.Username, model.Recordarme);
+                    _formsApplicationService.IniciarSesion(usuario, model.Recordarme);
                     if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
@@ -69,16 +71,17 @@ namespace Sicemed.Web.Areas.Public.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
+                Usuario usuario;
                 MembershipCreateStatus createStatus = _membershipApplicationService.CrearUsuario(model.Username, model.Password,
-                                                                                   model.Email);
+                                                                                   model.Email, out usuario);
 
-                if (createStatus == MembershipCreateStatus.Success)
+                if (createStatus == MembershipCreateStatus.Success && usuario != default(Usuario))
                 {
-                    _formsApplicationService.IniciarSesion(model.Username, false /* createPersistentCookie */);
+                    _formsApplicationService.IniciarSesion(usuario);
                     return RedirectToAction(MVC.Public.Home.Inicio());
                 } else
                 {
-                    ModelState.AddModelError(string.Empty, AccountValidation.ErrorCodeToString(createStatus));
+                    ModelState.AddModelError(string.Empty, ValidacionCuentaHelper.ToResourceString(createStatus));
                 }
             }
 

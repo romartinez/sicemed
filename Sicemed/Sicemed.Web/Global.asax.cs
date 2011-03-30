@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -8,10 +7,9 @@ using Castle.Core.Logging;
 using Castle.Facilities.TypedFactory;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
-using Newtonsoft.Json;
-using Sicemed.Web.Models;
 using Sicemed.Web.Plumbing;
 using Sicemed.Web.Plumbing.ModelBinders;
+using Sicemed.Web.Plumbing.Queries.Usuarios;
 
 namespace Sicemed.Web
 {
@@ -20,16 +18,16 @@ namespace Sicemed.Web
     public class MvcApplication : HttpApplication
     {
         private static IWindsorContainer _container;
-        private static ILogger _logger;
-
         public static IWindsorContainer Container
         {
             get { return _container; }
         }
 
+        private static ILogger _logger = NullLogger.Instance;
         public static ILogger Logger
         {
             get { return _logger; }
+            set { _logger = value; }
         }
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
@@ -68,17 +66,14 @@ namespace Sicemed.Web
 
         protected void Application_AuthenticateRequest(Object sender, EventArgs e)
         {
-            // Get the authentication cookie
             string cookieName = FormsAuthentication.FormsCookieName;
             HttpCookie authCookie = Context.Request.Cookies[cookieName];
 
-            // If the cookie can't be found, don't issue the ticket
             if (authCookie == null) return;
 
-            // Get the authentication ticket and rebuild the principal 
-            // & identity
-            var authTicket = FormsAuthentication.Decrypt(authCookie.Value);            
-            var usuario = JsonConvert.DeserializeObject<Usuario>(authTicket.UserData);            
+            var authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+            var id = Convert.ToInt64(authTicket.UserData);
+            var usuario = Container.Resolve<IUsuariosPorIdConRolesYPermisosQuery>().Execute(id);
             Context.User = usuario;
         }
 

@@ -57,8 +57,8 @@ namespace Sicemed.Web.Plumbing.HttpModules
 
         public void Dispose()
         {
-            _httpApplication.BeginRequest -= ContextBeginRequest;
-            _httpApplication.EndRequest -= ContextEndRequest;
+            //_httpApplication.BeginRequest -= ContextBeginRequest;
+            //_httpApplication.EndRequest -= ContextEndRequest;
         }
     }
 }

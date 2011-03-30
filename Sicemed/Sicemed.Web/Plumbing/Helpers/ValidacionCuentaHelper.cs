@@ -2,9 +2,9 @@
 
 namespace Sicemed.Web.Plumbing.Helpers
 {
-    public static class AccountValidation
+    public static class ValidacionCuentaHelper
     {
-        public static string ErrorCodeToString(MembershipCreateStatus createStatus)
+        public static string ToResourceString(this MembershipCreateStatus createStatus)
         {
             // See http://go.microsoft.com/fwlink/?LinkID=177550 for
             // a full list of status codes.

@@ -7,8 +7,8 @@ namespace Sicemed.Web.Services.ApplicationServices.Cuenta
     public interface IMembershipApplicationService
     {
         int LargoMinimoPassword { get; }
-        bool ValidarUsuario(string nombreUsuario, string password);
-        MembershipCreateStatus CrearUsuario(string nombreUsuario, string password, string email);
+        Usuario ValidarUsuario(string nombreUsuario, string password);
+        MembershipCreateStatus CrearUsuario(string nombreUsuario, string password, string email, out Usuario usuarioCreado);
         bool CambiarPassword(string nombreUsuario, string passwordViejo, string passwordNuevo);
         Usuario GetCurrentUser();
     }

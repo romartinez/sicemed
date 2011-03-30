@@ -1,4 +1,4 @@
-﻿@model Sicemed.Web.Models.RegisterModel
+﻿@model Sicemed.Web.Areas.Public.Models.Cuenta.RegistroViewModel
 
 @{
     ViewBag.Title = "Register";
@@ -22,11 +22,11 @@
             <legend>Account Information</legend>
 
             <div class="editor-label">
-                @Html.LabelFor(m => m.UserName)
+                @Html.LabelFor(m => m.Username)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.Username)
+                @Html.ValidationMessageFor(m => m.Username)
             </div>
 
             <div class="editor-label">
@@ -46,11 +46,11 @@
             </div>
 
             <div class="editor-label">
-                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.LabelFor(m => m.PasswordConfirmacion)
             </div>
             <div class="editor-field">
-                @Html.PasswordFor(m => m.ConfirmPassword)
-                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.PasswordConfirmacion)
+                @Html.ValidationMessageFor(m => m.PasswordConfirmacion)
             </div>
 
             <p>

@@ -34,8 +34,6 @@ namespace T4MVC {
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class AdminClass {
         public readonly string Name = "Admin";
-        public Sicemed.Web.Areas.Admin.Controllers.CalendariosController Calendarios = new Sicemed.Web.Areas.Admin.Controllers.T4MVC_CalendariosController();
-        public Sicemed.Web.Areas.Admin.Controllers.FeriadosController Feriados = new Sicemed.Web.Areas.Admin.Controllers.T4MVC_FeriadosController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
     }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -266,32 +264,12 @@ public interface IT4MVCActionResult {
   
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-public class T4MVC_ViewResult : System.Web.Mvc.ViewResult, IT4MVCActionResult {
-    public T4MVC_ViewResult(string area, string controller, string action): base()  {
-        this.InitMVCT4Result(area, controller, action);
-    }
-    
-    public string Controller { get; set; }
-    public string Action { get; set; }
-    public RouteValueDictionary RouteValueDictionary { get; set; }
-}
-[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public class T4MVC_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult {
     public T4MVC_ActionResult(string area, string controller, string action): base()  {
         this.InitMVCT4Result(area, controller, action);
     }
      
     public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
-    
-    public string Controller { get; set; }
-    public string Action { get; set; }
-    public RouteValueDictionary RouteValueDictionary { get; set; }
-}
-[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-public class T4MVC_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult {
-    public T4MVC_JsonResult(string area, string controller, string action): base()  {
-        this.InitMVCT4Result(area, controller, action);
-    }
     
     public string Controller { get; set; }
     public string Action { get; set; }

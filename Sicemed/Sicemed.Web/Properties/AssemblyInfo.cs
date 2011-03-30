@@ -1,4 +1,10 @@
-﻿using System.Reflection;
+﻿#if DEBUG
+#define DBC_CHECK_ALL
+#else
+#define DBC_CHECK_PRECONDITION
+#endif
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 

@@ -1,15 +1,18 @@
 using System.Web.Mvc;
 using Castle.Core.Logging;
-using Newtonsoft.Json;
-using NHibernate;
 using Sicemed.Web.Plumbing.ActionResults;
 
 namespace Sicemed.Web.Plumbing
 {
     public class BaseController : Controller
     {
-        public ILogger Logger { get; set; }
-        public ISessionFactory SessionFactory { get; set; }
+        private ILogger _logger = NullLogger.Instance;
+
+        public ILogger Logger
+        {
+            get { return _logger; }
+            set { _logger = value; }
+        }                
 
         protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
         {

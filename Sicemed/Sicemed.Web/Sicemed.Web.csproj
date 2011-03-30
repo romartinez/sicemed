@@ -129,12 +129,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.CalendariosController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Admin.FeriadosController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Admin.SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -151,6 +145,10 @@
     <Compile Include="Models\Roles\Profesional.cs" />
     <Compile Include="Models\Roles\Rol.cs" />
     <Compile Include="Models\Roles\Secretaria.cs" />
+    <Compile Include="Plumbing\DesignByContract.cs" />
+    <Compile Include="Plumbing\Queries\IQuery.cs" />
+    <Compile Include="Plumbing\Queries\Parametros\ConsultaParametro.cs" />
+    <Compile Include="Plumbing\Queries\Usuarios\UsuariosPorIdConRolesYPermisosQuery.cs" />
     <Compile Include="Public.HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -160,8 +158,8 @@
     <Compile Include="Public.UsuariosController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Services\ApplicationServices\Cuenta\AccountMembershipApplicationService.cs" />
-    <Compile Include="Plumbing\Helpers\AccountValidation.cs" />
+    <Compile Include="Services\ApplicationServices\Cuenta\MembershipApplicationService.cs" />
+    <Compile Include="Plumbing\Helpers\ValidacionCuentaHelper.cs" />
     <Compile Include="Services\ApplicationServices\Cuenta\IMembershipApplicationService.cs" />
     <Compile Include="Areas\Public\Models\Cuenta\IniciarSesionViewModel.cs" />
     <Compile Include="Areas\Public\Models\Cuenta\RegistroViewModel.cs" />
@@ -171,8 +169,6 @@
     <Compile Include="Services\ApplicationServices\Cuenta\IFormsAuthenticationApplicationService.cs" />
     <Compile Include="AppStart_Combres.cs" />
     <Compile Include="Areas\Public\Controllers\UsuariosController.cs" />
-    <Compile Include="Areas\Admin\Controllers\CalendariosController.cs" />
-    <Compile Include="Areas\Admin\Controllers\FeriadosController.cs" />
     <Compile Include="Areas\Public\Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -208,7 +204,7 @@
     <Compile Include="Plumbing\SessionFactoryProvider.cs" />
     <Compile Include="Plumbing\Facilities\PersistenceFacility.cs" />
     <Compile Include="Plumbing\HttpModules\NHibernateSessionModule.cs" />
-    <Compile Include="Plumbing\Installers\ApplicationServicesInstaller.cs" />
+    <Compile Include="Plumbing\Installers\DependenciesInstaller.cs" />
     <Compile Include="Plumbing\Installers\ControllersInstaller.cs" />
     <Compile Include="Plumbing\Installers\LoggerInstaller.cs" />
     <Compile Include="Plumbing\Installers\PersistenceInstaller.cs" />
@@ -342,8 +338,6 @@
     <Content Include="Views\Shared\_Breadcrumb.cshtml" />
     <Content Include="Views\Shared\_MenuFooter.cshtml" />
     <Content Include="scaffolding.config" />
-    <Content Include="Areas\Admin\Views\Calendarios\Inicio.cshtml" />
-    <Content Include="Areas\Admin\Views\Feriados\Inicio.cshtml" />
     <Content Include="Views\Shared\_LayoutRightColumn.cshtml" />
     <None Include="T4MVC.settings.t4" />
     <None Include="T4MVC.tt">
@@ -352,6 +346,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Public\Views\Shared\" />

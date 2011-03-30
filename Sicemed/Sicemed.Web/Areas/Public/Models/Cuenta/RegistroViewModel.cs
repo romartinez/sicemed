@@ -24,8 +24,8 @@ namespace Sicemed.Web.Areas.Public.Models.Cuenta
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", 
-            ErrorMessageResourceName = "VALIDATOR_PASSWORD_PASSWORDCONFIRMATION_NOT_EQUALS",
+        [Compare("Password",
+            ErrorMessageResourceName = "VALIDADOR_PASSWORD_PASSWORD_CONFIRMACION_DIFERENTES",
             ErrorMessageResourceType = typeof(Recursos))]
         public string PasswordConfirmacion { get; set; }
     }
