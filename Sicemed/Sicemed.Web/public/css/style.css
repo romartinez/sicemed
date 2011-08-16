@@ -93,7 +93,7 @@ float: left;
 
 #second_header, #second_header .center{
 overflow: visible;
-z-index: 2105;
+/*z-index: 2105;*/
 }
 
 
