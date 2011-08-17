@@ -19,6 +19,7 @@ using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
 using NHibernate.Dialect;
 using NHibernate.Driver;
+using NHibernate.Mapping.ByCode;
 using NHibernate.Tool.hbm2ddl;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.HttpModules;
@@ -95,6 +96,9 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
                             .Merge(new BidirectionalOneToManyRelationPack(orm))
                             .Merge(new DiscriminatorValueAsClassNamePack(orm))
                             .Merge(new CoolTablesAndColumnsNamingPack(orm))
+                            .Merge(new BidirectionalOneToManyCascadeApplier(orm))
+                            .Merge(new UnidirectionalOneToOneUniqueCascadeApplier(orm))
+                            .Merge(new PolymorphismBidirectionalOneToManyCascadeApplier(orm))
                             .Merge(new TablePerClassPack())
                             .Merge(new EnumAsStringPack())
                             .Merge(new PluralizedTablesPack(orm, inflector)) // <=== 
@@ -105,8 +109,21 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
 
             var entities = new List<Type>();
             entities.AddRange(typeof(Entity).Assembly.GetTypes().Where(t => typeof(Entity).IsAssignableFrom(t) && !(t.GetType() == typeof(Entity))));
+            entities.Add(typeof(Parametro));
+
             var mapper = new Mapper(orm, patternsAppliers);
             orm.TablePerClass(entities);
+            orm.TablePerClass<Parametro>();
+
+            orm.Cascade<Usuario, Rol>(CascadeOn.All);
+
+            mapper.Class<Parametro>(m =>
+                                        {
+                                            m.Id(p => p.Key);                                            
+                                            m.Property("_value", x => x.Access(Accessor.Field));
+                                        });
+            orm.ExcludeProperty<Parametro>(p => p.Key);
+            //mapper.Customize<Usuario>(m => m.Collection(p => p.Roles, c => c.Cascade(Cascade.Persist)));
             return mapper.CompileMappingFor(entities);
         }
 

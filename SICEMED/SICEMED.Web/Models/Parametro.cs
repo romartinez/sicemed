@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Sicemed.Web.Models
 {
-    public class Parametro : Entity, IEquatable<Parametro>
+    public class Parametro : IEquatable<Parametro>
     {
         public virtual Keys Key { get; set; }
         private string _value;
