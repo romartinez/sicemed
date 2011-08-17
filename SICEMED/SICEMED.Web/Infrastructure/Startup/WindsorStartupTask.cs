@@ -5,6 +5,7 @@ using Castle.Windsor;
 using Castle.Windsor.Installer;
 using CommonServiceLocator.WindsorAdapter;
 using Microsoft.Practices.ServiceLocation;
+using Sicemed.Web.Infrastructure.Controllers;
 
 namespace Sicemed.Web.Infrastructure.Startup
 {

@@ -20,9 +20,9 @@ using NHibernate.Cfg.MappingSchema;
 using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Tool.hbm2ddl;
-using SICEMED.Web.Infrastructure.SessionManagement;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.HttpModules;
+using Sicemed.Web.Infrastructure.Providers.Session;
 using Sicemed.Web.Models;
 using Environment = NHibernate.Cfg.Environment;
 
@@ -76,7 +76,7 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
         }
 
 
-        private static HbmMapping GetMapping()
+        public static HbmMapping GetMapping()
         {
             var orm = new ObjectRelationalMapper();
 

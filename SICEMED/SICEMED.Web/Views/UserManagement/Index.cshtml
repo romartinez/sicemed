@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Security.Web.Models.User>
+@using Security.Web.Models.Operations
+@{
+    ViewBag.Title = "Manage Users";
+}
+
+<h2>Manage Users</h2>
+
+<p>
+    @Html.SecureActionLink(Html.T("Create New"), "Create", Operation.ManageUsers)
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Full Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Roles
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.SecureActionLink("Edit", "Edit", Operation.ManageUsers, new { id = item.Id }) |
+            @Html.SecureActionLink("Delete", "Delete", Operation.ManageUsers, new { id = item.Id })
+        </td>
+        <td>
+            @item.FullName
+        </td>
+        <td>
+            @item.Membership.Email
+        </td>
+        <td>
+            <ul>
+            @foreach (var rol in @item.Roles)
+            {
+                <li>@rol.Name</li>
+            }            
+            </ul>
+        </td>
+    </tr>
+}
+
+</table>
+
+<script language="javascript" type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".cmd-confirmation").click(function (e) {
+            return confirm("Are you sure?");
+        });
+    });
+</script>
+

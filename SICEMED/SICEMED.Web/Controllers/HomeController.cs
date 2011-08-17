@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using SICEMED.Web.Infrastructure;
+﻿using System.Web.Mvc;
+using Sicemed.Web.Infrastructure.Controllers;
 
 namespace SICEMED.Web.Controllers
 {

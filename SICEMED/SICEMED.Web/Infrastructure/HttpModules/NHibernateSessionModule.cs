@@ -1,7 +1,7 @@
 using System;
 using System.Web;
 using NHibernate;
-using SICEMED.Web.Infrastructure.SessionManagement;
+using Sicemed.Web.Infrastructure.Providers.Session;
 
 namespace Sicemed.Web.Infrastructure.HttpModules
 {

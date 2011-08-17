@@ -143,34 +143,66 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ActionResults\NewtonJsonResult.cs" />
-    <Compile Include="Infrastructure\Attributes\ValidatePasswordLengthAttribute.cs" />
-    <Compile Include="Infrastructure\BaseController.cs" />
+    <Compile Include="Infrastructure\ApplicationInstaller.cs" />
+    <Compile Include="Infrastructure\Attributes\Filters\AuditAtrribute.cs" />
+    <Compile Include="Infrastructure\Attributes\Filters\AuthorizeItAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\Validation\EmailAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\Validation\ValidatePasswordLengthAttribute.cs" />
+    <Compile Include="Infrastructure\Controllers\BaseController.cs" />
+    <Compile Include="Infrastructure\Controllers\NHibernateController.cs" />
+    <Compile Include="Infrastructure\Controllers\WindsorControllerFactory.cs" />
     <Compile Include="Infrastructure\DesignByContract.cs" />
+    <Compile Include="Infrastructure\Enums\MembershipStatus.cs" />
+    <Compile Include="Infrastructure\Helpers\EnumReaderExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\HexEncoding.cs" />
+    <Compile Include="Infrastructure\Helpers\NHibernateMappingsExtensions.cs" />
+    <Compile Include="Infrastructure\Helpers\ReflectionHelper.cs" />
+    <Compile Include="Infrastructure\Helpers\SessionExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\UrlHelperExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\ValidationHelper.cs" />
-    <Compile Include="Infrastructure\SessionManagement\ISessionFactoryProvider.cs" />
+    <Compile Include="Infrastructure\Helpers\WindsorExtensions.cs" />
+    <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
+    <Compile Include="Infrastructure\Providers\Cache\ICacheProvider.cs" />
+    <Compile Include="Infrastructure\Providers\Cache\InMemoryCacheProvider.cs" />
+    <Compile Include="Infrastructure\Providers\Cache\NullCacheProvider.cs" />
+    <Compile Include="Infrastructure\Providers\FilterAtrribute\WindsorFilterAttributeFilterProvider.cs" />
+    <Compile Include="Infrastructure\Providers\Session\ISessionFactoryProvider.cs" />
     <Compile Include="Infrastructure\HttpModules\NHibernateSessionModule.cs" />
-    <Compile Include="Infrastructure\SessionManagement\SessionFactoryProvider.cs" />
+    <Compile Include="Infrastructure\Providers\Session\SessionFactoryProvider.cs" />
+    <Compile Include="Infrastructure\Services\FormAuthenticationStoreService.cs" />
+    <Compile Include="Infrastructure\Services\MailSenderService.cs" />
+    <Compile Include="Infrastructure\Services\MembershipService.cs" />
+    <Compile Include="Infrastructure\Services\SecurityService.cs" />
     <Compile Include="Infrastructure\Startup\ClientValidationExtensions.cs" />
-    <Compile Include="Infrastructure\WindsorControllerFactory.cs" />
     <Compile Include="Infrastructure\Windsor\Facilities\NHibernateFacility.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\ControllersInstallers.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\DependenciesInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\LoggerInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\NHibernateInstaller.cs" />
-    <Compile Include="Infrastructure\SessionManagement\LazySessionContext.cs" />
+    <Compile Include="Infrastructure\Providers\Session\LazySessionContext.cs" />
     <Compile Include="Infrastructure\Startup\WindsorStartupTask.cs" />
+    <Compile Include="Models\Components\Membership.cs" />
+    <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Usuario.cs" />
-    <Compile Include="Models\ViewModels\Account\RegisterViewModel.cs" />
+    <Compile Include="Models\ViewModels\Account\ChangePasswordModel.cs" />
+    <Compile Include="Models\ViewModels\Account\LogOnModel.cs" />
+    <Compile Include="Models\ViewModels\Account\RegisterModel.cs" />
+    <Compile Include="Models\ViewModels\UserManagement\RegisterUserViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserManagement\RegisterViewModel.cs" />
     <Compile Include="Models\Calendario.cs" />
-    <Compile Include="Models\ViewModels\Account\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserManagement\ChangePasswordViewModel.cs" />
     <Compile Include="Models\Components\ComponentBase.cs" />
     <Compile Include="Models\Components\Documentos\Cuil.cs" />
     <Compile Include="Models\Components\Documentos\Cuit.cs" />
@@ -185,7 +217,7 @@
     <Compile Include="Models\EspecialidadProfesional.cs" />
     <Compile Include="Models\Feriado.cs" />
     <Compile Include="Models\Localidad.cs" />
-    <Compile Include="Models\ViewModels\Account\LogOnModelViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserManagement\LogOnModelViewModel.cs" />
     <Compile Include="Models\ObraSocial.cs" />
     <Compile Include="Models\Parametro.cs" />
     <Compile Include="Models\Plan.cs" />
@@ -291,10 +323,6 @@
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
-    <Content Include="Views\Account\LogOn.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -313,6 +341,23 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Resource.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\UserManagement\Create.cshtml" />
+    <Content Include="Views\UserManagement\Edit.cshtml" />
+    <Content Include="Views\UserManagement\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

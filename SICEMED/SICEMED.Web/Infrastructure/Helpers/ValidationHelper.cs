@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,8 @@ namespace Sicemed.Web.Infrastructure.Helpers
 {
     public static class ValidationHelper
     {
+        public const string EMAIL_VALIDATION_REGEX = @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b";
+
         public static IEnumerable<ValidationResult> Validate(object component)
         {
             return from descriptor in TypeDescriptor.GetProperties(component).Cast<PropertyDescriptor>()
@@ -17,15 +20,14 @@ namespace Sicemed.Web.Infrastructure.Helpers
                    select new ValidationResult(
                        validation.FormatErrorMessage(validation.ErrorMessage) ??
                        string.Format(CultureInfo.CurrentUICulture, "{0} validation failed.", validation.GetType().Name),
-                       new[] {descriptor.Name});
+                       new[] { descriptor.Name });
         }
 
         public static bool IsValidEmail(string email)
         {
-            Check.Require(!string.IsNullOrWhiteSpace(email));
+            if (string.IsNullOrWhiteSpace(email)) throw new ArgumentNullException("email");
 
-            return Regex.IsMatch(email,
-                                 @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b");
+            return Regex.IsMatch(email, EMAIL_VALIDATION_REGEX);
         }
     }
 }
