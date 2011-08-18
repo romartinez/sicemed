@@ -66,9 +66,9 @@ namespace Sicemed.Web.Infrastructure
         {
             Logger.InfoFormat("Installing the application.");
             new SchemaExport(config).Execute(false, true, false, session.Connection, null);
-            //CrearRoles(session);
+            CrearRoles(session);
             ////No permite Tx anidadas
-            //CrearAdministrador();
+            CrearAdministrador();
             //Lo guardo al parametro nuevo.
             using (var tx = session.BeginTransaction())
             {
@@ -81,16 +81,16 @@ namespace Sicemed.Web.Infrastructure
         }
         private void CrearRoles(ISession session)
         {
-            //session.Save(Rol.Administrador);
-            //session.Save(Rol.Profesional);
-            //session.Save(Rol.Secretaria);
+            session.Save(Rol.Administrador);
+            session.Save(Rol.Profesional);
+            session.Save(Rol.Secretaria);
         }
 
         private void CrearAdministrador()
         {
-            //var usuario = new Usuario() { Nombre = "admin" };
-            //usuario.AgregarRol(Rol.Administrador);
-            //MembershipService.CreateUser(usuario, "admin@admin.com", "test");
+            var usuario = new Usuario() { Nombre = "admin" };
+            usuario.AgregarRol(Rol.Administrador);
+            MembershipService.CreateUser(usuario, "admin@admin.com", "test");
         }
     }
 }
