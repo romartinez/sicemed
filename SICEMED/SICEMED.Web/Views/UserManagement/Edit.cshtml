@@ -1,4 +1,5 @@
-﻿@model Security.Web.Areas.Admin.ViewModels.UserManagement.RegisterUserViewModel
+﻿@using Sicemed.Web.Models.ViewModels.UserManagement
+@model RegisterUserViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -36,11 +37,11 @@
             @foreach(var role in Model.AllRoles)
             {
                 <div>
-                    <input type="checkbox" name="SelectedRoles" id="@role.Id" value="@role.Id"
-                    @if(Model.SelectedRoles.Contains(@role.Id)){
+                    <input type="checkbox" name="SelectedRoles" id="@role.Value" value="@role.Value"
+                    @if(Model.SelectedRoles.Contains(@role.Value)){
                         @:checked="checked" 
                     }/>
-                    <label for="@role.Id">@role.Name</label>                
+                    <label for="@role.Value">@role.Name</label>                
                 </div>
             }            
             @Html.ValidationMessageFor(model => model.SelectedRoles)

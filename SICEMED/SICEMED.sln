@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sicemed.Web", "SICEMED.Web\Sicemed.Web.csproj", "{0696847C-4CB8-4AE0-97CB-E28A8D0E452A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sicemed.Web", "Sicemed.Web\Sicemed.Web.csproj", "{0696847C-4CB8-4AE0-97CB-E28A8D0E452A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sicemed.Tests", "SICEMED.Tests\Sicemed.Tests.csproj", "{E97B81CA-12F6-4E26-8B06-17C86F758F85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sicemed.Tests", "Sicemed.Tests\Sicemed.Tests.csproj", "{E97B81CA-12F6-4E26-8B06-17C86F758F85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

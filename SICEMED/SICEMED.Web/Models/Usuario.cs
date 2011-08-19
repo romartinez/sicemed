@@ -11,11 +11,11 @@ namespace Sicemed.Web.Models
     public class Usuario : Entity, IPrincipal
     {
         private readonly Membership _membership;
-        private readonly IList<Rol> _roles;
+        private readonly ISet<AsignacionRol> _roles;
 
         public Usuario()
         {
-            _roles = new List<Rol>();           
+            _roles = new HashSet<AsignacionRol>();           
             _membership = new Membership();
         }
 
@@ -24,7 +24,7 @@ namespace Sicemed.Web.Models
             get { return _membership; }
         }
 
-        public virtual IEnumerable<Rol> Roles
+        public virtual IEnumerable<AsignacionRol> Roles
         {
             get { return _roles; }
         }
@@ -59,7 +59,7 @@ namespace Sicemed.Web.Models
         
         public virtual bool IsInRole(string role)
         {
-            return _roles.Select(r => r.Name).Contains(role);
+            return _roles.Select(r => r.Rol.Name).Contains(role);
         }
 
         public virtual IIdentity Identity
@@ -69,13 +69,14 @@ namespace Sicemed.Web.Models
 
         public virtual Usuario AgregarRol(Rol rol)
         {
-            _roles.Add(rol);
+            _roles.Add(new AsignacionRol(rol));
             return this;
         }
 
         public virtual Usuario QuitarRol(Rol rol)
         {
-            _roles.Remove(rol);
+            var roleToRemove = _roles.FirstOrDefault(x => x.Rol == rol);
+            if(roleToRemove != null) _roles.Remove(roleToRemove);
             return this;
         }
 

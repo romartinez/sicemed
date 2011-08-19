@@ -1,5 +1,5 @@
-﻿@model IEnumerable<Security.Web.Models.User>
-@using Security.Web.Models.Operations
+﻿@using Sicemed.Web.Models
+@model IEnumerable<Usuario>
 @{
     ViewBag.Title = "Manage Users";
 }
@@ -7,7 +7,7 @@
 <h2>Manage Users</h2>
 
 <p>
-    @Html.SecureActionLink(Html.T("Create New"), "Create", Operation.ManageUsers)
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table>
     <tr>
@@ -26,11 +26,11 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.SecureActionLink("Edit", "Edit", Operation.ManageUsers, new { id = item.Id }) |
-            @Html.SecureActionLink("Delete", "Delete", Operation.ManageUsers, new { id = item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
         <td>
-            @item.FullName
+            @item.Nombre
         </td>
         <td>
             @item.Membership.Email
@@ -39,7 +39,7 @@
             <ul>
             @foreach (var rol in @item.Roles)
             {
-                <li>@rol.Name</li>
+                <li>@rol.Rol.Name</li>
             }            
             </ul>
         </td>

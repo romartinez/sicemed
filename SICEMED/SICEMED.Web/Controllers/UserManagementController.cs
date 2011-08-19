@@ -43,7 +43,7 @@ namespace Sicemed.Web.Controllers
 
                     foreach(var selectedRole in model.SelectedRoles)
                     {
-                        var role = model.AllRoles.Single(r => r.Id == selectedRole);
+                        var role = model.AllRoles.Single(r => r.Value == selectedRole);
                         user.AgregarRol(role);
                     }
 
@@ -83,16 +83,16 @@ namespace Sicemed.Web.Controllers
                     user.Nombre = model.FullName;
                     
                     //Roles
-                    var rolesToDelete = user.Roles.Where(r => !model.SelectedRoles.Contains(r.Id)).ToList();
+                    var rolesToDelete = user.Roles.Where(r => !model.SelectedRoles.Contains(r.Rol.Value)).ToList();
                     foreach(var roleToDelete in rolesToDelete)
                     {
-                        user.QuitarRol(roleToDelete);
+                        user.QuitarRol(roleToDelete.Rol);
                     }
 
-                    var rolesIdToAdd = model.SelectedRoles.Where(r => !user.Roles.Any(role => role.Id == r)).ToList();
+                    var rolesIdToAdd = model.SelectedRoles.Where(r => !user.Roles.Any(role => role.Rol.Value == r)).ToList();
                     foreach (var roleIdToAdd in rolesIdToAdd)
                     {
-                        var roleToAdd = model.AllRoles.Single(r => r.Id == roleIdToAdd);
+                        var roleToAdd = model.AllRoles.Single(r => r.Value == roleIdToAdd);
                         user.AgregarRol(roleToAdd);
                     }
 

@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Bootstrap;
-using Bootstrap.Windsor;
-using Bootstrap.AutoMapper;
-using Bootstrap.Extensions.StartupTasks;
 using Castle.Core.Logging;
+using Castle.Facilities.TypedFactory;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
+using CommonServiceLocator.WindsorAdapter;
+using DataAnnotationsExtensions.ClientValidation;
 using Microsoft.Practices.ServiceLocation;
+using SICEMED.Web.Infrastructure.Windsor.Facilities;
 using Sicemed.Web.Infrastructure;
 
 namespace SICEMED.Web
@@ -51,14 +50,21 @@ namespace SICEMED.Web
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            Bootstrapper.With.Windsor().And.AutoMapper().And.StartupTasks().Start();
+            var container = new WindsorContainer();
+            container.AddFacility<TypedFactoryFacility>();
+            container.Install(FromAssembly.This());
+
+            ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
+
+            DataAnnotationsModelValidatorProviderExtensions.RegisterValidationExtensions();
 
             _logger = ServiceLocator.Current.GetInstance<ILogger>();
+            ServiceLocator.Current.GetInstance<IApplicationInstaller>().Install(NHibernateFacility.BuildDatabaseConfiguration());
         }
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            if (_logger.IsFatalEnabled)
+            if(_logger.IsFatalEnabled)
                 _logger.FatalFormat("Error no atrapado. Exc: {0}", Server.GetLastError());
         }
     }

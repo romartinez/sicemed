@@ -42,7 +42,7 @@ namespace Sicemed.Web.Models.ViewModels.UserManagement
         {
             FullName = user.Nombre;
             Email = user.Membership.Email;
-            SelectedRoles = user.Roles.Select(r => r.Id).ToArray();
+            SelectedRoles = user.Roles.Select(r => r.Rol.Value).ToArray();
         }
     }
 }

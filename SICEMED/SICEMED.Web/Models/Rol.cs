@@ -1,11 +1,16 @@
-﻿namespace Sicemed.Web.Models
-{
-    public class Rol : Entity
-    {
-        public static Rol Secretaria = new Rol() {Name = "Secretaria"};
-        public static Rol Profesional = new Rol() { Name = "Profesional" };
-        public static Rol Administrador = new Rol() { Name = "Administrador" };
+﻿using Sicemed.Web.Models.Components;
 
-        public virtual string Name { get; set; }         
+namespace Sicemed.Web.Models
+{
+    public class Rol : Enumeration
+    {
+        public static readonly Rol Secretaria = new Rol(1, "Secretaria");
+        public static Rol Profesional = new Rol(2, "Profesional");
+        public static Rol Administrador = new Rol(3, "Administrador");
+
+        public virtual string Name { get; set; }
+        
+        public Rol(){}
+        public Rol(long value, string displayName) : base(value, displayName) { }
     }
 }

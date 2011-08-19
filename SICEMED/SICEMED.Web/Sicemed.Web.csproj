@@ -37,18 +37,6 @@
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="Bootstrapper">
-      <HintPath>..\packages\Bootstrapper.2.0.1.0\lib\Bootstrapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Bootstrapper.AutoMapper">
-      <HintPath>..\packages\Bootstrapper.AutoMapper.2.0.0.0\lib\Bootstrapper.AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Bootstrapper.ServiceLocator">
-      <HintPath>..\packages\Bootstrapper.ServiceLocator.2.0.0.0\lib\Bootstrapper.ServiceLocator.dll</HintPath>
-    </Reference>
-    <Reference Include="Bootstrapper.WindsorExtension">
-      <HintPath>..\packages\Bootstrapper.Windsor.2.0.0.0\lib\Bootstrapper.WindsorExtension.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
     </Reference>
@@ -174,6 +162,7 @@
     <Compile Include="Infrastructure\Helpers\ValidationHelper.cs" />
     <Compile Include="Infrastructure\Helpers\WindsorExtensions.cs" />
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
+    <Compile Include="Infrastructure\NHibernate\EnumerationType.cs" />
     <Compile Include="Infrastructure\Providers\Cache\ICacheProvider.cs" />
     <Compile Include="Infrastructure\Providers\Cache\InMemoryCacheProvider.cs" />
     <Compile Include="Infrastructure\Providers\Cache\NullCacheProvider.cs" />
@@ -185,14 +174,14 @@
     <Compile Include="Infrastructure\Services\MailSenderService.cs" />
     <Compile Include="Infrastructure\Services\MembershipService.cs" />
     <Compile Include="Infrastructure\Services\SecurityService.cs" />
-    <Compile Include="Infrastructure\Startup\ClientValidationExtensions.cs" />
     <Compile Include="Infrastructure\Windsor\Facilities\NHibernateFacility.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\ControllersInstallers.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\DependenciesInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\LoggerInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\NHibernateInstaller.cs" />
     <Compile Include="Infrastructure\Providers\Session\LazySessionContext.cs" />
-    <Compile Include="Infrastructure\Startup\WindsorStartupTask.cs" />
+    <Compile Include="Models\Components\AsignacionRol.cs" />
+    <Compile Include="Models\Components\Enumeration.cs" />
     <Compile Include="Models\Components\Membership.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Usuario.cs" />

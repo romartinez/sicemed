@@ -31,24 +31,24 @@ namespace Sicemed.Web.Infrastructure
 	[Serializable]
 	public class GenericSortedSetType<T> : GenericSetType<T>
 	{
-		private readonly IComparer<T> comparer;
+		private readonly IComparer<T> _comparer;
 
 		public GenericSortedSetType(string role, string propertyRef, IComparer<T> comparer)
 			: base(role, propertyRef)
 		{
-			this.comparer = comparer;
+			_comparer = comparer;
 		}
 
 		public override object Instantiate(int anticipatedSize)
 		{
-			return new SortedSet<T>(this.comparer);
+			return new SortedSet<T>(this._comparer);
 		}
 
 		public IComparer<T> Comparer
 		{
 			get
 			{
-				return this.comparer;
+				return this._comparer;
 			}
 		}
 	}
@@ -137,7 +137,7 @@ namespace Sicemed.Web.Infrastructure
 		/// <summary>
 		/// The <see cref="ISet{T}"/> that NHibernate is wrapping.
 		/// </summary>
-		protected ISet<T> set;
+		protected ISet<T> Set;
 
 		/// <summary>
 		/// A temporary list that holds the objects while the PersistentSet is being
@@ -178,7 +178,7 @@ namespace Sicemed.Web.Infrastructure
 			// do we need to copy it to be sure it won't be changing
 			// underneath us?
 			// ie. this.set.addAll(set);
-			set = original;
+			Set = original;
 			SetInitialized();
 			IsDirectlyAccessible = true;
 		}
@@ -190,12 +190,12 @@ namespace Sicemed.Web.Infrastructure
 
 		public override bool Empty
 		{
-			get { return set.Count == 0; }
+			get { return Set.Count == 0; }
 		}
 
 		public bool IsEmpty
 		{
-			get { return ReadSize() ? CachedSize == 0 : (set.Count == 0); }
+			get { return ReadSize() ? CachedSize == 0 : (Set.Count == 0); }
 		}
 
 		public object SyncRoot
@@ -213,19 +213,19 @@ namespace Sicemed.Web.Infrastructure
 		IEnumerator<T> IEnumerable<T>.GetEnumerator()
 		{
 			Read();
-			return set.GetEnumerator();
+			return Set.GetEnumerator();
 		}
 
 		public bool Contains(T o)
 		{
 			bool? exists = ReadElementExistence(o);
-			return exists == null ? set.Contains(o) : exists.Value;
+			return exists == null ? Set.Contains(o) : exists.Value;
 		}
 
 		public void CopyTo(T[] array, int arrayIndex)
 		{
 			Read();
-			Array.Copy(set.ToArray(), 0, array, arrayIndex, Count);
+			Array.Copy(Set.ToArray(), 0, array, arrayIndex, Count);
 		}
 
 		//public bool ContainsAll(ICollection c)
@@ -240,7 +240,7 @@ namespace Sicemed.Web.Infrastructure
 			if (!exists.HasValue)
 			{
 				Initialize(true);
-				if (set.Add(o))
+				if (Set.Add(o))
 				{
 					Dirty();
 					return true;
@@ -258,61 +258,61 @@ namespace Sicemed.Web.Infrastructure
 		public void UnionWith(IEnumerable<T> other)
 		{
 			Read();
-			set.UnionWith(other);
+			Set.UnionWith(other);
 		}
 
 		public void IntersectWith(IEnumerable<T> other)
 		{
 			Read();
-			set.IntersectWith(other);
+			Set.IntersectWith(other);
 		}
 
 		public void ExceptWith(IEnumerable<T> other)
 		{
 			Read();
-			set.ExceptWith(other);
+			Set.ExceptWith(other);
 		}
 
 		public void SymmetricExceptWith(IEnumerable<T> other)
 		{
 			Read();
-			set.SymmetricExceptWith(other);
+			Set.SymmetricExceptWith(other);
 		}
 
 		public bool IsSubsetOf(IEnumerable<T> other)
 		{
 			Read();
-			return set.IsProperSupersetOf(other);
+			return Set.IsProperSupersetOf(other);
 		}
 
 		public bool IsSupersetOf(IEnumerable<T> other)
 		{
 			Read();
-			return set.IsSupersetOf(other);
+			return Set.IsSupersetOf(other);
 		}
 
 		public bool IsProperSupersetOf(IEnumerable<T> other)
 		{
 			Read();
-			return set.IsProperSupersetOf(other);
+			return Set.IsProperSupersetOf(other);
 		}
 
 		public bool IsProperSubsetOf(IEnumerable<T> other)
 		{
 			Read();
-			return set.IsProperSubsetOf(other);
+			return Set.IsProperSubsetOf(other);
 		}
 
 		public bool Overlaps(IEnumerable<T> other)
 		{
 			Read();
-			return set.Overlaps(other);
+			return Set.Overlaps(other);
 		}
 
 		public bool SetEquals(IEnumerable<T> other)
 		{
 			Read();
-			return set.SetEquals(other);
+			return Set.SetEquals(other);
 		}
 
 		public bool Remove(T o)
@@ -321,7 +321,7 @@ namespace Sicemed.Web.Infrastructure
 			if (!exists.HasValue)
 			{
 				Initialize(true);
-				if (set.Remove(o))
+				if (Set.Remove(o))
 				{
 					Dirty();
 					return true;
@@ -350,9 +350,9 @@ namespace Sicemed.Web.Infrastructure
 			else
 			{
 				Initialize(true);
-				if (set.Count != 0)
+				if (Set.Count != 0)
 				{
-					set.Clear();
+					Set.Clear();
 					Dirty();
 				}
 			}
@@ -360,7 +360,7 @@ namespace Sicemed.Web.Infrastructure
 
 		public int Count
 		{
-			get { return ReadSize() ? CachedSize : set.Count; }
+			get { return ReadSize() ? CachedSize : Set.Count; }
 		}
 
 		public bool IsReadOnly
@@ -371,7 +371,7 @@ namespace Sicemed.Web.Infrastructure
 		public IEnumerator GetEnumerator()
 		{
 			Read();
-			return set.GetEnumerator();
+			return Set.GetEnumerator();
 		}
 
 		#endregion
@@ -382,11 +382,11 @@ namespace Sicemed.Web.Infrastructure
 
 		protected sealed class ClearDelayedOperation : IDelayedOperation
 		{
-			private readonly PersistentGenericSet<T> enclosingInstance;
+			private readonly PersistentGenericSet<T> _enclosingInstance;
 
 			public ClearDelayedOperation(PersistentGenericSet<T> enclosingInstance)
 			{
-				this.enclosingInstance = enclosingInstance;
+				this._enclosingInstance = enclosingInstance;
 			}
 
 			#region IDelayedOperation Members
@@ -403,7 +403,7 @@ namespace Sicemed.Web.Infrastructure
 
 			public void Operate()
 			{
-				enclosingInstance.set.Clear();
+				_enclosingInstance.Set.Clear();
 			}
 
 			#endregion
@@ -415,20 +415,20 @@ namespace Sicemed.Web.Infrastructure
 
 		protected sealed class SimpleAddDelayedOperation : IDelayedOperation
 		{
-			private readonly PersistentGenericSet<T> enclosingInstance;
-			private readonly T value;
+			private readonly PersistentGenericSet<T> _enclosingInstance;
+			private readonly T _value;
 
 			public SimpleAddDelayedOperation(PersistentGenericSet<T> enclosingInstance, T value)
 			{
-				this.enclosingInstance = enclosingInstance;
-				this.value = value;
+				this._enclosingInstance = enclosingInstance;
+				this._value = value;
 			}
 
 			#region IDelayedOperation Members
 
 			public object AddedInstance
 			{
-				get { return value; }
+				get { return _value; }
 			}
 
 			public object Orphan
@@ -438,7 +438,7 @@ namespace Sicemed.Web.Infrastructure
 
 			public void Operate()
 			{
-				enclosingInstance.set.Add(value);
+				_enclosingInstance.Set.Add(_value);
 			}
 
 			#endregion
@@ -450,13 +450,13 @@ namespace Sicemed.Web.Infrastructure
 
 		protected sealed class SimpleRemoveDelayedOperation : IDelayedOperation
 		{
-			private readonly PersistentGenericSet<T> enclosingInstance;
-			private readonly T value;
+			private readonly PersistentGenericSet<T> _enclosingInstance;
+			private readonly T _value;
 
 			public SimpleRemoveDelayedOperation(PersistentGenericSet<T> enclosingInstance, T value)
 			{
-				this.enclosingInstance = enclosingInstance;
-				this.value = value;
+				_enclosingInstance = enclosingInstance;
+				_value = value;
 			}
 
 			#region IDelayedOperation Members
@@ -468,12 +468,12 @@ namespace Sicemed.Web.Infrastructure
 
 			public object Orphan
 			{
-				get { return value; }
+				get { return _value; }
 			}
 
 			public void Operate()
 			{
-				enclosingInstance.set.Remove(value);
+				_enclosingInstance.Set.Remove(_value);
 			}
 
 			#endregion
@@ -486,8 +486,8 @@ namespace Sicemed.Web.Infrastructure
 		public override ICollection GetSnapshot(ICollectionPersister persister)
 		{
 			var entityMode = Session.EntityMode;
-			var clonedSet = new SetSnapShot<object>(set.Count);
-			var enumerable = from object current in set 
+			var clonedSet = new SetSnapShot<object>(Set.Count);
+			var enumerable = from object current in Set 
 							 select persister.ElementType.DeepCopy(current, entityMode, persister.Factory);
 			foreach (var copied in enumerable)
 			{
@@ -499,21 +499,21 @@ namespace Sicemed.Web.Infrastructure
 		public override ICollection GetOrphans(object snapshot, string entityName)
 		{
 			var sn = new SetSnapShot<object>((IEnumerable<object>) snapshot);
-			if (set.Count == 0) return sn;
+			if (Set.Count == 0) return sn;
 			if (((ICollection) sn).Count == 0) return sn;
-			return GetOrphans(sn, set.ToArray(), entityName, Session);
+			return GetOrphans(sn, Set.ToArray(), entityName, Session);
 		}
 
 		public override bool EqualsSnapshot(ICollectionPersister persister)
 		{
 			var elementType = persister.ElementType;
 			var snapshot = (ISetSnapshot<object>) GetSnapshot();
-			if (((ICollection) snapshot).Count != set.Count)
+			if (((ICollection) snapshot).Count != Set.Count)
 			{
 				return false;
 			}
 
-			return !(from object obj in set
+			return !(from object obj in Set
 			         let oldValue = snapshot[obj]
 			         where oldValue == null || elementType.IsDirty(oldValue, obj, Session)
 			         select obj).Any();
@@ -526,7 +526,7 @@ namespace Sicemed.Web.Infrastructure
 
 		public override void BeforeInitialize(ICollectionPersister persister, int anticipatedSize)
 		{
-			set = (ISet<T>) persister.CollectionType.Instantiate(anticipatedSize);
+			Set = (ISet<T>) persister.CollectionType.Instantiate(anticipatedSize);
 		}
 
 		/// <summary>
@@ -545,7 +545,7 @@ namespace Sicemed.Web.Infrastructure
 				var element = (T) persister.ElementType.Assemble(array[i], Session, owner);
 				if (element != null)
 				{
-					set.Add(element);
+					Set.Add(element);
 				}
 			}
 			SetInitialized();
@@ -554,7 +554,7 @@ namespace Sicemed.Web.Infrastructure
 		public override string ToString()
 		{
 			Read();
-			return StringHelper.CollectionToString(set.ToArray());
+			return StringHelper.CollectionToString(Set.ToArray());
 		}
 
 		public override object ReadFrom(IDataReader rs, ICollectionPersister role, ICollectionAliases descriptor, object owner)
@@ -586,7 +586,7 @@ namespace Sicemed.Web.Infrastructure
 		{
 			foreach (T item in tempList)
 			{
-				set.Add(item);
+				Set.Add(item);
 			}
 			tempList = null;
 			SetInitialized();
@@ -595,15 +595,15 @@ namespace Sicemed.Web.Infrastructure
 
 		public override IEnumerable Entries(ICollectionPersister persister)
 		{
-			return set;
+			return Set;
 		}
 
 		public override object Disassemble(ICollectionPersister persister)
 		{
-			var result = new object[set.Count];
+			var result = new object[Set.Count];
 			int i = 0;
 
-			foreach (object obj in set)
+			foreach (object obj in Set)
 			{
 				result[i++] = persister.ElementType.Disassemble(obj, Session, null);
 			}
@@ -616,9 +616,9 @@ namespace Sicemed.Web.Infrastructure
 			var sn = (ISetSnapshot<T>) GetSnapshot();
 			var deletes = new List<T>(((ICollection<T>) sn).Count);
 			
-			deletes.AddRange(sn.Where(obj => !set.Contains(obj)));
+			deletes.AddRange(sn.Where(obj => !Set.Contains(obj)));
 			
-			deletes.AddRange(from obj in set
+			deletes.AddRange(from obj in Set
 			                 let oldValue = sn[obj]
 			                 where oldValue != null && elementType.IsDirty(obj, oldValue, Session)
 			                 select oldValue);
@@ -669,13 +669,13 @@ namespace Sicemed.Web.Infrastructure
 				return false;
 			}
 			Read();
-			return set.SequenceEqual(that);
+			return Set.SequenceEqual(that);
 		}
 
 		public override int GetHashCode()
 		{
 			Read();
-			return set.GetHashCode();
+			return Set.GetHashCode();
 		}
 
 		public override bool EntryExists(object entry, int i)
@@ -685,14 +685,14 @@ namespace Sicemed.Web.Infrastructure
 
 		public override bool IsWrapper(object collection)
 		{
-			return set == collection;
+			return Set == collection;
 		}
 
 		public void CopyTo(Array array, int index)
 		{
 			// NH : we really need to initialize the set ?
 			Read();
-			Array.Copy(set.ToArray(), 0, array, index, Count);
+			Array.Copy(Set.ToArray(), 0, array, index, Count);
 		}
 
 		#region Nested type: ISetSnapshot
@@ -709,28 +709,28 @@ namespace Sicemed.Web.Infrastructure
 		[Serializable]
 		private class SetSnapShot<T> : ISetSnapshot<T>
 		{
-			private readonly List<T> elements;
+			private readonly List<T> _elements;
 
 			private SetSnapShot()
 			{
-				elements = new List<T>();
+				_elements = new List<T>();
 			}
 
 			public SetSnapShot(int capacity)
 			{
-				elements = new List<T>(capacity);
+				_elements = new List<T>(capacity);
 			}
 
 			public SetSnapShot(IEnumerable<T> collection)
 			{
-				elements = new List<T>(collection);
+				_elements = new List<T>(collection);
 			}
 
 			#region ISetSnapshot<T> Members
 
 			public IEnumerator<T> GetEnumerator()
 			{
-				return elements.GetEnumerator();
+				return _elements.GetEnumerator();
 			}
 
 			IEnumerator IEnumerable.GetEnumerator()
@@ -740,7 +740,7 @@ namespace Sicemed.Web.Infrastructure
 
 			public void Add(T item)
 			{
-				elements.Add(item);
+				_elements.Add(item);
 			}
 
 			public void Clear()
@@ -750,12 +750,12 @@ namespace Sicemed.Web.Infrastructure
 
 			public bool Contains(T item)
 			{
-				return elements.Contains(item);
+				return _elements.Contains(item);
 			}
 
 			public void CopyTo(T[] array, int arrayIndex)
 			{
-				elements.CopyTo(array, arrayIndex);
+				_elements.CopyTo(array, arrayIndex);
 			}
 
 			public bool Remove(T item)
@@ -765,42 +765,42 @@ namespace Sicemed.Web.Infrastructure
 
 			public void CopyTo(Array array, int index)
 			{
-				((ICollection) elements).CopyTo(array, index);
+				((ICollection) _elements).CopyTo(array, index);
 			}
 
 			int ICollection.Count
 			{
-				get { return elements.Count; }
+				get { return _elements.Count; }
 			}
 
 			public object SyncRoot
 			{
-				get { return ((ICollection) elements).SyncRoot; }
+				get { return ((ICollection) _elements).SyncRoot; }
 			}
 
 			public bool IsSynchronized
 			{
-				get { return ((ICollection) elements).IsSynchronized; }
+				get { return ((ICollection) _elements).IsSynchronized; }
 			}
 
 			int ICollection<T>.Count
 			{
-				get { return elements.Count; }
+				get { return _elements.Count; }
 			}
 
 			public bool IsReadOnly
 			{
-				get { return ((ICollection<T>) elements).IsReadOnly; }
+				get { return ((ICollection<T>) _elements).IsReadOnly; }
 			}
 
 			public T this[T element]
 			{
 				get
 				{
-					int idx = elements.IndexOf(element);
+					int idx = _elements.IndexOf(element);
 					if (idx >= 0)
 					{
-						return elements[idx];
+						return _elements[idx];
 					}
 					return default(T);
 				}
