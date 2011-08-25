@@ -69,14 +69,14 @@ namespace Sicemed.Web.Infrastructure
             //No permite Tx anidadas
             CrearAdministrador();
             //Lo guardo al parametro nuevo.
-            using (var tx = session.BeginTransaction())
-            {
-                var param = new Parametro() { Key = Parametro.Keys.APP_IS_INITIALIZED };
-                param.Set(true);
+            //using (var tx = session.BeginTransaction())
+            //{
+            //    var param = new Parametro() { Key = Parametro.Keys.APP_IS_INITIALIZED };
+            //    param.Set(true);
 
-                session.Save(param);
-                tx.Commit();
-            }
+            //    session.Save(param);
+            //    tx.Commit();
+            //}
         }
 
         private void CrearAdministrador()

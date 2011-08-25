@@ -47,7 +47,7 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
                                         .UsingFactoryMethod(k => k.ResolveAll<ISessionFactory>()));
 
             HttpContext.Current.Application[SessionFactoryProvider.Key]
-                            = Kernel.Resolve<ISessionFactoryProvider>();            
+                            = Kernel.Resolve<ISessionFactoryProvider>();
         }
 
         public static Configuration BuildDatabaseConfiguration()
@@ -106,32 +106,33 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
                             .Merge(new ListIndexAsPropertyPosColumnNameApplier());
 
             orm.Patterns.PoidStrategies.Add(new HighLowPoidPattern());
+            orm.Patterns.Bags.Add(new UseSetWhenGenericCollectionPattern());
             orm.Patterns.Sets.Add(new UseSetWhenGenericCollectionPattern());
 
             var entities = new List<Type>();
             entities.AddRange(typeof(Entity).Assembly.GetTypes().Where(t => typeof(Entity).IsAssignableFrom(t) && !(t.GetType() == typeof(Entity))));
-            entities.Add(typeof(Parametro));            
+            entities.Add(typeof(Parametro));
+            entities.Add(typeof(Rol));
 
             orm.TablePerClass(entities);
             orm.TablePerClass<Parametro>();
 
-            orm.Complex<Rol>();
+            orm.TablePerClass<Rol>();
 
             var mapper = new Mapper(orm, patternsAppliers);
-            mapper.AddPropertyPattern(p => 
-                ConfOrm.TypeExtensions.GetPropertyOrFieldType(p).Equals(typeof(Rol)), 
-                mp => mp.Type<EnumerationType<Rol>>()
-            );
+            //mapper.AddPropertyPattern(p => 
+            //    ConfOrm.TypeExtensions.GetPropertyOrFieldType(p).Equals(typeof(Rol)), 
+            //    mp => mp.Type<EnumerationType<Rol>>()
+            //);
 
 
             mapper.Class<Parametro>(m =>
                                         {
-                                            m.Id(p => p.Key);                                            
+                                            m.Id(p => p.Key);
                                             m.Property("_value", x => x.Access(Accessor.Field));
                                         });
-            orm.ExcludeProperty<Parametro>(p => p.Key);            
-            
-            //mapper.Customize<Usuario>(m => m.Collection(p => p.Roles, c => c.Cascade(Cascade.Persist)));
+            orm.ExcludeProperty<Parametro>(p => p.Key);
+
             return mapper.CompileMappingFor(entities);
         }
 

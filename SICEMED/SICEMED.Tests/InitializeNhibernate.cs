@@ -1,3 +1,4 @@
+using Castle.Windsor.Installer;
 using EfficientlyLazy.Crypto;
 using Moq;
 using NHibernate;
@@ -14,6 +15,7 @@ using Sicemed.Web.Infrastructure.Services;
 using log4net;
 using log4net.Config;
 using log4net.Core;
+using Configuration = NHibernate.Cfg.Configuration;
 
 namespace Sicemed.Tests
 {

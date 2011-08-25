@@ -59,7 +59,7 @@ namespace Sicemed.Web.Models
         
         public virtual bool IsInRole(string role)
         {
-            return _roles.Select(r => r.Rol.Name).Contains(role);
+            return _roles.Select(r => r.Rol.DisplayName).Contains(role);
         }
 
         public virtual IIdentity Identity
