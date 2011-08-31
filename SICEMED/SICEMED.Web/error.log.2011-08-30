@@ -1,0 +1,1647 @@
+INFO 5 Sicemed.Web.Infrastructure.ApplicationInstaller - Checking if the application is installed.
+DEBUG 5 Sicemed.Web.Infrastructure.ApplicationInstaller - The parameter for the DB Installed is: True
+DEBUG 5 Combres.Configuration - Reload Combres settings
+DEBUG 10 Combres.ChangeMonitor - Dynamic resource change monitor thread starts...
+DEBUG 5 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: 
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 5 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -311206321
+DEBUG 5 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 5 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -1685847194
+DEBUG 5 Combres.ChangeMonitor - Watch new settings
+DEBUG 5 Combres.Configuration - Elapsed time for 'ReloadSettings': 2104 ms
+DEBUG 5 Combres.RequestProcessor - ***** Processing request for resource set siteCss
+DEBUG 7 Combres.RequestProcessor - ***** Processing request for resource set siteJs
+DEBUG 7 Combres.RequestProcessor - Reading content of ~/scripts/jquery-1.6.2.js...
+DEBUG 5 Combres.RequestProcessor - Reading content of ~/content/Site.css...
+DEBUG 7 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 7 Combres.RequestProcessor - Reading content of ~/scripts/jquery-ui-1.8.15.js...
+DEBUG 5 Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/content/Site.css' (Mode: Static)...
+DEBUG 7 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 7 Combres.RequestProcessor - Reading content of ~/scripts/jQuery.tmpl.js...
+DEBUG 7 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 7 Combres.RequestProcessor - Reading content of ~/scripts/jquery.unobtrusive-ajax.js...
+DEBUG 7 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 7 Combres.RequestProcessor - Reading content of ~/scripts/jquery.validate.js...
+DEBUG 7 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 5 Combres.RequestProcessor - Reading content of ~/content/smart_wizard.css...
+DEBUG 7 Combres.RequestProcessor - Reading content of ~/scripts/jquery.validate.unobtrusive.js...
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 5 Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/content/smart_wizard.css' (Mode: Static)...
+DEBUG 7 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 7 Combres.RequestProcessor - Reading content of ~/scripts/knockout-1.2.1.js...
+DEBUG 5 Combres.RequestProcessor - Elapsed time for 'Reading & filtering siteCss': 17 ms
+DEBUG 7 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 7 Combres.RequestProcessor - Reading content of ~/scripts/knockout.mapping-latest.js...
+DEBUG 7 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 7 Combres.RequestProcessor - Reading content of ~/scripts/modernizr-2.0.6-development-only.js...
+DEBUG 7 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 7 Combres.RequestProcessor - Reading content of ~/scripts/jquery.smartWizard-2.0.js...
+DEBUG 5 Combres.RequestProcessor - Combining resources' contents...
+DEBUG 7 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 7 Combres.RequestProcessor - Elapsed time for 'Reading & filtering siteJs': 36 ms
+DEBUG 7 Combres.RequestProcessor - Combining resources' contents...
+DEBUG 5 Combres.RequestProcessor - Elapsed time for 'Combining & filtering siteCss': 0 ms
+DEBUG 7 Combres.RequestProcessor - Elapsed time for 'Combining & filtering siteJs': 2 ms
+DEBUG 5 Combres.RequestProcessor - Minifying combined content using minifier yui and binder Combres.Binders.SimpleObjectBinder...
+DEBUG 7 Combres.RequestProcessor - Minifying combined content using minifier yui and binder Combres.Binders.SimpleObjectBinder...
+DEBUG 5 Combres.RequestProcessor - Elapsed time for 'Minifying & filtering siteCss': 192 ms
+DEBUG 5 Combres.RequestProcessor - Compressing combined content...
+DEBUG 5 Combres.RequestProcessor - Elapsed time for 'Compressing & filtering siteCss': 393 ms
+DEBUG 5 Combres.RequestProcessor - Writing content to browser...
+DEBUG 5 Combres.RequestProcessor - Elapsed time for 'Processing siteCss': 882 ms
+DEBUG 7 Combres.RequestProcessor - Elapsed time for 'Minifying & filtering siteJs': 2753 ms
+DEBUG 7 Combres.RequestProcessor - Compressing combined content...
+DEBUG 7 Combres.RequestProcessor - Elapsed time for 'Compressing & filtering siteJs': 43 ms
+DEBUG 7 Combres.RequestProcessor - Writing content to browser...
+DEBUG 7 Combres.RequestProcessor - Elapsed time for 'Processing siteJs': 2850 ms
+DEBUG 7 Combres.RequestProcessor - ***** Processing request for resource set siteCss
+DEBUG 5 Combres.RequestProcessor - ***** Processing request for resource set siteJs
+DEBUG 7 Combres.RequestProcessor - Writing to client from server's cache...
+DEBUG 5 Combres.RequestProcessor - Writing to client from server's cache...
+DEBUG 5 Combres.RequestProcessor - Writing content to browser...
+DEBUG 7 Combres.RequestProcessor - Writing content to browser...
+DEBUG 7 Combres.RequestProcessor - Elapsed time for 'Processing siteCss': 1 ms
+DEBUG 5 Combres.RequestProcessor - Elapsed time for 'Processing siteJs': 2 ms
+INFO 5 Sicemed.Web.Infrastructure.ApplicationInstaller - Checking if the application is installed.
+DEBUG 5 Sicemed.Web.Infrastructure.ApplicationInstaller - The parameter for the DB Installed is: True
+DEBUG 5 Combres.Configuration - Reload Combres settings
+DEBUG 10 Combres.ChangeMonitor - Dynamic resource change monitor thread starts...
+DEBUG 5 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: 
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 5 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -311206321
+DEBUG 5 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 5 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -1685847194
+DEBUG 5 Combres.ChangeMonitor - Watch new settings
+DEBUG 5 Combres.Configuration - Elapsed time for 'ReloadSettings': 540 ms
+INFO 9 Sicemed.Web.Infrastructure.ApplicationInstaller - Checking if the application is installed.
+DEBUG 9 Sicemed.Web.Infrastructure.ApplicationInstaller - The parameter for the DB Installed is: True
+DEBUG 9 Combres.Configuration - Reload Combres settings
+DEBUG 11 Combres.ChangeMonitor - Dynamic resource change monitor thread starts...
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: 
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -311206321
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -1685847194
+DEBUG 9 Combres.ChangeMonitor - Watch new settings
+DEBUG 9 Combres.Configuration - Elapsed time for 'ReloadSettings': 186 ms
+DEBUG 9 Combres.RequestProcessor - ***** Processing request for resource set siteCss
+DEBUG 9 Combres.RequestProcessor - Reading content of ~/content/Site.css...
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 8 Combres.RequestProcessor - ***** Processing request for resource set siteJs
+DEBUG 8 Combres.RequestProcessor - Reading content of ~/scripts/jquery-1.6.2.js...
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/content/Site.css' (Mode: Static)...
+DEBUG 8 Combres.RequestProcessor - Reading content of ~/scripts/jquery-ui-1.8.15.js...
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 8 Combres.RequestProcessor - Reading content of ~/scripts/jQuery.tmpl.js...
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 8 Combres.RequestProcessor - Reading content of ~/scripts/jquery.unobtrusive-ajax.js...
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 8 Combres.RequestProcessor - Reading content of ~/scripts/jquery.validate.js...
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 8 Combres.RequestProcessor - Reading content of ~/scripts/jquery.validate.unobtrusive.js...
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 8 Combres.RequestProcessor - Reading content of ~/scripts/knockout-1.2.1.js...
+DEBUG 9 Combres.RequestProcessor - Reading content of ~/content/smart_wizard.css...
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/content/smart_wizard.css' (Mode: Static)...
+DEBUG 8 Combres.RequestProcessor - Reading content of ~/scripts/knockout.mapping-latest.js...
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 8 Combres.RequestProcessor - Reading content of ~/scripts/modernizr-2.0.6-development-only.js...
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Reading & filtering siteCss': 23 ms
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 8 Combres.RequestProcessor - Reading content of ~/scripts/jquery.smartWizard-2.0.js...
+DEBUG 9 Combres.RequestProcessor - Combining resources' contents...
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Combining & filtering siteCss': 0 ms
+DEBUG 8 Combres.RequestProcessor - Elapsed time for 'Reading & filtering siteJs': 18 ms
+DEBUG 8 Combres.RequestProcessor - Combining resources' contents...
+DEBUG 8 Combres.RequestProcessor - Elapsed time for 'Combining & filtering siteJs': 1 ms
+DEBUG 8 Combres.RequestProcessor - Minifying combined content using minifier yui and binder Combres.Binders.SimpleObjectBinder...
+DEBUG 9 Combres.RequestProcessor - Minifying combined content using minifier yui and binder Combres.Binders.SimpleObjectBinder...
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Minifying & filtering siteCss': 255 ms
+DEBUG 9 Combres.RequestProcessor - Compressing combined content...
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Compressing & filtering siteCss': 409 ms
+DEBUG 9 Combres.RequestProcessor - Writing content to browser...
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Processing siteCss': 887 ms
+DEBUG 8 Combres.RequestProcessor - Elapsed time for 'Minifying & filtering siteJs': 2279 ms
+DEBUG 8 Combres.RequestProcessor - Compressing combined content...
+DEBUG 8 Combres.RequestProcessor - Elapsed time for 'Compressing & filtering siteJs': 38 ms
+DEBUG 8 Combres.RequestProcessor - Writing content to browser...
+DEBUG 8 Combres.RequestProcessor - Elapsed time for 'Processing siteJs': 2347 ms
+INFO 9 Sicemed.Web.Infrastructure.ApplicationInstaller - Checking if the application is installed.
+DEBUG 9 Sicemed.Web.Infrastructure.ApplicationInstaller - The parameter for the DB Installed is: True
+DEBUG 9 Combres.Configuration - Reload Combres settings
+DEBUG 13 Combres.ChangeMonitor - Dynamic resource change monitor thread starts...
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: 
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -311206321
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -1685847194
+DEBUG 9 Combres.ChangeMonitor - Watch new settings
+DEBUG 9 Combres.Configuration - Elapsed time for 'ReloadSettings': 96 ms
+DEBUG 9 Combres.RequestProcessor - ***** Processing request for resource set siteCss
+DEBUG 9 Combres.RequestProcessor - Reading content of ~/content/Site.css...
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/content/Site.css' (Mode: Static)...
+DEBUG 9 Combres.RequestProcessor - Reading content of ~/content/smart_wizard.css...
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Performing filtering with Combres.Filters.FixUrlsInCssFilter for Resource '~/content/smart_wizard.css' (Mode: Static)...
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Reading & filtering siteCss': 16 ms
+DEBUG 9 Combres.RequestProcessor - Combining resources' contents...
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Combining & filtering siteCss': 0 ms
+DEBUG 9 Combres.RequestProcessor - Minifying combined content using minifier yui and binder Combres.Binders.SimpleObjectBinder...
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Minifying & filtering siteCss': 84 ms
+DEBUG 9 Combres.RequestProcessor - Compressing combined content...
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Compressing & filtering siteCss': 1 ms
+DEBUG 9 Combres.RequestProcessor - Writing content to browser...
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Processing siteCss': 125 ms
+DEBUG 9 Combres.RequestProcessor - ***** Processing request for resource set siteJs
+DEBUG 9 Combres.RequestProcessor - Reading content of ~/scripts/jquery-1.6.2.js...
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Reading content of ~/scripts/jquery-ui-1.8.15.js...
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Reading content of ~/scripts/jQuery.tmpl.js...
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Reading content of ~/scripts/jquery.unobtrusive-ajax.js...
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Reading content of ~/scripts/jquery.validate.js...
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Reading content of ~/scripts/jquery.validate.unobtrusive.js...
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Reading content of ~/scripts/knockout-1.2.1.js...
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Reading content of ~/scripts/knockout.mapping-latest.js...
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Reading content of ~/scripts/modernizr-2.0.6-development-only.js...
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Reading content of ~/scripts/jquery.smartWizard-2.0.js...
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Reading & filtering siteJs': 25 ms
+DEBUG 9 Combres.RequestProcessor - Combining resources' contents...
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Combining & filtering siteJs': 3 ms
+DEBUG 9 Combres.RequestProcessor - Minifying combined content using minifier yui and binder Combres.Binders.SimpleObjectBinder...
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Minifying & filtering siteJs': 2232 ms
+DEBUG 9 Combres.RequestProcessor - Compressing combined content...
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Compressing & filtering siteJs': 39 ms
+DEBUG 9 Combres.RequestProcessor - Writing content to browser...
+DEBUG 9 Combres.RequestProcessor - Elapsed time for 'Processing siteJs': 2308 ms
+DEBUG 12 Combres.ChangeMonitor - OnConfigChanged
+DEBUG 12 Combres.Configuration - Change posted. Change Type: Config - Affected resource list: 
+
+DEBUG 12 Combres.ChangeMonitor - OnConfigChanged
+DEBUG 9 Combres.Configuration - Apply changes
+DEBUG 9 Combres.Configuration - Apply change: Change Type: Config - Affected resource list: 
+
+DEBUG 9 Combres.Configuration - Reload Combres settings
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: 
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -311206321
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 318629022
+DEBUG 9 Combres.ChangeMonitor - Watch new settings
+DEBUG 9 Combres.Configuration - Elapsed time for 'ReloadSettings': 206 ms
+DEBUG 11 Combres.RequestProcessor - ***** Processing request for resource set siteJs
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/jquery-1.6.2.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/jquery-ui-1.8.15.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/jQuery.tmpl.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/jquery.unobtrusive-ajax.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/jquery.validate.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/jquery.validate.unobtrusive.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/knockout-1.2.1.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/knockout.mapping-latest.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/modernizr-2.0.6-development-only.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/jquery.smartWizard-2.0.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/jquery.jqGrid.min.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/app.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/app.ajax.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/app.fixes.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/app.grid.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/app.overrides.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Reading content of ~/scripts/app.ui.js...
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 11 Combres.RequestProcessor - Elapsed time for 'Reading & filtering siteJs': 26 ms
+DEBUG 11 Combres.RequestProcessor - Combining resources' contents...
+DEBUG 11 Combres.RequestProcessor - Elapsed time for 'Combining & filtering siteJs': 2 ms
+DEBUG 11 Combres.RequestProcessor - Minifying combined content using minifier yui and binder Combres.Binders.SimpleObjectBinder...
+DEBUG 11 Combres.RequestProcessor - Elapsed time for 'Minifying & filtering siteJs': 2564 ms
+DEBUG 11 Combres.RequestProcessor - Compressing combined content...
+DEBUG 11 Combres.RequestProcessor - Elapsed time for 'Compressing & filtering siteJs': 82 ms
+DEBUG 11 Combres.RequestProcessor - Writing content to browser...
+DEBUG 11 Combres.RequestProcessor - Elapsed time for 'Processing siteJs': 2683 ms
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change posted. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.grid.js
+
+DEBUG 11 Combres.Configuration - Apply changes
+DEBUG 11 Combres.Configuration - Apply change: Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.grid.js
+
+DEBUG 11 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: -311206321
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 11 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -311206321
+DEBUG 11 Combres.ResourceContentReader - Attempt to remove cached content for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Attempt to remove cached content for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 11 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 318629022
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 11 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 1434890192
+DEBUG 10 Combres.RequestProcessor - ***** Processing request for resource set siteJs
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/jquery-1.6.2.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/jquery-ui-1.8.15.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/jQuery.tmpl.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/jquery.unobtrusive-ajax.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/jquery.validate.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/jquery.validate.unobtrusive.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/knockout-1.2.1.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/knockout.mapping-latest.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/modernizr-2.0.6-development-only.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/jquery.smartWizard-2.0.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/jquery.jqGrid.min.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/app.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/app.ajax.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/app.fixes.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/app.grid.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/app.overrides.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Reading content of ~/scripts/app.ui.js...
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 10 Combres.RequestProcessor - Elapsed time for 'Reading & filtering siteJs': 23 ms
+DEBUG 10 Combres.RequestProcessor - Combining resources' contents...
+DEBUG 10 Combres.RequestProcessor - Elapsed time for 'Combining & filtering siteJs': 3 ms
+DEBUG 10 Combres.RequestProcessor - Minifying combined content using minifier yui and binder Combres.Binders.SimpleObjectBinder...
+DEBUG 10 Combres.RequestProcessor - Elapsed time for 'Minifying & filtering siteJs': 2532 ms
+DEBUG 10 Combres.RequestProcessor - Compressing combined content...
+DEBUG 10 Combres.RequestProcessor - Elapsed time for 'Compressing & filtering siteJs': 59 ms
+DEBUG 10 Combres.RequestProcessor - Writing content to browser...
+DEBUG 10 Combres.RequestProcessor - Elapsed time for 'Processing siteJs': 2626 ms
+DEBUG 12 Combres.ChangeMonitor - OnConfigChanged
+DEBUG 12 Combres.Configuration - Change posted. Change Type: Config - Affected resource list: 
+
+DEBUG 12 Combres.ChangeMonitor - OnConfigChanged
+DEBUG 9 Combres.Configuration - Apply changes
+DEBUG 9 Combres.Configuration - Apply change: Change Type: Config - Affected resource list: 
+
+DEBUG 9 Combres.Configuration - Reload Combres settings
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: 
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -507719826
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 9 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 1188577105
+DEBUG 9 Combres.ChangeMonitor - Watch new settings
+DEBUG 9 Combres.Configuration - Elapsed time for 'ReloadSettings': 641 ms
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 9 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change posted. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+ - ~/scripts/app.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+ - ~/scripts/app.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+ - ~/scripts/app.js
+ - ~/scripts/app.ui.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+ - ~/scripts/app.js
+ - ~/scripts/app.ui.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+ - ~/scripts/app.js
+ - ~/scripts/app.ui.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+ - ~/scripts/app.js
+ - ~/scripts/app.ui.js
+
+INFO 13 Sicemed.Web.Infrastructure.ApplicationInstaller - Checking if the application is installed.
+DEBUG 13 Sicemed.Web.Infrastructure.ApplicationInstaller - The parameter for the DB Installed is: True
+DEBUG 13 Combres.Configuration - Reload Combres settings
+DEBUG 15 Combres.ChangeMonitor - Dynamic resource change monitor thread starts...
+DEBUG 13 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: 
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 13 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -507719826
+DEBUG 13 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 13 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -1249796549
+DEBUG 13 Combres.ChangeMonitor - Watch new settings
+DEBUG 13 Combres.Configuration - Elapsed time for 'ReloadSettings': 350 ms
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 16 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change posted. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.overrides.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.overrides.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.overrides.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.overrides.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.overrides.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.overrides.js
+
+DEBUG 13 Combres.Configuration - Apply changes
+DEBUG 13 Combres.Configuration - Apply change: Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.overrides.js
+
+DEBUG 13 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: -507719826
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 13 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -507719826
+DEBUG 13 Combres.ResourceContentReader - Attempt to remove cached content for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 13 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: -1249796549
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 13 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 1717952138
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change posted. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+ - ~/scripts/app.ui.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+ - ~/scripts/app.ui.js
+
+DEBUG 5 Combres.Configuration - Apply changes
+DEBUG 5 Combres.Configuration - Apply change: Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+ - ~/scripts/app.ui.js
+
+DEBUG 5 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: -507719826
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 5 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -507719826
+DEBUG 5 Combres.ResourceContentReader - Attempt to remove cached content for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Attempt to remove cached content for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Attempt to remove cached content for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Attempt to remove cached content for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 5 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 1717952138
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 5 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -787887248
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 5 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 11 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change posted. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+ - ~/scripts/app.ui.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+ - ~/scripts/app.ui.js
+
+DEBUG 14 Combres.Configuration - Apply changes
+DEBUG 14 Combres.Configuration - Apply change: Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.ajax.js
+ - ~/scripts/app.fixes.js
+ - ~/scripts/app.grid.js
+ - ~/scripts/app.ui.js
+
+DEBUG 14 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: -507719826
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 14 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -507719826
+DEBUG 14 Combres.ResourceContentReader - Attempt to remove cached content for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Attempt to remove cached content for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Attempt to remove cached content for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Attempt to remove cached content for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 14 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: -787887248
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 14 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 1551214182
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 14 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+FATAL 8 Default - Error no atrapado. Exc: System.Web.HttpException (0x80004005): A public action method 'List' was not found on controller 'Sicemed.Web.Areas.Admin.Controllers.ContentController'.
+   at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+   at System.Web.Mvc.Controller.ExecuteCore()
+   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)
+   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<>c__DisplayClassb.<BeginProcessRequest>b__5()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass1.<MakeVoidDelegate>b__0()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClasse.<EndProcessRequest>b__d()
+   at System.Web.Mvc.SecurityUtil.<GetCallInAppTrustThunk>b__0(Action f)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+INFO 10 Sicemed.Web.Infrastructure.ApplicationInstaller - Checking if the application is installed.
+DEBUG 10 Sicemed.Web.Infrastructure.ApplicationInstaller - The parameter for the DB Installed is: True
+DEBUG 10 Combres.Configuration - Reload Combres settings
+DEBUG 16 Combres.ChangeMonitor - Dynamic resource change monitor thread starts...
+DEBUG 10 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: 
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 10 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -507719826
+DEBUG 10 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 10 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 1551214182
+DEBUG 10 Combres.ChangeMonitor - Watch new settings
+DEBUG 10 Combres.Configuration - Elapsed time for 'ReloadSettings': 133 ms
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+FATAL 5 Default - Error no atrapado. Exc: Microsoft.Practices.ServiceLocation.ActivationException: Activation error occured while trying to get instance of type ILog, key "" ---> Castle.MicroKernel.ComponentNotFoundException: No component for supporting the service log4net.ILog was found
+   at Castle.MicroKernel.DefaultKernel.Resolve(Type service) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\DefaultKernel_Resolve.cs:line 157
+   at Castle.Windsor.WindsorContainer.Resolve(Type service) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\Windsor\WindsorContainer.cs:line 783
+   at CommonServiceLocator.WindsorAdapter.WindsorServiceLocator.DoGetInstance(Type serviceType, String key) in D:\_development\CommonServiceLocator.WindsorAdapter\CommonServiceLocator.WindsorAdapter\WindsorServiceLocator.cs:line 38
+   at Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase.GetInstance(Type serviceType, String key) in c:\Home\Chris\Projects\CommonServiceLocator\main\Microsoft.Practices.ServiceLocation\ServiceLocatorImplBase.cs:line 49
+   --- End of inner exception stack trace ---
+   at Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase.GetInstance(Type serviceType, String key) in c:\Home\Chris\Projects\CommonServiceLocator\main\Microsoft.Practices.ServiceLocation\ServiceLocatorImplBase.cs:line 53
+   at Microsoft.Practices.ServiceLocation.ServiceLocatorImplBase.GetInstance[TService]() in c:\Home\Chris\Projects\CommonServiceLocator\main\Microsoft.Practices.ServiceLocation\ServiceLocatorImplBase.cs:line 90
+   at Sicemed.Web.Infrastructure.Attributes.Filters.AjaxHandleErrorAttribute.OnException(ExceptionContext filterContext) in D:\Documents\Projects\sicemed\Sicemed\Sicemed.Web\Infrastructure\Attributes\Filters\AjaxHandleError.cs:line 18
+   at System.Web.Mvc.ControllerActionInvoker.InvokeExceptionFilters(ControllerContext controllerContext, IList`1 filters, Exception exception)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+   at System.Web.Mvc.Controller.ExecuteCore()
+   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)
+   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<>c__DisplayClassb.<BeginProcessRequest>b__5()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass1.<MakeVoidDelegate>b__0()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClasse.<EndProcessRequest>b__d()
+   at System.Web.Mvc.SecurityUtil.<GetCallInAppTrustThunk>b__0(Action f)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+INFO 13 Sicemed.Web.Infrastructure.ApplicationInstaller - Checking if the application is installed.
+DEBUG 13 Sicemed.Web.Infrastructure.ApplicationInstaller - The parameter for the DB Installed is: True
+DEBUG 13 Combres.Configuration - Reload Combres settings
+DEBUG 16 Combres.ChangeMonitor - Dynamic resource change monitor thread starts...
+DEBUG 13 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: 
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 13 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -507719826
+DEBUG 13 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 13 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 1551214182
+DEBUG 13 Combres.ChangeMonitor - Watch new settings
+DEBUG 13 Combres.Configuration - Elapsed time for 'ReloadSettings': 216 ms
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+FATAL 8 Default - Se ha producido un error en la llamada.
+ Method: Sicemed.Web.Areas.Admin.Controllers.ContentController 
+Args: System.Web.Routing.RouteData
+ Exc: System.Web.Mvc.HttpAntiForgeryException (0x80004005): A required anti-forgery token was not supplied or was invalid.
+   at System.Web.Helpers.AntiForgeryWorker.Validate(HttpContextBase context, String salt)
+   at System.Web.Helpers.AntiForgery.Validate(HttpContextBase httpContext, String salt)
+   at System.Web.Mvc.ValidateAntiForgeryTokenAttribute.OnAuthorization(AuthorizationContext filterContext)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+FATAL 8 Default - Error no atrapado. Exc: System.InvalidOperationException: This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+   at System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+   at System.Web.Mvc.Controller.ExecuteCore()
+   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)
+   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<>c__DisplayClassb.<BeginProcessRequest>b__5()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass1.<MakeVoidDelegate>b__0()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClasse.<EndProcessRequest>b__d()
+   at System.Web.Mvc.SecurityUtil.<GetCallInAppTrustThunk>b__0(Action f)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+FATAL 8 Default - Se ha producido un error en la llamada.
+ Method: Sicemed.Web.Areas.Admin.Controllers.ContentController 
+Args: System.Web.Routing.RouteData
+ Exc: System.Web.Mvc.HttpAntiForgeryException (0x80004005): A required anti-forgery token was not supplied or was invalid.
+   at System.Web.Helpers.AntiForgeryWorker.Validate(HttpContextBase context, String salt)
+   at System.Web.Helpers.AntiForgery.Validate(HttpContextBase httpContext, String salt)
+   at System.Web.Mvc.ValidateAntiForgeryTokenAttribute.OnAuthorization(AuthorizationContext filterContext)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+FATAL 8 Default - Error no atrapado. Exc: System.InvalidOperationException: This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+   at System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+   at System.Web.Mvc.Controller.ExecuteCore()
+   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)
+   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<>c__DisplayClassb.<BeginProcessRequest>b__5()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass1.<MakeVoidDelegate>b__0()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClasse.<EndProcessRequest>b__d()
+   at System.Web.Mvc.SecurityUtil.<GetCallInAppTrustThunk>b__0(Action f)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 10 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+FATAL 10 Default - Se ha producido un error en la llamada.
+ Method: Sicemed.Web.Areas.Admin.Controllers.ContentController 
+Args: System.Web.Routing.RouteData
+ Exc: System.Web.Mvc.HttpAntiForgeryException (0x80004005): A required anti-forgery token was not supplied or was invalid.
+   at System.Web.Helpers.AntiForgeryWorker.Validate(HttpContextBase context, String salt)
+   at System.Web.Helpers.AntiForgery.Validate(HttpContextBase httpContext, String salt)
+   at System.Web.Mvc.ValidateAntiForgeryTokenAttribute.OnAuthorization(AuthorizationContext filterContext)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+FATAL 10 Default - Error no atrapado. Exc: System.InvalidOperationException: This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.
+   at System.Web.Mvc.JsonResult.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+   at System.Web.Mvc.Controller.ExecuteCore()
+   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)
+   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<>c__DisplayClassb.<BeginProcessRequest>b__5()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass1.<MakeVoidDelegate>b__0()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncResultWrapper.End(IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClasse.<EndProcessRequest>b__d()
+   at System.Web.Mvc.SecurityUtil.<GetCallInAppTrustThunk>b__0(Action f)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 13 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change posted. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - Static resources change count: 1
+DEBUG 12 Combres.Configuration - Change merged. Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.grid.js
+
+DEBUG 12 Combres.ChangeMonitor - OnConfigChanged
+DEBUG 12 Combres.Configuration - Change posted. Change Type: Config - Affected resource list: 
+
+DEBUG 12 Combres.ChangeMonitor - OnConfigChanged
+DEBUG 15 Combres.Configuration - Apply changes
+DEBUG 15 Combres.Configuration - Apply change: Change Type: Resource - Affected resource list: 
+ - ~/scripts/app.grid.js
+
+DEBUG 15 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: -507719826
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 15 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -507719826
+DEBUG 15 Combres.ResourceContentReader - Attempt to remove cached content for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 15 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 1551214182
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 15 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: 864861239
+DEBUG 15 Combres.Configuration - Apply change: Change Type: Config - Affected resource list: 
+
+DEBUG 15 Combres.Configuration - Reload Combres settings
+DEBUG 15 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteCss.  Current hash: 
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 15 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -507719826
+DEBUG 15 Combres.VersionGenerators.HashCodeVersionGenerator - Computing hash for set siteJs.  Current hash: 
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/postAntiForgery.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/msDateJsonParser.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/postify.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Retrieving new content for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 15 Combres.VersionGenerators.HashCodeVersionGenerator - New hash: -739853607
+DEBUG 15 Combres.ChangeMonitor - Watch new settings
+DEBUG 15 Combres.Configuration - Elapsed time for 'ReloadSettings': 92 ms
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/postAntiForgery.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/msDateJsonParser.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/postify.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 15 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/postAntiForgery.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/msDateJsonParser.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/postify.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/postAntiForgery.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/msDateJsonParser.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/postify.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/postAntiForgery.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/msDateJsonParser.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/postify.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/postAntiForgery.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/msDateJsonParser.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/postify.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/postAntiForgery.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/msDateJsonParser.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/postify.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/Site.css' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/content/smart_wizard.css' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-1.6.2.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery-ui-1.8.15.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jQuery.tmpl.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.unobtrusive-ajax.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.validate.unobtrusive.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout-1.2.1.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/knockout.mapping-latest.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/modernizr-2.0.6-development-only.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.smartWizard-2.0.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/jquery.jqGrid.min.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/postAntiForgery.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/msDateJsonParser.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/postify.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ajax.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.fixes.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.grid.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.overrides.js' (Mode: Static)
+DEBUG 8 Combres.ResourceContentReader - Use content from content's cache for Resource '~/scripts/app.ui.js' (Mode: Static)
+FATAL 9 Default - Se ha producido un error en la llamada.
+ Method: Sicemed.Web.Areas.Admin.Controllers.ContentController 
+Args: System.Web.Routing.RouteData
+ Exc: System.ArgumentException: The parameters dictionary contains a null entry for parameter 'count' of non-nullable type 'System.Int64' for method 'System.Web.Mvc.JsonResult List(Int64, Int32, Int32)' in 'Sicemed.Web.Areas.Admin.Controllers.ContentController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+   at System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+   at System.Web.Mvc.ReflectedActionDescriptor.<>c__DisplayClass1.<Execute>b__0(ParameterInfo parameterInfo)
+   at System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<>c__DisplayClass17.<InvokeActionMethodWithFilters>b__14()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)

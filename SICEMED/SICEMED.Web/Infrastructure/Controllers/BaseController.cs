@@ -9,11 +9,11 @@ namespace Sicemed.Web.Infrastructure.Controllers
 {
     public class BaseController : Controller
     {
-        private ILogger _logger = NullLogger.Instance;                
+        private ILogger _logger;
 
         public ILogger Logger
         {
-            get { return _logger; }
+            get { return _logger ?? (_logger = NullLogger.Instance); }
             set { _logger = value; }
         }
 

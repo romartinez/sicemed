@@ -12,6 +12,7 @@ using Microsoft.Practices.ServiceLocation;
 using SICEMED.Web.Infrastructure.Windsor.Facilities;
 using Sicemed.Web.Infrastructure;
 using Combres.Mvc;
+using Sicemed.Web.Infrastructure.Controllers;
 using ILogger = Castle.Core.Logging.ILogger;
 
 namespace SICEMED.Web
@@ -23,6 +24,13 @@ namespace SICEMED.Web
     {
 
         private static ILogger _logger = NullLogger.Instance;
+        private static WindsorContainer _container;
+
+        public static WindsorContainer Container
+        {
+            get { return _container; }
+        }
+
         public static ILogger Logger
         {
             get { return _logger; }
@@ -54,16 +62,18 @@ namespace SICEMED.Web
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            var container = new WindsorContainer();
-            container.AddFacility<TypedFactoryFacility>();
-            container.Install(FromAssembly.This());
+            _container = new WindsorContainer();
+            _container.AddFacility<TypedFactoryFacility>();
+            _container.Install(FromAssembly.This());
 
-            ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
+            ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(_container));
 
             DataAnnotationsModelValidatorProviderExtensions.RegisterValidationExtensions();
 
             _logger = ServiceLocator.Current.GetInstance<ILogger>();
             ServiceLocator.Current.GetInstance<IApplicationInstaller>().Install(NHibernateFacility.BuildDatabaseConfiguration());
+
+            ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(_container.Kernel));
         }
 
         protected void Application_Error(object sender, EventArgs e)

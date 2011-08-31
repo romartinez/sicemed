@@ -89,16 +89,16 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SICEMED.Web\Sicemed.Web.csproj">
-      <Project>{0696847C-4CB8-4AE0-97CB-E28A8D0E452A}</Project>
-      <Name>Sicemed.Web</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sicemed.Web\Sicemed.Web.csproj">
+      <Project>{0696847C-4CB8-4AE0-97CB-E28A8D0E452A}</Project>
+      <Name>Sicemed.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
