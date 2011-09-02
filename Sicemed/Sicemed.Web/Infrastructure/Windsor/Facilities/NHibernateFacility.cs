@@ -1,15 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Web;
 using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Facilities;
 using Castle.MicroKernel.Registration;
 using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Cfg.MappingSchema;
 using NHibernate.Dialect;
 using NHibernate.Driver;
+using NHibernate.Mapping.ByCode;
 using NHibernate.Tool.hbm2ddl;
 using Sicemed.Web.Infrastructure;
+using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.HttpModules;
 using Sicemed.Web.Infrastructure.Providers.Session;
 using Sicemed.Web.Models;
@@ -51,7 +55,9 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
                 db.HqlToSqlSubstitutions = "true 1, false 0, yes 'Y', no 'N'";
             });
 
-            configuration.AddAssembly(typeof(Entity).Assembly);
+            var mappings = GetHbmMappings();
+
+            mappings.ToList().ForEach(mp => configuration.AddDeserializedMapping(mp, null));                    
             
             SchemaMetadataUpdater.QuoteTableAndColumns(configuration);
 
@@ -60,6 +66,31 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
 
 
             return configuration;
+        }
+
+        public static IEnumerable<HbmMapping> GetHbmMappings()
+        {
+            var mapper = new ModelMapper();
+
+            mapper.AddMappings(typeof (Entity).Assembly.GetTypes());
+
+            //mapper.BeforeMapClass += (mi, t, map) => map.Table(t.Name.ToLowerInvariant());
+            //mapper.BeforeMapJoinedSubclass += (mi, t, map) => map.Table(t.Name.ToLowerInvariant());
+            //mapper.BeforeMapUnionSubclass += (mi, t, map) => map.Table(t.Name.ToLowerInvariant());
+
+            //mapper.BeforeMapBag += (mi, propPath, map) =>
+            //{
+            //    map.Cascade(Cascade.All.Include(Cascade.DeleteOrphans));
+            //    map.BatchSize(10);
+            //};
+
+            //mapper.BeforeMapSet += (mi, propPath, map) =>
+            //{
+            //    map.Cascade(Cascade.All.Include(Cascade.DeleteOrphans));
+            //    map.BatchSize(10);
+            //};
+
+            return mapper.CompileMappingForEach(typeof(Entity).Assembly.GetTypes());
         }
     }
 }

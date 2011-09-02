@@ -34,8 +34,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Windsor, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL" />
-    <Reference Include="ConfOrm, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ed8affdf01cbe4cf, processorArchitecture=MSIL" />
-    <Reference Include="ConfOrm.Shop, Version=2.0.0.0, Culture=neutral, PublicKeyToken=90b38bd64c76a74a, processorArchitecture=MSIL" />
     <Reference Include="EfficientlyLazy.Crypto">
       <HintPath>..\packages\EfficientlyLazy.Crypto.0.9\lib\net40\EfficientlyLazy.Crypto.dll</HintPath>
     </Reference>
