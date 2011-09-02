@@ -1,0 +1,58 @@
+﻿@using Sicemed.Web.Models
+@model IEnumerable<Usuario>
+@{
+    ViewBag.Title = "Manage Users";
+}
+
+<h2>Manage Users</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Full Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Roles
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+        <td>
+            @item.Nombre
+        </td>
+        <td>
+            @item.Membership.Email
+        </td>
+        <td>
+            <ul>
+            @foreach (var rol in @item.Roles)
+            {
+                <li>@rol.Rol.Name</li>
+            }            
+            </ul>
+        </td>
+    </tr>
+}
+
+</table>
+
+<script language="javascript" type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".cmd-confirmation").click(function (e) {
+            return confirm("Are you sure?");
+        });
+    });
+</script>
+

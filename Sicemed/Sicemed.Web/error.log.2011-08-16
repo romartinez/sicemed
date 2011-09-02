@@ -1,0 +1,288 @@
+FATAL 10 Default - Error no atrapado. Exc: NHibernate.InvalidProxyTypeException: The following types may not be used as proxies:
+Sicemed.Web.Models.Entity: method set_Id should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Calendario: method set_Feriados should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_Name should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_NombreUsuario should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method set_NombreUsuario should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_Nombre should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method set_Nombre should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_SegundoNombre should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method set_SegundoNombre should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_Apellido should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method set_Apellido should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_Email should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method set_Email should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_Password should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method set_Password should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_AuthenticationType should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_IsAuthenticated should be 'public/protected virtual' or 'protected internal virtual'
+   at NHibernate.Cfg.Configuration.ValidateEntities()
+   at NHibernate.Cfg.Configuration.Validate()
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at SICEMED.Web.Infrastructure.Windsor.Facilities.NHibernateFacility.<Init>b__0(IKernel k) in D:\Documents\Projects\sicemed\Sicemed\SICEMED.Web\Infrastructure\Windsor\Facilities\NHibernateFacility.cs:line 37
+   at Castle.MicroKernel.Registration.ComponentRegistration`1.<>c__DisplayClass12`1.<UsingFactoryMethod>b__11(IKernel k, ComponentModel m, CreationContext c) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Registration\ComponentRegistration.cs:line 742
+   at Castle.MicroKernel.ComponentActivator.FactoryMethodActivator`1.Instantiate(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\ComponentActivator\FactoryMethodActivator.cs:line 41
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\ComponentActivator\DefaultComponentActivator.cs:line 70
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\ComponentActivator\AbstractComponentActivator.cs:line 75
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.Resolve(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Lifestyle\AbstractLifestyleManager.cs:line 42
+   at Castle.MicroKernel.Lifestyle.SingletonLifestyleManager.Resolve(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Lifestyle\SingletonLifestyleManager.cs:line 50
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Handlers\DefaultHandler.cs:line 61
+   at Castle.MicroKernel.Handlers.AbstractHandler.Resolve(CreationContext context, Boolean instanceRequired) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Handlers\AbstractHandler.cs:line 771
+   at Castle.MicroKernel.Handlers.AbstractHandler.TryResolve(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Handlers\AbstractHandler.cs:line 376
+   at Castle.MicroKernel.DefaultKernel.TryResolveComponent(IHandler handler, Type service, IDictionary additionalArguments) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\DefaultKernel.cs:line 915
+   at Castle.MicroKernel.DefaultKernel.ResolveAll(Type service, IDictionary arguments) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\DefaultKernel_Resolve.cs:line 277
+   at Castle.Facilities.TypedFactory.TypedFactoryComponentCollection.Resolve(IKernel kernel) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\Facilities\TypedFactory\TypedFactoryComponentCollection.cs:line 39
+   at Castle.Facilities.TypedFactory.Internal.TypedFactoryInterceptor.Resolve(IInvocation invocation) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\Facilities\TypedFactory\Internal\TypedFactoryInterceptor.cs:line 173
+   at Castle.Facilities.TypedFactory.Internal.TypedFactoryInterceptor.Intercept(IInvocation invocation) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\Facilities\TypedFactory\Internal\TypedFactoryInterceptor.cs:line 83
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.ISessionFactoryProviderProxy.GetSessionFactories()
+   at Sicemed.Web.Infrastructure.HttpModules.NHibernateSessionModule.ContextBeginRequest(Object sender, EventArgs e) in D:\Documents\Projects\sicemed\Sicemed\SICEMED.Web\Infrastructure\HttpModules\NHibernateSessionModule.cs:line 22
+   at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+FATAL 22 Default - Error no atrapado. Exc: NHibernate.InvalidProxyTypeException: The following types may not be used as proxies:
+Sicemed.Web.Models.Entity: method set_Id should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Calendario: method set_Feriados should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_Name should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_NombreUsuario should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method set_NombreUsuario should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_Nombre should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method set_Nombre should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_SegundoNombre should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method set_SegundoNombre should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_Apellido should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method set_Apellido should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_Email should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method set_Email should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_Password should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method set_Password should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_AuthenticationType should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Usuario: method get_IsAuthenticated should be 'public/protected virtual' or 'protected internal virtual'
+   at NHibernate.Cfg.Configuration.ValidateEntities()
+   at NHibernate.Cfg.Configuration.Validate()
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at SICEMED.Web.Infrastructure.Windsor.Facilities.NHibernateFacility.<Init>b__0(IKernel k) in D:\Documents\Projects\sicemed\Sicemed\SICEMED.Web\Infrastructure\Windsor\Facilities\NHibernateFacility.cs:line 37
+   at Castle.MicroKernel.Registration.ComponentRegistration`1.<>c__DisplayClass12`1.<UsingFactoryMethod>b__11(IKernel k, ComponentModel m, CreationContext c) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Registration\ComponentRegistration.cs:line 742
+   at Castle.MicroKernel.ComponentActivator.FactoryMethodActivator`1.Instantiate(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\ComponentActivator\FactoryMethodActivator.cs:line 41
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\ComponentActivator\DefaultComponentActivator.cs:line 70
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\ComponentActivator\AbstractComponentActivator.cs:line 75
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.Resolve(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Lifestyle\AbstractLifestyleManager.cs:line 42
+   at Castle.MicroKernel.Lifestyle.SingletonLifestyleManager.Resolve(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Lifestyle\SingletonLifestyleManager.cs:line 50
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Handlers\DefaultHandler.cs:line 61
+   at Castle.MicroKernel.Handlers.AbstractHandler.Resolve(CreationContext context, Boolean instanceRequired) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Handlers\AbstractHandler.cs:line 771
+   at Castle.MicroKernel.Handlers.AbstractHandler.TryResolve(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Handlers\AbstractHandler.cs:line 376
+   at Castle.MicroKernel.DefaultKernel.TryResolveComponent(IHandler handler, Type service, IDictionary additionalArguments) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\DefaultKernel.cs:line 915
+   at Castle.MicroKernel.DefaultKernel.ResolveAll(Type service, IDictionary arguments) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\DefaultKernel_Resolve.cs:line 277
+   at Castle.Facilities.TypedFactory.TypedFactoryComponentCollection.Resolve(IKernel kernel) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\Facilities\TypedFactory\TypedFactoryComponentCollection.cs:line 39
+   at Castle.Facilities.TypedFactory.Internal.TypedFactoryInterceptor.Resolve(IInvocation invocation) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\Facilities\TypedFactory\Internal\TypedFactoryInterceptor.cs:line 173
+   at Castle.Facilities.TypedFactory.Internal.TypedFactoryInterceptor.Intercept(IInvocation invocation) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\Facilities\TypedFactory\Internal\TypedFactoryInterceptor.cs:line 83
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.ISessionFactoryProviderProxy.GetSessionFactories()
+   at Sicemed.Web.Infrastructure.HttpModules.NHibernateSessionModule.ContextBeginRequest(Object sender, EventArgs e) in D:\Documents\Projects\sicemed\Sicemed\SICEMED.Web\Infrastructure\HttpModules\NHibernateSessionModule.cs:line 22
+   at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+FATAL 10 Default - Error no atrapado. Exc: NHibernate.InvalidProxyTypeException: The following types may not be used as proxies:
+Sicemed.Web.Models.Entity: method set_Id should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Calendario: method set_Feriados should be 'public/protected virtual' or 'protected internal virtual'
+   at NHibernate.Cfg.Configuration.ValidateEntities()
+   at NHibernate.Cfg.Configuration.Validate()
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at SICEMED.Web.Infrastructure.Windsor.Facilities.NHibernateFacility.<Init>b__0(IKernel k) in D:\Documents\Projects\sicemed\Sicemed\SICEMED.Web\Infrastructure\Windsor\Facilities\NHibernateFacility.cs:line 37
+   at Castle.MicroKernel.Registration.ComponentRegistration`1.<>c__DisplayClass12`1.<UsingFactoryMethod>b__11(IKernel k, ComponentModel m, CreationContext c) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Registration\ComponentRegistration.cs:line 742
+   at Castle.MicroKernel.ComponentActivator.FactoryMethodActivator`1.Instantiate(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\ComponentActivator\FactoryMethodActivator.cs:line 41
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\ComponentActivator\DefaultComponentActivator.cs:line 70
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\ComponentActivator\AbstractComponentActivator.cs:line 75
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.Resolve(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Lifestyle\AbstractLifestyleManager.cs:line 42
+   at Castle.MicroKernel.Lifestyle.SingletonLifestyleManager.Resolve(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Lifestyle\SingletonLifestyleManager.cs:line 50
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Handlers\DefaultHandler.cs:line 61
+   at Castle.MicroKernel.Handlers.AbstractHandler.Resolve(CreationContext context, Boolean instanceRequired) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Handlers\AbstractHandler.cs:line 771
+   at Castle.MicroKernel.Handlers.AbstractHandler.TryResolve(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Handlers\AbstractHandler.cs:line 376
+   at Castle.MicroKernel.DefaultKernel.TryResolveComponent(IHandler handler, Type service, IDictionary additionalArguments) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\DefaultKernel.cs:line 915
+   at Castle.MicroKernel.DefaultKernel.ResolveAll(Type service, IDictionary arguments) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\DefaultKernel_Resolve.cs:line 277
+   at Castle.Facilities.TypedFactory.TypedFactoryComponentCollection.Resolve(IKernel kernel) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\Facilities\TypedFactory\TypedFactoryComponentCollection.cs:line 39
+   at Castle.Facilities.TypedFactory.Internal.TypedFactoryInterceptor.Resolve(IInvocation invocation) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\Facilities\TypedFactory\Internal\TypedFactoryInterceptor.cs:line 173
+   at Castle.Facilities.TypedFactory.Internal.TypedFactoryInterceptor.Intercept(IInvocation invocation) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\Facilities\TypedFactory\Internal\TypedFactoryInterceptor.cs:line 83
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.ISessionFactoryProviderProxy.GetSessionFactories()
+   at Sicemed.Web.Infrastructure.HttpModules.NHibernateSessionModule.ContextBeginRequest(Object sender, EventArgs e) in D:\Documents\Projects\sicemed\Sicemed\SICEMED.Web\Infrastructure\HttpModules\NHibernateSessionModule.cs:line 22
+   at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+FATAL 23 Default - Error no atrapado. Exc: NHibernate.InvalidProxyTypeException: The following types may not be used as proxies:
+Sicemed.Web.Models.Entity: method set_Id should be 'public/protected virtual' or 'protected internal virtual'
+Sicemed.Web.Models.Calendario: method set_Feriados should be 'public/protected virtual' or 'protected internal virtual'
+   at NHibernate.Cfg.Configuration.ValidateEntities()
+   at NHibernate.Cfg.Configuration.Validate()
+   at NHibernate.Cfg.Configuration.BuildSessionFactory()
+   at SICEMED.Web.Infrastructure.Windsor.Facilities.NHibernateFacility.<Init>b__0(IKernel k) in D:\Documents\Projects\sicemed\Sicemed\SICEMED.Web\Infrastructure\Windsor\Facilities\NHibernateFacility.cs:line 37
+   at Castle.MicroKernel.Registration.ComponentRegistration`1.<>c__DisplayClass12`1.<UsingFactoryMethod>b__11(IKernel k, ComponentModel m, CreationContext c) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Registration\ComponentRegistration.cs:line 742
+   at Castle.MicroKernel.ComponentActivator.FactoryMethodActivator`1.Instantiate(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\ComponentActivator\FactoryMethodActivator.cs:line 41
+   at Castle.MicroKernel.ComponentActivator.DefaultComponentActivator.InternalCreate(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\ComponentActivator\DefaultComponentActivator.cs:line 70
+   at Castle.MicroKernel.ComponentActivator.AbstractComponentActivator.Create(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\ComponentActivator\AbstractComponentActivator.cs:line 75
+   at Castle.MicroKernel.Lifestyle.AbstractLifestyleManager.Resolve(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Lifestyle\AbstractLifestyleManager.cs:line 42
+   at Castle.MicroKernel.Lifestyle.SingletonLifestyleManager.Resolve(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Lifestyle\SingletonLifestyleManager.cs:line 50
+   at Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(CreationContext context, Boolean requiresDecommission, Boolean instanceRequired) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Handlers\DefaultHandler.cs:line 61
+   at Castle.MicroKernel.Handlers.AbstractHandler.Resolve(CreationContext context, Boolean instanceRequired) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Handlers\AbstractHandler.cs:line 771
+   at Castle.MicroKernel.Handlers.AbstractHandler.TryResolve(CreationContext context) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\Handlers\AbstractHandler.cs:line 376
+   at Castle.MicroKernel.DefaultKernel.TryResolveComponent(IHandler handler, Type service, IDictionary additionalArguments) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\DefaultKernel.cs:line 915
+   at Castle.MicroKernel.DefaultKernel.ResolveAll(Type service, IDictionary arguments) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\MicroKernel\DefaultKernel_Resolve.cs:line 277
+   at Castle.Facilities.TypedFactory.TypedFactoryComponentCollection.Resolve(IKernel kernel) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\Facilities\TypedFactory\TypedFactoryComponentCollection.cs:line 39
+   at Castle.Facilities.TypedFactory.Internal.TypedFactoryInterceptor.Resolve(IInvocation invocation) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\Facilities\TypedFactory\Internal\TypedFactoryInterceptor.cs:line 173
+   at Castle.Facilities.TypedFactory.Internal.TypedFactoryInterceptor.Intercept(IInvocation invocation) in e:\OSS.Code\Castle.Windsor\src\Castle.Windsor\Facilities\TypedFactory\Internal\TypedFactoryInterceptor.cs:line 83
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.ISessionFactoryProviderProxy.GetSessionFactories()
+   at Sicemed.Web.Infrastructure.HttpModules.NHibernateSessionModule.ContextBeginRequest(Object sender, EventArgs e) in D:\Documents\Projects\sicemed\Sicemed\SICEMED.Web\Infrastructure\HttpModules\NHibernateSessionModule.cs:line 22
+   at System.Web.HttpApplication.SyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+FATAL 10 Default - Error no atrapado. Exc: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Glimpse.Mvc3.Interceptor.ActionInvokerProxyGenerationHook.NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
+   at Castle.DynamicProxy.Contributors.MembersCollector.AcceptMethod(MethodInfo method, Boolean onlyVirtuals, IProxyGenerationHook hook)
+   at Castle.DynamicProxy.Contributors.ClassMembersCollector.GetMethodToGenerate(MethodInfo method, IProxyGenerationHook hook, Boolean isStandalone)
+   at Castle.DynamicProxy.Contributors.MembersCollector.AddMethod(MethodInfo method, IProxyGenerationHook hook, Boolean isStandalone)
+   at Castle.DynamicProxy.Contributors.MembersCollector.AddProperty(PropertyInfo property, IProxyGenerationHook hook)
+   at Castle.DynamicProxy.Contributors.MembersCollector.CollectProperties(IProxyGenerationHook hook)
+   at Castle.DynamicProxy.Contributors.MembersCollector.CollectMembersToProxy(IProxyGenerationHook hook)
+   at Castle.DynamicProxy.Contributors.ClassProxyTargetContributor.<CollectElementsToProxyInternal>d__2.MoveNext()
+   at Castle.DynamicProxy.Contributors.CompositeTypeContributor.CollectElementsToProxy(IProxyGenerationHook hook, MetaType model)
+   at Castle.DynamicProxy.Generators.ClassProxyGenerator.GenerateType(String name, Type[] interfaces, INamingScope namingScope)
+   at Castle.DynamicProxy.Generators.ClassProxyGenerator.<>c__DisplayClass1.<GenerateCode>b__0(String n, INamingScope s)
+   at Castle.DynamicProxy.Generators.BaseProxyGenerator.ObtainProxyType(CacheKey cacheKey, Func`3 factory)
+   at Castle.DynamicProxy.Generators.ClassProxyGenerator.GenerateCode(Type[] interfaces, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.DefaultProxyBuilder.CreateClassProxyType(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyType(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, IInterceptor[] interceptors)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, ProxyGenerationOptions options, IInterceptor[] interceptors)
+   at Glimpse.Mvc3.Extensions.ControllerExtentions.TrySetActionInvoker(IController iController, IGlimpseLogger logger)
+   at Glimpse.Mvc3.Plumbing.GlimpseControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<BeginProcessRequest>b__2()
+   at System.Web.Mvc.SecurityUtil.<>c__DisplayClassb`1.<ProcessInApplicationTrust>b__a()
+   at System.Web.Mvc.SecurityUtil.<GetCallInAppTrustThunk>b__0(Action f)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust[TResult](Func`1 func)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+FATAL 19 Default - Error no atrapado. Exc: System.Web.HttpException (0x80004005): The controller for path '/favicon.ico' could not be found.
+   at Sicemed.Web.Infrastructure.WindsorControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType) in D:\Documents\Projects\sicemed\Sicemed\SICEMED.Web\Infrastructure\WindsorControllerFactory.cs:line 27
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at Glimpse.Mvc3.Plumbing.GlimpseControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<BeginProcessRequest>b__2()
+   at System.Web.Mvc.SecurityUtil.<>c__DisplayClassb`1.<ProcessInApplicationTrust>b__a()
+   at System.Web.Mvc.SecurityUtil.<GetCallInAppTrustThunk>b__0(Action f)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust[TResult](Func`1 func)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+FATAL 10 Default - Error no atrapado. Exc: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Glimpse.Mvc3.Interceptor.ActionInvokerProxyGenerationHook.NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
+   at Castle.DynamicProxy.Contributors.MembersCollector.AcceptMethod(MethodInfo method, Boolean onlyVirtuals, IProxyGenerationHook hook)
+   at Castle.DynamicProxy.Contributors.ClassMembersCollector.GetMethodToGenerate(MethodInfo method, IProxyGenerationHook hook, Boolean isStandalone)
+   at Castle.DynamicProxy.Contributors.MembersCollector.AddMethod(MethodInfo method, IProxyGenerationHook hook, Boolean isStandalone)
+   at Castle.DynamicProxy.Contributors.MembersCollector.AddProperty(PropertyInfo property, IProxyGenerationHook hook)
+   at Castle.DynamicProxy.Contributors.MembersCollector.CollectProperties(IProxyGenerationHook hook)
+   at Castle.DynamicProxy.Contributors.MembersCollector.CollectMembersToProxy(IProxyGenerationHook hook)
+   at Castle.DynamicProxy.Contributors.ClassProxyTargetContributor.<CollectElementsToProxyInternal>d__2.MoveNext()
+   at Castle.DynamicProxy.Contributors.CompositeTypeContributor.CollectElementsToProxy(IProxyGenerationHook hook, MetaType model)
+   at Castle.DynamicProxy.Generators.ClassProxyGenerator.GenerateType(String name, Type[] interfaces, INamingScope namingScope)
+   at Castle.DynamicProxy.Generators.ClassProxyGenerator.<>c__DisplayClass1.<GenerateCode>b__0(String n, INamingScope s)
+   at Castle.DynamicProxy.Generators.BaseProxyGenerator.ObtainProxyType(CacheKey cacheKey, Func`3 factory)
+   at Castle.DynamicProxy.Generators.ClassProxyGenerator.GenerateCode(Type[] interfaces, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.DefaultProxyBuilder.CreateClassProxyType(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyType(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, IInterceptor[] interceptors)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, ProxyGenerationOptions options, IInterceptor[] interceptors)
+   at Glimpse.Mvc3.Extensions.ControllerExtentions.TrySetActionInvoker(IController iController, IGlimpseLogger logger)
+   at Glimpse.Mvc3.Plumbing.GlimpseControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<BeginProcessRequest>b__2()
+   at System.Web.Mvc.SecurityUtil.<>c__DisplayClassb`1.<ProcessInApplicationTrust>b__a()
+   at System.Web.Mvc.SecurityUtil.<GetCallInAppTrustThunk>b__0(Action f)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust[TResult](Func`1 func)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+FATAL 22 Default - Error no atrapado. Exc: System.Web.HttpException (0x80004005): The controller for path '/favicon.ico' could not be found.
+   at Sicemed.Web.Infrastructure.WindsorControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType) in D:\Documents\Projects\sicemed\Sicemed\SICEMED.Web\Infrastructure\WindsorControllerFactory.cs:line 27
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at Glimpse.Mvc3.Plumbing.GlimpseControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<BeginProcessRequest>b__2()
+   at System.Web.Mvc.SecurityUtil.<>c__DisplayClassb`1.<ProcessInApplicationTrust>b__a()
+   at System.Web.Mvc.SecurityUtil.<GetCallInAppTrustThunk>b__0(Action f)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust[TResult](Func`1 func)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+FATAL 23 Default - Error no atrapado. Exc: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Glimpse.Mvc3.Interceptor.ActionInvokerProxyGenerationHook.NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
+   at Castle.DynamicProxy.Contributors.MembersCollector.AcceptMethod(MethodInfo method, Boolean onlyVirtuals, IProxyGenerationHook hook)
+   at Castle.DynamicProxy.Contributors.ClassMembersCollector.GetMethodToGenerate(MethodInfo method, IProxyGenerationHook hook, Boolean isStandalone)
+   at Castle.DynamicProxy.Contributors.MembersCollector.AddMethod(MethodInfo method, IProxyGenerationHook hook, Boolean isStandalone)
+   at Castle.DynamicProxy.Contributors.MembersCollector.AddProperty(PropertyInfo property, IProxyGenerationHook hook)
+   at Castle.DynamicProxy.Contributors.MembersCollector.CollectProperties(IProxyGenerationHook hook)
+   at Castle.DynamicProxy.Contributors.MembersCollector.CollectMembersToProxy(IProxyGenerationHook hook)
+   at Castle.DynamicProxy.Contributors.ClassProxyTargetContributor.<CollectElementsToProxyInternal>d__2.MoveNext()
+   at Castle.DynamicProxy.Contributors.CompositeTypeContributor.CollectElementsToProxy(IProxyGenerationHook hook, MetaType model)
+   at Castle.DynamicProxy.Generators.ClassProxyGenerator.GenerateType(String name, Type[] interfaces, INamingScope namingScope)
+   at Castle.DynamicProxy.Generators.ClassProxyGenerator.<>c__DisplayClass1.<GenerateCode>b__0(String n, INamingScope s)
+   at Castle.DynamicProxy.Generators.BaseProxyGenerator.ObtainProxyType(CacheKey cacheKey, Func`3 factory)
+   at Castle.DynamicProxy.Generators.ClassProxyGenerator.GenerateCode(Type[] interfaces, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.DefaultProxyBuilder.CreateClassProxyType(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxyType(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, Object[] constructorArguments, IInterceptor[] interceptors)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, Type[] additionalInterfacesToProxy, ProxyGenerationOptions options, IInterceptor[] interceptors)
+   at Castle.DynamicProxy.ProxyGenerator.CreateClassProxy(Type classToProxy, ProxyGenerationOptions options, IInterceptor[] interceptors)
+   at Glimpse.Mvc3.Extensions.ControllerExtentions.TrySetActionInvoker(IController iController, IGlimpseLogger logger)
+   at Glimpse.Mvc3.Plumbing.GlimpseControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<BeginProcessRequest>b__2()
+   at System.Web.Mvc.SecurityUtil.<>c__DisplayClassb`1.<ProcessInApplicationTrust>b__a()
+   at System.Web.Mvc.SecurityUtil.<GetCallInAppTrustThunk>b__0(Action f)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust[TResult](Func`1 func)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+FATAL 17 Default - Error no atrapado. Exc: System.Web.HttpException (0x80004005): The controller for path '/Scripts/jquery-1.5.1.min.js' could not be found.
+   at Sicemed.Web.Infrastructure.WindsorControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType) in D:\Documents\Projects\sicemed\Sicemed\SICEMED.Web\Infrastructure\WindsorControllerFactory.cs:line 27
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<BeginProcessRequest>b__2()
+   at System.Web.Mvc.SecurityUtil.<>c__DisplayClassb`1.<ProcessInApplicationTrust>b__a()
+   at System.Web.Mvc.SecurityUtil.<GetCallInAppTrustThunk>b__0(Action f)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust[TResult](Func`1 func)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+FATAL 9 Default - Error no atrapado. Exc: System.Web.HttpException (0x80004005): The controller for path '/Scripts/modernizr-1.7.min.js' could not be found.
+   at Sicemed.Web.Infrastructure.WindsorControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType) in D:\Documents\Projects\sicemed\Sicemed\SICEMED.Web\Infrastructure\WindsorControllerFactory.cs:line 27
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.<>c__DisplayClass6.<BeginProcessRequest>b__2()
+   at System.Web.Mvc.SecurityUtil.<>c__DisplayClassb`1.<ProcessInApplicationTrust>b__a()
+   at System.Web.Mvc.SecurityUtil.<GetCallInAppTrustThunk>b__0(Action f)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)
+   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust[TResult](Func`1 func)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)

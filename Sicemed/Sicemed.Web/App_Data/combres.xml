@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  This file contains basic settings needed for most web apps.
+  For full Combres settings (with explanation), refer to the sample definition file: combres_full_with_annotation.xml
+  Also, refer to Combres' documentation: http://combres.codeplex.com/documentation	
+-->
+<combres xmlns='urn:combres'>
+  <filters>
+    <filter type="Combres.Filters.FixUrlsInCssFilter, Combres" />
+  </filters>
+  <cssMinifiers>
+    <minifier name="yui" type="Combres.Minifiers.YuiCssMinifier, Combres">
+      <param name="CssCompressionType" type="string" value="StockYuiCompressor" />
+      <param name="ColumnWidth" type="int" value="-1" />
+    </minifier>
+  </cssMinifiers>
+  <jsMinifiers>
+    <minifier name="yui" type="Combres.Minifiers.YuiJSMinifier, Combres">
+      <param name="IsVerboseLogging" type="bool" value="false" />
+      <param name="IsObfuscateJavascript" type="bool" value="true" />
+      <param name="PreserveAllSemicolons" type="bool" value="false" />
+      <param name="DisableOptimizations" type="bool" value="false" />
+      <param name="LineBreakPosition" type="int" value="-1" />
+    </minifier>
+  </jsMinifiers>
+  <resourceSets url="~/combres.axd"
+                defaultDuration="30"
+                defaultVersion="auto"
+                defaultDebugEnabled="true"
+                defaultIgnorePipelineWhenDebug="true"
+                localChangeMonitorInterval="30"
+                remoteChangeMonitorInterval="60"
+                defaultCssMinifierRef="yui" 
+                defaultJSMinifierRef="yui"                
+                defaultCompressionEnabled="true"
+                >
+    <resourceSet name="siteCss" type="css">
+      <resource path="~/content/Site.css" />
+      <resource path="~/content/themes/base/jquery-ui.css" />
+      <resource path="~/content/jquery.jqGrid/ui.jqgrid.css" />
+      <resource path="~/content/smart_wizard.css" />
+    </resourceSet>
+    <resourceSet name="siteJs" type="js">
+      <resource path="~/scripts/jquery-1.6.2.js" />
+      <resource path="~/scripts/jquery-ui-1.8.15.js" />
+      <resource path="~/scripts/jQuery.tmpl.js" />
+      <resource path="~/scripts/jquery.unobtrusive-ajax.js" />
+      <resource path="~/scripts/jquery.validate.js" />
+      <resource path="~/scripts/jquery.validate.unobtrusive.js" />
+      <resource path="~/scripts/knockout-1.2.1.js" />
+      <resource path="~/scripts/knockout.mapping-latest.js" />
+      <resource path="~/scripts/modernizr-2.0.6-development-only.js" />
+      <resource path="~/scripts/jquery.smartWizard-2.0.js" />
+      <resource path="~/scripts/i18n/grid.locale-es.js" />
+      <resource path="~/scripts/jquery.jqGrid.min.js" />
+      <resource path="~/scripts/jquery.blockUI.js" />
+      <resource path="~/scripts/postAntiForgery.js" />
+      <resource path="~/scripts/msDateJsonParser.js" />
+      <resource path="~/scripts/postify.js" />
+      <resource path="~/scripts/app.js" />
+      <resource path="~/scripts/app.ajax.js" />
+      <resource path="~/scripts/app.fixes.js" />
+      <resource path="~/scripts/app.grid.js" />
+      <resource path="~/scripts/app.overrides.js" />
+      <resource path="~/scripts/app.ui.js" />
+    </resourceSet>
+  </resourceSets>
+</combres>
