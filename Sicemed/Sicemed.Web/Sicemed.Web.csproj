@@ -100,9 +100,6 @@
     <Reference Include="Glimpse.Mvc3">
       <HintPath>..\packages\Glimpse.Mvc3.0.84\lib\net40\Glimpse.Mvc3.dll</HintPath>
     </Reference>
-    <Reference Include="Iesi.Collections">
-      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
@@ -191,6 +188,7 @@
     <Compile Include="Infrastructure\Helpers\ValidationHelper.cs" />
     <Compile Include="Infrastructure\Helpers\WindsorExtensions.cs" />
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
+    <Compile Include="Infrastructure\Net4Collections.cs" />
     <Compile Include="Infrastructure\NHibernate\EnumerationType.cs" />
     <Compile Include="Infrastructure\Providers\Cache\ICacheProvider.cs" />
     <Compile Include="Infrastructure\Providers\Cache\InMemoryCacheProvider.cs" />
@@ -244,7 +242,6 @@
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\Provincia.cs" />
     <Compile Include="Models\Turno.cs" />
-    <Compile Include="Infrastructure\Net4Collections.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -314,6 +311,21 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Calendario.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Consultorio.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\DiaAtencionEspecialidadProfesional.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Entity.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Especialidad.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\EspecialidadProfesional.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Feriado.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Localidad.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\ObraSocial.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Pagina.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Parametro.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Plan.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Provincia.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Turno.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Usuario.hbm.xml" />
     <Content Include="Scripts\app.ajax.js" />
     <Content Include="Scripts\app.fixes.js" />
     <Content Include="Scripts\app.grid.js" />
