@@ -486,19 +486,19 @@ namespace Sicemed.Web.Infrastructure
 		public override ICollection GetSnapshot(ICollectionPersister persister)
 		{
 			var entityMode = Session.EntityMode;
-			var clonedSet = new SetSnapShot<object>(Set.Count);
+			var clonedSet = new SetSnapShot<T>(Set.Count);
 			var enumerable = from object current in Set 
 							 select persister.ElementType.DeepCopy(current, entityMode, persister.Factory);
 			foreach (var copied in enumerable)
 			{
-				clonedSet.Add(copied);
+				clonedSet.Add((T)copied);
 			}
 			return clonedSet;
 		}
 
 		public override ICollection GetOrphans(object snapshot, string entityName)
 		{
-			var sn = new SetSnapShot<object>((IEnumerable<object>) snapshot);
+			var sn = new SetSnapShot<T>((IEnumerable<T>) snapshot);
 			if (Set.Count == 0) return sn;
 			if (((ICollection) sn).Count == 0) return sn;
 			return GetOrphans(sn, Set.ToArray(), entityName, Session);
@@ -507,14 +507,14 @@ namespace Sicemed.Web.Infrastructure
 		public override bool EqualsSnapshot(ICollectionPersister persister)
 		{
 			var elementType = persister.ElementType;
-			var snapshot = (ISetSnapshot<object>) GetSnapshot();
+			var snapshot = (ISetSnapshot<T>) GetSnapshot();
 			if (((ICollection) snapshot).Count != Set.Count)
 			{
 				return false;
 			}
 
 			return !(from object obj in Set
-			         let oldValue = snapshot[obj]
+			         let oldValue = snapshot[(T)obj]
 			         where oldValue == null || elementType.IsDirty(oldValue, obj, Session)
 			         select obj).Any();
 		}
@@ -628,8 +628,8 @@ namespace Sicemed.Web.Infrastructure
 
 		public override bool NeedsInserting(object entry, int i, IType elemType)
 		{
-			var sn = (ISetSnapshot<object>) GetSnapshot();
-			object oldKey = sn[entry];
+			var sn = (ISetSnapshot<T>) GetSnapshot();
+			object oldKey = sn[(T)entry];
 			// note that it might be better to iterate the snapshot but this is safe,
 			// assuming the user implements equals() properly, as required by the PersistentSet
 			// contract!

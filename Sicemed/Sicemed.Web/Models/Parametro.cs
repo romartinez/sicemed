@@ -18,6 +18,12 @@ namespace Sicemed.Web.Models
             _value = JsonConvert.SerializeObject(item);
         }
 
+        public Parametro(){}
+        public Parametro(Keys key)
+        {
+            Key = key;
+        }
+
         public enum Keys
         {
             APP_IS_INITIALIZED
