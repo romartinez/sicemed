@@ -9,47 +9,56 @@ namespace Sicemed.Web.Models
 
         public virtual long Id { get; protected internal set; }
 
-        #region IEquatable<Entity> Members
+        private int? _requestedHashCode;
 
-        public virtual bool Equals(Entity obj)
+        /// <summary>
+        /// Compare equality trough Id
+        /// </summary>
+        /// <param name="other">Entity to compare.</param>
+        /// <returns>true is are equals</returns>
+        /// <remarks>
+        /// Two entities are equals if they are of the same hierarcy tree/sub-tree
+        /// and has same id.
+        /// </remarks>
+        public virtual bool Equals(Entity other)
         {
-            if (ReferenceEquals(null, obj))
+            if (null == other || !GetType().IsInstanceOfType(other))
             {
                 return false;
             }
-            if (ReferenceEquals(this, obj))
+            if (ReferenceEquals(this, other))
             {
                 return true;
             }
-            if (base.GetType() != obj.GetType())
+
+            bool otherIsTransient = Equals(other.Id, default(long));
+            bool thisIsTransient = IsTransient();
+            if (otherIsTransient && thisIsTransient)
             {
-                return false;
+                return ReferenceEquals(other, this);
             }
-            return (obj.Id == Id);
+
+            return other.Id.Equals(Id);
         }
 
-        #endregion
+        protected bool IsTransient()
+        {
+            return Equals(Id, default(long));
+        }
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-            if (base.GetType() != obj.GetType())
-            {
-                return false;
-            }
-            return Equals((Entity) obj);
+            var that = obj as Entity;
+            return Equals(that);
         }
 
         public override int GetHashCode()
         {
-            return ((Id.GetHashCode()*0x18d) ^ base.GetType().GetHashCode());
+            if (!_requestedHashCode.HasValue)
+            {
+                _requestedHashCode = IsTransient() ? base.GetHashCode() : Id.GetHashCode();
+            }
+            return _requestedHashCode.Value;
         }
 
         public static bool operator ==(Entity left, Entity right)
