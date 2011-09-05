@@ -26,7 +26,7 @@ namespace Sicemed.Web.Models
 
         public virtual Usuario Paciente { get; set; }
 
-        public virtual Usuario Secretaria { get; set; }
+        public virtual Usuario Secretaria { get; set; }       
 
         #endregion
     }

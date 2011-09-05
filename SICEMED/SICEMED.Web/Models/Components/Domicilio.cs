@@ -9,6 +9,6 @@ namespace Sicemed.Web.Models.Components
     {
         public virtual string Calle1 { get; set; }
         public virtual string Calle2 { get; set; }
-        public virtual Localidad Localidadad { get; set; }
+        public virtual Localidad Localidad { get; set; }
     }
 }

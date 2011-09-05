@@ -1,3 +1,4 @@
+using System.Data;
 using System.Linq;
 using EfficientlyLazy.Crypto;
 using Moq;
@@ -38,7 +39,7 @@ namespace Sicemed.Tests
                     XmlConfigurator.Configure();
 
                     _databaseConfiguration = new Configuration();
-                    _databaseConfiguration.CollectionTypeFactory<Net4CollectionTypeFactory>();            
+                    _databaseConfiguration.CollectionTypeFactory<Net4CollectionTypeFactory>();
 
 
                     _databaseConfiguration.DataBaseIntegration(db =>
@@ -46,12 +47,11 @@ namespace Sicemed.Tests
                                                                    //http://stackoverflow.com/questions/189280/problem-using-sqlite-memory-with-nhibernate
                                                                    db.Dialect<SQLiteDialect>();
                                                                    db.Driver<SQLite20Driver>();
-                                                                   db.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
-                                                                   //db.LogFormatedSql = true;
-                                                                   //db.LogSqlInConsole = true;
+                                                                   db.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;                                                                   
+                                                                   db.LogSqlInConsole = true;
                                                                    db.ConnectionString =
                                                                        "Data Source=:memory:;Version=3;New=True;";
-                                                                   //db.AutoCommentSql = true;
+                                                                   db.AutoCommentSql = true;
                                                                    db.ConnectionReleaseMode =
                                                                        ConnectionReleaseMode.OnClose;
                                                                    db.HqlToSqlSubstitutions =
@@ -66,7 +66,6 @@ namespace Sicemed.Tests
                     //    db.IsolationLevel = IsolationLevel.ReadCommitted;
                     //    db.ConnectionStringName = "ApplicationServices";
                     //    db.Timeout = 10;
-                    //    db.LogFormatedSql = true;
                     //    db.LogSqlInConsole = true;
                     //    db.AutoCommentSql = true;
                     //    db.HqlToSqlSubstitutions = "true 1, false 0, yes 'Y', no 'N'";

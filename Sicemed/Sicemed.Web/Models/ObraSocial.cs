@@ -2,6 +2,7 @@
 
 
 using System.Collections.Generic;
+using Sicemed.Web.Models.Components;
 
 namespace Sicemed.Web.Models
 {
@@ -11,17 +12,15 @@ namespace Sicemed.Web.Models
 
         public virtual string RazonSocial { get; set; }
 
-        public virtual string CUIT { get; set; }
+        public virtual Documento Documento { get; set; }
 
-        public virtual string Direccion { get; set; }
+        public virtual Domicilio Direccion { get; set; }
 
-        public virtual string Telefono { get; set; }
+        public virtual Telefono Telefono { get; set; }
 
         #endregion
 
         #region Navigation Properties
-
-        public virtual Localidad Localidad { get; set; }
 
         public virtual ISet<Plan> Planes { get; set; }
 

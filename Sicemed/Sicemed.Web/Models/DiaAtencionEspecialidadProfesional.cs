@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-
 
 namespace Sicemed.Web.Models
 {
@@ -29,8 +27,6 @@ namespace Sicemed.Web.Models
         public virtual Consultorio Consultorio { get; set; }
 
         public virtual EspecialidadProfesional EspecialidadProfesional { get; set; }
-
-        public virtual ISet<Turno> Turnos { get; set; }
 
         #endregion
     }

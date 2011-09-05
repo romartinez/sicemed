@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Enumerations;
 using Sicemed.Web.Models.ViewModels.UserManagement;
 
 namespace Sicemed.Web.Controllers

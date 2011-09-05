@@ -1,7 +1,7 @@
 ﻿using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
-using Sicemed.Web.Models;
 using Sicemed.Web.Models.Components;
+using Sicemed.Web.Models.Enumerations;
 
 namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Components
 {
@@ -9,10 +9,10 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Components
     {
          public AsignacionRolMap()
          {
-             Property(x => x.FechaAsignacion, map=>map.Access(Accessor.Field));
+             Property(x => x.FechaAsignacion, map=>map.Access(Accessor.NoSetter));
              Property(x => x.Rol, map => { 
                 map.Type<EnumerationType<Rol>>();
-                map.Access(Accessor.Field);
+                map.Access(Accessor.NoSetter);
              });
          }
     }

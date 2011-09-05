@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using Sicemed.Web.Models.Components;
-using Sicemed.Web.Models.Components.Documentos;
+using Sicemed.Web.Models.Enumerations;
 
 namespace Sicemed.Web.Models
 {

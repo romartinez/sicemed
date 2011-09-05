@@ -94,6 +94,9 @@
     <Reference Include="Glimpse.Mvc3">
       <HintPath>..\packages\Glimpse.Mvc3.0.84\lib\net40\Glimpse.Mvc3.dll</HintPath>
     </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
@@ -184,13 +187,25 @@
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
     <Compile Include="Infrastructure\Net4Collections.cs" />
     <Compile Include="Infrastructure\NHibernate\EnumerationType.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\CalendarioMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\AsignacionRolMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\DocumentoMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\DomicilioMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\MembershipMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\TelefonoMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\ConsultorioMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\DiaAtencionEspecialidadProfesionalMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\EntityMapping.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\EspecialidadMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\EspecialidadProfesionalMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\FeriadoMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\LocalidadMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\ObraSocialMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\PaginaMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\ParametroMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\PlanMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\ProvinciaMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\TurnoMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\UsuarioMap.cs" />
     <Compile Include="Infrastructure\Providers\Cache\ICacheProvider.cs" />
     <Compile Include="Infrastructure\Providers\Cache\InMemoryCacheProvider.cs" />
@@ -211,10 +226,11 @@
     <Compile Include="Infrastructure\Windsor\Installers\NHibernateInstaller.cs" />
     <Compile Include="Infrastructure\Providers\Session\LazySessionContext.cs" />
     <Compile Include="Models\Components\AsignacionRol.cs" />
-    <Compile Include="Models\Components\Enumeration.cs" />
+    <Compile Include="Models\Enumerations\Documentos\TipoDocumento.cs" />
+    <Compile Include="Models\Enumerations\Enumeration.cs" />
     <Compile Include="Models\Components\Membership.cs" />
     <Compile Include="Models\Pagina.cs" />
-    <Compile Include="Models\Rol.cs" />
+    <Compile Include="Models\Enumerations\Rol.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\ViewModels\Account\ChangePasswordModel.cs" />
     <Compile Include="Models\ViewModels\Account\LogOnModel.cs" />
@@ -225,10 +241,9 @@
     <Compile Include="Models\Calendario.cs" />
     <Compile Include="Models\ViewModels\UserManagement\ChangePasswordViewModel.cs" />
     <Compile Include="Models\Components\ComponentBase.cs" />
-    <Compile Include="Models\Components\Documentos\Cuil.cs" />
-    <Compile Include="Models\Components\Documentos\Cuit.cs" />
-    <Compile Include="Models\Components\Documentos\Dni.cs" />
-    <Compile Include="Models\Components\Documentos\Documento.cs" />
+    <Compile Include="Models\Enumerations\Documentos\Cuit.cs" />
+    <Compile Include="Models\Enumerations\Documentos\Dni.cs" />
+    <Compile Include="Models\Components\Documento.cs" />
     <Compile Include="Models\Components\Domicilio.cs" />
     <Compile Include="Models\Components\Telefono.cs" />
     <Compile Include="Models\Consultorio.cs" />

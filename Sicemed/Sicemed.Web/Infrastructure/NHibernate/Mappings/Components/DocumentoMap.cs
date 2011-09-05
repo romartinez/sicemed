@@ -1,5 +1,6 @@
 ﻿using NHibernate.Mapping.ByCode.Conformist;
-using Sicemed.Web.Models.Components.Documentos;
+using Sicemed.Web.Models.Components;
+using Sicemed.Web.Models.Enumerations.Documentos;
 
 namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Components
 {
@@ -7,8 +8,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Components
     {
         public DocumentoMap()
          {
-             Property(x => x.Descripcion);
-             Property(x => x.DescripcionCorta);
+             Property(x => x.TipoDocumento, map=>map.Type<EnumerationType<TipoDocumento>>());             
              Property(x => x.Numero);
          }
     }

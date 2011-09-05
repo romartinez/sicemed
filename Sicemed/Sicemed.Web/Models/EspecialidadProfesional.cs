@@ -1,15 +1,8 @@
-
-
-
-using System.Collections.Generic;
-
 namespace Sicemed.Web.Models
 {
     public class EspecialidadProfesional : Entity
     {
-        #region Navigation Properties
-
-        public virtual ISet<DiaAtencionEspecialidadProfesional> DiaAtencionEspecialidad { get; set; }
+        #region Navigation Properties        
 
         public virtual Especialidad Especialidad { get; set; }
 

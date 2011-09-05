@@ -1,4 +1,5 @@
 ﻿using System;
+using Sicemed.Web.Models.Enumerations;
 
 namespace Sicemed.Web.Models.Components
 {

@@ -14,7 +14,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Components
              Property(x => x.PasswordResetTokenGeneratedOn);
              Property(x => x.IsLockedOut);
              Property(x => x.LockedOutReason);
-             Property(x => x.CreateDate, map => map.Access(Accessor.Field));
+             Property(x => x.CreateDate, map => map.Access(Accessor.NoSetter));
              Property(x => x.LastLoginDate);
              Property(x => x.LastPasswordChangedDate);
              Property(x => x.LastLockoutDate);

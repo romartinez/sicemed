@@ -9,7 +9,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Components
          {
              Property(x => x.Calle1);
              Property(x => x.Calle2);
-             Property(x => x.Localidadad);
+
+             ManyToOne(x => x.Localidad);
          }
     }
 }

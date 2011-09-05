@@ -15,16 +15,16 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Property(x => x.InasistenciasContinuas);
             Property(x => x.NumeroAfiliado);
 
-            Component(x => x.Membership);
+            Component(x => x.Membership, map=> map.Access(Accessor.NoSetter));
             Component(x => x.Documento);
             Component(x => x.Domicilio);
             Component(x => x.Telefono);
 
-            Set(x => x.Roles, map =>
-                              {
-                                  map.Key(x => x.PropertyRef(o => o.Id));
-                                  map.Access(Accessor.Field);
-                              });
+            Set(x => x.Roles, map => { map.Access(Accessor.NoSetter);
+                                         map.Cascade(Cascade.All);
+            }, rel => rel.Component(map => { }));
+            
+            Set(x => x.Turnos, map => { map.Inverse(true); }, rel => rel.OneToMany());
         }
     }
 }

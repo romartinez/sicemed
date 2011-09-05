@@ -9,7 +9,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
          public ParametroMap()
          {
              Id(x => x.Key);
-             Property("_value", map => map.Access(Accessor.Field));
+             Property("_value", map => map.Access(Accessor.NoSetter));
          }
     }
 }

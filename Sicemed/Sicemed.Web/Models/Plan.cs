@@ -19,8 +19,6 @@ namespace Sicemed.Web.Models
 
         public virtual ObraSocial ObraSocial { get; set; }
 
-        public virtual ISet<Usuario> Pacientes { get; set; }
-
         #endregion
     }
 }

@@ -9,6 +9,7 @@ using NHibernate.Tool.hbm2ddl;
 using Sicemed.Web.Infrastructure.Providers.Session;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Enumerations;
 
 namespace Sicemed.Web.Infrastructure
 {
@@ -69,21 +70,21 @@ namespace Sicemed.Web.Infrastructure
             //No permite Tx anidadas
             CrearAdministrador();
             //Lo guardo al parametro nuevo.
-            //using (var tx = session.BeginTransaction())
-            //{
-            //    var param = new Parametro() { Key = Parametro.Keys.APP_IS_INITIALIZED };
-            //    param.Set(true);
+            using (var tx = session.BeginTransaction())
+            {
+                var param = new Parametro() { Key = Parametro.Keys.APP_IS_INITIALIZED };
+                param.Set(true);
 
-            //    session.Save(param);
-            //    tx.Commit();
-            //}
+                session.Save(param);
+                tx.Commit();
+            }
         }
 
         private void CrearAdministrador()
         {
-            var usuario = new Usuario() { Nombre = "admin" };
-            usuario.AgregarRol(Rol.Administrador);
-            MembershipService.CreateUser(usuario, "admin@admin.com", "test");
+            //var usuario = new Usuario() { Nombre = "admin" };
+            //usuario.AgregarRol(Rol.Administrador);
+            //MembershipService.CreateUser(usuario, "admin@admin.com", "test");
         }
     }
 }

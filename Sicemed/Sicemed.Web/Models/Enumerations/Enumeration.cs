@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Sicemed.Web.Models.Components
+namespace Sicemed.Web.Models.Enumerations
 {
     public abstract class Enumeration : IComparable
     {

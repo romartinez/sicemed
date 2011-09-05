@@ -12,8 +12,6 @@ using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Tool.hbm2ddl;
-using Sicemed.Web.Infrastructure;
-using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.HttpModules;
 using Sicemed.Web.Infrastructure.Providers.Session;
 using Sicemed.Web.Models;
@@ -73,6 +71,13 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
             var mapper = new ModelMapper();
 
             mapper.AddMappings(typeof (Entity).Assembly.GetTypes());
+
+            mapper.BeforeMapProperty += (mi, propertyPath, map) =>
+                                        {
+                                            if (propertyPath.PreviousPath != null 
+                                                && mi.IsComponent(propertyPath.LocalMember.DeclaringType))                                            
+                                                map.Column(propertyPath.ToColumnName());                                               
+                                        };
 
             //mapper.BeforeMapClass += (mi, t, map) => map.Table(t.Name.ToLowerInvariant());
             //mapper.BeforeMapJoinedSubclass += (mi, t, map) => map.Table(t.Name.ToLowerInvariant());
