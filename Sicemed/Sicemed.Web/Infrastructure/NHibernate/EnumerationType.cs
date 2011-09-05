@@ -3,7 +3,6 @@ using System.Data;
 using NHibernate.Dialect;
 using NHibernate.SqlTypes;
 using NHibernate.Type;
-using Sicemed.Web.Models.Components;
 using Sicemed.Web.Models.Enumerations;
 
 namespace Sicemed.Web.Infrastructure.NHibernate
