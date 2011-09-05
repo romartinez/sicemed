@@ -26,7 +26,11 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                 map.Cascade(Cascade.All);
             }, rel => rel.Component(map => { }));
 
-            Set(x => x.Turnos, map => map.Inverse(true), rel => rel.OneToMany());
+            Set(x => x.Turnos, map =>
+            {
+                map.Inverse(true);
+                map.Access(Accessor.NoSetter);
+            }, rel => rel.OneToMany());
         }
     }
 }

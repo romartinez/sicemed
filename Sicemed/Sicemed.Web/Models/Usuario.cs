@@ -16,6 +16,7 @@ namespace Sicemed.Web.Models
         {
             _roles = new HashSet<AsignacionRol>();           
             _membership = new Membership();
+            _turnos = new HashSet<Turno>();
         }
 
         public virtual Membership Membership
@@ -48,7 +49,11 @@ namespace Sicemed.Web.Models
 
         #region Navigation Properties
 
-        public virtual ISet<Turno> Turnos { get; set; }
+        private ISet<Turno> _turnos;
+        public virtual ISet<Turno> Turnos
+        {
+            get { return _turnos; }
+        }
 
         #endregion
 
@@ -76,6 +81,16 @@ namespace Sicemed.Web.Models
         {
             var roleToRemove = _roles.FirstOrDefault(x => x.Rol == rol);
             if(roleToRemove != null) _roles.Remove(roleToRemove);
+            return this;
+        }
+
+        public virtual Usuario AgregarTurno(Turno turno)
+        {
+            if (turno == null) throw new ArgumentNullException("turno");
+
+            _turnos.Add(turno);
+            turno.Paciente = this;
+
             return this;
         }
 
