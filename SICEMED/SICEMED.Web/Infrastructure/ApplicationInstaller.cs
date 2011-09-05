@@ -82,7 +82,7 @@ namespace Sicemed.Web.Infrastructure
 
         private void CrearAdministrador()
         {
-            var usuario = new Usuario() { Nombre = "admin" };
+            var usuario = new Usuario() { Nombre = "admin", Apellido= "admin" };
             usuario.AgregarRol(Rol.Administrador);
             MembershipService.CreateUser(usuario, "admin@admin.com", "test");
         }

@@ -13,6 +13,7 @@ using SICEMED.Web.Infrastructure.Windsor.Facilities;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.Services;
+using Sicemed.Web.Models;
 using log4net;
 using log4net.Config;
 using log4net.Core;
@@ -72,7 +73,7 @@ namespace Sicemed.Tests
                             db.LogSqlInConsole = true;
                             db.AutoCommentSql = true;
                             db.HqlToSqlSubstitutions = "true 1, false 0, yes 'Y', no 'N'";
-                        });                        
+                        });
                     }
 
                     _databaseConfiguration.Properties[Environment.CurrentSessionContextClass] =
@@ -82,10 +83,10 @@ namespace Sicemed.Tests
 
                     NHibernateMappingsExtensions.WriteAllXmlMapping(mappings);
 
-                    mappings.ToList().ForEach(mp => _databaseConfiguration.AddDeserializedMapping(mp, null));                    
-                    
+                    mappings.ToList().ForEach(mp => _databaseConfiguration.AddDeserializedMapping(mp, null));
+
                     SchemaMetadataUpdater.QuoteTableAndColumns(_databaseConfiguration);
-                    
+
                 }
 
                 return _databaseConfiguration;
@@ -109,6 +110,13 @@ namespace Sicemed.Tests
             get { return _sessionFactory.GetCurrentSession(); }
         }
 
+        private MembershipService _membershipService;
+        private Mock<IMailSenderService> _mailService;
+        protected Mock<IMailSenderService> MailService { get { return _mailService; } }
+        protected IMembershipService MembershipService { get { return _membershipService; } }
+
+
+
         [SetUp]
         public void Setup()
         {
@@ -122,19 +130,32 @@ namespace Sicemed.Tests
             installer.MembershipService = new MembershipService(SessionFactory, new RijndaelEngine("WAL"),
                                                                 new Mock<IMailSenderService>().Object,
                                                                 new Mock<IFormAuthenticationStoreService>().Object);
-            
+
             installer.Install(DatabaseConfiguration);
-            
+
             //After the installation bind the session, again
             CurrentSessionContext.Bind(session);
 
             LogManager.GetRepository().Threshold = Level.Debug;
+
+            var cryptoService = new RijndaelEngine("WAL");
+            _mailService = new Mock<IMailSenderService>();
+            var formsService = new Mock<IFormAuthenticationStoreService>();
+            _membershipService = new MembershipService(SessionFactory, cryptoService,
+                                                          _mailService.Object,
+                                                          formsService.Object);
         }
 
         [TearDown]
         public void TearDown()
         {
             CurrentSessionContext.Unbind(SessionFactory);
+        }
+
+
+        protected Usuario CrearUsuarioValido()
+        {
+            return new Usuario() { Nombre = "Walter", Apellido = "Walter" };
         }
     }
 }

@@ -7,10 +7,10 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
 
         public PlanMap()
         {
-            Property(x => x.Descripcion);
-            Property(x => x.Nombre);
+            Property(x => x.Descripcion, map => map.NotNullable(true));
+            Property(x => x.Nombre, map => map.NotNullable(true));
 
-            ManyToOne(x=>x.ObraSocial);
+            ManyToOne(x => x.ObraSocial, map => map.NotNullable(true));
         }
          
     }

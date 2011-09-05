@@ -6,11 +6,11 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
          public LocalidadMap()
          {
-             Property(x => x.Caracteristicas);
+             Property(x => x.Caracteristicas, map => map.NotNullable(true));
              Property(x => x.CodigoPostal);
-             Property(x => x.Nombre);
+             Property(x => x.Nombre, map => map.NotNullable(true));
 
-             ManyToOne(x => x.Provincia);
+             ManyToOne(x => x.Provincia, map => map.NotNullable(true));
          }
     }
 }

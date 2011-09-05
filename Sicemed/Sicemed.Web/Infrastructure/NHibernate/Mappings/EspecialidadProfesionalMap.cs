@@ -6,8 +6,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
          public EspecialidadProfesionalMap()
          {
-             ManyToOne(x => x.Especialidad);
-             ManyToOne(x => x.Profesional);
+             ManyToOne(x => x.Especialidad, map => map.NotNullable(true));
+             ManyToOne(x => x.Profesional, map => map.NotNullable(true));
          }
     }
 }

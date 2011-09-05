@@ -7,15 +7,15 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
          public TurnoMap()
          {
              Property(x => x.FechaAtencion);
-             Property(x => x.FechaGeneracion);
+             Property(x => x.FechaGeneracion, map => map.NotNullable(true));
              Property(x => x.FechaIngreso);
-             Property(x => x.FechaTurno);
-             Property(x => x.IpPaciente);
+             Property(x => x.FechaTurno, map => map.NotNullable(true));
+             Property(x => x.IpPaciente, map => map.NotNullable(true));
              Property(x => x.Nota);
 
-             ManyToOne(x => x.Paciente);
-             ManyToOne(x => x.Secretaria);
-             ManyToOne(x => x.DiaAtencionEspecialidadProfesional);
+             ManyToOne(x => x.Paciente, map => map.NotNullable(true));
+             ManyToOne(x => x.Secretaria, map => map.NotNullable(true));
+             ManyToOne(x => x.DiaAtencionEspecialidadProfesional, map => map.NotNullable(true));
          }
     }
 }

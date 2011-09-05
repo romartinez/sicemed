@@ -6,7 +6,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
          public ObraSocialMap()
          {
-             Property(x => x.RazonSocial);
+             Property(x => x.RazonSocial, map => map.NotNullable(true));
 
              Component(x => x.Documento);
              Component(x => x.Direccion);

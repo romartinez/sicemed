@@ -7,8 +7,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
          public PaginaMap()
          {
-             Property(x => x.Contenido);
-             Property(x => x.Nombre);
+             Property(x => x.Contenido, map => map.NotNullable(true));
+             Property(x => x.Nombre, map => map.NotNullable(true));
 
              ManyToOne(x => x.Padre);
 

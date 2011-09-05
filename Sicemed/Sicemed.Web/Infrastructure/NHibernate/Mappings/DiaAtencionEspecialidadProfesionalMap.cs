@@ -6,16 +6,16 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
          public DiaAtencionEspecialidadProfesionalMap()
          {
-             Property(x => x.DiaSemanaNombre);
-             Property(x => x.DiaSemanaNumero);
-             Property(x => x.DuracionTurno);
-             Property(x => x.PoliticaHorariaMatutinaDesde);
-             Property(x => x.PoliticaHorariaMatutinaHasta);
-             Property(x => x.PoliticaHorariaVespertinaDesde);
-             Property(x => x.PoliticaHorariaVespertinaHasta);
+             Property(x => x.DiaSemanaNombre, map => map.NotNullable(true));
+             Property(x => x.DiaSemanaNumero, map => map.NotNullable(true));
+             Property(x => x.DuracionTurno, map => map.NotNullable(true));
+             Property(x => x.PoliticaHorariaMatutinaDesde, map => map.NotNullable(true));
+             Property(x => x.PoliticaHorariaMatutinaHasta, map => map.NotNullable(true));
+             Property(x => x.PoliticaHorariaVespertinaDesde, map => map.NotNullable(true));
+             Property(x => x.PoliticaHorariaVespertinaHasta, map => map.NotNullable(true));
 
              ManyToOne(x => x.Consultorio);
-             ManyToOne(x => x.EspecialidadProfesional);
+             ManyToOne(x => x.EspecialidadProfesional, map => map.NotNullable(true));
          }
     }
 }

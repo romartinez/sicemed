@@ -7,9 +7,9 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Components
     public class DocumentoMap : ComponentMapping<Documento>
     {
         public DocumentoMap()
-         {
-             Property(x => x.TipoDocumento, map=>map.Type<EnumerationType<TipoDocumento>>());             
-             Property(x => x.Numero);
-         }
+        {
+            Property(x => x.TipoDocumento, map => map.Type<EnumerationType<TipoDocumento>>());
+            Property(x => x.Numero);
+        }
     }
 }

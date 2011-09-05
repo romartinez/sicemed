@@ -11,47 +11,43 @@ namespace Sicemed.Tests.Models.Users
         [Test]
         public void PuedoCrearUnUsuarioConUnSoloRol()
         {
-            using (var tx = Session.BeginTransaction())
-            {
-                var usuario = new Usuario { Nombre= "Walter"};
-                usuario.AgregarRol(Rol.Profesional);
-                Session.Save(usuario);
-                tx.Commit();
-            }
+            var usuario = CrearUsuarioValido();
+            usuario.AgregarRol(Rol.Profesional);
+            MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
+            Session.Flush();
+            Session.Evict(usuario);
 
-            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre== "Walter").SingleOrDefault();
+            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre == "Walter").SingleOrDefault();
             Assert.AreEqual(1, usuario2.Roles.Count());
         }
 
         [Test]
         public void PuedoCrearUnUsuarioConVariosRoles()
         {
-            using (var tx = Session.BeginTransaction())
-            {
-                var usuario = new Usuario { Nombre= "Walter"};
-                usuario.AgregarRol(Rol.Secretaria);
-                usuario.AgregarRol(Rol.Profesional);
-                Session.Save(usuario);
-                tx.Commit();
-            }
+            var usuario = CrearUsuarioValido();
+            usuario.AgregarRol(Rol.Secretaria);
+            usuario.AgregarRol(Rol.Profesional);
+            MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
+
+            Session.Flush();
+            Session.Evict(usuario);
 
 
-            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre== "Walter").SingleOrDefault();
+            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre == "Walter").SingleOrDefault();
             Assert.AreEqual(2, usuario2.Roles.Count());
         }
 
         [Test]
         public void PuedoCrearUnUsuarioSinRoles()
         {
-            using (var tx = Session.BeginTransaction())
-            {
-                var usuario = new Usuario { Nombre= "Walter"};
-                Session.Save(usuario);
-                tx.Commit();
-            }
+            var usuario = CrearUsuarioValido();
+            MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
-            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre== "Walter").SingleOrDefault();
+            Session.Flush();
+            Session.Evict(usuario);
+
+            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre == "Walter").SingleOrDefault();
             Assert.IsNotNull(usuario2);
             Assert.AreEqual(0, usuario2.Roles.Count());
         }

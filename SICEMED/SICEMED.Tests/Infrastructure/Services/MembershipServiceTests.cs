@@ -1,31 +1,20 @@
-using EfficientlyLazy.Crypto;
-using Moq;
 using NUnit.Framework;
 using Sicemed.Web.Infrastructure.Enums;
-using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
 
 namespace Sicemed.Tests.Infrastructure.Services
 {
     public class MembershipServiceTests : InitializeNhibernate
     {
+
         [Test]
         public void PuedoCrearUnUsuario()
         {
-            var cryptoService = new RijndaelEngine("WAL");
-            var mailService = new Mock<IMailSenderService>();
-            var formsService = new Mock<IFormAuthenticationStoreService>();
+            var usuario = CrearUsuarioValido();
 
-            var membershipService = new MembershipService(SessionFactory, cryptoService,
-                                                          mailService.Object,
-                                                          formsService.Object);
+            MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
-            var usuario = new Usuario();
-            usuario.Nombre = "Walter";
-
-            membershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
-
-            mailService.Verify(x => x.SendNewUserEmail(usuario));
+            MailService.Verify(x => x.SendNewUserEmail(usuario));
 
             var usuario2 =
                 Session.QueryOver<Usuario>().Where(u => u.Membership.Email == "walter.poch@gmail.com").SingleOrDefault();
@@ -35,100 +24,55 @@ namespace Sicemed.Tests.Infrastructure.Services
         [Test]
         public void PuedoLoguarme()
         {
-            var cryptoService = new RijndaelEngine("WAL");
-            var mailService = new Mock<IMailSenderService>();
-            var formsService = new Mock<IFormAuthenticationStoreService>();
+            var usuario = CrearUsuarioValido();
 
-            var membershipService = new MembershipService(SessionFactory, cryptoService,
-                                                          mailService.Object,
-                                                          formsService.Object);
-
-            var usuario = new Usuario();
-            usuario.Nombre = "Walter";
-
-            membershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
+            MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
             Usuario u2;
-            membershipService.Login("walter.poch@gmail.com", "testtest", out u2);
+            MembershipService.Login("walter.poch@gmail.com", "testtest", out u2);
             Assert.AreEqual(usuario, u2);
         }
 
         [Test]
         public void NoPuedoLoguearmeConUnMalPassword()
         {
-            var cryptoService = new RijndaelEngine("WAL");
-            var mailService = new Mock<IMailSenderService>();
-            var formsService = new Mock<IFormAuthenticationStoreService>();
+            var usuario = CrearUsuarioValido();
 
-            var membershipService = new MembershipService(SessionFactory, cryptoService,
-                                                          mailService.Object,
-                                                          formsService.Object);
+            MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
-            var usuario = new Usuario();
-            usuario.Nombre = "Walter";
-
-            membershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
-
-            Assert.AreEqual(MembershipStatus.BAD_PASSWORD, membershipService.Login("walter.poch@gmail.com", "te2sttest", out usuario));
+            Assert.AreEqual(MembershipStatus.BAD_PASSWORD, MembershipService.Login("walter.poch@gmail.com", "te2sttest", out usuario));
         }
 
         [Test]
         public void NoPuedoLoguearmeConUnMalUsuario()
         {
-            var cryptoService = new RijndaelEngine("WAL");
-            var mailService = new Mock<IMailSenderService>();
-            var formsService = new Mock<IFormAuthenticationStoreService>();
+            var usuario = CrearUsuarioValido();
 
-            var membershipService = new MembershipService(SessionFactory, cryptoService,
-                                                          mailService.Object,
-                                                          formsService.Object);
+            MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
-            var usuario = new Usuario();
-            usuario.Nombre = "Walter";
-
-            membershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
-
-            Assert.AreEqual(MembershipStatus.USER_NOT_FOUND, membershipService.Login("wal333ter.poch@gmail.com", "testtest", out usuario));
+            Assert.AreEqual(MembershipStatus.USER_NOT_FOUND, MembershipService.Login("wal333ter.poch@gmail.com", "testtest", out usuario));
         }
 
         [Test]
         public void NoPuedoLoguearmeConUnMalUsuarioYMalPassword()
         {
-            var cryptoService = new RijndaelEngine("WAL");
-            var mailService = new Mock<IMailSenderService>();
-            var formsService = new Mock<IFormAuthenticationStoreService>();
+            var usuario = CrearUsuarioValido();
 
-            var membershipService = new MembershipService(SessionFactory, cryptoService,
-                                                          mailService.Object,
-                                                          formsService.Object);
-
-            var usuario = new Usuario();
-            usuario.Nombre = "Walter";
-
-            membershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
+            MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
 
             Assert.AreEqual(MembershipStatus.USER_NOT_FOUND,
-                membershipService.Login("wal333ter.poch@gmail.com", "tesdfgttest", out usuario));
+                MembershipService.Login("wal333ter.poch@gmail.com", "tesdfgttest", out usuario));
         }
 
         [Test]
         public void PuedoBloquearUnUsuario()
         {
-            var cryptoService = new RijndaelEngine("WAL");
-            var mailService = new Mock<IMailSenderService>();
-            var formsService = new Mock<IFormAuthenticationStoreService>();
+            var usuario = CrearUsuarioValido();
 
-            var membershipService = new MembershipService(SessionFactory, cryptoService,
-                                                          mailService.Object,
-                                                          formsService.Object);
+            MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
-            var usuario = new Usuario();
-            usuario.Nombre = "Walter";
-
-            membershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
-
-            membershipService.LockUser("walter.poch@gmail.com", "Testing");
+            MembershipService.LockUser("walter.poch@gmail.com", "Testing");
 
 
             var usuario2 =
@@ -140,22 +84,13 @@ namespace Sicemed.Tests.Infrastructure.Services
         [Test]
         public void PuedoBloquearYDesbloquearUnUsuario()
         {
-            var cryptoService = new RijndaelEngine("WAL");
-            var mailService = new Mock<IMailSenderService>();
-            var formsService = new Mock<IFormAuthenticationStoreService>();
+            var usuario = CrearUsuarioValido();
 
-            var membershipService = new MembershipService(SessionFactory, cryptoService,
-                                                          mailService.Object,
-                                                          formsService.Object);
+            MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
-            var usuario = new Usuario();
-            usuario.Nombre = "Walter";
+            MembershipService.LockUser("walter.poch@gmail.com", "Testing");
 
-            membershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
-
-            membershipService.LockUser("walter.poch@gmail.com", "Testing");
-
-            membershipService.UnlockUser("walter.poch@gmail.com");
+            MembershipService.UnlockUser("walter.poch@gmail.com");
 
 
             var usuario2 =
@@ -167,24 +102,15 @@ namespace Sicemed.Tests.Infrastructure.Services
         [Test]
         public void UnUsuarioSeBloqueaCon3IntentosDeLoginFallidos()
         {
-            var cryptoService = new RijndaelEngine("WAL");
-            var mailService = new Mock<IMailSenderService>();
-            var formsService = new Mock<IFormAuthenticationStoreService>();
+            var usuario = CrearUsuarioValido();
 
-            var membershipService = new MembershipService(SessionFactory, cryptoService,
-                                                          mailService.Object,
-                                                          formsService.Object);
+            MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
-            var usuario = new Usuario();
-            usuario.Nombre = "Walter";
+            Assert.AreEqual(MembershipStatus.BAD_PASSWORD, MembershipService.Login("walter.poch@gmail.com", "345", out usuario));
 
-            membershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
+            Assert.AreEqual(MembershipStatus.BAD_PASSWORD, MembershipService.Login("walter.poch@gmail.com", "345", out usuario));
 
-            Assert.AreEqual(MembershipStatus.BAD_PASSWORD, membershipService.Login("walter.poch@gmail.com", "345", out usuario));
-
-            Assert.AreEqual(MembershipStatus.BAD_PASSWORD, membershipService.Login("walter.poch@gmail.com", "345", out usuario));
-
-            Assert.AreEqual(MembershipStatus.USER_LOCKED, membershipService.Login("walter.poch@gmail.com", "345", out usuario));
+            Assert.AreEqual(MembershipStatus.USER_LOCKED, MembershipService.Login("walter.poch@gmail.com", "345", out usuario));
 
 
             var usuario2 =
@@ -192,30 +118,21 @@ namespace Sicemed.Tests.Infrastructure.Services
             Assert.IsTrue(usuario2.Membership.IsLockedOut);
             Assert.IsFalse(string.IsNullOrWhiteSpace(usuario2.Membership.LockedOutReason));
 
-            Assert.AreEqual(MembershipStatus.USER_LOCKED, membershipService.Login("walter.poch@gmail.com", "testtest", out usuario));
+            Assert.AreEqual(MembershipStatus.USER_LOCKED, MembershipService.Login("walter.poch@gmail.com", "testtest", out usuario));
         }
 
         [Test]
         public void PuedoPedirUnPasswordReset()
         {
             var token = string.Empty;
-            var cryptoService = new RijndaelEngine("WAL");
-            var mailService = new Mock<IMailSenderService>();
-            var formsService = new Mock<IFormAuthenticationStoreService>();
+            var usuario = CrearUsuarioValido();
 
-            var membershipService = new MembershipService(SessionFactory, cryptoService,
-                                                          mailService.Object,
-                                                          formsService.Object);
-
-            var usuario = new Usuario();
-            usuario.Nombre = "Walter";
-
-            membershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
+            MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
 
-            membershipService.RecoverPassword("walter.poch@gmail.com");
+            MembershipService.RecoverPassword("walter.poch@gmail.com");
             token = usuario.Membership.PasswordResetToken;
-            mailService.Verify(x => x.SendPasswordResetEmail(usuario, token));
+            MailService.Verify(x => x.SendPasswordResetEmail(usuario, token));
 
 
             var usuario2 =
@@ -227,29 +144,20 @@ namespace Sicemed.Tests.Infrastructure.Services
         public void PuedoCambiarElPasswordYLoguearmeConElNuevo()
         {
             var token = string.Empty;
-            var cryptoService = new RijndaelEngine("WAL");
-            var mailService = new Mock<IMailSenderService>();
-            var formsService = new Mock<IFormAuthenticationStoreService>();
+            var usuario = CrearUsuarioValido();
 
-            var membershipService = new MembershipService(SessionFactory, cryptoService,
-                                                          mailService.Object,
-                                                          formsService.Object);
+            MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
-            var usuario = new Usuario();
-            usuario.Nombre = "Walter";
-
-            membershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
-
-            membershipService.RecoverPassword("walter.poch@gmail.com");
+            MembershipService.RecoverPassword("walter.poch@gmail.com");
 
             token = usuario.Membership.PasswordResetToken;
-            mailService.Verify(x => x.SendPasswordResetEmail(usuario, token));
+            MailService.Verify(x => x.SendPasswordResetEmail(usuario, token));
 
-            membershipService.ChangePassword("walter.poch@gmail.com", token, "walter2");
+            MembershipService.ChangePassword("walter.poch@gmail.com", token, "walter2");
 
-            Assert.AreEqual(MembershipStatus.BAD_PASSWORD, membershipService.Login("walter.poch@gmail.com", "testtest", out usuario));
+            Assert.AreEqual(MembershipStatus.BAD_PASSWORD, MembershipService.Login("walter.poch@gmail.com", "testtest", out usuario));
 
-            Assert.AreEqual(MembershipStatus.USER_FOUND, membershipService.Login("walter.poch@gmail.com", "walter2", out usuario));
+            Assert.AreEqual(MembershipStatus.USER_FOUND, MembershipService.Login("walter.poch@gmail.com", "walter2", out usuario));
         }
     }
 }

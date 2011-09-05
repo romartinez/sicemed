@@ -6,7 +6,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
          public ProvinciaMap()
          {
-             Property(x => x.Nombre);
+             Property(x => x.Nombre, map => map.NotNullable(true));
 
              Set(x => x.Localidades, map => map.Inverse(true), rel=>rel.OneToMany());
          }
