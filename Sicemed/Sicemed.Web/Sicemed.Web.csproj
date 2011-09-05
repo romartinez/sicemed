@@ -187,7 +187,6 @@
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
     <Compile Include="Infrastructure\Net4Collections.cs" />
     <Compile Include="Infrastructure\NHibernate\EnumerationType.cs" />
-    <Compile Include="Infrastructure\NHibernate\Mappings\CalendarioMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\AsignacionRolMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\DocumentoMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\DomicilioMap.cs" />
@@ -241,7 +240,6 @@
     <Compile Include="Models\ViewModels\PaginableResponse.cs" />
     <Compile Include="Models\ViewModels\UserManagement\RegisterUserViewModel.cs" />
     <Compile Include="Models\ViewModels\UserManagement\RegisterViewModel.cs" />
-    <Compile Include="Models\Calendario.cs" />
     <Compile Include="Models\ViewModels\UserManagement\ChangePasswordViewModel.cs" />
     <Compile Include="Models\Components\ComponentBase.cs" />
     <Compile Include="Models\Enumerations\Documentos\Cuit.cs" />

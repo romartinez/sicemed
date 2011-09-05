@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="Infrastructure\Services\MembershipServiceTests.cs" />
     <Compile Include="InitializeNhibernate.cs" />
+    <Compile Include="Models\Feriados\FeriadoTests.cs" />
     <Compile Include="Models\Paginas\PaginasTests.cs" />
     <Compile Include="Models\Users\UserRoleAssignamentTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

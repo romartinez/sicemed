@@ -22,6 +22,7 @@ namespace Sicemed.Tests.Models.Paginas
             }
 
             Session.Flush();
+            Session.Evict(pagina);
 
             var db = Session.Get<Pagina>(pagina.Id);
             db.Nombre.Should().Be("Prueba");
@@ -45,6 +46,7 @@ namespace Sicemed.Tests.Models.Paginas
             }
 
             Session.Flush();
+            Session.Evict(padre);
 
             var pagina = Session.Get<Pagina>(padre.Id);
                 
@@ -70,6 +72,7 @@ namespace Sicemed.Tests.Models.Paginas
             }
 
             Session.Flush();
+            Session.Evict(padre);
 
             var pagina = Session.Get<Pagina>(padre.Id);
 

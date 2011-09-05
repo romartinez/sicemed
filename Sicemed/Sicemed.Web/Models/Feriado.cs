@@ -1,5 +1,4 @@
 using System;
-using System.Web.Script.Serialization;
 
 namespace Sicemed.Web.Models
 {
@@ -12,12 +11,6 @@ namespace Sicemed.Web.Models
         public virtual DateTime? FechaAjustada { get; set; }
 
         public virtual DateTime FechaOriginal { get; set; }
-
-        #endregion
-
-        #region Navigation Properties
-        [ScriptIgnore]
-        public virtual Calendario Calendario { get; set; }
 
         #endregion
     }
