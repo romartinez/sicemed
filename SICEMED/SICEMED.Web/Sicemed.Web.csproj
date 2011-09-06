@@ -153,7 +153,15 @@
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\ContentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ConsultoriosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EspecialidadesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PlanesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ObrasSocialesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PaginasController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FeriadosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LocalidadesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProvinciasController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserManagementController.cs" />
@@ -169,6 +177,7 @@
     <Compile Include="Infrastructure\Attributes\Validation\EmailAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Validation\ValidatePasswordLengthAttribute.cs" />
     <Compile Include="Infrastructure\Controllers\BaseController.cs" />
+    <Compile Include="Infrastructure\Controllers\CrudBaseController.cs" />
     <Compile Include="Infrastructure\Controllers\NHibernateController.cs" />
     <Compile Include="Infrastructure\Controllers\WindsorControllerFactory.cs" />
     <Compile Include="Infrastructure\DesignByContract.cs" />
@@ -182,6 +191,7 @@
     <Compile Include="Infrastructure\Helpers\ReflectionHelper.cs" />
     <Compile Include="Infrastructure\Helpers\SessionExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\UrlHelperExtensions.cs" />
+    <Compile Include="Infrastructure\Helpers\UserExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\ValidationHelper.cs" />
     <Compile Include="Infrastructure\Helpers\WindsorExtensions.cs" />
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
@@ -420,7 +430,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Infrastructure\Extensions\" />
     <Folder Include="Views\Turno\" />
   </ItemGroup>
   <ItemGroup>
@@ -453,7 +462,7 @@
     <Content Include="Areas\Admin\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Content\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Paginas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />

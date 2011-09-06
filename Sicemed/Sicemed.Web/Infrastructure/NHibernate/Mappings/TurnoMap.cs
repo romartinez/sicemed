@@ -13,9 +13,9 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
              Property(x => x.IpPaciente, map => map.NotNullable(true));
              Property(x => x.Nota);
 
-             //ManyToOne(x => x.Paciente, map => map.NotNullable(true));
-             //ManyToOne(x => x.Secretaria, map => map.NotNullable(true));
-             //ManyToOne(x => x.DiaAtencionEspecialidadProfesional, map => map.NotNullable(true));
+             ManyToOne(x => x.Paciente, map => map.NotNullable(true));
+             ManyToOne(x => x.Secretaria, map => map.NotNullable(true));
+             ManyToOne(x => x.DiaAtencionEspecialidadProfesional, map => map.NotNullable(true));
          }
     }
 }

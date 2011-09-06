@@ -1,4 +1,6 @@
-﻿@using Combres
+﻿@using System.Security.Principal
+@using Combres
+@using Sicemed.Web.Models.Enumerations
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +21,23 @@
                 <ul id="menu">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
+                    @if (User.IsInRole(Rol.Administrador))
+                    {
+                        <li>
+                            Administraci&oacute;n
+                            <ul>
+                                <li>@Html.ActionLink("Paginas", "Index", "Paginas")</li>
+                                <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
+                                <li>@Html.ActionLink("Provincias", "Index", "Provincias")</li>
+                                <li>@Html.ActionLink("Localidades", "Index", "Localidades")</li>
+                                <li>@Html.ActionLink("Feriados", "Index", "Feriados")</li>
+                                <li>@Html.ActionLink("Obras Sociales", "Index", "ObrasSociales")</li>
+                                <li>@Html.ActionLink("Planes", "Index", "Planes")</li>
+                                <li>@Html.ActionLink("Especialidades", "Index", "Especialidades")</li>
+                                <li>@Html.ActionLink("Consultorios", "Index", "Consultorios")</li>                                
+                            </ul>
+                        </li>
+                    }
                 </ul>
             </nav>
         </header>
@@ -29,7 +48,6 @@
         </footer>
     </div>
     @Html.Raw(WebExtensions.CombresLink("siteJs"))
-
     @RenderSection("Scripts", false)
 </body>
 </html>

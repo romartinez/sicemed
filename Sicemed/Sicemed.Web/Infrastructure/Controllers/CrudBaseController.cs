@@ -1,18 +1,18 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Web.Mvc;
-using System.Web.UI;
-using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
-using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Exceptions;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.ViewModels;
 
-namespace Sicemed.Web.Areas.Admin.Controllers
+namespace Sicemed.Web.Infrastructure.Controllers
 {
-    public class ContentController : NHibernateController
+    public abstract class CrudBaseController<T> : NHibernateController where T : Entity
     {
-        public ActionResult Index()
+        protected abstract Expression<Func<T, object>> DefaultOrderBy { get; }
+
+        public virtual ActionResult Index()
         {
             return View();
         }
@@ -20,15 +20,15 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
-        public JsonResult List(long count, int page, int rows)
+        public virtual JsonResult List(long count, int page, int rows)
         {
             page--;
             var session = SessionFactory.GetCurrentSession();
-            var query = session.QueryOver<Pagina>();
+            var query = session.QueryOver<T>();
 
-            var respuesta = new PaginableResponse<Pagina>();
-            query.OrderBy(x => x.Nombre);
-            respuesta.Rows = query.Take(rows).Skip(page * rows).Future<Pagina>();
+            var respuesta = new PaginableResponse<T>();
+            query.OrderBy(DefaultOrderBy);
+            respuesta.Rows = query.Take(rows).Skip(page * rows).Future<T>();
             if (page == 0)
             {
                 var queryCount = query.ToRowCountInt64Query().FutureValue<long>();
@@ -43,20 +43,14 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             return Json(respuesta);
         }
 
-
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
-        public JsonResult Nuevo(string oper, string nombre, int paginaId = 0)
+        public virtual JsonResult Nuevo(string oper, T modelo, int paginaId = 0)
         {
             if (!oper.Equals("add", StringComparison.InvariantCultureIgnoreCase)) throw new ValidationErrorException();
 
-            var pagina = new Pagina()
-            {
-                Nombre = nombre,
-            };
-
-            SessionFactory.GetCurrentSession().Save(pagina);
+            SessionFactory.GetCurrentSession().Save(modelo);
 
             return Json(ResponseMessage.Success());
         }
@@ -64,18 +58,15 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(long id, string oper, string nombre)
+        public virtual ActionResult Editar(long id, string oper, T modelo)
         {
             if (!oper.Equals("edit", StringComparison.InvariantCultureIgnoreCase)) throw new ValidationErrorException();
 
             var session = SessionFactory.GetCurrentSession();
 
-            var pagina = session.QueryOver<Pagina>().Where(x => x.Id == id).SingleOrDefault();
+            var modelFromDb = session.QueryOver<Pagina>().Where(x => x.Id == id).SingleOrDefault();
 
-            if (pagina != null)
-            {
-                pagina.Nombre = nombre;
-            }
+            UpdateModel(modelFromDb);
 
             return Json(ResponseMessage.Success());
         }
@@ -83,7 +74,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
-        public ActionResult Eliminar(string id, string oper)
+        public virtual ActionResult Eliminar(string id, string oper)
         {
             if (!oper.Equals("del", StringComparison.InvariantCultureIgnoreCase)) throw new ValidationErrorException();
 
@@ -91,21 +82,10 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             var session = SessionFactory.GetCurrentSession();
             foreach (var idsSeleccionado in idsSeleccionados)
             {
-                //session.Delete<Pagina>((int) idsSeleccionado);
+                //session.Delete<T>((long) idsSeleccionado);
             }
 
             return Json(ResponseMessage.Success());
         }
-
-        [HttpGet]
-        [AjaxHandleError]
-        [OutputCache(Duration = 600, VaryByParam = "none", Location = OutputCacheLocation.ServerAndClient)]//10 minutes(10min*60sec)
-        [ValidateAntiForgeryToken]
-        public ActionResult ObtenerPaginas()
-        {
-            var paginas = SessionFactory.GetCurrentSession().QueryOver<Pagina>().List();
-            return Json(paginas);
-        }
-
     }
 }
