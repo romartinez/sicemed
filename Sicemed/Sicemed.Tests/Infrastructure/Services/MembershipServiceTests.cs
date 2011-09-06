@@ -28,6 +28,9 @@ namespace Sicemed.Tests.Infrastructure.Services
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
+            Session.Flush();
+            Session.Evict(usuario);
+
             Usuario u2;
             MembershipService.Login("walter.poch@gmail.com", "testtest", out u2);
             Assert.AreEqual(usuario, u2);
