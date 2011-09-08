@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Sicemed.Web.Infrastructure.Attributes.Validation;
 using Sicemed.Web.Models.Enumerations;
+using Sicemed.Web.Models.Enumerations.Roles;
 
 namespace Sicemed.Web.Models.ViewModels.UserManagement
 {

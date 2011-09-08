@@ -2,6 +2,7 @@
 using NHibernate.Mapping.ByCode.Conformist;
 using Sicemed.Web.Models.Components;
 using Sicemed.Web.Models.Enumerations;
+using Sicemed.Web.Models.Enumerations.Roles;
 
 namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Components
 {

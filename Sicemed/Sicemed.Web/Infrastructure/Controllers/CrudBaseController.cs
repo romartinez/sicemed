@@ -4,10 +4,13 @@ using System.Web.Mvc;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Exceptions;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Enumerations.Roles;
 using Sicemed.Web.Models.ViewModels;
+using Sicemed.Web.Infrastructure.Helpers;
 
 namespace Sicemed.Web.Infrastructure.Controllers
 {
+    [AuthorizeIt(typeof(Administrador))]
     public abstract class CrudBaseController<T> : NHibernateController where T : Entity
     {
         protected abstract Expression<Func<T, object>> DefaultOrderBy { get; }
@@ -19,7 +22,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
 
         [HttpPost]
         [AjaxHandleError]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]     
         public virtual JsonResult List(long count, int page, int rows)
         {
             page--;
@@ -46,6 +49,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
+        [ValidateModelStateAttribute]
         public virtual JsonResult Nuevo(string oper, T modelo, int paginaId = 0)
         {
             if (!oper.Equals("add", StringComparison.InvariantCultureIgnoreCase)) throw new ValidationErrorException();
@@ -58,6 +62,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
+        [ValidateModelStateAttribute]
         public virtual ActionResult Editar(long id, string oper, T modelo)
         {
             if (!oper.Equals("edit", StringComparison.InvariantCultureIgnoreCase)) throw new ValidationErrorException();
@@ -74,6 +79,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
+        [ValidateModelStateAttribute]
         public virtual ActionResult Eliminar(string id, string oper)
         {
             if (!oper.Equals("del", StringComparison.InvariantCultureIgnoreCase)) throw new ValidationErrorException();
@@ -82,7 +88,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
             var session = SessionFactory.GetCurrentSession();
             foreach (var idsSeleccionado in idsSeleccionados)
             {
-                //session.Delete<T>((long) idsSeleccionado);
+                session.Delete<T>(Convert.ToInt64(idsSeleccionado));
             }
 
             return Json(ResponseMessage.Success());

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Principal;
 using Sicemed.Web.Models.Components;
 using Sicemed.Web.Models.Enumerations;
+using Sicemed.Web.Models.Enumerations.Roles;
 
 namespace Sicemed.Web.Models
 {

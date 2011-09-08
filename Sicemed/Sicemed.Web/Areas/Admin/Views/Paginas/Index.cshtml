@@ -24,10 +24,50 @@
                 url: '@Url.Action("List")',
                 datatype: "json",
                 mtype: 'POST',
-                colNames: ['Id', 'Nombre'],
+                colNames: ['Id', 'Nombre', 'Contenido'],
                 colModel: [
-                    { name: 'Id', index: 'Id', width: 55 },
-                    { name: 'Nombre', index: 'Nombre', width: 90 }
+                    { 
+                        name: 'Id', 
+                        index: 'Id', 
+                        width: 55, 
+                        sortable: false, 
+                        hidden: true 
+                    },
+                    { 
+                        name: 'Nombre', 
+                        index: 'Nombre', 
+                        width: 90, 
+                        editable: true, 
+                        sortable: false, 
+                        editrules: { 
+                            required: true 
+                        }, 
+                        formoptions: { 
+                            label: 'Nombre (*)',
+                            maxlength: '255', 
+                            size: '255'                            
+                        } 
+                    },
+                    { 
+                        name: 'Contenido', 
+                        index: 'Contenido', 
+                        width: 300, 
+                        editable: true, 
+                        sortable: false, 
+                        edittype: 'textarea',
+                        editoptions: {
+                            rows:'30',
+                            cols:'70'
+                        },
+                        editrules: { 
+                            required: true 
+                        }, 
+                        formoptions: { 
+                            label: 'Contenido (*)',
+                            maxlength: '50', 
+                            size: '50'                            
+                        } 
+                    }
                 ],
                 multiselect: false,
                 postData: {
@@ -55,13 +95,63 @@
                 }                
             });
 
-            $("#data").navGrid('#pager', { edit: false, add: false, del: false, search: false, refresh: false },
-                null,
-                null,
-                null,
+            var defaultCrudOptions =  {
+                    modal: true,
+                    resize: false,
+                    width: 600,
+                    mtype: 'POST',
+                    closeAfterAdd: true,
+                    closeAfterEdit: true,
+                    savekey: [true, 13],
+                    reloadAfterSubmit: true,
+                    recreateForm: true,
+                    serializeEditData: $.appendAntiForgeryToken,
+                    serializeDelData: $.appendAntiForgeryToken,
+                    errorTextFormat: function (err) {
+                        return "Se produjo un error.";
+                    }
+            }
+
+            var getEditOptions = function(){
+                var options = {
+                    url: '@Url.Action("Editar")',
+                };
+                return $.extend(options, defaultCrudOptions);                
+            };
+
+            var getAddOptions = function(){
+                var options = {
+                    url: '@Url.Action("Nuevo")',
+                    afterSubmit: function (response, postData) {
+                        var grid = $("#data");
+                        grid.data("count", grid.data("count") + 1);
+                        return [true, ""];
+                    }
+                };
+                return $.extend(options, defaultCrudOptions);                
+            };
+
+            var getDeleteOptions = function(){
+                var options = {
+                    url: '@Url.Action("Eliminar")',
+                    afterSubmit: function (response, postData) {
+                        var grid = $("#data");
+                        grid.data("count", grid.data("count") - 1);
+                        return [true, ""];
+                    }
+                };
+                return $.extend(options, defaultCrudOptions);                
+            };
+
+            $("#data").navGrid('#pager', { edit: true, add: true, del: true, search: false, refresh: true },
+                getEditOptions(),
+                getAddOptions(),
+                getDeleteOptions(),
                 {}, //search
                 {closeOnEscape: true }
                 );            
+
+            
         });
     </script>
 }

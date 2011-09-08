@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using System.Web.Routing;
 using Castle.Core.Logging;
 using Castle.Facilities.TypedFactory;
@@ -11,8 +14,8 @@ using DataAnnotationsExtensions.ClientValidation;
 using Microsoft.Practices.ServiceLocation;
 using SICEMED.Web.Infrastructure.Windsor.Facilities;
 using Sicemed.Web.Infrastructure;
-using Combres.Mvc;
 using Sicemed.Web.Infrastructure.Controllers;
+using Sicemed.Web.Infrastructure.Providers.FilterAtrribute;
 using ILogger = Castle.Core.Logging.ILogger;
 
 namespace SICEMED.Web
@@ -44,6 +47,8 @@ namespace SICEMED.Web
 
         public static void RegisterRoutes(RouteCollection routes)
         {
+            AreaRegistration.RegisterAllAreas();
+
             routes.AddCombresRoute("Combres");
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
@@ -57,7 +62,8 @@ namespace SICEMED.Web
 
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
+            DefaultModelBinder.ResourceClassKey = "Messages";
+            ValidationExtensions.ResourceClassKey = "Messages";
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
@@ -74,12 +80,26 @@ namespace SICEMED.Web
             ServiceLocator.Current.GetInstance<IApplicationInstaller>().Install(NHibernateFacility.BuildDatabaseConfiguration());
 
             ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(_container.Kernel));
+            FilterProviders.Providers.Add(new WindsorFilterAttributeFilterProvider(_container));
         }
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            if(_logger.IsFatalEnabled)
-                _logger.FatalFormat("Error no atrapado. Exc: {0}", Server.GetLastError());
+            var ctx = HttpContext.Current;
+            var errorMsg = ctx.Server.GetLastError().ToString();
+            _logger.FatalFormat("URL:{0} \n ERROR: {1}", ctx.Request.RawUrl, errorMsg);
+            var error = new KeyValuePair<string, object>("ErrorMessage", errorMsg);
+            ctx.Response.Clear();
+            var rc = ((MvcHandler)ctx.CurrentHandler).RequestContext;
+            var controllerName = rc.RouteData.GetRequiredString("controller");
+            var factory = ControllerBuilder.Current.GetControllerFactory();
+            var controller = factory.CreateController(rc, controllerName);
+            var cc = new ControllerContext(rc, (ControllerBase)controller);
+
+            var viewResult = new ViewResult { ViewName = "ErrorGenerico" };
+            viewResult.ViewData.Add(error);
+            viewResult.ExecuteResult(cc);
+            ctx.Server.ClearError();
         }
     }
 }

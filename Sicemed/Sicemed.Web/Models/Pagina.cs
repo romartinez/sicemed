@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sicemed.Web.Models
 {
@@ -12,8 +13,11 @@ namespace Sicemed.Web.Models
             _hijos = new HashSet<Pagina>();
         }
 
+        [Required]
         public virtual string Nombre { get; set; }
+        [Required]
         public virtual string Contenido { get; set; }
+
         public virtual Pagina Padre { get; set; }
 
         public virtual IEnumerable<Pagina> Hijos

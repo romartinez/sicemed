@@ -1,5 +1,6 @@
 ﻿using System;
 using Sicemed.Web.Models.Enumerations;
+using Sicemed.Web.Models.Enumerations.Roles;
 
 namespace Sicemed.Web.Models.Components
 {

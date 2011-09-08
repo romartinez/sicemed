@@ -39,6 +39,7 @@
       <resource path="~/content/themes/base/jquery-ui.css" />
       <resource path="~/content/jquery.jqGrid/ui.jqgrid.css" />
       <resource path="~/content/smart_wizard.css" />
+      <resource path="~/content/menu.css" />
     </resourceSet>
     <resourceSet name="siteJs" type="js">
       <resource path="~/scripts/jquery-1.6.2.js" />
@@ -54,6 +55,7 @@
       <resource path="~/scripts/i18n/grid.locale-es.js" />
       <resource path="~/scripts/jquery.jqGrid.min.js" />
       <resource path="~/scripts/jquery.blockUI.js" />
+      <resource path="~/scripts/jquery.easing.1.3.js" />
       <resource path="~/scripts/postAntiForgery.js" />
       <resource path="~/scripts/msDateJsonParser.js" />
       <resource path="~/scripts/postify.js" />

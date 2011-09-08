@@ -5,6 +5,7 @@ using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Enumerations;
+using Sicemed.Web.Models.Enumerations.Roles;
 using Sicemed.Web.Models.ViewModels.UserManagement;
 
 namespace Sicemed.Web.Controllers

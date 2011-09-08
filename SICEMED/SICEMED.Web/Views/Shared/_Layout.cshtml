@@ -1,6 +1,7 @@
 ﻿@using System.Security.Principal
 @using Combres
 @using Sicemed.Web.Models.Enumerations
+@using Sicemed.Web.Models.Enumerations.Roles
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,30 +13,55 @@
     <div class="page">
         <header>
             <div id="title">
-                <h1>My MVC Application</h1>
+                <h1>Sicemed</h1>
             </div>
             <div id="logindisplay">
                 @Html.Partial("_LogOnPartial")
             </div>
             <nav>
-                <ul id="menu">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                <ul id="sdt_menu" class="sdt_menu ui-helper-clearfix">
+                    <li>
+                        <a href="@Url.Action("Index", "Home")">
+						    <img src="../../Content/images/menu/2.jpg" alt="Home"/>
+						    <span class="sdt_active"></span>
+						    <span class="sdt_wrap">
+							    <span class="sdt_link">Home</span>
+							    <span class="sdt_descr">Inicio</span>
+						    </span>                            
+                        </a>                    
+                    </li>
+                    <li>
+					    <a href="@Url.Action("About", "Home")">
+						    <img src="../../Content/images/menu/3.jpg" alt=""/>
+						    <span class="sdt_active"></span>
+						    <span class="sdt_wrap">
+							    <span class="sdt_link">Inspiration</span>
+							    <span class="sdt_descr">Where ideas get born</span>
+						    </span>
+					    </a>
+                    </li>
                     @if (User.IsInRole(Rol.Administrador))
                     {
                         <li>
-                            Administraci&oacute;n
-                            <ul>
-                                <li>@Html.ActionLink("Paginas", "Index", "Paginas")</li>
-                                <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
-                                <li>@Html.ActionLink("Provincias", "Index", "Provincias")</li>
-                                <li>@Html.ActionLink("Localidades", "Index", "Localidades")</li>
-                                <li>@Html.ActionLink("Feriados", "Index", "Feriados")</li>
-                                <li>@Html.ActionLink("Obras Sociales", "Index", "ObrasSociales")</li>
-                                <li>@Html.ActionLink("Planes", "Index", "Planes")</li>
-                                <li>@Html.ActionLink("Especialidades", "Index", "Especialidades")</li>
-                                <li>@Html.ActionLink("Consultorios", "Index", "Consultorios")</li>                                
-                            </ul>
+					        <a href="#">
+						        <img src="../../Content/images/menu/1.jpg" alt=""/>
+						        <span class="sdt_active"></span>
+						        <span class="sdt_wrap">
+							        <span class="sdt_link">Administraci&oacute;n</span>
+							        <span class="sdt_descr">My work</span>
+						        </span>
+					        </a>
+					        <div class="sdt_box">
+                                @Html.ActionLink("Paginas", "Index", new { Area = "Admin", Controller = "Paginas" })
+                                @Html.ActionLink("Usuarios", "Index", new { Area = "Admin", Controller = "Usuarios" })
+                                @Html.ActionLink("Provincias", "Index", new { Area = "Admin", Controller = "Provincias" })
+                                @Html.ActionLink("Localidades", "Index", new { Area = "Admin", Controller = "Localidades" })
+                                @Html.ActionLink("Feriados", "Index", new { Area = "Admin", Controller = "Feriados" })
+                                @Html.ActionLink("Obras Sociales", "Index", new { Area = "Admin", Controller = "ObrasSociales" })
+                                @Html.ActionLink("Planes", "Index", new { Area = "Admin", Controller = "Planes" })
+                                @Html.ActionLink("Especialidades", "Index", new { Area = "Admin", Controller = "Especialidades" })
+                                @Html.ActionLink("Consultorios", "Index", new { Area = "Admin", Controller = "Consultorios" })                                
+					        </div>
                         </li>
                     }
                 </ul>
@@ -49,5 +75,8 @@
     </div>
     @Html.Raw(WebExtensions.CombresLink("siteJs"))
     @RenderSection("Scripts", false)
+    <script type="text/javascript">
+        jQuery(document).ready(app.initialize);
+    </script>
 </body>
 </html>
