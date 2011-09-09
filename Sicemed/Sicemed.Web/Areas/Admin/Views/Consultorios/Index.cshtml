@@ -1,8 +1,8 @@
 ﻿@{
-    ViewBag.Title = "Administración De Páginas";
+    ViewBag.Title = "Administración De Consultorios";
 }
 <h2>
-    Administraci&oacute;n de P&aacute;ginas
+    Administraci&oacute;n de Consultorios
 </h2>
 
 @Html.Partial("GrillaBase")
@@ -17,11 +17,10 @@
                     del: '@Url.Action("Eliminar")',
                     list: '@Url.Action("List")'
                 },
-                params: {                    
-                    caption: 'Gesti&oacute;n De P&aacute;ginas',
-                    emptyrecords: 'No hay P&aacute;ginas cargadas.',
-                    modalWidth: 600,                    
-                    colNames: ['Id', 'Nombre', 'Contenido'],
+                params: {
+                    caption: 'Gesti&oacute;n De Consultorios',
+                    emptyrecords: 'No hay Consultorios cargados.',
+                    colNames: ['Id', 'Nombre', 'Descripcion'],
                     colModel: [
                             {
                                 name: 'Id',
@@ -46,23 +45,18 @@
                                 }
                             },
                             {
-                                name: 'Contenido',
-                                index: 'Contenido',
+                                name: 'Descripcion',
+                                index: 'Descripcion',
                                 width: 300,
                                 editable: true,
                                 sortable: false,
                                 edittype: 'textarea',
                                 editoptions: {
-                                    rows: '30',
-                                    cols: '70'
-                                },
-                                editrules: {
-                                    required: true
+                                    rows: '10',
+                                    cols: '30'
                                 },
                                 formoptions: {
-                                    label: 'Contenido (*)',
-                                    maxlength: '50',
-                                    size: '50'
+                                    label: 'Descripcion'
                                 }
                             }
                         ]

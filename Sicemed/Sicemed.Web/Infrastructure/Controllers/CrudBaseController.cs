@@ -69,7 +69,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
 
             var session = SessionFactory.GetCurrentSession();
 
-            var modelFromDb = session.QueryOver<Pagina>().Where(x => x.Id == id).SingleOrDefault();
+            var modelFromDb = session.QueryOver<T>().Where(x => x.Id == id).SingleOrDefault();
 
             UpdateModel(modelFromDb);
 

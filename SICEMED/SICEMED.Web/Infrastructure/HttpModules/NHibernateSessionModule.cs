@@ -46,9 +46,10 @@ namespace Sicemed.Web.Infrastructure.HttpModules
             }
         }
 
-        private static void EndSession(ISession session)
+        private void EndSession(ISession session)
         {
-            if(session.Transaction != null && session.Transaction.IsActive)
+            var exc = app.Server.GetLastError();
+            if (exc == null && session.Transaction != null && session.Transaction.IsActive)
             {
                 session.Transaction.Commit();
             }

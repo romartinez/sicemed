@@ -12,7 +12,7 @@
                 list: 'List'
             },
             params: {
-                modalWidth: 600,
+                modalWidth: 400,
                 editable: true,
                 addable: true,
                 deleteable: true,

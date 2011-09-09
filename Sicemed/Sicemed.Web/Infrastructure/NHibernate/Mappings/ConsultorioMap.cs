@@ -6,7 +6,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
          public ConsultorioMap()
          {
-             Property(x => x.Descripcion, map => map.NotNullable(true));
+             Property(x => x.Descripcion);
              Property(x => x.Nombre, map => map.NotNullable(true));
          }
     }
