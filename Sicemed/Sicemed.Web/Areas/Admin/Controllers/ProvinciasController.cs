@@ -1,14 +1,19 @@
 ﻿using System;
-using System.Web.Mvc;
+using System.Linq.Expressions;
 using Sicemed.Web.Infrastructure.Controllers;
+using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
 {
-    public class ProvinciasController : NHibernateController
+    public class ProvinciasController : CrudBaseController<Provincia>
     {
-        public ActionResult Index()
+        #region Overrides of CrudBaseController<Provincia>
+
+        protected override Expression<Func<Provincia, object>> DefaultOrderBy
         {
-            throw new NotImplementedException();
-        }         
+            get { return (x) => x.Nombre; }
+        }
+
+        #endregion
     }
 }

@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Administración De Provincias";
+}
+<h2>
+    Administraci&oacute;n de Provincias
+</h2>
+
+@Html.Partial("GrillaBase")
+
+@section Scripts{
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            app.grid.initialize({
+                url: {
+                    edit: '@Url.Action("Editar")',
+                    add: '@Url.Action("Nuevo")',
+                    del: '@Url.Action("Eliminar")',
+                    list: '@Url.Action("List")'
+                },
+                params: {
+                    caption: 'Gesti&oacute;n De Provincias',
+                    emptyrecords: 'No hay Provincias cargados.',
+                    colNames: ['Id', 'Nombre'],
+                    colModel: [
+                            {
+                                name: 'Id',
+                                index: 'Id',
+                                width: 55,
+                                sortable: false,
+                                hidden: true
+                            },
+                            {
+                                name: 'Nombre',
+                                index: 'Nombre',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Nombre (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            }
+                        ]
+                }
+            });
+        });
+    </script>
+}

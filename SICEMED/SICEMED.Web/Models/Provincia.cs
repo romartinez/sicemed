@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Sicemed.Web.Models
 {
@@ -15,6 +16,7 @@ namespace Sicemed.Web.Models
 
         #region Primitive Properties
 
+        [Required]
         public virtual string Nombre { get; set; }
 
         #endregion
