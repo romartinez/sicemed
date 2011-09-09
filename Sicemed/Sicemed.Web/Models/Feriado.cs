@@ -10,10 +10,8 @@ namespace Sicemed.Web.Models
         [Required]
         public virtual string Nombre { get; set; }
 
-        public virtual DateTime? FechaAjustada { get; set; }
-
         [Required]
-        public virtual DateTime FechaOriginal { get; set; }
+        public virtual DateTime Fecha { get; set; }
 
         #endregion
     }

@@ -9,7 +9,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
     {
         protected override Expression<Func<Feriado, object>> DefaultOrderBy
         {
-            get { return (x) => x.FechaOriginal; }
+            get { return (x) => x.Fecha; }
         }
     }
 }

@@ -20,7 +20,7 @@
                 params: {
                     caption: 'Gesti&oacute;n De Feriados',
                     emptyrecords: 'No hay Feriados cargados.',
-                    colNames: ['Id', 'Nombre', 'Fecha Original', 'Fecha Ajustada'],
+                    colNames: ['Id', 'Nombre', 'Fecha'],
                     colModel: [
                             {
                                 name: 'Id',
@@ -45,12 +45,15 @@
                                 }
                             },
                             {
-                                name: 'FechaOriginal',
-                                index: 'FechaOriginal',
+                                name: 'Fecha',
+                                index: 'Fecha',
                                 width: 90,
                                 editable: true,
                                 sortable: false,
-                                datefmt: 'dd/mm/yyyy',
+                                formatter: 'date',
+                                formatoptions: {
+                                    newformat: 'd/m/Y'
+                                },
                                 editoptions: {
                                     dataInit: function(element) {
                                         $(element).datepicker();
@@ -61,28 +64,7 @@
                                     required: true
                                 },
                                 formoptions: {
-                                    label: 'Fecha Original (*)',
-                                    maxlength: '10',
-                                    size: '10'
-                                }
-                            },
-                            {
-                                name: 'FechaAjustada',
-                                index: 'FechaAjustada',
-                                width: 90,
-                                editable: true,
-                                sortable: false,
-                                datefmt: 'dd/mm/yyyy',
-                                editoptions: {
-                                    dataInit: function (element) {
-                                        $(element).datepicker();
-                                    }
-                                },
-                                editrules: {
-                                    date: true  
-                                },
-                                formoptions: {
-                                    label: 'Fecha Ajustada',
+                                    label: 'Fecha (*)',
                                     maxlength: '10',
                                     size: '10'
                                 }

@@ -17,8 +17,7 @@ namespace Sicemed.Tests.Models.Feriados
                 feriado = new Feriado()
                           {
                               Nombre = "Paso a la Inmortalidad del General José de San Martín",
-                              FechaOriginal = new DateTime(2011, 08, 17),
-                              FechaAjustada = new DateTime(2011, 08, 15)
+                              Fecha = new DateTime(2011, 08, 17),
                           };
                 Session.Save(feriado);
                 tx.Commit();

@@ -44,6 +44,7 @@
     <resourceSet name="siteJs" type="js">
       <resource path="~/scripts/jquery-1.6.2.js" />
       <resource path="~/scripts/jquery-ui-1.8.15.js" />
+      <resource path="~/scripts/i18n/jquery.ui.datepicker-es.js" />
       <resource path="~/scripts/jQuery.tmpl.js" />
       <resource path="~/scripts/jquery.unobtrusive-ajax.js" />
       <resource path="~/scripts/jquery.validate.js" />
