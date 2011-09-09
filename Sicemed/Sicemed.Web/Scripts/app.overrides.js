@@ -1,4 +1,11 @@
-﻿//overwrite common methods
+﻿//Console overrides
+if (!window.console) console = {};
+console.log = console.log || function(){};
+console.warn = console.warn || function(){};
+console.error = console.error || function(){};
+console.info = console.info || function(){};
+
+//overwrite common methods
 function alert(content) {
     app.ui.showMessage(content);
 }

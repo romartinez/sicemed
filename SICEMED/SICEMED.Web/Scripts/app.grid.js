@@ -2,34 +2,91 @@
     var grid = app.grid = {};
 
     grid.initialize = function (options) {
+        var defaults = {
+            grid: '#data',
+            pager: '#pager',
+            url: {
+                edit: 'Editar',
+                add: 'Nuevo',
+                del: 'Eliminar',
+                list: 'List'
+            },
+            params: {
+                modalWidth: 600,
+                editable: true,
+                addable: true,
+                deleteable: true,
+                refresheable: true
+            }
+        };
 
-        $("#data", {
-            url: options.url.list,
+        var settings = $.extend(true, {}, defaults, options);
+
+        var getGridCount = function () {
+            var count = $(settings.grid).data("count");
+            return count === undefined ? 0 : count;
+        };
+
+        var defaultCrudOptions = {
+            modal: true,
+            resize: false,
+            width: settings.params.modalWidth,
+            mtype: 'POST',
+            closeAfterAdd: true,
+            closeAfterEdit: true,
+            savekey: [true, 13],
+            reloadAfterSubmit: true,
+            recreateForm: true,
+            serializeEditData: $.appendAntiForgeryToken,
+            serializeDelData: $.appendAntiForgeryToken,
+            errorTextFormat: function(err) {
+                return "Se produjo un error.";
+            }
+        };
+
+        var getEditOptions = function(){
+            var options = {
+                url: settings.url.edit
+            };
+            return $.extend(options, defaultCrudOptions);                
+        };
+
+        var getAddOptions = function(){
+            var options = {
+                url: settings.url.add,
+                afterSubmit: function (response, postData) {
+                    var grid = $(settings.grid);
+                    grid.data("count", grid.data("count") + 1);
+                    return [true, ""];
+                }
+            };
+            return $.extend(options, defaultCrudOptions);                
+        };
+
+        var getDeleteOptions = function(){
+            var options = {
+                url: settings.url.del,
+                afterSubmit: function (response, postData) {
+                    var grid = $(settings.grid);
+                    grid.data("count", grid.data("count") - 1);
+                    return [true, ""];
+                }
+            };
+            return $.extend(options, defaultCrudOptions);                
+        };        
+
+        $(settings.grid).jqGrid({
+            url: settings.url.list,
             datatype: 'json',
             mtype: 'POST',
-            colNames: ['Id', 'Nombre', 'Nombre Corto', 'Facultades', 'Requiere Cuenta?'],
-            colModel: [
-                        { name: 'IdE', hidden: true },
-                        { name: 'Descripcion', width: 230, resizable: false, align: 'left', sortable: false, editable: true, edittype: 'text', editoptions: { maxlength: '50', size: '50' }, editrules: { required: true }, formoptions: { label: 'Nombre (*)'} },
-                        { name: 'DescripcionCorta', width: 80, resizable: false, align: 'center', sortable: false, editable: true, edittype: 'text', editoptions: { maxlength: '10', size: '10' }, formoptions: { label: 'Nombre Corto'} },
-                        { name: 'Facultades', width: 310, resizable: false, align: 'left', sortable: false,
-                            formatter: function (cellvalue, o, rowObject) {
-                                var facultades = [];
-                                if (rowObject.Facultades) {
-                                    facultades = $.map(rowObject.Facultades, function (item, i) { return item.Descripcion; });
-                                }
-                                if (facultades.length > 0) return facultades.join(', ');
-                                return '&nbsp;';
-                            }
-                        },
-                        { name: 'RequiereCuenta', width: 110, resizable: false, align: 'center', sortable: false, editable: true, edittype: 'checkbox', editoptions: { value: 'true:false' }, formoptions: { label: 'Requiere Cuenta?' }, formatter: 'booleanFormatter' }
-                    ],
+            colNames: settings.params.colNames,
+            colModel: settings.params.colModel,
             multiselect: false,
             postData: {
                 count: getGridCount,
-                __RequestVerificationToken: app.getAntiForgeryToken
+                __RequestVerificationToken: app.helpers.getAntiForgeryToken
             },
-            pager: '#pager',
+            pager: settings.pager,
             rowNum: 10,
             rowList: [10, 25, 50],
             viewrecords: true,
@@ -41,49 +98,31 @@
                 records: "Records",
                 root: "Rows",
                 repeatitems: false,
-                id: "IdE"
+                id: "Id"
             },
-            caption: 'Gesti&oacute;n De Productos',
-            emptyrecords: 'No hay Productos cargados.',
+            caption: settings.params.caption,
+            emptyrecords: settings.params.emptyrecords,
             loadComplete: function (data) {
                 app.fixes.gridLoadFix($(this), data);
-            }
+            }                
         });
 
-        $("#data").navGrid('#pager', { edit: false, add: false, del: false, search: false, refresh: false },
-                null,
-                null,
-                null,
-                {}, //search
-                {closeOnEscape: true }
-                );
-
-    };
-
-    var getGridCount = function () {
-        var count = $("#data").data("count");
-        return count === undefined ? 0 : count;
-    };
-    
-    var getDefaultCrudOptions = function () {
-        var options = {
-            modal: true,
-            resize: false,
-            width: 400,
-            mtype: 'POST',
-            closeAfterAdd: true,
-            closeAfterEdit: true,
-            savekey: [true, 13],
-            reloadAfterSubmit: true,
-            recreateForm: true,
-            serializeEditData: $.appendAntiForgeryToken,
-            serializeDelData: $.appendAntiForgeryToken,
-            errorTextFormat: function (err) {
-                return "Se produjo un error.";
-            }
-        };
-        return options;
-    };
+        $(settings.grid).navGrid(
+            settings.pager, 
+            { 
+                edit: settings.params.editable,
+                add: settings.params.addable, 
+                del: settings.params.deleteable, 
+                search: false, 
+                refresh: settings.params.refresheable 
+            },
+            getEditOptions(),
+            getAddOptions(),
+            getDeleteOptions(),
+            {}, //search
+            {closeOnEscape: true }
+        );                    
+    }
 
     return app;
 })(jQuery, app || {});   

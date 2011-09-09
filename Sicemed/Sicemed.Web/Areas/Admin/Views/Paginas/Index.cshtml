@@ -1,157 +1,72 @@
 ﻿@{
-    ViewBag.Title = "Manejo De Contenido";
+    ViewBag.Title = "Administración De Páginas";
 }
 <h2>
-    Contenido
+    Administraci&oacute;n de P&aacute;ginas
 </h2>
 
-@Html.AntiForgeryToken()
-
-<table id="data">
-</table>
-<div id="pager">
-</div>
+@Html.Partial("GrillaBase")
 
 @section Scripts{
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
-            var getGridCount = function () {
-                var count = $("#data").data("count");
-                return count === undefined ? 0 : count;
-            };            
-            
-            $("#data").jqGrid({
-                url: '@Url.Action("List")',
-                datatype: "json",
-                mtype: 'POST',
-                colNames: ['Id', 'Nombre', 'Contenido'],
-                colModel: [
-                    { 
-                        name: 'Id', 
-                        index: 'Id', 
-                        width: 55, 
-                        sortable: false, 
-                        hidden: true 
-                    },
-                    { 
-                        name: 'Nombre', 
-                        index: 'Nombre', 
-                        width: 90, 
-                        editable: true, 
-                        sortable: false, 
-                        editrules: { 
-                            required: true 
-                        }, 
-                        formoptions: { 
-                            label: 'Nombre (*)',
-                            maxlength: '255', 
-                            size: '255'                            
-                        } 
-                    },
-                    { 
-                        name: 'Contenido', 
-                        index: 'Contenido', 
-                        width: 300, 
-                        editable: true, 
-                        sortable: false, 
-                        edittype: 'textarea',
-                        editoptions: {
-                            rows:'30',
-                            cols:'70'
-                        },
-                        editrules: { 
-                            required: true 
-                        }, 
-                        formoptions: { 
-                            label: 'Contenido (*)',
-                            maxlength: '50', 
-                            size: '50'                            
-                        } 
-                    }
-                ],
-                multiselect: false,
-                postData: {
-                    count: getGridCount,
-                    __RequestVerificationToken: app.helpers.getAntiForgeryToken
+            app.grid.initialize({
+                url: {
+                    edit: '@Url.Action("Editar")',
+                    add: '@Url.Action("Nuevo")',
+                    del: '@Url.Action("Eliminar")',
+                    list: '@Url.Action("List")'
                 },
-                pager: '#pager',
-                rowNum: 10,
-                rowList: [1,2,3,4,5,10, 25, 50],
-                viewrecords: true,
-                height: 'auto',
-                width: '730',
-                jsonReader: {
-                    page: "Page",
-                    total: "Total",
-                    records: "Records",
-                    root: "Rows",
-                    repeatitems: false,
-                    id: "Id"
-                },
-                caption: 'Gesti&oacute;n De P&aacute;ginas',
-                emptyrecords: 'No hay P&aacute;ginas cargados.',
-                loadComplete: function (data) {
-                    app.fixes.gridLoadFix($(this), data);
-                }                
+                params: {
+                    caption: 'Gesti&oacute;n De P&aacute;ginas',
+                    emptyrecords: 'No hay P&aacute;ginas cargadas.',
+                    colNames: ['Id', 'Nombre', 'Contenido'],
+                    colModel: [
+                            {
+                                name: 'Id',
+                                index: 'Id',
+                                width: 55,
+                                sortable: false,
+                                hidden: true
+                            },
+                            {
+                                name: 'Nombre',
+                                index: 'Nombre',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Nombre (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Contenido',
+                                index: 'Contenido',
+                                width: 300,
+                                editable: true,
+                                sortable: false,
+                                edittype: 'textarea',
+                                editoptions: {
+                                    rows: '30',
+                                    cols: '70'
+                                },
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Contenido (*)',
+                                    maxlength: '50',
+                                    size: '50'
+                                }
+                            }
+                        ]
+                }
             });
-
-            var defaultCrudOptions =  {
-                    modal: true,
-                    resize: false,
-                    width: 600,
-                    mtype: 'POST',
-                    closeAfterAdd: true,
-                    closeAfterEdit: true,
-                    savekey: [true, 13],
-                    reloadAfterSubmit: true,
-                    recreateForm: true,
-                    serializeEditData: $.appendAntiForgeryToken,
-                    serializeDelData: $.appendAntiForgeryToken,
-                    errorTextFormat: function (err) {
-                        return "Se produjo un error.";
-                    }
-            }
-
-            var getEditOptions = function(){
-                var options = {
-                    url: '@Url.Action("Editar")',
-                };
-                return $.extend(options, defaultCrudOptions);                
-            };
-
-            var getAddOptions = function(){
-                var options = {
-                    url: '@Url.Action("Nuevo")',
-                    afterSubmit: function (response, postData) {
-                        var grid = $("#data");
-                        grid.data("count", grid.data("count") + 1);
-                        return [true, ""];
-                    }
-                };
-                return $.extend(options, defaultCrudOptions);                
-            };
-
-            var getDeleteOptions = function(){
-                var options = {
-                    url: '@Url.Action("Eliminar")',
-                    afterSubmit: function (response, postData) {
-                        var grid = $("#data");
-                        grid.data("count", grid.data("count") - 1);
-                        return [true, ""];
-                    }
-                };
-                return $.extend(options, defaultCrudOptions);                
-            };
-
-            $("#data").navGrid('#pager', { edit: true, add: true, del: true, search: false, refresh: true },
-                getEditOptions(),
-                getAddOptions(),
-                getDeleteOptions(),
-                {}, //search
-                {closeOnEscape: true }
-                );            
-
-            
         });
     </script>
 }

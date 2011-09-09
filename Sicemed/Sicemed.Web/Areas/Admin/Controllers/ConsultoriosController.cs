@@ -1,14 +1,19 @@
 ﻿using System;
-using System.Web.Mvc;
+using System.Linq.Expressions;
 using Sicemed.Web.Infrastructure.Controllers;
+using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
 {
-    public class ConsultoriosController : NHibernateController
+    public class ConsultoriosController : CrudBaseController<Consultorio>
     {
-         public ActionResult Index()
-         {
-             throw new NotImplementedException();
-         }
+        #region Overrides of CrudBaseController<Consultorio>
+
+        protected override Expression<Func<Consultorio, object>> DefaultOrderBy
+        {
+            get { return (x) => x.Nombre; }
+        }
+
+        #endregion
     }
 }
