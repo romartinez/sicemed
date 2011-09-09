@@ -178,6 +178,7 @@
     <Compile Include="Infrastructure\Attributes\Filters\AjaxHandleError.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AuditAtrribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AuthorizeItAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\Filters\PermanentCacheAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Validation\EmailAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Validation\ValidatePasswordLengthAttribute.cs" />
@@ -476,6 +477,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Especialidades\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Localidades\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

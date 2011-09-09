@@ -7,19 +7,39 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "/C/Projects/sicemed/Sicemed/Sicemed.Web/Areas/Admin/Views/ObrasSociales/Index.cshtml",
+			"settings":
+			{
+				"buffer_size": 5912,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/NBSFProyectos/RegistroDeFirmas/Presentation/RegistroDeFirmas.Presentation.Web/Controllers/FirmaController.cs",
+			"settings":
+			{
+				"buffer_size": 6102,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 392,
+		"height": 55,
 		"selected_items":
 		[
+			[
+				"consol",
+				"Set Syntax: R Console"
+			]
 		],
 		"width": 392
 	},
 	"console":
 	{
-		"height": 0
+		"height": 122
 	},
 	"distraction_free":
 	{
@@ -31,11 +51,43 @@
 	},
 	"file_history":
 	[
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Areas/Admin/Views/Feriados/Index.cshtml",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Scripts/app.overrides.js",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Scripts/i18n/grid.locale-es.js",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/App_Data/combres.xml",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Scripts/msDateJsonParser.js",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Scripts/jquery.jqGrid.min.js",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Scripts/app.ajax.js",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Views/Account/LogOn.cshtml",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Views/Shared/_LogOnPartial.cshtml",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Content/menu.css",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Views/Shared/_Layout.cshtml",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Areas/Admin/Views/Paginas/Index.cshtml",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Scripts/app.grid.js",
+		"/C/NBSFProyectos/RegistroDeFirmas/Presentation/RegistroDeFirmas.Presentation.Web/Views/Facultad/Index.cshtml",
+		"/C/Projects/Security/Security.Web/Global.asax.cs",
+		"/D/Documents and Settings/Administrator/Desktop/Web.config",
+		"/C/NBSFProyectos/RegistroDeFirmas/Presentation/RegistroDeFirmas.Presentation.Web/Global.asax.cs",
+		"/C/NBSFProyectos/RegistroDeFirmas/Presentation/RegistroDeFirmas.Presentation.Web/App_GlobalResources/Messages.Designer.cs",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Views/Home/Index.cshtml",
+		"/D/Documents and Settings/Administrator/Desktop/jquery.easing.1.3.js",
+		"/D/Documents and Settings/Administrator/Desktop/index.html",
+		"/D/Documents and Settings/Administrator/Desktop/demo/index.html",
+		"/D/Documents and Settings/Administrator/Desktop/demo/menu.css",
+		"/D/Documents and Settings/Administrator/Desktop/demo/csshover3.htc",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Models/Enumerations/Documentos/Dni.cs",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Scripts/MicrosoftAjax.debug.js",
+		"/C/NBSFProyectos/RegistroDeFirmas/Presentation/RegistroDeFirmas.Presentation.Web/Services/CapturaFirmaService.svc.cs",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Scripts/app.js",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Views/UserManagement/Edit.cshtml",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Web.config",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/log4net.config",
+		"/C/tools/sublime/Data/Packages/Default/Global.sublime-settings",
 		"/C/NBSFProyectos/SiteEmpresasV2.35/CommonLayer/NBSF.Common.Types/Suscripciones/SuscripcionModiUsuario.cs"
 	],
 	"find":
 	{
-		"height": 0
+		"height": 32
 	},
 	"find_in_files":
 	{
@@ -54,6 +106,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Introduza una fecha correcta",
+			"jquery.ui.datepicker-es.js",
+			"datefmt",
+			"parseJSON",
+			"sdt_box",
+			"defaults",
+			"'",
+			"                    { \n                        name: 'Nombre', \n                        index: 'Nombre', \n                        width: 90, \n                        editable: true, \n                        sortable: false, \n                        editrules: { \n                            required: true \n                        }, \n                        formoptions: { \n                            label: 'Nombre (*)',\n                            maxlength: '50', \n                            size: '50'                            \n                        } \n                    }\n",
+			"getDefaultCRUDOptions",
 			"wal"
 		],
 		"highlight": true,
@@ -62,6 +123,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"settings",
+			"defaultCrudOptions"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -79,8 +142,65 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "/C/Projects/sicemed/Sicemed/Sicemed.Web/Areas/Admin/Views/ObrasSociales/Index.cshtml",
+					"settings":
+					{
+						"buffer_size": 5912,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5332,
+								5332
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0,
+						"translation.y": 1593,
+						"zoom_level": 1
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/NBSFProyectos/RegistroDeFirmas/Presentation/RegistroDeFirmas.Presentation.Web/Controllers/FirmaController.cs",
+					"settings":
+					{
+						"buffer_size": 6102,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5271,
+								5296
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0,
+						"translation.y": 1428,
+						"zoom_level": 1
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -117,7 +237,7 @@
 	"menu_visible": true,
 	"replace":
 	{
-		"height": 0
+		"height": 60
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -125,6 +245,78 @@
 		"height": 0,
 		"selected_items":
 		[
+			[
+				"obrasocial",
+				"Areas/Admin/Views/ObrasSociales/Index.cshtml"
+			],
+			[
+				"combr",
+				"App_Data/combres.xml"
+			],
+			[
+				"app.ove",
+				"Scripts/app.overrides.js"
+			],
+			[
+				"feriados",
+				"Areas/Admin/Views/Feriados/Index.cshtml"
+			],
+			[
+				"msd",
+				"Scripts/msDateJsonParser.js"
+			],
+			[
+				"app.a",
+				"Scripts/app.ajax.js"
+			],
+			[
+				"ove",
+				"Scripts/app.overrides.js"
+			],
+			[
+				"menu",
+				"Content/menu.css"
+			],
+			[
+				"_layo",
+				"Views/Shared/_Layout.cshtml"
+			],
+			[
+				"log",
+				"Views/Shared/_LogOnPartial.cshtml"
+			],
+			[
+				"logo",
+				"Views/Account/LogOn.cshtml"
+			],
+			[
+				"app",
+				"Scripts/app.grid.js"
+			],
+			[
+				"index",
+				"Areas/Admin/Views/Paginas/Index.cshtml"
+			],
+			[
+				"ind",
+				"Views/Home/Index.cshtml"
+			],
+			[
+				"m",
+				"Scripts/MicrosoftAjax.debug.js"
+			],
+			[
+				"edi",
+				"Models/Enumerations/Documentos/Dni.cs"
+			],
+			[
+				"lay",
+				"Views/Shared/_Layout.cshtml"
+			],
+			[
+				"web.con",
+				"Web.config"
+			],
 			[
 				"suscr",
 				"CommonLayer/NBSF.Common.Types/Suscripciones/SuscripcionModiUsuario.cs"
@@ -143,6 +335,6 @@
 	"show_minimap": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 266,
+	"side_bar_width": 274,
 	"status_bar_visible": true
 }
