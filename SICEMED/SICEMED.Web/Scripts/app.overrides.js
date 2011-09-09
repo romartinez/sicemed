@@ -43,6 +43,7 @@ jQuery.extend($.fn.fmatter.booleanFormatter, {
     }
 });
 
+
 //Fix validation
 $.validator.methods.range = function (value, element, param) {
     var globalizedValue = value.replace(",", ".");

@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "Administración De Obras Sociales";
+}
+<h2>
+    Administraci&oacute;n de Obras Sociales
+</h2>
+
+@Html.Partial("GrillaBase")
+
+@section Scripts{
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            app.grid.initialize({
+                url: {
+                    edit: '@Url.Action("Editar")',
+                    add: '@Url.Action("Nuevo")',
+                    del: '@Url.Action("Eliminar")',
+                    list: '@Url.Action("List")'
+                },
+                params: {
+                    caption: 'Gesti&oacute;n De Obras Sociales',
+                    emptyrecords: 'No hay Obras Sociales cargadas.',
+                    colNames: ['Id', 'Razon Social', 'Tipo Documento', 'Nro Documento', 'Domicilio', 'Localidad', 'Caracteristica', 'Telefono Nro'],
+                    colModel: [
+                            {
+                                name: 'Id',
+                                index: 'Id',
+                                width: 55,
+                                sortable: false,
+                                hidden: true
+                            },
+                            {
+                                name: 'RazonSocial',
+                                index: 'RazonSocial',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Razon Social (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Documento.TipoDocumento.Value',
+                                index: 'Documento.TipoDocumento.Value',
+                                width: 300,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Tipo Documento (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Documento.Numero',
+                                index: 'Documento.Numero',
+                                width: 300,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Numero Documento (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Domicilio.Direccion',
+                                index: 'Domicilio.Direccion',
+                                width: 300,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                },
+                                formoptions: {
+                                    label: 'Direccion',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Domicilio.Localidad',
+                                index: 'Domicilio.Localidad',
+                                width: 300,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                },
+                                formoptions: {
+                                    label: 'Localidad',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Telefono.Prefijo',
+                                index: 'Telefono.Prefijo',
+                                width: 300,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                },
+                                formoptions: {
+                                    label: 'Caracteristica',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Telefono.Numero',
+                                index: 'Telefono.Numero',
+                                width: 300,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                },
+                                formoptions: {
+                                    label: 'Telefono',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            }
+                        ]
+                }
+            });
+        });
+    </script>
+}

@@ -1,14 +1,19 @@
 ﻿using System;
-using System.Web.Mvc;
+using System.Linq.Expressions;
 using Sicemed.Web.Infrastructure.Controllers;
+using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
 {
-    public class ObrasSocialesController : NHibernateController
+    public class ObrasSocialesController : CrudBaseController<ObraSocial>
     {
-         public ActionResult Index()
-         {
-             throw new NotImplementedException();
-         }
+        #region Overrides of CrudBaseController<ObraSocial>
+
+        protected override Expression<Func<ObraSocial, object>> DefaultOrderBy
+        {
+            get { return x => x.RazonSocial; }
+        }
+
+        #endregion
     }
 }
