@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -27,7 +28,7 @@ namespace Sicemed.Web.Infrastructure.ActionResults
                 throw new ArgumentNullException("context");
             }
 
-            if(JsonRequestBehavior == JsonRequestBehavior.DenyGet &&
+            if (JsonRequestBehavior == JsonRequestBehavior.DenyGet &&
                 String.Equals(context.HttpContext.Request.HttpMethod, "GET", StringComparison.OrdinalIgnoreCase))
             {
                 throw new InvalidOperationException("This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.");
@@ -52,9 +53,9 @@ namespace Sicemed.Web.Infrastructure.ActionResults
                 var settings = new JsonSerializerSettings();
                 settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 settings.Converters.Add(new IsoDateTimeConverter());
-                response.Write(JsonConvert.SerializeObject(this.Data, Formatting.None, settings));                
+                response.Write(JsonConvert.SerializeObject(this.Data, Formatting.None, settings));
             }
         }
-        
+
     }
 }

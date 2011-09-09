@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Administración De Feriados";
+}
+<h2>
+    Administraci&oacute;n de Feriados
+</h2>
+
+@Html.Partial("GrillaBase")
+
+@section Scripts{
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            app.grid.initialize({
+                url: {
+                    edit: '@Url.Action("Editar")',
+                    add: '@Url.Action("Nuevo")',
+                    del: '@Url.Action("Eliminar")',
+                    list: '@Url.Action("List")'
+                },
+                params: {
+                    caption: 'Gesti&oacute;n De Feriados',
+                    emptyrecords: 'No hay Feriados cargados.',
+                    colNames: ['Id', 'Nombre', 'Fecha Original', 'Fecha Ajustada'],
+                    colModel: [
+                            {
+                                name: 'Id',
+                                index: 'Id',
+                                width: 55,
+                                sortable: false,
+                                hidden: true
+                            },
+                            {
+                                name: 'Nombre',
+                                index: 'Nombre',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Nombre (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'FechaOriginal',
+                                index: 'FechaOriginal',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                datefmt: 'dd/mm/yyyy',
+                                editoptions: {
+                                    dataInit: function(element) {
+                                        $(element).datepicker();
+                                    }   
+                                },
+                                editrules: {
+                                    date: true,
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Fecha Original (*)',
+                                    maxlength: '10',
+                                    size: '10'
+                                }
+                            },
+                            {
+                                name: 'FechaAjustada',
+                                index: 'FechaAjustada',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                datefmt: 'dd/mm/yyyy',
+                                editoptions: {
+                                    dataInit: function (element) {
+                                        $(element).datepicker();
+                                    }
+                                },
+                                editrules: {
+                                    date: true  
+                                },
+                                formoptions: {
+                                    label: 'Fecha Ajustada',
+                                    maxlength: '10',
+                                    size: '10'
+                                }
+                            }
+                        ]
+                }
+            });
+        });
+    </script>
+}
