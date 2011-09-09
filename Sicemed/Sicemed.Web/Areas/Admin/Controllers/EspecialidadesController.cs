@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Web.Mvc;
+using System.Linq.Expressions;
 using Sicemed.Web.Infrastructure.Controllers;
+using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
 {
-    public class EspecialidadesController : NHibernateController
+    public class EspecialidadesController : CrudBaseController<Especialidad>
     {
-         public ActionResult Index()
-         {
-             throw new NotImplementedException();
-         }
+        protected override Expression<Func<Especialidad, object>> DefaultOrderBy
+        {
+            get { return x => x.Nombre; }
+        }
     }
 }
