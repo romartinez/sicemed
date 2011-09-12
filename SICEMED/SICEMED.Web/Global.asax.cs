@@ -78,7 +78,6 @@ namespace SICEMED.Web
 
             _logger = ServiceLocator.Current.GetInstance<ILogger>();
             ServiceLocator.Current.GetInstance<IApplicationInstaller>().Install(NHibernateFacility.BuildDatabaseConfiguration());
-
             ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(_container.Kernel));
             FilterProviders.Providers.Add(new WindsorFilterAttributeFilterProvider(_container));
         }
@@ -90,15 +89,9 @@ namespace SICEMED.Web
             _logger.FatalFormat("URL:{0} \n ERROR: {1}", ctx.Request.RawUrl, errorMsg);
             var error = new KeyValuePair<string, object>("ErrorMessage", errorMsg);
             ctx.Response.Clear();
-            var rc = ((MvcHandler)ctx.CurrentHandler).RequestContext;
-            var controllerName = rc.RouteData.GetRequiredString("controller");
-            var factory = ControllerBuilder.Current.GetControllerFactory();
-            var controller = factory.CreateController(rc, controllerName);
-            var cc = new ControllerContext(rc, (ControllerBase)controller);
 
             var viewResult = new ViewResult { ViewName = "ErrorGenerico" };
             viewResult.ViewData.Add(error);
-            viewResult.ExecuteResult(cc);
             ctx.Server.ClearError();
         }
     }

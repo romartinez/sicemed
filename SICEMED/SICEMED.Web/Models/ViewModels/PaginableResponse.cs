@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
 
 namespace Sicemed.Web.Models.ViewModels
 {
-    public class PaginableResponse<T>
+    public class PaginableResponse
     {
         public long Total { get; set; }
         
@@ -10,11 +10,11 @@ namespace Sicemed.Web.Models.ViewModels
         
         public long Records { get; set; }
         
-        public IEnumerable<T> Rows { get; set; }
+        public IEnumerable Rows { get; set; }
 
         public PaginableResponse()
         {
-            Rows = new List<T>();
+            Rows = new ArrayList();
         }
     }
 }

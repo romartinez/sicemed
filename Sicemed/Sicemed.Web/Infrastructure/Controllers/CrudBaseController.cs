@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using NHibernate;
+using NHibernate.Criterion;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Exceptions;
 using Sicemed.Web.Models;
@@ -29,9 +33,10 @@ namespace Sicemed.Web.Infrastructure.Controllers
             var session = SessionFactory.GetCurrentSession();
             var query = session.QueryOver<T>();
 
-            var respuesta = new PaginableResponse<T>();
+            var respuesta = new PaginableResponse();
             query.OrderBy(DefaultOrderBy);
-            respuesta.Rows = query.Take(rows).Skip(page * rows).Future<T>();
+
+            respuesta.Rows = RetrieveList(page, rows, query);
             if (page == 0)
             {
                 var queryCount = query.ToRowCountInt64Query().FutureValue<long>();
@@ -44,6 +49,11 @@ namespace Sicemed.Web.Infrastructure.Controllers
             respuesta.Page = ++page;
             respuesta.Total = (long)Math.Ceiling(respuesta.Records / (double)rows);
             return Json(respuesta);
+        }
+
+        protected virtual IEnumerable RetrieveList(int page, int rows, IQueryOver<T, T> query)
+        {
+            return query.Take(rows).Skip(page * rows).Future<T>();
         }
 
         [HttpPost]
