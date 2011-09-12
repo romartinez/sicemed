@@ -85,9 +85,7 @@
                                 sortable: false,
                                 edittype: 'select',
                                 editoptions: {
-                                    value: {
-                                        @Html.Raw(string.Join(",", Model.Select(p=> string.Format("{0}: '{1}'", p.Id, Html.Encode(p.Nombre)))))
-                                    }
+                                    value: @Html.SelectJsonValues(x=>x.Id, x=>x.Nombre)
                                 },
                                 formoptions: {
                                     label: 'Provincia (*)'

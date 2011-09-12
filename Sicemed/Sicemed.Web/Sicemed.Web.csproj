@@ -193,6 +193,7 @@
     <Compile Include="Infrastructure\Exceptions\ValidationErrorException.cs" />
     <Compile Include="Infrastructure\Helpers\EnumReaderExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\HexEncoding.cs" />
+    <Compile Include="Infrastructure\Helpers\HtmlExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\NHibernateMappingsExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\ReflectionHelper.cs" />
     <Compile Include="Infrastructure\Helpers\SessionExtensions.cs" />
