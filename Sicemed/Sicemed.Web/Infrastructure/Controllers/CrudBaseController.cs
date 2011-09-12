@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using NHibernate;
@@ -33,7 +35,6 @@ namespace Sicemed.Web.Infrastructure.Controllers
             var respuesta = new PaginableResponse();
             query.OrderBy(DefaultOrderBy);
 
-            respuesta.Rows = AplicarJoins(query).Take(rows).Skip(page * rows).Future();
             if (page == 0)
             {
                 var queryCount = query.ToRowCountInt64Query().FutureValue<long>();
@@ -43,12 +44,19 @@ namespace Sicemed.Web.Infrastructure.Controllers
             {
                 respuesta.Records = count;
             }
+            respuesta.Rows = AplicarProjections(AplicarFetching(query).Take(rows).Skip(page * rows).Future());
+
             respuesta.Page = ++page;
             respuesta.Total = (long)Math.Ceiling(respuesta.Records / (double)rows);
             return Json(respuesta);
         }
 
-        protected virtual IQueryOver<T> AplicarJoins(IQueryOver<T, T> query)
+        protected virtual IEnumerable AplicarProjections(IEnumerable<T> results)
+        {
+            return results;
+        }
+
+        protected virtual IQueryOver<T> AplicarFetching(IQueryOver<T, T> query)
         {
             return query;
         }

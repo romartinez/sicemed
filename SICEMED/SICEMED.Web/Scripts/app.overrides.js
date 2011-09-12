@@ -25,6 +25,17 @@ jQuery.extend($.fn.fmatter, {
     }
 });
 
+jQuery.extend($.fn.fmatter, {
+    documento: function (cellvalue, options, rowdata) {
+        switch (cellvalue) {
+            case 3:
+                return "DNI";
+            default:
+                return "N/A";
+        }
+    }
+});
+
 jQuery.extend($.fn.fmatter.dateFormatter, {
     unformat: function (cellvalue, options) {
         return new Date(cellvalue);

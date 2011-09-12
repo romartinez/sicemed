@@ -48,6 +48,7 @@
                                 name: 'Documento.TipoDocumento.Value',
                                 index: 'Documento.TipoDocumento.Value',
                                 width: 300,
+                                formatter: 'documento',
                                 editable: true,
                                 sortable: false,
                                 editrules: {
@@ -61,7 +62,7 @@
                             },
                             {
                                 name: 'Documento.Numero',
-                                index: 'Documento.Numero',
+                                index: 'Documento.Numero',                                
                                 width: 300,
                                 editable: true,
                                 sortable: false,
@@ -89,8 +90,11 @@
                                 }
                             },
                             {
-                                name: 'Domicilio.Localidad',
-                                index: 'Domicilio.Localidad',
+                                name: 'LocalidadId',
+                                index: 'Localidad',
+                                formatter: function ( cellvalue, options, rowObject ){
+                                  return rowObject.Domicilio.Localidad.Nombre;
+                                },
                                 width: 300,
                                 editable: true,
                                 sortable: false,

@@ -22,9 +22,9 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             return View(SessionFactory.GetCurrentSession().QueryOver<Provincia>().OrderBy(x => x.Nombre).Asc.Future());
         }
 
-        protected override IQueryOver<Localidad> AplicarJoins(IQueryOver<Localidad, Localidad> query)
+        protected override IQueryOver<Localidad> AplicarFetching(IQueryOver<Localidad, Localidad> query)
         {
-            return query.JoinQueryOver<Provincia>(x => x.Provincia);
+            return query.Fetch(x => x.Provincia).Eager;
         }
 
         protected override Localidad AgregarReferencias(Localidad modelo)
