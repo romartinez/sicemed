@@ -38,15 +38,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         {
             const string ERROR_PROVINCIA_NO_ENCONTRADA = @"Debe seleccionar una Provincia para la Localidad.";
 
-            var provinciaIdValue = this.ValueProvider.GetValue("provinciaId");
-            if (provinciaIdValue == null)
-                throw new ValidationErrorException(ERROR_PROVINCIA_NO_ENCONTRADA);
-            if (string.IsNullOrWhiteSpace(provinciaIdValue.AttemptedValue))
-                throw new ValidationErrorException(ERROR_PROVINCIA_NO_ENCONTRADA);
-            long provinciaId = 0;
-            long.TryParse(provinciaIdValue.AttemptedValue, out provinciaId);
-            if (provinciaId == 0) throw new ValidationErrorException(ERROR_PROVINCIA_NO_ENCONTRADA);
-
+            var provinciaId = RetrieveParameter<long>("provinciaId", "Provincia");
             var session = SessionFactory.GetCurrentSession();
 
             var provincia = session.Get<Provincia>(provinciaId);
@@ -54,7 +46,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             if (provincia == null)
                 throw new ValidationErrorException(ERROR_PROVINCIA_NO_ENCONTRADA);
 
-            return provincia;
+            return provincia;                
         }
 
         #endregion
