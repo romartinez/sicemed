@@ -36,7 +36,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
             var respuesta = new PaginableResponse();
             query.OrderBy(DefaultOrderBy);
 
-            respuesta.Rows = RetrieveList(page, rows, query);
+            respuesta.Rows = AplicarJoins(query).Take(rows).Skip(page * rows).Future();
             if (page == 0)
             {
                 var queryCount = query.ToRowCountInt64Query().FutureValue<long>();
@@ -51,9 +51,19 @@ namespace Sicemed.Web.Infrastructure.Controllers
             return Json(respuesta);
         }
 
-        protected virtual IEnumerable RetrieveList(int page, int rows, IQueryOver<T, T> query)
+        protected virtual IQueryOver<T> AplicarJoins(IQueryOver<T, T> query)
         {
-            return query.Take(rows).Skip(page * rows).Future<T>();
+            return query;
+        }
+
+        protected virtual bool EsValido(T modelo)
+        {
+            return true;
+        }
+
+        protected virtual T AgregarReferencias(T modelo)
+        {
+            return modelo;
         }
 
         [HttpPost]
@@ -63,6 +73,10 @@ namespace Sicemed.Web.Infrastructure.Controllers
         public virtual JsonResult Nuevo(string oper, T modelo, int paginaId = 0)
         {
             if (!oper.Equals("add", StringComparison.InvariantCultureIgnoreCase)) throw new ValidationErrorException();
+
+            AgregarReferencias(modelo);
+
+            EsValido(modelo);
 
             SessionFactory.GetCurrentSession().Save(modelo);
 
@@ -82,6 +96,10 @@ namespace Sicemed.Web.Infrastructure.Controllers
             var modelFromDb = session.QueryOver<T>().Where(x => x.Id == id).SingleOrDefault();
 
             UpdateModel(modelFromDb);
+
+            AgregarReferencias(modelFromDb);
+            
+            EsValido(modelFromDb);
 
             return Json(ResponseMessage.Success());
         }

@@ -2,7 +2,6 @@
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using NHibernate;
-using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Exceptions;
 using Sicemed.Web.Models;
@@ -23,41 +22,19 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             return View(SessionFactory.GetCurrentSession().QueryOver<Provincia>().OrderBy(x => x.Nombre).Asc.Future());
         }
 
-        protected override System.Collections.IEnumerable RetrieveList(int page, int rows, NHibernate.IQueryOver<Localidad, Localidad> query)
+        protected override IQueryOver<Localidad> AplicarJoins(IQueryOver<Localidad, Localidad> query)
         {
-            return query.JoinQueryOver<Provincia>(x => x.Provincia).Take(rows).Skip(page*rows).Future();
+            return query.JoinQueryOver<Provincia>(x => x.Provincia);
         }
 
-        public override JsonResult Nuevo(string oper, Localidad modelo, int paginaId = 0)
+        protected override Localidad AgregarReferencias(Localidad modelo)
         {
-            if (!oper.Equals("add", StringComparison.InvariantCultureIgnoreCase)) throw new ValidationErrorException();
-
-            var session = SessionFactory.GetCurrentSession();
-
-            modelo.Provincia = RetrieveProvincia();
-
-            session.Save(modelo);
-
-            return Json(ResponseMessage.Success());
+            modelo.Provincia = ObtenerProvinciaSeleccionada();
+            
+            return modelo;
         }
 
-        public override ActionResult Editar(long id, string oper, Localidad modelo)
-        {
-            if (!oper.Equals("edit", StringComparison.InvariantCultureIgnoreCase)) throw new ValidationErrorException();
-
-            var session = SessionFactory.GetCurrentSession();
-
-            var modelFromDb = session.QueryOver<Localidad>().Where(x => x.Id == id).SingleOrDefault();
-
-            UpdateModel(modelFromDb);
-
-            modelFromDb.Provincia = RetrieveProvincia();
-
-            return Json(ResponseMessage.Success());      
-        }
-
-
-        private Provincia RetrieveProvincia()
+        private Provincia ObtenerProvinciaSeleccionada()
         {
             const string ERROR_PROVINCIA_NO_ENCONTRADA = @"Debe seleccionar una Provincia para la Localidad.";
 
