@@ -1,0 +1,286 @@
+﻿@{
+    ViewBag.Title = "Administración De Usuarios";
+}
+<h2>
+    Administraci&oacute;n de Usuarios
+</h2>
+
+@Html.Partial("GrillaBase")
+
+@section Scripts{
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            app.grid.initialize({
+                url: {
+                    edit: '@Url.Action("Editar")',
+                    add: '@Url.Action("Nuevo")',
+                    del: '@Url.Action("Eliminar")',
+                    list: '@Url.Action("List")'
+                },
+                params: {
+                    caption: 'Gesti&oacute;n De Usuarios',
+                    emptyrecords: 'No hay Usuarios cargados.',
+                    colNames: [
+                        'Id', 
+                        'Email', 
+                        'Apellido', 
+                        'Nombre', 
+                        'Segundo Nombre', 
+                        'Fecha Nacimiento', 
+                        'Tipo Documento', 
+                        'Nro Documento', 
+                        'Domicilio',
+                        'Localidad',
+                        'Provincia', 
+                        'Caracteristica',
+                        'Telefono',
+                        'Nro. Afiliado', 
+                        'Hab. Online',
+                        'Inasistencias',
+                        'Esta Bloqueado?'
+                    ],
+                    colModel: [
+                            {
+                                name: 'Id',
+                                index: 'Id',
+                                width: 55,
+                                sortable: false,
+                                hidden: true
+                            },
+                            {
+                                name: 'Membership.Email',
+                                index: 'Membership.Email',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true,
+                                    email: true
+                                },
+                                formoptions: {
+                                    label: 'Email (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Apellido',
+                                index: 'Apellido',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },                                
+                                formoptions: {
+                                    label: 'Apellido (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Nombre',
+                                index: 'Nombre',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },                                
+                                formoptions: {
+                                    label: 'Nombre (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'SegundoNombre',
+                                index: 'SegundoNombre',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                formoptions: {
+                                    label: 'Segundo Nombre',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'FechaNacimiento',
+                                index: 'FechaNacimiento',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true,
+                                    date: true
+                                },
+                                formoptions: {
+                                    label: 'Fecha Nacimiento (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Documento.TipoDocumento.Value',
+                                index: 'Documento.TipoDocumento.Value',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Tipo Documento (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Documento.Numero',
+                                index: 'Documento.Numero',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Nro. Documento (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Domicilio.Direccion',
+                                index: 'Domicilio.Direccion',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Direccion (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'LocalidadId',
+                                index: 'Localidad',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Localidad (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'ProvinciaId',
+                                index: 'Provincia',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Provincia (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Telefono.Prefijo',
+                                index: 'Telefono.Prefijo',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Caracteristica (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Telefono.Numero',
+                                index: 'Telefono.Numero',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Telefono (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'NumeroAfiliado',
+                                index: 'NumeroAfiliado',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Numero De Afiliado (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'EstaHabilitadoTurnosWeb',
+                                index: 'EstaHabilitadoTurnosWeb',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Hab. Online (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'InasistenciasContinuas',
+                                index: 'InasistenciasContinuas',
+                                width: 90,
+                                editable: false,
+                                sortable: false
+                            },
+                            {
+                                name: 'Membership.IsLockedOut',
+                                index: 'Membership.IsLockedOut',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Esta Bloquedo? (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            }                        
+                        ]
+                }
+            });
+        });
+    </script>
+}
