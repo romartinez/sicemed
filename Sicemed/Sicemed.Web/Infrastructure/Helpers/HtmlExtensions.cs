@@ -25,6 +25,7 @@ namespace System.Web.Mvc.Html
         {
             if (id == null) throw new ArgumentNullException("id");
             if (text == null) throw new ArgumentNullException("text");
+            if (models == null) throw new ArgumentNullException("models");
 
             var propertyId = ReflectionHelper.GetProperty(id);
             var propertyText = ReflectionHelper.GetProperty(text);
@@ -42,6 +43,8 @@ namespace System.Web.Mvc.Html
 
         public static MvcHtmlString SelectJsonValues(this HtmlHelper htmlHelper, IEnumerable<Enumeration> models)
         {
+            if (models == null) throw new ArgumentNullException("models");
+
             var list = new ListDictionary();
             foreach (var model in models)
             {

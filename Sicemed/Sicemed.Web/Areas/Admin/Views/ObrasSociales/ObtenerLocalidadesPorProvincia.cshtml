@@ -1,0 +1,6 @@
+﻿@using Sicemed.Web.Models
+@model IEnumerable<Localidad>
+@foreach(var localidad in Model)
+{
+    <option value='@localidad.Id'>@localidad.Nombre</option>
+}

@@ -1,4 +1,6 @@
-﻿@using Sicemed.Web.Models.Enumerations.Documentos
+﻿@model IEnumerable<Provincia>
+@using Sicemed.Web.Models
+@using Sicemed.Web.Models.Enumerations.Documentos
 @{
     ViewBag.Title = "Administración De Obras Sociales";
 }
@@ -21,7 +23,7 @@
                 params: {
                     caption: 'Gesti&oacute;n De Obras Sociales',
                     emptyrecords: 'No hay Obras Sociales cargadas.',
-                    colNames: ['Id', 'Razon Social', 'Tipo Documento', 'Nro Documento', 'Domicilio', 'Localidad', 'Caracteristica', 'Telefono Nro'],
+                    colNames: ['Id', 'Razon Social', 'Tipo Documento', 'Nro Documento', 'Domicilio', 'Localidad', 'Provincia' , 'Caracteristica', 'Telefono Nro'],
                     colModel: [
                             {
                                 name: 'Id',
@@ -46,8 +48,8 @@
                                 }
                             },
                             {
-                                name: 'Documento.TipoDocumento.Value',
-                                index: 'Documento.TipoDocumento.Value',
+                                name: 'Documento.TipoDocumento',
+                                index: 'Documento.TipoDocumento',
                                 width: 300,
                                 formatter: 'documento',
                                 editable: true,
@@ -100,10 +102,47 @@
                                 width: 300,
                                 editable: true,
                                 sortable: false,
+                                edittype: 'select',
+                                editoptions: {
+                                    value: {},
+                                    dataInit: function(element) {
+                                        setTimeout(function() {
+                                             $("#ProvinciaId").trigger("change");
+                                        }, 1);
+                                    }  
+                                },
                                 formoptions: {
                                     label: 'Localidad',
-                                    maxlength: '255',
-                                    size: '255'
+                                    rowpos: 6                                    
+                                }
+                            },
+                            {
+                                name: 'ProvinciaId',
+                                index: 'Provincia',
+                                formatter: function ( cellvalue, options, rowObject ){
+                                  return rowObject.Domicilio.Localidad.Provincia.Nombre;
+                                },
+                                width: 300,
+                                editable: true,
+                                sortable: false,
+                                edittype: 'select',
+                                editoptions: {
+                                    value: @Html.SelectJsonValues(x=>x.Id, x=>x.Nombre),
+                                    dataEvents: [{
+                                        type: 'change',
+                                        fn: function(e) {
+                                            var provinciaId = $(e.target).val();
+                                            var ddlLocalidades = $("#tr_LocalidadId select");
+                                            $.get('@Url.Action("ObtenerLocalidadesPorProvincia")?provinciaId=' + provinciaId, function(d) {                                                
+                                                ddlLocalidades.html(d);
+                                            });
+                                        }
+                                    }
+                                    ]
+                                },                                
+                                formoptions: {
+                                    label: 'Provincia',
+                                    rowpos: 5                                    
                                 }
                             },
                             {
