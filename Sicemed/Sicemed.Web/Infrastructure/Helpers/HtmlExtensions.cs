@@ -16,6 +16,11 @@ namespace System.Web.Mvc.Html
     public static class HtmlExtensions
     {
 
+        public static MvcHtmlString SelectJsonValues<T>(this HtmlHelper<IEnumerable<T>> htmlHelper, Expression<Func<T, object>> id, Expression<Func<T, object>> text)
+        {
+            return SelectJsonValues(htmlHelper, htmlHelper.ViewData.Model, id, text);
+        }
+
         public static MvcHtmlString SelectJsonValues<T>(this HtmlHelper<IEnumerable<T>> htmlHelper, IEnumerable<T> models, Expression<Func<T, object>> id, Expression<Func<T, object>> text)
         {
             if (id == null) throw new ArgumentNullException("id");

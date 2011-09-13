@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -8,7 +7,6 @@ using Castle.Core.Logging;
 using Castle.Facilities.TypedFactory;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
-using Combres;
 using CommonServiceLocator.WindsorAdapter;
 using DataAnnotationsExtensions.ClientValidation;
 using Microsoft.Practices.ServiceLocation;
@@ -16,16 +14,15 @@ using SICEMED.Web.Infrastructure.Windsor.Facilities;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Providers.FilterAtrribute;
-using ILogger = Castle.Core.Logging.ILogger;
+using WebExtensions = Combres.WebExtensions;
 
 namespace SICEMED.Web
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
-
         private static ILogger _logger = NullLogger.Instance;
         private static WindsorContainer _container;
 
@@ -49,15 +46,14 @@ namespace SICEMED.Web
         {
             AreaRegistration.RegisterAllAreas();
 
-            routes.AddCombresRoute("Combres");
+            WebExtensions.AddCombresRoute(routes, "Combres");
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-            );
-
+                new {controller = "Home", action = "Index", id = UrlParameter.Optional} // Parameter defaults
+                );
         }
 
         protected void Application_Start()
@@ -77,22 +73,45 @@ namespace SICEMED.Web
             DataAnnotationsModelValidatorProviderExtensions.RegisterValidationExtensions();
 
             _logger = ServiceLocator.Current.GetInstance<ILogger>();
-            ServiceLocator.Current.GetInstance<IApplicationInstaller>().Install(NHibernateFacility.BuildDatabaseConfiguration());
+            ServiceLocator.Current.GetInstance<IApplicationInstaller>().Install(
+                NHibernateFacility.BuildDatabaseConfiguration());
             ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(_container.Kernel));
             FilterProviders.Providers.Add(new WindsorFilterAttributeFilterProvider(_container));
         }
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            var ctx = HttpContext.Current;
-            var errorMsg = ctx.Server.GetLastError().ToString();
-            _logger.FatalFormat("URL:{0} \n ERROR: {1}", ctx.Request.RawUrl, errorMsg);
-            var error = new KeyValuePair<string, object>("ErrorMessage", errorMsg);
-            ctx.Response.Clear();
+            var exception = Server.GetLastError();
+            _logger.Fatal("Error Fatal.", exception);
 
-            var viewResult = new ViewResult { ViewName = "ErrorGenerico" };
-            viewResult.ViewData.Add(error);
-            ctx.Server.ClearError();
+            Response.Clear();
+
+            var httpException = exception as HttpException;
+
+            if (httpException != null)
+            {
+                string action;
+
+                switch (httpException.GetHttpCode())
+                {
+                    case 404:
+                        // page not found
+                        action = "HttpError404";
+                        break;
+                    case 500:
+                        // server error
+                        action = "HttpError500";
+                        break;
+                    default:
+                        action = "General";
+                        break;
+                }
+
+                // clear error on server
+                Server.ClearError();
+
+                Response.Redirect(String.Format("/Error/{0}/?message={1}", action, exception.Message));
+            }
         }
     }
 }
