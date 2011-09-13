@@ -30,6 +30,8 @@ jQuery.extend($.fn.fmatter, {
         switch (cellvalue) {
             case 3:
                 return "DNI";
+            case 10:
+                return "CUIT";
             default:
                 return "N/A";
         }

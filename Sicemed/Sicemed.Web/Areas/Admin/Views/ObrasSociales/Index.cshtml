@@ -48,8 +48,8 @@
                                 }
                             },
                             {
-                                name: 'Documento.TipoDocumento',
-                                index: 'Documento.TipoDocumento',
+                                name: 'Documento.TipoDocumento.Value',
+                                index: 'Documento.TipoDocumento.Value',
                                 width: 300,
                                 formatter: 'documento',
                                 editable: true,
@@ -71,7 +71,8 @@
                                 editable: true,
                                 sortable: false,
                                 editrules: {
-                                    required: true
+                                    required: true,
+                                    number: true
                                 },
                                 formoptions: {
                                     label: 'Numero Documento (*)',
@@ -85,8 +86,6 @@
                                 width: 300,
                                 editable: true,
                                 sortable: false,
-                                editrules: {
-                                },
                                 formoptions: {
                                     label: 'Direccion',
                                     maxlength: '255',
@@ -97,7 +96,9 @@
                                 name: 'LocalidadId',
                                 index: 'Localidad',
                                 formatter: function ( cellvalue, options, rowObject ){
-                                  return rowObject.Domicilio.Localidad.Nombre;
+                                    if(rowObject.Domicilio && rowObject.Domicilio.Localidad)
+                                        return rowObject.Domicilio.Localidad.Nombre;
+                                    return "";
                                 },
                                 width: 300,
                                 editable: true,
@@ -120,7 +121,9 @@
                                 name: 'ProvinciaId',
                                 index: 'Provincia',
                                 formatter: function ( cellvalue, options, rowObject ){
-                                  return rowObject.Domicilio.Localidad.Provincia.Nombre;
+                                    if(rowObject.Domicilio && rowObject.Domicilio.Localidad && rowObject.Domicilio.Localidad.Provincia)
+                                        return rowObject.Domicilio.Localidad.Provincia.Nombre;
+                                    return "";
                                 },
                                 width: 300,
                                 editable: true,
@@ -151,6 +154,9 @@
                                 width: 300,
                                 editable: true,
                                 sortable: false,
+                                editrules: {
+                                    number: true  
+                                },
                                 formoptions: {
                                     label: 'Caracteristica',
                                     maxlength: '255',
@@ -163,6 +169,9 @@
                                 width: 300,
                                 editable: true,
                                 sortable: false,
+                                editrules: {
+                                    number: true  
+                                },
                                 formoptions: {
                                     label: 'Telefono',
                                     maxlength: '255',
