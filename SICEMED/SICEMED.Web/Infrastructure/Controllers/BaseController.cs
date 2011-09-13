@@ -33,7 +33,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
         {
             if (string.IsNullOrWhiteSpace(paramName)) throw new ArgumentNullException("paramName");
 
-            var providerResult = this.ValueProvider.GetValue("provinciaId");
+            var providerResult = this.ValueProvider.GetValue(paramName);
             if(allowNulls && providerResult == null) return default(T);
 
             if (providerResult == null) 
