@@ -28,7 +28,7 @@ namespace Sicemed.Web.Infrastructure.Services
 
         public virtual bool Can(Usuario user, ActionDescriptor actionDescriptor)
         {
-            if (user == null) throw new ArgumentNullException("usuario");
+            if (user == null) throw new ArgumentNullException("user");
             if (actionDescriptor == null) throw new ArgumentNullException("actionDescriptor");
 
             var controllerAttributes = actionDescriptor.ControllerDescriptor.GetCustomAttributes(typeof(AuthorizeItAttribute), true).Cast<AuthorizeItAttribute>();
@@ -41,9 +41,7 @@ namespace Sicemed.Web.Infrastructure.Services
             if (!attributes.Any())
                 throw new SecurityException("El método no tiene definidos permisos. Por defecto los métodos son seguros, la seguridad debe ser explpícita.");
 
-            var userRoles = user.Roles.Select(x => x.Rol);
-
-            return attributes.Any(attr=> userRoles.Any(ur=> ur == attr.Rol));
+            return attributes.Any(attr => user.Roles.Any(ur => ur == attr.Rol));
         }
     }
 }

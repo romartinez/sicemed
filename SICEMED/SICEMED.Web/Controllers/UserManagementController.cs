@@ -85,13 +85,13 @@ namespace Sicemed.Web.Controllers
                     user.Nombre = model.FullName;
                     
                     //Roles
-                    var rolesToDelete = user.Roles.Where(r => !model.SelectedRoles.Contains(r.Rol.Value)).ToList();
+                    var rolesToDelete = user.Roles.Where(r => !model.SelectedRoles.Contains(r.Value)).ToList();
                     foreach(var roleToDelete in rolesToDelete)
                     {
-                        user.QuitarRol(roleToDelete.Rol);
+                        user.QuitarRol(roleToDelete);
                     }
 
-                    var rolesIdToAdd = model.SelectedRoles.Where(r => !user.Roles.Any(role => role.Rol.Value == r)).ToList();
+                    var rolesIdToAdd = model.SelectedRoles.Where(r => !user.Roles.Any(role => role.Value == r)).ToList();
                     foreach (var roleIdToAdd in rolesIdToAdd)
                     {
                         var roleToAdd = model.AllRoles.Single(r => r.Value == roleIdToAdd);

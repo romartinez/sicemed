@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Provincia>
 @using Sicemed.Web.Models
 @using Sicemed.Web.Models.Enumerations.Documentos
+@using Sicemed.Web.Models.Enumerations.Roles
 
 @{
     ViewBag.Title = "Administración De Usuarios";
@@ -31,6 +32,7 @@
                         'Nombre', 
                         'Segundo Nombre', 
                         'Password', 
+                        'Roles',
                         'Fecha Nacimiento', 
                         'Tipo Documento', 
                         'Nro Documento', 
@@ -125,6 +127,26 @@
                                 },                                
                                 formoptions: {
                                     label: 'Password (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },             
+                            {
+                                name: 'Roles',
+                                index: 'Roles',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                edittype: 'select',
+                                editoptions: {
+                                    multiple: true,
+                                    value: @Html.SelectJsonValues(Rol.Roles)
+                                },
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Roles (*)',
                                     maxlength: '255',
                                     size: '255'
                                 }

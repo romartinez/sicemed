@@ -19,7 +19,7 @@ namespace System.Security.Principal
             var usuario = user as Usuario;
             if (usuario == null) throw new ArgumentException(@"El usuario debe ser del tipo Usuario.", "user");
 
-            return usuario.Roles.Any(r=> r.Rol.Value == rol.Value);
+            return usuario.Roles.Any(r=> r.Value == rol.Value);
         }
     }
 }

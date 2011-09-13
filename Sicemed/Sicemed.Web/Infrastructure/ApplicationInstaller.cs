@@ -9,7 +9,9 @@ using NHibernate.Tool.hbm2ddl;
 using Sicemed.Web.Infrastructure.Providers.Session;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Components;
 using Sicemed.Web.Models.Enumerations;
+using Sicemed.Web.Models.Enumerations.Documentos;
 using Sicemed.Web.Models.Enumerations.Roles;
 
 namespace Sicemed.Web.Infrastructure
@@ -21,6 +23,40 @@ namespace Sicemed.Web.Infrastructure
 
     public class ApplicationInstaller : IApplicationInstaller
     {
+        public static Provincia ProvinciaSantaFe;
+        public static Provincia ProvinciaBuenosAires;
+        public static Provincia ProvinciaCordoba;
+
+        public static Localidad LocalidadPergamino;
+        public static Localidad LocalidadSanNicolas;
+        public static Localidad LocalidadRosario;
+        public static Localidad LocalidadSantaFe;
+        public static Localidad LocalidadCarlosPaz;
+        public static Localidad LocalidadMarcosJuarez;
+        
+        public static Consultorio ConsultorioA;
+        public static Consultorio ConsultorioB;
+        
+        public static Especialidad EspecialidadPediatra;
+        public static Especialidad EspecialidadClinico;
+        public static Especialidad EspecialidadDermatologo;
+
+        public static Pagina PaginaHome;
+        public static Pagina PaginaAboutUs;
+        
+        public static Feriado FeriadoCarnaval;
+        public static Feriado FeriadoDiaIndependencia;
+        
+        public static ObraSocial ObraSocialOsde;
+        public static ObraSocial ObraSocialSwissMedical;
+        
+        public static Plan PlanOsdeGold;
+        public static Plan PlanOsdeSilver;
+        public static Plan PlanOsdeNeo;
+        public static Plan PlanSwissNbsf;
+        public static Plan PlanSwissSb64;
+
+
         public virtual ISessionFactory SessionFactory { get; set; }
         public virtual ILogger Logger { get; set; }
         public virtual IMembershipService MembershipService { get; set; }
@@ -33,9 +69,9 @@ namespace Sicemed.Web.Infrastructure
         public void Install(Configuration config)
         {
             var session = SessionFactory.GetCurrentSession() ?? SessionFactory.OpenSession();
-            using(var importSession = SessionFactory.OpenSession(session.Connection))
+            using (var importSession = SessionFactory.OpenSession(session.Connection))
             {
-                if(HttpContext.Current != null)
+                if (HttpContext.Current != null)
                     LazySessionContext.Bind(new Lazy<ISession>(() => importSession), SessionFactory);
                 else
                     CurrentSessionContext.Bind(importSession);
@@ -46,18 +82,18 @@ namespace Sicemed.Web.Infrastructure
                     var param = importSession.Get<Parametro>(Parametro.Keys.APP_IS_INITIALIZED);
                     var isInitialized = param == null || param.Get<bool>();
                     Logger.DebugFormat("The parameter for the DB Installed is: {0}", isInitialized);
-                    if(!isInitialized)
+                    if (!isInitialized)
                     {
                         Initialize(config, importSession);
                     }
                 }
-                catch(GenericADOException)
+                catch (GenericADOException)
                 {
                     Logger.WarnFormat("The DB isn't initialized, generating it.");
                     //Check if the DB is created
                     Initialize(config, importSession);
                 }
-                if(HttpContext.Current != null)
+                if (HttpContext.Current != null)
                     LazySessionContext.UnBind(SessionFactory);
                 else
                     CurrentSessionContext.Unbind(SessionFactory);
@@ -69,7 +105,15 @@ namespace Sicemed.Web.Infrastructure
             Logger.InfoFormat("Installing the application.");
             new SchemaExport(config).Execute(false, true, false, session.Connection, null);
             //No permite Tx anidadas
-            CrearAdministrador();
+            CrearUsuarios();
+            CrearProvincias(session);
+            CrearLocalidades(session);
+            CrearEspecialidades(session);
+            CrearConsultorios(session);
+            CrearFeriados(session);
+            CrearObrasSociales(session);
+            CrearPlanes(session);
+            CrearPaginas(session);
             //Lo guardo al parametro nuevo.
             using (var tx = session.BeginTransaction())
             {
@@ -81,9 +125,141 @@ namespace Sicemed.Web.Infrastructure
             }
         }
 
-        private void CrearAdministrador()
+        private void CrearPaginas(ISession session)
         {
-            var usuario = new Usuario() { Nombre = "admin", Apellido= "admin" };
+            PaginaHome = new Pagina() {Nombre = "Home", Contenido = "Hola a todos bienvenidos a SICEMED"};
+            PaginaAboutUs = new Pagina() {Nombre = "About Us", Contenido = "Somos una empresa en pleno crecimiento."};
+
+            session.Save(PaginaAboutUs);
+            session.Save(PaginaHome);
+        }
+
+        private void CrearObrasSociales(ISession session)
+        {
+            ObraSocialOsde = new ObraSocial()
+            {
+                RazonSocial = "OSDE",
+                Documento = new Documento()
+                                {
+                                    Numero = 301231234, 
+                                    TipoDocumento = TipoDocumento.Cuit
+                                },
+                Telefono = new Telefono()
+                            {
+                                Prefijo = "0341", 
+                                Numero = "4481010"
+                            },
+                Domicilio =
+                    new Domicilio()
+                        {
+                            Direccion = "Bv. Oroño 345", 
+                            Localidad = LocalidadRosario
+                        }
+            };
+            ObraSocialSwissMedical = new ObraSocial()
+            {
+                RazonSocial = "Swiss Medical Group",
+                Documento = new Documento()
+                {
+                    Numero = 301456938,
+                    TipoDocumento = TipoDocumento.Cuit
+                },
+                Telefono = new Telefono()
+                {
+                    Prefijo = "0341",
+                    Numero = "4473023"
+                },
+                Domicilio =
+                    new Domicilio()
+                    {
+                        Direccion = "Rioja 1289",
+                        Localidad = LocalidadRosario
+                    }
+            };
+
+            session.Save(ObraSocialOsde);
+            session.Save(ObraSocialSwissMedical);
+        }
+
+        private void CrearPlanes(ISession session)
+        {
+            PlanOsdeGold = new Plan() {Nombre = "Gold", ObraSocial = ObraSocialOsde};
+            PlanOsdeSilver= new Plan() {Nombre = "Silver", ObraSocial = ObraSocialOsde};
+            PlanOsdeNeo = new Plan() {Nombre = "Neo", ObraSocial = ObraSocialOsde};
+            
+            PlanSwissNbsf = new Plan() {Nombre = "Convenio Nuevo Banco De Santa Fe", ObraSocial = ObraSocialSwissMedical};
+            PlanSwissSb64 = new Plan() { Nombre = "SB64", ObraSocial = ObraSocialSwissMedical };
+
+            session.Save(PlanOsdeGold);
+            session.Save(PlanOsdeSilver);
+            session.Save(PlanOsdeNeo);
+            session.Save(PlanSwissNbsf);
+            session.Save(PlanSwissSb64);
+        }
+
+        private void CrearFeriados(ISession session)
+        {
+            FeriadoCarnaval = new Feriado() {Nombre = "Carnaval", Fecha = new DateTime(2011, 03, 07)};
+            FeriadoDiaIndependencia = new Feriado() {Nombre = "Día De La Independencia", Fecha = new DateTime(2011, 07, 11)};
+
+            session.Save(FeriadoCarnaval);
+            session.Save(FeriadoDiaIndependencia);
+        }
+
+        private void CrearProvincias(ISession session)
+        {
+            ProvinciaSantaFe = new Provincia() { Nombre = "Santa Fe" };
+            ProvinciaBuenosAires = new Provincia() { Nombre = "Buenos Aires" };
+            ProvinciaCordoba = new Provincia() { Nombre = "Córdoba" };
+
+            session.Save(ProvinciaCordoba);
+            session.Save(ProvinciaBuenosAires);
+            session.Save(ProvinciaSantaFe);
+        }
+
+        private void CrearLocalidades(ISession session)
+        {
+            LocalidadCarlosPaz = new Localidad() { Nombre = "Villa Carlos Paz", Provincia = ProvinciaCordoba };
+            LocalidadMarcosJuarez = new Localidad() { Nombre = "Marcos Juarez", Provincia = ProvinciaCordoba };
+            LocalidadPergamino = new Localidad() { Nombre = "Pergamino", Provincia = ProvinciaBuenosAires };
+            LocalidadSanNicolas = new Localidad() { Nombre = "San Nicolás De Los Arroyos", Provincia = ProvinciaBuenosAires };
+            LocalidadRosario = new Localidad() { Nombre = "Rosario", Provincia = ProvinciaSantaFe };
+            LocalidadSantaFe = new Localidad() { Nombre = "Santa Fe", Provincia = ProvinciaSantaFe };
+
+
+            session.Save(LocalidadCarlosPaz);
+            session.Save(LocalidadMarcosJuarez);
+            session.Save(LocalidadPergamino);
+            session.Save(LocalidadSanNicolas);
+            session.Save(LocalidadRosario);
+            session.Save(LocalidadSantaFe);
+        }
+
+        private void CrearConsultorios(ISession session)
+        {
+            ConsultorioA = new Consultorio() {Nombre = "Consultorio A"};
+            ConsultorioB = new Consultorio() {Nombre = "Consultorio B"};
+
+            session.Save(ConsultorioA);
+            session.Save(ConsultorioB);
+        }
+
+        private void CrearEspecialidades(ISession session)
+        {
+            EspecialidadClinico = new Especialidad() {Nombre = "Clínico"};
+            EspecialidadDermatologo = new Especialidad() {Nombre = "Dermatólogo"};
+            EspecialidadPediatra = new Especialidad() {Nombre = "Pediatra"};
+
+            session.Save(EspecialidadClinico);
+            session.Save(EspecialidadDermatologo);
+            session.Save(EspecialidadPediatra);
+        }
+
+
+
+        private void CrearUsuarios()
+        {
+            var usuario = new Usuario() { Nombre = "admin", Apellido = "admin" };
             usuario.AgregarRol(Rol.Administrador);
             MembershipService.CreateUser(usuario, "admin@admin.com", "test");
         }

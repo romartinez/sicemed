@@ -2,6 +2,6 @@
 {
     public class Profesional : Rol
     {
-        public Profesional() : base(3, "Profesional") { }
+        public Profesional() : base(2, "Profesional") { }
     }
 }
