@@ -82,16 +82,5 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             return base.AgregarReferencias(modelo);
         }
         #endregion
-
-        public ActionResult ObtenerLocalidadesPorProvincia(long provinciaId)
-        {
-            using (var session = SessionFactory.OpenStatelessSession())
-            {
-                ViewData.Model = session.QueryOver<Localidad>()
-                    .Fetch(x => x.Provincia).Eager
-                    .Where(x => x.Provincia.Id == provinciaId).List();
-                return PartialView();
-            }
-        }
     }
 }

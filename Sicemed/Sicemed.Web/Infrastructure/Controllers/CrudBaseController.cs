@@ -126,5 +126,16 @@ namespace Sicemed.Web.Infrastructure.Controllers
 
             return Json(ResponseMessage.Success());
         }
+
+        public virtual ActionResult ObtenerLocalidadesPorProvincia(long provinciaId)
+        {
+            using (var session = SessionFactory.OpenStatelessSession())
+            {
+                ViewData.Model = session.QueryOver<Localidad>()
+                    .Fetch(x => x.Provincia).Eager
+                    .Where(x => x.Provincia.Id == provinciaId).List();
+                return PartialView();
+            }
+        }
     }
 }

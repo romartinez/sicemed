@@ -1,4 +1,8 @@
-﻿@{
+﻿@model IEnumerable<Provincia>
+@using Sicemed.Web.Models
+@using Sicemed.Web.Models.Enumerations.Documentos
+
+@{
     ViewBag.Title = "Administración De Usuarios";
 }
 <h2>
@@ -26,6 +30,7 @@
                         'Apellido', 
                         'Nombre', 
                         'Segundo Nombre', 
+                        'Password', 
                         'Fecha Nacimiento', 
                         'Tipo Documento', 
                         'Nro Documento', 
@@ -106,19 +111,47 @@
                                 }
                             },
                             {
+                                name: 'Password',
+                                index: 'Password',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                formatter: function ( cellvalue, options, rowObject ){
+                                    return "***********";
+                                },                                
+                                edittype: 'password',
+                                editrules: {
+                                    required: true
+                                },                                
+                                formoptions: {
+                                    label: 'Password (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },                        
+                            {
                                 name: 'FechaNacimiento',
                                 index: 'FechaNacimiento',
                                 width: 90,
                                 editable: true,
                                 sortable: false,
+                                formatter: 'date',
+                                formatoptions: {
+                                    newformat: 'd/m/Y'
+                                },
+                                editoptions: {
+                                    dataInit: function (element) {
+                                        $(element).datepicker();
+                                    }
+                                },
                                 editrules: {
-                                    required: true,
-                                    date: true
+                                    date: true,
+                                    required: true
                                 },
                                 formoptions: {
                                     label: 'Fecha Nacimiento (*)',
-                                    maxlength: '255',
-                                    size: '255'
+                                    maxlength: '10',
+                                    size: '10'
                                 }
                             },
                             {
@@ -127,6 +160,10 @@
                                 width: 90,
                                 editable: true,
                                 sortable: false,
+                                edittype: 'select',
+                                editoptions: {
+                                  value: @Html.SelectJsonValues(TipoDocumento.TiposDeDocumentos)
+                                },
                                 editrules: {
                                     required: true
                                 },
@@ -143,7 +180,8 @@
                                 editable: true,
                                 sortable: false,
                                 editrules: {
-                                    required: true
+                                    required: true,
+                                    number: true
                                 },
                                 formoptions: {
                                     label: 'Nro. Documento (*)',
@@ -169,31 +207,57 @@
                             {
                                 name: 'LocalidadId',
                                 index: 'Localidad',
-                                width: 90,
+                                formatter: function ( cellvalue, options, rowObject ){
+                                    if(rowObject.Domicilio && rowObject.Domicilio.Localidad)
+                                        return rowObject.Domicilio.Localidad.Nombre;
+                                    return "";
+                                },
+                                width: 300,
                                 editable: true,
                                 sortable: false,
-                                editrules: {
-                                    required: true
+                                edittype: 'select',
+                                editoptions: {
+                                    value: {},
+                                    dataInit: function(element) {
+                                        setTimeout(function() {
+                                             $("#ProvinciaId").trigger("change");
+                                        }, 1);
+                                    }  
                                 },
                                 formoptions: {
-                                    label: 'Localidad (*)',
-                                    maxlength: '255',
-                                    size: '255'
+                                    label: 'Localidad',
+                                    rowpos: 11                                    
                                 }
                             },
                             {
                                 name: 'ProvinciaId',
                                 index: 'Provincia',
-                                width: 90,
+                                formatter: function ( cellvalue, options, rowObject ){
+                                    if(rowObject.Domicilio && rowObject.Domicilio.Localidad && rowObject.Domicilio.Localidad.Provincia)
+                                        return rowObject.Domicilio.Localidad.Provincia.Nombre;
+                                    return "";
+                                },
+                                width: 300,
                                 editable: true,
                                 sortable: false,
-                                editrules: {
-                                    required: true
-                                },
+                                edittype: 'select',
+                                editoptions: {
+                                    value: @Html.SelectJsonValues(x=>x.Id, x=>x.Nombre),
+                                    dataEvents: [{
+                                        type: 'change',
+                                        fn: function(e) {
+                                            var provinciaId = $(e.target).val();
+                                            var ddlLocalidades = $("#tr_LocalidadId select");
+                                            $.get('@Url.Action("ObtenerLocalidadesPorProvincia")?provinciaId=' + provinciaId, function(d) {                                                
+                                                ddlLocalidades.html(d);
+                                            });
+                                        }
+                                    }
+                                    ]
+                                },                                
                                 formoptions: {
-                                    label: 'Provincia (*)',
-                                    maxlength: '255',
-                                    size: '255'
+                                    label: 'Provincia',
+                                    rowpos: 10                                  
                                 }
                             },
                             {
@@ -203,7 +267,8 @@
                                 editable: true,
                                 sortable: false,
                                 editrules: {
-                                    required: true
+                                    required: true,
+                                    number: true
                                 },
                                 formoptions: {
                                     label: 'Caracteristica (*)',
@@ -218,7 +283,8 @@
                                 editable: true,
                                 sortable: false,
                                 editrules: {
-                                    required: true
+                                    required: true,
+                                    number: true
                                 },
                                 formoptions: {
                                     label: 'Telefono (*)',
@@ -247,13 +313,12 @@
                                 width: 90,
                                 editable: true,
                                 sortable: false,
-                                editrules: {
-                                    required: true
-                                },
+                                edittype: 'checkbox',
+                                editoptions: {
+                                    value: 'true:false'  
+                                },                                
                                 formoptions: {
-                                    label: 'Hab. Online (*)',
-                                    maxlength: '255',
-                                    size: '255'
+                                    label: 'Hab. Online? (*)'
                                 }
                             },
                             {
@@ -268,14 +333,13 @@
                                 index: 'Membership.IsLockedOut',
                                 width: 90,
                                 editable: true,
+                                edittype: 'checkbox',
                                 sortable: false,
-                                editrules: {
-                                    required: true
+                                editoptions: {
+                                    value: 'true:false'  
                                 },
                                 formoptions: {
-                                    label: 'Esta Bloquedo? (*)',
-                                    maxlength: '255',
-                                    size: '255'
+                                    label: 'Esta Bloquedo? (*)'
                                 }
                             }                        
                         ]
