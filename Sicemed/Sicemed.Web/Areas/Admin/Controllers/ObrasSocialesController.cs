@@ -5,6 +5,8 @@ using System.Web.Mvc;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Exceptions;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Enumerations;
+using Sicemed.Web.Models.Enumerations.Documentos;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
 {
@@ -27,20 +29,20 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             return results.Select(x => new
                                   {
                                       x.Documento,
-                                      Domicilio = new
+                                      Domicilio = x.Domicilio != null ? new
                                                   {
                                                       x.Domicilio.Direccion,
-                                                      Localidad = new
+                                                      Localidad = x.Domicilio.Localidad != null ? new
                                                                   {
                                                                       x.Domicilio.Localidad.Id,
                                                                       x.Domicilio.Localidad.Nombre,
-                                                                      Provincia = new
+                                                                      Provincia = x.Domicilio.Localidad.Provincia != null ? new
                                                                                   {
                                                                                       x.Domicilio.Localidad.Provincia.Id,
                                                                                       x.Domicilio.Localidad.Provincia.Nombre
-                                                                                  }
-                                                                  }
-                                                  },
+                                                                                  } : null
+                                                                  } : null
+                                                  } : null,
                                       x.Id,
                                       x.RazonSocial,
                                       x.Telefono
@@ -58,6 +60,10 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
         protected override ObraSocial AgregarReferencias(ObraSocial modelo)
         {
+            var tipoDocumentoId = RetrieveParameter<int>("Documento.TipoDocumento.Value", "Tipo De Documento");
+            var tipoDocumento = Enumeration.FromValue<TipoDocumento>(tipoDocumentoId);
+            if (tipoDocumento == null) throw new ValidationErrorException("Debe seleccionar un Tipo De Documento válido.");
+
             var localidadId = RetrieveParameter<long>("localidadId", "Localidad", true);
 
             var session = SessionFactory.GetCurrentSession();
@@ -70,6 +76,8 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             }
 
             modelo.Domicilio.Localidad = localidad;
+            modelo.Documento.TipoDocumento = tipoDocumento;
+
 
             return base.AgregarReferencias(modelo);
         }
