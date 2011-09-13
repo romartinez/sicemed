@@ -27,6 +27,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         }
 
 
+
         protected override Usuario AgregarReferencias(Usuario modelo)
         {
             var tipoDocumentoId = RetrieveParameter<int>("Documento.TipoDocumento.Value", "Tipo De Documento");
