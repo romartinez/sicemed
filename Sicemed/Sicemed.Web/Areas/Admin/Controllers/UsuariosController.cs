@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using Sicemed.Web.Infrastructure.Controllers;
@@ -26,7 +27,41 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             return base.Index();
         }
 
-
+        protected override System.Collections.IEnumerable AplicarProjections(System.Collections.Generic.IEnumerable<Usuario> results)
+        {
+            return results.Select(x => new
+            {
+                x.Documento,
+                Domicilio = x.Domicilio != null ? new
+                {
+                    x.Domicilio.Direccion,
+                    Localidad = x.Domicilio.Localidad != null ? new
+                    {
+                        x.Domicilio.Localidad.Id,
+                        x.Domicilio.Localidad.Nombre,
+                        Provincia = x.Domicilio.Localidad.Provincia != null ? new
+                        {
+                            x.Domicilio.Localidad.Provincia.Id,
+                            x.Domicilio.Localidad.Provincia.Nombre
+                        } : null
+                    } : null
+                } : null,
+                x.Id,
+                x.Apellido,
+                x.Nombre,
+                x.SegundoNombre,
+                x.EstaHabilitadoTurnosWeb,
+                x.FechaNacimiento,
+                x.InasistenciasContinuas,
+                x.NumeroAfiliado,
+                Membership = x.Membership != null ?  new
+                                 {
+                                     x.Membership.Email,
+                                     x.Membership.IsLockedOut
+                                 } : null,
+                x.Telefono
+            });
+        }
 
         protected override Usuario AgregarReferencias(Usuario modelo)
         {

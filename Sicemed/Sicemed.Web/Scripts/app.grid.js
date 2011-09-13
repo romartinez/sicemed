@@ -29,6 +29,14 @@
 
         var defaultCrudOptions = {
             modal: true,
+            afterShowForm: function () {
+                $("jqmOverlay").hide();
+                $('body').prepend('<div class="ui-widget-overlay" id="jqgrid-overlay" style="left: 0px; top: 0px; width: 100%; height: 100%; position: fixed; z-index: 949; opacity: 0.3;"/>');
+            },
+            onClose: function () {
+                console.log("salir");
+                $('#jqgrid-overlay').remove();
+            },
             resize: false,
             width: settings.params.modalWidth,
             mtype: 'POST',
@@ -39,19 +47,19 @@
             recreateForm: true,
             serializeEditData: $.appendAntiForgeryToken,
             serializeDelData: $.appendAntiForgeryToken,
-            errorTextFormat: function(err) {
+            errorTextFormat: function (err) {
                 return "Se produjo un error.";
             }
         };
 
-        var getEditOptions = function(){
+        var getEditOptions = function () {
             var options = {
                 url: settings.url.edit
             };
-            return $.extend(options, defaultCrudOptions);                
+            return $.extend(options, defaultCrudOptions);
         };
 
-        var getAddOptions = function(){
+        var getAddOptions = function () {
             var options = {
                 url: settings.url.add,
                 afterSubmit: function (response, postData) {
@@ -60,10 +68,10 @@
                     return [true, ""];
                 }
             };
-            return $.extend(options, defaultCrudOptions);                
+            return $.extend(options, defaultCrudOptions);
         };
 
-        var getDeleteOptions = function(){
+        var getDeleteOptions = function () {
             var options = {
                 url: settings.url.del,
                 afterSubmit: function (response, postData) {
@@ -72,8 +80,8 @@
                     return [true, ""];
                 }
             };
-            return $.extend(options, defaultCrudOptions);                
-        };        
+            return $.extend(options, defaultCrudOptions);
+        };
 
         $(settings.grid).jqGrid({
             url: settings.url.list,
@@ -104,24 +112,24 @@
             emptyrecords: settings.params.emptyrecords,
             loadComplete: function (data) {
                 app.fixes.gridLoadFix($(this), data);
-            }                
+            }
         });
 
         $(settings.grid).navGrid(
-            settings.pager, 
-            { 
+            settings.pager,
+            {
                 edit: settings.params.editable,
-                add: settings.params.addable, 
-                del: settings.params.deleteable, 
-                search: false, 
-                refresh: settings.params.refresheable 
+                add: settings.params.addable,
+                del: settings.params.deleteable,
+                search: false,
+                refresh: settings.params.refresheable
             },
             getEditOptions(),
             getAddOptions(),
             getDeleteOptions(),
             {}, //search
             {closeOnEscape: true }
-        );                    
+        );
     }
 
     return app;
