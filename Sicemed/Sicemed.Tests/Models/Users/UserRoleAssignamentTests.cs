@@ -1,7 +1,7 @@
 using System.Linq;
 using NUnit.Framework;
 using Sicemed.Web.Models;
-using Sicemed.Web.Models.Enumerations.Roles;
+using Sicemed.Web.Models.Components.Roles;
 
 namespace Sicemed.Tests.Models.Users
 {

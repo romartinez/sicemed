@@ -1,7 +1,7 @@
 using System;
 using System.Web.Mvc;
 using Sicemed.Web.Infrastructure.Services;
-using Sicemed.Web.Models.Enumerations.Roles;
+using Sicemed.Web.Models.Components.Roles;
 
 namespace Sicemed.Web.Infrastructure.Attributes.Filters
 {    

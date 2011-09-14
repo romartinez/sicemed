@@ -10,8 +10,8 @@ using Sicemed.Web.Infrastructure.Providers.Session;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Components;
+using Sicemed.Web.Models.Components.Roles;
 using Sicemed.Web.Models.Enumerations.Documentos;
-using Sicemed.Web.Models.Enumerations.Roles;
 
 namespace Sicemed.Web.Infrastructure
 {

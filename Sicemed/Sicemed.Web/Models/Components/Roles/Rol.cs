@@ -1,6 +1,8 @@
-﻿namespace Sicemed.Web.Models.Enumerations.Roles
+﻿using System;
+
+namespace Sicemed.Web.Models.Components.Roles
 {
-    public class Rol : Enumeration
+    public abstract class Rol : ComponentBase
     {
         public static readonly Rol Secretaria = new Secretaria();
         public static readonly Rol Profesional = new Profesional();
@@ -8,7 +10,6 @@
 
         public static readonly Rol[] Roles = new[] { Secretaria, Profesional, Administrador };
 
-        public Rol() { }
-        public Rol(long value, string displayName) : base(value, displayName) { }
+        public virtual DateTime FechaAsignacion { get; set; }
     }
 }

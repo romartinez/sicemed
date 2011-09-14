@@ -1,6 +1,6 @@
 ﻿using NHibernate.Mapping.ByCode;
 using Sicemed.Web.Models;
-using Sicemed.Web.Models.Enumerations.Roles;
+using Sicemed.Web.Models.Components.Roles;
 
 namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
 {
@@ -25,7 +25,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             {
                 map.Access(Accessor.NoSetter);
                 map.Cascade(Cascade.All);
-            }, rel => rel.Element(x=>x.Type<EnumerationType<Rol>>()));
+            }, rel => rel.Component(map=>{}));
 
             //Set(x => x.Turnos, map =>
             //{

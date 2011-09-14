@@ -2,7 +2,7 @@
 
 using System.Linq;
 using Sicemed.Web.Models;
-using Sicemed.Web.Models.Enumerations.Roles;
+using Sicemed.Web.Models.Components.Roles;
 
 namespace System.Security.Principal
 // ReSharper restore CheckNamespace
