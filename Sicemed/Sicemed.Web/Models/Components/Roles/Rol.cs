@@ -2,7 +2,7 @@
 
 namespace Sicemed.Web.Models.Components.Roles
 {
-    public abstract class Rol : ComponentBase
+    public class Rol : ComponentBase
     {
         public static readonly Rol Secretaria = new Secretaria();
         public static readonly Rol Profesional = new Profesional();
@@ -11,5 +11,6 @@ namespace Sicemed.Web.Models.Components.Roles
         public static readonly Rol[] Roles = new[] { Secretaria, Profesional, Administrador };
 
         public virtual DateTime FechaAsignacion { get; set; }
+        public virtual string DisplayName { get { throw new NotSupportedException(); } }
     }
 }

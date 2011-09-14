@@ -1,10 +1,10 @@
 ﻿namespace Sicemed.Web.Models.Components.Roles
 {
-    public class Administrador : Rol
+    public class Paciente : Rol
     {
         public override string DisplayName
         {
-            get { return "Administrador"; }
+            get { return "Paciente"; }
         }
     }
 }

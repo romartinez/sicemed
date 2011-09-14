@@ -66,6 +66,16 @@ namespace Sicemed.Web.Models
             return _roles.Select(r => r.DisplayName).Contains(role);
         }
 
+        public virtual bool Es<T>() where T: Rol
+        {
+            return _roles.Any(x => x.GetType() == typeof (T));
+        }
+
+        public virtual T Como<T>() where T : Rol
+        {
+            return _roles.FirstOrDefault(x => x.GetType() == typeof(T)) as T;
+        }
+
         public virtual IIdentity Identity
         {
             get { return new GenericIdentity(this.Membership.Email); }

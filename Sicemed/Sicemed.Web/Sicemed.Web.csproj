@@ -204,6 +204,7 @@
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
     <Compile Include="Infrastructure\Net4Collections.cs" />
     <Compile Include="Infrastructure\NHibernate\EnumerationType.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\Components\RolMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\DocumentoMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\DomicilioMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\MembershipMap.cs" />
@@ -243,6 +244,7 @@
     <Compile Include="Infrastructure\Windsor\Installers\LoggerInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\NHibernateInstaller.cs" />
     <Compile Include="Infrastructure\Providers\Session\LazySessionContext.cs" />
+    <Compile Include="Models\Components\Roles\Paciente.cs" />
     <Compile Include="Models\Enumerations\Documentos\TipoDocumento.cs" />
     <Compile Include="Models\Enumerations\Enumeration.cs" />
     <Compile Include="Models\Components\Membership.cs" />

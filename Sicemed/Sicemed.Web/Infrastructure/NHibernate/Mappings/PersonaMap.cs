@@ -21,11 +21,11 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Component(x => x.Domicilio);
             Component(x => x.Telefono);
 
-            Set(x => x.Roles, map =>
-            {
-                map.Access(Accessor.NoSetter);
-                map.Cascade(Cascade.All);
-            }, rel => rel.Component(map=>{}));
+            //Set(x => x.Roles, map =>
+            //{
+            //    map.Access(Accessor.NoSetter);
+            //    map.Cascade(Cascade.All);
+            //}, {}));
 
             //Set(x => x.Turnos, map =>
             //{

@@ -2,5 +2,9 @@
 {
     public class Profesional : Rol
     {
+        public override string DisplayName
+        {
+            get { return "Profesional"; }
+        }
     }
 }
