@@ -38,7 +38,7 @@ namespace Sicemed.Web.Controllers
                 {
                     if(Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Content");
                 }
                 
                 ModelState.AddModelError("", status.Get());
@@ -55,7 +55,7 @@ namespace Sicemed.Web.Controllers
         {
             _membershipService.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Content");
         }
 
         // **************************************
@@ -77,7 +77,7 @@ namespace Sicemed.Web.Controllers
                 _membershipService.CreateUser(user, model.Email, model.Password);
                 var status = _membershipService.Login(model.Email, model.Password, out user);
                 if(status == MembershipStatus.USER_CREATED)
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Content");
                 ModelState.AddModelError("", status.Get());
             }
 
