@@ -101,7 +101,7 @@ namespace Sicemed.Tests.Models.Paginas
 
             var roots = new ObtenerPaginasRaizQuery(){SessionFactory = SessionFactory}.Execute();
             
-            roots.Count().Should().Be(2);
+            roots.Count().Should().Be(4); //Dos ya existen en el app initializer
         }
     }
 }
