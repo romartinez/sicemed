@@ -4,43 +4,38 @@ using Sicemed.Web.Infrastructure.Enums;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
-using Sicemed.Web.Models.ViewModels.Account;
+using Sicemed.Web.Models.ViewModels.Cuenta;
 
 namespace Sicemed.Web.Controllers
 {
-    public class AccountController : BaseController
+    public class CuentaController : BaseController
     {
         private readonly IMembershipService _membershipService;
 
-        public AccountController(IMembershipService membershipService)
+        public CuentaController(IMembershipService membershipService)
         {
             _membershipService = membershipService;
         }
 
-        public void Index()
-        {
-
-        }
-
-        public ActionResult LogOn()
+        public ActionResult IniciarSesion()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult LogOn(LogOnModel model, string returnUrl)
+        public ActionResult IniciarSesion(InciarSesionViewModel model, string returnUrl)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 Usuario user;
                 var status = _membershipService.Login(model.Email, model.Password, out user);
-                if(status == MembershipStatus.USER_FOUND)
+                if (status == MembershipStatus.USER_FOUND)
                 {
-                    if(Url.IsLocalUrl(returnUrl))
+                    if (Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
                     return RedirectToAction("Index", "Content");
                 }
-                
+
                 ModelState.AddModelError("", status.Get());
             }
 
@@ -48,35 +43,29 @@ namespace Sicemed.Web.Controllers
             return View(model);
         }
 
-        // **************************************
-        // URL: /Account/LogOff
-        // **************************************
-        public ActionResult LogOff()
+        public ActionResult Salir()
         {
             _membershipService.SignOut();
 
             return RedirectToAction("Index", "Content");
         }
 
-        // **************************************
-        // URL: /Account/Register
-        // **************************************
-        public ActionResult Register()
+        public ActionResult Registro()
         {
             ViewBag.PasswordLength = _membershipService.MinPasswordLength;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Registro(RegistroUsuarioViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                var user = new Usuario { Nombre = model.UserName };
+                var user = new Usuario { Nombre = model.Nombre, Apellido = model.Apellido };
                 _membershipService.CreateUser(user, model.Email, model.Password);
                 var status = _membershipService.Login(model.Email, model.Password, out user);
-                if(status == MembershipStatus.USER_CREATED)
+                if (status == MembershipStatus.USER_CREATED)
                     return RedirectToAction("Index", "Content");
                 ModelState.AddModelError("", status.Get());
             }
@@ -85,10 +74,6 @@ namespace Sicemed.Web.Controllers
             ViewBag.PasswordLength = _membershipService.MinPasswordLength;
             return View(model);
         }
-
-        // **************************************
-        // URL: /Account/ChangePassword
-        // **************************************
 
         public ActionResult ChangePassword()
         {
@@ -97,25 +82,22 @@ namespace Sicemed.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangePassword(ChangePasswordModel model)
+        public ActionResult ChangePassword(CambiarPasswordViewModel viewModel)
         {
-            if(ModelState.IsValid)
-            {                
-                var status = _membershipService.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
-                if(status == MembershipStatus.USER_FOUND)
-                    return RedirectToAction("ChangePasswordSuccess");
+            if (ModelState.IsValid)
+            {
+                var status = _membershipService.ChangePassword(User.Identity.Name, viewModel.PasswordActual, viewModel.PasswordNuevo);
+                if (status == MembershipStatus.USER_FOUND)
+                    return RedirectToAction("CambioDePasswordExitoso");
                 ModelState.AddModelError("", status.Get());
             }
 
             // If we got this far, something failed, redisplay form
             ViewBag.PasswordLength = _membershipService.MinPasswordLength;
-            return View(model);
+            return View(viewModel);
         }
 
-        // **************************************
-        // URL: /Account/ChangePasswordSuccess
-        // **************************************
-        public ActionResult ChangePasswordSuccess()
+        public ActionResult CambioDePasswordExitoso()
         {
             return View();
         }

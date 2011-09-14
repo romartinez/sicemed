@@ -9,7 +9,7 @@ namespace Sicemed.Web.Infrastructure.Helpers
     {
         public static string Get(this Enum status)
         {
-            var translated = Resource.ResourceManager.GetString(status.GetType().Name + "_" + status);
+            var translated = Messages.ResourceManager.GetString(status.GetType().Name + "_" + status);
             if(string.IsNullOrWhiteSpace(translated)) return GetDescription(status);
             return translated;
         }

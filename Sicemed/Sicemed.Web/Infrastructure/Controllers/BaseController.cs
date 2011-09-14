@@ -29,6 +29,14 @@ namespace Sicemed.Web.Infrastructure.Controllers
             }
         }
 
+        protected Usuario Usuario
+        {
+            get
+            {
+                return User;
+            }
+        }
+        
         protected virtual T RetrieveParameter<T>(string paramName, string paramNameDescription = null, bool allowNulls = false)
         {
             if (string.IsNullOrWhiteSpace(paramName)) throw new ArgumentNullException("paramName");

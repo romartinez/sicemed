@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Sicemed.Web.Models.ViewModels.Account
+namespace Sicemed.Web.Models.ViewModels.Cuenta
 {
-    public class LogOnModel
+    public class InciarSesionViewModel
     {
         [Required]
         [Display(Name = "Email")]
@@ -13,7 +13,7 @@ namespace Sicemed.Web.Models.ViewModels.Account
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Recordarme?")]
         public bool RememberMe { get; set; }
     }
 }

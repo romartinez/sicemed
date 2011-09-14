@@ -155,11 +155,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Resource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.resx</DependentUpon>
-    </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ConsultoriosController.cs" />
     <Compile Include="Areas\Admin\Controllers\EspecialidadesController.cs" />
@@ -170,10 +165,9 @@
     <Compile Include="Areas\Admin\Controllers\LocalidadesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProvinciasController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsuariosController.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\UserManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -258,13 +252,10 @@
     <Compile Include="Models\Pagina.cs" />
     <Compile Include="Models\Enumerations\Roles\Rol.cs" />
     <Compile Include="Models\Usuario.cs" />
-    <Compile Include="Models\ViewModels\Account\ChangePasswordModel.cs" />
-    <Compile Include="Models\ViewModels\Account\LogOnModel.cs" />
-    <Compile Include="Models\ViewModels\Account\RegisterModel.cs" />
+    <Compile Include="Models\ViewModels\Cuenta\CambiarPasswordViewModel.cs" />
+    <Compile Include="Models\ViewModels\Cuenta\InciarSesionViewModel.cs" />
+    <Compile Include="Models\ViewModels\Cuenta\RegistroUsuarioViewModel.cs" />
     <Compile Include="Models\ViewModels\PaginableResponse.cs" />
-    <Compile Include="Models\ViewModels\UserManagement\RegisterUserViewModel.cs" />
-    <Compile Include="Models\ViewModels\UserManagement\RegisterViewModel.cs" />
-    <Compile Include="Models\ViewModels\UserManagement\ChangePasswordViewModel.cs" />
     <Compile Include="Models\Components\ComponentBase.cs" />
     <Compile Include="Models\Enumerations\Documentos\Cuit.cs" />
     <Compile Include="Models\Enumerations\Documentos\Dni.cs" />
@@ -278,7 +269,6 @@
     <Compile Include="Models\EspecialidadProfesional.cs" />
     <Compile Include="Models\Feriado.cs" />
     <Compile Include="Models\Localidad.cs" />
-    <Compile Include="Models\ViewModels\UserManagement\LogOnModelViewModel.cs" />
     <Compile Include="Models\ObraSocial.cs" />
     <Compile Include="Models\Parametro.cs" />
     <Compile Include="Models\Plan.cs" />
@@ -411,14 +401,12 @@
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Views\Turno\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -430,21 +418,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Resource.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\UserManagement\Create.cshtml" />
-    <Content Include="Views\UserManagement\Edit.cshtml" />
-    <Content Include="Views\UserManagement\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Account\ChangePassword.cshtml" />
-    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
-    <Content Include="Views\Account\LogOn.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Cuenta\ChangePassword.cshtml" />
+    <Content Include="Views\Cuenta\CambioDePasswordExitoso.cshtml" />
+    <Content Include="Views\Cuenta\IniciarSesion.cshtml" />
+    <Content Include="Views\Cuenta\Registro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Web.config" />

@@ -79,6 +79,69 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Emial o Password no válido..
+        /// </summary>
+        internal static string MembershipStatus_BAD_PASSWORD {
+            get {
+                return ResourceManager.GetString("MembershipStatus_BAD_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El Email ingresado ya se encuentra registrado..
+        /// </summary>
+        internal static string MembershipStatus_DUPLICATED_USER {
+            get {
+                return ResourceManager.GetString("MembershipStatus_DUPLICATED_USER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Su token ha expirado, por favor solicite un nuevo reinicio de clave..
+        /// </summary>
+        internal static string MembershipStatus_TOKEN_EXPIRED {
+            get {
+                return ResourceManager.GetString("MembershipStatus_TOKEN_EXPIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El usuario ha sido creado satisfactoriamente..
+        /// </summary>
+        internal static string MembershipStatus_USER_CREATED {
+            get {
+                return ResourceManager.GetString("MembershipStatus_USER_CREATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuario encontrado..
+        /// </summary>
+        internal static string MembershipStatus_USER_FOUND {
+            get {
+                return ResourceManager.GetString("MembershipStatus_USER_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El Usuario se encuentra bloqueado..
+        /// </summary>
+        internal static string MembershipStatus_USER_LOCKED {
+            get {
+                return ResourceManager.GetString("MembershipStatus_USER_LOCKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email o Password no Válido..
+        /// </summary>
+        internal static string MembershipStatus_USER_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("MembershipStatus_USER_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to El campo {1} es inválido..
         /// </summary>
         internal static string PropertyValueInvalid {

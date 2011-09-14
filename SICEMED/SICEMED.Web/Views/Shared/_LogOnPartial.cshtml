@@ -1,7 +1,11 @@
-﻿@if(Request.IsAuthenticated) {
-    <text>Welcome <strong>@User.Identity.Name</strong>!
-    [ @Html.ActionLink("Log Off", "LogOff", "Account", new{Area = ""}, new { }) ]</text>
+﻿@using Sicemed.Web.Models
+@{
+    var usuario = (Usuario)User;
+}
+@if(Request.IsAuthenticated) {
+    <text>Bienvenido <strong>@usuario.Apellido, @usuario.Nombre</strong>!
+    [ @Html.ActionLink("Salir", "Salir", "Cuenta", new{Area = ""}, new { }) ]</text>
 }
 else {
-    @:[ @Html.ActionLink("Log On", "LogOn", "Account", new { Area = "" }, new { }) ]
+    @:[ @Html.ActionLink("Iniciar Sesión", "IniciarSesion", "Cuenta", new { Area = "" }, new { }) ]
 }

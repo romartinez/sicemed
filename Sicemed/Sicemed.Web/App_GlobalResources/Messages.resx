@@ -123,6 +123,27 @@
   <data name="EmailAttribute_ValidationError" xml:space="preserve">
     <value>El campo {0} debe ser una dirección de email válida.</value>
   </data>
+  <data name="MembershipStatus_BAD_PASSWORD" xml:space="preserve">
+    <value>Emial o Password no válido.</value>
+  </data>
+  <data name="MembershipStatus_DUPLICATED_USER" xml:space="preserve">
+    <value>El Email ingresado ya se encuentra registrado.</value>
+  </data>
+  <data name="MembershipStatus_TOKEN_EXPIRED" xml:space="preserve">
+    <value>Su token ha expirado, por favor solicite un nuevo reinicio de clave.</value>
+  </data>
+  <data name="MembershipStatus_USER_CREATED" xml:space="preserve">
+    <value>El usuario ha sido creado satisfactoriamente.</value>
+  </data>
+  <data name="MembershipStatus_USER_FOUND" xml:space="preserve">
+    <value>Usuario encontrado.</value>
+  </data>
+  <data name="MembershipStatus_USER_LOCKED" xml:space="preserve">
+    <value>El Usuario se encuentra bloqueado.</value>
+  </data>
+  <data name="MembershipStatus_USER_NOT_FOUND" xml:space="preserve">
+    <value>Email o Password no Válido.</value>
+  </data>
   <data name="PropertyValueInvalid" xml:space="preserve">
     <value>El campo {1} es inválido.</value>
   </data>
