@@ -16,12 +16,12 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             ManyToOne(x => x.Paciente, map =>
             {
                 map.NotNullable(true);
-                map.ForeignKey("FK_Turnos_Usuario_Paciente");
+                map.ForeignKey("FK_Turnos_Persona_Paciente");
             });
             ManyToOne(x => x.Secretaria, map =>
             {
                 map.NotNullable(true);
-                map.ForeignKey("FK_Turnos_Usuario_Secretaria");
+                map.ForeignKey("FK_Turnos_Persona_Secretaria");
             });
             
             ManyToOne(x => x.DiaAtencionEspecialidadProfesional, map => map.NotNullable(true));

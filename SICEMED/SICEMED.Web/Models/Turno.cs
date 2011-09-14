@@ -24,9 +24,9 @@ namespace Sicemed.Web.Models
 
         public virtual DiaAtencionEspecialidadProfesional DiaAtencionEspecialidadProfesional { get; set; }
 
-        public virtual Usuario Paciente { get; set; }
+        public virtual Persona Paciente { get; set; }
 
-        public virtual Usuario Secretaria { get; set; }       
+        public virtual Persona Secretaria { get; set; }       
 
         #endregion
     }

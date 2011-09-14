@@ -4,10 +4,10 @@
 @using Sicemed.Web.Models.Enumerations.Roles
 
 @{
-    ViewBag.Title = "Administración De Usuarios";
+    ViewBag.Title = "Administración De Personas";
 }
 <h2>
-    Administraci&oacute;n de Usuarios
+    Administraci&oacute;n de Personas
 </h2>
 
 @Html.Partial("GrillaBase")
@@ -23,8 +23,8 @@
                     list: '@Url.Action("List")'
                 },
                 params: {
-                    caption: 'Gesti&oacute;n De Usuarios',
-                    emptyrecords: 'No hay Usuarios cargados.',
+                    caption: 'Gesti&oacute;n De Personas',
+                    emptyrecords: 'No hay Personas cargados.',
                     colNames: [
                         'Id', 
                         'Email', 

@@ -10,13 +10,13 @@ namespace Sicemed.Web.Infrastructure.Services
 {
     public interface ISecurityService
     {
-        void Validate(Usuario user, ActionDescriptor actionDescriptor);
-        bool Can(Usuario user, ActionDescriptor actionDescriptor);
+        void Validate(Persona user, ActionDescriptor actionDescriptor);
+        bool Can(Persona user, ActionDescriptor actionDescriptor);
     }
 
     public class SecurityService : ISecurityService
     {
-        public virtual void Validate(Usuario user, ActionDescriptor actionDescriptor)
+        public virtual void Validate(Persona user, ActionDescriptor actionDescriptor)
         {
             if (user == null) throw new SecurityException("The user is not Authenticated.");
             if (actionDescriptor == null) throw new ArgumentNullException("actionDescriptor");
@@ -26,7 +26,7 @@ namespace Sicemed.Web.Infrastructure.Services
                     string.Format("The User '{0}' doesn't have the permissions to execute '{1}'.", user.Membership.Email, actionDescriptor));
         }
 
-        public virtual bool Can(Usuario user, ActionDescriptor actionDescriptor)
+        public virtual bool Can(Persona user, ActionDescriptor actionDescriptor)
         {
             if (user == null) throw new ArgumentNullException("user");
             if (actionDescriptor == null) throw new ArgumentNullException("actionDescriptor");

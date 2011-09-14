@@ -30,7 +30,7 @@ namespace Sicemed.Web.Infrastructure.HttpModules
             var authTicket = FormsAuthentication.Decrypt(authCookie.Value);
             var id = Convert.ToInt64(authTicket.UserData);
             var session = ServiceLocator.Current.GetInstance<ISessionFactory>().GetCurrentSession();
-            HttpContext.Current.User = session.Get<Usuario>(id);
+            HttpContext.Current.User = session.Get<Persona>(id);
         }
     }
 }

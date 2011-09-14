@@ -127,7 +127,7 @@ namespace Sicemed.Tests
             var installer = new ApplicationInstaller();
             installer.SessionFactory = SessionFactory;
 
-            installer.MembershipService = new MembershipService(SessionFactory, new RijndaelEngine("WAL"),
+            installer.MembershipService = new MembershipService(SessionFactory,
                                                                 new Mock<IMailSenderService>().Object,
                                                                 new Mock<IFormAuthenticationStoreService>().Object);
 
@@ -138,10 +138,10 @@ namespace Sicemed.Tests
 
             LogManager.GetRepository().Threshold = Level.Debug;
 
-            var cryptoService = new RijndaelEngine("WAL");
+            new RijndaelEngine("WAL");
             _mailService = new Mock<IMailSenderService>();
             var formsService = new Mock<IFormAuthenticationStoreService>();
-            _membershipService = new MembershipService(SessionFactory, cryptoService,
+            _membershipService = new MembershipService(SessionFactory,
                                                           _mailService.Object,
                                                           formsService.Object);
         }
@@ -153,9 +153,9 @@ namespace Sicemed.Tests
         }
 
 
-        protected Usuario CrearUsuarioValido()
+        protected Persona CrearPersonaValida()
         {
-            return new Usuario() { Nombre = "Walter", Apellido = "Poch" };
+            return new Persona() { Nombre = "Walter", Apellido = "Poch" };
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Sicemed.Web.Models
 
         public virtual Especialidad Especialidad { get; set; }
 
-        public virtual Usuario Profesional { get; set; }
+        public virtual Persona Profesional { get; set; }
 
         #endregion
     }

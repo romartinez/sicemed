@@ -1,6 +1,6 @@
 ﻿@using Sicemed.Web.Models
 @{
-    var usuario = (Usuario)User;
+    var usuario = (Persona)User;
 }
 @if(Request.IsAuthenticated) {
     <text>Bienvenido <strong>@usuario.Apellido, @usuario.Nombre</strong>!

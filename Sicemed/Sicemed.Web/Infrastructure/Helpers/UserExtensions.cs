@@ -16,10 +16,10 @@ namespace System.Security.Principal
             //Si no esta autenticado, no pertenece a los roles custom.
             if (!user.Identity.IsAuthenticated) return false;
             
-            var usuario = user as Usuario;
-            if (usuario == null) throw new ArgumentException(@"El usuario debe ser del tipo Usuario.", "user");
+            var persona = user as Persona;
+            if (persona == null) throw new ArgumentException(@"El usuario debe ser del tipo Persona.", "user");
 
-            return usuario.Roles.Any(r=> r.Value == rol.Value);
+            return persona.Roles.Any(r=> r.Value == rol.Value);
         }
     }
 }

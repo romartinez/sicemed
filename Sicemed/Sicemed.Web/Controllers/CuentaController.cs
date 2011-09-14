@@ -27,7 +27,7 @@ namespace Sicemed.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                Usuario user;
+                Persona user;
                 var status = _membershipService.Login(model.Email, model.Password, out user);
                 if (status == MembershipStatus.USER_FOUND)
                 {
@@ -57,12 +57,12 @@ namespace Sicemed.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Registro(RegistroUsuarioViewModel model)
+        public ActionResult Registro(RegistroPersonaViewModel model)
         {
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                var user = new Usuario { Nombre = model.Nombre, Apellido = model.Apellido };
+                var user = new Persona { Nombre = model.Nombre, Apellido = model.Apellido };
                 _membershipService.CreateUser(user, model.Email, model.Password);
                 var status = _membershipService.Login(model.Email, model.Password, out user);
                 if (status == MembershipStatus.USER_CREATED)

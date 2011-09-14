@@ -4,9 +4,9 @@ using Sicemed.Web.Models.Enumerations.Roles;
 
 namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
 {
-    public class UsuarioMap : EntityMapping<Usuario>
+    public class PersonaMap : EntityMapping<Persona>
     {
-        public UsuarioMap()
+        public PersonaMap()
         {
             Property(x => x.Nombre, map => map.NotNullable(true));
             Property(x => x.Apellido, map => map.NotNullable(true));

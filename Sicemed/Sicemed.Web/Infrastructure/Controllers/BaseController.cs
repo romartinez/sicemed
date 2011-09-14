@@ -21,7 +21,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
 
         public IMembershipService MembershipService {get;set;}
 
-        protected new Usuario User
+        protected new Persona User
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
             }
         }
 
-        protected Usuario Usuario
+        protected Persona Persona
         {
             get
             {

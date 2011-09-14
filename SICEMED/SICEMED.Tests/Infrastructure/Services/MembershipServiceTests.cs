@@ -10,28 +10,28 @@ namespace Sicemed.Tests.Infrastructure.Services
         [Test]
         public void PuedoCrearUnUsuario()
         {
-            var usuario = CrearUsuarioValido();
+            var usuario = CrearPersonaValida();
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
             MailService.Verify(x => x.SendNewUserEmail(usuario));
 
             var usuario2 =
-                Session.QueryOver<Usuario>().Where(u => u.Membership.Email == "walter.poch@gmail.com").SingleOrDefault();
+                Session.QueryOver<Persona>().Where(u => u.Membership.Email == "walter.poch@gmail.com").SingleOrDefault();
             Assert.AreEqual("Walter", usuario2.Nombre);
         }
 
         [Test]
         public void PuedoLoguarme()
         {
-            var usuario = CrearUsuarioValido();
+            var usuario = CrearPersonaValida();
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
             Session.Flush();
             Session.Evict(usuario);
 
-            Usuario u2;
+            Persona u2;
             MembershipService.Login("walter.poch@gmail.com", "testtest", out u2);
             Assert.AreEqual(usuario, u2);
         }
@@ -39,7 +39,7 @@ namespace Sicemed.Tests.Infrastructure.Services
         [Test]
         public void NoPuedoLoguearmeConUnMalPassword()
         {
-            var usuario = CrearUsuarioValido();
+            var usuario = CrearPersonaValida();
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
@@ -49,7 +49,7 @@ namespace Sicemed.Tests.Infrastructure.Services
         [Test]
         public void NoPuedoLoguearmeConUnMalUsuario()
         {
-            var usuario = CrearUsuarioValido();
+            var usuario = CrearPersonaValida();
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
@@ -59,7 +59,7 @@ namespace Sicemed.Tests.Infrastructure.Services
         [Test]
         public void NoPuedoLoguearmeConUnMalUsuarioYMalPassword()
         {
-            var usuario = CrearUsuarioValido();
+            var usuario = CrearPersonaValida();
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
@@ -71,7 +71,7 @@ namespace Sicemed.Tests.Infrastructure.Services
         [Test]
         public void PuedoBloquearUnUsuario()
         {
-            var usuario = CrearUsuarioValido();
+            var usuario = CrearPersonaValida();
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
@@ -79,7 +79,7 @@ namespace Sicemed.Tests.Infrastructure.Services
 
 
             var usuario2 =
-                Session.QueryOver<Usuario>().Where(u => u.Membership.Email == "walter.poch@gmail.com").SingleOrDefault();
+                Session.QueryOver<Persona>().Where(u => u.Membership.Email == "walter.poch@gmail.com").SingleOrDefault();
             Assert.IsTrue(usuario2.Membership.IsLockedOut);
             Assert.AreEqual("Testing", usuario2.Membership.LockedOutReason);
         }
@@ -87,7 +87,7 @@ namespace Sicemed.Tests.Infrastructure.Services
         [Test]
         public void PuedoBloquearYDesbloquearUnUsuario()
         {
-            var usuario = CrearUsuarioValido();
+            var usuario = CrearPersonaValida();
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
@@ -97,7 +97,7 @@ namespace Sicemed.Tests.Infrastructure.Services
 
 
             var usuario2 =
-                Session.QueryOver<Usuario>().Where(u => u.Membership.Email == "walter.poch@gmail.com").SingleOrDefault();
+                Session.QueryOver<Persona>().Where(u => u.Membership.Email == "walter.poch@gmail.com").SingleOrDefault();
             Assert.IsFalse(usuario2.Membership.IsLockedOut);
             Assert.AreEqual("Testing", usuario2.Membership.LockedOutReason);
         }
@@ -105,7 +105,7 @@ namespace Sicemed.Tests.Infrastructure.Services
         [Test]
         public void UnUsuarioSeBloqueaCon3IntentosDeLoginFallidos()
         {
-            var usuario = CrearUsuarioValido();
+            var usuario = CrearPersonaValida();
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
@@ -117,7 +117,7 @@ namespace Sicemed.Tests.Infrastructure.Services
 
 
             var usuario2 =
-                Session.QueryOver<Usuario>().Where(u => u.Membership.Email == "walter.poch@gmail.com").SingleOrDefault();
+                Session.QueryOver<Persona>().Where(u => u.Membership.Email == "walter.poch@gmail.com").SingleOrDefault();
             Assert.IsTrue(usuario2.Membership.IsLockedOut);
             Assert.IsFalse(string.IsNullOrWhiteSpace(usuario2.Membership.LockedOutReason));
 
@@ -128,7 +128,7 @@ namespace Sicemed.Tests.Infrastructure.Services
         public void PuedoPedirUnPasswordReset()
         {
             var token = string.Empty;
-            var usuario = CrearUsuarioValido();
+            var usuario = CrearPersonaValida();
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
@@ -139,7 +139,7 @@ namespace Sicemed.Tests.Infrastructure.Services
 
 
             var usuario2 =
-                Session.QueryOver<Usuario>().Where(u => u.Membership.Email == "walter.poch@gmail.com").SingleOrDefault();
+                Session.QueryOver<Persona>().Where(u => u.Membership.Email == "walter.poch@gmail.com").SingleOrDefault();
             Assert.AreEqual(token, usuario2.Membership.PasswordResetToken);
         }
 
@@ -147,7 +147,7 @@ namespace Sicemed.Tests.Infrastructure.Services
         public void PuedoCambiarElPasswordYLoguearmeConElNuevo()
         {
             var token = string.Empty;
-            var usuario = CrearUsuarioValido();
+            var usuario = CrearPersonaValida();
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 

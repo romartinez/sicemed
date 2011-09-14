@@ -7,7 +7,7 @@ namespace Sicemed.Web.Infrastructure.Services
 {
     public interface IFormAuthenticationStoreService
     {
-        void CreateLogInCookie(Usuario user, bool rememberMe = false);
+        void CreateLogInCookie(Persona user, bool rememberMe = false);
         void SingOut();
     }
 
@@ -15,7 +15,7 @@ namespace Sicemed.Web.Infrastructure.Services
     {
         #region IFormAuthenticationStoreService Members
 
-        public void CreateLogInCookie(Usuario user, bool rememberMe = false)
+        public void CreateLogInCookie(Persona user, bool rememberMe = false)
         {
             var authTicket = new FormsAuthenticationTicket(1,
                                                            user.Membership.Email,

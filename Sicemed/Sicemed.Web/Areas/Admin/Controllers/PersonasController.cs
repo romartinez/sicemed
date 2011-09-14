@@ -10,10 +10,10 @@ using Sicemed.Web.Models.Enumerations.Documentos;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
 {
-    public class UsuariosController : CrudBaseController<Usuario>
+    public class PersonasController : CrudBaseController<Persona>
     {
-        #region Overrides of CrudBaseController<Usuario>
-        protected override Expression<Func<Usuario, object>> DefaultOrderBy
+        #region Overrides of CrudBaseController<Persona>
+        protected override Expression<Func<Persona, object>> DefaultOrderBy
         {
             get { return x => x.Membership.Email; }
         }
@@ -27,7 +27,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             return base.Index();
         }
 
-        protected override System.Collections.IEnumerable AplicarProjections(System.Collections.Generic.IEnumerable<Usuario> results)
+        protected override System.Collections.IEnumerable AplicarProjections(System.Collections.Generic.IEnumerable<Persona> results)
         {
             return results.Select(x => new
             {
@@ -63,7 +63,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             });
         }
 
-        protected override Usuario AgregarReferencias(Usuario modelo)
+        protected override Persona AgregarReferencias(Persona modelo)
         {
             var tipoDocumentoId = RetrieveParameter<int>("Documento.TipoDocumento.Value", "Tipo De Documento");
             var tipoDocumento = Enumeration.FromValue<TipoDocumento>(tipoDocumentoId);

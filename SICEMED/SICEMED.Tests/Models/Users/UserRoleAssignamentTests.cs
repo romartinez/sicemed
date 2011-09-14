@@ -11,21 +11,21 @@ namespace Sicemed.Tests.Models.Users
         [Test]
         public void PuedoCrearUnUsuarioConUnSoloRol()
         {
-            var usuario = CrearUsuarioValido();
+            var usuario = CrearPersonaValida();
             usuario.AgregarRol(Rol.Profesional);
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
             Session.Flush();
             Session.Evict(usuario);
 
-            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre == "Walter" && u.Apellido == "Poch").SingleOrDefault();
+            var usuario2 = Session.QueryOver<Persona>().Where(u => u.Nombre == "Walter" && u.Apellido == "Poch").SingleOrDefault();
             Assert.AreEqual(1, usuario2.Roles.Count());
         }
 
         [Test]
         public void PuedoCrearUnUsuarioConVariosRoles()
         {
-            var usuario = CrearUsuarioValido();
+            var usuario = CrearPersonaValida();
             usuario.AgregarRol(Rol.Secretaria);
             usuario.AgregarRol(Rol.Profesional);
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
@@ -34,20 +34,20 @@ namespace Sicemed.Tests.Models.Users
             Session.Evict(usuario);
 
 
-            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre == "Walter" && u.Apellido == "Poch").SingleOrDefault();
+            var usuario2 = Session.QueryOver<Persona>().Where(u => u.Nombre == "Walter" && u.Apellido == "Poch").SingleOrDefault();
             Assert.AreEqual(2, usuario2.Roles.Count());
         }
 
         [Test]
         public void PuedoCrearUnUsuarioSinRoles()
         {
-            var usuario = CrearUsuarioValido();
+            var usuario = CrearPersonaValida();
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
             Session.Flush();
             Session.Evict(usuario);
 
-            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre == "Walter" && u.Apellido == "Poch").SingleOrDefault();
+            var usuario2 = Session.QueryOver<Persona>().Where(u => u.Nombre == "Walter" && u.Apellido == "Poch").SingleOrDefault();
             Assert.IsNotNull(usuario2);
             Assert.AreEqual(0, usuario2.Roles.Count());
         }

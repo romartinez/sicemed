@@ -4,7 +4,7 @@ using Sicemed.Web.Infrastructure.Attributes.Validation;
 
 namespace Sicemed.Web.Models.ViewModels.Cuenta
 {
-    public class RegistroUsuarioViewModel
+    public class RegistroPersonaViewModel
     {
         [Required]
         [Display(Name = "Nombre")]

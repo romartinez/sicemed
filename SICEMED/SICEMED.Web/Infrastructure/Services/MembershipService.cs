@@ -11,14 +11,14 @@ namespace Sicemed.Web.Infrastructure.Services
     public interface IMembershipService
     {
         int MinPasswordLength { get; }
-        MembershipStatus Login(string email, string password, out Usuario user, bool rememberMe = false);
+        MembershipStatus Login(string email, string password, out Persona persona, bool rememberMe = false);
         void SignOut();
         MembershipStatus RecoverPassword(string email);
         MembershipStatus ChangePassword(string email, string givenToken, string newPassword);
         MembershipStatus UnlockUser(string email);
         MembershipStatus LockUser(string email, string reason);
-        MembershipStatus CreateUser(Usuario user, string email, string password);
-        Usuario GetCurrentUser();
+        MembershipStatus CreateUser(Persona user, string email, string password);
+        Persona GetCurrentUser();
     }
 
     public class MembershipService : IMembershipService
@@ -26,7 +26,6 @@ namespace Sicemed.Web.Infrastructure.Services
         private const string SHA1_SALT = "!-3453dfg4";
         private const int WINDOW_MINUTES = 30;
         private const int MAX_FAILED_ATTEMPS = 3;
-        private readonly ICryptoEngine _cryptoEngine;
         private readonly IFormAuthenticationStoreService _formsAuthenticationStoreService;
         private readonly IMailSenderService _mailSenderService;
         private readonly ISessionFactory _sessionFactory;
@@ -39,40 +38,38 @@ namespace Sicemed.Web.Infrastructure.Services
         }
 
         public MembershipService(ISessionFactory sessionFactory,
-                                 ICryptoEngine cryptoEngine,
                                  IMailSenderService mailSenderService,
                                  IFormAuthenticationStoreService formsAuthenticationStoreService)
         {
             _sessionFactory = sessionFactory;
-            _cryptoEngine = cryptoEngine;
             _mailSenderService = mailSenderService;
             _formsAuthenticationStoreService = formsAuthenticationStoreService;
         }
 
         #region IMembershipService Members
 
-        public MembershipStatus Login(string email, string password, out Usuario user, bool rememberMe = false)
+        public MembershipStatus Login(string email, string password, out Persona persona, bool rememberMe = false)
         {
-            if(Logger.IsDebugEnabled) Logger.DebugFormat("The user '{0}' is logging in.", email);
+            if(Logger.IsDebugEnabled) Logger.DebugFormat("La persona '{0}' se esta logueando.", email);
             
             var passwordHash = DataHashing.Compute(Algorithm.SHA1, password + SHA1_SALT);
             var session = _sessionFactory.GetCurrentSession();
             using (var tx = session.BeginTransaction())
             {
-                user = session.QueryOver<Usuario>().Where(u => u.Membership.Email == email).SingleOrDefault();
+                persona = session.QueryOver<Persona>().Where(u => u.Membership.Email == email).SingleOrDefault();
 
-                var status = ValidateUser(email, user);
+                var status = ValidateUser(email, persona);
                 if(status != MembershipStatus.USER_FOUND) return status;
 
-                if (user.Membership.Password == passwordHash)
+                if (persona.Membership.Password == passwordHash)
                 {
                     if(Logger.IsDebugEnabled) 
-                        Logger.DebugFormat("The user '{0}' was found and his password correct. Updating his LastLoginDate.", email);
+                        Logger.DebugFormat("La persona '{0}' was found and his password correct. Updating his LastLoginDate.", email);
 
-                    user.Membership.LastLoginDate = DateTime.Now;
-                    session.Update(user);
+                    persona.Membership.LastLoginDate = DateTime.Now;
+                    session.Update(persona);
 
-                    _formsAuthenticationStoreService.CreateLogInCookie(user, rememberMe);
+                    _formsAuthenticationStoreService.CreateLogInCookie(persona, rememberMe);
 
                     tx.Commit();
                     return status;
@@ -80,33 +77,33 @@ namespace Sicemed.Web.Infrastructure.Services
 
                 status = MembershipStatus.BAD_PASSWORD;
 
-                if (user.Membership.FailedPasswordAttemptWindowStart.HasValue
-                    && user.Membership.FailedPasswordAttemptWindowStart.Value.AddMinutes(WINDOW_MINUTES) >= DateTime.Now)
+                if (persona.Membership.FailedPasswordAttemptWindowStart.HasValue
+                    && persona.Membership.FailedPasswordAttemptWindowStart.Value.AddMinutes(WINDOW_MINUTES) >= DateTime.Now)
                 {
-                    user.Membership.FailedPasswordAttemptCount++;
+                    persona.Membership.FailedPasswordAttemptCount++;
                     if(Logger.IsDebugEnabled)
-                        Logger.DebugFormat("The user '{0}' was found and his password incorrect. Incorrect attempt #{1}.", email, user.Membership.FailedPasswordAttemptCount);
+                        Logger.DebugFormat("The persona '{0}' was found and his password incorrect. Incorrect attempt #{1}.", email, persona.Membership.FailedPasswordAttemptCount);
 
-                    if (user.Membership.FailedPasswordAttemptCount >= MAX_FAILED_ATTEMPS)
+                    if (persona.Membership.FailedPasswordAttemptCount >= MAX_FAILED_ATTEMPS)
                     {
-                        user.Membership.LastLockoutDate = DateTime.UtcNow;
-                        user.Membership.IsLockedOut = true;
-                        user.Membership.LockedOutReason = "Maximum failed password attemp reached.";
+                        persona.Membership.LastLockoutDate = DateTime.UtcNow;
+                        persona.Membership.IsLockedOut = true;
+                        persona.Membership.LockedOutReason = "Maximum failed password attemp reached.";
 
                         status = MembershipStatus.USER_LOCKED;
 
                         if(Logger.IsInfoEnabled)
-                            Logger.InfoFormat("The user '{0}' was locked. Maximum failed password attemp reached: #{1}", email, user.Membership.FailedPasswordAttemptCount);
+                            Logger.InfoFormat("The persona '{0}' was locked. Maximum failed password attemp reached: #{1}", email, persona.Membership.FailedPasswordAttemptCount);
                     }
                 } else
                 {
-                    user.Membership.FailedPasswordAttemptCount = 1;
-                    user.Membership.FailedPasswordAttemptWindowStart = DateTime.UtcNow;
+                    persona.Membership.FailedPasswordAttemptCount = 1;
+                    persona.Membership.FailedPasswordAttemptWindowStart = DateTime.UtcNow;
 
                     if(Logger.IsDebugEnabled)
-                        Logger.DebugFormat("The user '{0}' was found and his password incorrect. First logon attempt.", email);
+                        Logger.DebugFormat("The persona '{0}' was found and his password incorrect. First logon attempt.", email);
                 }
-                session.Update(user);
+                session.Update(persona);
                 tx.Commit();
                 
                 return status;
@@ -121,38 +118,38 @@ namespace Sicemed.Web.Infrastructure.Services
 
         public MembershipStatus RecoverPassword(string email)
         {
-            if(Logger.IsDebugEnabled) Logger.DebugFormat("Recovering the password for the user '{0}'.", email);
+            if(Logger.IsDebugEnabled) Logger.DebugFormat("Recovering the password for the persona '{0}'.", email);
 
             var session = _sessionFactory.GetCurrentSession();
             using (var tx = session.BeginTransaction())
             {
-                var usuario = session.QueryOver<Usuario>().Where(u => u.Membership.Email == email).SingleOrDefault();
+                var persona = session.QueryOver<Persona>().Where(u => u.Membership.Email == email).SingleOrDefault();
 
-                var status = ValidateUser(email, usuario);
+                var status = ValidateUser(email, persona);
                 if(status != MembershipStatus.USER_FOUND) return status;
 
                 var token = DataGenerator.RandomString(10, 20, true, true, true, false);
-                usuario.Membership.PasswordResetToken = token;
-                usuario.Membership.PasswordResetTokenGeneratedOn = DateTime.UtcNow;
+                persona.Membership.PasswordResetToken = token;
+                persona.Membership.PasswordResetTokenGeneratedOn = DateTime.UtcNow;
 
-                session.Update(usuario);
+                session.Update(persona);
                 tx.Commit();
 
-                _mailSenderService.SendPasswordResetEmail(usuario, token);
+                _mailSenderService.SendPasswordResetEmail(persona, token);
                 return status;
             }
         }
 
-        private MembershipStatus ValidateUser(string email, Usuario usuario) {
-            if (usuario == default(Usuario))
+        private MembershipStatus ValidateUser(string email, Persona persona) {
+            if (persona == default(Persona))
             {
-                if(Logger.IsInfoEnabled) Logger.InfoFormat("There isn't a user with email '{0}'", email);
+                if(Logger.IsInfoEnabled) Logger.InfoFormat("There isn't a persona with email '{0}'", email);
                 return MembershipStatus.USER_NOT_FOUND;
             }
 
-            if(usuario.Membership.IsLockedOut)
+            if(persona.Membership.IsLockedOut)
             {
-                if(Logger.IsWarnEnabled) Logger.WarnFormat("The user '{0}' is locked out.", email);
+                if(Logger.IsWarnEnabled) Logger.WarnFormat("The persona '{0}' is locked out.", email);
                 return MembershipStatus.USER_LOCKED;
             }
 
@@ -161,13 +158,13 @@ namespace Sicemed.Web.Infrastructure.Services
 
         public MembershipStatus ChangePassword(string email, string givenToken, string newPassword)
         {
-            if(Logger.IsDebugEnabled) Logger.DebugFormat("The user '{0}' is changing his password.", email);
+            if(Logger.IsDebugEnabled) Logger.DebugFormat("The persona '{0}' is changing his password.", email);
 
             var session = _sessionFactory.GetCurrentSession();
             using (var tx = session.BeginTransaction())
             {
                 var usuario =
-                    session.QueryOver<Usuario>().Where(
+                    session.QueryOver<Persona>().Where(
                         u => u.Membership.Email == email && u.Membership.PasswordResetToken == givenToken).
                         SingleOrDefault();
 
@@ -192,14 +189,14 @@ namespace Sicemed.Web.Infrastructure.Services
 
         public MembershipStatus UnlockUser(string email)
         {
-            if(Logger.IsDebugEnabled) Logger.DebugFormat("Unlocking the user '{0}'.", email);
+            if(Logger.IsDebugEnabled) Logger.DebugFormat("Unlocking the persona '{0}'.", email);
 
             var session = _sessionFactory.GetCurrentSession();
             using (var tx = session.BeginTransaction())
             {
-                var usuario = session.QueryOver<Usuario>().Where(u => u.Membership.Email == email).SingleOrDefault();
+                var usuario = session.QueryOver<Persona>().Where(u => u.Membership.Email == email).SingleOrDefault();
 
-                if(usuario == default(Usuario))
+                if(usuario == default(Persona))
                     return MembershipStatus.USER_NOT_FOUND;
 
                 usuario.Membership.IsLockedOut = false;
@@ -213,14 +210,14 @@ namespace Sicemed.Web.Infrastructure.Services
 
         public MembershipStatus LockUser(string email, string reason)
         {
-            if(Logger.IsDebugEnabled) Logger.DebugFormat("Locking the user '{0}'.", email);
+            if(Logger.IsDebugEnabled) Logger.DebugFormat("Locking the persona '{0}'.", email);
 
             var session = _sessionFactory.GetCurrentSession();
             using (var tx = session.BeginTransaction())
             {
-                var usuario = session.QueryOver<Usuario>().Where(u => u.Membership.Email == email).SingleOrDefault();
+                var usuario = session.QueryOver<Persona>().Where(u => u.Membership.Email == email).SingleOrDefault();
 
-                if (usuario == default(Usuario))
+                if (usuario == default(Persona))
                     return MembershipStatus.USER_NOT_FOUND;
 
                 usuario.Membership.IsLockedOut = true;
@@ -234,13 +231,13 @@ namespace Sicemed.Web.Infrastructure.Services
             }
         }
 
-        public MembershipStatus CreateUser(Usuario user, string email, string password)
+        public MembershipStatus CreateUser(Persona user, string email, string password)
         {
             if (user == null) throw new ArgumentNullException("user");
             if (string.IsNullOrWhiteSpace(email)) throw new ArgumentNullException("email");
             if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException("password");
 
-            if(Logger.IsDebugEnabled) Logger.DebugFormat("Creating the user '{0}'.", email);
+            if(Logger.IsDebugEnabled) Logger.DebugFormat("Creating the persona '{0}'.", email);
 
             if (password.Length < MinPasswordLength)
                 throw new ArgumentException(
@@ -249,7 +246,7 @@ namespace Sicemed.Web.Infrastructure.Services
             var session = _sessionFactory.GetCurrentSession();
             using (var tx = session.BeginTransaction())
             {
-                var exists = session.QueryOver<Usuario>().Where(x => x.Membership.Email == email).RowCount() > 0;
+                var exists = session.QueryOver<Persona>().Where(x => x.Membership.Email == email).RowCount() > 0;
 
                 if(exists) return MembershipStatus.DUPLICATED_USER;
 
@@ -272,10 +269,10 @@ namespace Sicemed.Web.Infrastructure.Services
             return MembershipStatus.USER_CREATED;
         }
 
-        public virtual Usuario GetCurrentUser()
+        public virtual Persona GetCurrentUser()
         {
             if (!HttpContext.Current.User.Identity.IsAuthenticated) return null;
-            return (Usuario)HttpContext.Current.User;
+            return (Persona)HttpContext.Current.User;
         }
 
         public int MinPasswordLength
