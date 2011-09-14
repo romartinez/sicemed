@@ -1,0 +1,24 @@
+﻿@using Sicemed.Web.Models
+@model IEnumerable<Pagina>
+           
+@foreach (var pagina in Model)
+{
+<li>
+	<a href="@Url.Action("Content", "Content", new {id = pagina.Id})">
+		<span class="sdt_active">&nbsp;</span>
+		<span class="sdt_wrap">
+			<span class="sdt_link">@pagina.Nombre</span>
+			<span class="sdt_descr"></span>
+		</span>
+	</a>
+    @if(pagina.Hijos.Any())
+    {
+	    <div class="sdt_box">
+            @foreach(var hijo in pagina.Hijos)
+            {
+                <a href="@Url.Action("Content", "Content", new {id = hijo.Id})">@hijo.Nombre</a>
+            }
+	    </div>        
+    }
+</li>    
+}

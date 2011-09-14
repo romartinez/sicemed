@@ -1,6 +1,6 @@
 ﻿@using System.Security.Principal
 @using Combres
-@using Sicemed.Web.Models.Enumerations
+@using Sicemed.Web.Models
 @using Sicemed.Web.Models.Enumerations.Roles
 <!DOCTYPE html>
 <html>
@@ -20,26 +20,8 @@
             </div>
             <nav>
                 <ul id="sdt_menu" class="sdt_menu ui-helper-clearfix">
-                    <li>
-                        <a href="@Url.Action("Index", "Home")">
-						    <img src="../../Content/images/menu/2.jpg" alt="Home"/>
-						    <span class="sdt_active"></span>
-						    <span class="sdt_wrap">
-							    <span class="sdt_link">Home</span>
-							    <span class="sdt_descr">Inicio</span>
-						    </span>                            
-                        </a>                    
-                    </li>
-                    <li>
-					    <a href="@Url.Action("About", "Home")">
-						    <img src="../../Content/images/menu/3.jpg" alt=""/>
-						    <span class="sdt_active"></span>
-						    <span class="sdt_wrap">
-							    <span class="sdt_link">Inspiration</span>
-							    <span class="sdt_descr">Where ideas get born</span>
-						    </span>
-					    </a>
-                    </li>
+                    @Html.Partial("_Menu",(IEnumerable<Pagina>)ViewData["_Menu"])
+
                     @if (User.IsInRole(Rol.Administrador))
                     {
                         <li>

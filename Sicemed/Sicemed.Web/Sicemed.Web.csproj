@@ -168,8 +168,8 @@
     <Compile Include="Areas\Admin\Controllers\ProvinciasController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -179,6 +179,8 @@
     <Compile Include="Infrastructure\Attributes\Filters\AjaxHandleError.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AuditAtrribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AuthorizeItAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\Filters\MenuAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\Filters\NHibernateBaseAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\PermanentCacheAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Validation\EmailAttribute.cs" />
@@ -406,7 +408,6 @@
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -495,6 +496,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Usuarios\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Menu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Content\Content.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Content\NotFound.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

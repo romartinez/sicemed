@@ -19,6 +19,7 @@ namespace Sicemed.Web.Infrastructure.Providers.FilterAtrribute
         {
             new AuditAtrribute(),
             new HandleErrorAttribute(),
+            new MenuAttribute(),
             new HandleErrorAttribute(){ExceptionType = typeof(SecurityException), View = "PermissionError"},
         };
 
