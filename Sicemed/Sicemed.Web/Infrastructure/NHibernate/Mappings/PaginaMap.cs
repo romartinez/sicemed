@@ -13,7 +13,11 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                 map.NotNullable(true);
                 map.Type(NHibernateUtil.StringClob);
             });
-            Property(x => x.Nombre, map => map.NotNullable(true));
+            Property(x => x.Nombre, map =>
+                                    {
+                                        map.NotNullable(true);
+                                        map.Unique(true);
+                                    });
 
             ManyToOne(x => x.Padre);
 

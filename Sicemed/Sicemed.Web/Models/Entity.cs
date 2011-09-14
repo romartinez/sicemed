@@ -41,7 +41,7 @@ namespace Sicemed.Web.Models
             return other.Id.Equals(Id);
         }
 
-        protected bool IsTransient()
+        public virtual bool IsTransient()
         {
             return Equals(Id, default(long));
         }
