@@ -155,7 +155,7 @@ namespace Sicemed.Tests
 
         protected Usuario CrearUsuarioValido()
         {
-            return new Usuario() { Nombre = "Walter", Apellido = "Walter" };
+            return new Usuario() { Nombre = "Walter", Apellido = "Poch" };
         }
     }
 }

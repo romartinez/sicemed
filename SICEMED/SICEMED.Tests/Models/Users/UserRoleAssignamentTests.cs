@@ -1,7 +1,6 @@
 using System.Linq;
 using NUnit.Framework;
 using Sicemed.Web.Models;
-using Sicemed.Web.Models.Enumerations;
 using Sicemed.Web.Models.Enumerations.Roles;
 
 namespace Sicemed.Tests.Models.Users
@@ -19,7 +18,7 @@ namespace Sicemed.Tests.Models.Users
             Session.Flush();
             Session.Evict(usuario);
 
-            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre == "Walter").SingleOrDefault();
+            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre == "Walter" && u.Apellido == "Poch").SingleOrDefault();
             Assert.AreEqual(1, usuario2.Roles.Count());
         }
 
@@ -35,7 +34,7 @@ namespace Sicemed.Tests.Models.Users
             Session.Evict(usuario);
 
 
-            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre == "Walter").SingleOrDefault();
+            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre == "Walter" && u.Apellido == "Poch").SingleOrDefault();
             Assert.AreEqual(2, usuario2.Roles.Count());
         }
 
@@ -48,7 +47,7 @@ namespace Sicemed.Tests.Models.Users
             Session.Flush();
             Session.Evict(usuario);
 
-            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre == "Walter").SingleOrDefault();
+            var usuario2 = Session.QueryOver<Usuario>().Where(u => u.Nombre == "Walter" && u.Apellido == "Poch").SingleOrDefault();
             Assert.IsNotNull(usuario2);
             Assert.AreEqual(0, usuario2.Roles.Count());
         }
