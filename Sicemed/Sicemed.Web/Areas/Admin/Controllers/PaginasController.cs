@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web.Mvc;
-using System.Web.UI;
-using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Models;
 
@@ -10,19 +8,35 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 {
     public class PaginasController : CrudBaseController<Pagina>
     {
-        [HttpGet]
-        [AjaxHandleError]
-        [OutputCache(Duration = 600, VaryByParam = "none", Location = OutputCacheLocation.ServerAndClient)]//10 minutes(10min*60sec)
-        [ValidateAntiForgeryToken]
-        public ActionResult ObtenerPaginas()
-        {
-            var paginas = SessionFactory.GetCurrentSession().QueryOver<Pagina>().List();
-            return Json(paginas);
-        }
-
         protected override Expression<Func<Pagina, object>> DefaultOrderBy
         {
             get { return x => x.Nombre; }
+        }
+
+        protected override Pagina AgregarReferencias(Pagina modelo)
+        {
+            var padreId = RetrieveParameter<long>("padreId", "Padre", true);
+            var session = SessionFactory.GetCurrentSession();
+
+            if(padreId != default(long))
+            {
+                var paginaPadre = session.Get<Pagina>(padreId);
+
+                modelo.Padre = paginaPadre;
+            }
+
+            return modelo;
+        }
+
+        public virtual ActionResult ObtenerPaginasPadre()
+        {
+            using (var session = SessionFactory.OpenStatelessSession())
+            {
+                ViewData.Model = session.QueryOver<Pagina>()                    
+                    .Where(x => x.Padre == null).List();
+
+                return PartialView();
+            }
         }
     }
 }

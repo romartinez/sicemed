@@ -1,0 +1,9 @@
+﻿@using Sicemed.Web.Models
+@model IEnumerable<Pagina>
+<select role="select" id="PadreId" name="PadreId" class="FormElement">
+    <option value="0">Ninguno</option>
+    @foreach (var pagina in Model)
+    {
+        <option value='@pagina.Id'>@pagina.Nombre</option>
+    }
+</select>

@@ -1,10 +1,8 @@
 ﻿
 // ReSharper disable CheckNamespace
 
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 using Sicemed.Web.Infrastructure.Helpers;
@@ -16,12 +14,12 @@ namespace System.Web.Mvc.Html
     public static class HtmlExtensions
     {
 
-        public static MvcHtmlString SelectJsonValues<T>(this HtmlHelper<IEnumerable<T>> htmlHelper, Expression<Func<T, object>> id, Expression<Func<T, object>> text)
+        public static MvcHtmlString SelectJsonValues<T>(this HtmlHelper<IEnumerable<T>> htmlHelper, Expression<Func<T, object>> id, Expression<Func<T, object>> text, string emptySelectionText = null)
         {
-            return SelectJsonValues(htmlHelper, htmlHelper.ViewData.Model, id, text);
+            return SelectJsonValues(htmlHelper, htmlHelper.ViewData.Model, id, text, emptySelectionText);
         }
 
-        public static MvcHtmlString SelectJsonValues<T>(this HtmlHelper<IEnumerable<T>> htmlHelper, IEnumerable<T> models, Expression<Func<T, object>> id, Expression<Func<T, object>> text)
+        public static MvcHtmlString SelectJsonValues<T>(this HtmlHelper<IEnumerable<T>> htmlHelper, IEnumerable<T> models, Expression<Func<T, object>> id, Expression<Func<T, object>> text, string emptySelectionText = null)
         {
             if (id == null) throw new ArgumentNullException("id");
             if (text == null) throw new ArgumentNullException("text");
@@ -31,6 +29,12 @@ namespace System.Web.Mvc.Html
             var propertyText = ReflectionHelper.GetProperty(text);
 
             var list = new ListDictionary();
+
+            if (emptySelectionText != null)
+            {
+                list.Add(string.Empty, emptySelectionText);
+            }
+
             foreach (var model in models)
             {
                 var valueId = propertyId.GetValue(model, null);

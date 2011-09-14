@@ -4,7 +4,7 @@
 @foreach (var pagina in Model)
 {
 <li>
-	<a href="@Url.Action("Content", "Content", new {id = pagina.Id})">
+	<a href="@Url.Action("Index", "Content", new { id = pagina.Id, Area = "" })">
 		<span class="sdt_active">&nbsp;</span>
 		<span class="sdt_wrap">
 			<span class="sdt_link">@pagina.Nombre</span>
@@ -16,7 +16,7 @@
 	    <div class="sdt_box">
             @foreach(var hijo in pagina.Hijos)
             {
-                <a href="@Url.Action("Content", "Content", new {id = hijo.Id})">@hijo.Nombre</a>
+                <a href="@Url.Action("Index", "Content", new {id = hijo.Id, Area=""})">@hijo.Nombre</a>
             }
 	    </div>        
     }

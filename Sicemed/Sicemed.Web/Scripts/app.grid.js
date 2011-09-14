@@ -34,7 +34,6 @@
                 $('body').prepend('<div class="ui-widget-overlay" id="jqgrid-overlay" style="left: 0px; top: 0px; width: 100%; height: 100%; position: fixed; z-index: 949; opacity: 0.3;"/>');
             },
             onClose: function () {
-                console.log("salir");
                 $('#jqgrid-overlay').remove();
             },
             resize: false,

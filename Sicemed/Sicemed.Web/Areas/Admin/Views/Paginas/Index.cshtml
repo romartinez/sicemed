@@ -21,7 +21,7 @@
                     caption: 'Gesti&oacute;n De P&aacute;ginas',
                     emptyrecords: 'No hay P&aacute;ginas cargadas.',
                     modalWidth: 600,                    
-                    colNames: ['Id', 'Nombre', 'Contenido'],
+                    colNames: ['Id', 'Nombre', 'Contenido', 'Padre'],
                     colModel: [
                             {
                                 name: 'Id',
@@ -64,7 +64,27 @@
                                     maxlength: '50',
                                     size: '50'
                                 }
-                            }
+                            },
+                            {
+                                name: 'PadreId',
+                                index: 'Padre',
+                                formatter: function ( cellvalue, options, rowObject )
+                                {                    
+                                    if(rowObject.Padre)
+                                        return rowObject.Padre.Nombre;
+                                    return "";
+                                },
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                edittype: 'select',
+                                editoptions: {
+                                    dataUrl: '@Url.Action("ObtenerPaginasPadre")'
+                                },
+                                formoptions: {
+                                    label: 'Padre (*)'
+                                }
+                            }                        
                         ]
                 }
             });
