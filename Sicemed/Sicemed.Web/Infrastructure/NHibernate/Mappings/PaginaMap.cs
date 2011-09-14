@@ -1,28 +1,33 @@
-﻿using NHibernate.Mapping.ByCode;
+﻿using NHibernate;
+using NHibernate.Mapping.ByCode;
 using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
 {
     public class PaginaMap : EntityMapping<Pagina>
     {
-         public PaginaMap()
-         {
-             Property(x => x.Contenido, map => map.NotNullable(true));
-             Property(x => x.Nombre, map => map.NotNullable(true));
+        public PaginaMap()
+        {
+            Property(x => x.Contenido, map =>
+            {
+                map.NotNullable(true);
+                map.Type(NHibernateUtil.StringClob);
+            });
+            Property(x => x.Nombre, map => map.NotNullable(true));
 
-             ManyToOne(x => x.Padre);
+            ManyToOne(x => x.Padre);
 
-             Set(
-                 x => x.Hijos, 
-                 map =>
-                 {
+            Set(
+                x => x.Hijos,
+                map =>
+                {
                     map.Cascade(Cascade.All | Cascade.DeleteOrphans);
                     map.Access(Accessor.NoSetter);
                     map.Inverse(true);
                     map.Lazy(CollectionLazy.NoLazy);
                     map.Fetch(CollectionFetchMode.Join);
-                 }, 
-                rel => rel.OneToMany());
-         }
+                },
+               rel => rel.OneToMany());
+        }
     }
 }

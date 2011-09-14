@@ -7,13 +7,13 @@ using System.Linq.Expressions;
 using Newtonsoft.Json;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models.Enumerations;
+using Textile;
 
 namespace System.Web.Mvc.Html
 // ReSharper restore CheckNamespace
 {
     public static class HtmlExtensions
     {
-
         public static MvcHtmlString SelectJsonValues<T>(this HtmlHelper<IEnumerable<T>> htmlHelper, Expression<Func<T, object>> id, Expression<Func<T, object>> text, string emptySelectionText = null)
         {
             return SelectJsonValues(htmlHelper, htmlHelper.ViewData.Model, id, text, emptySelectionText);
@@ -57,5 +57,14 @@ namespace System.Web.Mvc.Html
             return new MvcHtmlString(JsonConvert.SerializeObject(list));
         }
 
+        public static MvcHtmlString Textile(this HtmlHelper htmlHelper, string textileContent)
+        {
+            var output = new StringBuilderTextileFormatter();
+            var formatter = new TextileFormatter(output);
+
+            formatter.Format(textileContent);
+
+            return new MvcHtmlString(output.GetFormattedText());
+        }
     }
 }
