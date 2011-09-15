@@ -5,6 +5,10 @@
 @{
     ViewBag.Title = "Administración De Personas";
 }
+<style>
+    ul.roles {margin: 0; padding: 0; padding-left: 14px;}
+</style>
+
 <h2>
     Administraci&oacute;n de Personas
 </h2>
@@ -132,7 +136,13 @@
                                 index: 'Roles',
                                 width: 90,
                                 formatter: function(cellvalue, options, rowObject) {
-                                    return rowObject;
+                                    var str = "<ul class='roles'>";
+                                    for(var i = 0; i < rowObject.Roles.length; i ++) {
+                                        var role = rowObject.Roles[i];
+                                        str += "<li>" + role + "</li>";
+                                    }
+                                    str += "</ul>";
+                                    return str ;
                                 },
                                 editable: false,
                                 sortable: false
