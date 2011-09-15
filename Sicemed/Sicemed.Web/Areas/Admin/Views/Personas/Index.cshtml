@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Provincia>
 @using Sicemed.Web.Models
 @using Sicemed.Web.Models.Enumerations.Documentos
+@using Sicemed.Web.Models.Roles
 
 @{
     ViewBag.Title = "Administración De Personas";
@@ -13,11 +14,16 @@
     Administraci&oacute;n de Personas
 </h2>
 
+@Html.Partial("Secretaria", Secretaria.Create(DateTime.Now))
+
+
 @Html.Partial("GrillaBase")
 
 @section Scripts{
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
+            $("#wdSecretaria").dialog();
+            
             app.grid.initialize({
                 url: {
                     edit: '@Url.Action("Editar")',
