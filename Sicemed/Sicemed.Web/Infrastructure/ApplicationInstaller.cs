@@ -268,7 +268,7 @@ namespace Sicemed.Web.Infrastructure
         private void CrearPersonas()
         {
             PersonaAdmin = new Persona { Nombre = "Administrador", Apellido = "Administrador" };
-            PersonaAdmin.AgregarRol(new Administrador());
+            PersonaAdmin.AgregarRol(Administrador.Create());
             MembershipService.CreateUser(PersonaAdmin, "admin@gmail.com", "sicemedAdmin");
 
             PersonaAdminProfesionalWalter = new Persona
@@ -281,8 +281,8 @@ namespace Sicemed.Web.Infrastructure
                 Documento = new Documento { Numero = 31364468, TipoDocumento = TipoDocumento.Dni },
                 Telefono = new Telefono { Prefijo = "0341", Numero = "153353273" }
             };
-            PersonaAdminProfesionalWalter.AgregarRol(new Administrador());
-            PersonaAdminProfesionalWalter.AgregarRol(new Profesional());
+            PersonaAdminProfesionalWalter.AgregarRol(Administrador.Create());
+            PersonaAdminProfesionalWalter.AgregarRol(Profesional.Create("46546546"));
             MembershipService.CreateUser(PersonaAdminProfesionalWalter, "walter@gmail.com", "sicemedWalter");
 
             PersonaPacientePablo = new Persona
@@ -316,7 +316,7 @@ namespace Sicemed.Web.Infrastructure
                 Documento = new Documento { Numero = 10112123, TipoDocumento = TipoDocumento.Dni },
                 Telefono = new Telefono { Prefijo = "0341", Numero = "4481123" }
             };
-            PersonaSecretariaJuana.AgregarRol(new Secretaria(DateTime.Now));
+            PersonaSecretariaJuana.AgregarRol(Secretaria.Create(DateTime.Now));
             MembershipService.CreateUser(PersonaSecretariaJuana, "juana@gmail.com", "sicemedJuana");
 
             PersonaProfesionalBernardo = new Persona
@@ -328,7 +328,7 @@ namespace Sicemed.Web.Infrastructure
                 Documento = new Documento { Numero = 30123876, TipoDocumento = TipoDocumento.Dni },
                 Telefono = new Telefono { Prefijo = "0341", Numero = "4471010" }
             };
-            PersonaProfesionalBernardo.AgregarRol(new Profesional());
+            PersonaProfesionalBernardo.AgregarRol(Profesional.Create("546546"));
             MembershipService.CreateUser(PersonaProfesionalBernardo, "bernardo@gmail.com", "sicemedBernardo");
 
             PersonaProfesionalJose = new Persona
@@ -341,7 +341,7 @@ namespace Sicemed.Web.Infrastructure
                 Documento = new Documento { Numero = 31789502, TipoDocumento = TipoDocumento.Dni },
                 Telefono = new Telefono { Prefijo = "0341", Numero = "1661234" }
             };
-            PersonaProfesionalJose.AgregarRol(new Profesional());
+            PersonaProfesionalJose.AgregarRol(Profesional.Create("546465489"));
             MembershipService.CreateUser(PersonaProfesionalJose, "jose@gmail.com", "sicemedJose");
         }
         #endregion

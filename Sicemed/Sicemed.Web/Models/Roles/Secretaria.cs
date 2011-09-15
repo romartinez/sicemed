@@ -1,5 +1,4 @@
 ﻿using System;
-using Sicemed.Web.Models.Components;
 
 namespace Sicemed.Web.Models.Roles
 {
@@ -7,15 +6,16 @@ namespace Sicemed.Web.Models.Roles
     {
         public override string DisplayName
         {
-            get { return "Secretaria"; }
+            get { return SECRETARIA; }
         }
 
-        public virtual DateTime FechaIngreso { get; set; }               
+        public virtual DateTime FechaIngreso { get; set; }
 
-        protected Secretaria(){}
-        public Secretaria(DateTime fechaIngreso)
+        protected Secretaria() {}
+
+        public static Rol Create(DateTime fechaIngreso)
         {
-            FechaIngreso = fechaIngreso;
+            return new Secretaria() { FechaIngreso = fechaIngreso };
         }
     }
 }

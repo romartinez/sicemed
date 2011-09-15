@@ -4,9 +4,17 @@
     {
         public override string DisplayName
         {
-            get { return "Profesional"; }
+            get { return PROFESIONAL; }
         }
 
-        public virtual long Matricula { get; set; }
+        public virtual string Matricula { get; set; }
+
+        protected Profesional() { }
+
+        public static Rol Create(string matricula)
+        {
+            return new Profesional() { Matricula = matricula };
+        }
+
     }
 }

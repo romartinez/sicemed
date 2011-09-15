@@ -7,7 +7,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Roles
     {
         public AdministradorMap()
         {
-            DiscriminatorValue("Administrador");
+            DiscriminatorValue(Rol.ADMINISTRADOR);
         }
     }
 }

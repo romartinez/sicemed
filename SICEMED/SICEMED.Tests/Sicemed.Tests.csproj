@@ -87,7 +87,7 @@
     <Compile Include="Models\Localidades\LocalidadesTests.cs" />
     <Compile Include="Models\Paginas\PaginasTests.cs" />
     <Compile Include="Models\Provincias\ProvinciasTests.cs" />
-    <Compile Include="Models\Users\UserRoleAssignamentTests.cs" />
+    <Compile Include="Models\Personas\PersonasAsignacionRolesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Roles
     {
         public SecretariaMap()
         {
-            DiscriminatorValue("Secretaria");
+            DiscriminatorValue(Rol.SECRETARIA);
             Property(x => x.FechaIngreso);
         }
     }

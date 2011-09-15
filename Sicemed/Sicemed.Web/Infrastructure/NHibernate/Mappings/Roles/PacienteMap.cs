@@ -7,7 +7,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Roles
     {
         public PacienteMap()
         {
-            DiscriminatorValue(new Paciente().DisplayName);            
+            DiscriminatorValue(Rol.PACIENTE);            
             Property(x => x.InasistenciasContinuas);
             Property(x => x.NumeroAfiliado);
             Property(x => x.EstaHabilitadoTurnosWeb);            

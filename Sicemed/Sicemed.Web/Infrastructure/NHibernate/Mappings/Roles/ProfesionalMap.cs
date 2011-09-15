@@ -7,7 +7,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Roles
     {
         public ProfesionalMap()
         {
-            DiscriminatorValue("Profesional");
+            DiscriminatorValue(Rol.PROFESIONAL);
             Property(x => x.Matricula);
         }
     }

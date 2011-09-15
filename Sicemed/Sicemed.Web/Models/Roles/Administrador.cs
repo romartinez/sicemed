@@ -4,7 +4,14 @@
     {
         public override string DisplayName
         {
-            get { return "Administrador"; }
+            get { return ADMINISTRADOR; }
+        }
+
+        protected Administrador() { }
+
+        public static Rol Create()
+        {
+            return new Administrador();
         }
     }
 }
