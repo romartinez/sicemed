@@ -21,7 +21,7 @@
                 <ul id="sdt_menu" class="sdt_menu ui-helper-clearfix">
                     @Html.Partial("_Menu",(IEnumerable<Pagina>)ViewData["_Menu"])
 
-                    @if (User.Identity.IsAuthenticated && (User as Persona).IsInRole<Administrador>())
+                    @if (User.IsInRole(Rol.ADMINISTRADOR))
                     {
                         <li>
 					        <a href="#">						        
