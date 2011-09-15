@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<Provincia>
 @using Sicemed.Web.Models
-@using Sicemed.Web.Models.Components.Roles
 @using Sicemed.Web.Models.Enumerations.Documentos
-@using Sicemed.Web.Models.Enumerations.Roles
 
 @{
     ViewBag.Title = "Administración De Personas";
@@ -42,9 +40,6 @@
                         'Provincia', 
                         'Caracteristica',
                         'Telefono',
-                        'Nro. Afiliado', 
-                        'Hab. Online',
-                        'Inasistencias',
                         'Esta Bloqueado?'
                     ],
                     colModel: [
@@ -136,21 +131,11 @@
                                 name: 'Roles',
                                 index: 'Roles',
                                 width: 90,
-                                editable: true,
-                                sortable: false,
-                                edittype: 'select',
-                                editoptions: {
-                                    multiple: true,
-                                    value: @Html.SelectJsonValues(Rol.Roles)
+                                formatter: function(cellvalue, options, rowObject) {
+                                    return rowObject;
                                 },
-                                editrules: {
-                                    required: true
-                                },
-                                formoptions: {
-                                    label: 'Roles (*)',
-                                    maxlength: '255',
-                                    size: '255'
-                                }
+                                editable: false,
+                                sortable: false
                             },                        
                             {
                                 name: 'FechaNacimiento',
@@ -314,43 +299,6 @@
                                     maxlength: '255',
                                     size: '255'
                                 }
-                            },
-                            {
-                                name: 'NumeroAfiliado',
-                                index: 'NumeroAfiliado',
-                                width: 90,
-                                editable: true,
-                                sortable: false,
-                                editrules: {
-                                    required: true
-                                },
-                                formoptions: {
-                                    label: 'Numero De Afiliado (*)',
-                                    maxlength: '255',
-                                    size: '255'
-                                }
-                            },
-                            {
-                                name: 'EstaHabilitadoTurnosWeb',
-                                index: 'EstaHabilitadoTurnosWeb',
-                                width: 90,
-                                editable: true,
-                                sortable: false,
-                                formatter: 'booleanFormatter',
-                                edittype: 'checkbox',
-                                editoptions: {
-                                    value: 'true:false'  
-                                },                                
-                                formoptions: {
-                                    label: 'Hab. Online?'
-                                }
-                            },
-                            {
-                                name: 'InasistenciasContinuas',
-                                index: 'InasistenciasContinuas',
-                                width: 90,
-                                editable: false,
-                                sortable: false
                             },
                             {
                                 name: 'Membership.IsLockedOut',

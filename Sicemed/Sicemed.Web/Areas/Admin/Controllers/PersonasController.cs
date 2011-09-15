@@ -50,16 +50,14 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 x.Apellido,
                 x.Nombre,
                 x.SegundoNombre,
-                x.EstaHabilitadoTurnosWeb,
                 x.FechaNacimiento,
-                x.InasistenciasContinuas,
-                x.NumeroAfiliado,
+                x.Telefono,
+                Roles = x.Roles.Select(r=> r.DisplayName),
                 Membership = x.Membership != null ?  new
                                  {
                                      x.Membership.Email,
                                      x.Membership.IsLockedOut
-                                 } : null,
-                x.Telefono
+                                 } : null                
             });
         }
 

@@ -7,7 +7,7 @@ using NHibernate;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Exceptions;
 using Sicemed.Web.Models;
-using Sicemed.Web.Models.Components.Roles;
+using Sicemed.Web.Models.Roles;
 using Sicemed.Web.Models.ViewModels;
 using Sicemed.Web.Infrastructure.Helpers;
 

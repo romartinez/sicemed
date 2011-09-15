@@ -1,7 +1,7 @@
 using System;
 using System.Web.Mvc;
 using Sicemed.Web.Infrastructure.Services;
-using Sicemed.Web.Models.Components.Roles;
+using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Infrastructure.Attributes.Filters
 {    
@@ -20,9 +20,9 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
         public virtual IMembershipService MembershipService { get; set; }
         public virtual ISecurityService SecurityService { get; set; }
 
-        public virtual Rol Rol
+        public virtual Type Rol
         {
-            get { return (Rol)Activator.CreateInstance(_rolType); }
+            get { return _rolType; }
         }
 
         public override void OnAuthorization(AuthorizationContext filterContext)

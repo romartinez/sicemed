@@ -1,8 +1,8 @@
 ﻿@using Sicemed.Web.Models
 @{
-    var usuario = (Persona)User;
+    var usuario = User as Persona;
 }
-@if(Request.IsAuthenticated) {
+@if(User.Identity.IsAuthenticated) {
     <text>Bienvenido <strong>@usuario.Apellido, @usuario.Nombre</strong>!
     [ @Html.ActionLink("Salir", "Salir", "Cuenta", new{Area = ""}, new { }) ]</text>
 }

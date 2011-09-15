@@ -1,4 +1,4 @@
-﻿namespace Sicemed.Web.Models.Components.Roles
+﻿namespace Sicemed.Web.Models.Roles
 {
     public class Profesional : Rol
     {
@@ -6,5 +6,7 @@
         {
             get { return "Profesional"; }
         }
+
+        public virtual long Matricula { get; set; }
     }
 }

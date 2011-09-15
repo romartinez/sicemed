@@ -1,7 +1,7 @@
 ﻿// ReSharper disable CheckNamespace
 
 using Sicemed.Web.Models;
-using Sicemed.Web.Models.Components.Roles;
+using Sicemed.Web.Models.Roles;
 
 namespace System.Security.Principal
 // ReSharper restore CheckNamespace
@@ -16,7 +16,7 @@ namespace System.Security.Principal
             var persona = user as Persona;
             if (persona == null) throw new ArgumentException(@"El usuario debe ser del tipo Persona.", "user");
 
-            return persona.Es<T>();
+            return persona.IsInRole<T>();
         }
     }
 }

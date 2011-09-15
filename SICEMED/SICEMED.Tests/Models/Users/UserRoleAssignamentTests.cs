@@ -1,7 +1,8 @@
+using System;
 using System.Linq;
 using NUnit.Framework;
 using Sicemed.Web.Models;
-using Sicemed.Web.Models.Components.Roles;
+using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Tests.Models.Users
 {
@@ -12,7 +13,7 @@ namespace Sicemed.Tests.Models.Users
         public void PuedoCrearUnUsuarioConUnSoloRol()
         {
             var usuario = CrearPersonaValida();
-            usuario.AgregarRol(Rol.Profesional);
+            usuario.AgregarRol(new Profesional());
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
             Session.Flush();
@@ -26,8 +27,8 @@ namespace Sicemed.Tests.Models.Users
         public void PuedoCrearUnUsuarioConVariosRoles()
         {
             var usuario = CrearPersonaValida();
-            usuario.AgregarRol(Rol.Secretaria);
-            usuario.AgregarRol(Rol.Profesional);
+            usuario.AgregarRol(new Secretaria(DateTime.Now));
+            usuario.AgregarRol(new Profesional());
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
             Session.Flush();

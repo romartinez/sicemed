@@ -1,4 +1,4 @@
-﻿namespace Sicemed.Web.Models.Components.Roles
+﻿namespace Sicemed.Web.Models.Roles
 {
     public class Administrador : Rol
     {

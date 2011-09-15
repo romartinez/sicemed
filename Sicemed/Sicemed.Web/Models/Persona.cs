@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using Sicemed.Web.Models.Components;
-using Sicemed.Web.Models.Components.Roles;
+using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Models
 {
@@ -14,7 +14,7 @@ namespace Sicemed.Web.Models
 
         public Persona()
         {
-            _roles = new HashSet<Rol>();           
+            _roles = new HashSet<Rol>();
             _membership = new Membership();
             _turnos = new HashSet<Turno>();
         }
@@ -24,26 +24,21 @@ namespace Sicemed.Web.Models
             get { return _membership; }
         }
 
-        public virtual IEnumerable<Rol> Roles
-        {
-            get { return _roles; }
-        }
-
         #region Primitive Properties
+
+        public virtual string Nombre { get; set; }
+        
+        public virtual string SegundoNombre { get; set; }
+        
+        public virtual string Apellido { get; set; }
 
         public virtual DateTime? FechaNacimiento { get; set; }
 
         public virtual Documento Documento { get; set; }
-        
+
         public virtual Domicilio Domicilio { get; set; }
 
-        public virtual bool? EstaHabilitadoTurnosWeb { get; set; }
-
         public virtual Telefono Telefono { get; set; }
-
-        public virtual int InasistenciasContinuas { get; set; }
-
-        public virtual string NumeroAfiliado { get; set; }
 
         #endregion
 
@@ -55,23 +50,28 @@ namespace Sicemed.Web.Models
             get { return _turnos; }
         }
 
+        public virtual IEnumerable<Rol> Roles
+        {
+            get { return _roles; }
+        }
         #endregion
 
-        public virtual string Nombre { get; set; }
-        public virtual string SegundoNombre { get; set; }
-        public virtual string Apellido{ get; set; }
-        
         public virtual bool IsInRole(string role)
         {
             return _roles.Select(r => r.DisplayName).Contains(role);
         }
 
-        public virtual bool Es<T>() where T: Rol
+        public virtual bool IsInRole<T>() where T : Rol
         {
-            return _roles.Any(x => x.GetType() == typeof (T));
+            return IsInRole(typeof (T));
         }
 
-        public virtual T Como<T>() where T : Rol
+        public virtual bool IsInRole(Type rolType)
+        {
+            return _roles.Any(x => x.GetType() == rolType);
+        }
+
+        public virtual T As<T>() where T : Rol
         {
             return _roles.FirstOrDefault(x => x.GetType() == typeof(T)) as T;
         }
@@ -90,7 +90,7 @@ namespace Sicemed.Web.Models
         public virtual Persona QuitarRol(Rol rol)
         {
             var roleToRemove = _roles.FirstOrDefault(r => r == rol);
-            if(roleToRemove != null) _roles.Remove(roleToRemove);
+            if (roleToRemove != null) _roles.Remove(roleToRemove);
             return this;
         }
 

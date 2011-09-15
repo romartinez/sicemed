@@ -41,7 +41,7 @@ namespace Sicemed.Web.Infrastructure.Services
             if (!attributes.Any())
                 throw new SecurityException("El método no tiene definidos permisos. Por defecto los métodos son seguros, la seguridad debe ser explpícita.");
 
-            return attributes.Any(attr => user.Roles.Any(ur => ur == attr.Rol));
+            return attributes.Any(attr => user.IsInRole(attr.Rol));
         }
     }
 }
