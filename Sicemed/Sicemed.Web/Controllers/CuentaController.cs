@@ -75,14 +75,14 @@ namespace Sicemed.Web.Controllers
             return View(model);
         }
 
-        public ActionResult ChangePassword()
+        public ActionResult CambiarPassword()
         {
             ViewBag.PasswordLength = _membershipService.MinPasswordLength;
             return View();
         }
 
         [HttpPost]
-        public ActionResult ChangePassword(CambiarPasswordViewModel viewModel)
+        public ActionResult CambiarPassword(CambiarPasswordViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
