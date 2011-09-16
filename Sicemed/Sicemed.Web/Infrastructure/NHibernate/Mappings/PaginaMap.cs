@@ -19,7 +19,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                                         map.Unique(true);
                                     });
 
-            ManyToOne(x => x.Padre);
+            ManyToOne(x => x.Padre, map=> map.ForeignKey("FK_Paginas_Padre"));
 
             Set(
                 x => x.Hijos,

@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Sicemed.Web.Models.Consultorio">
+    <Position X="17.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Consultorio.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Especialidad">
+    <Position X="14.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Especialidad.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Feriado" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Feriado.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Localidad">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAACAQAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Localidad.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Provincia" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sicemed.Web.Models.ObraSocial">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAEIAAAAAAAAAAAAACAAIAAgAAAAA=</HashCode>
+      <FileName>Models\ObraSocial.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Planes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Pagina">
+    <Position X="12" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAgAAAAIAAAAAAAAgABAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Models\Pagina.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Padre" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Hijos" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Persona" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAADAAAAQQEEAAAgAAAQgAAQAACAEABAgAAAAA=</HashCode>
+      <FileName>Models\Persona.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Membership" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Roles" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sicemed.Web.Models.Plan">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAABAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Models\Plan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Provincia">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AiAAAAAAAAAAAAACAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Provincia.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Turno">
+    <Position X="5.25" Y="12.5" Width="1.5" />
+    <AssociationLine Name="Secretaria" Type="Sicemed.Web.Models.Roles.Secretaria" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="12.562" />
+        <Point X="8" Y="12.562" />
+        <Point X="8" Y="10.562" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAEAAAACADAAAIEAAAABAAAAAABAAAgIAAAAEAAAAAA=</HashCode>
+      <FileName>Models\Turno.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Paciente" />
+      <Property Name="Profesional" />
+      <Property Name="Secretaria" />
+      <Property Name="Especialidad" />
+      <Property Name="Consultorio" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Parametro" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAABARAgAAAAAAAAAAAAIAAAAAAAAAAAiA=</HashCode>
+      <FileName>Models\Parametro.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Sicemed.Web.Models.Roles.Secretaria">
+    <Position X="7.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAACAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Roles\Secretaria.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Roles.Administrador">
+    <Position X="9.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Roles\Administrador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Roles.Paciente">
+    <Position X="5.25" Y="8.75" Width="1.5" />
+    <AssociationLine Name="Turnos" Type="Sicemed.Web.Models.Turno" FixedToPoint="true">
+      <Path>
+        <Point X="5.938" Y="11.601" />
+        <Point X="5.938" Y="12.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>EAQAEAAAAAAQAAAAAAAAAAAAAAAAAEARAAACBAAAAAA=</HashCode>
+      <FileName>Models\Roles\Paciente.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Turnos" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Roles.Profesional">
+    <Position X="11.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAEAAAAAAAAAAAAAACAAAAAEAAIAAAAgAAAAA=</HashCode>
+      <FileName>Models\Roles\Profesional.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Especialidades" />
+      <Property Name="Agendas" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Roles.Rol">
+    <Position X="8" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAMAAAAAAAAAAAAAEAAAAAgRAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\Roles\Rol.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Persona" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Components.Documento">
+    <Position X="14.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAABAAA=</HashCode>
+      <FileName>Models\Components\Documento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Components.Telefono">
+    <Position X="14.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAABAAA=</HashCode>
+      <FileName>Models\Components\Telefono.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Components.Domicilio">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Models\Components\Domicilio.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Localidad" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Components.Membership">
+    <Position X="0.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAECgIBAAAAAAAAEAQABCAAAACAAABAAAAgAA=</HashCode>
+      <FileName>Models\Components\Membership.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Agenda">
+    <Position X="14.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAgAAAAAAEAAAAAAIABAAAAARAAAAA=</HashCode>
+      <FileName>Models\Agenda.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Consultorio" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

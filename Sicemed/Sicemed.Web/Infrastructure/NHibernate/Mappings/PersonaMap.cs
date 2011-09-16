@@ -19,16 +19,10 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
 
             Set(x => x.Roles, map =>
             {
+                map.Inverse(true);
                 map.Access(Accessor.NoSetter);
                 map.Cascade(Cascade.All | Cascade.DeleteOrphans);
-            }, rel => rel.OneToMany());
-
-
-            //Set(x => x.Turnos, map =>
-            //{
-            //    map.Inverse(true);
-            //    map.Access(Accessor.NoSetter);
-            //}, rel => rel.OneToMany());
+            }, rel => rel.OneToMany() );
         }
     }
 }

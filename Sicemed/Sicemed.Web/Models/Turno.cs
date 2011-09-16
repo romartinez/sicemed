@@ -1,4 +1,5 @@
 using System;
+using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Models
 {
@@ -22,11 +23,15 @@ namespace Sicemed.Web.Models
 
         #region Navigation Properties
 
-        public virtual DiaAtencionEspecialidadProfesional DiaAtencionEspecialidadProfesional { get; set; }
+        public virtual Paciente Paciente { get; set; }
+        
+        public virtual Profesional Profesional { get; set; }
 
-        public virtual Persona Paciente { get; set; }
+        public virtual Secretaria Secretaria { get; set; }
 
-        public virtual Persona Secretaria { get; set; }       
+        public virtual Especialidad Especialidad { get; set; }
+        
+        public virtual Consultorio Consultorio { get; set; }
 
         #endregion
     }

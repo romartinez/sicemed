@@ -13,11 +13,5 @@ namespace Sicemed.Web.Models
         public virtual string Descripcion { get; set; }
 
         #endregion
-
-        #region Navigation Properties
-
-        public virtual ISet<EspecialidadProfesional> EspecialidadProfesionales { get; set; }
-
-        #endregion
     }
 }

@@ -699,9 +699,9 @@ namespace Sicemed.Web.Infrastructure
 
         #region Nested type: ISetSnapshot
 
-        private interface ISetSnapshot<T> : ICollection<T>, ICollection
+        private interface ISetSnapshot<T2> : ICollection<T2>, ICollection
         {
-            T this[T element] { get; }
+            T2 this[T2 element] { get; }
         }
 
         #endregion
@@ -709,28 +709,28 @@ namespace Sicemed.Web.Infrastructure
         #region Nested type: SetSnapShot
 
         [Serializable]
-        private class SetSnapShot<T> : ISetSnapshot<T>
+        private class SetSnapShot<T2> : ISetSnapshot<T2>
         {
-            private readonly List<T> elements;
+            private readonly List<T2> elements;
 
             private SetSnapShot()
             {
-                elements = new List<T>();
+                elements = new List<T2>();
             }
 
             public SetSnapShot(int capacity)
             {
-                elements = new List<T>(capacity);
+                elements = new List<T2>(capacity);
             }
 
-            public SetSnapShot(IEnumerable<T> collection)
+            public SetSnapShot(IEnumerable<T2> collection)
             {
-                elements = new List<T>(collection);
+                elements = new List<T2>(collection);
             }
 
             #region ISetSnapshot<T> Members
 
-            public IEnumerator<T> GetEnumerator()
+            public IEnumerator<T2> GetEnumerator()
             {
                 return elements.GetEnumerator();
             }
@@ -740,7 +740,7 @@ namespace Sicemed.Web.Infrastructure
                 return GetEnumerator();
             }
 
-            public void Add(T item)
+            public void Add(T2 item)
             {
                 elements.Add(item);
             }
@@ -750,17 +750,17 @@ namespace Sicemed.Web.Infrastructure
                 throw new InvalidOperationException();
             }
 
-            public bool Contains(T item)
+            public bool Contains(T2 item)
             {
                 return elements.Contains(item);
             }
 
-            public void CopyTo(T[] array, int arrayIndex)
+            public void CopyTo(T2[] array, int arrayIndex)
             {
                 elements.CopyTo(array, arrayIndex);
             }
 
-            public bool Remove(T item)
+            public bool Remove(T2 item)
             {
                 throw new InvalidOperationException();
             }
@@ -785,17 +785,17 @@ namespace Sicemed.Web.Infrastructure
                 get { return ((ICollection)elements).IsSynchronized; }
             }
 
-            int ICollection<T>.Count
+            int ICollection<T2>.Count
             {
                 get { return elements.Count; }
             }
 
             public bool IsReadOnly
             {
-                get { return ((ICollection<T>)elements).IsReadOnly; }
+                get { return ((ICollection<T2>)elements).IsReadOnly; }
             }
 
-            public T this[T element]
+            public T2 this[T2 element]
             {
                 get
                 {
@@ -804,7 +804,7 @@ namespace Sicemed.Web.Infrastructure
                     {
                         return elements[idx];
                     }
-                    return default(T);
+                    return default(T2);
                 }
             }
 

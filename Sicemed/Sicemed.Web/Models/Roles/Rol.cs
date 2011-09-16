@@ -10,6 +10,8 @@ namespace Sicemed.Web.Models.Roles
         public const string ADMINISTRADOR = "Administrador";
 
         public virtual DateTime FechaAsignacion { get; set; }
+        
+        public virtual Persona Persona { get; set; }
 
         protected Rol()
         {

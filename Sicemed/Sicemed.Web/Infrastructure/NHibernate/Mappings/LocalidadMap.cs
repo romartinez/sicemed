@@ -10,7 +10,10 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
              Property(x => x.CodigoPostal);
              Property(x => x.Nombre, map => map.NotNullable(true));
 
-             ManyToOne(x => x.Provincia, map => map.NotNullable(true));
+             ManyToOne(x => x.Provincia, map => { 
+                map.NotNullable(true);
+                map.ForeignKey("FK_Localidades_Provincia");
+             });
          }
     }
 }

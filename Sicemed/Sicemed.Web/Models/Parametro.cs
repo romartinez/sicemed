@@ -26,7 +26,22 @@ namespace Sicemed.Web.Models
 
         public enum Keys
         {
-            APP_IS_INITIALIZED
+            APP_IS_INITIALIZED,
+            APP_RAZON_SOCIAL,
+            APP_CUIT,
+            APP_DIRECCION,
+            APP_TELEFONO,
+            APP_FAX,
+            APP_EMAIL,
+            APP_HORARIO_MATUTINO_DESDE,
+            APP_HORARIO_MATUTINO_HASTA,
+            APP_HORARIO_VESPERTINO_DESDE,
+            APP_HORARIO_VESPERTINO_HASTA,
+            APP_HORARIO_ES_CORTADO,
+            APP_NRO_INASISTENCIAS_CONSECUTIVAS_BLOQUEO_PACIENTE,
+            APP_GOOGLE_MAPS_KEY,
+            APP_DIRECCION_LAT,
+            APP_DIRECCION_LONG
         }
 
         #region IEquatable<Parameter> Members
