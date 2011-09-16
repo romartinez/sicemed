@@ -14,7 +14,7 @@ namespace Sicemed.Tests.Models.Provincias
             Provincia provincia;
             using (var tx = Session.BeginTransaction())
             {
-                provincia = new Provincia() { Nombre = "Buenos Aires" };
+                provincia = new Provincia {Nombre = "Buenos Aires"};
                 Session.Save(provincia);
                 tx.Commit();
             }
@@ -34,10 +34,10 @@ namespace Sicemed.Tests.Models.Provincias
             Provincia provincia;
             using (var tx = Session.BeginTransaction())
             {
-                provincia = new Provincia() { Nombre = "Buenos Aires" };
+                provincia = new Provincia {Nombre = "Buenos Aires"};
 
-                provincia.AgregarLocalidad(new Localidad() {CodigoPostal = "2000", Nombre = "Pergamino"});
-                provincia.AgregarLocalidad(new Localidad() {CodigoPostal = "2700", Nombre = "Arrecifes"});
+                provincia.AgregarLocalidad(new Localidad {CodigoPostal = "2000", Nombre = "Pergamino"});
+                provincia.AgregarLocalidad(new Localidad {CodigoPostal = "2700", Nombre = "Arrecifes"});
 
                 Session.Save(provincia);
                 tx.Commit();

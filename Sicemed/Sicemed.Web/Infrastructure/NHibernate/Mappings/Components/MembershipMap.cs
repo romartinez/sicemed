@@ -15,10 +15,10 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Components
             Property(x => x.IsLockedOut, map => map.NotNullable(true));
             Property(x => x.LockedOutReason);
             Property(x => x.CreateDate, map =>
-            {
-                map.Access(Accessor.NoSetter);
-                map.NotNullable(true);
-            });
+                                        {
+                                            map.Access(Accessor.NoSetter);
+                                            map.NotNullable(true);
+                                        });
             Property(x => x.LastLoginDate);
             Property(x => x.LastPasswordChangedDate);
             Property(x => x.LastLockoutDate);

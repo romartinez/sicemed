@@ -11,6 +11,36 @@ namespace Sicemed.Tests.Models.Personas
     public class PersonasAsignacionRolesTest : InitializeNhibernate
     {
         [Test]
+        public void LanzaUnaExcepcionAlTraerUnaPersonaComoUnTipoQueNoEs()
+        {
+            var persona = CrearPersonaValida();
+            MembershipService.CreateUser(persona, "walter.poch@gmail.com", "testtest");
+
+            Session.Flush();
+            Session.Evict(persona);
+
+            var personaDb = Session.Get<Persona>(persona.Id);
+            Assert.IsNotNull(personaDb);
+            Assert.Throws<IdentityNotMappedException>(() => personaDb.As<Secretaria>());
+        }
+
+        [Test]
+        public void PuedoConsutarSiUnaPersonaEsDeUnTipo()
+        {
+            var persona = CrearPersonaValida();
+            persona.AgregarRol(Administrador.Create());
+            MembershipService.CreateUser(persona, "walter.poch@gmail.com", "testtest");
+
+            Session.Flush();
+            Session.Evict(persona);
+
+            var personaDb = Session.Get<Persona>(persona.Id);
+            Assert.IsNotNull(personaDb);
+            Assert.IsFalse(personaDb.IsInRole<Secretaria>());
+            Assert.IsTrue(personaDb.IsInRole<Administrador>());
+        }
+
+        [Test]
         public void PuedoCrearUnUsuarioConUnSoloRol()
         {
             var persona = CrearPersonaValida();
@@ -58,7 +88,7 @@ namespace Sicemed.Tests.Models.Personas
         [Test]
         public void PuedoCrearUnaPersonaSimple()
         {
-            var persona = CrearPersonaValida();            
+            var persona = CrearPersonaValida();
             MembershipService.CreateUser(persona, "walter.poch@gmail.com", "testtest");
 
             Session.Flush();
@@ -66,7 +96,7 @@ namespace Sicemed.Tests.Models.Personas
 
             var personaDb = Session.Get<Persona>(persona.Id);
             Assert.IsNotNull(personaDb);
-            Assert.AreEqual(0, personaDb.Roles.Count());            
+            Assert.AreEqual(0, personaDb.Roles.Count());
         }
 
         [Test]
@@ -86,38 +116,5 @@ namespace Sicemed.Tests.Models.Personas
             //Le hago el tostring porque en la base se guarda sin los milliseconds en sqlite
             Assert.AreEqual(date.ToString(), personaDb.As<Secretaria>().FechaIngreso.ToString());
         }
-
-        [Test]
-        public void LanzaUnaExcepcionAlTraerUnaPersonaComoUnTipoQueNoEs()
-        {
-            var persona = CrearPersonaValida();
-            MembershipService.CreateUser(persona, "walter.poch@gmail.com", "testtest");
-
-            Session.Flush();
-            Session.Evict(persona);
-
-            var personaDb = Session.Get<Persona>(persona.Id);
-            Assert.IsNotNull(personaDb);
-            Assert.Throws<IdentityNotMappedException>(() => personaDb.As<Secretaria>());
-        }
-
-        [Test]
-        public void PuedoConsutarSiUnaPersonaEsDeUnTipo()
-        {
-            var persona = CrearPersonaValida();
-            persona.AgregarRol(Administrador.Create());
-            MembershipService.CreateUser(persona, "walter.poch@gmail.com", "testtest");
-
-            Session.Flush();
-            Session.Evict(persona);
-
-            var personaDb = Session.Get<Persona>(persona.Id);
-            Assert.IsNotNull(personaDb);
-            Assert.IsFalse(personaDb.IsInRole<Secretaria>());
-            Assert.IsTrue(personaDb.IsInRole<Administrador>());
-        }
-
-
-
     }
 }

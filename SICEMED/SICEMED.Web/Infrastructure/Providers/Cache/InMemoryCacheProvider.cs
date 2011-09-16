@@ -12,6 +12,8 @@ namespace Sicemed.Web.Infrastructure.Providers.Cache
         public virtual ILogger Logger { get; set; }
         public virtual IMembershipService MembershipService { get; set; }
 
+        #region ICacheProvider Members
+
         public T GetUserContext<T>(string key)
         {
             key = GetUserContextKey(key);
@@ -24,6 +26,20 @@ namespace Sicemed.Web.Infrastructure.Providers.Cache
             Add(key, obj);
         }
 
+        public T Get<T>(string key)
+        {
+            if (HttpContext.Current == null) throw new ProviderException("The aren't a HttpContext available.");
+            return (T) HttpContext.Current.Cache[key];
+        }
+
+        public void Add(string key, object obj)
+        {
+            if (HttpContext.Current == null) throw new ProviderException("The aren't a HttpContext available.");
+            HttpContext.Current.Cache.Insert(key, obj, null, GetTiempoExpiracionCache(), TimeSpan.Zero);
+        }
+
+        #endregion
+
         private string GetUserContextKey(string key)
         {
             var user = MembershipService.GetCurrentUser();
@@ -31,44 +47,31 @@ namespace Sicemed.Web.Infrastructure.Providers.Cache
             return string.Format("{0}|{1}", userKey, key);
         }
 
-        public T Get<T>(string key)
-        {
-            if(HttpContext.Current == null) throw new ProviderException("The aren't a HttpContext available.");
-            return (T)HttpContext.Current.Cache[key];
-        }
-
-        public void Add(string key, object obj)
-        {
-            if(HttpContext.Current == null) throw new ProviderException("The aren't a HttpContext available.");
-            HttpContext.Current.Cache.Insert(key, obj, null, GetTiempoExpiracionCache(), TimeSpan.Zero);
-        }
-
         private DateTime GetTiempoExpiracionCache()
         {
             const string CONFIG_KEY = "TiempoExpiracionCache";
             const int DEFAULT_TIEMPO = 5;
             DateTime tiempoExpiracion;
-            if(!string.IsNullOrEmpty(ConfigurationManager.AppSettings[CONFIG_KEY]))
+            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings[CONFIG_KEY]))
             {
                 try
                 {
-                    int minutes = int.Parse(ConfigurationManager.AppSettings[CONFIG_KEY]);
+                    var minutes = int.Parse(ConfigurationManager.AppSettings[CONFIG_KEY]);
                     //Cargamos el valor seteado
                     tiempoExpiracion = DateTime.Now.AddMinutes(minutes);
-                }
-                catch(Exception ex)
+                } catch (Exception ex)
                 {
                     //Loggeamos la excepcion
-                    if(Logger.IsWarnEnabled)
+                    if (Logger.IsWarnEnabled)
                     {
-                        Logger.WarnFormat("Se produjo un error al leer de las configuraciones la variable:[{0}={1}]; se esperaba un número entero. Exc: {2}",
+                        Logger.WarnFormat(
+                            "Se produjo un error al leer de las configuraciones la variable:[{0}={1}]; se esperaba un número entero. Exc: {2}",
                             CONFIG_KEY, ConfigurationManager.AppSettings[CONFIG_KEY], ex);
                     }
                     //Usamos un valor por defecto
                     tiempoExpiracion = DateTime.Now.AddMinutes(DEFAULT_TIEMPO);
                 }
-            }
-            else
+            } else
             {
                 //Usamos un valor por defecto
                 tiempoExpiracion = DateTime.Now.AddMinutes(DEFAULT_TIEMPO);

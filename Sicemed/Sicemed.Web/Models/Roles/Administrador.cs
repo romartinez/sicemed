@@ -2,12 +2,12 @@
 {
     public class Administrador : Rol
     {
+        protected Administrador() {}
+
         public override string DisplayName
         {
             get { return ADMINISTRADOR; }
         }
-
-        protected Administrador() { }
 
         public static Rol Create()
         {

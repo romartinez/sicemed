@@ -19,45 +19,39 @@ namespace Sicemed.Web.Infrastructure.Controllers
             set { _logger = value; }
         }
 
-        public IMembershipService MembershipService {get;set;}
+        public IMembershipService MembershipService { get; set; }
 
         protected new Persona User
         {
-            get
-            {
-                return MembershipService.GetCurrentUser();   
-            }
+            get { return MembershipService.GetCurrentUser(); }
         }
 
         protected Persona Persona
         {
-            get
-            {
-                return User;
-            }
+            get { return User; }
         }
-        
-        protected virtual T RetrieveParameter<T>(string paramName, string paramNameDescription = null, bool allowNulls = false)
+
+        protected virtual T RetrieveParameter<T>(string paramName, string paramNameDescription = null,
+                                                 bool allowNulls = false)
         {
             if (string.IsNullOrWhiteSpace(paramName)) throw new ArgumentNullException("paramName");
 
             var providerResult = this.ValueProvider.GetValue(paramName);
-            if(allowNulls && providerResult == null) return default(T);
+            if (allowNulls && providerResult == null) return default(T);
 
-            if (providerResult == null) 
-                throw new ValidationErrorException(string.Format("No se encontró el valor para el parámetro: '{0}'", 
-                    paramNameDescription ?? paramName));
+            if (providerResult == null)
+                throw new ValidationErrorException(string.Format("No se encontró el valor para el parámetro: '{0}'",
+                                                                 paramNameDescription ?? paramName));
             try
             {
-                return (T)providerResult.ConvertTo(typeof(T));
-            }
-            catch (Exception ex)
+                return (T) providerResult.ConvertTo(typeof (T));
+            } catch (Exception ex)
             {
                 var errorMsg = string.Format("El valor ingresado: '{0}' no es válido para para el campo {1}.",
-                                      providerResult.AttemptedValue, paramNameDescription ?? paramName);
-                
+                                             providerResult.AttemptedValue, paramNameDescription ?? paramName);
+
                 if (Logger.IsWarnEnabled) Logger.WarnFormat(errorMsg + " Exc: " + ex.Message);
-                
+
                 throw new ValidationErrorException(errorMsg);
             }
         }

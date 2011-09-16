@@ -3,7 +3,7 @@ using Sicemed.Web.Infrastructure.Controllers;
 
 namespace Sicemed.Web.Controllers
 {
-    public class ErrorController  : BaseController
+    public class ErrorController : BaseController
     {
         public ActionResult HttpError404(string message)
         {

@@ -10,7 +10,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Property(x => x.Nombre, map => map.NotNullable(true));
             Property(x => x.Apellido, map => map.NotNullable(true));
             Property(x => x.SegundoNombre);
-            Property(x => x.FechaNacimiento);            
+            Property(x => x.FechaNacimiento);
 
             Component(x => x.Membership, map => map.Access(Accessor.NoSetter));
             Component(x => x.Documento);
@@ -18,11 +18,11 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Component(x => x.Telefono);
 
             Set(x => x.Roles, map =>
-            {
-                map.Inverse(true);
-                map.Access(Accessor.NoSetter);
-                map.Cascade(Cascade.All | Cascade.DeleteOrphans);
-            }, rel => rel.OneToMany() );
+                              {
+                                  map.Inverse(true);
+                                  map.Access(Accessor.NoSetter);
+                                  map.Cascade(Cascade.All | Cascade.DeleteOrphans);
+                              }, rel => rel.OneToMany());
         }
     }
 }

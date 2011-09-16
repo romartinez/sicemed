@@ -2,7 +2,7 @@
 {
     public class ToClientException : SicemedException
     {
-        public ToClientException() { }
-        public ToClientException(string message) : base(message) { }
+        public ToClientException() {}
+        public ToClientException(string message) : base(message) {}
     }
 }

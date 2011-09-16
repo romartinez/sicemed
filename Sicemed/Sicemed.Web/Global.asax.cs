@@ -7,6 +7,7 @@ using Castle.Core.Logging;
 using Castle.Facilities.TypedFactory;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using Combres;
 using CommonServiceLocator.WindsorAdapter;
 using DataAnnotationsExtensions.ClientValidation;
 using Microsoft.Practices.ServiceLocation;
@@ -14,7 +15,7 @@ using SICEMED.Web.Infrastructure.Windsor.Facilities;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Providers.FilterAtrribute;
-using WebExtensions = Combres.WebExtensions;
+using ILogger = Castle.Core.Logging.ILogger;
 
 namespace SICEMED.Web
 {

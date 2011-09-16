@@ -8,7 +8,9 @@ namespace Sicemed.Web.Infrastructure.HttpModules
     public class NHibernateSessionModule : IHttpModule
     {
         private HttpApplication app;
-		
+
+        #region IHttpModule Members
+
         public void Init(HttpApplication context)
         {
             app = context;
@@ -16,14 +18,22 @@ namespace Sicemed.Web.Infrastructure.HttpModules
             context.EndRequest += ContextEndRequest;
         }
 
+        public void Dispose()
+        {
+            app.BeginRequest -= ContextBeginRequest;
+            app.EndRequest -= ContextEndRequest;
+        }
+
+        #endregion
+
         private void ContextBeginRequest(object sender, EventArgs e)
         {
-            var sfp = (ISessionFactoryProvider)app.Context.Application[SessionFactoryProvider.Key];
+            var sfp = (ISessionFactoryProvider) app.Context.Application[SessionFactoryProvider.Key];
             foreach (var sf in sfp.GetSessionFactories())
             {
                 var localFactory = sf;
                 LazySessionContext.Bind(
-                    new Lazy<ISession>(() => BeginSession(localFactory)), 
+                    new Lazy<ISession>(() => BeginSession(localFactory)),
                     sf);
             }
         }
@@ -37,7 +47,7 @@ namespace Sicemed.Web.Infrastructure.HttpModules
 
         private void ContextEndRequest(object sender, EventArgs e)
         {
-            var sfp = (ISessionFactoryProvider)app.Context.Application[SessionFactoryProvider.Key];
+            var sfp = (ISessionFactoryProvider) app.Context.Application[SessionFactoryProvider.Key];
             foreach (var sf in sfp.GetSessionFactories())
             {
                 var session = LazySessionContext.UnBind(sf);
@@ -54,12 +64,6 @@ namespace Sicemed.Web.Infrastructure.HttpModules
                 session.Transaction.Commit();
             }
             session.Dispose();
-        }
-
-        public void Dispose()
-        {
-            app.BeginRequest -= ContextBeginRequest;
-            app.EndRequest -= ContextEndRequest;
         }
     }
 }

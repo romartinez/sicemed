@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Sicemed.Web.Models.Components
+﻿namespace Sicemed.Web.Models.Components
 {
     public class Telefono : ComponentBase
     {

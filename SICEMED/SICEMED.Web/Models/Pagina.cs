@@ -6,7 +6,7 @@ namespace Sicemed.Web.Models
 {
     public class Pagina : Entity
     {
-        private ISet<Pagina> _hijos;
+        private readonly ISet<Pagina> _hijos;
 
         public Pagina()
         {
@@ -15,6 +15,7 @@ namespace Sicemed.Web.Models
 
         [Required]
         public virtual string Nombre { get; set; }
+
         [Required]
         public virtual string Contenido { get; set; }
 

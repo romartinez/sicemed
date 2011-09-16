@@ -12,9 +12,9 @@ namespace Sicemed.Tests.Models.Feriados
         public void PuedoGrabarUnFeriado()
         {
             Feriado feriado;
-            using(var tx = Session.BeginTransaction())
+            using (var tx = Session.BeginTransaction())
             {
-                feriado = new Feriado()
+                feriado = new Feriado
                           {
                               Nombre = "Paso a la Inmortalidad del General José de San Martín",
                               Fecha = new DateTime(2011, 08, 17),

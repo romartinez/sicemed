@@ -7,12 +7,10 @@ namespace Sicemed.Web.Models.Enumerations
 {
     public abstract class Enumeration : IComparable
     {
-        private readonly long _value;
         private readonly string _displayName;
+        private readonly long _value;
 
-        protected Enumeration()
-        {
-        }
+        protected Enumeration() {}
 
         protected Enumeration(long value, string displayName)
         {
@@ -30,6 +28,15 @@ namespace Sicemed.Web.Models.Enumerations
             get { return _displayName; }
         }
 
+        #region IComparable Members
+
+        public virtual int CompareTo(object other)
+        {
+            return Value.CompareTo(((Enumeration) other).Value);
+        }
+
+        #endregion
+
         public override string ToString()
         {
             return DisplayName;
@@ -37,15 +44,15 @@ namespace Sicemed.Web.Models.Enumerations
 
         public static IEnumerable<T> GetAll<T>() where T : Enumeration, new()
         {
-            var type = typeof(T);
+            var type = typeof (T);
             var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
 
-            foreach(var info in fields)
+            foreach (var info in fields)
             {
                 var instance = new T();
                 var locatedValue = info.GetValue(instance) as T;
 
-                if(locatedValue != null)
+                if (locatedValue != null)
                 {
                     yield return locatedValue;
                 }
@@ -56,7 +63,7 @@ namespace Sicemed.Web.Models.Enumerations
         {
             var otherValue = obj as Enumeration;
 
-            if(otherValue == null)
+            if (otherValue == null)
             {
                 return false;
             }
@@ -90,28 +97,24 @@ namespace Sicemed.Web.Models.Enumerations
             return matchingItem;
         }
 
-        private static T Parse<T, TK>(TK value, string description, Func<T, bool> predicate) where T : Enumeration, new()
+        private static T Parse<T, TK>(TK value, string description, Func<T, bool> predicate)
+            where T : Enumeration, new()
         {
             var matchingItem = GetAll<T>().FirstOrDefault(predicate);
 
-            if(matchingItem == null)
+            if (matchingItem == null)
             {
-                var message = string.Format("'{0}' is not a valid {1} in {2}", value, description, typeof(T));
+                var message = string.Format("'{0}' is not a valid {1} in {2}", value, description, typeof (T));
                 throw new ApplicationException(message);
             }
 
             return matchingItem;
         }
 
-        public virtual int CompareTo(object other)
-        {
-            return Value.CompareTo(((Enumeration)other).Value);
-        }
-
         public static bool operator ==(Enumeration a, Enumeration b)
         {
-            if((object)a == null && (object)b == null) return true;
-            if((object)a == null || (object)b == null) return false;
+            if ((object) a == null && (object) b == null) return true;
+            if ((object) a == null || (object) b == null) return false;
             return a.Value == b.Value;
         }
 

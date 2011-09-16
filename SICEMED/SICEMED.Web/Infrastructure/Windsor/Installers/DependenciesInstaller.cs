@@ -3,7 +3,6 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using EfficientlyLazy.Crypto;
 using Sicemed.Web.Infrastructure;
-using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Providers.Cache;
 using Sicemed.Web.Infrastructure.Services;
 

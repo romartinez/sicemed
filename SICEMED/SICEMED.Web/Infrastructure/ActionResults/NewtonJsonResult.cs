@@ -1,5 +1,4 @@
 using System;
-using System.Threading;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -17,10 +16,10 @@ namespace Sicemed.Web.Infrastructure.ActionResults
         }
 
         /// <summary>
-        /// El código es el mismo de ASP.NET MVC 3, cambie el método que escribe en el response
-        /// http://aspnet.codeplex.com/SourceControl/changeset/view/63930#266491
+        ///   El código es el mismo de ASP.NET MVC 3, cambie el método que escribe en el response
+        ///   http://aspnet.codeplex.com/SourceControl/changeset/view/63930#266491
         /// </summary>
-        /// <param name="context"></param>
+        /// <param name = "context"></param>
         public override void ExecuteResult(ControllerContext context)
         {
             if (context == null)
@@ -31,7 +30,8 @@ namespace Sicemed.Web.Infrastructure.ActionResults
             if (JsonRequestBehavior == JsonRequestBehavior.DenyGet &&
                 String.Equals(context.HttpContext.Request.HttpMethod, "GET", StringComparison.OrdinalIgnoreCase))
             {
-                throw new InvalidOperationException("This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.");
+                throw new InvalidOperationException(
+                    "This request has been blocked because sensitive information could be disclosed to third party web sites when this is used in a GET request. To allow GET requests, set JsonRequestBehavior to AllowGet.");
             }
 
             var response = context.HttpContext.Response;
@@ -39,8 +39,7 @@ namespace Sicemed.Web.Infrastructure.ActionResults
             if (!String.IsNullOrEmpty(ContentType))
             {
                 response.ContentType = ContentType;
-            }
-            else
+            } else
             {
                 response.ContentType = "application/json";
             }
@@ -56,6 +55,5 @@ namespace Sicemed.Web.Infrastructure.ActionResults
                 response.Write(JsonConvert.SerializeObject(this.Data, Formatting.None, settings));
             }
         }
-
     }
 }

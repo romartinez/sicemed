@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
@@ -13,6 +15,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
     public class PersonasController : CrudBaseController<Persona>
     {
         #region Overrides of CrudBaseController<Persona>
+
         protected override Expression<Func<Persona, object>> DefaultOrderBy
         {
             get { return x => x.Membership.Email; }
@@ -27,45 +30,58 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             return base.Index();
         }
 
-        protected override System.Collections.IEnumerable AplicarProjections(System.Collections.Generic.IEnumerable<Persona> results)
+        protected override IEnumerable AplicarProjections(IEnumerable<Persona> results)
         {
             return results.Select(x => new
-            {
-                x.Documento,
-                Domicilio = x.Domicilio != null ? new
-                {
-                    x.Domicilio.Direccion,
-                    Localidad = x.Domicilio.Localidad != null ? new
-                    {
-                        x.Domicilio.Localidad.Id,
-                        x.Domicilio.Localidad.Nombre,
-                        Provincia = x.Domicilio.Localidad.Provincia != null ? new
-                        {
-                            x.Domicilio.Localidad.Provincia.Id,
-                            x.Domicilio.Localidad.Provincia.Nombre
-                        } : null
-                    } : null
-                } : null,
-                x.Id,
-                x.Apellido,
-                x.Nombre,
-                x.SegundoNombre,
-                x.FechaNacimiento,
-                x.Telefono,
-                Roles = x.Roles.Select(r=> r.DisplayName),
-                Membership = x.Membership != null ?  new
-                                 {
-                                     x.Membership.Email,
-                                     x.Membership.IsLockedOut
-                                 } : null                
-            });
+                                       {
+                                           x.Documento,
+                                           Domicilio = x.Domicilio != null
+                                                           ? new
+                                                             {
+                                                                 x.Domicilio.Direccion,
+                                                                 Localidad = x.Domicilio.Localidad != null
+                                                                                 ? new
+                                                                                   {
+                                                                                       x.Domicilio.Localidad.Id,
+                                                                                       x.Domicilio.Localidad.Nombre,
+                                                                                       Provincia =
+                                                                                       x.Domicilio.Localidad.Provincia !=
+                                                                                       null
+                                                                                           ? new
+                                                                                             {
+                                                                                                 x.Domicilio.Localidad.
+                                                                                                 Provincia.Id,
+                                                                                                 x.Domicilio.Localidad.
+                                                                                                 Provincia.Nombre
+                                                                                             }
+                                                                                           : null
+                                                                                   }
+                                                                                 : null
+                                                             }
+                                                           : null,
+                                           x.Id,
+                                           x.Apellido,
+                                           x.Nombre,
+                                           x.SegundoNombre,
+                                           x.FechaNacimiento,
+                                           x.Telefono,
+                                           Roles = x.Roles.Select(r => r.DisplayName),
+                                           Membership = x.Membership != null
+                                                            ? new
+                                                              {
+                                                                  x.Membership.Email,
+                                                                  x.Membership.IsLockedOut
+                                                              }
+                                                            : null
+                                       });
         }
 
         protected override Persona AgregarReferencias(Persona modelo)
         {
             var tipoDocumentoId = RetrieveParameter<int>("Documento.TipoDocumento.Value", "Tipo De Documento");
             var tipoDocumento = Enumeration.FromValue<TipoDocumento>(tipoDocumentoId);
-            if (tipoDocumento == null) throw new ValidationErrorException("Debe seleccionar un Tipo De Documento válido.");
+            if (tipoDocumento == null)
+                throw new ValidationErrorException("Debe seleccionar un Tipo De Documento válido.");
 
             var password = RetrieveParameter<string>("Password");
             var localidadId = RetrieveParameter<long>("localidadId", "Localidad", true);
@@ -87,6 +103,5 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         }
 
         #endregion
-
     }
 }

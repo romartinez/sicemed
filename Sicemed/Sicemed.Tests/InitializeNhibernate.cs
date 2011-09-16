@@ -17,8 +17,6 @@ using Sicemed.Web.Models;
 using log4net;
 using log4net.Config;
 using log4net.Core;
-using Configuration = NHibernate.Cfg.Configuration;
-using Environment = NHibernate.Cfg.Environment;
 
 namespace Sicemed.Tests
 {
@@ -29,6 +27,8 @@ namespace Sicemed.Tests
         private static Configuration _databaseConfiguration;
 
         private static ISessionFactory _sessionFactory;
+        private Mock<IMailSenderService> _mailService;
+        private MembershipService _membershipService;
 
         public static Configuration DatabaseConfiguration
         {
@@ -59,34 +59,33 @@ namespace Sicemed.Tests
                                                                        db.HqlToSqlSubstitutions =
                                                                            "true 1, false 0, yes 'Y', no 'N'";
                                                                    });
-                    }
-                    else
+                    } else
                     {
                         _databaseConfiguration.DataBaseIntegration(db =>
-                        {
-                            db.Dialect<MsSql2008Dialect>();
-                            db.Driver<SqlClientDriver>();
-                            db.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
-                            db.IsolationLevel = IsolationLevel.ReadCommitted;
-                            db.ConnectionStringName = "ApplicationServices";
-                            db.Timeout = 10;
-                            db.LogSqlInConsole = true;
-                            db.AutoCommentSql = true;
-                            db.HqlToSqlSubstitutions = "true 1, false 0, yes 'Y', no 'N'";
-                        });
+                                                                   {
+                                                                       db.Dialect<MsSql2008Dialect>();
+                                                                       db.Driver<SqlClientDriver>();
+                                                                       db.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
+                                                                       db.IsolationLevel = IsolationLevel.ReadCommitted;
+                                                                       db.ConnectionStringName = "ApplicationServices";
+                                                                       db.Timeout = 10;
+                                                                       db.LogSqlInConsole = true;
+                                                                       db.AutoCommentSql = true;
+                                                                       db.HqlToSqlSubstitutions =
+                                                                           "true 1, false 0, yes 'Y', no 'N'";
+                                                                   });
                     }
 
                     _databaseConfiguration.Properties[Environment.CurrentSessionContextClass] =
-                        typeof(ThreadStaticSessionContext).AssemblyQualifiedName;
+                        typeof (ThreadStaticSessionContext).AssemblyQualifiedName;
 
                     var mappings = NHibernateFacility.GetHbmMappings();
 
-                    NHibernateMappingsExtensions.WriteAllXmlMapping(mappings);
+                    mappings.WriteAllXmlMapping();
 
                     mappings.ToList().ForEach(mp => _databaseConfiguration.AddDeserializedMapping(mp, null));
 
                     SchemaMetadataUpdater.QuoteTableAndColumns(_databaseConfiguration);
-
                 }
 
                 return _databaseConfiguration;
@@ -110,11 +109,15 @@ namespace Sicemed.Tests
             get { return _sessionFactory.GetCurrentSession(); }
         }
 
-        private MembershipService _membershipService;
-        private Mock<IMailSenderService> _mailService;
-        protected Mock<IMailSenderService> MailService { get { return _mailService; } }
-        protected IMembershipService MembershipService { get { return _membershipService; } }
+        protected Mock<IMailSenderService> MailService
+        {
+            get { return _mailService; }
+        }
 
+        protected IMembershipService MembershipService
+        {
+            get { return _membershipService; }
+        }
 
 
         [SetUp]
@@ -142,8 +145,8 @@ namespace Sicemed.Tests
             _mailService = new Mock<IMailSenderService>();
             var formsService = new Mock<IFormAuthenticationStoreService>();
             _membershipService = new MembershipService(SessionFactory,
-                                                          _mailService.Object,
-                                                          formsService.Object);
+                                                       _mailService.Object,
+                                                       formsService.Object);
         }
 
         [TearDown]
@@ -155,7 +158,7 @@ namespace Sicemed.Tests
 
         protected Persona CrearPersonaValida()
         {
-            return new Persona() { Nombre = "Walter", Apellido = "Poch" };
+            return new Persona {Nombre = "Walter", Apellido = "Poch"};
         }
     }
 }

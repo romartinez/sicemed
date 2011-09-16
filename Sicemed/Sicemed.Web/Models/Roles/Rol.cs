@@ -9,14 +9,14 @@ namespace Sicemed.Web.Models.Roles
         public const string PROFESIONAL = "Profesional";
         public const string ADMINISTRADOR = "Administrador";
 
-        public virtual DateTime FechaAsignacion { get; set; }
-        
-        public virtual Persona Persona { get; set; }
-
         protected Rol()
         {
             FechaAsignacion = DateTime.Now;
         }
+
+        public virtual DateTime FechaAsignacion { get; set; }
+
+        public virtual Persona Persona { get; set; }
 
         public abstract string DisplayName { get; }
     }

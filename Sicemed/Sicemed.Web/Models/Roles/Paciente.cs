@@ -5,38 +5,39 @@ namespace Sicemed.Web.Models.Roles
 {
     public class Paciente : Rol
     {
-        public override string DisplayName
-        {
-            get { return PACIENTE; }
-        }
-
-        public virtual string NumeroAfiliado { get; set; }
-        
-        public virtual Plan Plan { get; set; }
-
-        public virtual int InasistenciasContinuas { get; set; }
-
-        public virtual bool EstaHabilitadoTurnosWeb { get; set; }
+        private readonly ISet<Turno> _turnos;
 
         protected Paciente()
         {
             _turnos = new HashSet<Turno>();
         }
 
-        public static Rol Create(string numeroAfiliado)
+        public override string DisplayName
         {
-            return new Paciente()
-                   {
-                       NumeroAfiliado = numeroAfiliado, 
-                       EstaHabilitadoTurnosWeb = true, 
-                       InasistenciasContinuas = 0
-                   };
+            get { return PACIENTE; }
         }
 
-        private ISet<Turno> _turnos;
+        public virtual string NumeroAfiliado { get; set; }
+
+        public virtual Plan Plan { get; set; }
+
+        public virtual int InasistenciasContinuas { get; set; }
+
+        public virtual bool EstaHabilitadoTurnosWeb { get; set; }
+
         public virtual ISet<Turno> Turnos
         {
             get { return _turnos; }
+        }
+
+        public static Rol Create(string numeroAfiliado)
+        {
+            return new Paciente
+                   {
+                       NumeroAfiliado = numeroAfiliado,
+                       EstaHabilitadoTurnosWeb = true,
+                       InasistenciasContinuas = 0
+                   };
         }
 
         public virtual Paciente AgregarTurno(Turno turno)

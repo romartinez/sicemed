@@ -9,17 +9,17 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
         public PaginaMap()
         {
             Property(x => x.Contenido, map =>
-            {
-                map.NotNullable(true);
-                map.Type(NHibernateUtil.StringClob);
-            });
+                                       {
+                                           map.NotNullable(true);
+                                           map.Type(NHibernateUtil.StringClob);
+                                       });
             Property(x => x.Nombre, map =>
                                     {
                                         map.NotNullable(true);
                                         map.Unique(true);
                                     });
 
-            ManyToOne(x => x.Padre, map=> map.ForeignKey("FK_Paginas_Padre"));
+            ManyToOne(x => x.Padre, map => map.ForeignKey("FK_Paginas_Padre"));
 
             Set(
                 x => x.Hijos,
@@ -31,7 +31,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                     map.Lazy(CollectionLazy.NoLazy);
                     map.Fetch(CollectionFetchMode.Join);
                 },
-               rel => rel.OneToMany());
+                rel => rel.OneToMany());
         }
     }
 }

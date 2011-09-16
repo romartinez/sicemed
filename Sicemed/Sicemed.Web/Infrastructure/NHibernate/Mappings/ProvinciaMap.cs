@@ -10,11 +10,11 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Property(x => x.Nombre, map => map.NotNullable(true));
 
             Set(x => x.Localidades, map =>
-            {
-                map.Inverse(true);
-                map.Access(Accessor.NoSetter);
-                map.Cascade(Cascade.All | Cascade.DeleteOrphans);
-            }, rel => rel.OneToMany());
+                                    {
+                                        map.Inverse(true);
+                                        map.Access(Accessor.NoSetter);
+                                        map.Cascade(Cascade.All | Cascade.DeleteOrphans);
+                                    }, rel => rel.OneToMany());
         }
     }
 }

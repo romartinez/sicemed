@@ -7,18 +7,19 @@ namespace Sicemed.Web.Models
     {
         // Methods
 
+        private int? _requestedHashCode;
         public virtual long Id { get; protected internal set; }
 
-        private int? _requestedHashCode;
+        #region IEquatable<Entity> Members
 
         /// <summary>
-        /// Compare equality trough Id
+        ///   Compare equality trough Id
         /// </summary>
-        /// <param name="other">Entity to compare.</param>
+        /// <param name = "other">Entity to compare.</param>
         /// <returns>true is are equals</returns>
         /// <remarks>
-        /// Two entities are equals if they are of the same hierarcy tree/sub-tree
-        /// and has same id.
+        ///   Two entities are equals if they are of the same hierarcy tree/sub-tree
+        ///   and has same id.
         /// </remarks>
         public virtual bool Equals(Entity other)
         {
@@ -31,8 +32,8 @@ namespace Sicemed.Web.Models
                 return true;
             }
 
-            bool otherIsTransient = Equals(other.Id, default(long));
-            bool thisIsTransient = IsTransient();
+            var otherIsTransient = Equals(other.Id, default(long));
+            var thisIsTransient = IsTransient();
             if (otherIsTransient && thisIsTransient)
             {
                 return ReferenceEquals(other, this);
@@ -40,6 +41,8 @@ namespace Sicemed.Web.Models
 
             return other.Id.Equals(Id);
         }
+
+        #endregion
 
         public virtual bool IsTransient()
         {

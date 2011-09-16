@@ -11,12 +11,13 @@ namespace Sicemed.Web.Infrastructure
 
         public static ResponseMessage Success(string description = null)
         {
-            return new ResponseMessage() { IsSuccessful = true, Description = description };
+            return new ResponseMessage {IsSuccessful = true, Description = description};
         }
 
         public static ResponseMessage Error(string description = null, Exception exception = null)
         {
-            return new ResponseMessage() { IsSuccessful = false, Description = description, Data = exception != null ? exception.Data : null };
+            return new ResponseMessage
+                   {IsSuccessful = false, Description = description, Data = exception != null ? exception.Data : null};
         }
     }
 }

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <!--
   This file contains basic settings needed for most web apps.
   For full Combres settings (with explanation), refer to the sample definition file: combres_full_with_annotation.xml
@@ -23,17 +24,9 @@
       <param name="LineBreakPosition" type="int" value="-1" />
     </minifier>
   </jsMinifiers>
-  <resourceSets url="~/combres.axd"
-                defaultDuration="30"
-                defaultVersion="auto"
-                defaultDebugEnabled="true"
-                defaultIgnorePipelineWhenDebug="true"
-                localChangeMonitorInterval="30"
-                remoteChangeMonitorInterval="60"
-                defaultCssMinifierRef="yui" 
-                defaultJSMinifierRef="yui"                
-                defaultCompressionEnabled="true"
-                >
+  <resourceSets url="~/combres.axd" defaultDuration="30" defaultVersion="auto" defaultDebugEnabled="true"
+                defaultIgnorePipelineWhenDebug="true" localChangeMonitorInterval="30" remoteChangeMonitorInterval="60"
+                defaultCssMinifierRef="yui" defaultJSMinifierRef="yui" defaultCompressionEnabled="true">
     <resourceSet name="siteCss" type="css">
       <resource path="~/content/Site.css" />
       <resource path="~/content/themes/base/jquery-ui.css" />

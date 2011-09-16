@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
@@ -20,7 +22,8 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
         public override ActionResult Index()
         {
-            return View(SessionFactory.GetCurrentSession().QueryOver<ObraSocial>().OrderBy(x => x.RazonSocial).Asc.Future());
+            return
+                View(SessionFactory.GetCurrentSession().QueryOver<ObraSocial>().OrderBy(x => x.RazonSocial).Asc.Future());
         }
 
         protected override IQueryOver<Plan> AplicarFetching(IQueryOver<Plan, Plan> query)
@@ -35,19 +38,21 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             return modelo;
         }
 
-        protected override System.Collections.IEnumerable AplicarProjections(System.Collections.Generic.IEnumerable<Plan> results)
+        protected override IEnumerable AplicarProjections(IEnumerable<Plan> results)
         {
-            return results.Select(x=> new
-                                      {
-                                          x.Id,
-                                          x.Nombre,
-                                          x.Descripcion,
-                                          ObraSocial = x.ObraSocial != null ? new
-                                                                              {
-                                                                                  x.ObraSocial.Id,
-                                                                                  x.ObraSocial.RazonSocial
-                                                                              } : null
-                                      });
+            return results.Select(x => new
+                                       {
+                                           x.Id,
+                                           x.Nombre,
+                                           x.Descripcion,
+                                           ObraSocial = x.ObraSocial != null
+                                                            ? new
+                                                              {
+                                                                  x.ObraSocial.Id,
+                                                                  x.ObraSocial.RazonSocial
+                                                              }
+                                                            : null
+                                       });
         }
 
         private ObraSocial ObtenerObraSocialSeleccionada()

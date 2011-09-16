@@ -62,7 +62,7 @@ namespace Sicemed.Web.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                var user = new Persona { Nombre = model.Nombre, Apellido = model.Apellido };
+                var user = new Persona {Nombre = model.Nombre, Apellido = model.Apellido};
                 _membershipService.CreateUser(user, model.Email, model.Password);
                 var status = _membershipService.Login(model.Email, model.Password, out user);
                 if (status == MembershipStatus.USER_CREATED)
@@ -86,7 +86,8 @@ namespace Sicemed.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var status = _membershipService.ChangePassword(User.Identity.Name, viewModel.PasswordActual, viewModel.PasswordNuevo);
+                var status = _membershipService.ChangePassword(User.Identity.Name, viewModel.PasswordActual,
+                                                               viewModel.PasswordNuevo);
                 if (status == MembershipStatus.USER_FOUND)
                     return RedirectToAction("CambioDePasswordExitoso");
                 ModelState.AddModelError("", status.Get());

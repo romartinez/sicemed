@@ -9,10 +9,10 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
 
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            if(Logger.IsDebugEnabled)
+            if (Logger.IsDebugEnabled)
                 Logger.DebugFormat("Executing action {0} of the controller {1}",
-                         filterContext.ActionDescriptor.ActionName,
-                         filterContext.ActionDescriptor.ControllerDescriptor.ControllerName);
+                                   filterContext.ActionDescriptor.ActionName,
+                                   filterContext.ActionDescriptor.ControllerDescriptor.ControllerName);
 
             base.OnActionExecuted(filterContext);
         }

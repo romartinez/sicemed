@@ -3,9 +3,7 @@ using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Infrastructure.Queries.Paginas
 {
-    public interface IObtenerPaginasRaizQuery : IQuery<Pagina>
-    {        
-    }
+    public interface IObtenerPaginasRaizQuery : IQuery<Pagina> {}
 
     public class ObtenerPaginasRaizQuery : Query<Pagina>, IObtenerPaginasRaizQuery
     {

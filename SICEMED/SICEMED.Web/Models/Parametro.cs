@@ -5,24 +5,7 @@ namespace Sicemed.Web.Models
 {
     public class Parametro : IEquatable<Parametro>
     {
-        public virtual Keys Key { get; set; }
-        private string _value;
-
-        public virtual T Get<T>()
-        {
-            return JsonConvert.DeserializeObject<T>(_value);
-        }
-
-        public virtual void Set(object item)
-        {
-            _value = JsonConvert.SerializeObject(item);
-        }
-
-        public Parametro(){}
-        public Parametro(Keys key)
-        {
-            Key = key;
-        }
+        #region Keys enum
 
         public enum Keys
         {
@@ -44,7 +27,20 @@ namespace Sicemed.Web.Models
             APP_DIRECCION_LONG
         }
 
-        #region IEquatable<Parameter> Members
+        #endregion
+
+        private string _value;
+
+        public Parametro() {}
+
+        public Parametro(Keys key)
+        {
+            Key = key;
+        }
+
+        public virtual Keys Key { get; set; }
+
+        #region IEquatable<Parametro> Members
 
         public virtual bool Equals(Parametro obj)
         {
@@ -65,6 +61,16 @@ namespace Sicemed.Web.Models
 
         #endregion
 
+        public virtual T Get<T>()
+        {
+            return JsonConvert.DeserializeObject<T>(_value);
+        }
+
+        public virtual void Set(object item)
+        {
+            _value = JsonConvert.SerializeObject(item);
+        }
+
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj))
@@ -79,12 +85,12 @@ namespace Sicemed.Web.Models
             {
                 return false;
             }
-            return Equals((Parametro)obj);
+            return Equals((Parametro) obj);
         }
 
         public override int GetHashCode()
         {
-            return ((Key.GetHashCode() * 0x18d) ^ base.GetType().GetHashCode());
+            return ((Key.GetHashCode()*0x18d) ^ base.GetType().GetHashCode());
         }
 
         public static bool operator ==(Parametro left, Parametro right)

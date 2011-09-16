@@ -4,15 +4,16 @@ using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Infrastructure.Attributes.Filters
-{    
+{
     public class AuthorizeItAttribute : AuthorizeAttribute
     {
-        private Type _rolType;
-        
+        private readonly Type _rolType;
+
         public AuthorizeItAttribute(Type rolType)
         {
             if (rolType == null) throw new ArgumentNullException("rolType");
-            if (rolType.IsAssignableFrom(typeof(Rol))) throw new ArgumentException(@"El tipo debe ser un Rol.", "rolType");
+            if (rolType.IsAssignableFrom(typeof (Rol)))
+                throw new ArgumentException(@"El tipo debe ser un Rol.", "rolType");
 
             _rolType = rolType;
         }
@@ -30,7 +31,7 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             //Check is logged on
             base.OnAuthorization(filterContext);
 
-            if(!base.AuthorizeCore(filterContext.HttpContext)) return;
+            if (!base.AuthorizeCore(filterContext.HttpContext)) return;
 
             //Authorize
             var currentUser = MembershipService.GetCurrentUser();

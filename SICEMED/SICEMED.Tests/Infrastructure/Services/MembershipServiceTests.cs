@@ -6,7 +6,6 @@ namespace Sicemed.Tests.Infrastructure.Services
 {
     public class MembershipServiceTests : InitializeNhibernate
     {
-
         [Test]
         public void PuedoCrearUnUsuario()
         {
@@ -43,7 +42,8 @@ namespace Sicemed.Tests.Infrastructure.Services
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
-            Assert.AreEqual(MembershipStatus.BAD_PASSWORD, MembershipService.Login("walter.poch@gmail.com", "te2sttest", out usuario));
+            Assert.AreEqual(MembershipStatus.BAD_PASSWORD,
+                            MembershipService.Login("walter.poch@gmail.com", "te2sttest", out usuario));
         }
 
         [Test]
@@ -53,7 +53,8 @@ namespace Sicemed.Tests.Infrastructure.Services
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
-            Assert.AreEqual(MembershipStatus.USER_NOT_FOUND, MembershipService.Login("wal333ter.poch@gmail.com", "testtest", out usuario));
+            Assert.AreEqual(MembershipStatus.USER_NOT_FOUND,
+                            MembershipService.Login("wal333ter.poch@gmail.com", "testtest", out usuario));
         }
 
         [Test]
@@ -65,7 +66,7 @@ namespace Sicemed.Tests.Infrastructure.Services
 
 
             Assert.AreEqual(MembershipStatus.USER_NOT_FOUND,
-                MembershipService.Login("wal333ter.poch@gmail.com", "tesdfgttest", out usuario));
+                            MembershipService.Login("wal333ter.poch@gmail.com", "tesdfgttest", out usuario));
         }
 
         [Test]
@@ -109,11 +110,14 @@ namespace Sicemed.Tests.Infrastructure.Services
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
-            Assert.AreEqual(MembershipStatus.BAD_PASSWORD, MembershipService.Login("walter.poch@gmail.com", "345", out usuario));
+            Assert.AreEqual(MembershipStatus.BAD_PASSWORD,
+                            MembershipService.Login("walter.poch@gmail.com", "345", out usuario));
 
-            Assert.AreEqual(MembershipStatus.BAD_PASSWORD, MembershipService.Login("walter.poch@gmail.com", "345", out usuario));
+            Assert.AreEqual(MembershipStatus.BAD_PASSWORD,
+                            MembershipService.Login("walter.poch@gmail.com", "345", out usuario));
 
-            Assert.AreEqual(MembershipStatus.USER_LOCKED, MembershipService.Login("walter.poch@gmail.com", "345", out usuario));
+            Assert.AreEqual(MembershipStatus.USER_LOCKED,
+                            MembershipService.Login("walter.poch@gmail.com", "345", out usuario));
 
 
             var usuario2 =
@@ -121,7 +125,8 @@ namespace Sicemed.Tests.Infrastructure.Services
             Assert.IsTrue(usuario2.Membership.IsLockedOut);
             Assert.IsFalse(string.IsNullOrWhiteSpace(usuario2.Membership.LockedOutReason));
 
-            Assert.AreEqual(MembershipStatus.USER_LOCKED, MembershipService.Login("walter.poch@gmail.com", "testtest", out usuario));
+            Assert.AreEqual(MembershipStatus.USER_LOCKED,
+                            MembershipService.Login("walter.poch@gmail.com", "testtest", out usuario));
         }
 
         [Test]
@@ -158,9 +163,11 @@ namespace Sicemed.Tests.Infrastructure.Services
 
             MembershipService.ChangePassword("walter.poch@gmail.com", token, "walter2");
 
-            Assert.AreEqual(MembershipStatus.BAD_PASSWORD, MembershipService.Login("walter.poch@gmail.com", "testtest", out usuario));
+            Assert.AreEqual(MembershipStatus.BAD_PASSWORD,
+                            MembershipService.Login("walter.poch@gmail.com", "testtest", out usuario));
 
-            Assert.AreEqual(MembershipStatus.USER_FOUND, MembershipService.Login("walter.poch@gmail.com", "walter2", out usuario));
+            Assert.AreEqual(MembershipStatus.USER_FOUND,
+                            MembershipService.Login("walter.poch@gmail.com", "walter2", out usuario));
         }
     }
 }

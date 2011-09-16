@@ -3,14 +3,13 @@ using System.Web.Mvc;
 using Castle.Core.Logging;
 using Microsoft.Practices.ServiceLocation;
 using Sicemed.Web.Infrastructure.Exceptions;
-using log4net;
 
 namespace Sicemed.Web.Infrastructure.Attributes.Filters
 {
     /// <summary>
-    /// Algo parecido a:
-    /// http://stackoverflow.com/questions/3274808/how-can-i-make-handleerrorattribute-work-with-ajax
-    /// pero que usa JSON
+    ///   Algo parecido a:
+    ///   http://stackoverflow.com/questions/3274808/how-can-i-make-handleerrorattribute-work-with-ajax
+    ///   pero que usa JSON
     /// </summary>
     public class AjaxHandleErrorAttribute : HandleErrorAttribute
     {
@@ -32,13 +31,11 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             // Verify if AJAX request
             if (filterContext.HttpContext.Request.IsAjaxRequest())
             {
-
                 var result = new JsonResult();
                 if (filterContext.Exception is ToClientException || HttpContext.Current.IsDebuggingEnabled)
                 {
                     result.Data = ResponseMessage.Error(filterContext.Exception.Message, filterContext.Exception);
-                }
-                else
+                } else
                 {
                     result.Data = ResponseMessage.Error();
                 }

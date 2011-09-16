@@ -7,12 +7,11 @@ namespace Sicemed.Tests.Models.Localidades
     [TestFixture]
     public class LocalidadesTests : InitializeNhibernate
     {
-         
         [Test]
         public void PuedoAgregarUnaLocalidadAUnaProvincia()
         {
-            var provincia = new Provincia() {Nombre = "Buenos Aires"};
-            using(var tx = Session.BeginTransaction())
+            var provincia = new Provincia {Nombre = "Buenos Aires"};
+            using (var tx = Session.BeginTransaction())
             {
                 Session.Save(provincia);
                 tx.Commit();
@@ -21,8 +20,8 @@ namespace Sicemed.Tests.Models.Localidades
             Session.Flush();
             Session.Evict(provincia);
 
-            var localidad = new Localidad() {Nombre = "Pergamino"};
-            using(var tx = Session.BeginTransaction())
+            var localidad = new Localidad {Nombre = "Pergamino"};
+            using (var tx = Session.BeginTransaction())
             {
                 var p2 = Session.Get<Provincia>(provincia.Id);
                 p2.AgregarLocalidad(localidad);

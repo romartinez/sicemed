@@ -8,15 +8,15 @@ namespace Sicemed.Web.Infrastructure.Helpers
     {
         public static T Deserialize<T>(string hexEncodedObject)
         {
-            byte[] bytes = HexEncoding.GetBytes(hexEncodedObject);
-            string jsonFormatted = Encoding.ASCII.GetString(bytes);
+            var bytes = HexEncoding.GetBytes(hexEncodedObject);
+            var jsonFormatted = Encoding.ASCII.GetString(bytes);
             return JsonConvert.DeserializeObject<T>(jsonFormatted);
         }
 
         public static string Serialize(object @object)
         {
-            string jsonFormatted = JsonConvert.SerializeObject(@object);
-            byte[] bytes = Encoding.ASCII.GetBytes(jsonFormatted);
+            var jsonFormatted = JsonConvert.SerializeObject(@object);
+            var bytes = Encoding.ASCII.GetBytes(jsonFormatted);
             return HexEncoding.ToString(bytes);
         }
 

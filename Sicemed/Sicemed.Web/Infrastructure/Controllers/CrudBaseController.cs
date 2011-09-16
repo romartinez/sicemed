@@ -6,14 +6,14 @@ using System.Web.Mvc;
 using NHibernate;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Exceptions;
+using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Roles;
 using Sicemed.Web.Models.ViewModels;
-using Sicemed.Web.Infrastructure.Helpers;
 
 namespace Sicemed.Web.Infrastructure.Controllers
 {
-    [AuthorizeIt(typeof(Administrador))]
+    [AuthorizeIt(typeof (Administrador))]
     public abstract class CrudBaseController<T> : NHibernateController where T : Entity
     {
         protected abstract Expression<Func<T, object>> DefaultOrderBy { get; }
@@ -25,7 +25,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
 
         [HttpPost]
         [AjaxHandleError]
-        [ValidateAntiForgeryToken]     
+        [ValidateAntiForgeryToken]
         public virtual JsonResult List(long count, int page, int rows)
         {
             page--;
@@ -39,15 +39,14 @@ namespace Sicemed.Web.Infrastructure.Controllers
             {
                 var queryCount = query.ToRowCountInt64Query().FutureValue<long>();
                 respuesta.Records = queryCount.Value;
-            }
-            else
+            } else
             {
                 respuesta.Records = count;
             }
-            respuesta.Rows = AplicarProjections(AplicarFetching(query).Take(rows).Skip(page * rows).Future());
+            respuesta.Rows = AplicarProjections(AplicarFetching(query).Take(rows).Skip(page*rows).Future());
 
             respuesta.Page = ++page;
-            respuesta.Total = (long)Math.Ceiling(respuesta.Records / (double)rows);
+            respuesta.Total = (long) Math.Ceiling(respuesta.Records/(double) rows);
             return Json(respuesta);
         }
 
@@ -103,7 +102,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
             UpdateModel(modelFromDb);
 
             AgregarReferencias(modelFromDb);
-            
+
             EsValido(modelFromDb);
 
             return Json(ResponseMessage.Success());

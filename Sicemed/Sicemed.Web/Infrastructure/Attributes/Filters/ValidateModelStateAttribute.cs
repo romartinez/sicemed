@@ -13,5 +13,4 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             base.OnActionExecuting(filterContext);
         }
     }
-
 }

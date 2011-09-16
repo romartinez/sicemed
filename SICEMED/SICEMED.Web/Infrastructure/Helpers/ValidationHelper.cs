@@ -10,7 +10,8 @@ namespace Sicemed.Web.Infrastructure.Helpers
 {
     public static class ValidationHelper
     {
-        public const string EMAIL_VALIDATION_REGEX = @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b";
+        public const string EMAIL_VALIDATION_REGEX =
+            @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b";
 
         public static IEnumerable<ValidationResult> Validate(object component)
         {
@@ -20,7 +21,7 @@ namespace Sicemed.Web.Infrastructure.Helpers
                    select new ValidationResult(
                        validation.FormatErrorMessage(validation.ErrorMessage) ??
                        string.Format(CultureInfo.CurrentUICulture, "{0} validation failed.", validation.GetType().Name),
-                       new[] { descriptor.Name });
+                       new[] {descriptor.Name});
         }
 
         public static bool IsValidEmail(string email)

@@ -30,7 +30,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         protected override Localidad AgregarReferencias(Localidad modelo)
         {
             modelo.Provincia = ObtenerProvinciaSeleccionada();
-            
+
             return modelo;
         }
 
@@ -46,7 +46,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             if (provincia == null)
                 throw new ValidationErrorException(ERROR_PROVINCIA_NO_ENCONTRADA);
 
-            return provincia;                
+            return provincia;
         }
 
         #endregion

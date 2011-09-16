@@ -2,10 +2,11 @@
 @{
     var usuario = User as Persona;
 }
-@if(User.Identity.IsAuthenticated) {
+@if (User.Identity.IsAuthenticated)
+{
     <text>Bienvenido <strong>@usuario.Apellido, @usuario.Nombre</strong>!
-    [ @Html.ActionLink("Salir", "Salir", "Cuenta", new{Area = ""}, new { }) ]</text>
-}
-else {
-    @:[ @Html.ActionLink("Iniciar Sesión", "IniciarSesion", "Cuenta", new { Area = "" }, new { }) ]
+        [ @Html.ActionLink("Salir", "Salir", "Cuenta", new {Area = ""}, new {}) ]</text>
+} else
+{
+    @:[ @Html.ActionLink("Iniciar Sesión", "IniciarSesion", "Cuenta", new {Area = ""}, new {}) ]
 }

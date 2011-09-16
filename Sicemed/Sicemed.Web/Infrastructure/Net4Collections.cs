@@ -22,7 +22,8 @@ namespace Sicemed.Web.Infrastructure
             return new GenericSetType<T>(role, propertyRef);
         }
 
-        public override CollectionType SortedSet<T>(string role, string propertyRef, bool embedded, IComparer<T> comparer)
+        public override CollectionType SortedSet<T>(string role, string propertyRef, bool embedded,
+                                                    IComparer<T> comparer)
         {
             return new GenericSortedSetType<T>(role, propertyRef, comparer);
         }
@@ -39,51 +40,46 @@ namespace Sicemed.Web.Infrastructure
             this.comparer = comparer;
         }
 
+        public IComparer<T> Comparer
+        {
+            get { return this.comparer; }
+        }
+
         public override object Instantiate(int anticipatedSize)
         {
             return new SortedSet<T>(this.comparer);
         }
-
-        public IComparer<T> Comparer
-        {
-            get
-            {
-                return this.comparer;
-            }
-        }
     }
 
     /// <summary>
-    /// An <see cref="IType"/> that maps an <see cref="ISet{T}"/> collection
-    /// to the database.
+    ///   An <see cref = "IType" /> that maps an <see cref = "ISet{T}" /> collection
+    ///   to the database.
     /// </summary>
     [Serializable]
     public class GenericSetType<T> : SetType
     {
         /// <summary>
-        /// Initializes a new instance of a <see cref="GenericSetType{T}"/> class for
-        /// a specific role.
+        ///   Initializes a new instance of a <see cref = "GenericSetType{T}" /> class for
+        ///   a specific role.
         /// </summary>
-        /// <param name="role">The role the persistent collection is in.</param>
-        /// <param name="propertyRef">The name of the property in the
-        /// owner object containing the collection ID, or <see langword="null" /> if it is
-        /// the primary key.</param>
+        /// <param name = "role">The role the persistent collection is in.</param>
+        /// <param name = "propertyRef">The name of the property in the
+        ///   owner object containing the collection ID, or <see langword = "null" /> if it is
+        ///   the primary key.</param>
         public GenericSetType(string role, string propertyRef)
-            : base(role, propertyRef, false)
-        {
-        }
+            : base(role, propertyRef, false) {}
 
         public override Type ReturnedClass
         {
-            get { return typeof(ISet<T>); }
+            get { return typeof (ISet<T>); }
         }
 
         /// <summary>
-        /// Instantiates a new <see cref="IPersistentCollection"/> for the set.
+        ///   Instantiates a new <see cref = "IPersistentCollection" /> for the set.
         /// </summary>
-        /// <param name="session">The current <see cref="ISessionImplementor"/> for the set.</param>
-        /// <param name="persister">The current <see cref="ICollectionPersister" /> for the set.</param>
-        /// <param name="key"></param>
+        /// <param name = "session">The current <see cref = "ISessionImplementor" /> for the set.</param>
+        /// <param name = "persister">The current <see cref = "ICollectionPersister" /> for the set.</param>
+        /// <param name = "key"></param>
         public override IPersistentCollection Instantiate(ISessionImplementor session, ICollectionPersister persister,
                                                           object key)
         {
@@ -91,12 +87,12 @@ namespace Sicemed.Web.Infrastructure
         }
 
         /// <summary>
-        /// Wraps an <see cref="IList{T}"/> in a <see cref="PersistentGenericSet&lt;T&gt;"/>.
+        ///   Wraps an <see cref = "IList{T}" /> in a <see cref = "PersistentGenericSet&lt;T&gt;" />.
         /// </summary>
-        /// <param name="session">The <see cref="ISessionImplementor"/> for the collection to be a part of.</param>
-        /// <param name="collection">The unwrapped <see cref="IList{T}"/>.</param>
+        /// <param name = "session">The <see cref = "ISessionImplementor" /> for the collection to be a part of.</param>
+        /// <param name = "collection">The unwrapped <see cref = "IList{T}" />.</param>
         /// <returns>
-        /// An <see cref="PersistentGenericSet&lt;T&gt;"/> that wraps the non NHibernate <see cref="IList{T}"/>.
+        ///   An <see cref = "PersistentGenericSet&lt;T&gt;" /> that wraps the non NHibernate <see cref = "IList{T}" />.
         /// </returns>
         public override IPersistentCollection Wrap(ISessionImplementor session, object collection)
         {
@@ -118,61 +114,56 @@ namespace Sicemed.Web.Infrastructure
 
         protected override void Clear(object collection)
         {
-            ((ISet<T>)collection).Clear();
+            ((ISet<T>) collection).Clear();
         }
 
         protected override void Add(object collection, object element)
         {
-            ((ISet<T>)collection).Add((T)element);
+            ((ISet<T>) collection).Add((T) element);
         }
     }
 
     /// <summary>
-    /// A persistent wrapper for an <see cref="ISet{T}"/>
+    ///   A persistent wrapper for an <see cref = "ISet{T}" />
     /// </summary>
     [Serializable]
-    [DebuggerTypeProxy(typeof(CollectionProxy<>))]
+    [DebuggerTypeProxy(typeof (CollectionProxy<>))]
     public class PersistentGenericSet<T> : AbstractPersistentCollection, ISet<T>
     {
         /// <summary>
-        /// The <see cref="ISet{T}"/> that NHibernate is wrapping.
+        ///   The <see cref = "ISet{T}" /> that NHibernate is wrapping.
         /// </summary>
         protected ISet<T> set;
 
         /// <summary>
-        /// A temporary list that holds the objects while the PersistentSet is being
-        /// populated from the database.  
+        ///   A temporary list that holds the objects while the PersistentSet is being
+        ///   populated from the database.
         /// </summary>
         /// <remarks>
-        /// This is necessary to ensure that the object being added to the PersistentSet doesn't
-        /// have its' <c>GetHashCode()</c> and <c>Equals()</c> methods called during the load
-        /// process.
+        ///   This is necessary to ensure that the object being added to the PersistentSet doesn't
+        ///   have its' <c>GetHashCode()</c> and <c>Equals()</c> methods called during the load
+        ///   process.
         /// </remarks>
-        [NonSerialized]
-        private IList<T> tempList;
+        [NonSerialized] private IList<T> tempList;
 
-        public PersistentGenericSet()
-        {
-        }
+        public PersistentGenericSet() {}
 
         // needed for serialization
 
-        /// <summary> 
-        /// Constructor matching super.
-        /// Instantiates a lazy set (the underlying set is un-initialized).
+        /// <summary>
+        ///   Constructor matching super.
+        ///   Instantiates a lazy set (the underlying set is un-initialized).
         /// </summary>
-        /// <param name="session">The session to which this set will belong. </param>
+        /// <param name = "session">The session to which this set will belong. </param>
         public PersistentGenericSet(ISessionImplementor session)
-            : base(session)
-        {
-        }
+            : base(session) {}
 
-        /// <summary> 
-        /// Instantiates a non-lazy set (the underlying set is constructed
-        /// from the incoming set reference).
+        /// <summary>
+        ///   Instantiates a non-lazy set (the underlying set is constructed
+        ///   from the incoming set reference).
         /// </summary>
-        /// <param name="session">The session to which this set will belong. </param>
-        /// <param name="original">The underlying set data. </param>
+        /// <param name = "session">The session to which this set will belong. </param>
+        /// <param name = "original">The underlying set data. </param>
         public PersistentGenericSet(ISessionImplementor session, ISet<T> original)
             : base(session)
         {
@@ -220,7 +211,7 @@ namespace Sicemed.Web.Infrastructure
 
         public bool Contains(T o)
         {
-            bool? exists = ReadElementExistence(o);
+            var exists = ReadElementExistence(o);
             return exists == null ? set.Contains(o) : exists.Value;
         }
 
@@ -238,7 +229,7 @@ namespace Sicemed.Web.Infrastructure
 
         public bool Add(T o)
         {
-            bool? exists = IsOperationQueueEnabled ? ReadElementExistence(o) : null;
+            var exists = IsOperationQueueEnabled ? ReadElementExistence(o) : null;
             if (!exists.HasValue)
             {
                 Initialize(true);
@@ -319,7 +310,7 @@ namespace Sicemed.Web.Infrastructure
 
         public bool Remove(T o)
         {
-            bool? exists = PutQueueEnabled ? ReadElementExistence(o) : null;
+            var exists = PutQueueEnabled ? ReadElementExistence(o) : null;
             if (!exists.HasValue)
             {
                 Initialize(true);
@@ -348,8 +339,7 @@ namespace Sicemed.Web.Infrastructure
             if (ClearQueueEnabled)
             {
                 QueueOperation(new ClearDelayedOperation(this));
-            }
-            else
+            } else
             {
                 Initialize(true);
                 if (set.Count != 0)
@@ -493,58 +483,58 @@ namespace Sicemed.Web.Infrastructure
                              select persister.ElementType.DeepCopy(current, entityMode, persister.Factory);
             foreach (var copied in enumerable)
             {
-                clonedSet.Add((T)copied);
+                clonedSet.Add((T) copied);
             }
             return clonedSet;
         }
 
         public override ICollection GetOrphans(object snapshot, string entityName)
         {
-            var sn = new SetSnapShot<object>((IEnumerable<object>)snapshot);
+            var sn = new SetSnapShot<object>((IEnumerable<object>) snapshot);
             if (set.Count == 0) return sn;
-            if (((ICollection)sn).Count == 0) return sn;
+            if (((ICollection) sn).Count == 0) return sn;
             return GetOrphans(sn, set.ToArray(), entityName, Session);
         }
 
         public override bool EqualsSnapshot(ICollectionPersister persister)
         {
             var elementType = persister.ElementType;
-            var snapshot = (ISetSnapshot<T>)GetSnapshot();
-            if (((ICollection)snapshot).Count != set.Count)
+            var snapshot = (ISetSnapshot<T>) GetSnapshot();
+            if (((ICollection) snapshot).Count != set.Count)
             {
                 return false;
             }
 
             return !(from object obj in set
-                     let oldValue = snapshot[(T)obj]
+                     let oldValue = snapshot[(T) obj]
                      where oldValue == null || elementType.IsDirty(oldValue, obj, Session)
                      select obj).Any();
         }
 
         public override bool IsSnapshotEmpty(object snapshot)
         {
-            return ((ICollection)snapshot).Count == 0;
+            return ((ICollection) snapshot).Count == 0;
         }
 
         public override void BeforeInitialize(ICollectionPersister persister, int anticipatedSize)
         {
-            set = (ISet<T>)persister.CollectionType.Instantiate(anticipatedSize);
+            set = (ISet<T>) persister.CollectionType.Instantiate(anticipatedSize);
         }
 
         /// <summary>
-        /// Initializes this PersistentSet from the cached values.
+        ///   Initializes this PersistentSet from the cached values.
         /// </summary>
-        /// <param name="persister">The CollectionPersister to use to reassemble the PersistentSet.</param>
-        /// <param name="disassembled">The disassembled PersistentSet.</param>
-        /// <param name="owner">The owner object.</param>
+        /// <param name = "persister">The CollectionPersister to use to reassemble the PersistentSet.</param>
+        /// <param name = "disassembled">The disassembled PersistentSet.</param>
+        /// <param name = "owner">The owner object.</param>
         public override void InitializeFromCache(ICollectionPersister persister, object disassembled, object owner)
         {
-            var array = (object[])disassembled;
-            int size = array.Length;
+            var array = (object[]) disassembled;
+            var size = array.Length;
             BeforeInitialize(persister, size);
-            for (int i = 0; i < size; i++)
+            for (var i = 0; i < size; i++)
             {
-                var element = (T)persister.ElementType.Assemble(array[i], Session, owner);
+                var element = (T) persister.ElementType.Assemble(array[i], Session, owner);
                 if (element != null)
                 {
                     set.Add(element);
@@ -559,9 +549,10 @@ namespace Sicemed.Web.Infrastructure
             return StringHelper.CollectionToString(set.ToArray());
         }
 
-        public override object ReadFrom(IDataReader rs, ICollectionPersister role, ICollectionAliases descriptor, object owner)
+        public override object ReadFrom(IDataReader rs, ICollectionPersister role, ICollectionAliases descriptor,
+                                        object owner)
         {
-            var element = (T)role.ReadElement(rs, owner, descriptor.SuffixedElementAliases, Session);
+            var element = (T) role.ReadElement(rs, owner, descriptor.SuffixedElementAliases, Session);
             if (element != null)
             {
                 tempList.Add(element);
@@ -570,8 +561,8 @@ namespace Sicemed.Web.Infrastructure
         }
 
         /// <summary>
-        /// Set up the temporary List that will be used in the EndRead() 
-        /// to fully create the set.
+        ///   Set up the temporary List that will be used in the EndRead() 
+        ///   to fully create the set.
         /// </summary>
         public override void BeginRead()
         {
@@ -580,13 +571,13 @@ namespace Sicemed.Web.Infrastructure
         }
 
         /// <summary>
-        /// Takes the contents stored in the temporary list created during <c>BeginRead()</c>
-        /// that was populated during <c>ReadFrom()</c> and write it to the underlying 
-        /// PersistentSet.
+        ///   Takes the contents stored in the temporary list created during <c>BeginRead()</c>
+        ///   that was populated during <c>ReadFrom()</c> and write it to the underlying 
+        ///   PersistentSet.
         /// </summary>
         public override bool EndRead(ICollectionPersister persister)
         {
-            foreach (T item in tempList)
+            foreach (var item in tempList)
             {
                 set.Add(item);
             }
@@ -603,7 +594,7 @@ namespace Sicemed.Web.Infrastructure
         public override object Disassemble(ICollectionPersister persister)
         {
             var result = new object[set.Count];
-            int i = 0;
+            var i = 0;
 
             foreach (object obj in set)
             {
@@ -614,9 +605,9 @@ namespace Sicemed.Web.Infrastructure
 
         public override IEnumerable GetDeletes(ICollectionPersister persister, bool indexIsFormula)
         {
-            IType elementType = persister.ElementType;
-            var sn = (ISetSnapshot<T>)GetSnapshot();
-            var deletes = new List<T>(((ICollection<T>)sn).Count);
+            var elementType = persister.ElementType;
+            var sn = (ISetSnapshot<T>) GetSnapshot();
+            var deletes = new List<T>(((ICollection<T>) sn).Count);
 
             deletes.AddRange(sn.Where(obj => !set.Contains(obj)));
 
@@ -630,8 +621,8 @@ namespace Sicemed.Web.Infrastructure
 
         public override bool NeedsInserting(object entry, int i, IType elemType)
         {
-            var sn = (ISetSnapshot<T>)GetSnapshot();
-            object oldKey = sn[(T)entry];
+            var sn = (ISetSnapshot<T>) GetSnapshot();
+            object oldKey = sn[(T) entry];
             // note that it might be better to iterate the snapshot but this is safe,
             // assuming the user implements equals() properly, as required by the PersistentSet
             // contract!
@@ -728,7 +719,7 @@ namespace Sicemed.Web.Infrastructure
                 elements = new List<T2>(collection);
             }
 
-            #region ISetSnapshot<T> Members
+            #region ISetSnapshot<T2> Members
 
             public IEnumerator<T2> GetEnumerator()
             {
@@ -767,7 +758,7 @@ namespace Sicemed.Web.Infrastructure
 
             public void CopyTo(Array array, int index)
             {
-                ((ICollection)elements).CopyTo(array, index);
+                ((ICollection) elements).CopyTo(array, index);
             }
 
             int ICollection.Count
@@ -777,12 +768,12 @@ namespace Sicemed.Web.Infrastructure
 
             public object SyncRoot
             {
-                get { return ((ICollection)elements).SyncRoot; }
+                get { return ((ICollection) elements).SyncRoot; }
             }
 
             public bool IsSynchronized
             {
-                get { return ((ICollection)elements).IsSynchronized; }
+                get { return ((ICollection) elements).IsSynchronized; }
             }
 
             int ICollection<T2>.Count
@@ -792,14 +783,14 @@ namespace Sicemed.Web.Infrastructure
 
             public bool IsReadOnly
             {
-                get { return ((ICollection<T2>)elements).IsReadOnly; }
+                get { return ((ICollection<T2>) elements).IsReadOnly; }
             }
 
             public T2 this[T2 element]
             {
                 get
                 {
-                    int idx = elements.IndexOf(element);
+                    var idx = elements.IndexOf(element);
                     if (idx >= 0)
                     {
                         return elements[idx];

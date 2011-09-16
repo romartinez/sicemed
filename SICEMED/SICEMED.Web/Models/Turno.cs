@@ -24,13 +24,13 @@ namespace Sicemed.Web.Models
         #region Navigation Properties
 
         public virtual Paciente Paciente { get; set; }
-        
+
         public virtual Profesional Profesional { get; set; }
 
         public virtual Secretaria Secretaria { get; set; }
 
         public virtual Especialidad Especialidad { get; set; }
-        
+
         public virtual Consultorio Consultorio { get; set; }
 
         #endregion

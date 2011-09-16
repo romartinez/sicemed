@@ -8,6 +8,6 @@ namespace Sicemed.Web.Infrastructure.Attributes.Validation
     public sealed class EmailAttribute : RegularExpressionAttribute
     {
         public EmailAttribute()
-            : base(ValidationHelper.EMAIL_VALIDATION_REGEX) { }
+            : base(ValidationHelper.EMAIL_VALIDATION_REGEX) {}
     }
 }

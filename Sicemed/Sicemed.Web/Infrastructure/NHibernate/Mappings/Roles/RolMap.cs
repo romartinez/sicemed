@@ -9,7 +9,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Roles
             Discriminator(x => x.Column("Rol"));
             Property(x => x.FechaAsignacion);
 
-            ManyToOne(x => x.Persona, map=> map.ForeignKey("FK_Roles_Persona"));
+            ManyToOne(x => x.Persona, map => map.ForeignKey("FK_Roles_Persona"));
         }
     }
 }

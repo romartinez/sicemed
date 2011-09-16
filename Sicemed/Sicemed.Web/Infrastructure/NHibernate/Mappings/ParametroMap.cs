@@ -11,10 +11,10 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
         {
             Id(x => x.Key, map => map.Type(new EnumStringType<Parametro.Keys>()));
             Property("_value", map =>
-            {
-                map.Access(Accessor.NoSetter);
-                map.NotNullable(true);
-            });
+                               {
+                                   map.Access(Accessor.NoSetter);
+                                   map.NotNullable(true);
+                               });
         }
     }
 }

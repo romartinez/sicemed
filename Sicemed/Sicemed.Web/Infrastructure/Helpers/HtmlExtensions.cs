@@ -1,7 +1,4 @@
-﻿
-// ReSharper disable CheckNamespace
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
@@ -14,12 +11,17 @@ namespace System.Web.Mvc.Html
 {
     public static class HtmlExtensions
     {
-        public static MvcHtmlString SelectJsonValues<T>(this HtmlHelper<IEnumerable<T>> htmlHelper, Expression<Func<T, object>> id, Expression<Func<T, object>> text, string emptySelectionText = null)
+        public static MvcHtmlString SelectJsonValues<T>(this HtmlHelper<IEnumerable<T>> htmlHelper,
+                                                        Expression<Func<T, object>> id, Expression<Func<T, object>> text,
+                                                        string emptySelectionText = null)
         {
             return SelectJsonValues(htmlHelper, htmlHelper.ViewData.Model, id, text, emptySelectionText);
         }
 
-        public static MvcHtmlString SelectJsonValues<T>(this HtmlHelper<IEnumerable<T>> htmlHelper, IEnumerable<T> models, Expression<Func<T, object>> id, Expression<Func<T, object>> text, string emptySelectionText = null)
+        public static MvcHtmlString SelectJsonValues<T>(this HtmlHelper<IEnumerable<T>> htmlHelper,
+                                                        IEnumerable<T> models, Expression<Func<T, object>> id,
+                                                        Expression<Func<T, object>> text,
+                                                        string emptySelectionText = null)
         {
             if (id == null) throw new ArgumentNullException("id");
             if (text == null) throw new ArgumentNullException("text");

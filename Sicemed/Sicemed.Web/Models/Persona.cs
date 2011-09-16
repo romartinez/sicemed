@@ -15,7 +15,7 @@ namespace Sicemed.Web.Models
         public Persona()
         {
             _roles = new HashSet<Rol>();
-            _membership = new Membership();            
+            _membership = new Membership();
         }
 
         public virtual Membership Membership
@@ -26,9 +26,9 @@ namespace Sicemed.Web.Models
         #region Primitive Properties
 
         public virtual string Nombre { get; set; }
-        
+
         public virtual string SegundoNombre { get; set; }
-        
+
         public virtual string Apellido { get; set; }
 
         public virtual DateTime? FechaNacimiento { get; set; }
@@ -43,17 +43,26 @@ namespace Sicemed.Web.Models
 
         #region Navigation Properties
 
-
         public virtual IEnumerable<Rol> Roles
         {
             get { return _roles; }
         }
+
         #endregion
+
+        #region IPrincipal Members
 
         public virtual bool IsInRole(string role)
         {
             return _roles.Select(r => r.DisplayName).Contains(role);
         }
+
+        public virtual IIdentity Identity
+        {
+            get { return new GenericIdentity(this.Membership.Email); }
+        }
+
+        #endregion
 
         public virtual bool IsInRole<T>() where T : Rol
         {
@@ -67,15 +76,10 @@ namespace Sicemed.Web.Models
 
         public virtual T As<T>() where T : Rol
         {
-            var personaAs = _roles.FirstOrDefault(x => x.GetType() == typeof(T)) as T;
-            if (personaAs == default(T)) 
-                throw new IdentityNotMappedException("El usuario no es del tipo "+ typeof(T).Name);
+            var personaAs = _roles.FirstOrDefault(x => x.GetType() == typeof (T)) as T;
+            if (personaAs == default(T))
+                throw new IdentityNotMappedException("El usuario no es del tipo " + typeof (T).Name);
             return personaAs;
-        }
-
-        public virtual IIdentity Identity
-        {
-            get { return new GenericIdentity(this.Membership.Email); }
         }
 
         public virtual Persona AgregarRol(Rol rol)

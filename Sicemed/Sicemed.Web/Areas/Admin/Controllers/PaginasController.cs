@@ -45,17 +45,22 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         {
             //Valido que el nombre sea unico.
             var session = SessionFactory.GetCurrentSession();
-            var paginaConMismoNombre = session.QueryOver<Pagina>().Where(x => x.Nombre == modelo.Nombre && x.Id != modelo.Id).Future();
+            var paginaConMismoNombre =
+                session.QueryOver<Pagina>().Where(x => x.Nombre == modelo.Nombre && x.Id != modelo.Id).Future();
 
             if (!modelo.IsTransient())
             {
                 //Lo busco y traigo los hijos, si tiene hijos no puede tener padre; un nivel de profundidad.
-                var padreConHijos = session.QueryOver<Pagina>().Where(x=>x.Id == modelo.Id).Fetch(x => x.Hijos).Eager.Future().First();
-                if (modelo.Padre != null && padreConHijos.Hijos.Any()) 
-                    throw new ValidationErrorException("Se admite un único nivel de profundidad. La página no puede poseer hijos y tener un padre al mismo tiempo. Quitele el padre.");
+                var padreConHijos =
+                    session.QueryOver<Pagina>().Where(x => x.Id == modelo.Id).Fetch(x => x.Hijos).Eager.Future().First();
+                if (modelo.Padre != null && padreConHijos.Hijos.Any())
+                    throw new ValidationErrorException(
+                        "Se admite un único nivel de profundidad. La página no puede poseer hijos y tener un padre al mismo tiempo. Quitele el padre.");
             }
 
-            if (paginaConMismoNombre.Any()) throw new ValidationErrorException(string.Format("Ya existe una página con el nombre: '{0}'", modelo.Nombre));
+            if (paginaConMismoNombre.Any())
+                throw new ValidationErrorException(string.Format("Ya existe una página con el nombre: '{0}'",
+                                                                 modelo.Nombre));
 
             return base.EsValido(modelo);
         }

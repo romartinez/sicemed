@@ -27,6 +27,6 @@ namespace Sicemed.Web.Models.Components
         public virtual DateTime? LastPasswordChangedDate { get; set; }
         public virtual DateTime? LastLockoutDate { get; set; }
         public virtual int FailedPasswordAttemptCount { get; set; }
-        public virtual DateTime? FailedPasswordAttemptWindowStart { get; set; }         
+        public virtual DateTime? FailedPasswordAttemptWindowStart { get; set; }
     }
 }
