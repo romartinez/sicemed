@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Sicemed.Web.Models.Roles
 {
@@ -33,6 +35,32 @@ namespace Sicemed.Web.Models.Roles
         public static Rol Create(string matricula)
         {
             return new Profesional {Matricula = matricula};
+        }
+
+        public virtual void AgregarEspecialidad(Especialidad especialidad)
+        {
+            if (especialidad == null) throw new ArgumentNullException("especialidad");
+
+            _especialidades.Add(especialidad);
+        }
+
+        public virtual void AgregarAgenda(DayOfWeek dia, TimeSpan duracionTurno, DateTime horarioDesde, DateTime horarioHasta, Consultorio consultorio, params Especialidad[] especialidades)
+        {
+            if (especialidades == null) throw new ArgumentNullException("especialidades");
+
+            var agenda = new Agenda()
+                             {
+                                 Dia = dia,
+                                 DuracionTurno = duracionTurno,
+                                 HorarioDesde = horarioDesde,
+                                 HorarioHasta = horarioHasta,
+                                 Profesional = this,
+                                 Consultorio = consultorio
+                             };
+
+            especialidades.ToList().ForEach(agenda.AgregarEspecialidad);
+
+            _agendas.Add(agenda);
         }
     }
 }

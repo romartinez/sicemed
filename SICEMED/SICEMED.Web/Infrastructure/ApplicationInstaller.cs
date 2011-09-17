@@ -61,8 +61,8 @@ namespace Sicemed.Web.Infrastructure
         public static Persona PersonaPacientePablo;
         public static Persona PersonaPacientePedro;
         public static Persona PersonaSecretariaJuana;
-        public static Persona PersonaProfesionalBernardo;
-        public static Persona PersonaProfesionalJose;
+        public static Persona PersonaProfesionalBernardoClinico;
+        public static Persona PersonaProfesionalJoseClinicoYDermatologo;
         public static Persona PersonaAdminProfesionalWalter;
 
         #endregion
@@ -305,6 +305,7 @@ namespace Sicemed.Web.Infrastructure
                                        Documento = new Documento {Numero = 1234568, TipoDocumento = TipoDocumento.Dni},
                                        Telefono = new Telefono {Prefijo = "0341", Numero = "1534665"}
                                    };
+            PersonaPacientePablo.AgregarRol(Paciente.Create("9798798"));
             MembershipService.CreateUser(PersonaPacientePablo, "pablo@gmail.com", "sicemedPablo");
 
             PersonaPacientePedro = new Persona
@@ -317,6 +318,7 @@ namespace Sicemed.Web.Infrastructure
                                        Documento = new Documento {Numero = 11234343, TipoDocumento = TipoDocumento.Dni},
                                        Telefono = new Telefono {Prefijo = "0341", Numero = "156333456"}
                                    };
+            PersonaPacientePedro.AgregarRol(Paciente.Create("9798798"));
             MembershipService.CreateUser(PersonaPacientePedro, "pedro@gmail.com", "sicemedPedro");
 
             PersonaSecretariaJuana = new Persona
@@ -334,7 +336,7 @@ namespace Sicemed.Web.Infrastructure
             PersonaSecretariaJuana.AgregarRol(Secretaria.Create(DateTime.Now));
             MembershipService.CreateUser(PersonaSecretariaJuana, "juana@gmail.com", "sicemedJuana");
 
-            PersonaProfesionalBernardo = new Persona
+            PersonaProfesionalBernardoClinico = new Persona
                                          {
                                              Nombre = "Bernardo",
                                              Apellido = "Lattanzio",
@@ -345,10 +347,11 @@ namespace Sicemed.Web.Infrastructure
                                                  new Documento {Numero = 30123876, TipoDocumento = TipoDocumento.Dni},
                                              Telefono = new Telefono {Prefijo = "0341", Numero = "4471010"}
                                          };
-            PersonaProfesionalBernardo.AgregarRol(Profesional.Create("546546"));
-            MembershipService.CreateUser(PersonaProfesionalBernardo, "bernardo@gmail.com", "sicemedBernardo");
+            PersonaProfesionalBernardoClinico.AgregarRol(Profesional.Create("546546"));
+            PersonaProfesionalBernardoClinico.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
+            MembershipService.CreateUser(PersonaProfesionalBernardoClinico, "bernardo@gmail.com", "sicemedBernardo");
 
-            PersonaProfesionalJose = new Persona
+            PersonaProfesionalJoseClinicoYDermatologo = new Persona
                                      {
                                          Nombre = "Jose",
                                          Apellido = "Bernavá",
@@ -360,8 +363,10 @@ namespace Sicemed.Web.Infrastructure
                                              new Documento {Numero = 31789502, TipoDocumento = TipoDocumento.Dni},
                                          Telefono = new Telefono {Prefijo = "0341", Numero = "1661234"}
                                      };
-            PersonaProfesionalJose.AgregarRol(Profesional.Create("546465489"));
-            MembershipService.CreateUser(PersonaProfesionalJose, "jose@gmail.com", "sicemedJose");
+            PersonaProfesionalJoseClinicoYDermatologo.AgregarRol(Profesional.Create("546465489"));
+            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
+            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarEspecialidad(EspecialidadDermatologo);
+            MembershipService.CreateUser(PersonaProfesionalJoseClinicoYDermatologo, "jose@gmail.com", "sicemedJose");
         }
 
         #endregion

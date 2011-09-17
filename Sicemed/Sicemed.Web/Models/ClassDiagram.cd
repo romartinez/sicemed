@@ -8,7 +8,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Sicemed.Web.Models.Especialidad">
-    <Position X="14.25" Y="12" Width="1.5" />
+    <Position X="12.5" Y="11.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAgAABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Especialidad.cs</FileName>
@@ -86,13 +86,13 @@
     <Position X="5.25" Y="12.5" Width="1.5" />
     <AssociationLine Name="Secretaria" Type="Sicemed.Web.Models.Roles.Secretaria" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="6.75" Y="12.562" />
-        <Point X="8" Y="12.562" />
+        <Point X="6.75" Y="12.58" />
+        <Point X="8" Y="12.58" />
         <Point X="8" Y="10.562" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAEAAAACADAAAIEAAAABAAAAAABAAAgIAAAAEAAAAAA=</HashCode>
+      <HashCode>AAEAAAACADAAAIEAAAABAAAAAABAAEgJAAAAEAAAAAA=</HashCode>
       <FileName>Models\Turno.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -101,6 +101,7 @@
       <Property Name="Secretaria" />
       <Property Name="Especialidad" />
       <Property Name="Consultorio" />
+      <Property Name="Agenda" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Sicemed.Web.Models.Parametro" Collapsed="true" BaseTypeListCollapsed="true">

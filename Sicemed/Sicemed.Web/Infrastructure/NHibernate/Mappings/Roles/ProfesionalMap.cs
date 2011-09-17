@@ -14,6 +14,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Roles
             Set(x => x.Agendas, map =>
                                 {
                                     map.Access(Accessor.NoSetter);
+                                    map.Inverse(true);
                                     map.Cascade(Cascade.All | Cascade.DeleteOrphans);
                                 }, rel => rel.OneToMany());
         }

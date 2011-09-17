@@ -45,7 +45,6 @@ namespace Sicemed.Web.Models.Roles
             if (turno == null) throw new ArgumentNullException("turno");
 
             _turnos.Add(turno);
-            turno.Paciente = this;
 
             return this;
         }

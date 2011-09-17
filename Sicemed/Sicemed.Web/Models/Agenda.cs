@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Models
 {
@@ -20,10 +21,18 @@ namespace Sicemed.Web.Models
         public virtual DayOfWeek Dia { get; set; }
 
         public virtual Consultorio Consultorio { get; set; }
+        public virtual Profesional Profesional { get; set; }
 
         public virtual ISet<Especialidad> EspecialidadesAtendidas
         {
             get { return _especialidadesAtendidas; }
+        }
+
+        public virtual void AgregarEspecialidad(Especialidad especialidad)
+        {
+            if (especialidad == null) throw new ArgumentNullException("especialidad");
+
+            _especialidadesAtendidas.Add(especialidad);
         }
     }
 }

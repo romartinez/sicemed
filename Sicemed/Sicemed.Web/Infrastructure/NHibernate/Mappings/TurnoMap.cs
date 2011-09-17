@@ -10,7 +10,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Property(x => x.FechaGeneracion, map => map.NotNullable(true));
             Property(x => x.FechaIngreso);
             Property(x => x.FechaTurno, map => map.NotNullable(true));
-            Property(x => x.IpPaciente, map => map.NotNullable(true));
+            Property(x => x.IpPaciente);
+            Property(x => x.EsTelefonico);
             Property(x => x.Nota);
 
             ManyToOne(x => x.Paciente, map =>
@@ -19,10 +20,14 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                                            map.ForeignKey("FK_Turnos_Paciente");
                                        });
 
-            ManyToOne(x => x.Secretaria, map =>
+            ManyToOne(x => x.SecretariaReservadoraTurno, map =>
                                          {
-                                             map.NotNullable(true);
-                                             map.ForeignKey("FK_Turnos_Secretaria");
+                                             map.ForeignKey("FK_Turnos_SecretariaReservadoraTurno");
+                                         });
+
+            ManyToOne(x => x.SecretariaRecepcionista, map =>
+                                         {
+                                             map.ForeignKey("FK_Turnos_SecretariaRecepcionista");
                                          });
 
             ManyToOne(x => x.Profesional, map =>
@@ -38,6 +43,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                                            });
 
             ManyToOne(x => x.Consultorio, map => { map.ForeignKey("FK_Turnos_Consultorio"); });
+            
+            ManyToOne(x => x.Agenda, map => { map.ForeignKey("FK_Turnos_Agenda"); });
         }
     }
 }

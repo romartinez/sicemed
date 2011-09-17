@@ -13,6 +13,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Property(x => x.HorarioHasta);
 
             ManyToOne(x => x.Consultorio, map => map.ForeignKey("FK_Agenda_Cosultorio"));
+            ManyToOne(x => x.Profesional, map => map.ForeignKey("FK_Agenda_Profesional"));
 
             Set(x => x.EspecialidadesAtendidas, map =>
                                                 {
