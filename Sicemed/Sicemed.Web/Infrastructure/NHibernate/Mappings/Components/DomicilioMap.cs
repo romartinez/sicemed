@@ -9,7 +9,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Components
         {
             Property(x => x.Direccion);
 
-            ManyToOne(x => x.Localidad, map => map.ForeignKey("FK_Domicilios_Localidad"));
+            ManyToOne(x => x.Localidad);
         }
     }
 }

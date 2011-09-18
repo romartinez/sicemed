@@ -12,6 +12,7 @@ using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Tool.hbm2ddl;
+using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.HttpModules;
 using Sicemed.Web.Infrastructure.Providers.Session;
 using Sicemed.Web.Models;
@@ -39,7 +40,7 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
         public static Configuration BuildDatabaseConfiguration()
         {
             var configuration = new Configuration();
-
+            configuration.CollectionTypeFactory<Net4CollectionTypeFactory>();
             configuration.DataBaseIntegration(db =>
                                               {
                                                   db.Dialect<MsSql2008Dialect>();

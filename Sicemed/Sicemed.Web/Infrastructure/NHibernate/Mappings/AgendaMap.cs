@@ -19,7 +19,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                                                 {
                                                     map.Access(Accessor.NoSetter);
                                                     map.Cascade(Cascade.All | Cascade.DeleteOrphans);
-                                                }, rel => rel.OneToMany());
+                                                }, rel => rel.ManyToMany());
         }
     }
 }

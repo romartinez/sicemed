@@ -48,6 +48,13 @@ namespace Sicemed.Web.Models.Roles
         {
             if (especialidades == null) throw new ArgumentNullException("especialidades");
 
+            if (!especialidades.ToList().TrueForAll(x => _especialidades.Contains(x)))
+                throw new ArgumentException(@"Alguna de las Especialidades seleccionadas no pertenece a las Especialidades del Profesional.", "especialidades");
+
+            if (horarioHasta < horarioDesde)
+                throw new ArgumentOutOfRangeException("horarioHasta",
+                                                      @"El Horario Desde es mayor al Horario Hasta de la Agenda.");
+
             var agenda = new Agenda()
                              {
                                  Dia = dia,
