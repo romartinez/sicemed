@@ -1,9 +1,12 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using Castle.Windsor.Installer;
 using EfficientlyLazy.Crypto;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Providers.Cache;
+using Sicemed.Web.Infrastructure.Queries;
+using Sicemed.Web.Infrastructure.Queries.Paginas;
 using Sicemed.Web.Infrastructure.Services;
 
 namespace SICEMED.Web.Infrastructure.Windsor.Installers
@@ -25,7 +28,8 @@ namespace SICEMED.Web.Infrastructure.Windsor.Installers
                 //Providers
                 Component.For<ICacheProvider>().ImplementedBy<NullCacheProvider>().LifeStyle.Singleton,
                 //Menu Provider
-
+                //Queries
+                Component.For<IObtenerEspecialidadesConProfesionalesQuery>().ImplementedBy<ObtenerEspecialidadesConProfesionalesQuery>().LifeStyle.Singleton,
                 Component.For<IApplicationInstaller>().ImplementedBy<ApplicationInstaller>().LifeStyle.Singleton,
                 //Transients
                 Component.For<IMembershipService>().ImplementedBy<MembershipService>().LifeStyle.Transient

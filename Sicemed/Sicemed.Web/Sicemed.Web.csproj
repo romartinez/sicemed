@@ -234,6 +234,7 @@
     <Compile Include="Infrastructure\HttpModules\NHibernateSessionModule.cs" />
     <Compile Include="Infrastructure\Providers\Session\SessionFactoryProvider.cs" />
     <Compile Include="Infrastructure\Queries\IQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Paginas\ObtenerEspecialidadesConProfesionalesQuery.cs" />
     <Compile Include="Infrastructure\Queries\Paginas\ObtenerPaginasRaizQuery.cs" />
     <Compile Include="Infrastructure\Queries\Query.cs" />
     <Compile Include="Infrastructure\ResponseMessage.cs" />
