@@ -28,7 +28,7 @@ namespace Sicemed.Tests.Models.Agendas
 
             var session = SessionFactory.GetCurrentSession();
 
-            //session.Update(profesional);
+            session.Update(profesional);
 
             session.Flush();
             session.Evict(profesional);

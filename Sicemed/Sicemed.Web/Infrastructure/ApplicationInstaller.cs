@@ -119,14 +119,23 @@ namespace Sicemed.Web.Infrastructure
             new SchemaExport(config).Execute(false, true, false, session.Connection, null);
             //No permite Tx anidadas
             CrearProvincias(session);
+            session.Flush();
             CrearLocalidades(session);
+            session.Flush(); 
             CrearEspecialidades(session);
+            session.Flush();
             CrearConsultorios(session);
+            session.Flush();
             CrearFeriados(session);
+            session.Flush();
             CrearObrasSociales(session);
+            session.Flush();
             CrearPlanes(session);
+            session.Flush();
             CrearPaginas(session);
-            CrearPersonas();
+            session.Flush();
+            CrearPersonas(session);
+            session.Flush();
             //Lo guardo al parametro nuevo.
             using (var tx = session.BeginTransaction())
             {
@@ -136,6 +145,9 @@ namespace Sicemed.Web.Infrastructure
                 session.Save(param);
                 tx.Commit();
             }
+
+            Console.WriteLine(@"*************************************************");
+            Console.WriteLine(@"*************************************************");
         }
 
         #region Entity Creation Methods
@@ -272,11 +284,12 @@ namespace Sicemed.Web.Infrastructure
             session.Save(EspecialidadPediatra);
         }
 
-        private void CrearPersonas()
+        private void CrearPersonas(ISession session)
         {
             PersonaAdmin = new Persona {Nombre = "Administrador", Apellido = "Administrador"};
             PersonaAdmin.AgregarRol(Administrador.Create());
             MembershipService.CreateUser(PersonaAdmin, "admin@gmail.com", "sicemedAdmin");
+            session.Update(PersonaAdmin);
 
             PersonaAdminProfesionalWalter = new Persona
                                             {
@@ -295,6 +308,8 @@ namespace Sicemed.Web.Infrastructure
             PersonaAdminProfesionalWalter.AgregarRol(Profesional.Create("46546546"));
             MembershipService.CreateUser(PersonaAdminProfesionalWalter, "walter@gmail.com", "sicemedWalter");
 
+            session.Update(PersonaAdminProfesionalWalter);
+
             PersonaPacientePablo = new Persona
                                    {
                                        Nombre = "Pablo",
@@ -307,6 +322,7 @@ namespace Sicemed.Web.Infrastructure
                                    };
             PersonaPacientePablo.AgregarRol(Paciente.Create("9798798"));
             MembershipService.CreateUser(PersonaPacientePablo, "pablo@gmail.com", "sicemedPablo");
+            session.Update(PersonaPacientePablo);
 
             PersonaPacientePedro = new Persona
                                    {
@@ -320,6 +336,7 @@ namespace Sicemed.Web.Infrastructure
                                    };
             PersonaPacientePedro.AgregarRol(Paciente.Create("9798798"));
             MembershipService.CreateUser(PersonaPacientePedro, "pedro@gmail.com", "sicemedPedro");
+            session.Update(PersonaPacientePedro);
 
             PersonaSecretariaJuana = new Persona
                                      {
@@ -335,6 +352,7 @@ namespace Sicemed.Web.Infrastructure
                                      };
             PersonaSecretariaJuana.AgregarRol(Secretaria.Create(DateTime.Now));
             MembershipService.CreateUser(PersonaSecretariaJuana, "juana@gmail.com", "sicemedJuana");
+            session.Update(PersonaSecretariaJuana);
 
             PersonaProfesionalBernardoClinico = new Persona
                                          {
@@ -350,6 +368,8 @@ namespace Sicemed.Web.Infrastructure
             PersonaProfesionalBernardoClinico.AgregarRol(Profesional.Create("546546"));
             PersonaProfesionalBernardoClinico.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
             MembershipService.CreateUser(PersonaProfesionalBernardoClinico, "bernardo@gmail.com", "sicemedBernardo");
+            session.Update(PersonaProfesionalBernardoClinico);
+            session.Update(PersonaProfesionalBernardoClinico.As<Profesional>());
 
             PersonaProfesionalJoseClinicoYDermatologo = new Persona
                                      {
@@ -367,6 +387,7 @@ namespace Sicemed.Web.Infrastructure
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarEspecialidad(EspecialidadDermatologo);
             MembershipService.CreateUser(PersonaProfesionalJoseClinicoYDermatologo, "jose@gmail.com", "sicemedJose");
+            session.Update(PersonaProfesionalJoseClinicoYDermatologo);
         }
 
         #endregion

@@ -84,9 +84,11 @@
     <Compile Include="Infrastructure\Services\MembershipServiceTests.cs" />
     <Compile Include="InitializeNhibernate.cs" />
     <Compile Include="Models\Agendas\AgendaTests.cs" />
+    <Compile Include="Models\Especialidades\EspecialidadesTests.cs" />
     <Compile Include="Models\Feriados\FeriadoTests.cs" />
     <Compile Include="Models\Localidades\LocalidadesTests.cs" />
     <Compile Include="Models\Paginas\PaginasTests.cs" />
+    <Compile Include="Models\Personas\ProfesionalesAsignacionEspecialidadesTest.cs" />
     <Compile Include="Models\Provincias\ProvinciasTests.cs" />
     <Compile Include="Models\Personas\PersonasAsignacionRolesTest.cs" />
     <Compile Include="Models\Turnos\TurnosTests.cs" />
