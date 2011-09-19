@@ -1,4 +1,5 @@
-﻿using Sicemed.Web.Models;
+﻿using NHibernate.Mapping.ByCode;
+using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
 {
@@ -12,6 +13,13 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                 map.NotNullable(true);
                 map.Unique(true);
             });
+
+            Set(x => x.Profesionales, map =>
+                                          {
+                                              map.Access(Accessor.NoSetter);
+                                              map.Cascade(Cascade.All | Cascade.DeleteOrphans);
+                                              map.Inverse(false);
+                                          }, rel => rel.ManyToMany());
         }
     }
 }

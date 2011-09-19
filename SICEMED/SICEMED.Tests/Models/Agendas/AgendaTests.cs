@@ -13,8 +13,10 @@ namespace Sicemed.Tests.Models.Agendas
         [Test]
         public void PuedoAsignarUnaAgendaAUnProfesional()
         {
-            var profesional = Session.Get<Persona>(ApplicationInstaller.PersonaProfesionalBernardoClinico.Id).As<Profesional>();
-
+            var session = SessionFactory.GetCurrentSession();
+            var profesional = session.Get<Persona>(ApplicationInstaller.PersonaProfesionalBernardoClinico.Id).As<Profesional>();
+            var consultorio = session.Get<Consultorio>(ApplicationInstaller.ConsultorioA.Id);
+            var clinico = session.Get<Especialidad>(ApplicationInstaller.EspecialidadClinico.Id);
 
 
             profesional.AgregarAgenda(
@@ -22,13 +24,9 @@ namespace Sicemed.Tests.Models.Agendas
                 TimeSpan.FromMinutes(15),
                 new DateTime(2000, 1, 1, 10, 0, 0),
                 new DateTime(2000, 1, 1, 12, 0, 0),
-                ApplicationInstaller.ConsultorioA,
-                ApplicationInstaller.EspecialidadClinico
+                consultorio,
+                clinico
             );
-
-            var session = SessionFactory.GetCurrentSession();
-
-            session.Update(profesional);
 
             session.Flush();
             session.Evict(profesional);

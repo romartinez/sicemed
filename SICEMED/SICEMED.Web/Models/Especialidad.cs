@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Models
 {
@@ -12,5 +14,16 @@ namespace Sicemed.Web.Models
         public virtual string Descripcion { get; set; }
 
         #endregion
+
+        private ISet<Profesional> _profesionales;
+        public virtual ISet<Profesional> Profesionales
+        {
+            get { return _profesionales; }
+        }
+
+        public Especialidad()
+        {
+            _profesionales = new HashSet<Profesional>();
+        }
     }
 }
