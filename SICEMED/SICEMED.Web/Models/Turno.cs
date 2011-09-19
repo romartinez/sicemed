@@ -92,6 +92,9 @@ namespace Sicemed.Web.Models
             if (!profesional.Especialidades.Contains(especialidad)) 
                 throw new ArgumentException(@"El Profesional seleccionado para el turno no atiende la Especialidad seleccionada", "especialidad");
 
+            if (agenda != null && !profesional.Agendas.Contains(agenda))
+                throw new ArgumentException(@"El Profesional seleccionado para el turno no atiende en el momento elegido.", "agenda");
+
             return new Turno
                        {
                            FechaGeneracion = DateTime.Now,
@@ -131,6 +134,9 @@ namespace Sicemed.Web.Models
 
             if (!profesional.Especialidades.Contains(especialidad))
                 throw new ArgumentException(@"El Profesional seleccionado para el turno no atiende la Especialidad seleccionada", "especialidad");
+
+            if (agenda != null && !profesional.Agendas.Contains(agenda))
+                throw new ArgumentException(@"El Profesional seleccionado para el turno no atiende en el momento elegido.", "agenda");
 
             return new Turno
                        {
