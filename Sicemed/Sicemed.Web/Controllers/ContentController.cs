@@ -1,6 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using Microsoft.CSharp.RuntimeBinder;
+using RazorEngine;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Queries.Paginas;
 using Sicemed.Web.Models;
@@ -21,30 +25,26 @@ namespace Sicemed.Web.Controllers
 
             if (pagina == null) return View("NotFound");
 
-            if (pagina.Contenido.Contains("${ESPECIALIDADES}"))
+            var model = new
             {
-                if (Logger.IsInfoEnabled) Logger.InfoFormat("Encontrado el tag ${ESPECIALIDADES}, recuperando las especialidades.");
+                Especialidades = new Lazy<IEnumerable<Especialidad>>(() => ObtenerEspecialidadesConProfesionalesQuery.Execute())
+            };
 
-                var especialidades = ObtenerEspecialidadesConProfesionalesQuery.Execute();
-                var sb = new StringBuilder();
-                sb.Append("<ul>");
-                foreach(var especialidad in especialidades)
-                {
-                    sb.AppendFormat("<li>{0}<ul>",especialidad.Nombre);                    
-                    foreach(var profesional in especialidad.Profesionales)
-                    {
-                        sb.AppendFormat("<li>{0}, {1}</li>", profesional.Persona.Apellido, profesional.Persona.Nombre);
-                    }
-                    sb.Append("</ul></li>");
-                }
-                sb.Append("</ul>");
+            var paginaARenderizar = new Pagina { Nombre = pagina.Nombre };
 
-                var paginaOriginal = pagina;
-                pagina = new Pagina() { Nombre = paginaOriginal.Nombre };
-                pagina.Contenido = paginaOriginal.Contenido.Replace("${ESPECIALIDADES}", sb.ToString());
+            try
+            {
+                paginaARenderizar.Contenido = Razor.Parse(pagina.Contenido, model);
+            }
+            catch (RuntimeBinderException ex)
+            {
+                ViewBag.Nombre = paginaARenderizar.Nombre;
+                ViewBag.Template = pagina.Contenido;
+                ViewBag.Error = ex.ToString();
+                return View("TemplateError");
             }
 
-            return View(pagina);
+            return View(paginaARenderizar);
         }
     }
 }
