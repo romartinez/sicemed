@@ -7,7 +7,7 @@ namespace Sicemed.Web.Infrastructure.Queries.Paginas
 
     public class ObtenerEspecialidadesConProfesionalesQuery : Query<Especialidad>, IObtenerEspecialidadesConProfesionalesQuery
     {
-        public override IEnumerable<Especialidad> Execute()
+        public override IEnumerable<Especialidad> CoreExecute()
         {
             if (Logger.IsInfoEnabled) Logger.InfoFormat("Consultando las especialidades.");
 
