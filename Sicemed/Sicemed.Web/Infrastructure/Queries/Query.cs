@@ -20,7 +20,7 @@ namespace Sicemed.Web.Infrastructure.Queries
 
         public virtual IEnumerable<T> Execute()
         {
-            if (Logger.IsInfoEnabled) Logger.InfoFormat("Ejecutando query con parametros:\n {1}", JsonConvert.SerializeObject(this, Formatting.Indented));
+            if (Logger.IsInfoEnabled) Logger.InfoFormat("Ejecutando query con parametros:\n {0}", JsonConvert.SerializeObject(this, Formatting.Indented));
             var watcher = Stopwatch.StartNew();
             var result = CoreExecute();
             
