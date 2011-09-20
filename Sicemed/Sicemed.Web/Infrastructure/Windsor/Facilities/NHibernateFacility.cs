@@ -50,7 +50,6 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
                                                   db.ConnectionStringName = "ApplicationServices";
                                                   db.Timeout = 10;
                                                   db.LogFormattedSql = true;
-                                                  db.LogSqlInConsole = true;
                                                   db.HqlToSqlSubstitutions = "true 1, false 0, yes 'Y', no 'N'";
                                               });
 

@@ -28,8 +28,6 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                     map.Cascade(Cascade.All | Cascade.DeleteOrphans);
                     map.Access(Accessor.NoSetter);
                     map.Inverse(true);
-                    map.Lazy(CollectionLazy.NoLazy);
-                    map.Fetch(CollectionFetchMode.Join);
                 },
                 rel => rel.OneToMany());
         }

@@ -23,6 +23,8 @@ namespace Sicemed.Web.Controllers
 
             if (pagina.Contenido.Contains("${ESPECIALIDADES}"))
             {
+                if (Logger.IsInfoEnabled) Logger.InfoFormat("Encontrado el tag ${ESPECIALIDADES}, recuperando las especialidades.");
+
                 var especialidades = ObtenerEspecialidadesConProfesionalesQuery.Execute();
                 var sb = new StringBuilder();
                 sb.Append("<ul>");
@@ -37,7 +39,9 @@ namespace Sicemed.Web.Controllers
                 }
                 sb.Append("</ul>");
 
-                pagina.Contenido = pagina.Contenido.Replace("${ESPECIALIDADES}", sb.ToString());
+                var paginaOriginal = pagina;
+                pagina = new Pagina() { Nombre = paginaOriginal.Nombre };
+                pagina.Contenido = paginaOriginal.Contenido.Replace("${ESPECIALIDADES}", sb.ToString());
             }
 
             return View(pagina);

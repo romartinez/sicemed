@@ -9,6 +9,8 @@ namespace Sicemed.Web.Infrastructure.Queries.Paginas
     {
         public override IEnumerable<Especialidad> Execute()
         {
+            if (Logger.IsInfoEnabled) Logger.InfoFormat("Consultando las especialidades.");
+
             var session = SessionFactory.GetCurrentSession();
 
             return session.QueryOver<Especialidad>().Fetch(x=>x.Profesionales).Eager.List();
