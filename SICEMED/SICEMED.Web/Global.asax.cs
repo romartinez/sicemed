@@ -114,5 +114,10 @@ namespace SICEMED.Web
                 Response.Redirect(String.Format("/Error/{0}/?message={1}", action, exception.Message));
             }
         }
+
+        protected void Application_End()
+        {            
+            if(_container != null)  _container.Dispose();
+        }
     }
 }
