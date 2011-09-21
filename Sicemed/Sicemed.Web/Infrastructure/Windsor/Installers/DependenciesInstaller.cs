@@ -29,7 +29,8 @@ namespace SICEMED.Web.Infrastructure.Windsor.Installers
                 Component.For<ICacheProvider>().ImplementedBy<NullCacheProvider>().LifeStyle.Singleton,
                 //Menu Provider
                 //Queries
-                Component.For<IObtenerEspecialidadesConProfesionalesQuery>().ImplementedBy<ObtenerEspecialidadesConProfesionalesQuery>().LifeStyle.Singleton,
+                AllTypes.FromThisAssembly().BasedOn<IQuery>()
+                    .WithService.DefaultInterface().Configure(x=>x.LifeStyle.Transient),                
                 Component.For<IApplicationInstaller>().ImplementedBy<ApplicationInstaller>().LifeStyle.Singleton,
                 //Transients
                 Component.For<IMembershipService>().ImplementedBy<MembershipService>().LifeStyle.Transient
