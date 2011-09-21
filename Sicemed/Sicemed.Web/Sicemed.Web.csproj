@@ -166,6 +166,7 @@
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClinicasController.cs" />
     <Compile Include="Areas\Admin\Controllers\ConsultoriosController.cs" />
     <Compile Include="Areas\Admin\Controllers\EspecialidadesController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlanesController.cs" />
@@ -215,6 +216,7 @@
     <Compile Include="Infrastructure\Net4Collections.cs" />
     <Compile Include="Infrastructure\NHibernate\EnumerationType.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\AgendaMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\ClinicaMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Roles\AdministradorMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Roles\ProfesionalMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Roles\SecretariaMap.cs" />
@@ -259,6 +261,12 @@
     <Compile Include="Infrastructure\Windsor\Installers\NHibernateInstaller.cs" />
     <Compile Include="Infrastructure\Providers\Session\LazySessionContext.cs" />
     <Compile Include="Models\Agenda.cs" />
+    <Compile Include="Models\BI\CategoriaIndicador.cs" />
+    <Compile Include="Models\BI\Components\MedicionIndicador.cs" />
+    <Compile Include="Models\BI\Enumerations\TipoOperadorIndicador.cs" />
+    <Compile Include="Models\BI\Indicador.cs" />
+    <Compile Include="Models\BI\ObjetivoIndicador.cs" />
+    <Compile Include="Models\Clinica.cs" />
     <Compile Include="Models\Roles\Paciente.cs" />
     <Compile Include="Models\Enumerations\Documentos\TipoDocumento.cs" />
     <Compile Include="Models\Enumerations\Enumeration.cs" />
@@ -504,6 +512,7 @@
     <Content Include="Areas\Admin\Views\Personas\Secretaria.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Views\Clinicas\Index.cshtml" />
     <None Include="Models\ClassDiagram.cd" />
     <Content Include="Views\Content\TemplateError.cshtml" />
   </ItemGroup>

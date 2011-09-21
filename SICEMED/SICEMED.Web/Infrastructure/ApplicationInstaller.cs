@@ -98,7 +98,8 @@ namespace Sicemed.Web.Infrastructure
                     {
                         Initialize(config, importSession);
                     }
-                } catch (GenericADOException)
+                }
+                catch (GenericADOException)
                 {
                     Logger.WarnFormat("The DB isn't initialized, generating it.");
                     //Check if the DB is created
@@ -119,23 +120,15 @@ namespace Sicemed.Web.Infrastructure
             new SchemaExport(config).Execute(false, true, false, session.Connection, null);
             //No permite Tx anidadas
             CrearProvincias(session);
-            session.Flush();
             CrearLocalidades(session);
-            session.Flush(); 
             CrearEspecialidades(session);
-            session.Flush();
             CrearConsultorios(session);
-            session.Flush();
             CrearFeriados(session);
-            session.Flush();
             CrearObrasSociales(session);
-            session.Flush();
             CrearPlanes(session);
-            session.Flush();
             CrearPaginas(session);
-            session.Flush();
             CrearPersonas(session);
-            session.Flush();
+            CrearClinica(session);
             //Lo guardo al parametro nuevo.
             using (var tx = session.BeginTransaction())
             {
@@ -151,11 +144,43 @@ namespace Sicemed.Web.Infrastructure
         }
 
         #region Entity Creation Methods
+        private void CrearClinica(ISession session)
+        {
+            var clinica = new Clinica
+                              {
+                                  RazonSocial = "Centro Médico Integral Velez Sarsfield",
+                                  DuracionTurnoPorDefecto = TimeSpan.FromMinutes(30),
+                                  HorarioMatutinoDesde = new DateTime(2000, 1, 1, 8, 0, 0),
+                                  HorarioMatutinoHasta = new DateTime(2000, 1, 1, 12, 0, 0),
+                                  HorarioVespertinoDesde = new DateTime(2000, 1, 1, 15, 0, 0),
+                                  HorarioVespertinoHasta = new DateTime(2000, 1, 1, 19, 0, 0),
+                                  NumeroInasistenciasConsecutivasGeneranBloqueo = 5,
+                                  Documento = new Documento
+                                                  {
+                                                      Numero = 13432423412,
+                                                      TipoDocumento = TipoDocumento.Cuit
+                                                  },
+                                  Domicilio = new Domicilio
+                                                  {
+                                                      Direccion = "Av. Velez Sarsfield 453",
+                                                      Localidad = LocalidadRosario
+                                                  },
+                                  Email = "contacto@sicemed.com.ar"
+                              };
+            clinica
+                .AgregarTelefono(
+                        new Telefono {Numero = "4487610", Prefijo = "0341"}
+                ).AgregarTelefono(
+                        new Telefono{Numero="4487610",Prefijo="0341"}
+                );
+
+            session.Save(clinica);
+        }
 
         private void CrearPaginas(ISession session)
         {
-            PaginaHome = new Pagina {Nombre = "Home", Contenido = "Hola a todos bienvenidos a SICEMED"};
-            PaginaAboutUs = new Pagina {Nombre = "About Us", Contenido = "Somos una empresa en pleno crecimiento."};
+            PaginaHome = new Pagina { Nombre = "Home", Contenido = "Hola a todos bienvenidos a SICEMED" };
+            PaginaAboutUs = new Pagina { Nombre = "About Us", Contenido = "Somos una empresa en pleno crecimiento." };
 
             session.Save(PaginaAboutUs);
             session.Save(PaginaHome);
@@ -210,12 +235,12 @@ namespace Sicemed.Web.Infrastructure
 
         private void CrearPlanes(ISession session)
         {
-            PlanOsdeGold = new Plan {Nombre = "Gold", ObraSocial = ObraSocialOsde};
-            PlanOsdeSilver = new Plan {Nombre = "Silver", ObraSocial = ObraSocialOsde};
-            PlanOsdeNeo = new Plan {Nombre = "Neo", ObraSocial = ObraSocialOsde};
+            PlanOsdeGold = new Plan { Nombre = "Gold", ObraSocial = ObraSocialOsde };
+            PlanOsdeSilver = new Plan { Nombre = "Silver", ObraSocial = ObraSocialOsde };
+            PlanOsdeNeo = new Plan { Nombre = "Neo", ObraSocial = ObraSocialOsde };
 
-            PlanSwissNbsf = new Plan {Nombre = "Convenio Nuevo Banco De Santa Fe", ObraSocial = ObraSocialSwissMedical};
-            PlanSwissSb64 = new Plan {Nombre = "SB64", ObraSocial = ObraSocialSwissMedical};
+            PlanSwissNbsf = new Plan { Nombre = "Convenio Nuevo Banco De Santa Fe", ObraSocial = ObraSocialSwissMedical };
+            PlanSwissSb64 = new Plan { Nombre = "SB64", ObraSocial = ObraSocialSwissMedical };
 
             session.Save(PlanOsdeGold);
             session.Save(PlanOsdeSilver);
@@ -226,9 +251,8 @@ namespace Sicemed.Web.Infrastructure
 
         private void CrearFeriados(ISession session)
         {
-            FeriadoCarnaval = new Feriado {Nombre = "Carnaval", Fecha = new DateTime(2011, 03, 07)};
-            FeriadoDiaIndependencia = new Feriado
-                                      {Nombre = "Día De La Independencia", Fecha = new DateTime(2011, 07, 11)};
+            FeriadoCarnaval = new Feriado { Nombre = "Carnaval", Fecha = new DateTime(2011, 03, 07) };
+            FeriadoDiaIndependencia = new Feriado { Nombre = "Día De La Independencia", Fecha = new DateTime(2011, 07, 11) };
 
             session.Save(FeriadoCarnaval);
             session.Save(FeriadoDiaIndependencia);
@@ -236,9 +260,9 @@ namespace Sicemed.Web.Infrastructure
 
         private void CrearProvincias(ISession session)
         {
-            ProvinciaSantaFe = new Provincia {Nombre = "Santa Fe"};
-            ProvinciaBuenosAires = new Provincia {Nombre = "Buenos Aires"};
-            ProvinciaCordoba = new Provincia {Nombre = "Córdoba"};
+            ProvinciaSantaFe = new Provincia { Nombre = "Santa Fe" };
+            ProvinciaBuenosAires = new Provincia { Nombre = "Buenos Aires" };
+            ProvinciaCordoba = new Provincia { Nombre = "Córdoba" };
 
             session.Save(ProvinciaCordoba);
             session.Save(ProvinciaBuenosAires);
@@ -247,13 +271,12 @@ namespace Sicemed.Web.Infrastructure
 
         private void CrearLocalidades(ISession session)
         {
-            LocalidadCarlosPaz = new Localidad {Nombre = "Villa Carlos Paz", Provincia = ProvinciaCordoba};
-            LocalidadMarcosJuarez = new Localidad {Nombre = "Marcos Juarez", Provincia = ProvinciaCordoba};
-            LocalidadPergamino = new Localidad {Nombre = "Pergamino", Provincia = ProvinciaBuenosAires};
-            LocalidadSanNicolas = new Localidad
-                                  {Nombre = "San Nicolás De Los Arroyos", Provincia = ProvinciaBuenosAires};
-            LocalidadRosario = new Localidad {Nombre = "Rosario", Provincia = ProvinciaSantaFe};
-            LocalidadSantaFe = new Localidad {Nombre = "Santa Fe", Provincia = ProvinciaSantaFe};
+            LocalidadCarlosPaz = new Localidad { Nombre = "Villa Carlos Paz", Provincia = ProvinciaCordoba };
+            LocalidadMarcosJuarez = new Localidad { Nombre = "Marcos Juarez", Provincia = ProvinciaCordoba };
+            LocalidadPergamino = new Localidad { Nombre = "Pergamino", Provincia = ProvinciaBuenosAires };
+            LocalidadSanNicolas = new Localidad { Nombre = "San Nicolás De Los Arroyos", Provincia = ProvinciaBuenosAires };
+            LocalidadRosario = new Localidad { Nombre = "Rosario", Provincia = ProvinciaSantaFe };
+            LocalidadSantaFe = new Localidad { Nombre = "Santa Fe", Provincia = ProvinciaSantaFe };
 
 
             session.Save(LocalidadCarlosPaz);
@@ -266,8 +289,8 @@ namespace Sicemed.Web.Infrastructure
 
         private void CrearConsultorios(ISession session)
         {
-            ConsultorioA = new Consultorio {Nombre = "Consultorio A"};
-            ConsultorioB = new Consultorio {Nombre = "Consultorio B"};
+            ConsultorioA = new Consultorio { Nombre = "Consultorio A" };
+            ConsultorioB = new Consultorio { Nombre = "Consultorio B" };
 
             session.Save(ConsultorioA);
             session.Save(ConsultorioB);
@@ -275,9 +298,9 @@ namespace Sicemed.Web.Infrastructure
 
         private void CrearEspecialidades(ISession session)
         {
-            EspecialidadClinico = new Especialidad {Nombre = "Clínico"};
-            EspecialidadDermatologo = new Especialidad {Nombre = "Dermatólogo"};
-            EspecialidadPediatra = new Especialidad {Nombre = "Pediatra"};
+            EspecialidadClinico = new Especialidad { Nombre = "Clínico" };
+            EspecialidadDermatologo = new Especialidad { Nombre = "Dermatólogo" };
+            EspecialidadPediatra = new Especialidad { Nombre = "Pediatra" };
 
             session.Save(EspecialidadClinico);
             session.Save(EspecialidadDermatologo);
@@ -286,7 +309,7 @@ namespace Sicemed.Web.Infrastructure
 
         private void CrearPersonas(ISession session)
         {
-            PersonaAdmin = new Persona {Nombre = "Administrador", Apellido = "Administrador"};
+            PersonaAdmin = new Persona { Nombre = "Administrador", Apellido = "Administrador" };
             PersonaAdmin.AgregarRol(Administrador.Create());
             MembershipService.CreateUser(PersonaAdmin, "admin@gmail.com", "sicemedAdmin");
             session.Update(PersonaAdmin);
@@ -298,11 +321,10 @@ namespace Sicemed.Web.Infrastructure
                                                 SegundoNombre = "Gaston",
                                                 FechaNacimiento = new DateTime(1985, 03, 03),
                                                 Domicilio =
-                                                    new Domicilio
-                                                    {Direccion = "Mendoza 1123 7°A", Localidad = LocalidadRosario},
+                                                    new Domicilio { Direccion = "Mendoza 1123 7°A", Localidad = LocalidadRosario },
                                                 Documento =
-                                                    new Documento {Numero = 31364468, TipoDocumento = TipoDocumento.Dni},
-                                                Telefono = new Telefono {Prefijo = "0341", Numero = "153353273"}
+                                                    new Documento { Numero = 31364468, TipoDocumento = TipoDocumento.Dni },
+                                                Telefono = new Telefono { Prefijo = "0341", Numero = "153353273" }
                                             };
             PersonaAdminProfesionalWalter.AgregarRol(Administrador.Create());
             PersonaAdminProfesionalWalter.AgregarRol(Profesional.Create("46546546"));
@@ -316,9 +338,9 @@ namespace Sicemed.Web.Infrastructure
                                        Apellido = "Dominguez",
                                        FechaNacimiento = new DateTime(1987, 03, 07),
                                        Domicilio =
-                                           new Domicilio {Direccion = "San Luis 323", Localidad = LocalidadRosario},
-                                       Documento = new Documento {Numero = 1234568, TipoDocumento = TipoDocumento.Dni},
-                                       Telefono = new Telefono {Prefijo = "0341", Numero = "1534665"}
+                                           new Domicilio { Direccion = "San Luis 323", Localidad = LocalidadRosario },
+                                       Documento = new Documento { Numero = 1234568, TipoDocumento = TipoDocumento.Dni },
+                                       Telefono = new Telefono { Prefijo = "0341", Numero = "1534665" }
                                    };
             PersonaPacientePablo.AgregarRol(Paciente.Create("9798798"));
             MembershipService.CreateUser(PersonaPacientePablo, "pablo@gmail.com", "sicemedPablo");
@@ -330,9 +352,9 @@ namespace Sicemed.Web.Infrastructure
                                        Apellido = "Hernandez",
                                        FechaNacimiento = new DateTime(1975, 6, 15),
                                        Domicilio =
-                                           new Domicilio {Direccion = "Rioja 1344", Localidad = LocalidadRosario},
-                                       Documento = new Documento {Numero = 11234343, TipoDocumento = TipoDocumento.Dni},
-                                       Telefono = new Telefono {Prefijo = "0341", Numero = "156333456"}
+                                           new Domicilio { Direccion = "Rioja 1344", Localidad = LocalidadRosario },
+                                       Documento = new Documento { Numero = 11234343, TipoDocumento = TipoDocumento.Dni },
+                                       Telefono = new Telefono { Prefijo = "0341", Numero = "156333456" }
                                    };
             PersonaPacientePedro.AgregarRol(Paciente.Create("9798798"));
             MembershipService.CreateUser(PersonaPacientePedro, "pedro@gmail.com", "sicemedPedro");
@@ -344,11 +366,10 @@ namespace Sicemed.Web.Infrastructure
                                          Apellido = "Alvarez",
                                          FechaNacimiento = new DateTime(1990, 1, 27),
                                          Domicilio =
-                                             new Domicilio
-                                             {Direccion = "Ovideo Lagos 343", Localidad = LocalidadRosario},
+                                             new Domicilio { Direccion = "Ovideo Lagos 343", Localidad = LocalidadRosario },
                                          Documento =
-                                             new Documento {Numero = 10112123, TipoDocumento = TipoDocumento.Dni},
-                                         Telefono = new Telefono {Prefijo = "0341", Numero = "4481123"}
+                                             new Documento { Numero = 10112123, TipoDocumento = TipoDocumento.Dni },
+                                         Telefono = new Telefono { Prefijo = "0341", Numero = "4481123" }
                                      };
             PersonaSecretariaJuana.AgregarRol(Secretaria.Create(DateTime.Now));
             MembershipService.CreateUser(PersonaSecretariaJuana, "juana@gmail.com", "sicemedJuana");
@@ -360,10 +381,10 @@ namespace Sicemed.Web.Infrastructure
                                              Apellido = "Lattanzio",
                                              FechaNacimiento = new DateTime(1984, 6, 14),
                                              Domicilio =
-                                                 new Domicilio {Direccion = "Italia 1243", Localidad = LocalidadRosario},
+                                                 new Domicilio { Direccion = "Italia 1243", Localidad = LocalidadRosario },
                                              Documento =
-                                                 new Documento {Numero = 30123876, TipoDocumento = TipoDocumento.Dni},
-                                             Telefono = new Telefono {Prefijo = "0341", Numero = "4471010"}
+                                                 new Documento { Numero = 30123876, TipoDocumento = TipoDocumento.Dni },
+                                             Telefono = new Telefono { Prefijo = "0341", Numero = "4471010" }
                                          };
             PersonaProfesionalBernardoClinico.AgregarRol(Profesional.Create("546546"));
             PersonaProfesionalBernardoClinico.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
@@ -378,10 +399,10 @@ namespace Sicemed.Web.Infrastructure
                                          SegundoNombre = "Ignacio",
                                          FechaNacimiento = new DateTime(1985, 7, 23),
                                          Domicilio =
-                                             new Domicilio {Direccion = "Brown 123 7°a", Localidad = LocalidadRosario},
+                                             new Domicilio { Direccion = "Brown 123 7°a", Localidad = LocalidadRosario },
                                          Documento =
-                                             new Documento {Numero = 31789502, TipoDocumento = TipoDocumento.Dni},
-                                         Telefono = new Telefono {Prefijo = "0341", Numero = "1661234"}
+                                             new Documento { Numero = 31789502, TipoDocumento = TipoDocumento.Dni },
+                                         Telefono = new Telefono { Prefijo = "0341", Numero = "1661234" }
                                      };
             PersonaProfesionalJoseClinicoYDermatologo.AgregarRol(Profesional.Create("546465489"));
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
