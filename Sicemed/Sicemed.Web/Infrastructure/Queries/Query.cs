@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Castle.Core.Logging;
 using NHibernate;
 using Newtonsoft.Json;
+using Sicemed.Web.Infrastructure.Helpers;
 
 namespace Sicemed.Web.Infrastructure.Queries
 {
@@ -20,7 +21,7 @@ namespace Sicemed.Web.Infrastructure.Queries
 
         public virtual IEnumerable<T> Execute()
         {
-            if (Logger.IsInfoEnabled) Logger.InfoFormat("Ejecutando query con parametros:\n {0}", JsonConvert.SerializeObject(this, Formatting.Indented));
+            if (Logger.IsInfoEnabled) Logger.InfoFormat("Ejecutando query con parametros:\n {0}", Json.SerializeObject(this));
             var watcher = Stopwatch.StartNew();
             var result = CoreExecute();
             
@@ -29,7 +30,7 @@ namespace Sicemed.Web.Infrastructure.Queries
             if (Logger.IsDebugEnabled || (watcher.ElapsedMilliseconds >= QUERY_THREADSHOLD && Logger.IsWarnEnabled))
                 Logger.WarnFormat("El query demoró: {0}ms", watcher.ElapsedMilliseconds);
 
-            if (Logger.IsInfoEnabled) Logger.InfoFormat("Resultado del query:\n {0}", JsonConvert.SerializeObject(result, Formatting.Indented));
+            if (Logger.IsInfoEnabled) Logger.InfoFormat("Resultado del query:\n {0}", Json.SerializeObject(result));
             return result;
         }
 

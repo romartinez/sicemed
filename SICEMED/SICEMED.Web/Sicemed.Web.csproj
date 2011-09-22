@@ -202,6 +202,7 @@
     <Compile Include="Infrastructure\Exceptions\SicemedException.cs" />
     <Compile Include="Infrastructure\Exceptions\ToClientException.cs" />
     <Compile Include="Infrastructure\Exceptions\ValidationErrorException.cs" />
+    <Compile Include="Infrastructure\Helpers\Json.cs" />
     <Compile Include="Infrastructure\Helpers\EnumReaderExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\HexEncoding.cs" />
     <Compile Include="Infrastructure\Helpers\HtmlExtensions.cs" />
@@ -215,6 +216,7 @@
     <Compile Include="Infrastructure\HttpModules\LoggingThreadContextSetupModule.cs" />
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
     <Compile Include="Infrastructure\Net4Collections.cs" />
+    <Compile Include="Infrastructure\NHibernate\NHibernateContractResolver.cs" />
     <Compile Include="Infrastructure\NHibernate\EnumerationType.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\AgendaMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\ClinicaMap.cs" />
