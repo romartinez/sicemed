@@ -12,7 +12,7 @@ namespace SICEMED.Web.Infrastructure.Windsor.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.AddFacility<LoggingFacility>(
-                f => f.LogUsing(LoggerImplementation.Log4net).WithConfig("log4net.config"));
+                f => f.LogUsing(LoggerImplementation.Log4net).WithConfig("log4net.config"));            
         }
 
         #endregion

@@ -5,6 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using Microsoft.CSharp.RuntimeBinder;
 using RazorEngine;
+using RazorEngine.Templating;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Queries.Paginas;
 using Sicemed.Web.Models;
@@ -13,7 +14,8 @@ namespace Sicemed.Web.Controllers
 {
     public class ContentController : NHibernateController
     {
-        public IObtenerEspecialidadesConProfesionalesQuery ObtenerEspecialidadesConProfesionalesQuery { get; set; }
+        public virtual IObtenerEspecialidadesConProfesionalesQuery ObtenerEspecialidadesConProfesionalesQuery { get; set; }
+        public virtual IObtenerClinicaActivaQuery ObtenerClinicaActivaQuery { get; set; }
 
         public virtual ActionResult Index(long id = 0)
         {
@@ -27,7 +29,8 @@ namespace Sicemed.Web.Controllers
 
             var model = new
             {
-                Especialidades = new Lazy<IEnumerable<Especialidad>>(() => ObtenerEspecialidadesConProfesionalesQuery.Execute())
+                Especialidades = new Lazy<IEnumerable<Especialidad>>(() => ObtenerEspecialidadesConProfesionalesQuery.Execute()),
+                Clinica = new Lazy<Clinica>(()=> ObtenerClinicaActivaQuery.Execute().FirstOrDefault())
             };
 
             var paginaARenderizar = new Pagina { Nombre = pagina.Nombre };
@@ -38,13 +41,22 @@ namespace Sicemed.Web.Controllers
             }
             catch (RuntimeBinderException ex)
             {
-                ViewBag.Nombre = paginaARenderizar.Nombre;
-                ViewBag.Template = pagina.Contenido;
-                ViewBag.Error = ex.ToString();
-                return View("TemplateError");
+                return ManageException(pagina, ex);
+            }
+            catch (TemplateCompilationException ex2)
+            {
+                return ManageException(pagina, ex2);
             }
 
             return View(paginaARenderizar);
+        }
+
+        private ActionResult ManageException(Pagina pagina, Exception ex)
+        {
+            ViewBag.Nombre = pagina.Nombre;
+            ViewBag.Template = pagina.Contenido;
+            ViewBag.Error = ex.ToString();
+            return View("TemplateError");
         }
     }
 }

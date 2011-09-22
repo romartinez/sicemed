@@ -2,20 +2,20 @@
 using System.Web.Mvc;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
+using Sicemed.Web.Infrastructure.Queries.Paginas;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
 {
     [AuthorizeIt(typeof(Administrador))]
-    public class ClinicasController : NHibernateController
+    public class ClinicasController : BaseController
     {
+        public virtual IObtenerClinicaActivaQuery ObtenerClinicaActivaQuery { get; set; }
+
         public virtual ActionResult Index()
         {
-            //Obtengo la última clínica
-            var session = SessionFactory.GetCurrentSession();
-
-            var clinica = session.QueryOver<Clinica>().List().LastOrDefault();
+            var clinica = ObtenerClinicaActivaQuery.Execute().FirstOrDefault();
 
             return View(clinica);
         }
@@ -26,9 +26,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         [ValidateModelStateAttribute]
         public virtual ActionResult Guardar(Clinica model)
         {
-            var session = SessionFactory.GetCurrentSession();
-
-            var modelFromDb = session.QueryOver<Clinica>().Where(x => x.Id == model.Id).SingleOrDefault();
+            var modelFromDb = ObtenerClinicaActivaQuery.Execute().FirstOrDefault();
 
             UpdateModel(modelFromDb);
 
