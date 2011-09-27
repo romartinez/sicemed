@@ -179,6 +179,7 @@
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\ObtenerTurnoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,6 +217,7 @@
     <Compile Include="Infrastructure\HttpModules\LoggingThreadContextSetupModule.cs" />
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
     <Compile Include="Infrastructure\Net4Collections.cs" />
+    <Compile Include="Infrastructure\NHibernate\Events\SaveOrUpdateEventListener.cs" />
     <Compile Include="Infrastructure\NHibernate\NHibernateContractResolver.cs" />
     <Compile Include="Infrastructure\NHibernate\EnumerationType.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\AgendaMap.cs" />
@@ -249,6 +251,8 @@
     <Compile Include="Infrastructure\HttpModules\NHibernateSessionModule.cs" />
     <Compile Include="Infrastructure\Providers\Session\SessionFactoryProvider.cs" />
     <Compile Include="Infrastructure\Queries\IQuery.cs" />
+    <Compile Include="Infrastructure\Queries\ObtenerTurno\ObtenerEspecialidadesQuery.cs" />
+    <Compile Include="Infrastructure\Queries\ObtenerTurno\ObtenerProfesionalPorEspecialidadONombreQuery.cs" />
     <Compile Include="Infrastructure\Queries\Paginas\ObtenerClinicaActivaQuery.cs" />
     <Compile Include="Infrastructure\Queries\Paginas\ObtenerEspecialidadesConProfesionalesQuery.cs" />
     <Compile Include="Infrastructure\Queries\Paginas\ObtenerPaginasRaizQuery.cs" />
@@ -284,6 +288,7 @@
     <Compile Include="Models\ViewModels\Cuenta\CambiarPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\Cuenta\InciarSesionViewModel.cs" />
     <Compile Include="Models\ViewModels\Cuenta\RegistroPersonaViewModel.cs" />
+    <Compile Include="Models\ViewModels\ObtenerTurno\BusquedaProfesionalViewModel.cs" />
     <Compile Include="Models\ViewModels\PaginableResponse.cs" />
     <Compile Include="Models\Components\ComponentBase.cs" />
     <Compile Include="Models\Enumerations\Documentos\Cuit.cs" />
@@ -519,6 +524,7 @@
     <Content Include="Areas\Admin\Views\Clinicas\Index.cshtml" />
     <None Include="Models\ClassDiagram.cd" />
     <Content Include="Views\Content\TemplateError.cshtml" />
+    <Content Include="Views\ObtenerTurno\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -64,5 +64,17 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
             return base.EsValido(modelo);
         }
+
+        [ValidateInput(false)]
+        public override JsonResult Nuevo(string oper, Pagina modelo, int paginaId = 0)
+        {
+            return base.Nuevo(oper, modelo, paginaId);
+        }
+
+        [ValidateInput(false)]
+        public override ActionResult Editar(long id, string oper, Pagina modelo)
+        {
+            return base.Editar(id, oper, modelo);
+        }
     }
 }

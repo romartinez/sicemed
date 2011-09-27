@@ -1,0 +1,54 @@
+﻿@model BusquedaProfesionalViewModel
+@using Sicemed.Web.Models
+@using Sicemed.Web.Models.ViewModels.ObtenerTurno
+@{
+    ViewBag.Title = "Obtener Turno";
+}
+<h2>
+    Obtener Turno</h2>
+<article>
+    <form action="@Url.Action("BuscarProfesional")" method="post">
+        @Html.AntiForgeryToken()
+        <div>
+            <label for="EspecialidadId">
+                Por Especialidad:
+            </label>
+            <select id="EspecialidadId" name="EspecialidadId">
+                <option @(Model.EspecialidadId == default(long) ? "selected='selected'" : string.Empty) value="@(default(long))">-- Seleccionar --</option>
+                @foreach (Especialidad especialidad in Model.Especialidades)
+                {
+                    <option @(Model.EspecialidadId == especialidad.Id ? "selected='selected'" : string.Empty) value="@especialidad.Id">@especialidad.Nombre</option>
+                }
+            </select>
+        </div>
+        <div>
+            <label for="EspecialidadId">
+                Por Especialidad:
+            </label>
+            <input type="text" id="Profesional" name="Profesional" value="@Model.Profesional" />
+        </div>
+        <div>
+            <input type="submit" value="Buscar" />
+        </div>
+    </form>
+
+    @if (Model.ProfesionalesEncontrados != null)
+    {
+    <div>
+    @if (Model.ProfesionalesEncontrados.Any())
+    {
+        foreach (var profesional in Model.ProfesionalesEncontrados)
+        {
+        <div>
+            @profesional.Persona.Apellido,@profesional.Persona.Nombre @profesional.Persona.SegundoNombre
+            <span>Matricula: @profesional.Matricula</span>
+        </div>                     
+        }
+    }
+    else
+    {
+        <div class="ui-state-error">No se han encontrado profesionales con los par&aacute;metros indicados. Por favor vuelva a formular su b&uacute;squeda.</div>
+    }
+    </div>        
+    }
+</article>

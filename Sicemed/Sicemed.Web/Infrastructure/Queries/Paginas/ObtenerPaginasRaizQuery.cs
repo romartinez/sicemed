@@ -3,9 +3,9 @@ using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Infrastructure.Queries.Paginas
 {
-    public interface IObtenerPaginasRaizQuery : IQuery<Pagina> {}
+    public interface IObtenerPaginasRaizQuery : IQuery<IEnumerable<Pagina>> { }
 
-    public class ObtenerPaginasRaizQuery : Query<Pagina>, IObtenerPaginasRaizQuery
+    public class ObtenerPaginasRaizQuery : Query<IEnumerable<Pagina>>, IObtenerPaginasRaizQuery
     {
         #region Implementation of IQuery<Pagina>
 

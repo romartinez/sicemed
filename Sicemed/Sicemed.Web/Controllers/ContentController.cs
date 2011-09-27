@@ -30,7 +30,7 @@ namespace Sicemed.Web.Controllers
             var model = new
             {
                 Especialidades = new Lazy<IEnumerable<Especialidad>>(() => ObtenerEspecialidadesConProfesionalesQuery.Execute()),
-                Clinica = new Lazy<Clinica>(()=> ObtenerClinicaActivaQuery.Execute().FirstOrDefault())
+                Clinica = new Lazy<Clinica>(()=> ObtenerClinicaActivaQuery.Execute())
             };
 
             var paginaARenderizar = new Pagina { Nombre = pagina.Nombre };

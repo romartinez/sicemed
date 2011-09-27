@@ -17,9 +17,9 @@ namespace Sicemed.Web.Infrastructure.Queries
 
         #region Implementation of IQuery<T>
 
-        public abstract IEnumerable<T> CoreExecute();
+        public abstract T CoreExecute();
 
-        public virtual IEnumerable<T> Execute()
+        public virtual T Execute()
         {
             if (Logger.IsInfoEnabled) Logger.InfoFormat("Ejecutando query con parametros:\n {0}", Json.SerializeObject(this));
             var watcher = Stopwatch.StartNew();

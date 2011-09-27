@@ -7,12 +7,9 @@ namespace Sicemed.Web.Infrastructure.Queries.Paginas
 
     public class ObtenerClinicaActivaQuery : Query<Clinica>, IObtenerClinicaActivaQuery
     {
-        public override IEnumerable<Clinica> CoreExecute()
+        public override Clinica CoreExecute()
         {
-            return new[]
-                       {
-                           SessionFactory.GetCurrentSession().QueryOver<Clinica>().OrderBy(x => x.Id).Desc.SingleOrDefault()
-                       };
+            return SessionFactory.GetCurrentSession().QueryOver<Clinica>().OrderBy(x => x.Id).Desc.SingleOrDefault();
         }
     }
 }

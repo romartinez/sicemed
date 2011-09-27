@@ -10,10 +10,12 @@ using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
 using NHibernate.Dialect;
 using NHibernate.Driver;
+using NHibernate.Impl;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Tool.hbm2ddl;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.HttpModules;
+using Sicemed.Web.Infrastructure.NHibernate.Events;
 using Sicemed.Web.Infrastructure.Providers.Session;
 using Sicemed.Web.Models;
 
@@ -24,7 +26,14 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
         protected override void Init()
         {
             Kernel.Register(Component.For<ISessionFactory>()
-                                .UsingFactoryMethod(k => BuildDatabaseConfiguration().BuildSessionFactory()));
+                .UsingFactoryMethod(k =>
+                {
+                    var sessionFactory = BuildDatabaseConfiguration().BuildSessionFactory();
+                    ((SessionFactoryImpl)sessionFactory).EventListeners.
+                        SaveOrUpdateEventListeners = new[] { new SaveOrUpdateEventListener() };
+
+                    return sessionFactory;
+                }));
 
             Kernel.Register(Component.For<NHibernateSessionModule>());
 
@@ -60,7 +69,7 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
             SchemaMetadataUpdater.QuoteTableAndColumns(configuration);
 
             configuration.Properties[Environment.CurrentSessionContextClass]
-                = typeof (LazySessionContext).AssemblyQualifiedName;
+                = typeof(LazySessionContext).AssemblyQualifiedName;
 
 
             return configuration;
@@ -70,7 +79,7 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
         {
             var mapper = new ModelMapper();
 
-            mapper.AddMappings(typeof (Entity).Assembly.GetTypes());
+            mapper.AddMappings(typeof(Entity).Assembly.GetTypes());
 
             mapper.BeforeMapProperty += (mi, propertyPath, map) =>
                                         {
@@ -95,7 +104,7 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
             //    map.BatchSize(10);
             //};
 
-            return mapper.CompileMappingForEach(typeof (Entity).Assembly.GetTypes());
+            return mapper.CompileMappingForEach(typeof(Entity).Assembly.GetTypes());
         }
     }
 }

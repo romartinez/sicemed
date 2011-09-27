@@ -9,6 +9,8 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
     {
         private readonly Type _rolType;
 
+        public AuthorizeItAttribute(){}
+
         public AuthorizeItAttribute(Type rolType)
         {
             if (rolType == null) throw new ArgumentNullException("rolType");
@@ -33,10 +35,13 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
 
             if (!base.AuthorizeCore(filterContext.HttpContext)) return;
 
-            //Authorize
-            var currentUser = MembershipService.GetCurrentUser();
+            if(_rolType != null)
+            {
+                //Authorize
+                var currentUser = MembershipService.GetCurrentUser();
 
-            SecurityService.Validate(currentUser, filterContext.ActionDescriptor);
+                SecurityService.Validate(currentUser, filterContext.ActionDescriptor);                
+            }
         }
     }
 }

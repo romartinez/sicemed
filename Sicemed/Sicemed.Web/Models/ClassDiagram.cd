@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Sicemed.Web.Models.Consultorio">
-    <Position X="17.25" Y="12" Width="1.5" />
+    <Position X="14.25" Y="12.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAgAABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Consultorio.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Sicemed.Web.Models.Especialidad">
-    <Position X="12.5" Y="11.5" Width="1.5" />
+    <Position X="9.5" Y="12.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAgAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAgAABACAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Especialidad.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -84,21 +84,28 @@
   </Class>
   <Class Name="Sicemed.Web.Models.Turno">
     <Position X="5.25" Y="12.5" Width="1.5" />
-    <AssociationLine Name="Secretaria" Type="Sicemed.Web.Models.Roles.Secretaria" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="Profesional" Type="Sicemed.Web.Models.Roles.Profesional" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="6.75" Y="12.58" />
-        <Point X="8" Y="12.58" />
-        <Point X="8" Y="10.562" />
+        <Point X="6.75" Y="14.688" />
+        <Point X="12.75" Y="14.688" />
+        <Point X="12.75" Y="11.437" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Agenda" Type="Sicemed.Web.Models.Agenda" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="15.812" />
+        <Point X="16.125" Y="15.812" />
+        <Point X="16.125" Y="10.562" />
+        <Point X="15.75" Y="10.562" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAEAAAACADAAAIEAAAABAAAAAABAAEgJAAAAEAAAAAA=</HashCode>
+      <HashCode>AAEIAAAiADAAAAEAAAABAAAAAABAAEiJAAQAEAAAACE=</HashCode>
       <FileName>Models\Turno.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Paciente" />
       <Property Name="Profesional" />
-      <Property Name="Secretaria" />
       <Property Name="Especialidad" />
       <Property Name="Consultorio" />
       <Property Name="Agenda" />
@@ -145,7 +152,7 @@
   <Class Name="Sicemed.Web.Models.Roles.Profesional">
     <Position X="11.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAEAAAAAAAAAAAAAACAAAAAEAAIAAAAgAAAAA=</HashCode>
+      <HashCode>AAIAEAAAEAAAAAAAAAAAAAACAAIAAEAAIAAAAgAAAAA=</HashCode>
       <FileName>Models\Roles\Profesional.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -180,7 +187,7 @@
   <Class Name="Sicemed.Web.Models.Components.Domicilio">
     <Position X="9.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <HashCode>AAAAAAAAAEAAAAAAACAAAAAAAAAAAAAAAAAAAAAAEgA=</HashCode>
       <FileName>Models\Components\Domicilio.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -197,7 +204,7 @@
   <Class Name="Sicemed.Web.Models.Agenda">
     <Position X="14.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAgAAAAAAEAAAAAAIABAAAAARAAAAA=</HashCode>
+      <HashCode>AAAAAAAAACAAAAEgAAAAAAEAAAIAAIABAAAAARAAAAA=</HashCode>
       <FileName>Models\Agenda.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

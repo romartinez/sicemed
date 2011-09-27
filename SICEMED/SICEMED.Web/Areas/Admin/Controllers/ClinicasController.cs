@@ -15,7 +15,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
         public virtual ActionResult Index()
         {
-            var clinica = ObtenerClinicaActivaQuery.Execute().FirstOrDefault();
+            var clinica = ObtenerClinicaActivaQuery.Execute();
 
             return View(clinica);
         }
@@ -26,7 +26,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         [ValidateModelStateAttribute]
         public virtual ActionResult Guardar(Clinica model)
         {
-            var modelFromDb = ObtenerClinicaActivaQuery.Execute().FirstOrDefault();
+            var modelFromDb = ObtenerClinicaActivaQuery.Execute();
 
             UpdateModel(modelFromDb);
 

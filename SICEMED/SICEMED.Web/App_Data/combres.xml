@@ -24,7 +24,7 @@
       <param name="LineBreakPosition" type="int" value="-1" />
     </minifier>
   </jsMinifiers>
-  <resourceSets url="~/combres.axd" defaultDuration="30" defaultVersion="auto" defaultDebugEnabled="true"
+  <resourceSets url="~/combres.axd" defaultDuration="30" defaultVersion="auto" defaultDebugEnabled="false"
                 defaultIgnorePipelineWhenDebug="true" localChangeMonitorInterval="30" remoteChangeMonitorInterval="60"
                 defaultCssMinifierRef="yui" defaultJSMinifierRef="yui" defaultCompressionEnabled="true">
     <resourceSet name="siteCss" type="css">

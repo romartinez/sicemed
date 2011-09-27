@@ -3,9 +3,9 @@ using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Infrastructure.Queries.Paginas
 {
-    public interface IObtenerEspecialidadesConProfesionalesQuery : IQuery<Especialidad> { }
+    public interface IObtenerEspecialidadesConProfesionalesQuery : IQuery<IEnumerable<Especialidad>> { }
 
-    public class ObtenerEspecialidadesConProfesionalesQuery : Query<Especialidad>, IObtenerEspecialidadesConProfesionalesQuery
+    public class ObtenerEspecialidadesConProfesionalesQuery : Query<IEnumerable<Especialidad>>, IObtenerEspecialidadesConProfesionalesQuery
     {
         public override IEnumerable<Especialidad> CoreExecute()
         {

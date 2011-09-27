@@ -6,6 +6,6 @@ namespace Sicemed.Web.Infrastructure.Queries
     
     public interface IQuery<T> : IQuery
     {
-        IEnumerable<T> Execute();
+        T Execute();
     }
 }
