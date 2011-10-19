@@ -3,10 +3,30 @@
 	{
 		"selected_items":
 		[
+			[
+				"for",
+				"for: for (…) {…} (Improved Native For-Loop)"
+			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "Sicemed.Web/Views/ObtenerTurno/Index.cshtml",
+			"settings":
+			{
+				"buffer_size": 1568,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Sicemed.Web/Scripts/ObtenerTurno/index.js",
+			"settings":
+			{
+				"buffer_size": 1800,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "Packages/User/aspnet.sublime-build",
 	"command_palette":
@@ -32,6 +52,28 @@
 	},
 	"file_history":
 	[
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Scripts/app.ajax.js",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Content/mocks/ObtenerTurno/ObtenerEspecialidades.js",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Content/mocks/ObtenerTurno/BuscarProfesional.js",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/App_Data/combres.xml",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Views/ObtenerTurno/mocks/BuscarProfesional.js",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Views/ObtenerTurno/mocks/ObtenerEspecialidades.js",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Views/ObtenerTurno/mocks/BuscarProfesional.json",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/Default/Base File.sublime-settings",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/JavaScript.sublime-settings",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/Default/Global.sublime-settings",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/if.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/module.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/Prototype-(proto).sublime-snippet",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Scripts/ObtenerTurno/index.js",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/for-()-{}-(faster).sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/JSON.tmLanguage",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/JSON.tmLanguage.cache",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Views/ObtenerTurno/Index.cshtml",
+		"/C/Projects/wpoch.com.ar/config/config.yml",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Controllers/ErrorController.cs",
 		"/C/Projects/SublimeLogger/SublimeLogger/README",
 		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Controllers/CuentaController.cs",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/aspnet.sublime-build",
@@ -40,7 +82,6 @@
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/Global.asax.cs",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/Default (Linux).sublime-keymap",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
-		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/Global.sublime-settings",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/XML.sublime-settings",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/Base File.sublime-settings",
@@ -52,22 +93,16 @@
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/XML/comment.sublime-snippet",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/function.sublime-snippet",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/function-(fun).sublime-snippet",
-		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/for-()-{}-(faster).sublime-snippet",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/for-()-{}.sublime-snippet",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/setTimeout-function.sublime-snippet",
-		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/Prototype-(proto).sublime-snippet",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/Object-Value-JS.sublime-snippet",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/Object-Method.sublime-snippet",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/Object-key-key-value.sublime-snippet",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/if-___-else.sublime-snippet",
-		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/if.sublime-snippet",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/Get-Elements.sublime-snippet",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/HTML/HTML.sublime-completions",
 		"/D/Documents and Settings/Administrator/Desktop/test.html",
-		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
-		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/Default/Global.sublime-settings",
 		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/HTML.sublime-settings",
-		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/Default/Base File.sublime-settings",
 		"/D/Program Files/Sublime Text 2/Pristine Packages/C#.sublime-package",
 		"/C/Console2/console2.reg",
 		"/D/node/apps/pdfkit/test.coffee",
@@ -99,6 +134,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"debug",
+			"tab",
+			"ctrl+d",
+			"<div></div>",
 			"sublime",
 			"logger",
 			"CuentaController.cs",
@@ -130,8 +169,70 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "Sicemed.Web/Views/ObtenerTurno/Index.cshtml",
+					"settings":
+					{
+						"buffer_size": 1568,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1252,
+								1252
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4.0,
+							"translate_tabs_to_spaces": true,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 432.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "Sicemed.Web/Scripts/ObtenerTurno/index.js",
+					"settings":
+					{
+						"buffer_size": 1800,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1038,
+								1038
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 432.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -141,7 +242,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 29.0
 	},
 	"layout":
 	{
@@ -152,6 +253,12 @@
 				0,
 				1,
 				1
+			],
+			[
+				0,
+				1,
+				1,
+				2
 			]
 		],
 		"cols":
@@ -162,14 +269,11 @@
 		"rows":
 		[
 			0.0,
+			0.5,
 			1.0
 		]
 	},
 	"menu_visible": true,
-	"output.exec":
-	{
-		"height": 335.0
-	},
 	"replace":
 	{
 		"height": 0.0
@@ -180,6 +284,42 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"buscarpro",
+				"Sicemed.Web/Content/mocks/ObtenerTurno/BuscarProfesional.js"
+			],
+			[
+				"app.a",
+				"Sicemed.Web/Scripts/app.ajax.js"
+			],
+			[
+				"com",
+				"Sicemed.Web/App_Data/combres.xml"
+			],
+			[
+				"obteneres",
+				"Sicemed.Web/Content/mocks/ObtenerTurno/ObtenerEspecialidades.js"
+			],
+			[
+				"buscar",
+				"Sicemed.Web/Views/ObtenerTurno/mocks/BuscarProfesional.js"
+			],
+			[
+				"especia",
+				"Sicemed.Web/Views/ObtenerTurno/mocks/ObtenerEspecialidades.js"
+			],
+			[
+				"index.js",
+				"Sicemed.Web/Scripts/ObtenerTurno/index.js"
+			],
+			[
+				"obtenerturno",
+				"Sicemed.Web/Views/ObtenerTurno/Index.cshtml"
+			],
+			[
+				"obtener",
+				"Sicemed.Web/Controllers/ObtenerTurnoController.cs"
+			]
 		],
 		"width": 0.0
 	},

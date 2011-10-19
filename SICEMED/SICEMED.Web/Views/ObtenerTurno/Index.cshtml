@@ -1,54 +1,50 @@
 ﻿@model BusquedaProfesionalViewModel
-@using Sicemed.Web.Models
 @using Sicemed.Web.Models.ViewModels.ObtenerTurno
 @{
     ViewBag.Title = "Obtener Turno";
 }
 <h2>
-    Obtener Turno</h2>
-<article>
-    <form action="@Url.Action("BuscarProfesional")" method="post">
-        @Html.AntiForgeryToken()
-        <div>
-            <label for="EspecialidadId">
-                Por Especialidad:
-            </label>
-            <select id="EspecialidadId" name="EspecialidadId">
-                <option @(Model.EspecialidadId == default(long) ? "selected='selected'" : string.Empty) value="@(default(long))">-- Seleccionar --</option>
-                @foreach (Especialidad especialidad in Model.Especialidades)
-                {
-                    <option @(Model.EspecialidadId == especialidad.Id ? "selected='selected'" : string.Empty) value="@especialidad.Id">@especialidad.Nombre</option>
-                }
-            </select>
-        </div>
-        <div>
-            <label for="EspecialidadId">
-                Por Especialidad:
-            </label>
-            <input type="text" id="Profesional" name="Profesional" value="@Model.Profesional" />
-        </div>
-        <div>
-            <input type="submit" value="Buscar" />
-        </div>
-    </form>
+    Obtener Turno
+</h2>
+<article data-bind="template: { name: 'currentTmpl', data: currentStep }">
 
-    @if (Model.ProfesionalesEncontrados != null)
-    {
-    <div>
-    @if (Model.ProfesionalesEncontrados.Any())
-    {
-        foreach (var profesional in Model.ProfesionalesEncontrados)
-        {
-        <div>
-            @profesional.Persona.Apellido,@profesional.Persona.Nombre @profesional.Persona.SegundoNombre
-            <span>Matricula: @profesional.Matricula</span>
-        </div>                     
-        }
-    }
-    else
-    {
-        <div class="ui-state-error">No se han encontrado profesionales con los par&aacute;metros indicados. Por favor vuelva a formular su b&uacute;squeda.</div>
-    }
-    </div>        
-    }
 </article>
+
+<script id="currentTmpl" type="text/html">
+    <h2 data-bind="text: name"></h2>
+    <div data-bind="template: { name: getTemplate(), data: model }"></div> 
+</script>
+
+<div id="selectProfesionales">
+    <script id="selectProfesional" type="text/html">
+        <div>
+            <label>
+                Por Especialidad:
+            </label>
+            <select data-bind="options: especialidades, optionsText: 'nombre', value: especialidadSeleccionada">
+            </select>            
+        </div>
+        <div>
+            <label>
+                Por Profesional:
+            </label>
+            <input type="text" data-bind="value: profesionalABuscar" />
+        </div>
+        <div>
+            <button data-bind="click: buscarProfesionales">Buscar</button>
+        </div>
+        <div data-bind='template: { name: "profesionalEncontrado", 
+                            foreach: profesionalesEncontrados }'> </div>
+    </script>
+
+    <script id="profesionalEncontrado" type="text/html">
+        <div>
+            <span data-bind="text: nombre"></span>
+        </div>
+    </script>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Testing/jquery.mockjax.js")"></script>   
+    <script type="text/javascript" src="@Url.Content("~/Scripts/ObtenerTurno/index.js")"></script>   
+}

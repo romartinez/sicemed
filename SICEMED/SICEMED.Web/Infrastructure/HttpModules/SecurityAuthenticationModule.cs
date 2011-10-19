@@ -1,14 +1,18 @@
 using System;
 using System.Web;
 using System.Web.Security;
+using Castle.Core.Logging;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using Sicemed.Web.Models;
+using log4net;
 
 namespace Sicemed.Web.Infrastructure.HttpModules
 {
     public class SecurityAuthenticationModule : IHttpModule
     {
+        private ILogger _logger = ServiceLocator.Current.GetInstance<ILogger>();
+
         #region IHttpModule Members
 
         public void Init(HttpApplication context)
@@ -30,7 +34,15 @@ namespace Sicemed.Web.Infrastructure.HttpModules
             var authTicket = FormsAuthentication.Decrypt(authCookie.Value);
             var id = Convert.ToInt64(authTicket.UserData);
             var session = ServiceLocator.Current.GetInstance<ISessionFactory>().GetCurrentSession();
-            HttpContext.Current.User = session.Get<Persona>(id);
+            try
+            {
+                HttpContext.Current.User = session.Get<Persona>(id);   
+            } 
+            catch (Exception ex)
+            {
+                _logger.Fatal(string.Format("There was an error authenticating the user: '{0}'.", id), ex);
+                FormsAuthentication.SignOut();
+            }            
         }
     }
 }

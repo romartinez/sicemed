@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web.Mvc;
 using Microsoft.CSharp.RuntimeBinder;
 using RazorEngine;
@@ -22,7 +21,7 @@ namespace Sicemed.Web.Controllers
             var session = SessionFactory.GetCurrentSession();
 
             var pagina = id == 0
-                             ? session.QueryOver<Pagina>().Where(p => p.Padre == null).Take(1).Future().First()
+                             ? session.QueryOver<Pagina>().Where(p => p.Padre == null).Take(1).Future().FirstOrDefault()
                              : session.Get<Pagina>(id);
 
             if (pagina == null) return View("NotFound");

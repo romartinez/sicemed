@@ -1,4 +1,5 @@
-﻿using Sicemed.Web.Models.Roles;
+﻿using NHibernate.Mapping.ByCode;
+using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Roles
 {
@@ -9,7 +10,10 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Roles
             Discriminator(x => x.Column("Rol"));
             Property(x => x.FechaAsignacion);
 
-            ManyToOne(x => x.Persona, map => map.ForeignKey("FK_Roles_Persona"));
+            ManyToOne(x => x.Persona, map => { 
+                map.ForeignKey("FK_Roles_Persona");
+                map.Cascade(Cascade.All);
+            });
         }
     }
 }

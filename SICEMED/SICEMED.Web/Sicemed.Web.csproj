@@ -321,6 +321,8 @@
     <Content Include="Content\jquery.jqGrid\ellipsis-xbl.xml" />
     <Content Include="Content\jquery.jqGrid\ui.jqgrid.css" />
     <Content Include="Content\menu.css" />
+    <Content Include="Content\Mocks\ObtenerTurno\BuscarProfesional.js" />
+    <Content Include="Content\Mocks\ObtenerTurno\ObtenerEspecialidades.js" />
     <Content Include="Content\smart_wizard.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -408,8 +410,10 @@
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
     <Content Include="Scripts\msDateJsonParser.js" />
+    <Content Include="Scripts\ObtenerTurno\index.js" />
     <Content Include="Scripts\postAntiForgery.js" />
     <Content Include="Scripts\postify.js" />
+    <Content Include="Scripts\Testing\jquery.mockjax.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

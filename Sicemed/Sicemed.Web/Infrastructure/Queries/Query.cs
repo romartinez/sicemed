@@ -15,6 +15,11 @@ namespace Sicemed.Web.Infrastructure.Queries
         [JsonIgnore]
         public virtual ILogger Logger { get; set; }
 
+        protected Query()
+        {
+            Logger = NullLogger.Instance;
+        }
+
         #region Implementation of IQuery<T>
 
         public abstract T CoreExecute();
