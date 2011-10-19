@@ -1,0 +1,200 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/User/aspnet.sublime-build",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 260.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Projects/SublimeLogger/SublimeLogger/README",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Controllers/CuentaController.cs",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/aspnet.sublime-build",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Global.asax.cs",
+		"/C/o.txt",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/Global.asax.cs",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/Default (Linux).sublime-keymap",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/Global.sublime-settings",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/XML.sublime-settings",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/Base File.sublime-settings",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Web.config",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/XML/short-tag.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/XML/long-tag.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/XML/XML-Processing-Instruction.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/XML/cdata.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/XML/comment.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/function.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/function-(fun).sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/for-()-{}-(faster).sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/for-()-{}.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/setTimeout-function.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/Prototype-(proto).sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/Object-Value-JS.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/Object-Method.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/Object-key-key-value.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/if-___-else.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/if.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/JavaScript/Get-Elements.sublime-snippet",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/HTML/HTML.sublime-completions",
+		"/D/Documents and Settings/Administrator/Desktop/test.html",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/Default/Global.sublime-settings",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/User/HTML.sublime-settings",
+		"/D/Documents and Settings/Administrator/Application Data/Sublime Text 2/Packages/Default/Base File.sublime-settings",
+		"/D/Program Files/Sublime Text 2/Pristine Packages/C#.sublime-package",
+		"/C/Console2/console2.reg",
+		"/D/node/apps/pdfkit/test.coffee",
+		"/D/node/node_modules/pdfkit/lib/reference.coffee",
+		"/D/node/node_modules/pdfkit/lib/font.coffee",
+		"/D/node/node_modules/pdfkit/lib/image/png.coffee",
+		"/D/node/apps/pdfkit/tiger.js",
+		"/D/node/apps/pdfkit/test1.cofee",
+		"/D/node/coffee.bat",
+		"/D/node/coffe.bat",
+		"/D/node/apps/pdfkit/test1.js"
+	],
+	"find":
+	{
+		"height": 32.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"include_history":
+		[
+		],
+		"location_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"sublime",
+			"logger",
+			"CuentaController.cs",
+			"msbuild",
+			"msbuild.exe",
+			"infla",
+			"defla",
+			"inflate",
+			"deflate",
+			"font",
+			"arial",
+			"font",
+			"Palatino",
+			"image"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 335.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 261.0,
+	"status_bar_visible": true
+}
