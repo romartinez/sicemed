@@ -15,7 +15,15 @@
 			"file": "Sicemed.Web/Views/ObtenerTurno/Index.cshtml",
 			"settings":
 			{
-				"buffer_size": 1568,
+				"buffer_size": 1727,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Sicemed.Web/Content/mocks/ObtenerTurno/BuscarProfesional.js",
+			"settings":
+			{
+				"buffer_size": 387,
 				"line_ending": "Windows"
 			}
 		},
@@ -177,15 +185,15 @@
 					"file": "Sicemed.Web/Views/ObtenerTurno/Index.cshtml",
 					"settings":
 					{
-						"buffer_size": 1568,
+						"buffer_size": 1727,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1252,
-								1252
+								1078,
+								1078
 							]
 						],
 						"settings":
@@ -200,6 +208,34 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Sicemed.Web/Content/mocks/ObtenerTurno/BuscarProfesional.js",
+					"settings":
+					{
+						"buffer_size": 387,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								278,
+								278
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2.0,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
 				}
 			]
 		},
@@ -208,7 +244,7 @@
 			"sheets":
 			[
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "Sicemed.Web/Scripts/ObtenerTurno/index.js",
 					"settings":
 					{
@@ -285,6 +321,10 @@
 		"selected_items":
 		[
 			[
+				"buscar",
+				"Sicemed.Web/Content/mocks/ObtenerTurno/BuscarProfesional.js"
+			],
+			[
 				"buscarpro",
 				"Sicemed.Web/Content/mocks/ObtenerTurno/BuscarProfesional.js"
 			],
@@ -299,10 +339,6 @@
 			[
 				"obteneres",
 				"Sicemed.Web/Content/mocks/ObtenerTurno/ObtenerEspecialidades.js"
-			],
-			[
-				"buscar",
-				"Sicemed.Web/Views/ObtenerTurno/mocks/BuscarProfesional.js"
 			],
 			[
 				"especia",

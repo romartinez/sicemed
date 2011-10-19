@@ -39,7 +39,11 @@
 
     <script id="profesionalEncontrado" type="text/html">
         <div>
+            <img data-bind="attr: {src: foto, alt: nombre}" />
             <span data-bind="text: nombre"></span>
+            {{each especialidades}}
+                ${$value}
+            {{/each}}            
         </div>
     </script>
 </div>

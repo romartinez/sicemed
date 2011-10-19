@@ -1,7 +1,7 @@
 [
   {
     "id":213456,
-    "foto": "/Content/Images/mocks/personita.png",
+    "foto": "/Content/Images/personal_128x128.png",
     "nombre": "Perez, Raúl",
     "especialidades":[
       "Dermatologo", "Kinesiologo"
@@ -10,7 +10,7 @@
   },
   {
     "id":5465,
-    "foto": "/Content/Images/mocks/personita.png",
+    "foto": "/Content/Images/personal_128x128.png",
     "nombre":"Poch, Walter",
     "especialidades":[
       "Clinico"
