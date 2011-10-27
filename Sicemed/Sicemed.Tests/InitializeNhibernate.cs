@@ -96,7 +96,7 @@ namespace Sicemed.Tests
                                                                 new Mock<IFormAuthenticationStoreService>().Object);
             installer.Install(DatabaseConfiguration);
 
-            LogManager.GetRepository().Threshold = Level.Debug;
+            LogManager.GetRepository().Threshold = Level.Info;
 
             new RijndaelEngine("WAL");
             _mailService = new Mock<IMailSenderService>();

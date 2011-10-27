@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" namespace="Sicemed.Web.Models" assembly="Sicemed.Web" xmlns="urn:nhibernate-mapping-2.2">
-  <class name="Especialidad">
+  <class name="Especialidad" table="Especialidades">
     <id name="Id" type="Int64">
       <generator class="hilo" />
     </id>
     <property name="Nombre" not-null="true" unique="true" />
     <property name="Descripcion" />
-    <set name="Profesionales" access="nosetter.camelcase-underscore" cascade="all,delete-orphan">
+    <set name="Profesionales" access="nosetter.camelcase-underscore" table="ProfesionalEspecialidades" cascade="all,delete-orphan">
       <key column="especialidad_key" />
-      <many-to-many class="Sicemed.Web.Models.Roles.Profesional" />
+      <many-to-many class="Sicemed.Web.Models.Roles.Profesional" column="profesional_key" />
     </set>
   </class>
 </hibernate-mapping>

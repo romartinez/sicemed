@@ -28,6 +28,8 @@ namespace Sicemed.Tests.Models.Agendas
                 clinico
             );
 
+            session.Update(profesional);
+
             session.Flush();
             session.Evict(profesional);
 

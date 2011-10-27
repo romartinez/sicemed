@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" namespace="Sicemed.Web.Models.Roles" assembly="Sicemed.Web" xmlns="urn:nhibernate-mapping-2.2">
   <subclass name="Profesional" discriminator-value="Profesional" extends="Rol">
-    <set name="Especialidades" access="nosetter.camelcase-underscore" cascade="all,delete-orphan">
-      <key column="profesional_key" />
-      <many-to-many class="Sicemed.Web.Models.Especialidad" />
+    <set name="Especialidades" access="nosetter.camelcase-underscore" table="ProfesionalEspecialidades" cascade="all,delete-orphan">
+      <key column="profesional_key"/>
+      <many-to-many class="Sicemed.Web.Models.Especialidad" column="especialidad_key" />
     </set>
-    <set name="Agendas" access="nosetter.camelcase-underscore" inverse="true" cascade="all,delete-orphan">
-      <key column="Profesional" />
+    <set name="Agendas" access="nosetter.camelcase-underscore" cascade="all,delete-orphan">
+      <key column="agenda_key" />
       <one-to-many class="Sicemed.Web.Models.Agenda" />
     </set>
     <property name="Matricula" />
