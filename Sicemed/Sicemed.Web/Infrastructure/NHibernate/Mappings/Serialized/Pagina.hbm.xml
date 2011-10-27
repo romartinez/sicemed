@@ -6,7 +6,7 @@
     </id>
     <property name="Nombre" not-null="true" unique="true" />
     <property name="Contenido" type="StringClob" not-null="true" />
-    <many-to-one name="Padre" foreign-key="FK_Pagina_Pagina_Padre" />
+    <many-to-one name="Padre" column="PaginaPadreId" foreign-key="FK_Pagina_Pagina_Padre" />
     <set name="Hijos" access="nosetter.camelcase-underscore" inverse="true" cascade="all,delete-orphan">
       <key column="PaginaPadreId" />
       <one-to-many class="Pagina" />

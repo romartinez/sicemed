@@ -6,7 +6,7 @@
       <many-to-many class="Sicemed.Web.Models.Especialidad" column="EspecialidadId" foreign-key="FK_ProfesionalEspecialidad_Especialidad" />
     </set>
     <set name="Agendas" access="nosetter.camelcase-underscore" cascade="all,delete-orphan">
-      <key column="Id" />
+      <key column="ProfesionalId" foreign-key="FK_Agenda_PersonaRol_Profesional" />
       <one-to-many class="Sicemed.Web.Models.Agenda" />
     </set>
     <property name="Matricula" />
