@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using Iesi.Collections.Generic;
 using Sicemed.Web.Models.Components;
 using Sicemed.Web.Models.Roles;
 
@@ -11,7 +11,7 @@ namespace Sicemed.Web.Models
 
         public Clinica()
         {
-            _telefonos = new HashSet<Telefono>();
+            _telefonos = new HashedSet<Telefono>();
         }
 
         public virtual string RazonSocial { get; set; }

@@ -2,21 +2,17 @@
 using System.Data;
 using System.Linq;
 using System.Web;
-using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Facilities;
 using Castle.MicroKernel.Registration;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
+using NHibernate.Context;
 using NHibernate.Dialect;
 using NHibernate.Driver;
-using NHibernate.Impl;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Tool.hbm2ddl;
-using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.HttpModules;
-using Sicemed.Web.Infrastructure.NHibernate.Events;
-using Sicemed.Web.Infrastructure.Providers.Session;
 using Sicemed.Web.Models;
 
 namespace SICEMED.Web.Infrastructure.Windsor.Facilities
@@ -25,31 +21,22 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
     {
         protected override void Init()
         {
-            Kernel.Register(Component.For<ISessionFactory>()
-                .UsingFactoryMethod(k =>
-                {
-                    var sessionFactory = BuildDatabaseConfiguration().BuildSessionFactory();
-                    ((SessionFactoryImpl)sessionFactory).EventListeners.
-                        SaveOrUpdateEventListeners = new[] { new SaveOrUpdateEventListener() };
+            var config = BuildDatabaseConfiguration();
 
-                    return sessionFactory;
-                }).LifeStyle.Singleton);
-
-            Kernel.Register(Component.For<NHibernateSessionModule>());
-
-            Kernel.Register(Component.For<ISessionFactoryProvider>().AsFactory());
-
-            Kernel.Register(Component.For<IEnumerable<ISessionFactory>>()
-                                .UsingFactoryMethod(k => k.ResolveAll<ISessionFactory>()));
-
-            HttpContext.Current.Application[SessionFactoryProvider.Key]
-                = Kernel.Resolve<ISessionFactoryProvider>();
+            Kernel.Register(
+                Component.For<ISessionFactory>()
+                    .UsingFactoryMethod(k =>
+                    {                                            
+                        var sf = config.BuildSessionFactory();
+                        HttpContext.Current.Application[NHibernateSessionModule.NH_SESSION_FACTORY_KEY] = sf;
+                        return sf;
+                    }));
         }
 
         public static Configuration BuildDatabaseConfiguration()
         {
             var configuration = new Configuration();
-            configuration.CollectionTypeFactory<Net4CollectionTypeFactory>();
+
             configuration.DataBaseIntegration(db =>
                                               {
                                                   db.Dialect<MsSql2008Dialect>();
@@ -68,8 +55,8 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
 
             SchemaMetadataUpdater.QuoteTableAndColumns(configuration);
 
-            configuration.Properties[Environment.CurrentSessionContextClass]
-                = typeof(LazySessionContext).AssemblyQualifiedName;
+            configuration.Properties[Environment.CurrentSessionContextClass] =
+                typeof(WebSessionContext).AssemblyQualifiedName;
 
 
             return configuration;

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using Iesi.Collections.Generic;
 
 namespace Sicemed.Web.Models.Roles
 {
@@ -9,7 +9,7 @@ namespace Sicemed.Web.Models.Roles
 
         protected Paciente()
         {
-            _turnos = new HashSet<Turno>();
+            _turnos = new HashedSet<Turno>();
         }
 
         public override string DisplayName

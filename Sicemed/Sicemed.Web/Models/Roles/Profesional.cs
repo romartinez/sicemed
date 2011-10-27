@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using Iesi.Collections.Generic;
 
 namespace Sicemed.Web.Models.Roles
 {
@@ -11,8 +11,8 @@ namespace Sicemed.Web.Models.Roles
 
         protected Profesional()
         {
-            _especialidades = new HashSet<Especialidad>();
-            _agendas = new HashSet<Agenda>();
+            _especialidades = new HashedSet<Especialidad>();
+            _agendas = new HashedSet<Agenda>();
         }
 
         public override string DisplayName

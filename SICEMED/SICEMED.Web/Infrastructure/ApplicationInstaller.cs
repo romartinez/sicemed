@@ -6,7 +6,6 @@ using NHibernate.Cfg;
 using NHibernate.Context;
 using NHibernate.Exceptions;
 using NHibernate.Tool.hbm2ddl;
-using Sicemed.Web.Infrastructure.Providers.Session;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Components;
@@ -82,16 +81,12 @@ namespace Sicemed.Web.Infrastructure
         {            
             using (var importSession = SessionFactory.OpenSession())
             {
-                ISession previousSession = null;
-                if (HttpContext.Current != null)
+                ISession session = null;
+                if(CurrentSessionContext.HasBind(SessionFactory))
                 {
-                    LazySessionContext.Bind(new Lazy<ISession>(() => importSession), SessionFactory);
+                    session = CurrentSessionContext.Unbind(SessionFactory);
                 }
-                else
-                {
-                    previousSession = CurrentSessionContext.Unbind(SessionFactory);   
-                    CurrentSessionContext.Bind(importSession);   
-                }                    
+                CurrentSessionContext.Bind(importSession);   
 
                 Logger.InfoFormat("Checking if the application is installed.");
                 try
@@ -110,16 +105,12 @@ namespace Sicemed.Web.Infrastructure
                     //Check if the DB is created
                     Initialize(config, importSession);
                 }
-                if (HttpContext.Current != null)
+                
+                CurrentSessionContext.Unbind(SessionFactory);   
+                if(session != null)
                 {
-                    LazySessionContext.UnBind(SessionFactory);
-                    LazySessionContext.Bind(new Lazy<ISession>(() => SessionFactory.OpenSession()), SessionFactory);
-                }                    
-                else
-                {
-                    CurrentSessionContext.Unbind(SessionFactory);   
-                    CurrentSessionContext.Bind(previousSession);   
-                }                    
+                    CurrentSessionContext.Bind(session);
+                }
             }
         }
 

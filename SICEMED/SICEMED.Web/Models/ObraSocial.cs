@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Iesi.Collections.Generic;
 using Sicemed.Web.Models.Components;
 
 namespace Sicemed.Web.Models
@@ -23,7 +23,7 @@ namespace Sicemed.Web.Models
 
         #region Navigation Properties
 
-        public virtual IEnumerable<Plan> Planes
+        public virtual ISet<Plan> Planes
         {
             get { return _planes; }
         }
@@ -32,7 +32,7 @@ namespace Sicemed.Web.Models
 
         public ObraSocial()
         {
-            _planes = new HashSet<Plan>();
+            _planes = new HashedSet<Plan>();
         }
     }
 }

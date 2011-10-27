@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Iesi.Collections.Generic;
 
 namespace Sicemed.Web.Models
 {
@@ -8,7 +8,7 @@ namespace Sicemed.Web.Models
     {
         public Provincia()
         {
-            _localidades = new HashSet<Localidad>();
+            _localidades = new HashedSet<Localidad>();
         }
 
         #region Primitive Properties
@@ -22,7 +22,7 @@ namespace Sicemed.Web.Models
 
         private readonly ISet<Localidad> _localidades;
 
-        public virtual IEnumerable<Localidad> Localidades
+        public virtual ISet<Localidad> Localidades
         {
             get { return _localidades; }
         }

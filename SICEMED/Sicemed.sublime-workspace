@@ -34,6 +34,14 @@
 				"buffer_size": 1800,
 				"line_ending": "Windows"
 			}
+		},
+		{
+			"file": "//nbsf000des01/c$/Inetpub/wwwroot/BrokerWSDesa/Actions/Adapters/DB2/DB2Adapter.dll.config",
+			"settings":
+			{
+				"buffer_size": 2512,
+				"line_ending": "Windows"
+			}
 		}
 	],
 	"build_system": "Packages/User/aspnet.sublime-build",
@@ -60,6 +68,8 @@
 	},
 	"file_history":
 	[
+		"//nbsf000des01/c$/Inetpub/wwwroot/BrokerWSDesa/Actions/Adapters/AS/ASAdapter.dll.config",
+		"//nbsf000des01/c$/Inetpub/wwwroot/BrokerWSDesa/Actions/Adapters/DB2/DB2Adapter.dll.config",
 		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Scripts/app.ajax.js",
 		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Content/mocks/ObtenerTurno/ObtenerEspecialidades.js",
 		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Content/mocks/ObtenerTurno/BuscarProfesional.js",
@@ -240,7 +250,7 @@
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -255,8 +265,8 @@
 						"selection":
 						[
 							[
-								1038,
-								1038
+								762,
+								762
 							]
 						],
 						"settings":
@@ -264,7 +274,35 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 432.0,
+						"translation.y": 96.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "//nbsf000des01/c$/Inetpub/wwwroot/BrokerWSDesa/Actions/Adapters/DB2/DB2Adapter.dll.config",
+					"settings":
+					{
+						"buffer_size": 2512,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								171,
+								161
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.tmLanguage",
+							"tab_size": 4.0,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

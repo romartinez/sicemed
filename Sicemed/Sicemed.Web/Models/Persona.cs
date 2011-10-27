@@ -1,7 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
+using Iesi.Collections.Generic;
 using Sicemed.Web.Models.Components;
 using Sicemed.Web.Models.Roles;
 
@@ -14,7 +14,7 @@ namespace Sicemed.Web.Models
 
         public Persona()
         {
-            _roles = new HashSet<Rol>();
+            _roles = new HashedSet<Rol>();
             _membership = new Membership();
         }
 
@@ -43,7 +43,7 @@ namespace Sicemed.Web.Models
 
         #region Navigation Properties
 
-        public virtual IEnumerable<Rol> Roles
+        public virtual ISet<Rol> Roles
         {
             get { return _roles; }
         }

@@ -215,8 +215,8 @@
     <Compile Include="Infrastructure\Helpers\ValidationHelper.cs" />
     <Compile Include="Infrastructure\Helpers\WindsorExtensions.cs" />
     <Compile Include="Infrastructure\HttpModules\LoggingThreadContextSetupModule.cs" />
+    <Compile Include="Infrastructure\HttpModules\NHibernateSessionModule.cs" />
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
-    <Compile Include="Infrastructure\Net4Collections.cs" />
     <Compile Include="Infrastructure\NHibernate\Events\SaveOrUpdateEventListener.cs" />
     <Compile Include="Infrastructure\NHibernate\NHibernateContractResolver.cs" />
     <Compile Include="Infrastructure\NHibernate\EnumerationType.cs" />
@@ -247,9 +247,6 @@
     <Compile Include="Infrastructure\Providers\Cache\InMemoryCacheProvider.cs" />
     <Compile Include="Infrastructure\Providers\Cache\NullCacheProvider.cs" />
     <Compile Include="Infrastructure\Providers\FilterAtrribute\WindsorFilterAttributeFilterProvider.cs" />
-    <Compile Include="Infrastructure\Providers\Session\ISessionFactoryProvider.cs" />
-    <Compile Include="Infrastructure\HttpModules\NHibernateSessionModule.cs" />
-    <Compile Include="Infrastructure\Providers\Session\SessionFactoryProvider.cs" />
     <Compile Include="Infrastructure\Queries\IQuery.cs" />
     <Compile Include="Infrastructure\Queries\ObtenerTurno\ObtenerEspecialidadesQuery.cs" />
     <Compile Include="Infrastructure\Queries\ObtenerTurno\ObtenerProfesionalPorEspecialidadONombreQuery.cs" />
@@ -267,7 +264,6 @@
     <Compile Include="Infrastructure\Windsor\Installers\DependenciesInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\LoggerInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\NHibernateInstaller.cs" />
-    <Compile Include="Infrastructure\Providers\Session\LazySessionContext.cs" />
     <Compile Include="Models\Agenda.cs" />
     <Compile Include="Models\BI\CategoriaIndicador.cs" />
     <Compile Include="Models\BI\Components\MedicionIndicador.cs" />

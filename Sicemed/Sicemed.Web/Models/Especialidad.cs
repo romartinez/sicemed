@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Iesi.Collections.Generic;
 using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Models
@@ -23,7 +23,7 @@ namespace Sicemed.Web.Models
 
         public Especialidad()
         {
-            _profesionales = new HashSet<Profesional>();
+            _profesionales = new HashedSet<Profesional>();
         }
     }
 }

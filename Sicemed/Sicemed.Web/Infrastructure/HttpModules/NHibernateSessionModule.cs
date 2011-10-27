@@ -1,13 +1,14 @@
 using System;
 using System.Web;
 using NHibernate;
-using Sicemed.Web.Infrastructure.Providers.Session;
+using NHibernate.Context;
 
 namespace Sicemed.Web.Infrastructure.HttpModules
 {
     public class NHibernateSessionModule : IHttpModule
     {
         private HttpApplication app;
+        public const string NH_SESSION_FACTORY_KEY = "NH_SESSION_FACTORY_KEY";
 
         #region IHttpModule Members
 
@@ -28,14 +29,8 @@ namespace Sicemed.Web.Infrastructure.HttpModules
 
         private void ContextBeginRequest(object sender, EventArgs e)
         {
-            var sfp = (ISessionFactoryProvider) app.Context.Application[SessionFactoryProvider.Key];
-            foreach (var sf in sfp.GetSessionFactories())
-            {
-                var localFactory = sf;
-                LazySessionContext.Bind(
-                    new Lazy<ISession>(() => BeginSession(localFactory)),
-                    sf);
-            }
+            var sf = (ISessionFactory) app.Context.Application[NH_SESSION_FACTORY_KEY];
+            CurrentSessionContext.Bind(BeginSession(sf));
         }
 
         private static ISession BeginSession(ISessionFactory sf)
@@ -47,13 +42,9 @@ namespace Sicemed.Web.Infrastructure.HttpModules
 
         private void ContextEndRequest(object sender, EventArgs e)
         {
-            var sfp = (ISessionFactoryProvider) app.Context.Application[SessionFactoryProvider.Key];
-            foreach (var sf in sfp.GetSessionFactories())
-            {
-                var session = LazySessionContext.UnBind(sf);
-                if (session == null) continue;
-                EndSession(session);
-            }
+            var sf = (ISessionFactory) app.Context.Application[NH_SESSION_FACTORY_KEY];
+            var session = CurrentSessionContext.Unbind(sf);            
+            EndSession(session);
         }
 
         private void EndSession(ISession session)

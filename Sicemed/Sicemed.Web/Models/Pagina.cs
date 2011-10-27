@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Iesi.Collections.Generic;
 
 namespace Sicemed.Web.Models
 {
@@ -10,7 +10,7 @@ namespace Sicemed.Web.Models
 
         public Pagina()
         {
-            _hijos = new HashSet<Pagina>();
+            _hijos = new HashedSet<Pagina>();
         }
 
         [Required]
@@ -21,7 +21,7 @@ namespace Sicemed.Web.Models
 
         public virtual Pagina Padre { get; set; }
 
-        public virtual IEnumerable<Pagina> Hijos
+        public virtual ISet<Pagina> Hijos
         {
             get { return _hijos; }
         }

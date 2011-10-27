@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using Iesi.Collections.Generic;
 using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Models
@@ -10,7 +10,7 @@ namespace Sicemed.Web.Models
 
         public Agenda()
         {
-            _especialidadesAtendidas = new HashSet<Especialidad>();
+            _especialidadesAtendidas = new HashedSet<Especialidad>();
         }
 
         public virtual DateTime HorarioDesde { get; set; }
