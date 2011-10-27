@@ -6,6 +6,6 @@
     </id>
     <discriminator column="Rol" />
     <property name="FechaAsignacion" />
-    <many-to-one name="Persona" cascade="all" foreign-key="FK_Roles_Persona" />
+    <many-to-one name="Persona" column="PersonaId" cascade="all" foreign-key="FK_PersonaRol_Persona" />
   </class>
 </hibernate-mapping>

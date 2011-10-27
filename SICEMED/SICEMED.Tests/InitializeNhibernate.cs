@@ -113,7 +113,12 @@ namespace Sicemed.Tests
             CurrentSessionContext.Unbind(SessionFactory);
             RevertDatabaseFromSnapshot("SicemedTest", "Sicemed_Snapshot");
         }
-
+        
+        [Test]
+        public void PuedoCrearElSchema()
+        {
+            
+        }
 
         protected Persona CrearPersonaValida()
         {

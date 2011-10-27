@@ -2,8 +2,8 @@
 <hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" namespace="Sicemed.Web.Models.Roles" assembly="Sicemed.Web" xmlns="urn:nhibernate-mapping-2.2">
   <subclass name="Profesional" discriminator-value="Profesional" extends="Rol">
     <set name="Especialidades" access="nosetter.camelcase-underscore" table="ProfesionalEspecialidades" cascade="all,delete-orphan">
-      <key column="ProfesionalId"/>
-      <many-to-many class="Sicemed.Web.Models.Especialidad" column="EspecialidadId" />
+      <key column="ProfesionalId" foreign-key="FK_ProfesionalEspecialidad_PersonaRol"/>
+      <many-to-many class="Sicemed.Web.Models.Especialidad" column="EspecialidadId" foreign-key="FK_ProfesionalEspecialidad_Especialidad" />
     </set>
     <set name="Agendas" access="nosetter.camelcase-underscore" cascade="all,delete-orphan">
       <key column="Id" />

@@ -7,8 +7,8 @@
     <property name="Nombre" not-null="true" unique="true" />
     <property name="Descripcion" />
     <set name="Profesionales" access="nosetter.camelcase-underscore" table="ProfesionalEspecialidades" cascade="all,delete-orphan">
-      <key column="EspecialidadId" />
-      <many-to-many class="Sicemed.Web.Models.Roles.Profesional" column="ProfesionalId" />
+      <key column="EspecialidadId" foreign-key="FK_ProfesionalEspecialidad_Especialidad" />
+      <many-to-many class="Sicemed.Web.Models.Roles.Profesional" column="ProfesionalId" foreign-key="FK_ProfesionalEspecialidad_PersonaRol" />
     </set>
   </class>
 </hibernate-mapping>

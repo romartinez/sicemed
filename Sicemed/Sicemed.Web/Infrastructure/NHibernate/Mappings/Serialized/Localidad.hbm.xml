@@ -7,6 +7,6 @@
     <property name="Nombre" not-null="true" />
     <property name="CodigoPostal" />
     <property name="Caracteristicas" />
-    <many-to-one name="Provincia" not-null="true" foreign-key="FK_Localidades_Provincia" />
+    <many-to-one name="Provincia" column="ProvinciaId" not-null="true" foreign-key="FK_Localidad_Provincia" />
   </class>
 </hibernate-mapping>

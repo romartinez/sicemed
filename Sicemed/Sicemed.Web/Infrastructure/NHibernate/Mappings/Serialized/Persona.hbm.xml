@@ -28,7 +28,7 @@
     </component>
     <component class="Sicemed.Web.Models.Components.Domicilio" name="Domicilio">
       <property name="Direccion" column="DomicilioDireccion" />
-      <many-to-one name="Localidad" />
+      <many-to-one name="Localidad" foreign-key="FK_Persona_Localidad" />
     </component>
     <component class="Sicemed.Web.Models.Components.Telefono" name="Telefono">
       <property name="Numero" column="TelefonoNumero" />

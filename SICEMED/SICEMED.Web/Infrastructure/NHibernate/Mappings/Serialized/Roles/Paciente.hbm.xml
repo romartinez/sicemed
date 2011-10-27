@@ -2,7 +2,7 @@
 <hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" namespace="Sicemed.Web.Models.Roles" assembly="Sicemed.Web" xmlns="urn:nhibernate-mapping-2.2">
   <subclass name="Paciente" discriminator-value="Paciente" extends="Rol">
     <property name="NumeroAfiliado" />
-    <many-to-one name="Plan" foreign-key="FK_Pacientes_Plan" />
+    <many-to-one name="Plan" column="PlanId" foreign-key="FK_PersonaRol_Paciente_Plan" />
     <property name="InasistenciasContinuas" />
     <property name="EstaHabilitadoTurnosWeb" />
     <set name="Turnos" access="nosetter.camelcase-underscore" inverse="true" cascade="all,delete-orphan">

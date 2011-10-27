@@ -11,10 +11,10 @@
     </component>
     <component class="Sicemed.Web.Models.Components.Domicilio" name="Domicilio">
       <property name="Direccion" column="DomicilioDireccion" />
-      <many-to-one name="Localidad" />
+      <many-to-one name="Localidad" foreign-key="FK_Clinica_Localidad" />
     </component>
     <set name="Telefonos" access="nosetter.camelcase-underscore" table="ClinicaTelefonos" cascade="all,delete-orphan">
-      <key column="ClinicaId" />
+      <key column="ClinicaId" foreign-key="FK_Clinica_ClinicaTelefono" />
       <composite-element class="Sicemed.Web.Models.Components.Telefono">
         <property name="Numero" column="TelefonosNumero" />
         <property name="Prefijo" column="TelefonosPrefijo" />

@@ -6,6 +6,6 @@
     </id>
     <property name="Nombre" not-null="true" />
     <property name="Descripcion" />
-    <many-to-one name="ObraSocial" not-null="true" foreign-key="FK_Planes_ObraSocial" />
+    <many-to-one name="ObraSocial" column="ObraSocialId" not-null="true" foreign-key="FK_Plan_ObraSocial" />
   </class>
 </hibernate-mapping>
