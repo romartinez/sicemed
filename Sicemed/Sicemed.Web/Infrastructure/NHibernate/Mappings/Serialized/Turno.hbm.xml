@@ -11,12 +11,12 @@
     <property name="Nota" />
     <property name="IpPaciente" />
     <property name="EsTelefonico" />
-    <many-to-one name="Paciente" not-null="true" foreign-key="FK_Turnos_Paciente" />
-    <many-to-one name="Profesional" not-null="true" foreign-key="FK_Turnos_Profesional" />
-    <many-to-one name="SecretariaReservadoraTurno" foreign-key="FK_Turnos_SecretariaReservadoraTurno" />
-    <many-to-one name="SecretariaRecepcionista" foreign-key="FK_Turnos_SecretariaRecepcionista" />
-    <many-to-one name="Especialidad" not-null="true" foreign-key="FK_Turnos_Especialidad" />
-    <many-to-one name="Consultorio" foreign-key="FK_Turnos_Consultorio" />
-    <many-to-one name="Agenda" foreign-key="FK_Turnos_Agenda" />
+    <many-to-one name="Paciente" column="PacienteId" not-null="true" foreign-key="FK_Turnos_Paciente" />
+    <many-to-one name="Profesional" column="ProfesionalId" not-null="true" foreign-key="FK_Turnos_Profesional" />
+    <many-to-one name="SecretariaReservadoraTurno" column="SecretariaReservadoraTurnoId" foreign-key="FK_Turnos_SecretariaReservadoraTurno" />
+    <many-to-one name="SecretariaRecepcionista" column="SecretariaRecepcionistaId" foreign-key="FK_Turnos_SecretariaRecepcionista" />
+    <many-to-one name="Especialidad" column="EspecialidadId" not-null="true" foreign-key="FK_Turnos_Especialidad" />
+    <many-to-one name="Consultorio" column="ConsultorioId" foreign-key="FK_Turnos_Consultorio" />
+    <many-to-one name="Agenda" column="AgendaId" foreign-key="FK_Turnos_Agenda" />
   </class>
 </hibernate-mapping>

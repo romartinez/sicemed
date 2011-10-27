@@ -8,7 +8,7 @@
     <property name="Contenido" type="StringClob" not-null="true" />
     <many-to-one name="Padre" foreign-key="FK_Paginas_Padre" />
     <set name="Hijos" access="nosetter.camelcase-underscore" inverse="true" cascade="all,delete-orphan">
-      <key column="Padre" />
+      <key column="PaginaPadreId" />
       <one-to-many class="Pagina" />
     </set>
   </class>

@@ -6,7 +6,7 @@
     <property name="InasistenciasContinuas" />
     <property name="EstaHabilitadoTurnosWeb" />
     <set name="Turnos" access="nosetter.camelcase-underscore" inverse="true" cascade="all,delete-orphan">
-      <key column="Paciente" />
+      <key column="PacienteId" />
       <one-to-many class="Sicemed.Web.Models.Turno" />
     </set>
   </subclass>

@@ -8,11 +8,11 @@
     <property name="HorarioHasta" />
     <property name="DuracionTurno" />
     <property name="Dia" />
-    <many-to-one name="Consultorio" foreign-key="FK_Agenda_Cosultorio" />
-    <many-to-one name="Profesional" foreign-key="FK_Agenda_Profesional" />
-    <set name="EspecialidadesAtendidas" access="nosetter.camelcase-underscore" cascade="all,delete-orphan">
-      <key column="agenda_key" />
-      <many-to-many class="Especialidad" />
+    <many-to-one name="Consultorio" column="ConsultorioId" foreign-key="FK_Agenda_Cosultorio" />
+    <many-to-one name="Profesional" column="ProfesionalId" foreign-key="FK_Agenda_Profesional" />
+    <set name="EspecialidadesAtendidas" access="nosetter.camelcase-underscore" table="AgendaEspecialidadesAtendidas" cascade="all,delete-orphan">
+      <key column="AgendaId" />
+      <many-to-many class="Especialidad" column="EspecialidadId" />
     </set>
   </class>
 </hibernate-mapping>
