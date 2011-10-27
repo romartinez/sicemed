@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using Castle.MicroKernel.Facilities;
 using Castle.MicroKernel.Registration;
@@ -49,9 +50,11 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
                                                   db.HqlToSqlSubstitutions = "true 1, false 0, yes 'Y', no 'N'";
                                               });
 
-            var mappings = GetHbmMappings();
+            //var mappings = GetHbmMappings();
 
-            mappings.ToList().ForEach(mp => configuration.AddDeserializedMapping(mp, null));
+            //mappings.ToList().ForEach(mp => configuration.AddDeserializedMapping(mp, null));
+
+            configuration.AddAssembly(typeof(NHibernateFacility).Assembly);
 
             SchemaMetadataUpdater.QuoteTableAndColumns(configuration);
 
