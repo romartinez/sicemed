@@ -33,7 +33,7 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
                         SaveOrUpdateEventListeners = new[] { new SaveOrUpdateEventListener() };
 
                     return sessionFactory;
-                }));
+                }).LifeStyle.Singleton);
 
             Kernel.Register(Component.For<NHibernateSessionModule>());
 

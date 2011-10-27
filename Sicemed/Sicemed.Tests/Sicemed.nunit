@@ -1,0 +1,7 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" />
+  <Config name="Debug" appbase="bin\x86\Debug" configfile="Sicemed.Tests.dll.config" binpathtype="Auto" runtimeFramework="any">
+    <assembly path="Sicemed.Tests.dll" />
+  </Config>
+  <Config name="Release" binpathtype="Auto" />
+</NUnitProject>

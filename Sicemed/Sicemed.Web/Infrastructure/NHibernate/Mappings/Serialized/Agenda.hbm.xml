@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" namespace="Sicemed.Web.Models" assembly="Sicemed.Web" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Agenda">
+    <id name="Id" type="Int64">
+      <generator class="hilo" />
+    </id>
+    <property name="HorarioDesde" />
+    <property name="HorarioHasta" />
+    <property name="DuracionTurno" />
+    <property name="Dia" />
+    <many-to-one name="Consultorio" foreign-key="FK_Agenda_Cosultorio" />
+    <many-to-one name="Profesional" foreign-key="FK_Agenda_Profesional" />
+    <set name="EspecialidadesAtendidas" access="nosetter.camelcase-underscore" cascade="all,delete-orphan">
+      <key column="agenda_key" />
+      <many-to-many class="Especialidad" />
+    </set>
+  </class>
+</hibernate-mapping>

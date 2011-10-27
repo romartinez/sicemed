@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" namespace="Sicemed.Web.Models" assembly="Sicemed.Web" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Clinica">
+    <id name="Id" type="Int64">
+      <generator class="hilo" />
+    </id>
+    <property name="RazonSocial" not-null="true" unique="true" />
+    <component class="Sicemed.Web.Models.Components.Documento" name="Documento">
+      <property name="TipoDocumento" type="Sicemed.Web.Infrastructure.NHibernate.EnumerationType`1[[Sicemed.Web.Models.Enumerations.Documentos.TipoDocumento, Sicemed.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Sicemed.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" column="DocumentoTipoDocumento" />
+      <property name="Numero" column="DocumentoNumero" />
+    </component>
+    <component class="Sicemed.Web.Models.Components.Domicilio" name="Domicilio">
+      <property name="Direccion" column="DomicilioDireccion" />
+      <many-to-one name="Localidad" />
+    </component>
+    <set name="Telefonos" access="nosetter.camelcase-underscore" cascade="all,delete-orphan">
+      <key column="clinica_key" />
+      <composite-element class="Sicemed.Web.Models.Components.Telefono">
+        <property name="Numero" column="TelefonosNumero" />
+        <property name="Prefijo" column="TelefonosPrefijo" />
+      </composite-element>
+    </set>
+    <property name="Email" not-null="true" />
+    <property name="HorarioMatutinoDesde" not-null="true" />
+    <property name="HorarioMatutinoHasta" not-null="true" />
+    <property name="HorarioVespertinoDesde" />
+    <property name="HorarioVespertinoHasta" />
+    <property name="NumeroInasistenciasConsecutivasGeneranBloqueo" not-null="true" />
+    <property name="GoogleMapsKey" />
+  </class>
+</hibernate-mapping>

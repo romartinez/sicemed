@@ -79,14 +79,19 @@ namespace Sicemed.Web.Infrastructure
         #region IApplicationInstaller Members
 
         public void Install(Configuration config)
-        {
-            var session = SessionFactory.GetCurrentSession() ?? SessionFactory.OpenSession();
-            using (var importSession = SessionFactory.OpenSession(session.Connection))
+        {            
+            using (var importSession = SessionFactory.OpenSession())
             {
+                ISession previousSession = null;
                 if (HttpContext.Current != null)
+                {
                     LazySessionContext.Bind(new Lazy<ISession>(() => importSession), SessionFactory);
+                }
                 else
-                    CurrentSessionContext.Bind(importSession);
+                {
+                    previousSession = CurrentSessionContext.Unbind(SessionFactory);   
+                    CurrentSessionContext.Bind(importSession);   
+                }                    
 
                 Logger.InfoFormat("Checking if the application is installed.");
                 try
@@ -106,9 +111,15 @@ namespace Sicemed.Web.Infrastructure
                     Initialize(config, importSession);
                 }
                 if (HttpContext.Current != null)
+                {
                     LazySessionContext.UnBind(SessionFactory);
+                    LazySessionContext.Bind(new Lazy<ISession>(() => SessionFactory.OpenSession()), SessionFactory);
+                }                    
                 else
-                    CurrentSessionContext.Unbind(SessionFactory);
+                {
+                    CurrentSessionContext.Unbind(SessionFactory);   
+                    CurrentSessionContext.Bind(previousSession);   
+                }                    
             }
         }
 
@@ -117,7 +128,7 @@ namespace Sicemed.Web.Infrastructure
         private void Initialize(Configuration config, ISession session)
         {
             Logger.InfoFormat("Installing the application.");
-            new SchemaExport(config).Execute(false, true, false, session.Connection, null);
+            new SchemaExport(config).Execute(false, true, false);
             //No permite Tx anidadas
             CrearProvincias(session);
             CrearLocalidades(session);

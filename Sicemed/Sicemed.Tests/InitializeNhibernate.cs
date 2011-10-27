@@ -1,13 +1,10 @@
-using System.Data;
-using System.Linq;
+using System;
+using System.Configuration;
+using System.Data.SqlClient;
 using EfficientlyLazy.Crypto;
 using Moq;
 using NHibernate;
-using NHibernate.Cfg;
 using NHibernate.Context;
-using NHibernate.Dialect;
-using NHibernate.Driver;
-using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
 using SICEMED.Web.Infrastructure.Windsor.Facilities;
 using Sicemed.Web.Infrastructure;
@@ -17,13 +14,14 @@ using Sicemed.Web.Models;
 using log4net;
 using log4net.Config;
 using log4net.Core;
+using Configuration = NHibernate.Cfg.Configuration;
+using Environment = NHibernate.Cfg.Environment;
 
 namespace Sicemed.Tests
 {
     public class InitializeNhibernate
     {
-        private const bool USAR_SQL_LITE = true;
-
+        protected ILog Log = LogManager.GetLogger(typeof(InitializeNhibernate));
         private static Configuration _databaseConfiguration;
 
         private static ISessionFactory _sessionFactory;
@@ -39,53 +37,13 @@ namespace Sicemed.Tests
                     //Lo configuro acá asi no veo los primeros inserts :D
                     XmlConfigurator.Configure();
 
-                    _databaseConfiguration = new Configuration();
-                    _databaseConfiguration.CollectionTypeFactory<Net4CollectionTypeFactory>();
-
-                    if (USAR_SQL_LITE)
-                    {
-                        _databaseConfiguration.DataBaseIntegration(db =>
-                                                                   {
-                                                                       //http://stackoverflow.com/questions/189280/problem-using-sqlite-memory-with-nhibernate
-                                                                       db.Dialect<SQLiteDialect>();
-                                                                       db.Driver<SQLite20Driver>();
-                                                                       db.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
-                                                                       db.LogSqlInConsole = true;
-                                                                       db.ConnectionString =
-                                                                           "Data Source=:memory:;Version=3;New=True;";
-                                                                       db.AutoCommentSql = true;
-                                                                       db.ConnectionReleaseMode =
-                                                                           ConnectionReleaseMode.OnClose;
-                                                                       db.HqlToSqlSubstitutions =
-                                                                           "true 1, false 0, yes 'Y', no 'N'";
-                                                                   });
-                    } else
-                    {
-                        _databaseConfiguration.DataBaseIntegration(db =>
-                                                                   {
-                                                                       db.Dialect<MsSql2008Dialect>();
-                                                                       db.Driver<SqlClientDriver>();
-                                                                       db.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
-                                                                       db.IsolationLevel = IsolationLevel.ReadCommitted;
-                                                                       db.ConnectionStringName = "ApplicationServices";
-                                                                       db.Timeout = 10;
-                                                                       db.LogSqlInConsole = true;
-                                                                       db.AutoCommentSql = true;
-                                                                       db.HqlToSqlSubstitutions =
-                                                                           "true 1, false 0, yes 'Y', no 'N'";
-                                                                   });
-                    }
+                    _databaseConfiguration = NHibernateFacility.BuildDatabaseConfiguration();
 
                     _databaseConfiguration.Properties[Environment.CurrentSessionContextClass] =
-                        typeof (ThreadStaticSessionContext).AssemblyQualifiedName;
+                        typeof(ThreadStaticSessionContext).AssemblyQualifiedName;
 
                     var mappings = NHibernateFacility.GetHbmMappings();
-
                     mappings.WriteAllXmlMapping();
-
-                    mappings.ToList().ForEach(mp => _databaseConfiguration.AddDeserializedMapping(mp, null));
-
-                    SchemaMetadataUpdater.QuoteTableAndColumns(_databaseConfiguration);
                 }
 
                 return _databaseConfiguration;
@@ -123,21 +81,18 @@ namespace Sicemed.Tests
         [SetUp]
         public void Setup()
         {
-            var session = SessionFactory.OpenSession();
-            CurrentSessionContext.Bind(session);
+            CreateDatabaseSnapshot("Sicemed_Snapshot", "SicemedTest", @"C:\Program Files\Microsoft SQL Server\MSSQL10.MSSQLSERVER\MSSQL\DATA\Sicemed_Snapshot.ss");
             LogManager.GetRepository().Threshold = Level.Off;
 
+            CurrentSessionContext.Bind(SessionFactory.OpenSession());
+            
             var installer = new ApplicationInstaller();
             installer.SessionFactory = SessionFactory;
 
             installer.MembershipService = new MembershipService(SessionFactory,
                                                                 new Mock<IMailSenderService>().Object,
                                                                 new Mock<IFormAuthenticationStoreService>().Object);
-
             installer.Install(DatabaseConfiguration);
-
-            //After the installation bind the session, again
-            CurrentSessionContext.Bind(session);
 
             LogManager.GetRepository().Threshold = Level.Debug;
 
@@ -147,18 +102,74 @@ namespace Sicemed.Tests
             _membershipService = new MembershipService(SessionFactory,
                                                        _mailService.Object,
                                                        formsService.Object);
+
         }
 
         [TearDown]
         public void TearDown()
         {
             CurrentSessionContext.Unbind(SessionFactory);
+            RevertDatabaseFromSnapshot("SicemedTest", "Sicemed_Snapshot");
         }
 
 
         protected Persona CrearPersonaValida()
         {
-            return new Persona {Nombre = "Walter", Apellido = "Poch"};
+            return new Persona { Nombre = "Walter", Apellido = "Poch" };
+        }
+
+        private void CreateDatabaseSnapshot(string snapshotName, string originalDb, string snapshotPath)
+        {
+            using (var cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand())
+                {
+                    try
+                    {
+                        cmd.Connection = cnn;
+                        cmd.CommandTimeout = 1000;
+                        cmd.CommandText = string.Format("USE master;");
+                        cmd.CommandText += string.Format("CREATE DATABASE {0} ON ( NAME = {1}, FILENAME = '{2}' ) AS SNAPSHOT OF {1};", 
+                            snapshotName, originalDb, snapshotPath);
+
+                        cnn.Open();
+
+                        Log.Info("CREATE SNAPSHOT: " + cmd.ExecuteNonQuery().ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Fatal(ex);
+                    }
+                }
+                cnn.Close();
+            }
+        }
+
+        private void RevertDatabaseFromSnapshot(string databaseName, string snapshotName)
+        {
+            using (var cnn = new SqlConnection(ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand())
+                {
+                    try
+                    {
+                        cmd.Connection = cnn;
+                        cmd.CommandTimeout = 1000;
+                        cmd.CommandText = string.Format("USE master;");
+                        cmd.CommandText += string.Format("ALTER DATABASE {0} SET SINGLE_USER WITH ROLLBACK IMMEDIATE;", databaseName);
+                        cmd.CommandText += string.Format("RESTORE DATABASE {0} FROM DATABASE_SNAPSHOT = '{1}';", databaseName, snapshotName);
+                        cmd.CommandText += string.Format("DROP DATABASE {0};", snapshotName);
+                        cmd.CommandText += string.Format("ALTER DATABASE {0} SET MULTI_USER;", databaseName);
+
+                        cnn.Open();
+                        Log.Info("REVERT SNAPSHOT: " + cmd.ExecuteNonQuery().ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Fatal(ex);
+                    }
+                }
+            }
         }
     }
 }

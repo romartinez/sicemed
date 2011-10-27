@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" namespace="Sicemed.Web.Models" assembly="Sicemed.Web" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Localidad">
+    <id name="Id" type="Int64">
+      <generator class="hilo" />
+    </id>
+    <property name="Nombre" not-null="true" />
+    <property name="CodigoPostal" />
+    <property name="Caracteristicas" />
+    <many-to-one name="Provincia" not-null="true" foreign-key="FK_Localidades_Provincia" />
+  </class>
+</hibernate-mapping>

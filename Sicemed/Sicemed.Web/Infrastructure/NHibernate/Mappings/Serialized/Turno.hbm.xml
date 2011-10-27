@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" namespace="Sicemed.Web.Models" assembly="Sicemed.Web" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Turno">
+    <id name="Id" type="Int64">
+      <generator class="hilo" />
+    </id>
+    <property name="FechaGeneracion" not-null="true" />
+    <property name="FechaTurno" not-null="true" />
+    <property name="FechaIngreso" />
+    <property name="FechaAtencion" />
+    <property name="Nota" />
+    <property name="IpPaciente" />
+    <property name="EsTelefonico" />
+    <many-to-one name="Paciente" not-null="true" foreign-key="FK_Turnos_Paciente" />
+    <many-to-one name="Profesional" not-null="true" foreign-key="FK_Turnos_Profesional" />
+    <many-to-one name="SecretariaReservadoraTurno" foreign-key="FK_Turnos_SecretariaReservadoraTurno" />
+    <many-to-one name="SecretariaRecepcionista" foreign-key="FK_Turnos_SecretariaRecepcionista" />
+    <many-to-one name="Especialidad" not-null="true" foreign-key="FK_Turnos_Especialidad" />
+    <many-to-one name="Consultorio" foreign-key="FK_Turnos_Consultorio" />
+    <many-to-one name="Agenda" foreign-key="FK_Turnos_Agenda" />
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" namespace="Sicemed.Web.Models" assembly="Sicemed.Web" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Persona">
+    <id name="Id" type="Int64">
+      <generator class="hilo" />
+    </id>
+    <component class="Sicemed.Web.Models.Components.Membership" name="Membership" access="nosetter.camelcase-underscore">
+      <property name="Password" column="MembershipPassword" not-null="true" />
+      <property name="Email" column="MembershipEmail" not-null="true" />
+      <property name="PasswordResetToken" column="MembershipPasswordResetToken" />
+      <property name="PasswordResetTokenGeneratedOn" column="MembershipPasswordResetTokenGeneratedOn" />
+      <property name="IsLockedOut" column="MembershipIsLockedOut" not-null="true" />
+      <property name="LockedOutReason" column="MembershipLockedOutReason" />
+      <property name="CreateDate" access="nosetter.camelcase-underscore" column="MembershipCreateDate" not-null="true" />
+      <property name="LastLoginDate" column="MembershipLastLoginDate" />
+      <property name="LastPasswordChangedDate" column="MembershipLastPasswordChangedDate" />
+      <property name="LastLockoutDate" column="MembershipLastLockoutDate" />
+      <property name="FailedPasswordAttemptCount" column="MembershipFailedPasswordAttemptCount" not-null="true" />
+      <property name="FailedPasswordAttemptWindowStart" column="MembershipFailedPasswordAttemptWindowStart" />
+    </component>
+    <property name="Nombre" not-null="true" />
+    <property name="SegundoNombre" />
+    <property name="Apellido" not-null="true" />
+    <property name="FechaNacimiento" />
+    <component class="Sicemed.Web.Models.Components.Documento" name="Documento">
+      <property name="TipoDocumento" type="Sicemed.Web.Infrastructure.NHibernate.EnumerationType`1[[Sicemed.Web.Models.Enumerations.Documentos.TipoDocumento, Sicemed.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Sicemed.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" column="DocumentoTipoDocumento" />
+      <property name="Numero" column="DocumentoNumero" />
+    </component>
+    <component class="Sicemed.Web.Models.Components.Domicilio" name="Domicilio">
+      <property name="Direccion" column="DomicilioDireccion" />
+      <many-to-one name="Localidad" />
+    </component>
+    <component class="Sicemed.Web.Models.Components.Telefono" name="Telefono">
+      <property name="Numero" column="TelefonoNumero" />
+      <property name="Prefijo" column="TelefonoPrefijo" />
+    </component>
+    <set name="Roles" access="nosetter.camelcase-underscore" inverse="true" cascade="all,delete-orphan">
+      <key column="Persona" />
+      <one-to-many class="Sicemed.Web.Models.Roles.Rol" />
+    </set>
+  </class>
+</hibernate-mapping>
