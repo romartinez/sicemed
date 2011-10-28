@@ -81,8 +81,8 @@ namespace Sicemed.Tests
         [SetUp]
         public void Setup()
         {
-            var path = @"D:\Program Files\Microsoft SQL Server\MSSQL.2\MSSQL\Data\Sicemed_Snapshot.ss";
-            //var path = @"C:\Program Files\Microsoft SQL Server\MSSQL10.MSSQLSERVER\MSSQL\DATA\Sicemed_Snapshot.ss";
+            //var path = @"D:\Program Files\Microsoft SQL Server\MSSQL.2\MSSQL\Data\Sicemed_Snapshot.ss";
+            var path = @"C:\Program Files\Microsoft SQL Server\MSSQL10.MSSQLSERVER\MSSQL\DATA\Sicemed_Snapshot.ss";
             CreateDatabaseSnapshot("Sicemed_Snapshot", "SicemedTest", path);
             LogManager.GetRepository().Threshold = Level.Off;
 

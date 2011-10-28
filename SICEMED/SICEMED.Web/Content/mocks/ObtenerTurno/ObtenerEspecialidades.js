@@ -1,14 +1,14 @@
 [
     {
-        "id": 48,
-        "nombre": "Clinica"
+        "Id": 48,
+        "Nombre": "Clinica"
     },
     {
-        "id": 545,
-        "nombre": "Dermatologo"
+        "Id": 545,
+        "Nombre": "Dermatologo"
     },
     {
-        "id": 10,
-        "nombre": "Pediatra"
+        "Id": 10,
+        "Nombre": "Pediatra"
     }
 ]

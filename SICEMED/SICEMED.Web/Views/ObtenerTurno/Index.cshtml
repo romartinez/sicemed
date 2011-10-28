@@ -21,7 +21,7 @@
             <label>
                 Por Especialidad:
             </label>
-            <select data-bind="options: especialidades, optionsText: 'nombre', value: especialidadSeleccionada">
+            <select data-bind="options: especialidades, optionsText: 'Nombre', value: especialidadSeleccionada">
             </select>            
         </div>
         <div>
@@ -33,18 +33,28 @@
         <div>
             <button data-bind="click: buscarProfesionales">Buscar</button>
         </div>
-        <div data-bind='template: { name: "profesionalEncontrado", 
-                            foreach: profesionalesEncontrados }'> </div>
+        <div data-bind='template: { name: "profesionalEncontrado"}'> </div>
     </script>
 
     <script id="profesionalEncontrado" type="text/html">
-        <div>
-            <img data-bind="attr: {src: foto, alt: nombre}" />
-            <span data-bind="text: nombre"></span>
-            {{each especialidades}}
-                ${$value}
-            {{/each}}            
-        </div>
+        {{each profesionalesEncontrados}}
+            <div>
+                <img data-bind="attr: {src: Foto, alt: Nombre}" />
+                <span data-bind="text: Nombre"></span>            
+                {{each Especialidades}}
+                    ${$value}
+                {{/each}}
+                <div>
+                    {{if ProximoTurno}}
+                        Pr&oacute;ximo Turno: <a href="" data-bind="click:reservarTurnoLibre,text: ProximoTurno"></a>
+                        <br/>
+                        <a href="" data-bind="click: elegirTurnoEnAgenda">Buscar turno en la agenda</a>
+                    {{else}}
+                        El profesional no cuenta con turnos disponibles.
+                    {{/if}}
+                </div>
+            </div>
+        {{/each}}
     </script>
 </div>
 

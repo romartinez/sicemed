@@ -287,6 +287,7 @@
 											url: m.proxy,
 											type: m.proxyType,
 											data: m.data,
+										    cache: m.cache,
 											dataType: s.dataType,
 											complete: function(xhr, txt) {
 												m.responseXML = xhr.responseXML;
@@ -361,6 +362,7 @@
 		
 		lastModified: null,
 		etag:         '',
+        cache:        true,
 		headers: {
 			etag: 'IJF@H#@923uf8023hFO@I#H#',
 			'content-type' : 'text/plain'

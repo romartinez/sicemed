@@ -1,20 +1,20 @@
 [
   {
-    "id":213456,
-    "foto": "/Content/Images/personal_128x128.png",
-    "nombre": "Perez, Raúl",
-    "especialidades":[
+    "Id":213456,
+    "Foto": "/Content/Images/personal_128x128.png",
+    "Nombre": "Perez, Raúl",
+    "Especialidades":[
       "Dermatologo", "Kinesiologo"
     ],
-    "proximo_turno": "/new Date()/"
+    "ProximoTurno": "/new Date()/"
   },
   {
-    "id":5465,
-    "foto": "/Content/Images/personal_128x128.png",
-    "nombre":"Poch, Walter",
-    "especialidades":[
+    "Id":5465,
+    "Foto": "/Content/Images/personal_128x128.png",
+    "Nombre":"Poch, Walter",
+    "Especialidades":[
       "Clinico"
     ],
-    "proximo_turno": null
+    "ProximoTurno": null
   }
 ]
