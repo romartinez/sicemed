@@ -11,6 +11,7 @@ $.mockjax(function (settings) {
 });
 //---------------------------
 
+var holder = {};
 
 var obtenerTurno = (function () {
     var my = {};
@@ -36,8 +37,6 @@ var obtenerTurno = (function () {
         self.profesionalABuscar = ko.observable('');
 
         self.profesionalesEncontrados = ko.observableArray([]);
-        
-        self.profesional
 
         self.buscarProfesionales = function () {
             self.profesionalesEncontrados.removeAll();
@@ -46,10 +45,10 @@ var obtenerTurno = (function () {
                     //Agrego los metodos del firmante
                     var profesional = data[i];
                     profesional.reservarTurnoLibre = function () {
-                        $(self).trigger('reservarTurnoLibre', profesional);
+                        $(self).trigger('reservarTurnoLibre', [profesional]);
                     };
                     profesional.elegirTurnoEnAgenda = function () {
-                        $(self).trigger('elegirTurnoEnAgenda', profesional);
+                        $(self).trigger('elegirTurnoEnAgenda', [profesional]);
                     };
 
                     self.profesionalesEncontrados.push(profesional);
@@ -79,19 +78,19 @@ var obtenerTurno = (function () {
             return self.currentStep().template;
         };
 
-        $(stepSeleccionProfesional).bind('reservarTurnoLibre', self.reservarTurnoLibre);
-        $(stepSeleccionProfesional).bind('elegirTurnoEnAgenda', self.elegirTurnoEnAgenda);
+        self.reservarTurnoLibre = function (e, profesional) {
+            console.log("reservarTurnoLibre " + profesional.Id);
+        };
+        self.elegirTurnoEnAgenda = function (e, profesional) {
+            console.log("elegirTurnoEnAgenda " + profesional.Id);
+        };
 
-        self.reservarTurnoLibre = function (firmante) {
-            console.log(firmante);
-        };
-        self.elegirTurnoEnAgenda = function (firmante) {
-            console.log(firmante);
-        };
+        $(stepSeleccionProfesional.model()).bind('reservarTurnoLibre', self.reservarTurnoLibre);
+        $(stepSeleccionProfesional.model()).bind('elegirTurnoEnAgenda', self.elegirTurnoEnAgenda);
+
     };
 
     my.vm = new wizard();
-
     ko.applyBindings(my.vm);
 
     return my;
