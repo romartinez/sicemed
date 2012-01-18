@@ -36,6 +36,19 @@
         <div data-bind='template: { name: "profesionalEncontrado"}'> </div>
     </script>
 
+    <script id="selectTurno" type="text/html">
+        <div id="calendar"></div>
+    </script>    
+
+    <script id="selectComprobante" type="text/html">
+        <div>
+            Datos
+        </div>
+        <div>
+            <button data-bind="click: imprimir">Imprimir</button>
+        </div>
+    </script>
+
     <script id="profesionalEncontrado" type="text/html">
         {{each profesionalesEncontrados}}
             <div>
