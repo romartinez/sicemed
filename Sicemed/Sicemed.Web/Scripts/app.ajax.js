@@ -34,15 +34,13 @@ var app = (function ($, app) {
         $.unblockUI();
     };
 
-    $(document).ready(function () {
-        $(document).ajaxError(ajax.errorXhr);
-        $.ajaxSetup({
-            converters: {
-                "text json": function (data) {
-                    return $.parseJSON(data, true);
-                }
+    $(document).ajaxError(ajax.errorXhr);
+    $.ajaxSetup({
+        converters: {
+            "text json": function (data) {
+                return $.parseJSON(data, true);
             }
-        });
+        }
     });
 
     return app;

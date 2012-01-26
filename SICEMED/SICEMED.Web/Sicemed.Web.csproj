@@ -306,6 +306,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\combres.xml" />
+    <Content Include="Content\fullcalendar.css" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\menu\1.jpg" />
     <Content Include="Content\images\menu\2.jpg" />
@@ -318,6 +319,7 @@
     <Content Include="Content\jquery.jqGrid\ui.jqgrid.css" />
     <Content Include="Content\menu.css" />
     <Content Include="Content\Mocks\ObtenerTurno\BuscarProfesional.js" />
+    <Content Include="Content\Mocks\ObtenerTurno\ObtenerAgendaProfesional.js" />
     <Content Include="Content\Mocks\ObtenerTurno\ObtenerEspecialidades.js" />
     <Content Include="Content\smart_wizard.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -402,6 +404,7 @@
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\app.overrides.js" />
     <Content Include="Scripts\app.ui.js" />
+    <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\i18n\grid.locale-es.js" />
     <Content Include="Scripts\i18n\jquery.ui.datepicker-es.js" />
     <Content Include="Scripts\jquery-1.6.2-vsdoc.js" />
@@ -422,7 +425,6 @@
     <Content Include="Scripts\knockout-1.2.1.debug.js" />
     <Content Include="Scripts\knockout-1.2.1.js" />
     <Content Include="Scripts\knockout-2.0.0.js" />
-    <Content Include="Scripts\knockout.address.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />

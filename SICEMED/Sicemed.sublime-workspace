@@ -15,7 +15,7 @@
 			"file": "Sicemed.Web/Views/ObtenerTurno/Index.cshtml",
 			"settings":
 			{
-				"buffer_size": 1727,
+				"buffer_size": 2527,
 				"line_ending": "Windows"
 			}
 		},
@@ -23,7 +23,7 @@
 			"file": "Sicemed.Web/Content/mocks/ObtenerTurno/BuscarProfesional.js",
 			"settings":
 			{
-				"buffer_size": 387,
+				"buffer_size": 385,
 				"line_ending": "Windows"
 			}
 		},
@@ -31,15 +31,15 @@
 			"file": "Sicemed.Web/Scripts/ObtenerTurno/index.js",
 			"settings":
 			{
-				"buffer_size": 1800,
+				"buffer_size": 4984,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "//nbsf000des01/c$/Inetpub/wwwroot/BrokerWSDesa/Actions/Adapters/DB2/DB2Adapter.dll.config",
+			"file": "/D/Documents and Settings/Administrator/Desktop/fullcalendar-1.5.2/demos/default.html",
 			"settings":
 			{
-				"buffer_size": 2512,
+				"buffer_size": 2019,
 				"line_ending": "Windows"
 			}
 		}
@@ -68,8 +68,9 @@
 	},
 	"file_history":
 	[
-		"//nbsf000des01/c$/Inetpub/wwwroot/BrokerWSDesa/Actions/Adapters/AS/ASAdapter.dll.config",
+		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Content/mocks/ObtenerTurno/ObtenerAgendaProfesional.js",
 		"//nbsf000des01/c$/Inetpub/wwwroot/BrokerWSDesa/Actions/Adapters/DB2/DB2Adapter.dll.config",
+		"//nbsf000des01/c$/Inetpub/wwwroot/BrokerWSDesa/Actions/Adapters/AS/ASAdapter.dll.config",
 		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Scripts/app.ajax.js",
 		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Content/mocks/ObtenerTurno/ObtenerEspecialidades.js",
 		"/C/Projects/sicemed/Sicemed/Sicemed.Web/Content/mocks/ObtenerTurno/BuscarProfesional.js",
@@ -152,6 +153,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"inicial",
 			"debug",
 			"tab",
 			"ctrl+d",
@@ -195,15 +197,15 @@
 					"file": "Sicemed.Web/Views/ObtenerTurno/Index.cshtml",
 					"settings":
 					{
-						"buffer_size": 1727,
+						"buffer_size": 2527,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1078,
-								1078
+								1172,
+								1197
 							]
 						],
 						"settings":
@@ -214,7 +216,7 @@
 							"word_wrap": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 432.0,
+						"translation.y": 448.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -224,15 +226,15 @@
 					"file": "Sicemed.Web/Content/mocks/ObtenerTurno/BuscarProfesional.js",
 					"settings":
 					{
-						"buffer_size": 387,
+						"buffer_size": 385,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								278,
-								278
+								385,
+								0
 							]
 						],
 						"settings":
@@ -250,7 +252,7 @@
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -258,51 +260,52 @@
 					"file": "Sicemed.Web/Scripts/ObtenerTurno/index.js",
 					"settings":
 					{
-						"buffer_size": 1800,
+						"buffer_size": 4984,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								762,
-								762
+								2735,
+								2735
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4.0,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 96.0,
+						"translation.y": 1056.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "//nbsf000des01/c$/Inetpub/wwwroot/BrokerWSDesa/Actions/Adapters/DB2/DB2Adapter.dll.config",
+					"file": "/D/Documents and Settings/Administrator/Desktop/fullcalendar-1.5.2/demos/default.html",
 					"settings":
 					{
-						"buffer_size": 2512,
+						"buffer_size": 2019,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								171,
-								161
+								624,
+								1715
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/XML/XML.tmLanguage",
-							"tab_size": 4.0,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 768.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -409,6 +412,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 261.0,
+	"side_bar_width": 221.0,
 	"status_bar_visible": true
 }

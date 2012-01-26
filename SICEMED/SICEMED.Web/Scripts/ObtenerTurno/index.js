@@ -38,7 +38,7 @@ var obtenerTurno = (function () {
 
         self.profesionalesEncontrados = ko.observableArray([]);
 
-        self.buscarProfesionales = function () {            
+        self.buscarProfesionales = function () {
             self.profesionalesEncontrados.removeAll();
             $.getJSON('/ObtenerTurno/BuscarProfesional').done(function (data) {
                 for (var i = data.length - 1; i >= 0; i--) {
@@ -66,36 +66,33 @@ var obtenerTurno = (function () {
 
     // Expone un evento
     // * reservarTurno(turno)
-    var seleccionTurnoVm = function(){
+    var seleccionTurnoVm = function () {
         var self = this;
-        
+
         self.turnosDisponibles = ko.observableArray([]);
 
         //Incializar agenda
         $.getJSON("/ObtenerTurno/ObtenerAgendaProfesional").done(function (data) {
             for (var i = data.length - 1; i >= 0; i--) {
                 var turno = data[i];
-                turno.reservarTurno = function(){
+                turno.reservarTurno = function () {
                     $(self).trigger('reservarTurno', [turno]);
                 };
                 self.turnosDisponibles.push(turno);
-            };                                  
-            
-            //Render del calendar
-            console.log("Render");
-            console.log($('#calendar'));
-            $('#calendar').fullCalendar({events:[]});                                
-        });          
+                console.log(turno);
+            }
+            //TODO:Agregar los turnos al calendar
+        });
     };
 
 
-    var comprobanteVm = function(){
+    var comprobanteVm = function () {
         var self = this;
-        
-        self.imprimir = function(){
+
+        self.imprimir = function () {
             console.log("Imprimir");
         };
-    };    
+    };
 
     var stepSeleccionProfesional = new step(1, 'Seleccion De Profesional', 'selectProfesional', new seleccionProfesionalesVm());
     var stepSeleccionTurno = new step(2, 'Seleccion De Turno', 'selectTurno', new seleccionTurnoVm());
@@ -126,6 +123,7 @@ var obtenerTurno = (function () {
         self.elegirTurnoEnAgenda = function (e, profesional) {
             self.profesionalSeleccionado(profesional);
             self.currentStep(self.stepModels()[1]);
+            $('#calendar').show();
         };
         self.reservarTurno = function (e, turno) {
             self.turnoSeleccionado(turno);
@@ -134,9 +132,13 @@ var obtenerTurno = (function () {
 
         $(stepSeleccionProfesional.model()).bind('reservarTurnoLibre', self.reservarTurnoLibre);
         $(stepSeleccionProfesional.model()).bind('elegirTurnoEnAgenda', self.elegirTurnoEnAgenda);
-        
+
         $(stepSeleccionTurno.model()).bind('reservarTurno', self.reservarTurno);
 
+        //Render del calendar
+        $('#calendar').fullCalendar({
+            events: []
+        }).hide();
     };
 
     my.vm = new wizard();

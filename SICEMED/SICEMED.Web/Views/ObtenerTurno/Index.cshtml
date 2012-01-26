@@ -6,9 +6,12 @@
 <h2>
     Obtener Turno
 </h2>
+
 <article data-bind="template: { name: 'currentTmpl', data: currentStep }">
 
 </article>
+
+<div id="calendar"></div>
 
 <script id="currentTmpl" type="text/html">
     <h2 data-bind="text: name"></h2>
@@ -37,7 +40,6 @@
     </script>
 
     <script id="selectTurno" type="text/html">
-        <div id="calendar"></div>
     </script>    
 
     <script id="selectComprobante" type="text/html">
