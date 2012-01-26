@@ -53,8 +53,8 @@
         </div>
         <h3>Turno</h3>
         <div>
-            <span data-bind="text: turnoSeleccionado().FechaTurnoInicial"></span>
-            <span data-bind="text: turnoSeleccionado().FechaTurnoFinal"></span>
+            <span data-bind="text: app.format.fulldate(turnoSeleccionado().FechaTurnoInicial)"></span>
+            <span data-bind="text: app.format.fulldate(turnoSeleccionado().FechaTurnoFinal)"></span>
             <span data-bind="text: turnoSeleccionado().Consultorio.Nombre"></span>
         </div>
         <div>
@@ -72,7 +72,7 @@
                 {{/each}}
                 <div>
                     {{if ProximoTurno}}
-                        Pr&oacute;ximo Turno: <a href="" data-bind="click:reservarTurnoLibre,text: ProximoTurno"></a>
+                        Pr&oacute;ximo Turno: <a href="" data-bind="click:reservarTurnoLibre,text: app.format.fulldate(ProximoTurno)"></a>
                         <br/>
                         <a href="" data-bind="click: elegirTurnoEnAgenda">Buscar turno en la agenda</a>
                     {{else}}
