@@ -77,6 +77,9 @@ var obtenerTurno = (function () {
         self.init = function () {
             //Incializar agenda
             $.getJSON("/ObtenerTurno/ObtenerAgendaProfesional").done(function (data) {
+                var events = [];
+                var calendar = $("#calendar");
+                calendar.fullCalendar('removeEvents');
                 for (var i = data.length - 1; i >= 0; i--) {
                     var turno = data[i];
                     turno.reservarTurno = function () {
@@ -87,11 +90,12 @@ var obtenerTurno = (function () {
                         title: 'Reservar...',
                         start: turno.FechaTurnoInicial,
                         end: turno.FechaTurnoFinal,
+                        allDay: false,
                         description: turno.Consultorio.Nombre
                     };
-                    $("#calendar").fullCalendar('addEvent', event);
-                    $("#calendar").fullCalendar('renderEvent', event);
+                    events.push(event);
                 }
+                calendar.fullCalendar('addEventSource', events);
             });
         };
     };
@@ -152,6 +156,35 @@ var obtenerTurno = (function () {
 
         //Render del calendar
         $('#calendar').fullCalendar({
+            theme: true,
+            header: {
+                left: 'title',
+                center: '',
+                right: 'today prev,next'
+            },
+            weekends: false,
+            defaultView: 'agendaWeek',
+            allDaySlot: false,
+            minTime: '7:00', //Horario apertura clinica
+            maxTime: '20:00', //Horario cierre clinica
+            slotMinutes: 15, //Duracion por defecto turno
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab'],
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
+                        'Agosto', 'Septiembre', 'Ocubtre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                        'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec'],
+            buttonText: {
+                today: 'hoy',
+                month: 'mes',
+                week: 'semana',
+                day: 'dia'
+            },
+            columnFormat: {
+                month: 'ddd',
+                week: 'ddd d/M',
+                day: 'dddd d/M'
+            },
             events: []
         }).hide();
     };
