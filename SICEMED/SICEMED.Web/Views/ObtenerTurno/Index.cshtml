@@ -7,7 +7,7 @@
     Obtener Turno
 </h2>
 
-<article data-bind="template: { name: 'currentTmpl', data: currentStep }">
+<article data-bind="template: { name: 'currentTmpl', data: currentStep, afterRender: currentStep().model().init }">
 
 </article>
 

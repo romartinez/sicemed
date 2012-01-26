@@ -56,12 +56,15 @@ var obtenerTurno = (function () {
             });
         };
 
-        //Inicializar Especialidades
-        $.getJSON("/ObtenerTurno/ObtenerEspecialidades").done(function (data) {
-            for (var i = data.length - 1; i >= 0; i--) {
-                self.especialidades.push(data[i]);
-            };
-        });
+        self.init = function () {
+            //Inicializar Especialidades
+            $.getJSON("/ObtenerTurno/ObtenerEspecialidades").done(function (data) {
+                for (var i = data.length - 1; i >= 0; i--) {
+                    self.especialidades.push(data[i]);
+                }
+                ;
+            });
+        };
     };
 
     // Expone un evento
@@ -71,23 +74,35 @@ var obtenerTurno = (function () {
 
         self.turnosDisponibles = ko.observableArray([]);
 
-        //Incializar agenda
-        $.getJSON("/ObtenerTurno/ObtenerAgendaProfesional").done(function (data) {
-            for (var i = data.length - 1; i >= 0; i--) {
-                var turno = data[i];
-                turno.reservarTurno = function () {
-                    $(self).trigger('reservarTurno', [turno]);
-                };
-                self.turnosDisponibles.push(turno);
-                console.log(turno);
-            }
-            //TODO:Agregar los turnos al calendar
-        });
+        self.init = function () {
+            //Incializar agenda
+            $.getJSON("/ObtenerTurno/ObtenerAgendaProfesional").done(function (data) {
+                for (var i = data.length - 1; i >= 0; i--) {
+                    var turno = data[i];
+                    turno.reservarTurno = function () {
+                        $(self).trigger('reservarTurno', [turno]);
+                    };
+                    self.turnosDisponibles.push(turno);
+                    var event = {
+                        title: 'Reservar...',
+                        start: turno.FechaTurnoInicial,
+                        end: turno.FechaTurnoFinal,
+                        description: turno.Consultorio.Nombre
+                    };
+                    $("#calendar").fullCalendar('addEvent', event);
+                    $("#calendar").fullCalendar('renderEvent', event);
+                }
+            });
+        };
     };
 
 
     var comprobanteVm = function () {
         var self = this;
+
+        self.init = function () {
+
+        };
 
         self.imprimir = function () {
             console.log("Imprimir");
