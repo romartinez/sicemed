@@ -6,7 +6,7 @@
     "Especialidades":[
       "Dermatologo", "Kinesiologo"
     ],
-    "ProximoTurno": "/new Date()/"
+    "ProximoTurno": "2012-01-26T11:00:00"
   },
   {
     "Id":5465,

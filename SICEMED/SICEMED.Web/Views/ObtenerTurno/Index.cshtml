@@ -43,8 +43,19 @@
     </script>    
 
     <script id="selectComprobante" type="text/html">
+        <h3>Profesional</h3>
         <div>
-            Datos
+            <img data-bind="attr: {src: profesionalSeleccionado().Foto, alt: profesionalSeleccionado().Nombre}" />
+            <span data-bind="text: profesionalSeleccionado().Nombre"></span>
+            {{each profesionalSeleccionado().Especialidades}}
+                ${$value},
+            {{/each}}
+        </div>
+        <h3>Turno</h3>
+        <div>
+            <span data-bind="text: turnoSeleccionado().FechaTurnoInicial"></span>
+            <span data-bind="text: turnoSeleccionado().FechaTurnoFinal"></span>
+            <span data-bind="text: turnoSeleccionado().Consultorio.Nombre"></span>
         </div>
         <div>
             <button data-bind="click: imprimir">Imprimir</button>

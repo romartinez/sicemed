@@ -13,6 +13,10 @@
       "Consultorio": {
           "Id": 2,
           "Nombre": "PBA 1002"
+      },
+      "Paciente" : {
+          "Id": 1,
+          "Nombre": "Walter Poch"
       }
   }
 ]

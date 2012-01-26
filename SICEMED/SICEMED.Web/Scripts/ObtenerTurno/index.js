@@ -75,6 +75,7 @@ var obtenerTurno = (function () {
         self.turnosDisponibles = ko.observableArray([]);
 
         self.init = function () {
+            $('#calendar').show();
             //Incializar agenda
             $.getJSON("/ObtenerTurno/ObtenerAgendaProfesional").done(function (data) {
                 var events = [];
@@ -87,11 +88,14 @@ var obtenerTurno = (function () {
                     };
                     self.turnosDisponibles.push(turno);
                     var event = {
-                        title: 'Reservar...',
+                        title: turno.Paciente ? turno.Paciente.Nombre : 'Reservar...',
                         start: turno.FechaTurnoInicial,
                         end: turno.FechaTurnoFinal,
                         allDay: false,
-                        description: turno.Consultorio.Nombre
+                        description: turno.Consultorio.Nombre,
+                        color: turno.Paciente ? '#F00' : null,
+                        libre: !turno.Paciente,
+                        turno: turno
                     };
                     events.push(event);
                 }
@@ -104,8 +108,11 @@ var obtenerTurno = (function () {
     var comprobanteVm = function () {
         var self = this;
 
-        self.init = function () {
+        self.profesionalSeleccionado = ko.observable(null);
+        self.turnoSeleccionado = ko.observable(null);
 
+        self.init = function () {
+            $('#calendar').hide();
         };
 
         self.imprimir = function () {
@@ -127,25 +134,21 @@ var obtenerTurno = (function () {
 
         self.currentStep = ko.observable(self.stepModels()[0]);
 
-        self.profesionalSeleccionado = ko.observable(null);
-        self.turnoSeleccionado = ko.observable(null);
-
         self.getTemplate = function () {
             return self.currentStep().template;
         };
 
         self.reservarTurnoLibre = function (e, profesional) {
-            self.profesionalSeleccionado(profesional);
-            self.turnoSeleccionado(profesional.ProximoTurno);
+            stepComprobante.model().profesionalSeleccionado(profesional);
+            stepComprobante.model().turnoSeleccionado(profesional.ProximoTurno);
             self.currentStep(self.stepModels()[2]);
         };
         self.elegirTurnoEnAgenda = function (e, profesional) {
-            self.profesionalSeleccionado(profesional);
+            stepComprobante.model().profesionalSeleccionado(profesional);
             self.currentStep(self.stepModels()[1]);
-            $('#calendar').show();
         };
         self.reservarTurno = function (e, turno) {
-            self.turnoSeleccionado(turno);
+            stepComprobante.model().turnoSeleccionado(turno);
             self.currentStep(self.stepModels()[2]);
         };
 
@@ -184,6 +187,15 @@ var obtenerTurno = (function () {
                 month: 'ddd',
                 week: 'ddd d/M',
                 day: 'dddd d/M'
+            },
+            eventClick: function (calEvent, jsEvent, view) {
+                if(calEvent.libre) self.reservarTurno(jsEvent, calEvent.turno);
+            },
+            eventMouseout: function (event, jsEvent, view) {
+                $(this).css('cursor', 'auto');
+            },
+            eventMouseover: function (event, jsEvent, view) {
+                if (event.libre) $(this).css('cursor', 'pointer');
             },
             events: []
         }).hide();
