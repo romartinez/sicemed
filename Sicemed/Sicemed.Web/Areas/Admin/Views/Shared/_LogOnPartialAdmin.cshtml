@@ -1,0 +1,33 @@
+﻿@using Sicemed.Web.Models
+@{
+    var usuario = User as Persona;
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <img src="../../public/images/profile.jpg" width="55" alt="Profile Pic" />
+    <h2>
+        Administrator
+    </h2>
+    <h3>
+        @usuario.Apellido, @usuario.Nombre
+    </h3>
+    <ul>        
+        <li>
+            @Html.ActionLink("Salir", "Salir", "Cuenta", new { Area = "" }, new { })
+        </li>
+    </ul>    
+}
+else
+{
+    <img src="../../public/images/profile_anon.jpg" width="55" alt="Profile Pic" />
+    <h2>
+        
+    </h2>
+    <h3>
+        <a href="#"></a></h3>
+    <ul>        
+        <li>
+            @Html.ActionLink("Iniciar Sesión", "IniciarSesion", "Cuenta", new { Area = "" }, new { })
+        </li>
+    </ul>
+}

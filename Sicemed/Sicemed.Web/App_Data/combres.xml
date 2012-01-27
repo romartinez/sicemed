@@ -33,27 +33,83 @@
       <resource path="~/content/jquery.jqGrid/ui.jqgrid.css" />
       <resource path="~/content/smart_wizard.css" />
       <resource path="~/content/menu.css" />
-      <resource path="~/content/fullcalendar.css" />      
+      <resource path="~/content/fullcalendar.css" />
     </resourceSet>
-    <resourceSet name="siteJs" type="js">
-      <resource path="~/scripts/jquery-1.6.2.js" />
-      <resource path="~/scripts/jquery-ui-1.8.15.js" />
-      <resource path="~/scripts/jquery.address.js" />
-      <resource path="~/scripts/i18n/jquery.ui.datepicker-es.js" />
-      <resource path="~/scripts/jQuery.tmpl.js" />
-      <resource path="~/scripts/jquery.unobtrusive-ajax.js" />
-      <resource path="~/scripts/jquery.validate.js" />
-      <resource path="~/scripts/jquery.validate.unobtrusive.js" />
-      <resource path="~/scripts/knockout-2.0.0.js" />
-      <resource path="~/scripts/knockout.mapping-latest.js" />
-      <resource path="~/scripts/modernizr-2.0.6-development-only.js" />
-      <resource path="~/scripts/jquery.smartWizard-2.0.js" />
+    <resourceSet name="appCss" type="css">            
+      <resource path="~/content/jquery.jqGrid/ui.jqgrid.css" />
+    </resourceSet>
+    <resourceSet name="adminicaCss" type="css">
+      <resource path="~/public/styles/reset.css"/>
+      <resource path="~/public/styles/googlefont.css"/>
+
+      <resource path="~/public/scripts/fancybox/jquery.fancybox-1.3.4.css"/>
+      <resource path="~/public/scripts/tinyeditor/style.css"/>      
+      <resource path="~/public/scripts/slidernav/slidernav.css"/>
+      <resource path="~/public/scripts/syntax_highlighter/styles/shCore.css"/>
+      <resource path="~/public/scripts/syntax_highlighter/styles/shThemeDefault.css"/>
+      <resource path="~/public/scripts/uitotop/css/ui.totop.css"/>
+      <resource path="~/public/scripts/fullcalendar/fullcalendar.css"/>
+      <resource path="~/public/scripts/isotope/isotope.css"/>
+      <resource path="~/public/scripts/elfinder/css/elfinder.css"/>
+
+      <resource path="~/public/scripts/tiptip/tipTip.css"/>
+      <resource path="~/public/scripts/uniform/css/uniform.aristo.css"/>
+      <resource path="~/public/scripts/multiselect/css/ui.multiselect.css"/>
+      <resource path="~/public/scripts/selectbox/jquery.selectBox.css"/>      
+      <resource path="~/public/scripts/colorpicker/css/colorpicker.css"/>
+      <resource path="~/public/scripts/uistars/jquery.ui.stars.min.css"/>
+
+      <resource path="~/public/scripts/themeroller/Aristo.css"/>
+
+      <resource path="~/public/styles/text.css"/>
+      <resource path="~/public/styles/grid.css"/>
+      <resource path="~/public/styles/main.css"/>
+      <resource path="~/public/styles/theme/theme_base.css"/>
+
+      <resource path="~/public/styles/theme/layout_fixed.css"/>
+      <resource path="~/public/styles/theme/theme_blue.css"/>
+      <resource path="~/public/styles/theme/bg_noise.css"/>
+
+      <resource path="~/public/styles/buttons.css"/>
+      <resource path="~/public/styles/ie.css"/>
+    </resourceSet>
+    <resourceSet name="adminicaJs" type="js">
+      <!-- Load JQuery -->
+      <resource path="~/public/scripts/jquery-1.7.1.min.js" />
+      <!-- Load JQuery UI -->
+      <resource path="~/public/scripts/jquery-ui-1.8.17.custom.min.js" />
+      <!-- Global -->
+      <resource path="~/public/scripts/touchPunch/jquery.ui.touch-punch.min.js" />
+      <resource path="~/public/scripts/uitotop/js/jquery.ui.totop.js" />
+      <!-- Forms -->
+      <resource path="~/public/scripts/uniform/jquery.uniform.min.js"/>
+      <resource path="~/public/scripts/autogrow/jquery.autogrowtextarea.js"/>
+      <resource path="~/public/scripts/multiselect/js/ui.multiselect.js"/>
+      <resource path="~/public/scripts/selectbox/jquery.selectBox.min.js"/>
+      <resource path="~/public/scripts/timepicker/jquery.timepicker.js"/>
+      <resource path="~/public/scripts/colorpicker/js/colorpicker.js"/>
+      <resource path="~/public/scripts/uistars/jquery.ui.stars.min.js"/>
+      <resource path="~/public/scripts/tiptip/jquery.tipTip.minified.js"/>
+      <resource path="~/public/scripts/validation/jquery.validate.min.js"/>
+
+      <!-- Configuration Script -->
+      <resource path="~/public/scripts/adminica/adminica_ui.js"/>
+      <resource path="~/public/scripts/adminica/adminica_forms.js"/>
+      <resource path="~/public/scripts/adminica/adminica_mobile.js"/>
+    </resourceSet>
+    <resourceSet name="adminicaBottomJs" type="js">
+      <resource path="~/public/scripts/isotope/jquery.isotope.min.js"/>
+      <resource path="~/public/scripts/fancybox/jquery.fancybox-1.3.4.js"/>
+      <resource path="~/public/scripts/adminica/adminica_gallery.js"/>
+    </resourceSet>
+    <resourceSet name="appJs" type="js">
+      <resource path="~/scripts/msDateJsonParser.js" />
+      <resource path="~/scripts/postAntiForgery.js" />
       <resource path="~/scripts/i18n/grid.locale-es.js" />
       <resource path="~/scripts/jquery.jqGrid.min.js" />
       <resource path="~/scripts/jquery.blockUI.js" />
-      <resource path="~/scripts/jquery.easing.1.3.js" />
-      <resource path="~/scripts/postAntiForgery.js" />
-      <resource path="~/scripts/postify.js" />
+      <resource path="~/scripts/jQuery.tmpl.js" />
+      <resource path="~/scripts/knockout-2.0.0.js" />
       <resource path="~/scripts/fullcalendar.js" />
       <resource path="~/scripts/app.js" />
       <resource path="~/scripts/app.ajax.js" />
@@ -61,7 +117,36 @@
       <resource path="~/scripts/app.grid.js" />
       <resource path="~/scripts/app.overrides.js" />
       <resource path="~/scripts/app.ui.js" />
+    </resourceSet>
+    <resourceSet name="siteJs" type="js">
+      <resource path="~/scripts/jquery-1.6.2.js" />
+      <resource path="~/scripts/jquery-ui-1.8.15.js" />
+      <resource path="~/scripts/jquery.address.js" />
+      <resource path="~/scripts/i18n/jquery.ui.datepicker-es.js" />
+      <resource path="~/scripts/jquery.unobtrusive-ajax.js" />
+      <resource path="~/scripts/jquery.validate.js" />
+      <resource path="~/scripts/jquery.validate.unobtrusive.js" />
+      <resource path="~/scripts/modernizr-2.0.6-development-only.js" />
+      <resource path="~/scripts/jquery.smartWizard-2.0.js" />
+      <resource path="~/scripts/jquery.easing.1.3.js" />
+      <resource path="~/scripts/postify.js" />
+      
+      
       <resource path="~/scripts/msDateJsonParser.js" />
+      <resource path="~/scripts/postAntiForgery.js" />
+      <resource path="~/scripts/i18n/grid.locale-es.js" />
+      <resource path="~/scripts/jquery.jqGrid.min.js" />
+      <resource path="~/scripts/jquery.blockUI.js" />
+      <resource path="~/scripts/jQuery.tmpl.js" />
+      <resource path="~/scripts/knockout-2.0.0.js" />
+      <resource path="~/scripts/knockout.mapping-latest.js" />
+      <resource path="~/scripts/fullcalendar.js" />
+      <resource path="~/scripts/app.js" />
+      <resource path="~/scripts/app.ajax.js" />
+      <resource path="~/scripts/app.fixes.js" />
+      <resource path="~/scripts/app.grid.js" />
+      <resource path="~/scripts/app.overrides.js" />
+      <resource path="~/scripts/app.ui.js" />
     </resourceSet>
   </resourceSets>
 </combres>
