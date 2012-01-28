@@ -1,24 +1,46 @@
 ﻿@using Sicemed.Web.Models
+@using Sicemed.Web.Models.Roles
 @model IEnumerable<Pagina>
-           
 @foreach (var pagina in Model)
 {
-    <li class="@( @pagina.Hijos.Any() ? "parent": "")">
-        <a href="@Url.Action("Index", "Content", new {id = pagina.Id, Area = ""})">
-            <span>@pagina.Nombre</span>
-        </a>        
+    <li class="@( @pagina.Hijos.Any() ? "parent" : "")"><a href="@Url.Action("Index", "Content", new { id = pagina.Id, Area = "" })">
+        <span>@pagina.Nombre</span> </a>
         @if (pagina.Hijos.Any())
         {
             <ul>
                 @foreach (var hijo in pagina.Hijos)
                 {
-                    <li class="first">
-                        <a href="@Url.Action("Index", "Content", new {id = hijo.Id, Area = ""})">
-                            <span>@hijo.Nombre</span>
-                        </a>
-                    </li>
+                    <li class="first"><a href="@Url.Action("Index", "Content", new { id = hijo.Id, Area = "" })">
+                        <span>@hijo.Nombre</span> </a></li>
                 }
             </ul>
         }
+    </li>
+}
+@if (User.IsInRole(Rol.ADMINISTRADOR))
+{
+    <li><a href="#"><span>Admin</span> </a>
+        <ul>
+            <li><span>@Html.ActionLink("Datos Clínica", "Index", new { Area = "Admin", Controller = "Clinicas" })</span>
+            </li>
+            <li><span>@Html.ActionLink("Paginas", "Index", new { Area = "Admin", Controller = "Paginas" })</span>
+            </li>
+            <li><span>@Html.ActionLink("Personas", "Index", new { Area = "Admin", Controller = "Personas" })</span>
+            </li>
+            <li><span>@Html.ActionLink("Provincias", "Index", new { Area = "Admin", Controller = "Provincias" })</span>
+            </li>
+            <li><span>@Html.ActionLink("Localidades", "Index", new { Area = "Admin", Controller = "Localidades" })</span>
+            </li>
+            <li><span>@Html.ActionLink("Feriados", "Index", new { Area = "Admin", Controller = "Feriados" })</span>
+            </li>
+            <li><span>@Html.ActionLink("Obras Sociales", "Index", new { Area = "Admin", Controller = "ObrasSociales" })</span>
+            </li>
+            <li><span>@Html.ActionLink("Planes", "Index", new { Area = "Admin", Controller = "Planes" })</span>
+            </li>
+            <li><span>@Html.ActionLink("Especialidades", "Index", new { Area = "Admin", Controller = "Especialidades" })</span>
+            </li>
+            <li><span>@Html.ActionLink("Consultorios", "Index", new { Area = "Admin", Controller = "Consultorios" })</span>
+            </li>
+        </ul>
     </li>
 }

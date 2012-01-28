@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisualState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ShowCheckBoxes="false">
+  <TopNode>[0-1000]D:\Documents\Projects\Sicemed\Sicemed\Sicemed.Tests\Sicemed.nunit</TopNode>
+  <SelectedNode>[0-1000]D:\Documents\Projects\Sicemed\Sicemed\Sicemed.Tests\Sicemed.nunit</SelectedNode>
+  <ExcludeCategories>false</ExcludeCategories>
+  <Nodes>
+    <Node UniqueName="[0-1000]D:\Documents\Projects\Sicemed\Sicemed\Sicemed.Tests\Sicemed.nunit" Expanded="true" />
+    <Node UniqueName="[0-1048]D:\Documents\Projects\Sicemed\Sicemed\Sicemed.Tests\bin\x86\Debug\Sicemed.Tests.dll" Expanded="true" />
+    <Node UniqueName="[0-1049]Sicemed" Expanded="true" />
+    <Node UniqueName="[0-1050]Sicemed.Tests" Expanded="true" />
+    <Node UniqueName="[0-1054]Sicemed.Tests.Infrastructure" Expanded="true" />
+    <Node UniqueName="[0-1055]Sicemed.Tests.Infrastructure.Services" Expanded="true" />
+    <Node UniqueName="[0-1011]Sicemed.Tests.Infrastructure.Services.MembershipServiceTests" Expanded="true" />
+    <Node UniqueName="[0-1051]Sicemed.Tests.Models" Expanded="true" />
+    <Node UniqueName="[0-1061]Sicemed.Tests.Models.Agendas" Expanded="true" />
+    <Node UniqueName="[0-1044]Sicemed.Tests.Models.Agendas.AgendaTests" Expanded="true" />
+    <Node UniqueName="[0-1056]Sicemed.Tests.Models.Especialidades" Expanded="true" />
+    <Node UniqueName="[0-1059]Sicemed.Tests.Models.Feriados" Expanded="true" />
+    <Node UniqueName="[0-1052]Sicemed.Tests.Models.Localidades" Expanded="true" />
+    <Node UniqueName="[0-1058]Sicemed.Tests.Models.Paginas" Expanded="true" />
+    <Node UniqueName="[0-1053]Sicemed.Tests.Models.Personas" Expanded="true" />
+    <Node UniqueName="[0-1057]Sicemed.Tests.Models.Provincias" Expanded="true" />
+    <Node UniqueName="[0-1060]Sicemed.Tests.Models.Turnos" Expanded="true" />
+  </Nodes>
+</VisualState>

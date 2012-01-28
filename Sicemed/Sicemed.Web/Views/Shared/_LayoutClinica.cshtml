@@ -4,18 +4,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="author" content="ThemeFuse">
-    <meta name="Description" content="A short description of your company">
-    <meta name="Keywords" content="Some keywords that best describe your business">
-    <title>Medica - Medical Services</title>
-    <link href="../../public/clinica/style.css" media="screen" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="../../public/clinica/jquery.js"></script>    
-    <script type="text/javascript" language="JavaScript" src="../../public/clinica/general.js"></script>
-    <script type="text/javascript" language="JavaScript" src="../../public/clinica/jquery_003.js"></script>
-    <script type="text/javascript" language="JavaScript" src="../../public/clinica/jquery_002.js"></script>
-    <script type="text/javascript" language="JavaScript" src="../../public/clinica/slides.js"></script>
+    <meta name="author" content="Walter Poch">
+    <meta name="Description" content="">
+    <meta name="Keywords" content="">
+    <title>@ViewBag.Title</title>
+    
+    @Html.Raw(WebExtensions.CombresLink("css"))
     <!--[if IE 7]>
-    <link rel="stylesheet" type="text/css" href="../../public/clinica/ie.css" />
+    <link rel="stylesheet" type="text/css" href="../../public/css/theme_ie.css" />
     <![endif]-->
 </head>
 <body>
@@ -25,13 +21,13 @@
                 <div class="container">
                     <div class="logo">
                         <a href="http://themefuse.com/demo/html/Medica/index.html">
-                            <img src="../../public/clinica/logo.png" alt="Medica" height="80" width="210"></a></div>
+                            <img src="../../public/images/theme/logo.png" alt="Medica" height="80" width="210"></a></div>
                     <div class="header_contacts">
                         <p>
                             Call us directly: <span class="icon_phone">1-800-643-4300</span></p>
                         <p>
                             5 East Hyde Park, Chicago <a href="http://themefuse.com/demo/html/Medica/locations.html"
-                                class="icon_map">View Location</a></p>
+                                                         class="icon_map">View Location</a></p>
                     </div>
                 </div>
             </div>
@@ -47,7 +43,7 @@
             <!-- header image/slider -->
             <div class="header_bot header_image">
                 <div class="container">
-                    <img src="../../public/clinica/header_image_2.jpg" alt="" height="142" width="960">
+                    <img src="../../public/images/theme/header_image_2.jpg" alt="" height="142" width="960">
                 </div>
             </div>
             <!--/ header image/slider -->
@@ -59,9 +55,6 @@
                 <!-- content -->
                 <div class="grid_8 content">
                     <div class="post-item">
-                        <h1>
-                            @ViewBag.Title
-                        </h1>
                         <div class="entry">
                             @RenderBody()
                         </div>
@@ -132,11 +125,11 @@
                 <div class="grid_4">
                     <div class="text-center">
                         <p>
-                            <img src="../../public/clinica/logo_footer.png" alt="" height="34" width="200"></p>
+                            <img src="../../public/images/theme/logo_footer.png" alt="" height="34" width="200"></p>
                         <br>
                         <p>
                             1251-A Nowhere Boulevard<br>
-                            City of OuttaSight, State 90378</p>
+                                                    City of OuttaSight, State 90378</p>
                     </div>
                 </div>
                 <div class="clear">
@@ -146,5 +139,11 @@
             </div>
         </div>
     </div>
+    
+    @Html.Raw(WebExtensions.CombresLink("js"))
+    @RenderSection("Scripts", false)
+    <script type="text/javascript">
+        jQuery(document).ready(app.initialize);
+    </script>
 </body>
 </html>

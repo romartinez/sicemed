@@ -1,0 +1,4 @@
+﻿input[type="reset"],input[type="submit"],input[type="button"], button {
+    width: 160px;
+    text-transform: uppercase;
+}
