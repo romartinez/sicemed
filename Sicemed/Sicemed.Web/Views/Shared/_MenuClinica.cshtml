@@ -1,23 +1,45 @@
-﻿@using Sicemed.Web.Models
-@using Sicemed.Web.Models.Roles
-@model IEnumerable<Pagina>
+﻿@using System.Text
+
+@model IEnumerable<dynamic>
+           
+           
+@functions{
+    public string RenderMenuItem(dynamic pagina)
+    {
+        var html = new StringBuilder();
+        html.AppendFormat("<li class=\"{0} {1} {2} {3} {4}\">",
+            pagina.IsFirst ? "first" : string.Empty, 
+            pagina.IsParent ? "parent": string.Empty,
+            pagina.IsCurrentItem ? "current-menu-item" : string.Empty,
+            pagina.IsCurrent ? "current-menu-ancestor" : string.Empty, 
+            pagina.IsLast ? "last": string.Empty);
+
+        html.AppendFormat("<a href=\"{0}\"><span>{1}</span></a>", pagina.Url, pagina.Nombre);
+
+        if (pagina.IsParent)
+        {
+            html.Append("<ul>");
+            foreach (var hijo in pagina.Hijos)
+            {
+                html.Append(RenderMenuItem(hijo));
+            }
+            html.Append("</ul>");
+        }
+        
+        html.Append("</li>");
+        
+        return html.ToString();
+    }
+}
+
 @foreach (var pagina in Model)
 {
-    <li class="@( @pagina.Hijos.Any() ? "parent" : "")"><a href="@Url.Action("Index", "Content", new { id = pagina.Id, Area = "" })">
-        <span>@pagina.Nombre</span> </a>
-        @if (pagina.Hijos.Any())
-        {
-            <ul>
-                @foreach (var hijo in pagina.Hijos)
-                {
-                    <li class="first"><a href="@Url.Action("Index", "Content", new { id = hijo.Id, Area = "" })">
-                        <span>@hijo.Nombre</span> </a></li>
-                }
-            </ul>
-        }
-    </li>
+    @Html.Raw(RenderMenuItem(pagina))
 }
-@if (User.IsInRole(Rol.ADMINISTRADOR))
+
+
+
+@*@if (User.IsInRole(Rol.ADMINISTRADOR))
 {
     <li><a href="#"><span>Admin</span> </a>
         <ul>
@@ -43,4 +65,4 @@
             </li>
         </ul>
     </li>
-}
+}*@

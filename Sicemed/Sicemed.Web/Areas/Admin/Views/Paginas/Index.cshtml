@@ -27,7 +27,7 @@
                     caption: 'Gesti&oacute;n De P&aacute;ginas',
                     emptyrecords: 'No hay P&aacute;ginas cargadas.',
                     modalWidth: 600,                    
-                    colNames: ['Id', 'Nombre', 'Contenido', 'Padre'],
+                    colNames: ['Id', 'Nombre', 'Url', 'Orden', 'Contenido', 'Padre'],
                     colModel: [
                             {
                                 name: 'Id',
@@ -47,6 +47,37 @@
                                 },
                                 formoptions: {
                                     label: 'Nombre (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Url',
+                                index: 'Url',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Url (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Orden',
+                                index: 'Orden',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true,
+                                    number: true
+                                },
+                                formoptions: {
+                                    label: 'Orden (*)',
                                     maxlength: '255',
                                     size: '255'
                                 }
