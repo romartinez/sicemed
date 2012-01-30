@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Castle.Windsor;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Helpers;
+using Sicemed.Web.Infrastructure.Services;
 
 namespace Sicemed.Web.Infrastructure.Providers.FilterAtrribute
 {
@@ -14,21 +15,22 @@ namespace Sicemed.Web.Infrastructure.Providers.FilterAtrribute
     {
         private readonly IWindsorContainer _container;
 
-        private readonly IEnumerable<FilterAttribute> _globalFilters = new FilterAttribute[]
-                                                                       {
-                                                                           new AuditAtrribute(),
-                                                                           new HandleErrorAttribute(),
-                                                                           new MenuAttribute(),
-                                                                           new HandleErrorAttribute
-                                                                           {
-                                                                               ExceptionType = typeof (SecurityException),
-                                                                               View = "PermissionError"
-                                                                           },
-                                                                       };
+        private readonly IEnumerable<FilterAttribute> _globalFilters;
 
         public WindsorFilterAttributeFilterProvider(IWindsorContainer container)
         {
             _container = container;
+            _globalFilters = new FilterAttribute[]
+                                {
+                                    new AuditAtrribute(),
+                                    new HandleErrorAttribute(),
+                                    new MenuAttribute(_container.Resolve<IMembershipService>()),
+                                    new HandleErrorAttribute
+                                    {
+                                        ExceptionType = typeof (SecurityException),
+                                        View = "PermissionError"
+                                    },
+                                };
         }
 
         protected override IEnumerable<FilterAttribute> GetControllerAttributes(

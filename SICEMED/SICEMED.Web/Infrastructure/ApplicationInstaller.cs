@@ -181,9 +181,32 @@ namespace Sicemed.Web.Infrastructure
 
         private void CrearPaginas(ISession session)
         {
-            PaginaHome = new Pagina { Nombre = "Home", Contenido = "Hola a todos bienvenidos a SICEMED" };
-            PaginaAboutUs = new Pagina { Nombre = "About Us", Contenido = "Somos una empresa en pleno crecimiento." };
+            PaginaHome = new Pagina { Nombre = "Home", Contenido = "Hola a todos bienvenidos a SICEMED", Url = "", Orden = 0 };
+            PaginaAboutUs = new Pagina { Nombre = "About Us", Contenido = "Somos una empresa en pleno crecimiento.", Url = "AboutUs", Orden = 0 };
+            var paginaPadre = new Pagina { Nombre = "Con Hijos", Contenido = "Una pagina de prueba.", Url = "Padre", Orden = 0 };            
+            for (var i = 0; i < 5; i++ )
+            {
+                var hijo = new Pagina()
+                               {
+                                   Nombre = "Hijo " + i,
+                                   Contenido = "Una pagina de prueba.",
+                                   Url = "Padre/Hijo-" + i,
+                                   Orden = 0
+                               };
+                if(i == 0)
+                {
+                    hijo.AgregarHijo(new Pagina()
+                    {
+                        Nombre = "SubHijo",
+                        Contenido = "Una pagina de prueba.",
+                        Url = "Padre/Hijo-" + i + "/SubHijo",
+                        Orden = 0
+                    });
+                }
+                paginaPadre.AgregarHijo(hijo);
+            }
 
+            session.Save(paginaPadre);
             session.Save(PaginaAboutUs);
             session.Save(PaginaHome);
         }

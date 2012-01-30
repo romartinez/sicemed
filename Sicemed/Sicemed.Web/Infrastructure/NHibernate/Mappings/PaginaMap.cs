@@ -18,6 +18,12 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                                         map.NotNullable(true);
                                         map.Unique(true);
                                     });
+            Property(x => x.Url, map =>
+                                    {
+                                        map.NotNullable(true);
+                                        map.Unique(true);
+                                    });
+            Property(x => x.Orden, map => map.NotNullable(true));
 
             ManyToOne(x => x.Padre, map => map.ForeignKey("FK_Paginas_Padre"));
 

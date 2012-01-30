@@ -45,8 +45,12 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         {
             //Valido que el nombre sea unico.
             var session = SessionFactory.GetCurrentSession();
+            
             var paginaConMismoNombre =
                 session.QueryOver<Pagina>().Where(x => x.Nombre == modelo.Nombre && x.Id != modelo.Id).Future();
+
+            var paginaConMismaUrl =
+                session.QueryOver<Pagina>().Where(x => x.Url == modelo.Url && x.Id != modelo.Id).Future();
 
             if (!modelo.IsTransient())
             {
@@ -59,8 +63,11 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             }
 
             if (paginaConMismoNombre.Any())
-                throw new ValidationErrorException(string.Format("Ya existe una página con el nombre: '{0}'",
+                throw new ValidationErrorException(string.Format("Ya existe una página con el Nombre: '{0}'",
                                                                  modelo.Nombre));
+            if (paginaConMismaUrl.Any())
+                throw new ValidationErrorException(string.Format("Ya existe una página con la misma Url: '{0}'",
+                                                                 modelo.Url));
 
             return base.EsValido(modelo);
         }

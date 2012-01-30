@@ -19,6 +19,12 @@ namespace Sicemed.Web.Models
         [Required]
         public virtual string Contenido { get; set; }
 
+        [Required]
+        public virtual string Url { get; set; }
+
+        [Required]
+        public virtual int Orden { get; set; }
+
         public virtual Pagina Padre { get; set; }
 
         public virtual ISet<Pagina> Hijos
