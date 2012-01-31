@@ -32,6 +32,7 @@
     <resourceSet name="js" type="js">
       <resource path="~/public/js/libs/jquery-1.6.2.min.js" />
       <resource path="~/public/js/libs/jquery-ui-1.8.15.min.js" />
+      <resource path="~/public/js/libs/i18n/grid.locale-es.js" />
       <resource path="~/public/js/libs/jquery.jqGrid.min.js" />
       <resource path="~/public/js/libs/msDateJsonParser.js" />
       <resource path="~/public/js/libs/jQuery.tmpl.js" />
@@ -43,7 +44,6 @@
       <resource path="~/public/js/libs/fullcalendar.js" />
       <resource path="~/public/js/libs/jquery.smartWizard-2.0.js" />
 
-      <resource path="~/public/js/libs/i18n/grid.locale-es.js" />
       <resource path="~/public/js/libs/i18n/jquery.ui.datepicker-es.js" />
 
       <resource path="~/public/js/app/app.js" />

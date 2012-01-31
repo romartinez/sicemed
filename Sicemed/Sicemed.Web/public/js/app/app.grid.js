@@ -98,7 +98,7 @@
             rowList: [10, 25, 50],
             viewrecords: true,
             height: 'auto',
-            width: '730',
+            width: '950',
             jsonReader: {
                 page: "Page",
                 total: "Total",

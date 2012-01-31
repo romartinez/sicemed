@@ -4,7 +4,7 @@
 }
 @if (User.Identity.IsAuthenticated)
 {
-    @:<strong>@usuario.Apellido, @usuario.Nombre</strong>
+    @usuario.Apellido@:, @usuario.Nombre
         @:[ @Html.ActionLink("Salir", "Salir", "Cuenta", new {Area = ""}, new {}) ]
 } else
 {
