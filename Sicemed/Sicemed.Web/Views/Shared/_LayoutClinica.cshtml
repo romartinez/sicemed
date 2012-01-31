@@ -1,5 +1,4 @@
 ﻿@using Combres
-@using Sicemed.Web.Models.Roles
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -8,7 +7,6 @@
     <meta name="Description" content="">
     <meta name="Keywords" content="">
     <title>@ViewBag.Title</title>
-    
     @Html.Raw(WebExtensions.CombresLink("css"))
     <!--[if IE 7]>
     <link rel="stylesheet" type="text/css" href="../../public/css/theme_ie.css" />
@@ -20,14 +18,24 @@
             <div class="header_top">
                 <div class="container">
                     <div class="logo">
-                        <a href="http://themefuse.com/demo/html/Medica/index.html">
-                            <img src="../../public/images/theme/logo.png" alt="Medica" height="80" width="210"></a></div>
+                        <a href="@Url.Content("~/")">
+                            <img src="../../public/images/theme/logo.png" alt="SICEMED" height="80" width="210" />
+                        </a>
+                    </div>
                     <div class="header_contacts">
                         <p>
-                            Call us directly: <span class="icon_phone">1-800-643-4300</span></p>
+                            @Html.Partial("_LogOnPartial")
+                        </p>
                         <p>
-                            5 East Hyde Park, Chicago <a href="http://themefuse.com/demo/html/Medica/locations.html"
-                                                         class="icon_map">View Location</a></p>
+                            Comun&iacute;quese con nosotros:
+                            <span class="icon_phone">448-7896</span>
+                        </p>
+                        <p>
+                            Velez Sarsfield 982, Rosario
+                            <a href="#" class="icon_map">
+                                Ver Mapa
+                            </a>                            
+                        </p>
                     </div>
                 </div>
             </div>
@@ -43,7 +51,7 @@
             <!-- header image/slider -->
             <div class="header_bot header_image">
                 <div class="container">
-                    <img src="../../public/images/theme/header_image_2.jpg" alt="" height="142" width="960">
+                    <img src="../../public/images/theme/header_image_2.jpg" alt="" height="142" width="960"/>
                 </div>
             </div>
             <!--/ header image/slider -->
@@ -72,23 +80,15 @@
         <div class="footer">
             <div class="container_12">
                 <div class="grid_4 push_8">
-                    <div class="text-center">
+                    <div class="text-right">
                         <p>
-                            <img src="../../public/images/theme/logo_footer.png" alt="" height="34" width="200"></p>
-                        <br>
-                        <p>
-                            1251-A Nowhere Boulevard<br>
-                                                    City of OuttaSight, State 90378</p>
+                            <a href="http://wpoch.com.ar" target="_blank">Developed by Walter Poch</a>
+                        </p>
                     </div>
                 </div>
-                <div class="clear">
-                </div>
-                <div class="copyright">
-                    © 2011 WordPress theme by <a href="http://themefuse.com/">Themefuse.com</a></div>
             </div>
         </div>
     </div>
-    
     @Html.Raw(WebExtensions.CombresLink("js"))
     @RenderSection("Scripts", false)
     <script type="text/javascript">

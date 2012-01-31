@@ -66,31 +66,21 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             var user = _membershipService.GetCurrentUser();
             if (user != null && user.IsInRole(Rol.ADMINISTRADOR))
             {
-                dynamic pagina = new ExpandoObject();
-                pagina.Url = "";
-                pagina.Nombre = "Admin";
-                pagina.Hijos = new List<dynamic>();
-                pagina.IsParent = true;
-                pagina.IsCurrent = false;
-                pagina.IsCurrentItem = false;
-                pagina.IsFirst = false;
-                pagina.IsLast = true;
-                pagina.Parent = null;
+                var admin = CreateDefaultPagina("Admin", "#");                
+                var clinica = CreateDefaultPagina("Clinica", "Admin/Clinicas", admin);
+                admin.Hijos.Add(clinica);
 
-                dynamic hijo = new ExpandoObject();
-                hijo.Url = VirtualPathUtility.ToAbsolute("~/") + "Admin/Clinicas";
-                hijo.Nombre = "Clinica";
-                hijo.Hijos = new List<dynamic>();
-                hijo.IsParent = false;
-                hijo.IsCurrent = false;
-                hijo.IsCurrentItem = false;
-                hijo.IsFirst = true;
-                hijo.IsLast = false;
-                hijo.Parent = pagina;
+                admin.Hijos.Add(CreateDefaultPagina("Paginas", "Admin/Paginas", admin));
+                admin.Hijos.Add(CreateDefaultPagina("Personas", "Admin/Personas", admin));
+                admin.Hijos.Add(CreateDefaultPagina("Provincias", "Admin/Provincias", admin));
+                admin.Hijos.Add(CreateDefaultPagina("Localidades", "Admin/Localidades", admin));
+                admin.Hijos.Add(CreateDefaultPagina("Feriados", "Admin/Feriados", admin));
+                admin.Hijos.Add(CreateDefaultPagina("Obras Sociales", "Admin/ObrasSociales", admin));
+                admin.Hijos.Add(CreateDefaultPagina("Planes", "Admin/Planes", admin));
+                admin.Hijos.Add(CreateDefaultPagina("Especialidades", "Admin/Especialidades", admin));
+                admin.Hijos.Add(CreateDefaultPagina("Consultorios", "Admin/Consultorios", admin));
 
-                pagina.Hijos.Add(hijo);
-
-                paginas.Add(pagina);
+                paginas.Add(admin);
             }
 
             //Actualizamos cual es el current
@@ -103,6 +93,23 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
 
 
             filterContext.Controller.ViewData["_Menu"] = paginas;
+        }
+
+
+        private dynamic CreateDefaultPagina(string nombre = "", string url = "", dynamic padre = null)
+        {
+            dynamic dynamicPage = new ExpandoObject();
+            dynamicPage.Url = VirtualPathUtility.ToAbsolute("~/") + url;
+            dynamicPage.Nombre = nombre;
+            dynamicPage.Hijos = new List<dynamic>();
+            dynamicPage.IsParent = false;
+            dynamicPage.IsCurrent = false;
+            dynamicPage.IsCurrentItem = false;
+            dynamicPage.IsFirst = false;
+            dynamicPage.IsLast = false;
+            dynamicPage.Parent = padre;
+
+            return dynamicPage;
         }
 
         private dynamic GetByUrl(List<dynamic> paginas, string url)
