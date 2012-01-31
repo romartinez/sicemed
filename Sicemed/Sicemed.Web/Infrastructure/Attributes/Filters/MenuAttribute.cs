@@ -26,11 +26,8 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
 
             paginaDyn.Nombre = pagina.Nombre;
             paginaDyn.Url = VirtualPathUtility.ToAbsolute("~/") + pagina.Url;
-            paginaDyn.IsParent = pagina.Hijos.Any();
             paginaDyn.IsCurrent = false;
             paginaDyn.IsCurrentItem = false;
-            paginaDyn.IsFirst = (i == 0);
-            paginaDyn.IsLast = (i > 0 && i == total - 1);
             paginaDyn.Parent = padre;
 
             var hijosCount = pagina.Hijos.Count;
@@ -84,6 +81,9 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             }
 
             //Actualizamos cual es el current
+
+            FixHierarchy(paginas);
+
             var currentPagina = GetByUrl(paginas, url);
 
             if (currentPagina != null)
@@ -95,6 +95,19 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             filterContext.Controller.ViewData["_Menu"] = paginas;
         }
 
+        private void FixHierarchy(List<dynamic> pages)
+        {
+            for(var i = 0; i < pages.Count; i++)
+            {
+                var page = pages[i];
+                page.IsFirst = i == 0;
+                page.IsLast = (i > 0 && i == pages.Count - 1);
+                page.IsParent = page.Hijos.Count > 0;
+
+                if(page.IsParent) FixHierarchy(page.Hijos);
+            }
+        }
+
 
         private dynamic CreateDefaultPagina(string nombre = "", string url = "", dynamic padre = null)
         {
@@ -102,11 +115,8 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             dynamicPage.Url = VirtualPathUtility.ToAbsolute("~/") + url;
             dynamicPage.Nombre = nombre;
             dynamicPage.Hijos = new List<dynamic>();
-            dynamicPage.IsParent = false;
             dynamicPage.IsCurrent = false;
             dynamicPage.IsCurrentItem = false;
-            dynamicPage.IsFirst = false;
-            dynamicPage.IsLast = false;
             dynamicPage.Parent = padre;
 
             return dynamicPage;

@@ -78,15 +78,15 @@ namespace Sicemed.Web.Infrastructure
         #region IApplicationInstaller Members
 
         public void Install(Configuration config)
-        {            
+        {
             using (var importSession = SessionFactory.OpenSession())
             {
                 ISession session = null;
-                if(CurrentSessionContext.HasBind(SessionFactory))
+                if (CurrentSessionContext.HasBind(SessionFactory))
                 {
                     session = CurrentSessionContext.Unbind(SessionFactory);
                 }
-                CurrentSessionContext.Bind(importSession);   
+                CurrentSessionContext.Bind(importSession);
 
                 Logger.InfoFormat("Checking if the application is installed.");
                 try
@@ -105,9 +105,9 @@ namespace Sicemed.Web.Infrastructure
                     //Check if the DB is created
                     Initialize(config, importSession);
                 }
-                
-                CurrentSessionContext.Unbind(SessionFactory);   
-                if(session != null)
+
+                CurrentSessionContext.Unbind(SessionFactory);
+                if (session != null)
                 {
                     CurrentSessionContext.Bind(session);
                 }
@@ -171,9 +171,9 @@ namespace Sicemed.Web.Infrastructure
                               };
             clinica
                 .AgregarTelefono(
-                        new Telefono {Numero = "4487610", Prefijo = "0341"}
+                        new Telefono { Numero = "4487610", Prefijo = "0341" }
                 ).AgregarTelefono(
-                        new Telefono{Numero="4487610",Prefijo="0341"}
+                        new Telefono { Numero = "4487610", Prefijo = "0341" }
                 );
 
             session.Save(clinica);
@@ -182,18 +182,18 @@ namespace Sicemed.Web.Infrastructure
         private void CrearPaginas(ISession session)
         {
             PaginaHome = new Pagina { Nombre = "Home", Contenido = "Hola a todos bienvenidos a SICEMED", Url = "", Orden = 0 };
-            PaginaAboutUs = new Pagina { Nombre = "About Us", Contenido = "Somos una empresa en pleno crecimiento.", Url = "AboutUs", Orden = 0 };
-            var paginaPadre = new Pagina { Nombre = "Con Hijos", Contenido = "Una pagina de prueba.", Url = "Padre", Orden = 0 };            
-            for (var i = 0; i < 5; i++ )
+            PaginaAboutUs = new Pagina { Nombre = "About Us", Contenido = "Somos una empresa en pleno crecimiento.", Url = "AboutUs", Orden = 999 };
+            var paginaPadre = new Pagina { Nombre = "Con Hijos", Contenido = "Una pagina de prueba.", Url = "Padre", Orden = 50 };
+            for (var i = 0; i < 5; i++)
             {
                 var hijo = new Pagina()
                                {
                                    Nombre = "Hijo " + i,
                                    Contenido = "Una pagina de prueba.",
                                    Url = "Padre/Hijo-" + i,
-                                   Orden = 0
+                                   Orden = i * 10
                                };
-                if(i == 0)
+                if (i == 0)
                 {
                     hijo.AgregarHijo(new Pagina()
                     {
