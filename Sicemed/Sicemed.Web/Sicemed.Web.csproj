@@ -208,6 +208,7 @@
     <Compile Include="Infrastructure\Helpers\HexEncoding.cs" />
     <Compile Include="Infrastructure\Helpers\HtmlExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\NHibernateMappingsExtensions.cs" />
+    <Compile Include="Infrastructure\Helpers\ObjectCopier.cs" />
     <Compile Include="Infrastructure\Helpers\ReflectionHelper.cs" />
     <Compile Include="Infrastructure\Helpers\SessionExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\UrlHelperExtensions.cs" />
@@ -284,6 +285,7 @@
     <Compile Include="Models\ViewModels\Cuenta\CambiarPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\Cuenta\InciarSesionViewModel.cs" />
     <Compile Include="Models\ViewModels\Cuenta\RegistroPersonaViewModel.cs" />
+    <Compile Include="Models\ViewModels\Menu\PageViewModel.cs" />
     <Compile Include="Models\ViewModels\ObtenerTurno\BusquedaProfesionalViewModel.cs" />
     <Compile Include="Models\ViewModels\PaginableResponse.cs" />
     <Compile Include="Models\Components\ComponentBase.cs" />

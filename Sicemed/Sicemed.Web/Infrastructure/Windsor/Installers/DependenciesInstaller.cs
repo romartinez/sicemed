@@ -26,7 +26,7 @@ namespace SICEMED.Web.Infrastructure.Windsor.Installers
                 Component.For<IMailSenderService>().ImplementedBy<MailSenderService>().LifeStyle.Singleton,
                 Component.For<ISecurityService>().ImplementedBy<SecurityService>().LifeStyle.Singleton,
                 //Providers
-                Component.For<ICacheProvider>().ImplementedBy<NullCacheProvider>().LifeStyle.Singleton,
+                Component.For<ICacheProvider>().ImplementedBy<InMemoryCacheProvider>().LifeStyle.Singleton,
                 //Menu Provider
                 //Queries
                 AllTypes.FromThisAssembly().BasedOn<IQuery>()

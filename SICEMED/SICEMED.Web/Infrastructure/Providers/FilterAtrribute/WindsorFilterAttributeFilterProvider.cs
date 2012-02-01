@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Castle.Windsor;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Helpers;
+using Sicemed.Web.Infrastructure.Providers.Cache;
 using Sicemed.Web.Infrastructure.Services;
 
 namespace Sicemed.Web.Infrastructure.Providers.FilterAtrribute
@@ -24,7 +25,10 @@ namespace Sicemed.Web.Infrastructure.Providers.FilterAtrribute
                                 {
                                     new AuditAtrribute(),
                                     new HandleErrorAttribute(),
-                                    new MenuAttribute(_container.Resolve<IMembershipService>()),
+                                    new MenuAttribute(
+                                        _container.Resolve<IMembershipService>(), 
+                                        _container.Resolve<ICacheProvider>()
+                                        ),
                                     new HandleErrorAttribute
                                     {
                                         ExceptionType = typeof (SecurityException),

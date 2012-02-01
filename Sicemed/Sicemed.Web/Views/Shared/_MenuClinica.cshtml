@@ -1,27 +1,26 @@
 ﻿@using System.Text
 
-@model IEnumerable<dynamic>
-           
+@model IEnumerable<Sicemed.Web.Models.ViewModels.Menu.PageViewModel>
            
 @functions{
-    public string RenderMenuItem(dynamic pagina)
+    public string RenderMenuItem(dynamic page)
     {
         var html = new StringBuilder();
         html.AppendFormat("<li class=\"{0} {1} {2} {3} {4}\">",
-            pagina.IsFirst ? "first" : string.Empty, 
-            pagina.IsParent ? "parent": string.Empty,
-            pagina.IsCurrentItem ? "current-menu-item" : string.Empty,
-            pagina.IsCurrent ? "current-menu-ancestor" : string.Empty, 
-            pagina.IsLast ? "last": string.Empty);
+            page.IsFirst ? "first" : string.Empty, 
+            page.IsParent ? "parent": string.Empty,
+            page.IsCurrentItem ? "current-menu-item" : string.Empty,
+            page.IsCurrent ? "current-menu-ancestor" : string.Empty, 
+            page.IsLast ? "last": string.Empty);
 
-        html.AppendFormat("<a href=\"{0}\"><span>{1}</span></a>", pagina.Url, pagina.Nombre);
+        html.AppendFormat("<a href=\"{0}\"><span>{1}</span></a>", page.Url, page.Name);
 
-        if (pagina.IsParent)
+        if (page.IsParent)
         {
             html.Append("<ul>");
-            foreach (var hijo in pagina.Hijos)
+            foreach (var child in page.Childs)
             {
-                html.Append(RenderMenuItem(hijo));
+                html.Append(RenderMenuItem(child));
             }
             html.Append("</ul>");
         }
@@ -32,37 +31,7 @@
     }
 }
 
-@foreach (var pagina in Model)
+@foreach (var page in Model)
 {
-    @Html.Raw(RenderMenuItem(pagina))
+    @Html.Raw(RenderMenuItem(page))
 }
-
-
-
-@*@if (User.IsInRole(Rol.ADMINISTRADOR))
-{
-    <li><a href="#"><span>Admin</span> </a>
-        <ul>
-            <li><span>@Html.ActionLink("Datos Clínica", "Index", new { Area = "Admin", Controller = "Clinicas" })</span>
-            </li>
-            <li><span>@Html.ActionLink("Paginas", "Index", new { Area = "Admin", Controller = "Paginas" })</span>
-            </li>
-            <li><span>@Html.ActionLink("Personas", "Index", new { Area = "Admin", Controller = "Personas" })</span>
-            </li>
-            <li><span>@Html.ActionLink("Provincias", "Index", new { Area = "Admin", Controller = "Provincias" })</span>
-            </li>
-            <li><span>@Html.ActionLink("Localidades", "Index", new { Area = "Admin", Controller = "Localidades" })</span>
-            </li>
-            <li><span>@Html.ActionLink("Feriados", "Index", new { Area = "Admin", Controller = "Feriados" })</span>
-            </li>
-            <li><span>@Html.ActionLink("Obras Sociales", "Index", new { Area = "Admin", Controller = "ObrasSociales" })</span>
-            </li>
-            <li><span>@Html.ActionLink("Planes", "Index", new { Area = "Admin", Controller = "Planes" })</span>
-            </li>
-            <li><span>@Html.ActionLink("Especialidades", "Index", new { Area = "Admin", Controller = "Especialidades" })</span>
-            </li>
-            <li><span>@Html.ActionLink("Consultorios", "Index", new { Area = "Admin", Controller = "Consultorios" })</span>
-            </li>
-        </ul>
-    </li>
-}*@
