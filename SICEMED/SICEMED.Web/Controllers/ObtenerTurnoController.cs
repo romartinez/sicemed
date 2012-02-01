@@ -4,7 +4,7 @@ using Sicemed.Web.Infrastructure.Controllers;
 
 namespace Sicemed.Web.Controllers
 {
-    //[AuthorizeIt]
+    [AuthorizeIt]
     public class ObtenerTurnoController : BaseController
     {
         public virtual ActionResult Index()

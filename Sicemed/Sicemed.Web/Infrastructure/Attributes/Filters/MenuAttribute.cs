@@ -60,10 +60,35 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
                 paginas.Add(Convert(pagina, i, paginasCount));
             }
 
+            AttachCorePages(paginas);
+            AttachAdminPages(paginas);
+
+            //Actualizamos cual es el current
+
+            FixHierarchy(paginas);
+
+            var currentPagina = GetByUrl(paginas, url);
+
+            if (currentPagina != null)
+            {
+                MarkAsCurrent(currentPagina);
+            }
+
+
+            filterContext.Controller.ViewData["_Menu"] = paginas;
+        }
+
+        private void AttachCorePages(List<object> paginas)
+        {
+            paginas.Add(CreateDefaultPagina("Obtener Turno", "ObtenerTurno"));
+        }
+
+        private void AttachAdminPages(List<dynamic> paginas)
+        {
             var user = _membershipService.GetCurrentUser();
             if (user != null && user.IsInRole(Rol.ADMINISTRADOR))
             {
-                var admin = CreateDefaultPagina("Admin", "#");                
+                var admin = CreateDefaultPagina("Admin", "#");
                 var clinica = CreateDefaultPagina("Clinica", "Admin/Clinicas", admin);
                 admin.Hijos.Add(clinica);
 
@@ -79,20 +104,6 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
 
                 paginas.Add(admin);
             }
-
-            //Actualizamos cual es el current
-
-            FixHierarchy(paginas);
-
-            var currentPagina = GetByUrl(paginas, url);
-
-            if (currentPagina != null)
-            {
-                MarkAsCurrent(currentPagina);
-            }
-
-
-            filterContext.Controller.ViewData["_Menu"] = paginas;
         }
 
         private void FixHierarchy(List<dynamic> pages)
