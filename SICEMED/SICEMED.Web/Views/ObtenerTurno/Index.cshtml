@@ -24,7 +24,6 @@
 <div id="calendar"></div>
 
 <script id="currentTmpl" type="text/html">
-    <h2 data-bind="text: name"></h2>
     <div data-bind="template: { name: getTemplate(), data: model }"></div> 
 </script>
 
@@ -34,7 +33,7 @@
             <label>
                 Por Especialidad:
             </label>
-            <select data-bind="options: especialidades, optionsText: 'Nombre', value: especialidadSeleccionada">
+            <select data-bind="options: especialidades, optionsText: 'Nombre', value: especialidadSeleccionada, optionsCaption: '-- Todas --'">
             </select>            
         </div>
         <div>

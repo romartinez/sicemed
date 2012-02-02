@@ -1,17 +1,15 @@
-// Setup mocking
-$.mockjax(function (settings) {
-    var resource = settings.url.match(/\/ObtenerTurno\/(.*)$/);
-    if (resource) {
-        return {
-            proxy: '/public/js/features/ObtenerTurno/mocks/' + resource[1] + '.js',
-            cache: false
-        };
-    }
-    return;
-});
-//---------------------------
-
-var holder = {};
+//// Setup mocking
+//$.mockjax(function (settings) {
+//    var resource = settings.url.match(/\/ObtenerTurno\/(.*)$/);
+//    if (resource) {
+//        return {
+//            proxy: '/public/js/features/ObtenerTurno/mocks/' + resource[1] + '.js',
+//            cache: false
+//        };
+//    }
+//    return;
+//});
+////---------------------------
 
 var obtenerTurno = (function () {
     var my = {};
@@ -40,7 +38,12 @@ var obtenerTurno = (function () {
 
         self.buscarProfesionales = function () {
             self.profesionalesEncontrados.removeAll();
-            $.getJSON('/ObtenerTurno/BuscarProfesional').done(function (data) {
+            $.getJSON('/ObtenerTurno/BuscarProfesional',
+                {
+                    especialidadId: self.especialidadSeleccionada() ? self.especialidadSeleccionada().Id : null,
+                    nombre: self.profesionalABuscar()
+                }
+            ).done(function (data) {
                 for (var i = data.length - 1; i >= 0; i--) {
                     //Agrego los metodos del firmante
                     var profesional = data[i];

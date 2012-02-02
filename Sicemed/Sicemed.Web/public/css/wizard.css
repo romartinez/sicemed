@@ -4,12 +4,13 @@ http://www.emirplicanic.com/css/css-step-by-step-menu-wizard-style
 /* = STEPS CONTAINER
 ----------------------------*/
 .wizard-steps {
-    margin:20px 10px 0px 10px;
+    margin:20px 10px 10px 10px;
     padding:0px;
     position: relative;
     clear:both;
     font-family: 'CartoGothicStdBold', Arial, Helvetica, sans-serif;
     font-weight: bold;
+    height: 40px;
 }
 .wizard-steps div {
     position:relative;

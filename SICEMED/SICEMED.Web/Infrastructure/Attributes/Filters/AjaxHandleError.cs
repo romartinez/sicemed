@@ -31,11 +31,12 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             // Verify if AJAX request
             if (filterContext.HttpContext.Request.IsAjaxRequest())
             {
-                var result = new JsonResult();
+                var result = new JsonResult() { JsonRequestBehavior = JsonRequestBehavior.AllowGet };
                 if (filterContext.Exception is ToClientException || HttpContext.Current.IsDebuggingEnabled)
                 {
                     result.Data = ResponseMessage.Error(filterContext.Exception.Message, filterContext.Exception);
-                } else
+                }
+                else
                 {
                     result.Data = ResponseMessage.Error();
                 }
