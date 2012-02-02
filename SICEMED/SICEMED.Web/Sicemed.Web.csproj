@@ -331,10 +331,10 @@
     <Content Include="public\css\app.css" />
     <Content Include="public\css\fullcalendar.css" />
     <Content Include="public\css\jquery-ui.css" />
-    <Content Include="public\css\smart_wizard.css" />
     <Content Include="public\css\theme_ie.css" />
     <Content Include="public\css\theme.css" />
     <Content Include="public\css\jqgrid.css" />
+    <Content Include="public\css\wizard.css" />
     <Content Include="public\fonts\cartogothicstd-bold-webfont.svg" />
     <Content Include="public\fonts\cartogothicstd-bolditalic-webfont.svg" />
     <Content Include="public\fonts\cartogothicstd-book-webfont.svg" />
@@ -504,7 +504,6 @@
     <Content Include="public\js\libs\jquery.blockUI.js" />
     <Content Include="public\js\libs\jquery.jqGrid.min.js" />
     <Content Include="public\js\libs\jquery.mockjax.js" />
-    <Content Include="public\js\libs\jquery.smartWizard-2.0.js" />
     <Content Include="public\js\libs\jquery.tmpl.js" />
     <Content Include="public\js\libs\jquery.validate.min.js" />
     <Content Include="public\js\libs\jquery.validate.unobtrusive.min.js" />

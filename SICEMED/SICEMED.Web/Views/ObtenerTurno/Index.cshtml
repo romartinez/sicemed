@@ -7,8 +7,18 @@
     Obtener Turno
 </h2>
 
-<article data-bind="template: { name: 'currentTmpl', data: currentStep, afterRender: currentStep().model().init }">
+<div class="wizard-steps" data-bind="foreach: stepModels">
+    <div data-bind="attr: {class: $parent.getClass($data) }" >
+        <a data-bind="click: $parent.changeStep" href="#">
+            <span data-bind="text: $data.id"></span>
+            <b data-bind="text: $data.name"></b>
+        </a>
+    </div>
+</div>
 
+<div class="ui-helper-clearfix"></div>
+
+<article data-bind="template: { name: 'currentTmpl', data: currentStep, afterRender: currentStep().model().init }">
 </article>
 
 <div id="calendar"></div>

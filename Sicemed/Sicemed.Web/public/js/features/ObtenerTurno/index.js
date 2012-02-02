@@ -134,6 +134,20 @@ var obtenerTurno = (function () {
 
         self.currentStep = ko.observable(self.stepModels()[0]);
 
+        self.getClass = function (stepToCheck) {
+            if (self.currentStep().id == stepToCheck.id) return 'active-step';
+            if (self.currentStep().id > stepToCheck.id) return 'completed-step';
+            return '';
+        };
+
+        self.changeStep = function (stepToChange) {            
+            //TODO: No se si lo voy a implementar.
+//            if (self.currentStep().id > stepToChange.id) {
+//                $('#calendar').hide();
+//                self.currentStep(stepToChange);
+//            } 
+        };
+
         self.getTemplate = function () {
             return self.currentStep().template;
         };
@@ -189,7 +203,7 @@ var obtenerTurno = (function () {
                 day: 'dddd d/M'
             },
             eventClick: function (calEvent, jsEvent, view) {
-                if(calEvent.libre) self.reservarTurno(jsEvent, calEvent.turno);
+                if (calEvent.libre) self.reservarTurno(jsEvent, calEvent.turno);
             },
             eventMouseout: function (event, jsEvent, view) {
                 $(this).css('cursor', 'auto');
