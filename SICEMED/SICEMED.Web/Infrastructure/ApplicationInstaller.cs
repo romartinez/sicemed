@@ -352,7 +352,6 @@ namespace Sicemed.Web.Infrastructure
                                                 Telefono = new Telefono { Prefijo = "0341", Numero = "153353273" }
                                             };
             PersonaAdminProfesionalWalter.AgregarRol(Administrador.Create());
-            PersonaAdminProfesionalWalter.AgregarRol(Profesional.Create("46546546"));
             MembershipService.CreateUser(PersonaAdminProfesionalWalter, "walter@gmail.com", "sicemedWalter");
 
             session.Update(PersonaAdminProfesionalWalter);
@@ -413,6 +412,11 @@ namespace Sicemed.Web.Infrastructure
                                          };
             PersonaProfesionalBernardoClinico.AgregarRol(Profesional.Create("546546"));
             PersonaProfesionalBernardoClinico.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
+            var horarioComienzo = new DateTime(2012, 01, 01, 10, 00, 00);
+            var horarioFin = new DateTime(2012, 01, 01, 20, 00, 00);
+            PersonaProfesionalBernardoClinico.As<Profesional>().AgregarAgenda(DayOfWeek.Monday, TimeSpan.FromMinutes(30), horarioComienzo, horarioFin, ConsultorioA, EspecialidadClinico);
+            PersonaProfesionalBernardoClinico.As<Profesional>().AgregarAgenda(DayOfWeek.Wednesday, TimeSpan.FromMinutes(30), horarioComienzo, horarioFin, ConsultorioA, EspecialidadClinico);
+            PersonaProfesionalBernardoClinico.As<Profesional>().AgregarAgenda(DayOfWeek.Friday, TimeSpan.FromMinutes(30), horarioComienzo, horarioFin, ConsultorioA, EspecialidadClinico);
             MembershipService.CreateUser(PersonaProfesionalBernardoClinico, "bernardo@gmail.com", "sicemedBernardo");
             session.Update(PersonaProfesionalBernardoClinico);
             session.Update(PersonaProfesionalBernardoClinico.As<Profesional>());
@@ -430,8 +434,16 @@ namespace Sicemed.Web.Infrastructure
                                          Telefono = new Telefono { Prefijo = "0341", Numero = "1661234" }
                                      };
             PersonaProfesionalJoseClinicoYDermatologo.AgregarRol(Profesional.Create("546465489"));
+            var horarioComienzo2 = new DateTime(2012, 01, 01, 11, 00, 00);
+            var horarioFin2 = new DateTime(2012, 01, 01, 16, 00, 00);
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
+            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Tuesday, TimeSpan.FromMinutes(15), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadClinico);
+            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Thursday, TimeSpan.FromMinutes(15), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadClinico);
+
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarEspecialidad(EspecialidadDermatologo);
+            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Monday, TimeSpan.FromMinutes(10), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadDermatologo);
+            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Wednesday, TimeSpan.FromMinutes(10), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadDermatologo);
+            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Friday, TimeSpan.FromMinutes(10), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadDermatologo);
             MembershipService.CreateUser(PersonaProfesionalJoseClinicoYDermatologo, "jose@gmail.com", "sicemedJose");
             session.Update(PersonaProfesionalJoseClinicoYDermatologo);
         }
