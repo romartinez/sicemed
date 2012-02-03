@@ -54,10 +54,10 @@
     // Formatters **********************************************************************    
     var format = app.format = {};
     format.date = function (date) {
-        return $.fullCalendar.formatDate(date, "dd/mm/yy");
+        return $.fullCalendar.formatDate(date, "dd/MM/yy");
     };
     format.fulldate = function (date) {
-        return $.fullCalendar.formatDate(date, "dd/mm/yy HH:MM");
+        return $.fullCalendar.formatDate(date, "dd/MM/yy HH:mm");
     };
 
 
