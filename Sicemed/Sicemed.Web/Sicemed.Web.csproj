@@ -203,6 +203,7 @@
     <Compile Include="Infrastructure\Exceptions\SicemedException.cs" />
     <Compile Include="Infrastructure\Exceptions\ToClientException.cs" />
     <Compile Include="Infrastructure\Exceptions\ValidationErrorException.cs" />
+    <Compile Include="Infrastructure\Helpers\DateTimeExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\Json.cs" />
     <Compile Include="Infrastructure\Helpers\EnumReaderExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\HexEncoding.cs" />

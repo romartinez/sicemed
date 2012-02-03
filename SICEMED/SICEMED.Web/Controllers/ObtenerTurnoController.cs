@@ -7,6 +7,7 @@ using NHibernate.Criterion;
 using NHibernate.Transform;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
+using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Roles;
 
@@ -131,20 +132,21 @@ namespace Sicemed.Web.Controllers
 
             //Agrego los turnos otorgados
             turnos.AddRange(turnosProfesional.Select(t => new
-                                                             {
-                                                                 FechaTurnoInicial = t.FechaTurno,
-                                                                 FechaTurnoFinal = t.FechaTurno.AddMinutes(t.Agenda.DuracionTurno.TotalMinutes),
-                                                                 Consultorio = new
-                                                                 {
-                                                                     t.Consultorio.Id,
-                                                                     t.Consultorio.Nombre
-                                                                 },
-                                                                 Paciente = new
-                                                                {
-                                                                    t.Paciente.Id,
-                                                                    t.Paciente.Persona.Nombre
-                                                                }
-                                                             }));
+                {
+                    FechaTurnoInicial = t.FechaTurno,
+                    FechaTurnoFinal = t.FechaTurno.AddMinutes(t.Agenda.DuracionTurno.TotalMinutes),
+                    Consultorio = new
+                    {
+                        t.Consultorio.Id,
+                        t.Consultorio.Nombre
+                    },
+                    Paciente = new
+                    {
+                        t.Paciente.Id,
+                        t.Paciente.Persona.Nombre
+                    }
+                })
+            );
 
             return Json(turnos, JsonRequestBehavior.AllowGet);
         }
@@ -155,10 +157,11 @@ namespace Sicemed.Web.Controllers
             var tiempoAtencion = agendaDia.HorarioHasta.Subtract(agendaDia.HorarioDesde);
             for (var minutes = 0; minutes < tiempoAtencion.TotalMinutes; minutes += (int)agendaDia.DuracionTurno.TotalMinutes)
             {
+                var diaConHora = dia.SetTimeWith(agendaDia.HorarioDesde);
                 turnos.Add(new
                 {
-                    FechaTurnoInicial = new DateTime(dia.Year, dia.Month, dia.Day, agendaDia.HorarioDesde.Hour, agendaDia.HorarioDesde.Minute, agendaDia.HorarioDesde.Second).AddMinutes(minutes),
-                    FechaTurnoFinal = new DateTime(dia.Year, dia.Month, dia.Day, agendaDia.HorarioDesde.Hour, agendaDia.HorarioDesde.Minute, agendaDia.HorarioDesde.Second).AddMinutes(minutes).AddMinutes(agendaDia.DuracionTurno.TotalMinutes),
+                    FechaTurnoInicial = diaConHora.AddMinutes(minutes),
+                    FechaTurnoFinal = diaConHora.AddMinutes(minutes).AddMinutes(agendaDia.DuracionTurno.TotalMinutes),
                     Consultorio = new
                     {
                         agendaDia.Consultorio.Id,
@@ -168,12 +171,12 @@ namespace Sicemed.Web.Controllers
             }
 
             //Quito los turnos anteriores a que abra la clinica
-            turnos.RemoveAll(x => x.FechaTurnoInicial <= new DateTime(dia.Year, dia.Month, dia.Day, clinica.HorarioMatutinoDesde.Hour, clinica.HorarioMatutinoDesde.Minute, clinica.HorarioMatutinoDesde.Second));
+            turnos.RemoveAll(x => x.FechaTurnoInicial <= dia.SetTimeWith(clinica.HorarioMatutinoDesde));
 
             //Quito los que son despues de que la clinica cerro
             var horarioCierreClinica = clinica.EsHorarioCorrido
-                                           ? new DateTime(dia.Year, dia.Month, dia.Day, clinica.HorarioMatutinoHasta.Hour, clinica.HorarioMatutinoHasta.Minute, clinica.HorarioMatutinoHasta.Second)
-                                           : new DateTime(dia.Year, dia.Month, dia.Day, clinica.HorarioVespertinoHasta.Value.Hour, clinica.HorarioVespertinoHasta.Value.Minute, clinica.HorarioVespertinoHasta.Value.Second);
+                                           ? dia.SetTimeWith(clinica.HorarioMatutinoHasta) 
+                                           : dia.SetTimeWith(clinica.HorarioVespertinoHasta.Value);
 
             turnos.RemoveAll(x => x.FechaTurnoInicial >= horarioCierreClinica);
 
@@ -181,9 +184,8 @@ namespace Sicemed.Web.Controllers
             if (!clinica.EsHorarioCorrido)
             {
                 turnos.RemoveAll(
-                    x =>
-                    x.FechaTurnoInicial >= new DateTime(dia.Year, dia.Month, dia.Day, clinica.HorarioMatutinoHasta.Hour, clinica.HorarioMatutinoHasta.Minute, clinica.HorarioMatutinoHasta.Second) &&
-                    x.FechaTurnoInicial < new DateTime(dia.Year, dia.Month, dia.Day, clinica.HorarioVespertinoDesde.Value.Hour, clinica.HorarioVespertinoDesde.Value.Minute, clinica.HorarioVespertinoDesde.Value.Second));
+                    x => x.FechaTurnoInicial >= dia.SetTimeWith(clinica.HorarioMatutinoHasta) 
+                    && x.FechaTurnoInicial < dia.SetTimeWith(clinica.HorarioVespertinoDesde.Value));
             }
 
             return turnos;
