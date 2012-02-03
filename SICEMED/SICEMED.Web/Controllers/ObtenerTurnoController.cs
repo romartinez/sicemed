@@ -90,7 +90,7 @@ namespace Sicemed.Web.Controllers
         {
             return new
             {
-                p.Id,
+                p.As<Profesional>().Id,
                 Foto = "/public/images/personal_128x128.png",
                 Nombre = string.Format("{0}, {1} {2}", p.Apellido, p.Nombre, p.SegundoNombre),
                 ProximoTurno = DateTime.Now,
@@ -100,10 +100,95 @@ namespace Sicemed.Web.Controllers
 
         #endregion
 
+        #region Obtener Agenda
         public virtual JsonResult ObtenerAgendaProfesional(long profesionalId)
         {
-            throw new NotImplementedException();
+            var session = SessionFactory.GetCurrentSession();
+            var clinica = session.QueryOver<Clinica>().FutureValue();
+            var turnosProfesional = session.QueryOver<Turno>()
+                .Where(t => t.FechaTurno > DateTime.Now.AddDays(-1) && t.FechaTurno < DateTime.Now.AddMonths(3))
+                .JoinQueryOver(x => x.Profesional)
+                .Where(p => p.Id == profesionalId)
+                .Future();
+
+            var agendaProfesional = session.QueryOver<Agenda>()
+                .JoinQueryOver(a => a.Profesional)
+                .Where(p => p.Id == profesionalId)
+                .Future();
+
+            //Creo los turnos libres 3 meses para adelante promedio 30 dias por mes
+            var turnos = new List<dynamic>();
+            for (var i = 0; i <= 3 * 30; i++)
+            {
+                var dia = DateTime.Now.AddDays(i);
+                var agendaDia = agendaProfesional.FirstOrDefault(a => a.Dia == dia.DayOfWeek);
+
+                if (agendaDia != null) turnos.AddRange(CalcularTurnos(dia, clinica.Value, agendaDia));
+            }
+
+            //Quito los turnos otorgados
+            turnos.RemoveAll(x => turnosProfesional.Any(t => t.FechaTurno == x.FechaTurnoInicial));
+
+            //Agrego los turnos otorgados
+            turnos.AddRange(turnosProfesional.Select(t => new
+                                                             {
+                                                                 FechaTurnoInicial = t.FechaTurno,
+                                                                 FechaTurnoFinal = t.FechaTurno.AddMinutes(t.Agenda.DuracionTurno.TotalMinutes),
+                                                                 Consultorio = new
+                                                                 {
+                                                                     t.Consultorio.Id,
+                                                                     t.Consultorio.Nombre
+                                                                 },
+                                                                 Paciente = new
+                                                                {
+                                                                    t.Paciente.Id,
+                                                                    t.Paciente.Persona.Nombre
+                                                                }
+                                                             }));
+
+            return Json(turnos, JsonRequestBehavior.AllowGet);
         }
+
+        private List<dynamic> CalcularTurnos(DateTime dia, Clinica clinica, Agenda agendaDia)
+        {
+            var turnos = new List<dynamic>();
+            var tiempoAtencion = agendaDia.HorarioHasta.Subtract(agendaDia.HorarioDesde);
+            for (var minutes = 0; minutes < tiempoAtencion.TotalMinutes; minutes += (int)agendaDia.DuracionTurno.TotalMinutes)
+            {
+                turnos.Add(new
+                {
+                    FechaTurnoInicial = new DateTime(dia.Year, dia.Month, dia.Day, agendaDia.HorarioDesde.Hour, agendaDia.HorarioDesde.Minute, agendaDia.HorarioDesde.Second).AddMinutes(minutes),
+                    FechaTurnoFinal = new DateTime(dia.Year, dia.Month, dia.Day, agendaDia.HorarioDesde.Hour, agendaDia.HorarioDesde.Minute, agendaDia.HorarioDesde.Second).AddMinutes(minutes).AddMinutes(agendaDia.DuracionTurno.TotalMinutes),
+                    Consultorio = new
+                    {
+                        agendaDia.Consultorio.Id,
+                        agendaDia.Consultorio.Nombre
+                    }
+                });
+            }
+
+            //Quito los turnos anteriores a que abra la clinica
+            turnos.RemoveAll(x => x.FechaTurnoInicial <= new DateTime(dia.Year, dia.Month, dia.Day, clinica.HorarioMatutinoDesde.Hour, clinica.HorarioMatutinoDesde.Minute, clinica.HorarioMatutinoDesde.Second));
+
+            //Quito los que son despues de que la clinica cerro
+            var horarioCierreClinica = clinica.EsHorarioCorrido
+                                           ? new DateTime(dia.Year, dia.Month, dia.Day, clinica.HorarioMatutinoHasta.Hour, clinica.HorarioMatutinoHasta.Minute, clinica.HorarioMatutinoHasta.Second)
+                                           : new DateTime(dia.Year, dia.Month, dia.Day, clinica.HorarioVespertinoHasta.Value.Hour, clinica.HorarioVespertinoHasta.Value.Minute, clinica.HorarioVespertinoHasta.Value.Second);
+
+            turnos.RemoveAll(x => x.FechaTurnoInicial >= horarioCierreClinica);
+
+            //Quito los turnos del mediodia si es horario cortado
+            if (!clinica.EsHorarioCorrido)
+            {
+                turnos.RemoveAll(
+                    x =>
+                    x.FechaTurnoInicial >= new DateTime(dia.Year, dia.Month, dia.Day, clinica.HorarioMatutinoHasta.Hour, clinica.HorarioMatutinoHasta.Minute, clinica.HorarioMatutinoHasta.Second) &&
+                    x.FechaTurnoInicial < new DateTime(dia.Year, dia.Month, dia.Day, clinica.HorarioVespertinoDesde.Value.Hour, clinica.HorarioVespertinoDesde.Value.Minute, clinica.HorarioVespertinoDesde.Value.Second));
+            }
+
+            return turnos;
+        }
+        #endregion
 
         public virtual JsonResult ReservarTurno(long profesionalId, DateTime fecha)
         {

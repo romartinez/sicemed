@@ -80,7 +80,11 @@ var obtenerTurno = (function () {
         self.init = function () {
             $('#calendar').show();
             //Incializar agenda
-            $.getJSON("/ObtenerTurno/ObtenerAgendaProfesional").done(function (data) {
+            $.getJSON("/ObtenerTurno/ObtenerAgendaProfesional",
+                {
+                    profesionalId: stepComprobante.model().profesionalSeleccionado().Id
+                }
+            ).done(function (data) {
                 var events = [];
                 var calendar = $("#calendar");
                 calendar.fullCalendar('removeEvents');
