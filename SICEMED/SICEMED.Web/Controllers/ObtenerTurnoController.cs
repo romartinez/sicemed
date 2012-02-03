@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using NHibernate;
 using NHibernate.Criterion;
+using NHibernate.Transform;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Models;
@@ -22,7 +24,7 @@ namespace Sicemed.Web.Controllers
         {
             var session = SessionFactory.GetCurrentSession();
             var especialidades = session.QueryOver<Especialidad>()
-                .OrderBy(x=>x.Nombre).Asc
+                .OrderBy(x => x.Nombre).Asc
                 .Future()
                 .Select(x => new
                 {
@@ -32,32 +34,71 @@ namespace Sicemed.Web.Controllers
             return Json(especialidades, JsonRequestBehavior.AllowGet);
         }
 
+        #region BuscarProfesional
+
         public virtual JsonResult BuscarProfesional(long? especialidadId, string nombre)
         {
+            return especialidadId.HasValue ?
+                BuscarProfesionalPorEspecialidad(especialidadId.Value, nombre)
+                : BuscarProfesionalPorNombre(nombre);
+        }
+
+        private JsonResult BuscarProfesionalPorNombre(string nombre)
+        {
             var session = SessionFactory.GetCurrentSession();
+
             var query = session.QueryOver<Persona>()
-                .WhereRestrictionOn(p => p.Nombre).IsLike(nombre, MatchMode.Start)
-                .WhereRestrictionOn(p => p.SegundoNombre).IsLike(nombre, MatchMode.Start)
-                .WhereRestrictionOn(p => p.Apellido).IsLike(nombre, MatchMode.Start)
-                .JoinQueryOver<Rol>(p => p.Roles)
-                .Where(r=>r is Profesional);
+                    .Where(
+                        Restrictions.On<Persona>(p => p.Nombre).IsLike(nombre, MatchMode.Start)
+                        || Restrictions.On<Persona>(p => p.SegundoNombre).IsLike(nombre, MatchMode.Start)
+                        || Restrictions.On<Persona>(p => p.Apellido).IsLike(nombre, MatchMode.Start)
+                    ).JoinQueryOver<Rol>(p => p.Roles)
+                    .Where(r => r.GetType() == typeof(Profesional))
+                    .TransformUsing(Transformers.DistinctRootEntity)
+                    .Future();
 
-            if(especialidadId.HasValue)
-            {
-                query = query.Where(r=>r.Id == especialidadId.Value);
-            }
-
-            var profesionales = query.Future().Select(p => new
-                                                               {
-                                                                   p.Id,
-                                                                   Foto = "/public/images/personal_128x128.png",
-                                                                   Nombre = string.Format("{0}, {1} {2}", p.Apellido, p.Nombre, p.SegundoNombre),
-                                                                   ProximoTurno = DateTime.Now,
-                                                                   Especialidades = p.As<Profesional>().Especialidades.Select(e=> e.Nombre)
-                                                               });
+            var profesionales = query.Select(ConverPersonaToProfesionalViewModel);
 
             return Json(profesionales, JsonRequestBehavior.AllowGet);
         }
+
+        private JsonResult BuscarProfesionalPorEspecialidad(long especialidadId, string nombre)
+        {
+            var session = SessionFactory.GetCurrentSession();
+
+            var especialidadConProfesionales = session.QueryOver<Especialidad>()
+                .Where(e => e.Id == especialidadId)
+                .JoinQueryOver<Profesional>(e => e.Profesionales)
+                .JoinQueryOver(p => p.Persona)
+                .Where(
+                    Restrictions.On<Persona>(p => p.Nombre).IsLike(nombre, MatchMode.Start)
+                    || Restrictions.On<Persona>(p => p.SegundoNombre).IsLike(nombre, MatchMode.Start)
+                    || Restrictions.On<Persona>(p => p.Apellido).IsLike(nombre, MatchMode.Start)
+                )
+                .TransformUsing(Transformers.DistinctRootEntity)
+                .Future();
+
+            var profesionalesConEspecialidad = especialidadConProfesionales
+                .SelectMany(e => e.Profesionales)
+                .Select(p => p.Persona)
+                .Select(ConverPersonaToProfesionalViewModel);
+
+            return Json(profesionalesConEspecialidad, JsonRequestBehavior.AllowGet);
+        }
+
+        private static dynamic ConverPersonaToProfesionalViewModel(Persona p)
+        {
+            return new
+            {
+                p.Id,
+                Foto = "/public/images/personal_128x128.png",
+                Nombre = string.Format("{0}, {1} {2}", p.Apellido, p.Nombre, p.SegundoNombre),
+                ProximoTurno = DateTime.Now,
+                Especialidades = p.As<Profesional>().Especialidades.Select(e => e.Nombre)
+            };
+        }
+
+        #endregion
 
         public virtual JsonResult ObtenerAgendaProfesional(long profesionalId)
         {
