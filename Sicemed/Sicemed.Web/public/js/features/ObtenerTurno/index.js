@@ -115,6 +115,8 @@ var obtenerTurno = (function () {
     var comprobanteVm = function () {
         var self = this;
 
+        self.turnoId = ko.observable(null);
+
         self.profesionalSeleccionado = ko.observable(null);
         self.turnoSeleccionado = ko.observable(null);
 
@@ -122,8 +124,18 @@ var obtenerTurno = (function () {
             $('#calendar').hide();
         };
 
+        self.reservar = function () {            
+            $.post('/ObtenerTurno/ReservarTurno', {
+                profesionalId: self.profesionalSeleccionado().Id,
+                fecha: app.format.fulldate(self.turnoSeleccionado().FechaTurnoInicial),                
+                consultorioId: self.turnoSeleccionado().Consultorio.Id
+            }).done(function (d) {
+                self.turnoId(d);
+            });
+        };
+
         self.imprimir = function () {
-            console.log("Imprimir");
+            console.log("Imprimir " + self.turnoId());
         };
     };
 
@@ -147,12 +159,12 @@ var obtenerTurno = (function () {
             return '';
         };
 
-        self.changeStep = function (stepToChange) {            
+        self.changeStep = function (stepToChange) {
             //TODO: No se si lo voy a implementar.
-//            if (self.currentStep().id > stepToChange.id) {
-//                $('#calendar').hide();
-//                self.currentStep(stepToChange);
-//            } 
+            //            if (self.currentStep().id > stepToChange.id) {
+            //                $('#calendar').hide();
+            //                self.currentStep(stepToChange);
+            //            } 
         };
 
         self.getTemplate = function () {

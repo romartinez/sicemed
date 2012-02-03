@@ -190,10 +190,20 @@ namespace Sicemed.Web.Controllers
         }
         #endregion
 
-        public virtual JsonResult ReservarTurno(long profesionalId, DateTime fecha)
+        #region Reservar Turno
+        [HttpPost]
+        public virtual JsonResult ReservarTurno(long profesionalId, DateTime fecha, long consultorioId)
         {
-            throw new NotImplementedException();
+            var session = SessionFactory.GetCurrentSession();
+            var profesional = session.QueryOver<Profesional>().Where(p => p.Id == profesionalId).FutureValue();
+            //TODO: Me falta la especialidad y la agenda (especialidad no estoy seguro que sea necesario.
+            var turno = Turno.Create(fecha, User.As<Paciente>(), profesional.Value, profesional.Value.Especialidades.First(), Request.UserHostAddress);
+
+            session.Save(turno);
+
+            return Json(turno.Id);
         }
+        #endregion
 
         public virtual ActionResult ImprimirComprobante(long turnoId)
         {

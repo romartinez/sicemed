@@ -57,7 +57,7 @@
             <img data-bind="attr: {src: profesionalSeleccionado().Foto, alt: profesionalSeleccionado().Nombre}" />
             <span data-bind="text: profesionalSeleccionado().Nombre"></span>
             {{each profesionalSeleccionado().Especialidades}}
-                ${$value},
+            ${$value},
             {{/each}}
         </div>
         <h3>Turno</h3>
@@ -67,7 +67,8 @@
             <span data-bind="text: turnoSeleccionado().Consultorio.Nombre"></span>
         </div>
         <div>
-            <button data-bind="click: imprimir">Imprimir</button>
+            <button data-bind="click: reservar, visible: turnoId() == null">Reservar Turno</button>
+            <button data-bind="click: imprimir, visible: turnoId() != null">Imprimir</button>
         </div>
     </script>
 
