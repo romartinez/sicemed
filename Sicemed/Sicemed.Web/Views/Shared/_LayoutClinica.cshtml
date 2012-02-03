@@ -1,4 +1,5 @@
 ﻿@using Combres
+@using SICEMED.Web
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,7 +12,10 @@
     <!--[if IE 7]>
     <link rel="stylesheet" type="text/css" href="../../public/css/theme_ie.css" />
     <![endif]-->
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBKt3eKqEI-zr5bqGJG3mCCZJK0asao5-0&sensor=true" type="text/javascript"></script>
+    @if(!MvcApplication.IsUsingProxy)
+    {
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBKt3eKqEI-zr5bqGJG3mCCZJK0asao5-0&sensor=true" type="text/javascript"></script>        
+    }
 </head>
 <body>
     <div class="body_wrap">
@@ -97,7 +101,11 @@
     @Html.Raw(WebExtensions.CombresLink("js"))
     @RenderSection("Scripts", false)
     <script type="text/javascript">
-        jQuery(document).ready(app.initialize);
+        $(function () {
+            app.initialize({
+                isUsingProxy : @MvcApplication.IsUsingProxy.ToString().ToLower()
+            });
+        });        
     </script>
 </body>
 </html>

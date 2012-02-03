@@ -57,7 +57,7 @@ namespace SICEMED.Web
             foreach (var hijo in pagina.Hijos)
             {
                 AddPaginaToRoute(routes, hijo);
-            }            
+            }
         }
 
         public static void RegisterRoutes(RouteCollection routes)
@@ -69,24 +69,24 @@ namespace SICEMED.Web
 
             //Add the SEO Urls
             var sessionFactory = _container.Resolve<ISessionFactory>();
-            using(var session = sessionFactory.OpenSession())
+            using (var session = sessionFactory.OpenSession())
             {
                 var paginas = session.QueryOver<Pagina>()
                                     .Fetch(x => x.Hijos).Eager
                                     .OrderBy(x => x.Orden).Asc
                                     .Where(x => x.Padre == null)
                                     .TransformUsing(Transformers.DistinctRootEntity).List();
-                
+
                 foreach (var pagina in paginas)
                 {
                     AddPaginaToRoute(routes, pagina);
-                }                
+                }
             }
 
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new {controller = "Content", action = "Index", id = UrlParameter.Optional} // Parameter defaults
+                new { controller = "Content", action = "Index", id = UrlParameter.Optional } // Parameter defaults
                 );
         }
 
@@ -95,7 +95,7 @@ namespace SICEMED.Web
             DefaultModelBinder.ResourceClassKey = "Messages";
             ValidationExtensions.ResourceClassKey = "Messages";
 
-            RegisterGlobalFilters(GlobalFilters.Filters);            
+            RegisterGlobalFilters(GlobalFilters.Filters);
 
             _container = new WindsorContainer();
             _container.AddFacility<TypedFactoryFacility>();
@@ -150,8 +150,16 @@ namespace SICEMED.Web
         }
 
         protected void Application_End()
-        {            
-            if(_container != null)  _container.Dispose();
+        {
+            if (_container != null) _container.Dispose();
+        }
+
+        public static bool IsUsingProxy
+        {
+            get
+            {
+                return Environment.MachineName == "WSFTYSDES002S";
+            }
         }
     }
 }
