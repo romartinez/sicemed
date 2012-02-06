@@ -106,6 +106,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\Reporting\PDFGeneratorTests.cs" />
     <Compile Include="Infrastructure\Services\MembershipServiceTests.cs" />
     <Compile Include="InitializeNhibernate.cs" />
     <Compile Include="Models\Agendas\AgendaTests.cs" />

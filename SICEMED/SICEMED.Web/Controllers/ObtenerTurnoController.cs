@@ -140,6 +140,7 @@ namespace Sicemed.Web.Controllers
                         t.Consultorio.Id,
                         t.Consultorio.Nombre
                     },
+                    t.Agenda,
                     Paciente = new
                     {
                         t.Paciente.Id,
@@ -162,6 +163,7 @@ namespace Sicemed.Web.Controllers
                 {
                     FechaTurnoInicial = diaConHora.AddMinutes(minutes),
                     FechaTurnoFinal = diaConHora.AddMinutes(minutes).AddMinutes(agendaDia.DuracionTurno.TotalMinutes),
+                    Agenda = agendaDia,
                     Consultorio = new
                     {
                         agendaDia.Consultorio.Id,
