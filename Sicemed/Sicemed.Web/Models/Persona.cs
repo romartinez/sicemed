@@ -31,6 +31,11 @@ namespace Sicemed.Web.Models
 
         public virtual string Apellido { get; set; }
 
+        public virtual string NombreCompleto
+        {
+            get { return string.Format("{0}, {1} {2}", Apellido, Nombre, SegundoNombre); }
+        }
+
         public virtual DateTime? FechaNacimiento { get; set; }
 
         public virtual Documento Documento { get; set; }

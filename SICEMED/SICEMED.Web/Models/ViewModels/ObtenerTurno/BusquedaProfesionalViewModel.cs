@@ -1,15 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Models.ViewModels.ObtenerTurno
 {
     public class BusquedaProfesionalViewModel
     {
-        public virtual IEnumerable<Especialidad> Especialidades { get; set; }
+        public long Id { get; set; }
+        public string Foto { get; set; }
+        public string Nombre { get; set; }
+        public DateTime? ProximoTurnoLibre { get; set; }
+        public IEnumerable<InfoViewModel> Especialidades { get; set; }
 
-        public virtual long EspecialidadId { get; set; }
-        public virtual string Profesional { get; set; }
-
-        public IEnumerable<Profesional> ProfesionalesEncontrados { get; set; }
+        public static BusquedaProfesionalViewModel Create(Persona persona)
+        {
+            var profesional = persona.As<Profesional>();
+            var vm = new BusquedaProfesionalViewModel
+                         {
+                             Id = profesional.Id,
+                             Nombre = persona.NombreCompleto,                             
+                             Especialidades = profesional.Especialidades.Select(
+                                     e => new InfoViewModel { Descripcion = e.Nombre, Id = e.Id })
+                         };
+            return vm;
+        }
     }
 }
