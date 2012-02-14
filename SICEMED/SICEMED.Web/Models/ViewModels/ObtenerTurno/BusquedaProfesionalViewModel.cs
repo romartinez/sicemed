@@ -5,12 +5,13 @@ using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Models.ViewModels.ObtenerTurno
 {
+    [Serializable]
     public class BusquedaProfesionalViewModel
     {
         public long Id { get; set; }
         public string Foto { get; set; }
         public string Nombre { get; set; }
-        public DateTime? ProximoTurnoLibre { get; set; }
+        public TurnoViewModel ProximoTurnoLibre { get; set; }
         public IEnumerable<InfoViewModel> Especialidades { get; set; }
 
         public static BusquedaProfesionalViewModel Create(Persona persona)

@@ -84,9 +84,9 @@
             <li>${Descripcion}</li>
             {{/each}}
         </ul>
-            {{if ProximoTurno}}
+            {{if ProximoTurnoLibre}}
             <div>
-                Pr&oacute;ximo Turno: <a href="" data-bind="click:reservarTurnoLibre,text: app.format.fulldate(ProximoTurno)"></a>
+                Pr&oacute;ximo Turno: <a href="" data-bind="click:reservarTurnoLibre,text: app.format.fulldate(ProximoTurnoLibre.FechaTurnoInicial)"></a>
                 <br/>
                 <a href="" data-bind="click: elegirTurnoEnAgenda">Buscar turno en la agenda</a>
             </div>

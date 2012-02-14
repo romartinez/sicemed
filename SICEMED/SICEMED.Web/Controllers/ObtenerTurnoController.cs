@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Xml.Linq;
 using NHibernate.Criterion;
 using NHibernate.Transform;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
@@ -16,6 +17,7 @@ namespace Sicemed.Web.Controllers
     [AuthorizeIt]
     public class ObtenerTurnoController : NHibernateController
     {
+
         public virtual ActionResult Index()
         {
             return View();
@@ -39,12 +41,22 @@ namespace Sicemed.Web.Controllers
 
         public virtual JsonResult BuscarProfesional(long? especialidadId, string nombre)
         {
-            return especialidadId.HasValue ?
+
+            var profesionales = especialidadId.HasValue ?
                 BuscarProfesionalPorEspecialidad(especialidadId.Value, nombre)
                 : BuscarProfesionalPorNombre(nombre);
+
+            var profesionalesConProximoTurno = new List<BusquedaProfesionalViewModel>();
+            foreach (var p in profesionales)
+            {
+                p.ProximoTurnoLibre = ObtenerProximoTurnoLibre(p.Id, especialidadId);
+                profesionalesConProximoTurno.Add(p);
+            }
+
+            return Json(profesionalesConProximoTurno, JsonRequestBehavior.AllowGet);
         }
 
-        private JsonResult BuscarProfesionalPorNombre(string nombre)
+        private IEnumerable<BusquedaProfesionalViewModel> BuscarProfesionalPorNombre(string nombre)
         {
             var session = SessionFactory.GetCurrentSession();
 
@@ -58,12 +70,10 @@ namespace Sicemed.Web.Controllers
                     .TransformUsing(Transformers.DistinctRootEntity)
                     .Future();
 
-            var profesionales = query.Select(ConverPersonaToProfesionalViewModel);
-
-            return Json(profesionales, JsonRequestBehavior.AllowGet);
+            return query.Select(ConverPersonaToProfesionalViewModel);
         }
 
-        private JsonResult BuscarProfesionalPorEspecialidad(long especialidadId, string nombre)
+        private IEnumerable<BusquedaProfesionalViewModel> BuscarProfesionalPorEspecialidad(long especialidadId, string nombre)
         {
             var session = SessionFactory.GetCurrentSession();
 
@@ -79,12 +89,10 @@ namespace Sicemed.Web.Controllers
                 .TransformUsing(Transformers.DistinctRootEntity)
                 .Future();
 
-            var profesionalesConEspecialidad = especialidadConProfesionales
+            return especialidadConProfesionales
                 .SelectMany(e => e.Profesionales)
                 .Select(p => p.Persona)
                 .Select(ConverPersonaToProfesionalViewModel);
-
-            return Json(profesionalesConEspecialidad, JsonRequestBehavior.AllowGet);
         }
 
         private static BusquedaProfesionalViewModel ConverPersonaToProfesionalViewModel(Persona persona)
@@ -92,11 +100,33 @@ namespace Sicemed.Web.Controllers
             return BusquedaProfesionalViewModel.Create(persona);
         }
 
+        private TurnoViewModel ObtenerProximoTurnoLibre(long profesionalId, long? especialidadId = null)
+        {
+            var turnos = ObtenerAgenda(profesionalId, especialidadId);
+            return turnos.FirstOrDefault();
+        }
         #endregion
 
         #region Obtener Agenda
-        public virtual JsonResult ObtenerAgendaProfesional(long profesionalId, long? especialidadId)
+        public virtual JsonResult ObtenerAgendaProfesional(long profesionalId, long? especialidadId = null)
         {
+            return Json(ObtenerAgenda(profesionalId, especialidadId), JsonRequestBehavior.AllowGet);
+        }
+
+        private List<TurnoViewModel> ObtenerAgenda(long profesionalId, long? especialidadId = null)
+        {
+            var cacheKey = String.Format("TURNOS_{0}", profesionalId);
+            var cached = Cache.Get<List<TurnoViewModel>>(cacheKey);
+            if (cached != null)
+            {
+                var turnosCached = cached.Clone();
+                if (especialidadId.HasValue)
+                {
+                    turnosCached = turnosCached.Where(x => x.Especialidad.Id == especialidadId.Value).ToList();
+                }
+                return turnosCached;
+            }
+
             var session = SessionFactory.GetCurrentSession();
             var clinica = session.QueryOver<Clinica>().FutureValue();
             var turnosProfesional = session.QueryOver<Turno>()
@@ -105,23 +135,9 @@ namespace Sicemed.Web.Controllers
                 .Where(p => p.Id == profesionalId)
                 .Future();
 
-            IEnumerable<Agenda> agendaProfesional;
-
-            if(especialidadId.HasValue)
-            {
-                var especialidad = session.Get<Especialidad>(especialidadId);
-                
-                agendaProfesional = session.QueryOver<Agenda>()
-                    .Where(e=>e.EspecialidadesAtendidas.Contains(especialidad))
-                    .JoinQueryOver(a => a.Profesional)
-                    .Where(p => p.Id == profesionalId).Future();                                             
-            }
-            else
-            {
-                agendaProfesional = session.QueryOver<Agenda>()
-                    .JoinQueryOver(a => a.Profesional)
-                    .Where(p => p.Id == profesionalId).Future();                             
-            }
+            var agendaProfesional = session.QueryOver<Agenda>()
+                .JoinQueryOver(a => a.Profesional)
+                .Where(p => p.Id == profesionalId).Future();
 
             //Creo los turnos libres 3 meses para adelante promedio 30 dias por mes
             var turnos = new List<TurnoViewModel>();
@@ -139,17 +155,20 @@ namespace Sicemed.Web.Controllers
             //Agrego los turnos otorgados
             turnos.AddRange(turnosProfesional.Select(TurnoViewModel.Create));
 
-            return Json(turnos, JsonRequestBehavior.AllowGet);
+            Cache.Add(cacheKey, turnos);
+
+            //Filtro por especialidad
+            return !especialidadId.HasValue ? turnos : turnos.Where(x => x.Especialidad.Id == especialidadId.Value).ToList();
         }
 
-        private IEnumerable<TurnoViewModel> CalcularTurnos(DateTime dia, Clinica clinica, Agenda agendaDia)
+        private List<TurnoViewModel> CalcularTurnos(DateTime dia, Clinica clinica, Agenda agendaDia)
         {
             var turnos = new List<TurnoViewModel>();
             var tiempoAtencion = agendaDia.HorarioHasta.Subtract(agendaDia.HorarioDesde);
             for (var minutes = 0; minutes < tiempoAtencion.TotalMinutes; minutes += (int)agendaDia.DuracionTurno.TotalMinutes)
             {
                 var diaConHora = dia.SetTimeWith(agendaDia.HorarioDesde).AddMinutes(minutes);
-                turnos.Add(TurnoViewModel.Create(diaConHora, agendaDia));
+                turnos.AddRange(TurnoViewModel.Create(diaConHora, agendaDia));
             }
 
             //Quito los turnos anteriores a que abra la clinica
@@ -157,7 +176,7 @@ namespace Sicemed.Web.Controllers
 
             //Quito los que son despues de que la clinica cerro
             var horarioCierreClinica = clinica.EsHorarioCorrido
-                                           ? dia.SetTimeWith(clinica.HorarioMatutinoHasta) 
+                                           ? dia.SetTimeWith(clinica.HorarioMatutinoHasta)
                                            : dia.SetTimeWith(clinica.HorarioVespertinoHasta.Value);
 
             turnos.RemoveAll(x => x.FechaTurnoInicial >= horarioCierreClinica);
@@ -166,7 +185,7 @@ namespace Sicemed.Web.Controllers
             if (!clinica.EsHorarioCorrido)
             {
                 turnos.RemoveAll(
-                    x => x.FechaTurnoInicial >= dia.SetTimeWith(clinica.HorarioMatutinoHasta) 
+                    x => x.FechaTurnoInicial >= dia.SetTimeWith(clinica.HorarioMatutinoHasta)
                     && x.FechaTurnoInicial < dia.SetTimeWith(clinica.HorarioVespertinoDesde.Value));
             }
 

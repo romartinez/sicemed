@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Sicemed.Web.Models.ViewModels.ObtenerTurno
 {
+    [Serializable]
     public class TurnoViewModel
     {
         public DateTime FechaTurnoInicial { get; set; }
@@ -35,13 +38,18 @@ namespace Sicemed.Web.Models.ViewModels.ObtenerTurno
             return vm;
         }
 
-        public static TurnoViewModel Create(DateTime diaConHora, Agenda agendaDia)
+        public static TurnoViewModel Create(DateTime diaConHora, Agenda agendaDia, Especialidad especialidad)
         {
             var vm = new TurnoViewModel
                          {
                              FechaTurnoInicial = diaConHora,
                              FechaTurnoFinal = diaConHora.AddMinutes(agendaDia.DuracionTurno.TotalMinutes),
                              Agenda = new InfoViewModel { Id = agendaDia.Id },
+                             Especialidad =  new InfoViewModel
+                                               {
+                                                   Id = especialidad.Id,
+                                                   Descripcion = especialidad.Nombre
+                                               },
                              Consultorio = new InfoViewModel
                                                {
                                                    Id = agendaDia.Consultorio.Id,
@@ -49,6 +57,11 @@ namespace Sicemed.Web.Models.ViewModels.ObtenerTurno
                                                }
                          };
             return vm;
+        }
+
+        public static IEnumerable<TurnoViewModel> Create(DateTime diaConHora, Agenda agendaDia)
+        {
+            return agendaDia.EspecialidadesAtendidas.Select(especialidad => Create(diaConHora, agendaDia, especialidad));
         }
     }
 }

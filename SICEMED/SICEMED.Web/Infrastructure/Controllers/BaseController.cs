@@ -5,6 +5,7 @@ using Castle.Core.Logging;
 using Sicemed.Web.Infrastructure.ActionResults;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Exceptions;
+using Sicemed.Web.Infrastructure.Providers.Cache;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
 
@@ -22,6 +23,8 @@ namespace Sicemed.Web.Infrastructure.Controllers
         }
 
         public IMembershipService MembershipService { get; set; }
+
+        public ICacheProvider Cache { get; set; }
 
         protected new Persona User
         {

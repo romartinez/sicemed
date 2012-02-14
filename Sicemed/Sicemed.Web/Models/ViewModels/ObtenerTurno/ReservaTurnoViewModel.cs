@@ -2,6 +2,7 @@
 
 namespace Sicemed.Web.Models.ViewModels.ObtenerTurno
 {
+    [Serializable]
     public class ReservaTurnoViewModel
     {
         public DateTime FechaTurnoInicial { get; set; }

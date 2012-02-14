@@ -348,6 +348,8 @@
     <Content Include="public\fonts\cartogothicstd-bolditalic-webfont.svg" />
     <Content Include="public\fonts\cartogothicstd-book-webfont.svg" />
     <Content Include="public\fonts\cartogothicstd-italic-webfont.svg" />
+    <Content Include="public\images\doctor_256.png" />
+    <Content Include="public\images\doctor_64.png" />
     <Content Include="public\images\jquery-ui\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="public\images\jquery-ui\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="public\images\jquery-ui\ui-bg_glass_55_fbf9ee_1x400.png" />

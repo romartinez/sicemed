@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 
 namespace Sicemed.Web.Models.ViewModels
 {
+    [Serializable]
     public class PaginableResponse
     {
         public PaginableResponse()
