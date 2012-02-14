@@ -27,23 +27,27 @@
 
 <div id="selectProfesionales">
     <script id="selectProfesional" type="text/html">
-        <div>
-            <label>
-                Por Especialidad:
-            </label>
-            <select data-bind="options: especialidades, optionsText: 'Nombre', value: especialidadSeleccionada, optionsCaption: '-- Todas --'">
-            </select>            
-        </div>
-        <div>
-            <label>
-                Por Profesional:
-            </label>
-            <input type="text" data-bind="value: profesionalABuscar" />
-        </div>
-        <div>
-            <button data-bind="click: buscarProfesionales">Buscar</button>
-        </div>
-        <div data-bind='template: { name: "profesionalEncontrado"}'> </div>
+        <form>
+            <div class="row field_select">
+                <label>
+                    Por Especialidad:
+                </label>
+                <br/>
+                <select class="select_styled" data-bind="options: especialidades, optionsText: 'Nombre', value: especialidadSeleccionada, optionsCaption: '-- Todas --'">
+                </select>            
+            </div>
+            <div class="row field_text">
+                <label>
+                    Por Profesional:
+                </label>
+                <br/>
+                <input type="text" class="inputtext required" data-bind="value: profesionalABuscar" />
+            </div>
+            <div class="row">
+                <button data-bind="click: buscarProfesionales">Buscar</button>
+            </div>
+            <div data-bind='template: { name: "profesionalEncontrado"}'> </div>
+        </form>
     </script>
 
     <script id="selectTurno" type="text/html">
@@ -72,22 +76,24 @@
 
     <script id="profesionalEncontrado" type="text/html">
         {{each profesionalesEncontrados}}
+        <div class="row">     
+        <img data-bind="attr: { alt: Nombre }" src="../../public/images/doctor_64.png"/>           
+        <h3 class="text-blue" data-bind="text: Nombre"></h3>                        
+        <ul>
+            {{each Especialidades}}
+            <li>${Descripcion}</li>
+            {{/each}}
+        </ul>
+            {{if ProximoTurno}}
             <div>
-                <img data-bind="attr: {src: Foto, alt: Nombre}" />
-                <span data-bind="text: Nombre"></span>            
-                {{each Especialidades}}
-                    ${$value}
-                {{/each}}
-                <div>
-                    {{if ProximoTurno}}
-                        Pr&oacute;ximo Turno: <a href="" data-bind="click:reservarTurnoLibre,text: app.format.fulldate(ProximoTurno)"></a>
-                        <br/>
-                        <a href="" data-bind="click: elegirTurnoEnAgenda">Buscar turno en la agenda</a>
-                    {{else}}
-                        El profesional no cuenta con turnos disponibles.
-                    {{/if}}
-                </div>
+                Pr&oacute;ximo Turno: <a href="" data-bind="click:reservarTurnoLibre,text: app.format.fulldate(ProximoTurno)"></a>
+                <br/>
+                <a href="" data-bind="click: elegirTurnoEnAgenda">Buscar turno en la agenda</a>
             </div>
+            {{else}}
+                <div class="ui-state-error-text">El profesional no cuenta con turnos disponibles.</div>
+            {{/if}}
+        </div>
         {{/each}}
     </script>
 </div>

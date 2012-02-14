@@ -139,3 +139,11 @@
 
     return app;
 })(jQuery, app || {});
+
+//Apply global styles
+$(function () {
+//    $("select.select_styled").selectmenu({
+//        style: 'dropdown',
+//        transferClasses: true
+//    });
+})
