@@ -64,8 +64,7 @@ var obtenerTurno = (function () {
             $.getJSON("/ObtenerTurno/ObtenerEspecialidades").done(function (data) {
                 for (var i = data.length - 1; i >= 0; i--) {
                     self.especialidades.push(data[i]);
-                }
-                ;
+                };
             });
         };
     };
@@ -119,16 +118,30 @@ var obtenerTurno = (function () {
 
         self.profesionalSeleccionado = ko.observable(null);
         self.turnoSeleccionado = ko.observable(null);
+        self.especialidadSeleccionada = ko.observable(null);
 
         self.init = function () {
             $('#calendar').hide();
         };
 
-        self.reservar = function () {            
+        self.reservar = function () {
+            //Seleccion de Especialidad
+            var especialidadId = null;
+            if (stepSeleccionProfesional.model().especialidadSeleccionada()) {
+                especialidadId = stepSeleccionProfesional.model().especialidadSeleccionada().Id;
+            } else {
+                if (!self.especialidadSeleccionada()) {
+                    app.ui.showError("Debe seleccionar una especialidad.");
+                    return;
+                }
+                especialidadId = self.especialidadSeleccionada().Id;
+            }
+
             $.post('/ObtenerTurno/ReservarTurno', {
                 profesionalId: self.profesionalSeleccionado().Id,
-                fecha: app.format.fulldate(self.turnoSeleccionado().FechaTurnoInicial),                
-                consultorioId: self.turnoSeleccionado().Consultorio.Id
+                fecha: app.format.fulldate(self.turnoSeleccionado().FechaTurnoInicial),
+                agendaId: self.turnoSeleccionado().Agenda.Id,
+                especialidadId: especialidadId
             }).done(function (d) {
                 self.turnoId(d);
             });

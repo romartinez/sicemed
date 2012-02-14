@@ -52,38 +52,22 @@
 
     <script id="selectTurno" type="text/html">
     </script>    
-
-    <script id="selectComprobante" type="text/html">
-        <h3>Profesional</h3>
-        <div>
-            <img data-bind="attr: {src: profesionalSeleccionado().Foto, alt: profesionalSeleccionado().Nombre}" />
-            <span data-bind="text: profesionalSeleccionado().Nombre"></span>
-            {{each profesionalSeleccionado().Especialidades}}
-            ${$value},
-            {{/each}}
-        </div>
-        <h3>Turno</h3>
-        <div>
-            <span data-bind="text: app.format.fulldate(turnoSeleccionado().FechaTurnoInicial)"></span>
-            <span data-bind="text: app.format.fulldate(turnoSeleccionado().FechaTurnoFinal)"></span>
-            <span data-bind="text: turnoSeleccionado().Consultorio.Nombre"></span>
-        </div>
-        <div>
-            <button data-bind="click: reservar, visible: turnoId() == null">Reservar Turno</button>
-            <button data-bind="click: imprimir, visible: turnoId() != null">Imprimir</button>
+  
+    <script id="profesionalTemplate" type="text/html">
+        <div class="row">                 
+            <img alt="${Nombre}" src="../../public/images/doctor_64.png"/>           
+            <h4>${Nombre}</h4>                        
+            <ul>
+                {{each Especialidades}}
+                <li>${Descripcion}</li>
+                {{/each}}
+            </ul>
         </div>
     </script>
 
     <script id="profesionalEncontrado" type="text/html">
-        {{each profesionalesEncontrados}}
-        <div class="row">     
-        <img data-bind="attr: { alt: Nombre }" src="../../public/images/doctor_64.png"/>           
-        <h3 class="text-blue" data-bind="text: Nombre"></h3>                        
-        <ul>
-            {{each Especialidades}}
-            <li>${Descripcion}</li>
-            {{/each}}
-        </ul>
+        {{each(i, profesional) profesionalesEncontrados}}        
+            {{tmpl(profesional) "#profesionalTemplate"}}
             {{if ProximoTurnoLibre}}
             <div>
                 Pr&oacute;ximo Turno: <a href="" data-bind="click:reservarTurnoLibre,text: app.format.fulldate(ProximoTurnoLibre.FechaTurnoInicial)"></a>
@@ -91,10 +75,34 @@
                 <a href="" data-bind="click: elegirTurnoEnAgenda">Buscar turno en la agenda</a>
             </div>
             {{else}}
-                <div class="ui-state-error-text">El profesional no cuenta con turnos disponibles.</div>
+            <div class="ui-state-error-text">El profesional no cuenta con turnos disponibles.</div>
             {{/if}}
-        </div>
         {{/each}}
+    </script>
+    
+    <script id="selectComprobante" type="text/html">
+        <h3 class="text-blue">Profesional</h3>
+        <div>
+            {{tmpl(profesionalSeleccionado()) "#profesionalTemplate"}}
+        </div>
+        <h3 class="text-blue">Turno</h3>
+        <div>
+            <span data-bind="text: app.format.fulldate(turnoSeleccionado().FechaTurnoInicial)"></span>
+            <span data-bind="text: app.format.fulldate(turnoSeleccionado().FechaTurnoFinal)"></span>
+            <span data-bind="text: turnoSeleccionado().Consultorio.Nombre"></span>
+        </div>
+        <div class="row field_select" data-bind="visible: !obtenerTurno.vm.stepModels()[0].model().especialidadSeleccionada()">
+            <label>
+                Por Especialidad:
+            </label>
+            <br/>
+            <select class="select_styled" data-bind="options: turnoSeleccionado().Agenda.EspecialidadesAtendidas, optionsText: 'Descripcion', value: especialidadSeleccionada, optionsCaption: '-- Seleccione --'">
+            </select>            
+        </div>
+        <div>
+            <button data-bind="click: reservar, visible: turnoId() == null">Reservar Turno</button>
+            <button data-bind="click: imprimir, visible: turnoId() != null">Imprimir</button>
+        </div>
     </script>
 </div>
 

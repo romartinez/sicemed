@@ -293,6 +293,7 @@
     <Compile Include="Models\ViewModels\Cuenta\RegistroPersonaViewModel.cs" />
     <Compile Include="Models\ViewModels\InfoViewModel.cs" />
     <Compile Include="Models\ViewModels\Menu\PageViewModel.cs" />
+    <Compile Include="Models\ViewModels\ObtenerTurno\AgendaConEspecialidadesViewModel.cs" />
     <Compile Include="Models\ViewModels\ObtenerTurno\BusquedaProfesionalViewModel.cs" />
     <Compile Include="Models\ViewModels\ObtenerTurno\ReservaTurnoViewModel.cs" />
     <Compile Include="Models\ViewModels\ObtenerTurno\TurnoViewModel.cs" />
