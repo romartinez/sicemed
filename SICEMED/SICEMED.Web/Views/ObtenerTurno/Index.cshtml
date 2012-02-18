@@ -16,13 +16,13 @@
 
 <div class="ui-helper-clearfix"></div>
 
-<article data-bind="template: { name: 'currentTmpl', data: currentStep, afterRender: currentStep().model().init }">
+<article data-bind="template: { name: 'currentTmpl', afterRender: currentStep().init }">
 </article>
 
 <div id="calendar"></div>
 
 <script id="currentTmpl" type="text/html">
-    <div data-bind="template: { name: getTemplate(), data: model }"></div> 
+    <div data-bind="template: { name: getTemplate()}"></div> 
 </script>
 
 <div id="selectProfesionales">

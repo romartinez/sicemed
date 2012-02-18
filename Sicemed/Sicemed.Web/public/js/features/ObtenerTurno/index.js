@@ -1,88 +1,36 @@
-//// Setup mocking
-//$.mockjax(function (settings) {
-//    var resource = settings.url.match(/\/ObtenerTurno\/(.*)$/);
-//    if (resource) {
-//        return {
-//            proxy: '/public/js/features/ObtenerTurno/mocks/' + resource[1] + '.js',
-//            cache: false
-//        };
-//    }
-//    return;
-//});
-////---------------------------
+var model = (function () {
 
-var obtenerTurno = (function () {
-    var my = {};
-
-    var step = function (id, name, template, model) {
-        this.id = id;
-        this.name = ko.observable(name);
-        this.template = template;
-        this.model = ko.observable(model);
-
-        this.getTemplate = function () {
-            return this.template;
-        };
-    };
-
-    // Expone dos eventos:
-    // * reservarTurnoLibre(profesional)
-    // * elegirTurnoEnAgenda(profesional)
-    var seleccionProfesionalesVm = function () {
+    var ViewModel = function () {
         var self = this;
-        self.especialidades = ko.observableArray([]);
-        self.especialidadSeleccionada = ko.observable(null);
-        self.profesionalABuscar = ko.observable('');
 
-        self.profesionalesEncontrados = ko.observableArray([]);
+        //#region Wizard
+        var step = function (id, name, template, initFunction) {
+            this.id = id;
+            this.name = ko.observable(name);
+            this.template = template;
 
-        self.buscarProfesionales = function () {
-            self.profesionalesEncontrados.removeAll();
-            $.getJSON('/ObtenerTurno/BuscarProfesional',
-                {
-                    especialidadId: self.especialidadSeleccionada() ? self.especialidadSeleccionada().Id : null,
-                    nombre: self.profesionalABuscar()
-                }
-            ).done(function (data) {
-                for (var i = data.length - 1; i >= 0; i--) {
-                    //Agrego los metodos del firmante
-                    var profesional = data[i];
-                    profesional.reservarTurnoLibre = function () {
-                        $(self).trigger('reservarTurnoLibre', [profesional]);
-                    };
-                    profesional.elegirTurnoEnAgenda = function () {
-                        $(self).trigger('elegirTurnoEnAgenda', [profesional]);
-                    };
+            this.getTemplate = function () {
+                return this.template;
+            };
 
-                    self.profesionalesEncontrados.push(profesional);
-                };
-            });
+            this.init = initFunction || function () { };
         };
 
-        self.init = function () {
+        var stepSeleccionProfesional = new step(1, 'Seleccion De Profesional', 'selectProfesional', function () {
             //Inicializar Especialidades
             $.getJSON("/ObtenerTurno/ObtenerEspecialidades").done(function (data) {
                 for (var i = data.length - 1; i >= 0; i--) {
                     self.especialidades.push(data[i]);
                 }
-                ;
             });
-        };
-    };
+        });
 
-    // Expone un evento
-    // * reservarTurno(turno)
-    var seleccionTurnoVm = function () {
-        var self = this;
-
-        self.turnosDisponibles = ko.observableArray([]);
-
-        self.init = function () {
+        var stepSeleccionTurno = new step(2, 'Seleccion De Turno', 'selectTurno', function () {
             $('#calendar').show();
             //Incializar agenda
             $.getJSON("/ObtenerTurno/ObtenerAgendaProfesional",
                 {
-                    profesionalId: stepComprobante.model().profesionalSeleccionado().Id
+                    profesionalId: self.profesionalSeleccionado().Id
                 }
             ).done(function (data) {
                 var events = [];
@@ -91,7 +39,8 @@ var obtenerTurno = (function () {
                 for (var i = data.length - 1; i >= 0; i--) {
                     var turno = data[i];
                     turno.reservarTurno = function () {
-                        $(self).trigger('reservarTurno', [turno]);
+                        self.turnoSeleccionado(turno);
+                        self.currentStep(stepComprobante);
                     };
                     self.turnosDisponibles.push(turno);
                     var event = {
@@ -108,50 +57,19 @@ var obtenerTurno = (function () {
                 }
                 calendar.fullCalendar('addEventSource', events);
             });
-        };
-    };
+        });
 
-
-    var comprobanteVm = function () {
-        var self = this;
-
-        self.turnoId = ko.observable(null);
-
-        self.profesionalSeleccionado = ko.observable(null);
-        self.turnoSeleccionado = ko.observable(null);
-
-        self.init = function () {
+        var stepComprobante = new step(3, 'Comprobante', 'selectComprobante', function () {
             $('#calendar').hide();
-        };
+        });
 
-        self.reservar = function () {            
-            $.post('/ObtenerTurno/ReservarTurno', {
-                profesionalId: self.profesionalSeleccionado().Id,
-                fecha: app.format.fulldate(self.turnoSeleccionado().FechaTurnoInicial),                
-                consultorioId: self.turnoSeleccionado().Consultorio.Id
-            }).done(function (d) {
-                self.turnoId(d);
-            });
-        };
-
-        self.imprimir = function () {
-            console.log("Imprimir " + self.turnoId());
-        };
-    };
-
-    var stepSeleccionProfesional = new step(1, 'Seleccion De Profesional', 'selectProfesional', new seleccionProfesionalesVm());
-    var stepSeleccionTurno = new step(2, 'Seleccion De Turno', 'selectTurno', new seleccionTurnoVm());
-    var stepComprobante = new step(3, 'Comprobante', 'selectComprobante', new comprobanteVm());
-
-    var wizard = function () {
-        var self = this;
         self.stepModels = ko.observableArray([
                 stepSeleccionProfesional,
                 stepSeleccionTurno,
                 stepComprobante
             ]);
 
-        self.currentStep = ko.observable(self.stepModels()[0]);
+        self.currentStep = ko.observable(stepSeleccionProfesional);
 
         self.getClass = function (stepToCheck) {
             if (self.currentStep().id == stepToCheck.id) return 'active-step';
@@ -171,24 +89,62 @@ var obtenerTurno = (function () {
             return self.currentStep().template;
         };
 
-        self.reservarTurnoLibre = function (e, profesional) {
-            stepComprobante.model().profesionalSeleccionado(profesional);
-            stepComprobante.model().turnoSeleccionado(profesional.ProximoTurno);
-            self.currentStep(self.stepModels()[2]);
-        };
-        self.elegirTurnoEnAgenda = function (e, profesional) {
-            stepComprobante.model().profesionalSeleccionado(profesional);
-            self.currentStep(self.stepModels()[1]);
-        };
-        self.reservarTurno = function (e, turno) {
-            stepComprobante.model().turnoSeleccionado(turno);
-            self.currentStep(self.stepModels()[2]);
+        //#endregion
+
+        //#region Propiedades
+        self.especialidades = ko.observableArray([]);
+        self.profesionalesEncontrados = ko.observableArray([]);
+        self.turnosDisponibles = ko.observableArray([]);
+        self.profesionalABuscar = ko.observable('');
+
+        self.especialidadSeleccionada = ko.observable(null);
+        self.profesionalSeleccionado = ko.observable(null);
+        self.turnoSeleccionado = ko.observable(null);
+        self.turnoId = ko.observable(null);
+        //#endregion
+
+        //#region Metodos
+        self.buscarProfesionales = function () {
+            self.profesionalesEncontrados.removeAll();
+            $.getJSON('/ObtenerTurno/BuscarProfesional',
+                {
+                    especialidadId: self.especialidadSeleccionada() ? self.especialidadSeleccionada().Id : null,
+                    nombre: self.profesionalABuscar()
+                }
+            ).done(function (data) {
+                for (var i = data.length - 1; i >= 0; i--) {
+                    //Agrego los metodos del firmante
+                    var profesional = data[i];
+                    profesional.reservarTurnoLibre = function () {
+                        self.profesionalSeleccionado(profesional);
+                        self.turnoSeleccionado(profesional.ProximoTurnoLibre);
+                        self.currentStep(stepComprobante);
+                    };
+                    profesional.elegirTurnoEnAgenda = function () {
+                        self.profesionalSeleccionado(profesional);
+                        self.currentStep(stepSeleccionTurno);
+                    };
+
+                    self.profesionalesEncontrados.push(profesional);
+                };
+            });
         };
 
-        $(stepSeleccionProfesional.model()).bind('reservarTurnoLibre', self.reservarTurnoLibre);
-        $(stepSeleccionProfesional.model()).bind('elegirTurnoEnAgenda', self.elegirTurnoEnAgenda);
+        self.reservar = function () {
+            $.post('/ObtenerTurno/ReservarTurno', {
+                profesionalId: self.profesionalSeleccionado().Id,
+                fecha: app.format.fulldate(self.turnoSeleccionado().FechaTurnoInicial),
+                consultorioId: self.turnoSeleccionado().Consultorio.Id
+            }).done(function (d) {
+                self.turnoId(d);
+                alert("Su turno es: " + d);
+            });
+        };
 
-        $(stepSeleccionTurno.model()).bind('reservarTurno', self.reservarTurno);
+        self.imprimir = function () {
+            console.log("Imprimir " + self.turnoId());
+        };
+        //#endregion
 
         //Render del calendar
         $('#calendar').fullCalendar({
@@ -222,7 +178,10 @@ var obtenerTurno = (function () {
                 day: 'dddd d/M'
             },
             eventClick: function (calEvent, jsEvent, view) {
-                if (calEvent.libre) self.reservarTurno(jsEvent, calEvent.turno);
+                if (calEvent.libre) {
+                    self.turnoSeleccionado(calEvent.turno);
+                    self.currentStep(stepComprobante);
+                }
             },
             eventMouseout: function (event, jsEvent, view) {
                 $(this).css('cursor', 'auto');
@@ -234,8 +193,8 @@ var obtenerTurno = (function () {
         }).hide();
     };
 
-    my.vm = new wizard();
-    ko.applyBindings(my.vm);
+    var vm = new ViewModel();
+    ko.applyBindings(vm);
 
-    return my;
+    return vm;
 } ());
