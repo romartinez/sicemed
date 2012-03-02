@@ -74,7 +74,7 @@ namespace Sicemed.Web.Models
         /// <param name="paciente"></param>
         /// <param name="profesional"></param>
         /// <param name="especialidad"></param>
-        /// <param name="ipPaciente"></param>
+        /// <param name="ipPaciente"></param>        
         /// <param name="agenda"></param>
         /// <returns></returns>
         public static Turno Create(
@@ -82,7 +82,7 @@ namespace Sicemed.Web.Models
             Paciente paciente,
             Profesional profesional,
             Especialidad especialidad,
-            string ipPaciente,
+            string ipPaciente,            
             Agenda agenda = null)
         {
             if (paciente == null) throw new ArgumentNullException("paciente");
@@ -95,6 +95,9 @@ namespace Sicemed.Web.Models
             if (agenda != null && !profesional.Agendas.Contains(agenda))
                 throw new ArgumentException(@"El Profesional seleccionado para el turno no atiende en el momento elegido.", "agenda");
 
+            if(agenda != null && !agenda.EspecialidadesAtendidas.Contains(especialidad))
+                throw new ArgumentException(@"La Especialidad elegida no se encuentra disponible en la agenda del profesional.", "especialidad");
+
             return new Turno
                        {
                            FechaGeneracion = DateTime.Now,
@@ -103,6 +106,7 @@ namespace Sicemed.Web.Models
                            Profesional = profesional,
                            Especialidad = especialidad,
                            IpPaciente = ipPaciente,
+                           Consultorio = agenda.Consultorio,
                            Agenda = agenda
                        };
         }

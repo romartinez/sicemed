@@ -195,12 +195,12 @@ namespace Sicemed.Web.Controllers
 
         #region Reservar Turno
         [HttpPost]
-        public virtual JsonResult ReservarTurno(long profesionalId, DateTime fecha, long consultorioId, long especialidadId, long agendaId)
+        public virtual JsonResult ReservarTurno(long profesionalId, DateTime fecha, long especialidadId, long agendaId)
         {
             var session = SessionFactory.GetCurrentSession();
             var profesional = session.Get<Profesional>(profesionalId);
             var especialidad = session.Get<Especialidad>(especialidadId);
-            var agenda = session.Get<Agenda>(agendaId);
+            var agenda = session.Get<Agenda>(agendaId);            
 
             //TODO: Validar las políticas de la clínica y comportamiento del usuario
 
