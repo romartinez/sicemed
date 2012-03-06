@@ -225,6 +225,7 @@
     <Compile Include="Infrastructure\HttpModules\LoggingThreadContextSetupModule.cs" />
     <Compile Include="Infrastructure\HttpModules\NHibernateSessionModule.cs" />
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
+    <Compile Include="Infrastructure\Logs\ConfigAdoNetAppender.cs" />
     <Compile Include="Infrastructure\NHibernate\Events\AuditEventListener.cs" />
     <Compile Include="Infrastructure\NHibernate\Events\SaveOrUpdateEventListener.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\AuditLogMapping.cs" />
@@ -325,6 +326,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\combres.xml" />
+    <Content Include="App_Data\LogTable.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Roles\Administrador.hbm.xml" />
@@ -531,6 +533,7 @@
     <Content Include="public\js\libs\knockout-2.0.0.js" />
     <Content Include="public\js\libs\msDateJsonParser.js" />
     <Content Include="public\js\libs\postAntiForgery.js" />
+    <Content Include="Reports\logo.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -648,6 +651,7 @@
     <None Include="public\fonts\cartogothicstd-italic-webfont.eot" />
     <None Include="public\fonts\cartogothicstd-italic-webfont.ttf" />
     <None Include="public\fonts\cartogothicstd-italic-webfont.woff" />
+    <None Include="Reports\ComprobanteTurno.docx" />
     <None Include="Reports\ComprobanteTurno.pdf" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

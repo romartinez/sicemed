@@ -2,6 +2,8 @@ using System;
 using System.Web;
 using NHibernate;
 using NHibernate.Context;
+using NHibernate.Impl;
+using log4net;
 
 namespace Sicemed.Web.Infrastructure.HttpModules
 {
@@ -37,6 +39,7 @@ namespace Sicemed.Web.Infrastructure.HttpModules
         {
             var session = sf.OpenSession();
             session.BeginTransaction();
+            ThreadContext.Properties["sessionId"] = SessionIdLoggingContext.SessionId.ToString();
             return session;
         }
 

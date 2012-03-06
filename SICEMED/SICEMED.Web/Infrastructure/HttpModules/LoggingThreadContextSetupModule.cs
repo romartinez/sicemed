@@ -8,9 +8,9 @@ namespace Sicemed.Web.Infrastructure.HttpModules
     {
         public void Init(HttpApplication context)
         {
-            context.BeginRequest += (sender, args) =>
+            context.PostAuthenticateRequest += (sender, args) =>
                                         {
-                                            ThreadContext.Properties["sessionId"] = GetSessionId();
+                                            
                                             ThreadContext.Properties["userId"] = GetUserId(context);
                                             ThreadContext.Properties["userIp"] = GetUserIp(context);
                                             ThreadContext.Properties["rawUrl"] = GetRawUrl(context);
@@ -41,11 +41,6 @@ namespace Sicemed.Web.Infrastructure.HttpModules
             if (!context.Context.User.Identity.IsAuthenticated)
                 return "No Authenticated";
             return context.Context.User.Identity.Name;
-        }
-
-        private string GetSessionId()
-        {
-            return SessionIdLoggingContext.SessionId.ToString();
         }
 
         public void Dispose()
