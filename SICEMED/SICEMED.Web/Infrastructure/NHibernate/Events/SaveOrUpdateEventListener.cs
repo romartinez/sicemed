@@ -1,6 +1,5 @@
 ﻿using System.Web;
 using NHibernate.Event;
-using Newtonsoft.Json;
 using Sicemed.Web.Infrastructure.Helpers;
 using log4net;
 

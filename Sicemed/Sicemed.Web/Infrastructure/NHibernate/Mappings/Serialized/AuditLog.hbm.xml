@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" namespace="Sicemed.Web.Models" assembly="Sicemed.Web" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="AuditLog">
+    <id name="Id" type="Guid">
+      <generator class="guid.comb" />
+    </id>
+    <property name="Entidad" />
+    <property name="EntidadId" />
+    <property name="Usuario" />
+    <property name="Accion" />
+    <property name="Fecha" />
+    <property name="EntidadAntes" type="StringClob" />
+    <property name="EntidadDespues" type="StringClob" />
+  </class>
+</hibernate-mapping>

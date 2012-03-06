@@ -225,7 +225,9 @@
     <Compile Include="Infrastructure\HttpModules\LoggingThreadContextSetupModule.cs" />
     <Compile Include="Infrastructure\HttpModules\NHibernateSessionModule.cs" />
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
+    <Compile Include="Infrastructure\NHibernate\Events\AuditEventListener.cs" />
     <Compile Include="Infrastructure\NHibernate\Events\SaveOrUpdateEventListener.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\AuditLogMapping.cs" />
     <Compile Include="Infrastructure\NHibernate\NHibernateContractResolver.cs" />
     <Compile Include="Infrastructure\NHibernate\EnumerationType.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\AgendaMap.cs" />
@@ -251,6 +253,7 @@
     <Compile Include="Infrastructure\NHibernate\Mappings\ProvinciaMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\TurnoMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\PersonaMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Resolver.cs" />
     <Compile Include="Infrastructure\Providers\Cache\ICacheProvider.cs" />
     <Compile Include="Infrastructure\Providers\Cache\InMemoryCacheProvider.cs" />
     <Compile Include="Infrastructure\Providers\Cache\NullCacheProvider.cs" />
@@ -275,6 +278,7 @@
     <Compile Include="Infrastructure\Windsor\Installers\LoggerInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\NHibernateInstaller.cs" />
     <Compile Include="Models\Agenda.cs" />
+    <Compile Include="Models\AuditLog.cs" />
     <Compile Include="Models\BI\CategoriaIndicador.cs" />
     <Compile Include="Models\BI\Components\MedicionIndicador.cs" />
     <Compile Include="Models\BI\Enumerations\TipoOperadorIndicador.cs" />
@@ -341,6 +345,7 @@
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Roles\Rol.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Roles\Secretaria.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Turno.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\AuditLog.hbm.xml" />
     <Content Include="public\css\app.css" />
     <Content Include="public\css\fullcalendar.css" />
     <Content Include="public\css\jquery-ui.css" />
