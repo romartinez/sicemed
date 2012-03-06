@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Reflection;
 using System.Web;
 using Castle.MicroKernel.Facilities;
 using Castle.MicroKernel.Registration;
@@ -11,9 +9,11 @@ using NHibernate.Cfg.MappingSchema;
 using NHibernate.Context;
 using NHibernate.Dialect;
 using NHibernate.Driver;
+using NHibernate.Event;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Tool.hbm2ddl;
 using Sicemed.Web.Infrastructure.HttpModules;
+using Sicemed.Web.Infrastructure.NHibernate.Events;
 using Sicemed.Web.Models;
 
 namespace SICEMED.Web.Infrastructure.Windsor.Facilities
@@ -61,6 +61,11 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
             configuration.Properties[Environment.CurrentSessionContextClass] =
                 typeof(WebSessionContext).AssemblyQualifiedName;
 
+            var auditListener = new AuditEventListener();
+
+            configuration.SetListener(ListenerType.PostDelete, auditListener);
+            configuration.SetListener(ListenerType.PostInsert, auditListener);
+            configuration.SetListener(ListenerType.PostUpdate, auditListener);
 
             return configuration;
         }
