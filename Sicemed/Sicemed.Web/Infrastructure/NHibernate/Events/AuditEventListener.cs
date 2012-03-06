@@ -2,6 +2,7 @@
 using System.Web;
 using NHibernate;
 using NHibernate.Event;
+using NHibernate.Event.Default;
 using Newtonsoft.Json;
 using Sicemed.Web.Models;
 using log4net;
@@ -29,9 +30,9 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
         {
             try
             {
-                return "AA"; // JsonConvert.SerializeObject(obj, Formatting.Indented, _settings);
+                return JsonConvert.SerializeObject(obj, Formatting.Indented, _settings);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return ex.Message;
             }
@@ -39,7 +40,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
 
         private void AuditEvent(ISession session, string action, string entity, string before, string after)
         {
-            var usuario = HttpContext.Current != null && HttpContext.Current.User != null 
+            var usuario = HttpContext.Current != null && HttpContext.Current.User != null
                 ? HttpContext.Current.User.Identity.Name : "*Unkonwn*";
 
             if (string.IsNullOrWhiteSpace(usuario)) usuario = "*Anonymous*";
@@ -56,7 +57,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
 
             if (Log.IsDebugEnabled)
                 Log.DebugFormat(Serialize(new object[] { auditRecord }));
-            
+
             session.Save(auditRecord);
             session.Flush();
         }
@@ -67,7 +68,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
                 return;
 
             AuditEvent(@event.Session.GetSession(EntityMode.Poco),
-                "DELETE", @event.Entity.GetType().Name, Serialize(@event.DeletedState), string.Empty);
+                "DELETE", @event.Entity.GetType().Name, Serialize(Resolver.ResolveArray(@event.DeletedState, @event.Session)), string.Empty);
         }
 
         public void OnPostInsert(PostInsertEvent @event)
@@ -76,7 +77,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
                 return;
 
             AuditEvent(@event.Session.GetSession(EntityMode.Poco),
-                "INSERT", @event.Entity.GetType().Name, string.Empty, Serialize(@event.State));
+                "INSERT", @event.Entity.GetType().Name, string.Empty, Serialize(Resolver.ResolveArray(@event.State, @event.Session)));
         }
 
         public void OnPostUpdate(PostUpdateEvent @event)
@@ -85,7 +86,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
                 return;
 
             AuditEvent(@event.Session.GetSession(EntityMode.Poco),
-                "UPDATE", @event.Entity.GetType().Name, Serialize(@event.OldState), Serialize(@event.State));
+                "UPDATE", @event.Entity.GetType().Name, Serialize(Resolver.ResolveArray(@event.OldState, @event.Session)), Serialize(Resolver.ResolveArray(@event.State, @event.Session)));
         }
     }
 }
