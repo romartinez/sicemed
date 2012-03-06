@@ -5,11 +5,14 @@ using System.Reflection;
 using NHibernate;
 using NHibernate.Metadata;
 using NHibernate.Type;
- 
+using log4net;
+
 namespace Sicemed.Web.Infrastructure.NHibernate
 {
     public static class Resolver
     {
+        private static ILog _log = LogManager.GetLogger(typeof(Resolver));
+
         public static List<T> ResolveList<T>(List<T> entityList, ISession session) where T : class
         {
             // create a resolved entities list for peace and sharing
@@ -55,8 +58,15 @@ namespace Sicemed.Web.Infrastructure.NHibernate
 
             T resolvedEntity = default(T);
             // now lets go ahead and make sure everything is unproxied
-            try { resolvedEntity = (T)session.GetSessionImplementation().PersistenceContext.Unproxy(entity); }
-            catch (Exception ex) { return default(T); }
+            try
+            {
+                resolvedEntity = (T)session.GetSessionImplementation().PersistenceContext.Unproxy(entity);
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                return default(T);
+            }
             // add entity to the list of resolved entities
             resolvedEntities.Add(resolvedEntity);
 
@@ -66,8 +76,15 @@ namespace Sicemed.Web.Infrastructure.NHibernate
             // get the entity type
             Type entityType = entity.GetType();
             // get the entity meta data from the type
-            try { entityMetadata = session.SessionFactory.GetClassMetadata(entityType); }
-            catch (Exception ex) { return default(T); }
+            try
+            {
+                entityMetadata = session.SessionFactory.GetClassMetadata(entityType);
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                return default(T);
+            }
 
             // PERFORM PROPERTY DIVE //
 
@@ -81,35 +98,42 @@ namespace Sicemed.Web.Infrastructure.NHibernate
             // loop over source properties & compare
             foreach (PropertyInfo propertyInfo in propertyInfos)
             {
-                // get property name
-                propertyName = propertyInfo.Name;
-                // get property type
-                try { entityPropertyType = entityMetadata.GetPropertyType(propertyName); }
-                catch (Exception ex) { continue; }
-                // get property value
-                propertyValue = propertyInfo.GetValue(entity, null);
-                // these are not the good kind of bags :P
-                if (entityPropertyType.IsCollectionType)
+                try
                 {
-                    // first get the property list's internal type
-                    propertyListInternalType = propertyInfo.PropertyType.GetGenericArguments()[0];
-                    // create new array type based on the internal type
-                    propertyListType = typeof(List<>).MakeGenericType(propertyListInternalType);
-                    // create a new property list of the internal type
-                    IList propertyList = (IList)Activator.CreateInstance(propertyListType);
-                    // set the property list in the resolved object
-                    propertyInfo.SetValue(resolvedEntity, propertyList, null);
-                    // get the enumerator for this property value
-                    IEnumerator enumerator = ((IEnumerable)propertyValue).GetEnumerator();
-                    // loop over items to also perform resolution
-                    while (enumerator.MoveNext())
-                        propertyList.Add(Resolve(enumerator.Current, session, resolvedEntities));
+                    // get property name
+                    propertyName = propertyInfo.Name;
+                    // get property type
+                    try { entityPropertyType = entityMetadata.GetPropertyType(propertyName); }
+                    catch (Exception ex) { continue; }
+                    // get property value
+                    propertyValue = propertyInfo.GetValue(entity, null);
+                    // these are not the good kind of bags :P
+                    if (entityPropertyType.IsCollectionType)
+                    {
+                        // first get the property list's internal type
+                        propertyListInternalType = propertyInfo.PropertyType.GetGenericArguments()[0];
+                        // create new array type based on the internal type
+                        propertyListType = typeof(List<>).MakeGenericType(propertyListInternalType);
+                        // create a new property list of the internal type
+                        IList propertyList = (IList)Activator.CreateInstance(propertyListType);
+                        // set the property list in the resolved object
+                        propertyInfo.SetValue(resolvedEntity, propertyList, null);
+                        // get the enumerator for this property value
+                        IEnumerator enumerator = ((IEnumerable)propertyValue).GetEnumerator();
+                        // loop over items to also perform resolution
+                        while (enumerator.MoveNext())
+                            propertyList.Add(Resolve(enumerator.Current, session, resolvedEntities));
+                    }
+                    // destroy hibernate proxies
+                    else if (entityPropertyType.IsEntityType)
+                    {
+                        // set the property of the resolved entity to the child beneath us
+                        propertyInfo.SetValue(resolvedEntity, Resolve(propertyValue, session, resolvedEntities), null);
+                    }
                 }
-                // destroy hibernate proxies
-                else if (entityPropertyType.IsEntityType)
+                catch (Exception ex)
                 {
-                    // set the property of the resolved entity to the child beneath us
-                    propertyInfo.SetValue(resolvedEntity, Resolve(propertyValue, session, resolvedEntities), null);
+                    _log.Error(ex);
                 }
             }
 

@@ -5,6 +5,7 @@
       <generator class="guid.comb" />
     </id>
     <property name="Entidad" />
+    <property name="EntidadId" />
     <property name="Usuario" />
     <property name="Accion" />
     <property name="Fecha" />

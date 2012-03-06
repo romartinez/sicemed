@@ -12,6 +12,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Id(x => x.Id, map => map.Generator(Generators.GuidComb));
 
             Property(x => x.Accion);
+            Property(x => x.EntidadId);
             Property(x => x.Entidad);
             Property(x => x.EntidadAntes, m => m.Type(NHibernateUtil.StringClob));
             Property(x => x.EntidadDespues, m => m.Type(NHibernateUtil.StringClob));

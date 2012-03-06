@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using NHibernate;
 using NHibernate.Event;
@@ -26,11 +27,20 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
                             };
         }
 
-        private string Serialize(object[] obj)
+        private string Serialize(string[] propertyNames, object[] obj)
         {
             try
             {
-                return JsonConvert.SerializeObject(obj, Formatting.Indented, _settings);
+                var values = new Dictionary<string, object>();
+                if(propertyNames.Length != obj.Length) 
+                    throw new Exception("The length of the properties is different from the values.");
+
+                for (var i = 0; i < propertyNames.Length; i++)
+                {
+                    values.Add(propertyNames[i], obj[i]);
+                }
+
+                return JsonConvert.SerializeObject(values, Formatting.Indented, _settings);
             }
             catch (Exception ex)
             {
@@ -38,7 +48,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
             }
         }
 
-        private void AuditEvent(ISession session, string action, string entity, string before, string after)
+        private void AuditEvent(ISession session, object entityId, string action, string entity, string before, string after)
         {
             var usuario = HttpContext.Current != null && HttpContext.Current.User != null
                 ? HttpContext.Current.User.Identity.Name : "*Unkonwn*";
@@ -50,13 +60,11 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
                 Usuario = usuario,
                 Accion = action,
                 Entidad = entity,
+                EntidadId = Convert.ToInt64(entityId),
                 EntidadAntes = before,
                 EntidadDespues = after,
                 Fecha = DateTime.Now
             };
-
-            if (Log.IsDebugEnabled)
-                Log.DebugFormat(Serialize(new object[] { auditRecord }));
 
             session.Save(auditRecord);
             session.Flush();
@@ -67,8 +75,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
             if (!(@event.Entity is Entity))
                 return;
 
-            AuditEvent(@event.Session.GetSession(EntityMode.Poco),
-                "DELETE", @event.Entity.GetType().Name, Serialize(Resolver.ResolveArray(@event.DeletedState, @event.Session)), string.Empty);
+            AuditEvent(@event.Session.GetSession(EntityMode.Poco), @event.Id,
+                "DELETE", @event.Entity.GetType().Name, Serialize(@event.Persister.EntityMetamodel.PropertyNames, Resolver.ResolveArray(@event.DeletedState, @event.Session)), string.Empty);
         }
 
         public void OnPostInsert(PostInsertEvent @event)
@@ -76,8 +84,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
             if (!(@event.Entity is Entity))
                 return;
 
-            AuditEvent(@event.Session.GetSession(EntityMode.Poco),
-                "INSERT", @event.Entity.GetType().Name, string.Empty, Serialize(Resolver.ResolveArray(@event.State, @event.Session)));
+            AuditEvent(@event.Session.GetSession(EntityMode.Poco), @event.Id,
+                "INSERT", @event.Entity.GetType().Name, string.Empty, Serialize(@event.Persister.EntityMetamodel.PropertyNames, Resolver.ResolveArray(@event.State, @event.Session)));
         }
 
         public void OnPostUpdate(PostUpdateEvent @event)
@@ -85,8 +93,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
             if (!(@event.Entity is Entity))
                 return;
 
-            AuditEvent(@event.Session.GetSession(EntityMode.Poco),
-                "UPDATE", @event.Entity.GetType().Name, Serialize(Resolver.ResolveArray(@event.OldState, @event.Session)), Serialize(Resolver.ResolveArray(@event.State, @event.Session)));
+            AuditEvent(@event.Session.GetSession(EntityMode.Poco), @event.Id,
+                "UPDATE", @event.Entity.GetType().Name, Serialize(@event.Persister.EntityMetamodel.PropertyNames, Resolver.ResolveArray(@event.OldState, @event.Session)), Serialize(@event.Persister.EntityMetamodel.PropertyNames, Resolver.ResolveArray(@event.State, @event.Session)));
         }
     }
 }
