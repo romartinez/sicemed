@@ -5,6 +5,7 @@ namespace Sicemed.Web.Models.ViewModels.ObtenerTurno
     [Serializable]
     public class ReservaTurnoViewModel
     {
+        public long Id { get; set; }
         public DateTime FechaTurnoInicial { get; set; }
 
         public InfoViewModel Consultorio { get; set; }
@@ -16,6 +17,8 @@ namespace Sicemed.Web.Models.ViewModels.ObtenerTurno
         {
             var vm = new ReservaTurnoViewModel
                          {
+                             Id = turno.Id,
+                             FechaTurnoInicial = turno.FechaTurno,
                              Consultorio =
                                  new InfoViewModel() { Id = turno.Consultorio.Id, Descripcion = turno.Consultorio.Descripcion },
                              Paciente =

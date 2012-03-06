@@ -81,7 +81,7 @@ namespace Sicemed.Web.Models
 
         public virtual T As<T>() where T : Rol
         {
-            var personaAs = _roles.FirstOrDefault(x => x.GetType() == typeof (T)) as T;
+            var personaAs = _roles.FirstOrDefault(x => x is T) as T;
             if (personaAs == default(T))
                 throw new IdentityNotMappedException("El usuario no es del tipo " + typeof (T).Name);
             return personaAs;

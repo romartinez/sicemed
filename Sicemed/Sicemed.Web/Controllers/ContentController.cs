@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Microsoft.CSharp.RuntimeBinder;
 using RazorEngine;
 using RazorEngine.Templating;
+using SICEMED.Web;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Queries.Paginas;
 using Sicemed.Web.Models;
@@ -13,8 +14,7 @@ namespace Sicemed.Web.Controllers
 {
     public class ContentController : NHibernateController
     {
-        public virtual IObtenerEspecialidadesConProfesionalesQuery ObtenerEspecialidadesConProfesionalesQuery { get; set; }
-        public virtual IObtenerClinicaActivaQuery ObtenerClinicaActivaQuery { get; set; }
+        public virtual IObtenerEspecialidadesConProfesionalesQuery ObtenerEspecialidadesConProfesionalesQuery { get; set; }        
 
         public virtual ActionResult Index(long id = 0)
         {
@@ -29,7 +29,7 @@ namespace Sicemed.Web.Controllers
             var model = new
             {
                 Especialidades = new Lazy<IEnumerable<Especialidad>>(() => ObtenerEspecialidadesConProfesionalesQuery.Execute()),
-                Clinica = new Lazy<Clinica>(()=> ObtenerClinicaActivaQuery.Execute())
+                Clinica = new Lazy<Clinica>(()=> MvcApplication.Clinica)
             };
 
             var paginaARenderizar = new Pagina { Nombre = pagina.Nombre };

@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Web.Mvc;
-using System.Xml.Linq;
 using NHibernate.Criterion;
 using NHibernate.Transform;
+using SICEMED.Web;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Roles;
 using Sicemed.Web.Models.ViewModels.ObtenerTurno;
+using iTextSharp.text.pdf;
 
 namespace Sicemed.Web.Controllers
 {
@@ -115,6 +117,10 @@ namespace Sicemed.Web.Controllers
 
         private List<TurnoViewModel> ObtenerAgenda(long profesionalId, long? especialidadId = null)
         {
+            var filtroEspecialidad = new Func<TurnoViewModel, bool>(x =>
+                        (x.Especialidad != null && x.Especialidad.Id == especialidadId.Value)
+                        || x.Agenda.EspecialidadesAtendidas.Any(e => e.Id == especialidadId.Value));
+
             var cacheKey = String.Format("TURNOS_{0}", profesionalId);
             var cached = Cache.Get<List<TurnoViewModel>>(cacheKey);
             if (cached != null)
@@ -122,22 +128,23 @@ namespace Sicemed.Web.Controllers
                 var turnosCached = cached.Clone();
                 if (especialidadId.HasValue)
                 {
-                    turnosCached = turnosCached.Where(x => x.Especialidad.Id == especialidadId.Value).ToList();
+                    turnosCached = turnosCached.Where(filtroEspecialidad).ToList();
                 }
                 return turnosCached;
             }
 
             var session = SessionFactory.GetCurrentSession();
-            var clinica = session.QueryOver<Clinica>().FutureValue();
             var turnosProfesional = session.QueryOver<Turno>()
                 .Where(t => t.FechaTurno > DateTime.Now.AddDays(-1) && t.FechaTurno < DateTime.Now.AddMonths(3))
                 .JoinQueryOver(x => x.Profesional)
                 .Where(p => p.Id == profesionalId)
+                .JoinQueryOver(p => p.Especialidades)
                 .Future();
 
             var agendaProfesional = session.QueryOver<Agenda>()
                 .JoinQueryOver(a => a.Profesional)
-                .Where(p => p.Id == profesionalId).Future();
+                .Where(p => p.Id == profesionalId)
+                .JoinQueryOver(p => p.Especialidades).Future();
 
             //Creo los turnos libres 3 meses para adelante promedio 30 dias por mes
             var turnos = new List<TurnoViewModel>();
@@ -146,7 +153,7 @@ namespace Sicemed.Web.Controllers
                 var dia = DateTime.Now.AddDays(i);
                 var agendaDia = agendaProfesional.FirstOrDefault(a => a.Dia == dia.DayOfWeek);
 
-                if (agendaDia != null) turnos.AddRange(CalcularTurnos(dia, clinica.Value, agendaDia));
+                if (agendaDia != null) turnos.AddRange(CalcularTurnos(dia, agendaDia));
             }
 
             //Quito los turnos otorgados
@@ -158,10 +165,10 @@ namespace Sicemed.Web.Controllers
             Cache.Add(cacheKey, turnos);
 
             //Filtro por especialidad
-            return !especialidadId.HasValue ? turnos : turnos.Where(x => x.Especialidad.Id == especialidadId.Value).ToList();
+            return !especialidadId.HasValue ? turnos : turnos.Where(filtroEspecialidad).ToList();
         }
 
-        private List<TurnoViewModel> CalcularTurnos(DateTime dia, Clinica clinica, Agenda agendaDia)
+        private List<TurnoViewModel> CalcularTurnos(DateTime dia, Agenda agendaDia)
         {
             var turnos = new List<TurnoViewModel>();
             var tiempoAtencion = agendaDia.HorarioHasta.Subtract(agendaDia.HorarioDesde);
@@ -172,21 +179,21 @@ namespace Sicemed.Web.Controllers
             }
 
             //Quito los turnos anteriores a que abra la clinica
-            turnos.RemoveAll(x => x.FechaTurnoInicial <= dia.SetTimeWith(clinica.HorarioMatutinoDesde));
+            turnos.RemoveAll(x => x.FechaTurnoInicial <= dia.SetTimeWith(MvcApplication.Clinica.HorarioMatutinoDesde));
 
             //Quito los que son despues de que la clinica cerro
-            var horarioCierreClinica = clinica.EsHorarioCorrido
-                                           ? dia.SetTimeWith(clinica.HorarioMatutinoHasta)
-                                           : dia.SetTimeWith(clinica.HorarioVespertinoHasta.Value);
+            var horarioCierreClinica = MvcApplication.Clinica.EsHorarioCorrido
+                                           ? dia.SetTimeWith(MvcApplication.Clinica.HorarioMatutinoHasta)
+                                           : dia.SetTimeWith(MvcApplication.Clinica.HorarioVespertinoHasta.Value);
 
             turnos.RemoveAll(x => x.FechaTurnoInicial >= horarioCierreClinica);
 
             //Quito los turnos del mediodia si es horario cortado
-            if (!clinica.EsHorarioCorrido)
+            if (!MvcApplication.Clinica.EsHorarioCorrido)
             {
                 turnos.RemoveAll(
-                    x => x.FechaTurnoInicial >= dia.SetTimeWith(clinica.HorarioMatutinoHasta)
-                    && x.FechaTurnoInicial < dia.SetTimeWith(clinica.HorarioVespertinoDesde.Value));
+                    x => x.FechaTurnoInicial >= dia.SetTimeWith(MvcApplication.Clinica.HorarioMatutinoHasta)
+                    && x.FechaTurnoInicial < dia.SetTimeWith(MvcApplication.Clinica.HorarioVespertinoDesde.Value));
             }
 
             return turnos;
@@ -200,7 +207,7 @@ namespace Sicemed.Web.Controllers
             var session = SessionFactory.GetCurrentSession();
             var profesional = session.Get<Profesional>(profesionalId);
             var especialidad = session.Get<Especialidad>(especialidadId);
-            var agenda = session.Get<Agenda>(agendaId);            
+            var agenda = session.Get<Agenda>(agendaId);
 
             //TODO: Validar las políticas de la clínica y comportamiento del usuario
 
@@ -212,9 +219,36 @@ namespace Sicemed.Web.Controllers
         }
         #endregion
 
-        public virtual ActionResult ImprimirComprobante(long turnoId)
+        public virtual void ImprimirComprobante(long turnoId)
         {
-            throw new NotImplementedException();
+            var turno = SessionFactory.GetCurrentSession().Load<Turno>(turnoId);
+            //Valido que sea del paciente actual
+            if (turno.Paciente.Id != User.As<Paciente>().Id)
+                throw new SecurityException("El usuario actual no es al que se le otorgó el turno.");
+
+            // Read the template            
+            var reader = new PdfReader(Server.MapPath("~/Reports/ComprobanteTurno.pdf"));
+
+            // Writes the modified template to http response
+            this.HttpContext.Response.Clear();
+            this.HttpContext.Response.ContentType = "application/pdf";
+            var stamper = new PdfStamper(reader, this.HttpContext.Response.OutputStream);
+
+            // Retrieve the PDF form fields defined in the template
+            var form = stamper.AcroFields;
+
+            // Set values for the fields
+            form.SetField("Fecha", turno.FechaTurno.ToString());
+            form.SetField("Profesional", turno.Profesional.Persona.NombreCompleto);
+            form.SetField("Especialidad", turno.Especialidad.Nombre);
+            form.SetField("Paciente", turno.Paciente.Persona.NombreCompleto);
+            form.SetField("Consultorio", turno.Consultorio.Nombre);
+
+            // Setting this to true to make the document read-only
+            stamper.FormFlattening = true;
+
+            //Close the stamper instance
+            stamper.Close();
         }
     }
 }

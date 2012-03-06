@@ -91,17 +91,17 @@
             <span data-bind="text: app.format.fulldate(turnoSeleccionado().FechaTurnoFinal)"></span>
             <span data-bind="text: turnoSeleccionado().Consultorio.Nombre"></span>
         </div>
-        <div class="row field_select" data-bind="visible: !obtenerTurno.vm.stepModels()[0].model().especialidadSeleccionada()">
+        <div class="row field_select" data-bind="visible: !especialidadSeleccionada()">
             <label>
                 Por Especialidad:
             </label>
             <br/>
-            <select class="select_styled" data-bind="options: turnoSeleccionado().Agenda.EspecialidadesAtendidas, optionsText: 'Descripcion', value: especialidadSeleccionada, optionsCaption: '-- Seleccione --'">
+            <select class="select_styled" data-bind="options: turnoSeleccionado().Agenda.EspecialidadesAtendidas, optionsText: 'Descripcion', value: especialidadAgendaSeleccionada, optionsCaption: '-- Seleccione --'">
             </select>            
         </div>
         <div>
-            <button data-bind="click: reservar, visible: turnoId() == null">Reservar Turno</button>
-            <button data-bind="click: imprimir, visible: turnoId() != null">Imprimir</button>
+            <button data-bind="click: reservar, visible: turnoAsignado() == null">Reservar Turno</button>
+            <button data-bind="click: imprimir, visible: turnoAsignado() != null">Imprimir</button>
         </div>
     </script>
 </div>

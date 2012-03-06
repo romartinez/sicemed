@@ -44,7 +44,7 @@ var model = (function () {
                     };
                     self.turnosDisponibles.push(turno);
                     var event = {
-                        title: turno.Paciente ? turno.Paciente.Nombre : 'Reservar...',
+                        title: turno.Paciente ? turno.Paciente.Descripcion : 'Reservar...',
                         start: turno.FechaTurnoInicial,
                         end: turno.FechaTurnoFinal,
                         allDay: false,
@@ -98,9 +98,10 @@ var model = (function () {
         self.profesionalABuscar = ko.observable('');
 
         self.especialidadSeleccionada = ko.observable(null);
+        self.especialidadAgendaSeleccionada = ko.observable(null);
         self.profesionalSeleccionado = ko.observable(null);
         self.turnoSeleccionado = ko.observable(null);
-        self.turnoId = ko.observable(null);
+        self.turnoAsignado = ko.observable(null);
         //#endregion
 
         //#region Metodos
@@ -132,17 +133,20 @@ var model = (function () {
 
         self.reservar = function () {
             $.post('/ObtenerTurno/ReservarTurno', {
+                especialidadId: self.especialidadAgendaSeleccionada() ?
+                                    self.especialidadAgendaSeleccionada().Id 
+                                    : self.especialidadSeleccionada().Id,
                 profesionalId: self.profesionalSeleccionado().Id,
                 fecha: app.format.fulldate(self.turnoSeleccionado().FechaTurnoInicial),
-                consultorioId: self.turnoSeleccionado().Consultorio.Id
+                consultorioId: self.turnoSeleccionado().Consultorio.Id,
+                agendaId: self.turnoSeleccionado().Agenda.Id
             }).done(function (d) {
-                self.turnoId(d);
-                alert("Su turno es: " + d);
+                self.turnoAsignado(d);                
             });
         };
 
         self.imprimir = function () {
-            console.log("Imprimir " + self.turnoId());
+            window.open("/ObtenerTurno/ImprimirComprobante?turnoId=" + self.turnoAsignado().Id);
         };
         //#endregion
 
