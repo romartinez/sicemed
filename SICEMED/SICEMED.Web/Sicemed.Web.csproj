@@ -250,6 +250,7 @@
     <Compile Include="Infrastructure\NHibernate\Mappings\ProvinciaMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\TurnoMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\PersonaMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Resolver.cs" />
     <Compile Include="Infrastructure\Providers\Cache\ICacheProvider.cs" />
     <Compile Include="Infrastructure\Providers\Cache\InMemoryCacheProvider.cs" />
     <Compile Include="Infrastructure\Providers\Cache\NullCacheProvider.cs" />
