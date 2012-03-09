@@ -172,9 +172,11 @@
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AuditController.cs" />
     <Compile Include="Areas\Admin\Controllers\ClinicasController.cs" />
     <Compile Include="Areas\Admin\Controllers\ConsultoriosController.cs" />
     <Compile Include="Areas\Admin\Controllers\EspecialidadesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LogController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlanesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ObrasSocialesController.cs" />
     <Compile Include="Areas\Admin\Controllers\PaginasController.cs" />
@@ -227,7 +229,6 @@
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
     <Compile Include="Infrastructure\Logs\ConfigAdoNetAppender.cs" />
     <Compile Include="Infrastructure\NHibernate\Events\AuditEventListener.cs" />
-    <Compile Include="Infrastructure\NHibernate\Events\SaveOrUpdateEventListener.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\AuditLogMapping.cs" />
     <Compile Include="Infrastructure\NHibernate\NHibernateContractResolver.cs" />
     <Compile Include="Infrastructure\NHibernate\EnumerationType.cs" />

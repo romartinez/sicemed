@@ -63,7 +63,7 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
 
             var currentUrl = VirtualPathUtility.ToAbsolute("~/") + virtualPathData.VirtualPath;
 
-            var clonedPages = pages.Clone(); 
+            var clonedPages = pages.Clone();
             var currentPage = FinmdByUrl(clonedPages, currentUrl);
             if (currentPage != null)
             {
@@ -104,17 +104,24 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
         private static void AttachAdminPages(ICollection<PageViewModel> pages)
         {
             var adminPage = CreateDefaultPage("Admin", "#", order: 9999); //Show last in the menu.
+            //ABMS
+            var abmsPage = CreateDefaultPage("ABMs", "#", adminPage, 10);
+            abmsPage.Childs.Add(CreateDefaultPage("Clinica", "Admin/Clinicas", adminPage));
+            abmsPage.Childs.Add(CreateDefaultPage("Paginas", "Admin/Paginas", adminPage));
+            abmsPage.Childs.Add(CreateDefaultPage("Personas", "Admin/Personas", adminPage));
+            abmsPage.Childs.Add(CreateDefaultPage("Provincias", "Admin/Provincias", adminPage));
+            abmsPage.Childs.Add(CreateDefaultPage("Localidades", "Admin/Localidades", adminPage));
+            abmsPage.Childs.Add(CreateDefaultPage("Feriados", "Admin/Feriados", adminPage));
+            abmsPage.Childs.Add(CreateDefaultPage("Obras Sociales", "Admin/ObrasSociales", adminPage));
+            abmsPage.Childs.Add(CreateDefaultPage("Planes", "Admin/Planes", adminPage));
+            abmsPage.Childs.Add(CreateDefaultPage("Especialidades", "Admin/Especialidades", adminPage));
+            abmsPage.Childs.Add(CreateDefaultPage("Consultorios", "Admin/Consultorios", adminPage));
+            adminPage.Childs.Add(abmsPage);
 
-            adminPage.Childs.Add(CreateDefaultPage("Clinica", "Admin/Clinicas", adminPage));
-            adminPage.Childs.Add(CreateDefaultPage("Paginas", "Admin/Paginas", adminPage));
-            adminPage.Childs.Add(CreateDefaultPage("Personas", "Admin/Personas", adminPage));
-            adminPage.Childs.Add(CreateDefaultPage("Provincias", "Admin/Provincias", adminPage));
-            adminPage.Childs.Add(CreateDefaultPage("Localidades", "Admin/Localidades", adminPage));
-            adminPage.Childs.Add(CreateDefaultPage("Feriados", "Admin/Feriados", adminPage));
-            adminPage.Childs.Add(CreateDefaultPage("Obras Sociales", "Admin/ObrasSociales", adminPage));
-            adminPage.Childs.Add(CreateDefaultPage("Planes", "Admin/Planes", adminPage));
-            adminPage.Childs.Add(CreateDefaultPage("Especialidades", "Admin/Especialidades", adminPage));
-            adminPage.Childs.Add(CreateDefaultPage("Consultorios", "Admin/Consultorios", adminPage));
+            var auditPage = CreateDefaultPage("Auditoria", "Admin/Audit", adminPage, 20);
+            adminPage.Childs.Add(auditPage);
+            var logsPage = CreateDefaultPage("Auditoria", "Admin/Log", adminPage, 30);
+            adminPage.Childs.Add(logsPage);
 
             pages.Add(adminPage);
         }
