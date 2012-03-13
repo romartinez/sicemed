@@ -23,3 +23,7 @@ table.detail td
     text-align: left;
 }
 
+table.detail tr.even
+{
+    background: #f0f0f0;
+}

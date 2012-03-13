@@ -633,6 +633,7 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Clinicas\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Auditoria\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Logs\Index.cshtml" />
     <None Include="Models\ClassDiagram.cd" />
     <Content Include="Views\Content\TemplateError.cshtml" />
     <Content Include="Views\ObtenerTurno\Index.cshtml" />

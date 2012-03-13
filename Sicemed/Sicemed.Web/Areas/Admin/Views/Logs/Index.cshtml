@@ -1,9 +1,9 @@
 ﻿@{
-    ViewBag.Title = "Visualización de Auditoría";
+    ViewBag.Title = "Visualización de Logs";
 }
 
 <h2>
-    Visualizaci&oacute;n de Auditor&iacute;a
+    Visualizaci&oacute;n de Logs
 </h2>
 
 @Html.Partial("GrillaBase")
@@ -14,21 +14,43 @@
 
 <script id="tmplDetalle" type="text/html">
     <div>
-        <h2>Entidad: ${Entidad}</h2>
-        <h3>Id: ${EntidadId}</h3>
         <table class="detail">
-            <caption>${app.format.fulldate(Fecha)} - ${Accion}</caption>
             <tr>
-                <th style="background: #f6f6f6;">Antes</th>
-                <th>Despu&eacute;s</th>
+                <th>Date</th>
+                <td>${app.format.fulldate(Date)}</td>
+            </tr>
+            <tr class="even">
+                <th>Level</th>
+                <td>${Level}</td>
             </tr>
             <tr>
-                <td style="background: #f6f6f6;">{{html EntidadAntes.replace(/\r\n/gi, "<br/>").replace(/\s/gi, "&nbsp;")}}</td>
-                <td>{{html EntidadDespues.replace(/\r\n/gi, "<br/>").replace(/\s/gi, "&nbsp;")}}</td>
+                <th>Logger</th>
+                <td>${Logger}</td>
+            </tr>
+            <tr class="even">
+                <th>Thread</th>
+                <td>${Thread}</td>
+            </tr>
+            <tr>
+                <th>UserId</th>
+                <td>${UserId}</td>
+            </tr>
+            <tr class="even">
+                <th>UserIp</th>
+                <td>${UserIp}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>${Message}</td>
+            </tr>
+            <tr class="even">
+                <th>Exception</th>
+                <td>${Exception}</td>
             </tr>
         </table>
     </div>
 </script>
+
 @section Scripts{
     <script type="text/javascript">
         jQuery(document).ready(function($) {
@@ -40,9 +62,9 @@
                     editable: false,
                     addable: false,
                     deleteable: false,
-                    caption: 'Visualizaci&oacute;n de Auditor&iacute;a',
-                    emptyrecords: 'No hay registros auditados.',
-                    colNames: ['Id', 'Fecha', 'Usuario', 'Entidad Id', 'Entidad', 'Accion'],
+                    caption: 'Visualizaci&oacute;n de Logs',
+                    emptyrecords: 'No hay registros de logs.',
+                    colNames: ['Id', 'Date', 'Level', 'Logger', 'Thread', 'UserId', 'UserIp'],
                     colModel: [
                             {
                                 name: 'Id',
@@ -52,8 +74,8 @@
                                 hidden: true
                             },
                             {
-                                name: 'Fecha',
-                                index: 'Fecha',
+                                name: 'Date',
+                                index: 'Date',
                                 width: 90,
                                 editable: true,
                                 sortable: false,
@@ -63,37 +85,44 @@
                                 }
                             },
                             {
-                                name: 'Usuario',
-                                index: 'Usuario',
+                                name: 'Level',
+                                index: 'Level',
                                 width: 90,
                                 editable: false,
                                 sortable: false
-                            },
+                            },                        
                             {
-                                name: 'EntidadId',
-                                index: 'EntidadId',
+                                name: 'Logger',
+                                index: 'Logger',
                                 width: 90,
                                 editable: false,
                                 sortable: false
-                            },
+                            },                        
                             {
-                                name: 'Entidad',
-                                index: 'Entidad',
+                                name: 'Thread',
+                                index: 'Thread',
                                 width: 90,
                                 editable: false,
                                 sortable: false
-                            },
+                            },                        
                             {
-                                name: 'Accion',
-                                index: 'Accion',
+                                name: 'UserId',
+                                index: 'UserId',
+                                width: 90,
+                                editable: false,
+                                sortable: false
+                            },                        
+                            {
+                                name: 'UserIp',
+                                index: 'UserIp',
                                 width: 90,
                                 editable: false,
                                 sortable: false
                             }
-                    ]
+                    ]                        
                 }
             });
-
+            
             $("#data").jqGrid('navButtonAdd',"#pager", {
                 caption:"Detalle", 
                 buttonicon:"ui-icon-newwin", 
