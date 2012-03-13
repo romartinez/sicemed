@@ -172,11 +172,11 @@
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\AuditController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AuditoriaController.cs" />
     <Compile Include="Areas\Admin\Controllers\ClinicasController.cs" />
     <Compile Include="Areas\Admin\Controllers\ConsultoriosController.cs" />
     <Compile Include="Areas\Admin\Controllers\EspecialidadesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\LogController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LogsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlanesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ObrasSocialesController.cs" />
     <Compile Include="Areas\Admin\Controllers\PaginasController.cs" />
@@ -632,6 +632,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Clinicas\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Auditoria\Index.cshtml" />
     <None Include="Models\ClassDiagram.cd" />
     <Content Include="Views\Content\TemplateError.cshtml" />
     <Content Include="Views\ObtenerTurno\Index.cshtml" />

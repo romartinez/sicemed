@@ -2,3 +2,24 @@
     width: 160px;
     text-transform: uppercase;
 }
+
+table.detail {
+    border: 1px solid #ccc;
+    text-align: left;
+    width: 100%;
+}
+
+table.detail caption{
+    border: 1px solid #ccc;
+    background: #666;
+    color: #fff;
+    text-align: left;
+    font-weight: bold;
+}
+
+table.detail td
+{
+    width: 50%;
+    text-align: left;
+}
+

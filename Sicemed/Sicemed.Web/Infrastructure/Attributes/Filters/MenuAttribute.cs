@@ -118,9 +118,9 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             abmsPage.Childs.Add(CreateDefaultPage("Consultorios", "Admin/Consultorios", adminPage));
             adminPage.Childs.Add(abmsPage);
 
-            var auditPage = CreateDefaultPage("Auditoria", "Admin/Audit", adminPage, 20);
+            var auditPage = CreateDefaultPage("Auditoria", "Admin/Auditoria", adminPage, 20);
             adminPage.Childs.Add(auditPage);
-            var logsPage = CreateDefaultPage("Auditoria", "Admin/Log", adminPage, 30);
+            var logsPage = CreateDefaultPage("Logs", "Admin/Logs", adminPage, 30);
             adminPage.Childs.Add(logsPage);
 
             pages.Add(adminPage);

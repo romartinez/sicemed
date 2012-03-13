@@ -5,7 +5,7 @@ using Sicemed.Web.Models.Roles;
 namespace Sicemed.Web.Areas.Admin.Controllers
 {
     [AuthorizeIt(typeof(Administrador))]
-    public class LogController : NHibernateController
+    public class LogsController : NHibernateController
     {
          
     }

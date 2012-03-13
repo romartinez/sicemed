@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "Visualización de Auditoría";
+}
+
+<h2>
+    Visualizaci&oacute;n de Auditor&iacute;a
+</h2>
+
+@Html.Partial("GrillaBase")
+
+<div id="detalle" title="Detalle" class="ui-helper-hidden">
+    <div></div>
+</div>
+
+<script id="tmplDetalle" type="text/html">
+    <div>
+        <h2>Entidad: ${Entidad}</h2>
+        <h3>Id: ${EntidadId}</h3>
+        <table class="detail">
+            <caption>${app.format.fulldate(Fecha)} - ${Accion}</caption>
+            <tr>
+                <th style="background: #f6f6f6;">Antes</th>
+                <th>Despu&eacute;s</th>
+            </tr>
+            <tr>
+                <td style="background: #f6f6f6;">{{html EntidadAntes.replace(/\r\n/gi, "<br/>").replace(/\s/gi, "&nbsp;")}}</td>
+                <td>{{html EntidadDespues.replace(/\r\n/gi, "<br/>").replace(/\s/gi, "&nbsp;")}}</td>
+            </tr>
+        </table>
+    </div>
+</script>
+@section Scripts{
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            app.grid.initialize({
+                url: {
+                    list: '@Url.Action("List")'
+                },
+                params: {
+                    editable: false,
+                    addable: false,
+                    deleteable: false,
+                    caption: 'Visualizaci&oacute;n de Auditor&iacute;a',
+                    emptyrecords: 'No hay registros auditados.',
+                    colNames: ['Id', 'Fecha', 'Usuario', 'Entidad Id', 'Entidad', 'Accion'],
+                    colModel: [
+                            {
+                                name: 'Id',
+                                index: 'Id',
+                                width: 55,
+                                sortable: false,
+                                hidden: true
+                            },
+
+                            {
+                                name: 'Fecha',
+                                index: 'Fecha',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                formatter: 'date',
+                                formatoptions: {
+                                    newformat: 'd/m/Y h:i:s'
+                                },
+                                editoptions: {
+                                    dataInit: function(element) {
+                                        $(element).datepicker();
+                                    }   
+                                },
+                                editrules: {
+                                    date: true,
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Fecha (*)',
+                                    maxlength: '10',
+                                    size: '10'
+                                }
+                            },
+                            {
+                                name: 'Usuario',
+                                index: 'Usuario',
+                                width: 90,
+                                editable: false,
+                                sortable: false
+                            },
+                            {
+                                name: 'EntidadId',
+                                index: 'EntidadId',
+                                width: 90,
+                                editable: false,
+                                sortable: false
+                            },
+                            {
+                                name: 'Entidad',
+                                index: 'Entidad',
+                                width: 90,
+                                editable: false,
+                                sortable: false
+                            },
+                            {
+                                name: 'Accion',
+                                index: 'Accion',
+                                width: 90,
+                                editable: false,
+                                sortable: false
+                            }
+                    ]
+                }
+            });
+
+            $("#data").jqGrid('navButtonAdd',"#pager", {
+                caption:"Detalle", 
+                buttonicon:"ui-icon-newwin", 
+                onClickButton:function () {
+                    var selected = $("#data").getGridParam('selrow');
+                    if(!selected) {
+                        app.ui.showError("Debe seleccionar un elemento de la lista.");
+                        return;
+                    }
+                    $.postAntiForgery("@Url.Action("Get")", { id: selected }).done(function (audit) {
+                        $("#detalle div").replaceWith($("#tmplDetalle").tmpl(audit));
+                        $("#detalle").dialog('open');
+                    });
+                }, 
+                position: "last", 
+                title:"Detalle", 
+                cursor: "pointer"
+            });
+
+            $("#detalle").dialog({
+                width: 1024,
+                autoOpen: false,
+                modal: true
+            });
+        });
+    </script>
+}
