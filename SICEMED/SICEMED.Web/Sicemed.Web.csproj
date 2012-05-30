@@ -229,6 +229,7 @@
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
     <Compile Include="Infrastructure\Logs\ConfigAdoNetAppender.cs" />
     <Compile Include="Infrastructure\NHibernate\Events\AuditEventListener.cs" />
+    <Compile Include="Infrastructure\NHibernate\Events\PostFlushFixEventListener.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\AuditLogMapping.cs" />
     <Compile Include="Infrastructure\NHibernate\NHibernateContractResolver.cs" />
     <Compile Include="Infrastructure\NHibernate\EnumerationType.cs" />

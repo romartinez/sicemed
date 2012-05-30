@@ -67,6 +67,8 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
             configuration.SetListener(ListenerType.PostInsert, auditListener);
             configuration.SetListener(ListenerType.PostUpdate, auditListener);
 
+			configuration.SetListener(ListenerType.Flush, new PostFlushFixEventListener());
+
             return configuration;
         }
 
