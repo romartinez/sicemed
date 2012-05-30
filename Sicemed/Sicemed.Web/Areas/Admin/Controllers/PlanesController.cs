@@ -26,7 +26,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 View(SessionFactory.GetCurrentSession().QueryOver<ObraSocial>().OrderBy(x => x.RazonSocial).Asc.Future());
         }
 
-        protected override IQueryOver<Plan> AplicarFetching(IQueryOver<Plan, Plan> query)
+        protected override IQueryOver<Plan> ApplyFetching(IQueryOver<Plan, Plan> query)
         {
             return query.Fetch(x => x.ObraSocial).Eager;
         }
@@ -38,7 +38,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             return modelo;
         }
 
-        protected override IEnumerable AplicarProjections(IEnumerable<Plan> results)
+        protected override IEnumerable ProjectEntities(IEnumerable<Plan> results)
         {
             return results.Select(x => new
                                        {

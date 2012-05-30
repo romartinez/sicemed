@@ -30,7 +30,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             return base.Index();
         }
 
-        protected override IEnumerable AplicarProjections(IEnumerable<Persona> results)
+        protected override IEnumerable ProjectEntities(IEnumerable<Persona> results)
         {
             return results.Select(x => new
                                        {

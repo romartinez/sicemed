@@ -41,7 +41,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             }
         }
 
-        protected override bool EsValido(Pagina modelo)
+        protected override bool IsValid(Pagina modelo)
         {
             //Valido que el nombre sea unico.
             var session = SessionFactory.GetCurrentSession();
@@ -69,7 +69,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 throw new ValidationErrorException(string.Format("Ya existe una página con la misma Url: '{0}'",
                                                                  modelo.Url));
 
-            return base.EsValido(modelo);
+            return base.IsValid(modelo);
         }
 
         [ValidateInput(false)]
