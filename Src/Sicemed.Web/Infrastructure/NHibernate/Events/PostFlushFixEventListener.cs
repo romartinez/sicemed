@@ -1,8 +1,5 @@
-﻿using System;
-using NHibernate;
-using NHibernate.Event;
+﻿using NHibernate.Event;
 using NHibernate.Event.Default;
-using log4net;
 
 namespace Sicemed.Web.Infrastructure.NHibernate.Events
 {
@@ -20,8 +17,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
 			{
 				base.OnFlush(@event);
 			}
-			catch (Exception ex)
-			{
+			catch (AssertionException){
 				//swallow is a bug in NH
 			}
 		}
