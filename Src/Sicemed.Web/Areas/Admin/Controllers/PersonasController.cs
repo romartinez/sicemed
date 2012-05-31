@@ -14,8 +14,6 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 {
     public class PersonasController : CrudBaseController<Persona>
     {
-        #region Overrides of CrudBaseController<Persona>
-
         protected override Expression<Func<Persona, object>> DefaultOrderBy
         {
             get { return x => x.Membership.Email; }
@@ -101,7 +99,5 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
             return base.AgregarReferencias(modelo);
         }
-
-        #endregion
     }
 }
