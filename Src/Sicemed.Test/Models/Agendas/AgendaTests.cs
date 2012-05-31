@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Models;
@@ -38,7 +39,7 @@ namespace Sicemed.Tests.Models.Agendas
 
             var profesionalDb = personaDb.As<Profesional>();
 
-            Assert.AreEqual(1, profesionalDb.Agendas.Count);
+            Assert.AreEqual(1, profesionalDb.Agendas.Count(x => x.Dia == DayOfWeek.Tuesday && x.DuracionTurno == TimeSpan.FromMinutes(15)));
         }
 
         [Test]
