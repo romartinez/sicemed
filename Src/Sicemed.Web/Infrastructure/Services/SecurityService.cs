@@ -25,8 +25,8 @@ namespace Sicemed.Web.Infrastructure.Services
 
             if (!Can(user, actionDescriptor))
                 throw new SecurityException(
-                    string.Format("The User '{0}' doesn't have the permissions to execute '{1}'.", user.Membership.Email,
-                                  actionDescriptor));
+                    string.Format("The User '{0}' doesn't have the permissions to execute the '{1}/{2}' action.", user,
+								  actionDescriptor.ControllerDescriptor.ControllerName, actionDescriptor.ActionName));
         }
 
         public virtual bool Can(Persona user, ActionDescriptor actionDescriptor)
@@ -46,7 +46,8 @@ namespace Sicemed.Web.Infrastructure.Services
 
             if (!attributes.Any())
                 throw new SecurityException(
-                    "El método no tiene definidos permisos. Por defecto los métodos son seguros, la seguridad debe ser explpícita.");
+                    string.Format("The action '{0}/{1}' doesn't have permissions defined. " +
+                    "By default the methods are secured, you must be explicit on permissions.",actionDescriptor.ControllerDescriptor.ControllerName, actionDescriptor.ActionName));
 
             return attributes.Any(attr => user.IsInRole(attr.Rol));
         }
