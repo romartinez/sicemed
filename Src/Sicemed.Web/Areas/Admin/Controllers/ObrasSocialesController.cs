@@ -22,12 +22,12 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             get { return x => x.RazonSocial; }
         }
 
-        protected override IQueryOver<ObraSocial> ApplyFetching(IQueryOver<ObraSocial, ObraSocial> query)
+        protected override IQueryOver<ObraSocial> AplicarFetching(IQueryOver<ObraSocial, ObraSocial> query)
         {
             return query.Fetch(x => x.Domicilio.Localidad).Eager.Fetch(x => x.Domicilio.Localidad.Provincia).Eager;
         }
 
-        protected override IEnumerable ProjectEntities(IEnumerable<ObraSocial> results)
+        protected override IEnumerable AplicarProjections(IEnumerable<ObraSocial> results)
         {
             return results.Select(x => new
                                        {

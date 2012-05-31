@@ -22,7 +22,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             return View(SessionFactory.GetCurrentSession().QueryOver<Provincia>().OrderBy(x => x.Nombre).Asc.Future());
         }
 
-        protected override IQueryOver<Localidad> ApplyFetching(IQueryOver<Localidad, Localidad> query)
+        protected override IQueryOver<Localidad> AplicarFetching(IQueryOver<Localidad, Localidad> query)
         {
             return query.Fetch(x => x.Provincia).Eager;
         }
