@@ -106,7 +106,7 @@ namespace Sicemed.Web.Models
                            Profesional = profesional,
                            Especialidad = especialidad,
                            IpPaciente = ipPaciente,
-                           Consultorio = agenda.Consultorio,
+                           Consultorio = agenda == null ? null : agenda.Consultorio,
                            Agenda = agenda
                        };
         }
