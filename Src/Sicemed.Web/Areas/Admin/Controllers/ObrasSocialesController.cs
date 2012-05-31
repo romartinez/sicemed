@@ -15,8 +15,6 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 {
     public class ObrasSocialesController : CrudBaseController<ObraSocial>
     {
-        #region Overrides of CrudBaseController<ObraSocial>
-
         protected override Expression<Func<ObraSocial, object>> DefaultOrderBy
         {
             get { return x => x.RazonSocial; }
@@ -95,7 +93,5 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
             return base.AgregarReferencias(modelo);
         }
-
-        #endregion
     }
 }

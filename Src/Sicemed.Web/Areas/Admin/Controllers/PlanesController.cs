@@ -13,8 +13,6 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 {
     public class PlanesController : CrudBaseController<Plan>
     {
-        #region Overrides of CrudBaseController<Plan>
-
         protected override Expression<Func<Plan, object>> DefaultOrderBy
         {
             get { return x => x.Nombre; }
@@ -69,7 +67,5 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
             return obraSocial;
         }
-
-        #endregion
     }
 }
