@@ -16,7 +16,7 @@ using iTextSharp.text.pdf;
 
 namespace Sicemed.Web.Controllers
 {
-    [AuthorizeIt]
+    [AuthorizeIt(typeof(Paciente))]
     public class ObtenerTurnoController : NHibernateController
     {
 

@@ -96,9 +96,14 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             return page;
         }
 
-        private static void AttachCorePages(ICollection<PageViewModel> pages)
+        private void AttachCorePages(ICollection<PageViewModel> pages)
         {
-            pages.Add(CreateDefaultPage("Obtener Turno", "ObtenerTurno", order: 9990)); //Almost at the end
+			//Only show the menu to anon users or Pacientess
+			if(_membershipService.GetCurrentUser() == null 
+				|| _membershipService.GetCurrentUser().IsInRole<Paciente>())
+			{
+				pages.Add(CreateDefaultPage("Obtener Turno", "ObtenerTurno", order: 9990)); //Almost at the end				
+			}
         }
 
         private static void AttachAdminPages(ICollection<PageViewModel> pages)
