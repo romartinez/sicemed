@@ -30,6 +30,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate
             // create a resolved entities list for peace and sharing
             List<Object> resolvedEntities = new List<Object>();
             // loop over elements
+            if (entityArray == null) return null;
+
             for (int entityArrayIndex = 0; entityArrayIndex < entityArray.Length; entityArrayIndex++)
                 entityArray[entityArrayIndex] = Resolve<T>(entityArray[entityArrayIndex], session, resolvedEntities);
 
