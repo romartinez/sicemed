@@ -8,6 +8,7 @@ namespace Sicemed.Tests.Infrastructure.Reporting
     public class PDFGeneratorTests
     {
         [Test]
+        [Ignore("No se está usando el Reporting Services Local")]
         public void CanCreateAnEmptyReport()
         {
             var g = new PDFGenerator();
@@ -17,6 +18,7 @@ namespace Sicemed.Tests.Infrastructure.Reporting
         }        
         
         [Test]
+        [Ignore("No se está usando el Reporting Services Local")]
         public void CanCreateReport()
         {
             var g = new PDFGenerator();
