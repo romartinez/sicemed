@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NUnit.Framework;
 using SharpTestsEx;
 using Sicemed.Web.Infrastructure.Queries.Paginas;
@@ -15,9 +16,9 @@ namespace Sicemed.Tests.Models.Paginas
             Pagina padre = null;
             using (var tx = Session.BeginTransaction())
             {
-                padre = new Pagina {Nombre = "Padre", Contenido = "HTML"};
-                var pagina2 = new Pagina {Nombre = "Hijo 1", Contenido = "HTML"};
-                var pagina3 = new Pagina {Nombre = "Hijo 2", Contenido = "HTML"};
+                padre = new Pagina { Nombre = "Prueba Padre", Contenido = "HTML", Url="/1" };
+                var pagina2 = new Pagina { Nombre = "Prueba Hijo 1", Contenido = "HTML", Url = "/2" };
+                var pagina3 = new Pagina { Nombre = "Prueba Hijo 2", Contenido = "HTML", Url = "/3" };
 
                 pagina2.AgregarHijo(pagina3);
                 padre.AgregarHijo(pagina2);
@@ -42,7 +43,7 @@ namespace Sicemed.Tests.Models.Paginas
             Pagina pagina;
             using (var tx = Session.BeginTransaction())
             {
-                pagina = new Pagina {Nombre = "Prueba", Contenido = "HTML"};
+                pagina = new Pagina { Nombre = "Prueba", Contenido = "HTML", Url = "/" };
                 Session.Save(pagina);
                 tx.Commit();
             }
@@ -60,9 +61,9 @@ namespace Sicemed.Tests.Models.Paginas
             Pagina padre = null;
             using (var tx = Session.BeginTransaction())
             {
-                padre = new Pagina {Nombre = "Padre", Contenido = "HTML"};
-                var pagina2 = new Pagina {Nombre = "Hijo 1", Contenido = "HTML"};
-                var pagina3 = new Pagina {Nombre = "Hijo 2", Contenido = "HTML"};
+                padre = new Pagina { Nombre = "Prueba Padre", Contenido = "HTML", Url = "/1" };
+                var pagina2 = new Pagina { Nombre = "Prueba Hijo 1", Contenido = "HTML", Url = "/2" };
+                var pagina3 = new Pagina { Nombre = "Prueba Hijo 2", Contenido = "HTML", Url = "/3" };
 
                 padre.AgregarHijo(pagina2);
                 padre.AgregarHijo(pagina3);
@@ -85,9 +86,9 @@ namespace Sicemed.Tests.Models.Paginas
         {
             using (var tx = Session.BeginTransaction())
             {
-                var padre = new Pagina {Nombre = "Padre", Contenido = "HTML"};
-                var pagina2 = new Pagina {Nombre = "Hijo 1", Contenido = "HTML"};
-                var pagina3 = new Pagina {Nombre = "Hijo 2", Contenido = "HTML"};
+                var padre = new Pagina { Nombre = "Prueba Padre", Contenido = "HTML", Url = "/1" };
+                var pagina2 = new Pagina { Nombre = "Prueba Hijo 1", Contenido = "HTML", Url = "/2" };
+                var pagina3 = new Pagina { Nombre = "Prueba Hijo 2", Contenido = "HTML", Url = "/3" };
 
                 padre.AgregarHijo(pagina2);
 
@@ -98,9 +99,9 @@ namespace Sicemed.Tests.Models.Paginas
 
             Session.Flush();
 
-            var roots = new ObtenerPaginasRaizQuery {SessionFactory = SessionFactory}.Execute();
+            var roots = new ObtenerPaginasRaizQuery { SessionFactory = SessionFactory }.Execute();
 
-            roots.Count().Should().Be(4); //Dos ya existen en el app initializer
+            roots.Count().Should().Be(5); //Dos ya existen en el app initializer
         }
     }
 }
