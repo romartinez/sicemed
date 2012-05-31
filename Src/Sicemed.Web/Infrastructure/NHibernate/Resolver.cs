@@ -104,7 +104,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate
                     propertyName = propertyInfo.Name;
                     // get property type
                     try { entityPropertyType = entityMetadata.GetPropertyType(propertyName); }
-                    catch (Exception ex) { continue; }
+                    catch (Exception) { continue; }
                     // get property value
                     propertyValue = propertyInfo.GetValue(entity, null);
                     // these are not the good kind of bags :P
