@@ -1,12 +1,10 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Castle.Windsor.Installer;
 using EfficientlyLazy.Crypto;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Providers.Cache;
 using Sicemed.Web.Infrastructure.Queries;
-using Sicemed.Web.Infrastructure.Queries.Paginas;
 using Sicemed.Web.Infrastructure.Services;
 
 namespace SICEMED.Web.Infrastructure.Windsor.Installers

@@ -37,8 +37,9 @@
     <Reference Include="AjaxMin">
       <HintPath>..\packages\AjaxMin.4.19.4141.18463\lib\AjaxMin.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.1.1.0.118\lib\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=2.1.267.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.2.1.267\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
@@ -184,6 +185,7 @@
     <Compile Include="Areas\Admin\Controllers\LocalidadesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProvinciasController.cs" />
     <Compile Include="Areas\Admin\Controllers\PersonasController.cs" />
+    <Compile Include="Areas\Admin\Models\Clinicas\ClinicaEditViewModel.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -202,6 +204,8 @@
     <Compile Include="Infrastructure\Attributes\Filters\ValidateModelStateAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Validation\EmailAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Validation\ValidatePasswordLengthAttribute.cs" />
+    <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
+    <Compile Include="Infrastructure\AutoMapper\AdminProfile.cs" />
     <Compile Include="Infrastructure\Controllers\BaseController.cs" />
     <Compile Include="Infrastructure\Controllers\CrudBaseController.cs" />
     <Compile Include="Infrastructure\Controllers\NHibernateController.cs" />
@@ -547,9 +551,7 @@
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

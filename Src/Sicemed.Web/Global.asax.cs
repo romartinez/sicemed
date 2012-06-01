@@ -118,6 +118,9 @@ namespace SICEMED.Web
             ControllerBuilder.Current.SetControllerFactory(new WindsorControllerFactory(_container.Kernel));
             FilterProviders.Providers.Add(new WindsorFilterAttributeFilterProvider(_container));
 
+            //Automapper
+            AutoMapperConfiguration.Configure();
+
             //Cargar la clinica
             var clinicaIdStr = ConfigurationManager.AppSettings["ClinicaID"];
             if(string.IsNullOrWhiteSpace(clinicaIdStr))

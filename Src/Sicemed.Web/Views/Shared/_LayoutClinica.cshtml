@@ -24,7 +24,10 @@
                 <div class="container">
                     <div class="logo">
                         <a href="@Url.Content("~/")">
-                            <img src="../../public/images/theme/logo.png" alt="SICEMED" height="80" width="210" />
+                            @if (!MvcApplication.IsUsingProxy)
+                            {
+                                <img src="../../public/images/theme/logo.png" alt="SICEMED" height="80" width="210" />
+                            }
                         </a>
                     </div>
                     <div class="header_contacts">
@@ -56,7 +59,10 @@
             <!-- header image/slider -->
             <div class="header_bot header_image">
                 <div class="container">
+                @if (!MvcApplication.IsUsingProxy)
+                {
                     <img src="../../public/images/theme/header_image_2.jpg" alt="" height="142" width="960"/>
+                }
                 </div>
             </div>
             <!--/ header image/slider -->

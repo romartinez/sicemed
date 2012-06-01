@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using AutoMapper;
+using Sicemed.Web.Areas.Admin.Models.Clinicas;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Queries.Paginas;
@@ -17,22 +18,26 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         {
             var clinica = ObtenerClinicaActivaQuery.Execute();
 
-            return View(clinica);
+            return View(Mapper.Map<ClinicaEditViewModel>(clinica));
         }
 
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
         [ValidateModelStateAttribute]
-        public virtual ActionResult Guardar(Clinica model)
+        public virtual ActionResult Guardar()
         {
             var modelFromDb = ObtenerClinicaActivaQuery.Execute();
 
-            UpdateModel(modelFromDb);
+            var viewModelFromDb = Mapper.Map<ClinicaEditViewModel>(modelFromDb);
+
+            UpdateModel(viewModelFromDb);
+
+            Mapper.Map(viewModelFromDb, modelFromDb);
 
             ViewBag.Message = "Los datos de la clínica fueron actualizados exitosamente.";
 
-            return View("Index", modelFromDb);
+            return View("Index", viewModelFromDb);
         }
     }
 }

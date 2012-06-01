@@ -1,5 +1,5 @@
-﻿@using Sicemed.Web.Models
-@model Clinica
+﻿@using Sicemed.Web.Areas.Admin.Models.Clinicas
+@model ClinicaEditViewModel
 @{
     ViewBag.Title = "Administración Datos Clínica";
 }
@@ -10,6 +10,14 @@
 {
     <h3 class="ui-state-highlight">@ViewBag.Message</h3>
 }
+
+@using(Html.BeginForm("Guardar")){
+    @Html.EditorForModel()
+
+    <input type="submit"/>
+}
+
+@*
 <div id="wdSecretaria" title="Cl&iacute;nica" class="ui-jqdialog-content">
 	<form action="@Url.Action("Guardar")" method="POST" style="width: 100%; overflow: auto; position: relative; height: auto;" class="FormGrid" id="FrmGrid_data" name="FormPost">
 		@Html.AntiForgeryToken()
@@ -177,3 +185,4 @@
 		});
 	</script>	
 }
+*@
