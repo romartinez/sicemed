@@ -29,4 +29,18 @@ table.detail tr.even
 }
 
 .valid{border:1px solid #70A41B!important; overflow:hide;} /*#70A41B*/
-.input-validation-error, .error {overflow:hide; border:1px solid red!important; }
+.input-validation-error, .error {overflow:hide; border:1px solid #cd0a0a/*{fcError}*/!important; }
+.field-validation-error{color: #cd0a0a/*{fcError}*/;}
+.validation-summary-errors {
+    border: 1px solid #cd0a0a/*{borderColorError}*/; background: #fef1ec/*{bgColorError}*/ url(../images/jquery-ui/ui-bg_glass_95_fef1ec_1x400.png)/*{bgImgUrlError}*/ 50%/*{bgErrorXPos}*/ 50%/*{bgErrorYPos}*/ repeat-x/*{bgErrorRepeat}*/; color: #cd0a0a/*{fcError}*/;
+    padding: 10px;
+}
+.validation-summary-errors span {
+    font-weight: bold;
+}
+.validation-summary-errors ul {
+    padding-left: 15px;
+}
+.validation-summary-errors ul li {
+    color: #cd0a0a/*{fcError}*/;
+}
