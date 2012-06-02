@@ -27,3 +27,6 @@ table.detail tr.even
 {
     background: #f0f0f0;
 }
+
+.valid{border:1px solid #70A41B!important; overflow:hide;} /*#70A41B*/
+.input-validation-error, .error {overflow:hide; border:1px solid red!important; }

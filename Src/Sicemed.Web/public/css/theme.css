@@ -750,7 +750,15 @@ fieldset{
 	border:1px solid #e0e0e0;}
 form .row {
 	padding:5px 0}
-input[type=text],input[type=password],textarea{
+input[type=text],input[type=password],
+input[type=number],input[type=time],
+input[type=url],input[type=email],
+input[type=month],input[type=tel],
+input[type=search],input[type=week],
+input[type=datetime],input[type=datetime-local],
+input[type=date],input[type=datetime-color],
+textarea,
+select{
 	color:#666;
 	padding:5px;
 	border:1px solid #dcdcdc;
@@ -3334,8 +3342,6 @@ h3.toggle.box {
 .square-disable{
 	background:url(../images/theme/icons/icon_square_white.gif) 0 2px no-repeat;}
 
-.valid{border:1px solid #70A41B!important; overflow:hide;} /*#70A41B*/
-.error {overflow:hide; border:1px solid red!important; }
 #reservationForm p.sending, #reservationForm p.textconfirm, #reservationForm p.texterror { display:none; }
 #reservationForm p.sending img { border:none}
 #reservationForm #sending { padding: 10px 0 10px 300px; }
@@ -3724,5 +3730,3 @@ h3.toggle.box {
 	text-shadow:0 1px 1px #fff;
 	padding:0;
 	text-align:center}
-.valid{border:1px solid #70A41B!important; overflow:hide;} /*#70A41B*/
-.error {overflow:hide; border:1px solid red!important; }	
