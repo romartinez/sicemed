@@ -1,5 +1,7 @@
 ﻿@using Combres
 @using SICEMED.Web
+@using Sicemed.Web.Infrastructure
+@using Sicemed.Web.Infrastructure.Controllers
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -12,9 +14,10 @@
     <!--[if IE 7]>
     <link rel="stylesheet" type="text/css" href="../../public/css/theme_ie.css" />
     <![endif]-->
-    @if(!MvcApplication.IsUsingProxy)
+    @if (!MvcApplication.IsUsingProxy)
     {
-        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBKt3eKqEI-zr5bqGJG3mCCZJK0asao5-0&sensor=true" type="text/javascript"></script>        
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBKt3eKqEI-zr5bqGJG3mCCZJK0asao5-0&sensor=true"
+            type="text/javascript"></script>        
     }
 </head>
 <body>
@@ -35,14 +38,11 @@
                             @Html.Partial("_LogOnPartial")
                         </p>
                         <p>
-                            Comun&iacute;quese con nosotros:
-                            <span class="icon_phone">448-7896</span>
+                            Comun&iacute;quese con nosotros: <span class="icon_phone">448-7896</span>
                         </p>
                         <p>
-                            Velez Sarsfield 982, Rosario
-                            <a href="#" id="google-map-link" class="icon_map">
-                                Ver Mapa
-                            </a>                            
+                            Velez Sarsfield 982, Rosario <a href="#" id="google-map-link" class="icon_map">Ver Mapa
+                            </a>
                         </p>
                     </div>
                 </div>
@@ -59,10 +59,10 @@
             <!-- header image/slider -->
             <div class="header_bot header_image">
                 <div class="container">
-                @if (!MvcApplication.IsUsingProxy)
-                {
-                    <img src="../../public/images/theme/header_image_2.jpg" alt="" height="142" width="960"/>
-                }
+                    @if (!MvcApplication.IsUsingProxy)
+                    {
+                        <img src="../../public/images/theme/header_image_2.jpg" alt="" height="142" width="960" />
+                    }
                 </div>
             </div>
             <!--/ header image/slider -->
@@ -100,11 +100,11 @@
             </div>
         </div>
     </div>
-    <!-- google maps -->    
+    @*google maps*@
     <div id="google-map-wrapper" title="SICEMED - Ubicaci&oacute;n">
-        <div id="google-map" style="width:100%; height:100%"></div>
+        <div id="google-map" style="width: 100%; height: 100%">
+        </div>
     </div>
-
     @Html.Raw(WebExtensions.CombresLink("js"))
     @RenderSection("Scripts", false)
     <script type="text/javascript">
@@ -112,6 +112,16 @@
             app.initialize({
                 isUsingProxy : @MvcApplication.IsUsingProxy.ToString().ToLower()
             });
+                        
+            @if (TempData.ContainsKey(BaseController.MESSAGES_KEY))
+            {
+                var storedMessages = (List<ResponseMessage>)TempData[BaseController.MESSAGES_KEY];
+                foreach (var responseMessage in storedMessages)
+                {
+                    var growlSettings = responseMessage.IsSuccessful ? "header: '&Eacute;xito', theme: 'ui-state-sucess'" : "header: 'Error', theme: 'ui-state-error'";
+                    @:$.jGrowl("@responseMessage.Description", { @Html.Raw(growlSettings), sticky: true});
+                }
+            }
         });        
     </script>
 </body>

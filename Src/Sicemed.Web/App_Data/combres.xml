@@ -27,6 +27,7 @@
       <resource path="~/public/css/jqgrid.css" />
       <resource path="~/public/css/fullcalendar.css" />
       <resource path="~/public/css/wizard.css" />
+      <resource path="~/public/css/jquery.jgrowl.css" />
       <resource path="~/public/css/app.css" />
     </resourceSet>
     <resourceSet name="js" type="js">
@@ -42,6 +43,7 @@
       <resource path="~/public/js/libs/jquery.blockUI.js" />
       <resource path="~/public/js/libs/knockout-2.0.0.js" />
       <resource path="~/public/js/libs/fullcalendar.js" />
+      <resource path="~/public/js/libs/jquery.jgrowl.js" />
 
       <resource path="~/public/js/libs/i18n/jquery.ui.datepicker-es.js" />
 

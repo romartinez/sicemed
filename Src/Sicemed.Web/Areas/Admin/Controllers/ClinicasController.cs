@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using AutoMapper;
 using Sicemed.Web.Areas.Admin.Models.Clinicas;
+using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Helpers;
@@ -55,7 +56,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
             Mapper.Map(viewModelFromDb, modelFromDb);
 
-            ViewBag.Message = "Los datos de la clínica fueron actualizados exitosamente.";
+            ShowMessages(ResponseMessage.Success());
 
             return RedirectToAction("Index");
         }

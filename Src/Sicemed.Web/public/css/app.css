@@ -45,6 +45,10 @@ table.detail tr.even
     color: #cd0a0a/*{fcError}*/;
 }
 
+.ui-state-sucess, .ui-widget-content .ui-state-sucess, .ui-widget-header .ui-state-sucess  {border: 1px solid #2e8f19; background: #70A41B !important; color: #fbf9ee; }
+.ui-state-sucess a, .ui-widget-content .ui-state-sucess a,.ui-widget-header .ui-state-sucess a { color: #363636; }
+
+
 /* Form */
 fieldset.form {
     

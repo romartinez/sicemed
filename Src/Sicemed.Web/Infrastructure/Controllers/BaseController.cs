@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Web.Mvc;
 using Castle.Core.Logging;
@@ -65,6 +66,17 @@ namespace Sicemed.Web.Infrastructure.Controllers
                                            JsonRequestBehavior behavior)
         {
             return new NewtonJsonResult(base.Json(data, contentType, contentEncoding, behavior));
+        }
+
+        public const string MESSAGES_KEY = "MESSAGES_";
+        protected void ShowMessages(params ResponseMessage[] messages)
+        {
+            var storedMessages = TempData.ContainsKey(MESSAGES_KEY)
+                                                       ? (List<ResponseMessage>) TempData[MESSAGES_KEY]
+                                                       : new List<ResponseMessage>();
+            storedMessages.AddRange(messages);
+
+            TempData[MESSAGES_KEY] = storedMessages;
         }
     }
 }

@@ -362,6 +362,7 @@
     <Content Include="public\css\app.css" />
     <Content Include="public\css\fullcalendar.css" />
     <Content Include="public\css\jquery-ui.css" />
+    <Content Include="public\css\jquery.jgrowl.css" />
     <Content Include="public\css\theme_ie.css" />
     <Content Include="public\css\theme.css" />
     <Content Include="public\css\jqgrid.css" />
@@ -536,10 +537,10 @@
     <Content Include="public\js\libs\jquery-1.6.2.min.js" />
     <Content Include="public\js\libs\jquery-ui-1.8.15.min.js" />
     <Content Include="public\js\libs\jquery.blockUI.js" />
+    <Content Include="public\js\libs\jquery.jgrowl.js" />
     <Content Include="public\js\libs\jquery.jqGrid.min.js" />
     <Content Include="public\js\libs\jquery.mockjax.js" />
     <Content Include="public\js\libs\jquery.tmpl.js" />
-    <Content Include="public\js\libs\jquery.ui.selectmenu.js" />
     <Content Include="public\js\libs\jquery.validate.min.js" />
     <Content Include="public\js\libs\jquery.validate.unobtrusive.min.js" />
     <Content Include="public\js\libs\knockout-2.0.0.js" />
