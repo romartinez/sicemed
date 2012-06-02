@@ -15,8 +15,12 @@ namespace Sicemed.Web.Areas.Admin.Models.Clinicas
         [DropDownProperty("DocumentoTipoDocumentoValue")]
         public IEnumerable<SelectListItem> TiposDocumentosHabilitados { get; set; }
 
-		public SelectList ProvinciasHabilitadas { get; set; }
-		public SelectList LocalidadesHabilitadas { get; set; }
+        [UIHint("DropDownList")]
+        [DisplayName("Provincia")]
+        [DropDownProperty("ProvinciaId")]
+        public IEnumerable<SelectListItem> ProvinciasHabilitadas { get; set; }
+		
+        public SelectList LocalidadesHabilitadas { get; set; }
 
 		[Required]
 		[DisplayName("Razón Social")]

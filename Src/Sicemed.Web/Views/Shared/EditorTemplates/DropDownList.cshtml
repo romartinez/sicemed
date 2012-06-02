@@ -5,7 +5,7 @@
         ? ViewData.ModelMetadata.AdditionalValues["DropDownProperty"].ToString()
         : string.Empty;
         
-    if(string.IsNullOrWhiteSpace(name))
+    if(!string.IsNullOrWhiteSpace(name))
     {
         ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
     }

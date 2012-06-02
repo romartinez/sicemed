@@ -10,7 +10,7 @@ using Sicemed.Web.Models.Roles;
 namespace Sicemed.Web.Areas.Admin.Controllers
 {
     [AuthorizeIt(typeof(Administrador))]
-    public class ClinicasController : BaseController
+    public class ClinicasController : NHibernateController
     {
         public virtual IObtenerClinicaActivaQuery ObtenerClinicaActivaQuery { get; set; }
 
@@ -20,6 +20,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         	var viewModel = Mapper.Map<ClinicaEditViewModel>(model);
 
         	viewModel.TiposDocumentosHabilitados = DomainExtensions.GetTiposDocumentos(viewModel.DocumentoTipoDocumentoValue);
+            viewModel.ProvinciasHabilitadas = DomainExtensions.GetProvincias(SessionFactory);
 
             return View(viewModel);
         }

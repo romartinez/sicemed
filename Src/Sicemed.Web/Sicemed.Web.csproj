@@ -172,11 +172,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_LocalResources\ValidationErrors.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ValidationErrors.resx</DependentUpon>
-    </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AuditoriaController.cs" />
     <Compile Include="Areas\Admin\Controllers\ClinicasController.cs" />
@@ -343,10 +338,6 @@
     <Content Include="App_Data\LogTable.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="App_LocalResources\ValidationErrors.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ValidationErrors.Designer.cs</LastGenOutput>
-    </Content>
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Roles\Administrador.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Agenda.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Clinica.hbm.xml" />
