@@ -16,6 +16,8 @@
     {
         <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBKt3eKqEI-zr5bqGJG3mCCZJK0asao5-0&sensor=true" type="text/javascript"></script>        
     }
+    @Html.Raw(WebExtensions.CombresLink("js"))
+    @RenderSection("Scripts", false)
 </head>
 <body>
     <div class="body_wrap">
@@ -104,8 +106,6 @@
     <div id="google-map-wrapper" title="SICEMED - Ubicaci&oacute;n">
         <div id="google-map" style="width:100%; height:100%"></div>
     </div>
-    @Html.Raw(WebExtensions.CombresLink("js"))
-    @RenderSection("Scripts", false)
     <script type="text/javascript">
         $(function () {
             app.initialize({

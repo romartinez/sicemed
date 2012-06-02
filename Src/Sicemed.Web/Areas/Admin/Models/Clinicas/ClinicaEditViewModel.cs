@@ -20,7 +20,10 @@ namespace Sicemed.Web.Areas.Admin.Models.Clinicas
         [DropDownProperty("ProvinciaId")]
         public IEnumerable<SelectListItem> ProvinciasHabilitadas { get; set; }
 		
-        public SelectList LocalidadesHabilitadas { get; set; }
+        [DisplayName("Localidad")]
+        [UIHint("CascadingDropDownList")]
+        [CascadingDropDownPropertyAttribute("DomicilioLocalidadId", "ProvinciaId", "GetLocalidades", "Domain")]
+        public IEnumerable<SelectListItem> LocalidadesHabilitadas { get; set; }
 
 		[Required]
 		[DisplayName("Razón Social")]

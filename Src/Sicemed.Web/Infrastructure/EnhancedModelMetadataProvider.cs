@@ -7,7 +7,7 @@ using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
 
 namespace Sicemed.Web.Infrastructure
 {
-    public class EnhancedModelMetadataProvider : DataAnnotationsModelMetadataProvider 
+    public class EnhancedModelMetadataProvider : DataAnnotationsModelMetadataProvider
     {
         protected override ModelMetadata CreateMetadata(
                                      IEnumerable<Attribute> attributes,
@@ -25,16 +25,25 @@ namespace Sicemed.Web.Infrastructure
                                  propertyName);
 
             //Enhance the metadata with custom attributes
-            var display = attributes.SingleOrDefault(a => typeof(DisplayAttribute) == a.GetType());
+            var display = attributes.SingleOrDefault(a => a is DisplayAttribute);
             if (display != null)
             {
-                var displayAttribute = ((DisplayAttribute) display);
+                var displayAttribute = ((DisplayAttribute)display);
                 data.Watermark = displayAttribute.Prompt;
-                data.Description = displayAttribute.Description;                
+                data.Description = displayAttribute.Description;
             }
 
-            var dropDown = attributes.SingleOrDefault(a => typeof(DropDownPropertyAttribute) == a.GetType());
-            if (dropDown != null) data.AdditionalValues.Add("DropDownProperty", ((DropDownPropertyAttribute) dropDown).PropertyName);
+            var dropDown = attributes.SingleOrDefault(a => a is DropDownPropertyAttribute);
+            if (dropDown != null) data.AdditionalValues.Add("DropDownProperty.PropertyName", ((DropDownPropertyAttribute)dropDown).PropertyName);
+
+            var cascadingDropDown = attributes.SingleOrDefault(a => a is CascadingDropDownPropertyAttribute);
+            if (cascadingDropDown != null)
+            {
+                data.AdditionalValues.Add("CascadingDropDownProperty.ParentPropertyName", ((CascadingDropDownPropertyAttribute)cascadingDropDown).ParentPropertyName);   
+                data.AdditionalValues.Add("CascadingDropDownProperty.ActionName", ((CascadingDropDownPropertyAttribute)cascadingDropDown).ActionName);
+                data.AdditionalValues.Add("CascadingDropDownProperty.ControllerName", ((CascadingDropDownPropertyAttribute)cascadingDropDown).ControllerName);
+                data.AdditionalValues.Add("CascadingDropDownProperty.ParameterName", ((CascadingDropDownPropertyAttribute)cascadingDropDown).ParameterName);   
+            }                
 
             return data;
         }

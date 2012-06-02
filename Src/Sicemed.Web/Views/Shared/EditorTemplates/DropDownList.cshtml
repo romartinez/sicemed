@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<SelectListItem>
-
 @{
-    var name = ViewData.ModelMetadata.AdditionalValues.ContainsKey("DropDownProperty") 
-        ? ViewData.ModelMetadata.AdditionalValues["DropDownProperty"].ToString()
+    var name = ViewData.ModelMetadata.AdditionalValues.ContainsKey("DropDownProperty.PropertyName")
+        ? ViewData.ModelMetadata.AdditionalValues["DropDownProperty.PropertyName"].ToString()
         : string.Empty;
-        
-    if(!string.IsNullOrWhiteSpace(name))
+
+    if (!string.IsNullOrWhiteSpace(name))
     {
         ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
     }
 }
-
 @Html.DropDownList(name, Model, "<< Seleccione >>")

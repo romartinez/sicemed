@@ -188,6 +188,7 @@
     <Compile Include="Areas\Admin\Models\Clinicas\ClinicaEditViewModel.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DomainController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ObtenerTurnoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -195,6 +196,7 @@
     </Compile>
     <Compile Include="Infrastructure\ActionResults\NewtonJsonResult.cs" />
     <Compile Include="Infrastructure\ApplicationInstaller.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\CascadingDropDownPropertyAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\DataAnnotations\DropDownPropertyAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AjaxHandleError.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AuditAtrribute.cs" />
@@ -679,6 +681,7 @@
     <Content Include="Views\Shared\EditorTemplates\DropDownList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Object.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Object.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CascadingDropDownList.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

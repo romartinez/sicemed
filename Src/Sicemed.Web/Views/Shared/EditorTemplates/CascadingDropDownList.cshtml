@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SelectListItem>
+@{
+    var name = ViewData.ModelMetadata.AdditionalValues.ContainsKey("DropDownProperty.PropertyName")
+        ? ViewData.ModelMetadata.AdditionalValues["DropDownProperty.PropertyName"].ToString()
+        : string.Empty;
+
+    if (!string.IsNullOrWhiteSpace(name))
+    {
+        ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
+    }
+
+    var parent = ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ParentPropertyName")
+        ? ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ParentPropertyName"].ToString()
+        : string.Empty;
+
+    var action = ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ActionName")
+        ? ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ActionName"].ToString()
+        : string.Empty;
+
+    var controller = ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ControllerName")
+        ? ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ControllerName"].ToString()
+        : string.Empty;
+
+    var parameter = ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ParameterName")
+        ? ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ParameterName"].ToString()
+        : string.Empty;
+        
+}
+
+@Html.DropDownList(name, Model, "<< Seleccione >>", new { data_cascading_parent = parent, data_cascading_url = Url.Action(action, controller), data_cascading_parameter = parameter, @class = "control-cascading" })    
+
+<script type="text/javascript" language="javascript">
+    $(function () {
+        var item = $("#@name");
+        var parent = item.data("cascading-parent");
+        $("#" + parent).change(function () {
+            var url = item.data("cascading-url");
+            var id = $(this).val();
+            //item.data("data-cascading-parameter")
+            $.getJSON(url, {provinciaId: id}, function (r) {
+                console.log(r);
+            });
+        });
+    });
+</script>
+

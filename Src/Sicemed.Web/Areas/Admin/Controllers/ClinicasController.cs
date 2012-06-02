@@ -21,7 +21,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
         	viewModel.TiposDocumentosHabilitados = DomainExtensions.GetTiposDocumentos(viewModel.DocumentoTipoDocumentoValue);
             viewModel.ProvinciasHabilitadas = DomainExtensions.GetProvincias(SessionFactory);
-
+            viewModel.LocalidadesHabilitadas = new SelectListItem[]{};
             return View(viewModel);
         }
 
