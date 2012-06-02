@@ -172,6 +172,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_LocalResources\ValidationErrors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValidationErrors.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AuditoriaController.cs" />
     <Compile Include="Areas\Admin\Controllers\ClinicasController.cs" />
@@ -195,6 +200,7 @@
     </Compile>
     <Compile Include="Infrastructure\ActionResults\NewtonJsonResult.cs" />
     <Compile Include="Infrastructure\ApplicationInstaller.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\DropDownPropertyAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AjaxHandleError.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AuditAtrribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AuthorizeItAttribute.cs" />
@@ -202,20 +208,22 @@
     <Compile Include="Infrastructure\Attributes\Filters\NHibernateBaseAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\PermanentCacheAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\ValidateModelStateAttribute.cs" />
-    <Compile Include="Infrastructure\Attributes\Validation\EmailAttribute.cs" />
-    <Compile Include="Infrastructure\Attributes\Validation\ValidatePasswordLengthAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\DefaultStringLengthAttribute.cs" />
     <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\AutoMapper\AdminProfile.cs" />
+    <Compile Include="Infrastructure\AutoMapper\GenericProfile.cs" />
     <Compile Include="Infrastructure\Controllers\BaseController.cs" />
     <Compile Include="Infrastructure\Controllers\CrudBaseController.cs" />
     <Compile Include="Infrastructure\Controllers\NHibernateController.cs" />
     <Compile Include="Infrastructure\Controllers\WindsorControllerFactory.cs" />
     <Compile Include="Infrastructure\DesignByContract.cs" />
+    <Compile Include="Infrastructure\EnhancedModelMetadataProvider.cs" />
     <Compile Include="Infrastructure\Enums\MembershipStatus.cs" />
     <Compile Include="Infrastructure\Exceptions\SicemedException.cs" />
     <Compile Include="Infrastructure\Exceptions\ToClientException.cs" />
     <Compile Include="Infrastructure\Exceptions\ValidationErrorException.cs" />
     <Compile Include="Infrastructure\Helpers\DateTimeExtensions.cs" />
+    <Compile Include="Infrastructure\Helpers\DomainExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\Json.cs" />
     <Compile Include="Infrastructure\Helpers\EnumReaderExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\HexEncoding.cs" />
@@ -335,6 +343,10 @@
     <Content Include="App_Data\LogTable.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="App_LocalResources\ValidationErrors.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationErrors.Designer.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Roles\Administrador.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Agenda.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Clinica.hbm.xml" />
@@ -659,6 +671,23 @@
     <None Include="public\fonts\cartogothicstd-italic-webfont.woff" />
     <None Include="Reports\ComprobanteTurno.docx" />
     <None Include="Reports\ComprobanteTurno.pdf" />
+    <Content Include="Views\Shared\EditorTemplates\Week.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Search.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\PhoneNumber.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Month.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime-Local.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Color.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Int32.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Double.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropDownList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Object.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Object.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

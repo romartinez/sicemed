@@ -3,8 +3,8 @@ using AutoMapper;
 using Sicemed.Web.Areas.Admin.Models.Clinicas;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
+using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.Queries.Paginas;
-using Sicemed.Web.Models;
 using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
@@ -16,16 +16,19 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
         public virtual ActionResult Index()
         {
-            var clinica = ObtenerClinicaActivaQuery.Execute();
+            var model = ObtenerClinicaActivaQuery.Execute();
+        	var viewModel = Mapper.Map<ClinicaEditViewModel>(model);
 
-            return View(Mapper.Map<ClinicaEditViewModel>(clinica));
+        	viewModel.TiposDocumentosHabilitados = DomainExtensions.GetTiposDocumentos(viewModel.DocumentoTipoDocumentoValue);
+
+            return View(viewModel);
         }
 
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
         [ValidateModelStateAttribute]
-        public virtual ActionResult Guardar()
+        public virtual ActionResult Guardar(ClinicaEditViewModel viewModel)
         {
             var modelFromDb = ObtenerClinicaActivaQuery.Execute();
 

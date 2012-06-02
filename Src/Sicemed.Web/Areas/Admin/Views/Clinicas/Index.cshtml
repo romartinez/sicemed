@@ -12,7 +12,10 @@
 }
 
 @using(Html.BeginForm("Guardar")){
-    @Html.EditorForModel()
+    
+	@Html.ValidationSummaryWithMessage()
+
+	@Html.EditorForModel()
 
     <input type="submit"/>
 }

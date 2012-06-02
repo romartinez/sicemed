@@ -68,5 +68,10 @@ namespace System.Web.Mvc.Html
 
             return new MvcHtmlString(output.GetFormattedText());
         }
+
+        public static MvcHtmlString ValidationSummaryWithMessage(this HtmlHelper htmlHelper)
+        {
+            return htmlHelper.ValidationSummary("Uppss.. corrija los siguientes puntos antes de continuar:");
+        }    
     }
 }

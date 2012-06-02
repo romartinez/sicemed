@@ -23,6 +23,7 @@ namespace Sicemed.Web.Infrastructure.Services
 
     public class MembershipService : IMembershipService
     {
+    	public const int MIN_REQUIRED_PASSWORD_LENGTH = 6;
         private const string SHA1_SALT = "!-3453dfg4";
         private const int WINDOW_MINUTES = 30;
         private const int MAX_FAILED_ATTEMPS = 3;

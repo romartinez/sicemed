@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using Sicemed.Web.Infrastructure.Attributes.Validation;
+using Sicemed.Web.Infrastructure.Services;
 
 namespace Sicemed.Web.Models.ViewModels.Cuenta
 {
@@ -12,7 +12,7 @@ namespace Sicemed.Web.Models.ViewModels.Cuenta
         public string PasswordActual { get; set; }
 
         [Required]
-        [ValidatePasswordLength]
+		[StringLength(MembershipService.MIN_REQUIRED_PASSWORD_LENGTH)]
         [DataType(DataType.Password)]
         [Display(Name = "Password Nuevo")]
         public string PasswordNuevo { get; set; }

@@ -121,6 +121,9 @@ namespace SICEMED.Web
             //Automapper
             AutoMapperConfiguration.Configure();
 
+            //MetadataProvider
+            ModelMetadataProviders.Current = new EnhancedModelMetadataProvider();
+
             //Cargar la clinica
             var clinicaIdStr = ConfigurationManager.AppSettings["ClinicaID"];
             if(string.IsNullOrWhiteSpace(clinicaIdStr))

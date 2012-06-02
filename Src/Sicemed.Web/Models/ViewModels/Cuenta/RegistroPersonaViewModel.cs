@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using Sicemed.Web.Infrastructure.Attributes.Validation;
+using DataAnnotationsExtensions;
+using Sicemed.Web.Infrastructure.Services;
 
 namespace Sicemed.Web.Models.ViewModels.Cuenta
 {
@@ -17,10 +18,11 @@ namespace Sicemed.Web.Models.ViewModels.Cuenta
         [Required]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
+		[Email]
         public string Email { get; set; }
 
         [Required]
-        [ValidatePasswordLength]
+		[StringLength(MembershipService.MIN_REQUIRED_PASSWORD_LENGTH)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -28,6 +30,7 @@ namespace Sicemed.Web.Models.ViewModels.Cuenta
         [DataType(DataType.Password)]
         [Display(Name = "Confirmación Password")]
         [Compare("Password", ErrorMessage = @"El password y su confirmación no coinciden.")]
-        public string ConfirmacionPassword { get; set; }
+		[StringLength(MembershipService.MIN_REQUIRED_PASSWORD_LENGTH)]
+		public string ConfirmacionPassword { get; set; }
     }
 }
