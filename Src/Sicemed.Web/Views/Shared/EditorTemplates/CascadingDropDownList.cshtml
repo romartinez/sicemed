@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<SelectListItem>
 @{
+    var model = Model ?? new SelectListItem[] { };
+
     var name = ViewData.ModelMetadata.AdditionalValues.ContainsKey("DropDownProperty.PropertyName")
         ? ViewData.ModelMetadata.AdditionalValues["DropDownProperty.PropertyName"].ToString()
         : string.Empty;
@@ -9,35 +11,69 @@
         ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
     }
 
-    var parent = ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ParentPropertyName")
-        ? ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ParentPropertyName"].ToString()
-        : string.Empty;
+    var attrs = new Dictionary<string, object>();
 
-    var action = ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ActionName")
-        ? ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ActionName"].ToString()
-        : string.Empty;
+    var prompt = !string.IsNullOrWhiteSpace(ViewData.ModelMetadata.Watermark)
+        ? ViewData.ModelMetadata.Watermark : "<< Seleccione >>";
 
-    var controller = ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ControllerName")
-        ? ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ControllerName"].ToString()
-        : string.Empty;
+    attrs.Add("data-cascading-prompt", prompt);
 
-    var parameter = ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ParameterName")
-        ? ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ParameterName"].ToString()
-        : string.Empty;
-        
+    if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ParentPropertyName"))
+    {
+        attrs.Add("data-cascading-parent", ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ParentPropertyName"]);
+    }
+
+    if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ActionName"))
+    {
+        string url;
+        if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ControllerName"))
+        {
+            url = Url.Action(
+                ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ActionName"].ToString(),
+                ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ControllerName"].ToString());
+        }
+        else
+        {
+            url = Url.Action(
+                ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ActionName"].ToString());
+        }
+        attrs.Add("data-cascading-url", url);
+    }
+
+    if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ParameterName"))
+    {
+        attrs.Add("data-cascading-parameter", ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ParameterName"]);
+    }
+
+    if (!model.Any())
+    {
+        attrs.Add("disabled", "disabled");
+    }
+
+    attrs.Add("class", "dropdown-cascading");
 }
-
-@Html.DropDownList(name, Model, "<< Seleccione >>", new { data_cascading_parent = parent, data_cascading_url = Url.Action(action, controller), data_cascading_parameter = parameter, @class = "control-cascading" })    
-
+@Html.DropDownList(name, model, prompt, attrs)
 <script type="text/javascript" language="javascript">
     $(function () {
         var item = $("#@name");
         var parent = item.data("cascading-parent");
         $("#" + parent).change(function () {
+            item.empty();
+            item.append($("<option />").text(item.data("cascading-prompt")));
+
+            var val = $(this).val();
+            if (!val) return;
+            
             var url = item.data("cascading-url");
-            var id = $(this).val();
-            $.getJSON(url, { provinciaId: id }, function (r) {
-                item.empty();
+            var params = {};
+            params[item.data("cascading-parameter")] = val;
+            $.getJSON(url, params, function (r) {
+                if (!r || r.length == 0) {
+                    item.addAttr("disabled", "disabled");
+                    return;
+                } else {
+                    item.removeAttr("disabled");
+                }
                 $.each(r, function () {
                     item.append($("<option />").val(this.Value).text(this.Text));
                 });
@@ -45,4 +81,3 @@
         });
     });
 </script>
-
