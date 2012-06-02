@@ -494,6 +494,7 @@
     <Content Include="public\images\theme\playSlider_item_active.png" />
     <Content Include="public\images\theme\playSlider_line_bot.png" />
     <Content Include="public\images\theme\ribbon_mail.png" />
+    <Content Include="public\images\theme\ribbon_required.png" />
     <Content Include="public\images\theme\sidebar_menu_bg.jpg" />
     <Content Include="public\images\theme\sidebar_menu_bg_left.jpg" />
     <Content Include="public\images\theme\sidebar_nav_menu_bg.jpg" />

@@ -44,3 +44,26 @@ table.detail tr.even
 .validation-summary-errors ul li {
     color: #cd0a0a/*{fcError}*/;
 }
+
+/* Form */
+fieldset.form {
+    
+}
+fieldset.form li 
+{
+    list-style: none;
+    border-top: 1px solid whiteSmoke;
+    /*padding: 5px 0;*/
+}
+.editor-label {    
+    display: inline-block;
+    padding-left: 16px;    
+    vertical-align: top;
+    width: 150px;
+}
+.editor-label-required {
+    background: url(../images/theme/ribbon_required.png) no-repeat;
+}
+.editor-field {
+    display: inline-block;
+}

@@ -71,6 +71,7 @@ namespace System.Web.Mvc.Html
 
         public static MvcHtmlString ValidationSummaryWithMessage(this HtmlHelper htmlHelper)
         {
+            if (htmlHelper.ViewData.ModelState.IsValid) return null;
             return htmlHelper.ValidationSummary("Uppss.. corrija los siguientes puntos antes de continuar:");
         }    
     }
