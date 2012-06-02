@@ -36,9 +36,11 @@
         $("#" + parent).change(function () {
             var url = item.data("cascading-url");
             var id = $(this).val();
-            //item.data("data-cascading-parameter")
-            $.getJSON(url, {provinciaId: id}, function (r) {
-                console.log(r);
+            $.getJSON(url, { provinciaId: id }, function (r) {
+                item.empty();
+                $.each(r, function () {
+                    item.append($("<option />").val(this.Value).text(this.Text));
+                });
             });
         });
     });
