@@ -39,10 +39,12 @@ namespace Sicemed.Web.Infrastructure
             var cascadingDropDown = attributes.SingleOrDefault(a => a is CascadingDropDownPropertyAttribute);
             if (cascadingDropDown != null)
             {
-                data.AdditionalValues.Add("CascadingDropDownProperty.ParentPropertyName", ((CascadingDropDownPropertyAttribute)cascadingDropDown).ParentPropertyName);   
-                data.AdditionalValues.Add("CascadingDropDownProperty.ActionName", ((CascadingDropDownPropertyAttribute)cascadingDropDown).ActionName);
-                data.AdditionalValues.Add("CascadingDropDownProperty.ControllerName", ((CascadingDropDownPropertyAttribute)cascadingDropDown).ControllerName);
-                data.AdditionalValues.Add("CascadingDropDownProperty.ParameterName", ((CascadingDropDownPropertyAttribute)cascadingDropDown).ParameterName);   
+                var cascading = (CascadingDropDownPropertyAttribute) cascadingDropDown;
+                data.AdditionalValues.Add("CascadingDropDownProperty.ParentPropertyName", cascading.ParentPropertyName);
+                data.AdditionalValues.Add("CascadingDropDownProperty.ParentPrompt", cascading.ParentPrompt);
+                data.AdditionalValues.Add("CascadingDropDownProperty.ActionName", cascading.ActionName);
+                data.AdditionalValues.Add("CascadingDropDownProperty.ControllerName", cascading.ControllerName);
+                data.AdditionalValues.Add("CascadingDropDownProperty.ParameterName", cascading.ParameterName);
             }                
 
             return data;

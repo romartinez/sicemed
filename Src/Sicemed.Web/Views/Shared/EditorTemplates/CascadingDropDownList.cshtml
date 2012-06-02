@@ -18,6 +18,15 @@
 
     attrs.Add("data-cascading-prompt", prompt);
 
+    var parentPrompt = model.Any() ? prompt : "<< Seleccione Padre >>";    
+    if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ParentPrompt") 
+        && ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ParentPrompt"] != null)
+    {
+        parentPrompt = ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ParentPrompt"].ToString();
+        attrs.Add("data-cascading-parent-prompt", ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ParentPrompt"]);
+    }
+    
+    
     if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ParentPropertyName"))
     {
         attrs.Add("data-cascading-parent", ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ParentPropertyName"]);
@@ -52,32 +61,4 @@
 
     attrs.Add("class", "dropdown-cascading");
 }
-@Html.DropDownList(name, model, prompt, attrs)
-<script type="text/javascript" language="javascript">
-    $(function () {
-        var item = $("#@name");
-        var parent = item.data("cascading-parent");
-        $("#" + parent).change(function () {
-            item.empty();
-            item.append($("<option />").text(item.data("cascading-prompt")));
-
-            var val = $(this).val();
-            if (!val) return;
-            
-            var url = item.data("cascading-url");
-            var params = {};
-            params[item.data("cascading-parameter")] = val;
-            $.getJSON(url, params, function (r) {
-                if (!r || r.length == 0) {
-                    item.addAttr("disabled", "disabled");
-                    return;
-                } else {
-                    item.removeAttr("disabled");
-                }
-                $.each(r, function () {
-                    item.append($("<option />").val(this.Value).text(this.Text));
-                });
-            });
-        });
-    });
-</script>
+@Html.DropDownList(name, model, parentPrompt, attrs)
