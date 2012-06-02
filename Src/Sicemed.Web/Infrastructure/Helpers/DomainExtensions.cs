@@ -21,7 +21,7 @@ namespace Sicemed.Web.Infrastructure.Helpers
                     });
         }
 
-        public static IEnumerable<SelectListItem> GetProvincias(ISessionFactory sessionFactory, int? selectedValue = null)
+        public static IEnumerable<SelectListItem> GetProvincias(ISessionFactory sessionFactory, long? selectedValue = null)
         {
             var provincias = sessionFactory.GetCurrentSession().QueryOver<Provincia>().OrderBy(x => x.Nombre).Asc.Future();
             return provincias.Select(x =>
@@ -33,7 +33,7 @@ namespace Sicemed.Web.Infrastructure.Helpers
                 });
         }
 
-        public static IEnumerable<SelectListItem> GetLocalidades(ISessionFactory sessionFactory, int provinciaId, int? selectedValue = null)
+        public static IEnumerable<SelectListItem> GetLocalidades(ISessionFactory sessionFactory, long provinciaId, long? selectedValue = null)
         {
             var localidades = sessionFactory.GetCurrentSession().QueryOver<Localidad>().OrderBy(x => x.Nombre).Asc.
                 JoinQueryOver(l=>l.Provincia).Where(p=>p.Id == provinciaId).Future();

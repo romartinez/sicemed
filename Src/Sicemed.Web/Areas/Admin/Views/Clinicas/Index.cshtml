@@ -11,8 +11,8 @@
     <h3 class="ui-state-highlight">@ViewBag.Message</h3>
 }
 
-@using(Html.BeginForm("Guardar")){
-    
+@using(Html.BeginForm("Guardar", "Clinicas")){
+    @Html.AntiForgeryToken()
 	@Html.ValidationSummaryWithMessage()
 
 	@Html.EditorForModel()

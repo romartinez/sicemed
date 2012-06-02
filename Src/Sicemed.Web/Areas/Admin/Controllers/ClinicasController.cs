@@ -19,17 +19,34 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             var model = ObtenerClinicaActivaQuery.Execute();
         	var viewModel = Mapper.Map<ClinicaEditViewModel>(model);
 
-        	viewModel.TiposDocumentosHabilitados = DomainExtensions.GetTiposDocumentos(viewModel.DocumentoTipoDocumentoValue);
-            viewModel.ProvinciasHabilitadas = DomainExtensions.GetProvincias(SessionFactory);
+        	AppendLists(viewModel);
+
             return View(viewModel);
+        }
+
+        private void AppendLists(ClinicaEditViewModel viewModel)
+        {
+            viewModel.TiposDocumentosHabilitados = DomainExtensions.GetTiposDocumentos(viewModel.DocumentoTipoDocumentoValue);
+            viewModel.ProvinciasHabilitadas = DomainExtensions.GetProvincias(SessionFactory, viewModel.DomicilioLocalidadProvinciaId);
+
+            if (viewModel.DomicilioLocalidadProvinciaId.HasValue)
+            {
+                viewModel.LocalidadesHabilitadas = 
+                    DomainExtensions.GetLocalidades(SessionFactory, viewModel.DomicilioLocalidadProvinciaId.Value, viewModel.DomicilioLocalidadId);
+            }
         }
 
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
-        [ValidateModelStateAttribute]
         public virtual ActionResult Guardar(ClinicaEditViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                AppendLists(viewModel);
+                return View("Index", viewModel);
+            }
+
             var modelFromDb = ObtenerClinicaActivaQuery.Execute();
 
             var viewModelFromDb = Mapper.Map<ClinicaEditViewModel>(modelFromDb);
@@ -40,7 +57,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
             ViewBag.Message = "Los datos de la clínica fueron actualizados exitosamente.";
 
-            return View("Index", viewModelFromDb);
+            return RedirectToAction("Index");
         }
     }
 }
