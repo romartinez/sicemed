@@ -27,23 +27,45 @@ namespace Sicemed.Web.Models.ViewModels.Cuenta
         [DefaultStringLength]
         public string Apellido { get; set; }
 
-        [Display(Name = "Fecha Nacimiento")]        
-        [DataType(DataType.Date)]
-        public DateTime? FechaNacimiento { get; set; }
-
         [UIHint("DropDownList")]
         [DisplayName("Tipo Documento")]
-        [DropDownProperty("DocumentoTipoDocumentoValue")]
+        [DropDownProperty("TipoDocumentoId")]
         public IEnumerable<SelectListItem> TiposDocumentosHabilitados { get; set; }
 
         [Required]
         [DisplayName("Tipo Documento")]
         [ScaffoldColumn(false)]
-        public virtual int DocumentoTipoDocumentoValue { get; set; }
+        public virtual int TipoDocumentoId { get; set; }
 
         [Required]
         [DisplayName("Número Documento")]
         public virtual long DocumentoNumero { get; set; }
+
+        [Display(Name = "Fecha Nacimiento")]        
+        [DataType(DataType.Date)]
+        public DateTime? FechaNacimiento { get; set; }
+
+        [Required]
+        [Email]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
+        [DefaultStringLength]
+        public string Email { get; set; }
+
+        [Required]
+        [MinLength(MembershipService.MIN_REQUIRED_PASSWORD_LENGTH)]
+        [DefaultStringLength]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmación Password")]
+        [Compare("Password", ErrorMessage = @"El password y su confirmación no coinciden.")]
+        [MinLength(MembershipService.MIN_REQUIRED_PASSWORD_LENGTH)]
+        [DefaultStringLength]
+        public string ConfirmacionPassword { get; set; }
 
         [Required]
         [DisplayName("Telefono")]
@@ -72,28 +94,29 @@ namespace Sicemed.Web.Models.ViewModels.Cuenta
         [Required]
         [DisplayName("Provincia")]
         [ScaffoldColumn(false)]
-        public virtual long? DomicilioLocalidadProvinciaId { get; set; }	
-        
-        [Required]
-        [Email]
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email")]
-        [DefaultStringLength]
-        public string Email { get; set; }
+        public virtual long? DomicilioLocalidadProvinciaId { get; set; }
+
+        [UIHint("DropDownList")]
+        [DisplayName("Obra Social")]
+        [DropDownProperty("ObraSocialId")]
+        public IEnumerable<SelectListItem> ObrasSocialesHabilitadas { get; set; }
+
+        [DisplayName("Plan")]
+        [UIHint("CascadingDropDownList")]
+        [CascadingDropDownPropertyAttribute("PlanId", "ObraSocialId", "GetPlanesObraSocial", "Cuenta", "obraSocialId", "<< Seleccione una Obra Social >>")]
+        public IEnumerable<SelectListItem> PlanesObraSocialHabilitados { get; set; }
 
         [Required]
-        [MinLength(MembershipService.MIN_REQUIRED_PASSWORD_LENGTH)]
-        [DefaultStringLength]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+        [ScaffoldColumn(false)]
+        public virtual long? PlanId { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirmación Password")]
-        [Compare("Password", ErrorMessage = @"El password y su confirmación no coinciden.")]
-        [MinLength(MembershipService.MIN_REQUIRED_PASSWORD_LENGTH)]
+        [ScaffoldColumn(false)]
+        public virtual long? ObraSocialId { get; set; }
+
+        [Required]
+        [DisplayName("Número Afiliado")]
         [DefaultStringLength]
-        public string ConfirmacionPassword { get; set; }
+        public virtual string NumeroAfiliado { get; set; }
     }
 }

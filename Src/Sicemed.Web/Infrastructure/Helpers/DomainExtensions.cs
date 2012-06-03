@@ -45,5 +45,30 @@ namespace Sicemed.Web.Infrastructure.Helpers
                     Selected = selectedValue.HasValue && x.Id == selectedValue.Value
                 });
         }
+
+        public static IEnumerable<SelectListItem> GetObrasSociales(ISessionFactory sessionFactory, long? selectedValue = null)
+        {
+            var obrasSociales = sessionFactory.GetCurrentSession().QueryOver<ObraSocial>().OrderBy(x => x.RazonSocial).Asc.Future();
+            return obrasSociales.Select(x =>
+                new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.RazonSocial,
+                    Selected = selectedValue.HasValue && x.Id == selectedValue.Value
+                });
+        }
+
+        public static IEnumerable<SelectListItem> GetPlanesObraSocial(ISessionFactory sessionFactory, long obraSocialId, long? selectedValue = null)
+        {
+            var planes = sessionFactory.GetCurrentSession().QueryOver<Plan>().OrderBy(x => x.Nombre).Asc.
+                JoinQueryOver(l => l.ObraSocial).Where(p => p.Id == obraSocialId).Future();
+            return planes.Select(x =>
+                new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Nombre,
+                    Selected = selectedValue.HasValue && x.Id == selectedValue.Value
+                });
+        }
     }
 }

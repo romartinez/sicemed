@@ -1,3 +1,5 @@
 ﻿@using Sicemed.Web.Models.Components
 @model Telefono
-@Html.Partial("_Telefono", Model, new ViewDataDictionary { { "Multiple", false } })
+<div class="editor-field-inner">
+    (@Html.EditorFor(x => x.Prefijo)) - @Html.EditorFor(x => x.Numero)        
+</div>    

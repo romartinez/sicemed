@@ -688,6 +688,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Telefono.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Telefonos.cshtml" />
     <Content Include="Views\Shared\_Submit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Telefono.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

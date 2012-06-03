@@ -30,7 +30,7 @@ namespace Sicemed.Web.Models.Roles
             get { return _turnos; }
         }
 
-        public static Rol Create(string numeroAfiliado)
+        public static Paciente Create(string numeroAfiliado)
         {
             return new Paciente
                    {

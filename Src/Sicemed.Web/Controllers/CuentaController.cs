@@ -91,15 +91,16 @@ namespace Sicemed.Web.Controllers
                 model.Documento = new Documento
                                       {
                                           Numero = viewModel.DocumentoNumero,
-                                          TipoDocumento = Enumeration.FromValue<TipoDocumento>(viewModel.DocumentoTipoDocumentoValue)
+                                          TipoDocumento = Enumeration.FromValue<TipoDocumento>(viewModel.TipoDocumentoId)
                                       };
                 model.Domicilio = new Domicilio
                                       {
                                           Direccion = viewModel.DomicilioDireccion,
                                           Localidad =  session.Load<Localidad>(viewModel.DomicilioLocalidadId)
                                       };
-                //TODO: Falta meterle las obras sociales y los planes para poder hacer esto
-                //User.AgregarRol(Paciente.Create(viewModel.NumeroAfiliado));
+                var pacienteRol = Paciente.Create(viewModel.NumeroAfiliado);
+                pacienteRol.Plan = session.Load<Plan>(viewModel.PlanId);
+                model.AgregarRol(pacienteRol);
                 var status = _membershipService.CreateUser(model, viewModel.Email, viewModel.Password);                
                 if (status == MembershipStatus.USER_CREATED)
                 {
@@ -112,6 +113,12 @@ namespace Sicemed.Web.Controllers
 
             ViewBag.PasswordLength = _membershipService.MinPasswordLength;
             return View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult GetPlanesObraSocial(long obraSocialId)
+        {
+            return Json(DomainExtensions.GetPlanesObraSocial(SessionFactory, obraSocialId), JsonRequestBehavior.AllowGet);                       
         }
         #endregion
 
@@ -163,14 +170,17 @@ namespace Sicemed.Web.Controllers
 
         private void AppendLists(RegistroPersonaViewModel viewModel)
         {
-            viewModel.TiposDocumentosHabilitados = DomainExtensions.GetTiposDocumentos(viewModel.DocumentoTipoDocumentoValue);
+            viewModel.TiposDocumentosHabilitados = DomainExtensions.GetTiposDocumentos(viewModel.TipoDocumentoId);
             viewModel.ProvinciasHabilitadas = DomainExtensions.GetProvincias(SessionFactory, viewModel.DomicilioLocalidadProvinciaId);
+            viewModel.ObrasSocialesHabilitadas = DomainExtensions.GetObrasSociales(SessionFactory, viewModel.ObraSocialId);
 
             if (viewModel.DomicilioLocalidadProvinciaId.HasValue)
-            {
                 viewModel.LocalidadesHabilitadas =
                     DomainExtensions.GetLocalidades(SessionFactory, viewModel.DomicilioLocalidadProvinciaId.Value, viewModel.DomicilioLocalidadId);
-            }
+
+            if (viewModel.ObraSocialId.HasValue)
+                viewModel.PlanesObraSocialHabilitados =
+                    DomainExtensions.GetPlanesObraSocial(SessionFactory, viewModel.ObraSocialId.Value, viewModel.PlanId);
         }
     }
 }
