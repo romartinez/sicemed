@@ -98,12 +98,12 @@ namespace Sicemed.Web.Controllers
                 model.Domicilio = new Domicilio
                                       {
                                           Direccion = viewModel.DomicilioDireccion,
-                                          Localidad =  session.Load<Localidad>(viewModel.DomicilioLocalidadId)
+                                          Localidad = session.Load<Localidad>(viewModel.DomicilioLocalidadId)
                                       };
                 var pacienteRol = Paciente.Create(viewModel.NumeroAfiliado);
                 pacienteRol.Plan = session.Load<Plan>(viewModel.PlanId);
                 model.AgregarRol(pacienteRol);
-                var status = _membershipService.CreateUser(model, viewModel.Email, viewModel.Password);                
+                var status = _membershipService.CreateUser(model, viewModel.Email, viewModel.Password);
                 if (status == MembershipStatus.USER_CREATED)
                 {
                     _membershipService.Login(viewModel.Email, viewModel.Password, out model);
@@ -120,7 +120,7 @@ namespace Sicemed.Web.Controllers
         [HttpGet]
         public ActionResult GetPlanesObraSocial(long obraSocialId)
         {
-            return Json(DomainExtensions.GetPlanesObraSocial(SessionFactory, obraSocialId), JsonRequestBehavior.AllowGet);                       
+            return Json(DomainExtensions.GetPlanesObraSocial(SessionFactory, obraSocialId), JsonRequestBehavior.AllowGet);
         }
         #endregion
 
@@ -154,21 +154,55 @@ namespace Sicemed.Web.Controllers
         }
         #endregion
 
-        #region Olvide Password
+        #region Recuperar Password
         public ActionResult RecuperarPassword()
         {
-            //TODO:
-            throw new NotImplementedException();
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RecuperarPassword(string pass)
+        public ActionResult RecuperarPassword(RecuperarPasswordViewModel viewModel)
         {
-            //TODO:
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                _membershipService.RecoverPassword(viewModel.Email);
+
+                ShowMessages(ResponseMessage.Success("Se ha enviado un mail a '{0}' con las instrucciones para cambiar su password.", viewModel.Email));
+
+                return RedirectToAction("Index", "Content");
+            }
+
+            return View(viewModel);
+        }
+
+        public ActionResult RecuperarPasswordMail(string t, string m)
+        {
+            return View(new CambiarPasswordMailViewModel { Token = t, Email = m });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RecuperarPasswordMail(CambiarPasswordMailViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var status = _membershipService.ChangePassword(viewModel.Email, viewModel.Token, viewModel.PasswordNuevo);
+                if (status == MembershipStatus.USER_FOUND)
+                {
+                    ShowMessages(ResponseMessage.Success("Se ha cambiado con éxito su password."));
+                    return RedirectToAction("Index", "Content");
+                }
+                ModelState.AddModelError("", status.Get());
+            }
+
+            // If we got this far, something failed, redisplay form
+            ViewBag.PasswordLength = _membershipService.MinPasswordLength;
+            return View(viewModel);
         }
         #endregion
+
+
 
         private void AppendLists(RegistroPersonaViewModel viewModel)
         {

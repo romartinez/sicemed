@@ -1,3 +1,7 @@
+using System.Net.Mail;
+using System.Web.Mvc;
+using Mvc.Mailer;
+using SICEMED.Web;
 using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Infrastructure.Services
@@ -8,20 +12,44 @@ namespace Sicemed.Web.Infrastructure.Services
         void SendNewUserEmail(Persona user);
     }
 
-    public class MailSenderService : IMailSenderService
+    public class MailSenderService : MailerBase, IMailSenderService
     {
-        #region IMailSenderService Members
+
+        public MailSenderService()
+            : base()
+        {
+            MasterName = "_Layout";
+        }
 
         public void SendPasswordResetEmail(Persona user, string token)
         {
-            //TODO: throw new NotImplementedException();
+            var mailMessage = new MailMessage
+                                  {
+                                      Subject = "SICEMED - Recuperar Password"
+                                  };
+
+            mailMessage.To.Add(user.Membership.Email);
+            mailMessage.From = new MailAddress(MvcApplication.Clinica.Email);
+            ViewData.Model = user;
+            ViewBag.Token = token;
+            PopulateBody(mailMessage, "RecuperarPassword");
+
+            mailMessage.Send();
         }
 
         public void SendNewUserEmail(Persona user)
         {
-            //TODO: throw new NotImplementedException();
-        }
+            var mailMessage = new MailMessage
+            {
+                Subject = "SICEMED - Bienvenido"
+            };
 
-        #endregion
+            mailMessage.To.Add(user.Membership.Email);
+            mailMessage.From = new MailAddress(MvcApplication.Clinica.Email);
+            ViewData.Model = user;
+            PopulateBody(mailMessage, "Registro");
+
+            mailMessage.Send();
+        }
     }
 }
