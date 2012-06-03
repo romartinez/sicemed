@@ -199,6 +199,7 @@
     <Compile Include="Infrastructure\Attributes\DataAnnotations\CascadingDropDownPropertyAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\DataAnnotations\DropDownPropertyAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AjaxHandleError.cs" />
+    <Compile Include="Infrastructure\Attributes\Filters\AjaxMessagesFilter.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AuditAtrribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AuthorizeItAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\MenuAttribute.cs" />
