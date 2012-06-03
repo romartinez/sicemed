@@ -51,5 +51,14 @@ namespace Sicemed.Web.Models
 
             return this;
         }
+
+        public virtual Clinica QuitarTelefono(Telefono telefono)
+        {
+            if (telefono == null) throw new ArgumentNullException("telefono");
+
+            _telefonos.Remove(telefono);
+
+            return this;
+        }
     }
 }

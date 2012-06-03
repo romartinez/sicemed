@@ -209,6 +209,7 @@
     <Compile Include="Infrastructure\Attributes\DataAnnotations\DefaultStringLengthAttribute.cs" />
     <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\AutoMapper\AdminProfile.cs" />
+    <Compile Include="Infrastructure\AutoMapper\AutoMapperExtensions.cs" />
     <Compile Include="Infrastructure\AutoMapper\GenericProfile.cs" />
     <Compile Include="Infrastructure\Controllers\BaseController.cs" />
     <Compile Include="Infrastructure\Controllers\CrudBaseController.cs" />

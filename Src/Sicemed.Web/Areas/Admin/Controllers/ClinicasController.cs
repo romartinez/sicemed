@@ -6,6 +6,9 @@ using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.Queries.Paginas;
+using Sicemed.Web.Models;
+using Sicemed.Web.Models.Enumerations;
+using Sicemed.Web.Models.Enumerations.Documentos;
 using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
@@ -50,11 +53,17 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
             var modelFromDb = ObtenerClinicaActivaQuery.Execute();
 
-            var viewModelFromDb = Mapper.Map<ClinicaEditViewModel>(modelFromDb);
+            Mapper.Map(viewModel, modelFromDb);
 
-            UpdateModel(viewModelFromDb);
+            //Update not automapped properties
+            modelFromDb.Documento.Numero = viewModel.DocumentoNumero;
+            modelFromDb.Documento.TipoDocumento =
+                Enumeration.FromValue<TipoDocumento>(viewModel.DocumentoTipoDocumentoValue);
 
-            Mapper.Map(viewModelFromDb, modelFromDb);
+            modelFromDb.Domicilio.Direccion = viewModel.DomicilioDireccion;
+            modelFromDb.Domicilio.Latitud = viewModel.DomicilioLatitud;
+            modelFromDb.Domicilio.Longitud = viewModel.DomicilioLongitud;
+            modelFromDb.Domicilio.Localidad = SessionFactory.GetCurrentSession().Load<Localidad>(viewModel.DomicilioLocalidadId);
 
             ShowMessages(ResponseMessage.Success());
 
