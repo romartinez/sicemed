@@ -115,7 +115,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usuario encontrado..
+        ///   Looks up a localized string similar to Ya existe un usuario con el mail ingresado..
         /// </summary>
         internal static string MembershipStatus_USER_FOUND {
             get {

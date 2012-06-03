@@ -19,6 +19,15 @@ namespace Sicemed.Web.Controllers
             _membershipService = membershipService;
         }
 
+        public ActionResult Salir()
+        {
+            _membershipService.SignOut();
+
+            ShowMessages(ResponseMessage.Success("Ha cerrado su sesión."));
+
+            return RedirectToAction("Index", "Content");
+        }
+
         #region Iniciar Sesion
         public ActionResult IniciarSesion()
         {
@@ -51,15 +60,6 @@ namespace Sicemed.Web.Controllers
 
         #endregion
 
-        public ActionResult Salir()
-        {
-            _membershipService.SignOut();
-
-            ShowMessages(ResponseMessage.Success("Ha cerrado su sesión."));
-
-            return RedirectToAction("Index", "Content");
-        }
-
         #region Registro
         public ActionResult Registro()
         {
@@ -74,17 +74,17 @@ namespace Sicemed.Web.Controllers
             if (ModelState.IsValid)
             {
                 // Attempt to register the user
-                var user = new Persona {Nombre = model.Nombre, Apellido = model.Apellido};
-                _membershipService.CreateUser(user, model.Email, model.Password);
-                var status = _membershipService.Login(model.Email, model.Password, out user);
+                var user = new Persona { Nombre = model.Nombre, Apellido = model.Apellido };
+                var status = _membershipService.CreateUser(user, model.Email, model.Password);                
                 if (status == MembershipStatus.USER_CREATED)
                 {
+                    _membershipService.Login(model.Email, model.Password, out user);
                     ShowMessages(ResponseMessage.Success("Bienvenido a SICEMED {0}.", user.NombreCompleto));
                     return RedirectToAction("Index", "Content");
                 }
                 ModelState.AddModelError("", status.Get());
             }
-            
+
             ViewBag.PasswordLength = _membershipService.MinPasswordLength;
             return View(model);
         }
@@ -109,8 +109,8 @@ namespace Sicemed.Web.Controllers
                 if (status == MembershipStatus.USER_FOUND)
                 {
                     ShowMessages(ResponseMessage.Success("Se ha cambiado con éxito su password."));
-                    return RedirectToAction("Index", "Content");   
-                }                    
+                    return RedirectToAction("Index", "Content");
+                }
                 ModelState.AddModelError("", status.Get());
             }
 

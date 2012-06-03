@@ -15,54 +15,11 @@
 
 @using (Html.BeginForm())
 {
-    @Html.ValidationSummary(true, "Se han producido los siguientes errores en la creación de su cuenta. Corríjalos e inténtelo nuevamente.")
-    <div>
-        <fieldset>
-            <legend>Informac&oacute; de su cuenta</legend>
+    @Html.AntiForgeryToken()
+    
+    @Html.ValidationSummaryWithMessage()
 
-            <div class="editor-label">
-                @Html.LabelFor(m => m.Apellido)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(m => m.Apellido)
-                @Html.ValidationMessageFor(m => m.Apellido)
-            </div>
+    @Html.EditorForModel()
 
-            <div class="editor-label">
-                @Html.LabelFor(m => m.Nombre)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(m => m.Nombre)
-                @Html.ValidationMessageFor(m => m.Nombre)
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(m => m.Email)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(m => m.Email)
-                @Html.ValidationMessageFor(m => m.Email)
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(m => m.Password)
-            </div>
-            <div class="editor-field">
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(m => m.ConfirmacionPassword)
-            </div>
-            <div class="editor-field">
-                @Html.PasswordFor(m => m.ConfirmacionPassword)
-                @Html.ValidationMessageFor(m => m.ConfirmacionPassword)
-            </div>
-
-            <p>
-                <input type="submit" value="Registrarse" />
-            </p>
-        </fieldset>
-    </div>
+    @Html.Submit("Registrarse")        
 }

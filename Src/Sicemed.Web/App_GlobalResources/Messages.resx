@@ -136,7 +136,7 @@
     <value>El usuario ha sido creado satisfactoriamente.</value>
   </data>
   <data name="MembershipStatus_USER_FOUND" xml:space="preserve">
-    <value>Usuario encontrado.</value>
+    <value>Ya existe un usuario con el mail ingresado.</value>
   </data>
   <data name="MembershipStatus_USER_LOCKED" xml:space="preserve">
     <value>El Usuario se encuentra bloqueado.</value>
