@@ -11,9 +11,15 @@ namespace Sicemed.Web.Infrastructure.Helpers
         {
             try
             {
-                var obj = session.Load<TEntity>(id);
+                var queryString = string.Format("delete {0} where id = :id",
+                                                        typeof(TEntity));
+                session.CreateQuery(queryString)
+                       .SetParameter("id", id)
+                       .ExecuteUpdate();
+                //Doesn't work!
+                //var obj = session.Load<TEntity>(id);
 
-                session.Delete(obj);
+                //session.Delete(obj);
             } catch (GenericADOException ex)
             {
                 if (ex.InnerException != null
