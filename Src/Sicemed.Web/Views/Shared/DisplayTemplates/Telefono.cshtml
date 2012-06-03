@@ -1,0 +1,10 @@
+﻿@model Sicemed.Web.Models.Components.Telefono
+
+@if(!string.IsNullOrWhiteSpace(Model.Prefijo))
+{
+    @:(@Model.Prefijo) @Model.Numero
+}
+else
+{
+    @Model.Numero
+}

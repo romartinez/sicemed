@@ -686,6 +686,9 @@
     <Content Include="Views\Shared\DisplayTemplates\Object.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Object.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CascadingDropDownList.cshtml" />
+    <Content Include="Views\Shared\_Telefono.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Telefono.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Telefonos.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

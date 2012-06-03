@@ -21,3 +21,24 @@
 
     <input type="submit"/>
 }
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#action-add").click(function () {
+                $.ajax({
+                    url: this.href,
+                    cache: false,
+                    success: function (html) { $("#telefonos").append(html); }
+                });
+                return false;
+            });
+
+            $("a.action-delete").live("click", function () {
+                $(this).parents("div.editor-field-inner:first").remove();
+                return false;
+            });            
+        })
+    </script>
+}

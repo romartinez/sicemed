@@ -37,16 +37,14 @@
                             @Html.Partial("_LogOnPartial")
                         </p>
                         <p>
-                            Comun&iacute;quese con nosotros: <span class="icon_phone">
-                                                                 @foreach(var telefono in MvcApplication.Clinica.Telefonos)
-                                                                 {
-                                                                     if(!string.IsNullOrEmpty(telefono.Prefijo))
-                                                                     {
-                                                                         @:(@telefono.Prefijo)
-                                                                     }
-                                                                    @:@telefono.Numero<br/>
-                                                                 }                                                                 
-                                                             </span>
+                            Comun&iacute;quese con nosotros: 
+                            <span class="icon_phone">
+                                @foreach(var telefono in MvcApplication.Clinica.Telefonos)
+                                {
+                                    @Html.DisplayFor(x => telefono)
+                                    <br/>
+                                }                                                                 
+                            </span>
                         </p>
                         <p>
                             @MvcApplication.Clinica.DomicilioDireccion, 

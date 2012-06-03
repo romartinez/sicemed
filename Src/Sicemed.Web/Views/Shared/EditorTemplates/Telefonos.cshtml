@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Sicemed.Web.Models.Components.Telefono>
+<div id="telefonos">
+    @foreach (var telefono in Model)
+    {
+        @Html.Partial("_Telefono", telefono)
+    }
+</div>
+@Html.ActionLink("Agregar", "NuevoTelefono", "Domain", new { Area = "Admin" }, new { id = "action-add" })
