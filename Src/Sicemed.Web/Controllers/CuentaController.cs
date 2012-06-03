@@ -27,9 +27,11 @@ namespace Sicemed.Web.Controllers
 
         public ActionResult Salir()
         {
-            _membershipService.SignOut();
-
-            ShowMessages(ResponseMessage.Success("Ha cerrado su sesión."));
+            if (User != null && User.Identity.IsAuthenticated)
+            {
+                _membershipService.SignOut();
+                ShowMessages(ResponseMessage.Success("Ha cerrado su sesión."));
+            }
 
             return RedirectToAction("Index", "Content");
         }
