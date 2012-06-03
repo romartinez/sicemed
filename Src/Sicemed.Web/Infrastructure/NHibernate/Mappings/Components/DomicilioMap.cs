@@ -8,6 +8,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Components
         public DomicilioMap()
         {
             Property(x => x.Direccion);
+            Property(x => x.Latitud);
+            Property(x => x.Longitud);
 
             ManyToOne(x => x.Localidad);
         }

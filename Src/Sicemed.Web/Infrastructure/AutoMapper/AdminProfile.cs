@@ -12,10 +12,7 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
         }
 
         protected override void Configure()
-        {
-            Mapper.CreateMap<ClinicaEditViewModel, Clinica>()
-                .ForAllMembers(x => x.Ignore());
-        	
+        {        	
 			Mapper.CreateMap<Clinica, ClinicaEditViewModel>()				
 				.ForMember(d => d.TiposDocumentosHabilitados, m => m.Ignore())
 				.ForMember(d => d.LocalidadesHabilitadas, m => m.Ignore())

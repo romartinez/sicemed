@@ -16,8 +16,7 @@
     <![endif]-->
     @if (!MvcApplication.IsUsingProxy)
     {
-        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBKt3eKqEI-zr5bqGJG3mCCZJK0asao5-0&sensor=true"
-            type="text/javascript"></script>        
+        <script src="http://maps.googleapis.com/maps/api/js?key=@MvcApplication.Clinica.GoogleMapsKey&sensor=true" type="text/javascript"></script>        
     }
 </head>
 <body>
@@ -38,11 +37,22 @@
                             @Html.Partial("_LogOnPartial")
                         </p>
                         <p>
-                            Comun&iacute;quese con nosotros: <span class="icon_phone">448-7896</span>
+                            Comun&iacute;quese con nosotros: <span class="icon_phone">
+                                                                 @foreach(var telefono in MvcApplication.Clinica.Telefonos)
+                                                                 {
+                                                                     if(!string.IsNullOrEmpty(telefono.Prefijo))
+                                                                     {
+                                                                         @:(@telefono.Prefijo)
+                                                                     }
+                                                                    @:@telefono.Numero<br/>
+                                                                 }                                                                 
+                                                             </span>
                         </p>
                         <p>
-                            Velez Sarsfield 982, Rosario <a href="#" id="google-map-link" class="icon_map">Ver Mapa
-                            </a>
+                            @MvcApplication.Clinica.DomicilioDireccion, 
+                            @MvcApplication.Clinica.DomicilioLocalidadNombre, 
+                            @MvcApplication.Clinica.DomicilioLocalidadProvinciaNombre 
+                            <a href="#" id="google-map-link" class="icon_map">Ver Mapa</a>
                         </p>
                     </div>
                 </div>
@@ -110,7 +120,9 @@
     <script type="text/javascript">
         $(function () {
             app.initialize({
-                isUsingProxy : @MvcApplication.IsUsingProxy.ToString().ToLower()
+                isUsingProxy : @MvcApplication.IsUsingProxy.ToString().ToLower(),
+                latitud: @MvcApplication.Clinica.DomicilioLatitud,
+                longitud: @MvcApplication.Clinica.DomicilioLongitud
             });
                         
             @if (TempData.ContainsKey(BaseController.MESSAGES_KEY))

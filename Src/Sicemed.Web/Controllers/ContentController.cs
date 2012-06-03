@@ -9,6 +9,7 @@ using SICEMED.Web;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Queries.Paginas;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.ViewModels;
 
 namespace Sicemed.Web.Controllers
 {
@@ -29,7 +30,7 @@ namespace Sicemed.Web.Controllers
             var model = new
             {
                 Especialidades = new Lazy<IEnumerable<Especialidad>>(() => ObtenerEspecialidadesConProfesionalesQuery.Execute()),
-                Clinica = new Lazy<Clinica>(()=> MvcApplication.Clinica)
+                Clinica = new Lazy<ClinicaViewModel>(()=> MvcApplication.Clinica)
             };
 
             var paginaARenderizar = new Pagina { Nombre = pagina.Nombre };

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using DataAnnotationsExtensions;
 using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
+using Sicemed.Web.Models.Components;
 
 namespace Sicemed.Web.Areas.Admin.Models.Clinicas
 {
@@ -37,6 +38,11 @@ namespace Sicemed.Web.Areas.Admin.Models.Clinicas
         [Email]
         [DefaultStringLength]
         public virtual string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [DisplayName("Telefonos")]
+        public IEnumerable<Telefono> Telefonos { get; set; }
 
         [Required]
         [DisplayName("Domicilio")]

@@ -897,7 +897,8 @@ button:hover,button:focus{
 /* 2.1 Header */
 /*----------------------------------------------*/
 .header_top .container {
-	height:119px;}
+	min-height:119px;
+	}
 
 .logo {
 	padding:20px 0 0 0;
@@ -921,8 +922,10 @@ button:hover,button:focus{
 	color:#12a0a9}
 
 .header_contacts .icon_phone {
-	background:url(../images/theme/icons/header_phone.png) right 0 no-repeat;
-	padding-right:22px}
+	background:url(../images/theme/icons/header_phone.png) left 0 no-repeat;
+    padding-right: 22px;
+    padding-left:20px;
+    }
 
 .header_contacts .icon_map {
 	background:url(../images/theme/icons/header_map.png) right 0 no-repeat;

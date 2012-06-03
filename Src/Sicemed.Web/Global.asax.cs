@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
+using AutoMapper;
 using Castle.Core.Logging;
 using Castle.Facilities.TypedFactory;
 using Castle.Windsor;
@@ -20,6 +21,7 @@ using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Providers.FilterAtrribute;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.ViewModels;
 using ILogger = Castle.Core.Logging.ILogger;
 
 namespace SICEMED.Web
@@ -29,7 +31,7 @@ namespace SICEMED.Web
 
     public class MvcApplication : HttpApplication
     {
-        private static Clinica _clinica;
+        private static ClinicaViewModel _clinica;
         private static ILogger _logger = NullLogger.Instance;
         private static WindsorContainer _container;
 
@@ -44,7 +46,7 @@ namespace SICEMED.Web
             set { _logger = value; }
         }
 
-        public static Clinica Clinica
+        public static ClinicaViewModel Clinica
         {
             get { return _clinica; }
         }
@@ -126,21 +128,30 @@ namespace SICEMED.Web
             ModelMetadataProviders.Current = new EnhancedModelMetadataProvider();
 
             //Cargar la clinica
-            var clinicaIdStr = ConfigurationManager.AppSettings["ClinicaID"];
-            if(string.IsNullOrWhiteSpace(clinicaIdStr))
-                throw new ConfigurationErrorsException("No se ha configurado el parámetro ClinicaID en el web.config con el valor de la clínica por defecto.");
-            long clinicaId = 0;
-            if(!long.TryParse(clinicaIdStr, out clinicaId))
-                throw new ConfigurationErrorsException(string.Format("El valor configurado en el parámetro ClinicaID ('{0}') no es del tipo long.", clinicaIdStr));
-            
-            using(var session = ServiceLocator.Current.GetInstance<ISessionFactory>().OpenStatelessSession())
-            {
-                _clinica = session.Get<Clinica>(clinicaId);
-            }
-            if (_clinica == default(Clinica))
-                throw new ConfigurationErrorsException(string.Format("El valor configurado en el parámetro ClinicaID ('{0}') no se corresponde con ninguna clínica cargada en la base de datos.", clinicaId));
+            CargarClinica();
 
             RegisterRoutes(RouteTable.Routes);
+        }
+
+        private static void CargarClinica()
+        {
+            var clinicaIdStr = ConfigurationManager.AppSettings["ClinicaID"];
+            if (string.IsNullOrWhiteSpace(clinicaIdStr))
+                throw new ConfigurationErrorsException(
+                    "No se ha configurado el parámetro ClinicaID en el web.config con el valor de la clínica por defecto.");
+            long clinicaId = 0;
+            if (!long.TryParse(clinicaIdStr, out clinicaId))
+                throw new ConfigurationErrorsException(
+                    string.Format("El valor configurado en el parámetro ClinicaID ('{0}') no es del tipo long.", clinicaIdStr));
+
+            using (var session = ServiceLocator.Current.GetInstance<ISessionFactory>().OpenSession())
+            {
+                var clinica = session.Get<Clinica>(clinicaId);
+                if (clinica == default(Clinica))
+                    throw new ConfigurationErrorsException(
+                        string.Format("El valor configurado en el parámetro ClinicaID ('{0}') no se corresponde con ninguna clínica cargada en la base de datos.", clinicaId));
+                _clinica = Mapper.Map<ClinicaViewModel>(clinica);
+            }
         }
 
         protected void Application_Error(object sender, EventArgs e)
