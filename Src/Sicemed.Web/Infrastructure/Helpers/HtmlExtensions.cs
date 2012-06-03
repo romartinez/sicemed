@@ -75,6 +75,12 @@ namespace System.Web.Mvc.Html
             return htmlHelper.ValidationSummary("Uppss.. corrija los siguientes puntos antes de continuar:");
         }
 
+        public static MvcHtmlString Submit(this HtmlHelper htmlHelper, string value = null)
+        {
+            return htmlHelper.Partial("_Submit", value);
+        }
+
+
         //http://blog.stevensanderson.com/2010/01/28/editing-a-variable-length-list-aspnet-mvc-2-style/
         #region Collection Items Extensions
         private const string IDS_TO_REUSE_KEY = "__htmlPrefixScopeExtensions_IdsToReuse_";

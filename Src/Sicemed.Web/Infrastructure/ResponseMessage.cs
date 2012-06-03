@@ -9,13 +9,14 @@ namespace Sicemed.Web.Infrastructure
         public string Description { get; set; }
         public IDictionary Data { get; set; }
 
-        public static ResponseMessage Success(string description = null)
+        public static ResponseMessage Success(string description = null, params string[] values)
         {
             return new ResponseMessage
                        {
                            IsSuccessful = true, 
-                           Description = description 
-                                ?? "La operación se ha realizado con éxito."
+                           Description = !string.IsNullOrWhiteSpace(description) 
+                           ? string.Format(description, values)
+                           : "La operación se ha realizado con éxito."
                        };
         }
 

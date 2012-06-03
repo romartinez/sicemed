@@ -573,7 +573,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Cuenta\CambiarPassword.cshtml" />
-    <Content Include="Views\Cuenta\CambioDePasswordExitoso.cshtml" />
     <Content Include="Views\Cuenta\IniciarSesion.cshtml" />
     <Content Include="Views\Cuenta\Registro.cshtml" />
   </ItemGroup>
@@ -650,9 +649,6 @@
     <None Include="Models\ClassDiagram.cd" />
     <Content Include="Views\Content\TemplateError.cshtml" />
     <Content Include="Views\ObtenerTurno\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_MenuAdmin.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_LogOnPartialAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutClinica.cshtml" />
     <Content Include="Views\Shared\_MenuClinica.cshtml" />
     <None Include="public\fonts\cartogothicstd-bold-webfont.eot" />
@@ -690,6 +686,7 @@
     <Content Include="Views\Shared\_Telefono.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Telefono.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Telefonos.cshtml" />
+    <Content Include="Views\Shared\_Submit.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -10,38 +10,16 @@
     Por favor ingrese su Email y Password. O @Html.ActionLink("Registrese", "Registro") si no posee una cuenta.
 </p>
 
-@Html.ValidationSummary(true, "No ha podido iniciar sesión, por favor verifique los siguientes puntos:")
-
 @using (Html.BeginForm())
 {
-    <div>
-        <fieldset>
-            <legend>Informaci&oacute;n</legend>
+    @Html.AntiForgeryToken()
 
-            <div class="editor-label">
-                @Html.LabelFor(m => m.Email)
-            </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(m => m.Email)
-                @Html.ValidationMessageFor(m => m.Email)
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(m => m.Password)
-            </div>
-            <div class="editor-field">
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </div>
-
-            <div class="editor-label">
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe)
-            </div>
-
-            <p>
-                <input type="submit" value="Iniciar Sesi&oacute;n" />
-            </p>
-        </fieldset>
-    </div>
+    @Html.ValidationSummaryWithMessage()
+    
+    @Html.EditorForModel()
+    
+    @Html.Submit("Iniciar Sesión")
 }
+<p>
+    Olvid&oacute; su password? @Html.ActionLink("haga click aquí para recuperarlo.", "RecuperarPassword").
+</p>

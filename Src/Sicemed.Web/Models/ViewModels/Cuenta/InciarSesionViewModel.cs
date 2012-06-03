@@ -1,19 +1,24 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
 
 namespace Sicemed.Web.Models.ViewModels.Cuenta
 {
     public class InciarSesionViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [DisplayName("Email")]
+        [DataType(DataType.EmailAddress)]
+        [DefaultStringLength]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [DisplayName("Password")]
+        [DefaultStringLength]
         public string Password { get; set; }
 
-        [Display(Name = "Recordarme?")]
+        [DisplayName("Recordarme?")]
         public bool RememberMe { get; set; }
     }
 }
