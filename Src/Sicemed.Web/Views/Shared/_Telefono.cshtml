@@ -3,6 +3,9 @@
 {
     <div class="editor-field-inner">
         (@Html.EditorFor(x => x.Prefijo)) - @Html.EditorFor(x => x.Numero)
-        <a href="#" class="action-delete">Eliminar</a>
+        @if (ViewData.ContainsKey("Multiple") && (bool)ViewData["Multiple"])
+        {
+            <a href="#" class="action-delete">Eliminar</a>   
+        }
     </div>
 }

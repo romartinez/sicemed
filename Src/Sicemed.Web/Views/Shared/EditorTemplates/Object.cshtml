@@ -1,5 +1,4 @@
 ﻿<fieldset class="form">
-    @ViewData.ModelMetadata.ContainerType
     <ul>
         @foreach (var prop in ViewData.ModelMetadata.Properties.Where(pm => pm.ShowForEdit && !ViewData.TemplateInfo.Visited(pm)))
         {
