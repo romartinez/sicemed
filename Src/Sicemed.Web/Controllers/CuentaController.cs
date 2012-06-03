@@ -1,16 +1,22 @@
 using System;
 using System.Web.Mvc;
+using AutoMapper;
+using Sicemed.Web.Areas.Admin.Models.Clinicas;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Enums;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Components;
+using Sicemed.Web.Models.Enumerations;
+using Sicemed.Web.Models.Enumerations.Documentos;
+using Sicemed.Web.Models.Roles;
 using Sicemed.Web.Models.ViewModels.Cuenta;
 
 namespace Sicemed.Web.Controllers
 {
-    public class CuentaController : BaseController
+    public class CuentaController : NHibernateController
     {
         private readonly IMembershipService _membershipService;
 
@@ -64,29 +70,48 @@ namespace Sicemed.Web.Controllers
         public ActionResult Registro()
         {
             ViewBag.PasswordLength = _membershipService.MinPasswordLength;
-            return View();
+            var viewModel = new RegistroPersonaViewModel();
+            AppendLists(viewModel);
+
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Registro(RegistroPersonaViewModel model)
+        public ActionResult Registro(RegistroPersonaViewModel viewModel)
         {
+            AppendLists(viewModel);
+
             if (ModelState.IsValid)
             {
-                // Attempt to register the user
-                var user = new Persona { Nombre = model.Nombre, Apellido = model.Apellido };
-                var status = _membershipService.CreateUser(user, model.Email, model.Password);                
+                var session = SessionFactory.GetCurrentSession();
+                // Attempt to register the user                
+                var model = Mapper.Map<Persona>(viewModel);
+                //Update not automapped properties
+                model.Documento = new Documento
+                                      {
+                                          Numero = viewModel.DocumentoNumero,
+                                          TipoDocumento = Enumeration.FromValue<TipoDocumento>(viewModel.DocumentoTipoDocumentoValue)
+                                      };
+                model.Domicilio = new Domicilio
+                                      {
+                                          Direccion = viewModel.DomicilioDireccion,
+                                          Localidad =  session.Load<Localidad>(viewModel.DomicilioLocalidadId)
+                                      };
+                //TODO: Falta meterle las obras sociales y los planes para poder hacer esto
+                //User.AgregarRol(Paciente.Create(viewModel.NumeroAfiliado));
+                var status = _membershipService.CreateUser(model, viewModel.Email, viewModel.Password);                
                 if (status == MembershipStatus.USER_CREATED)
                 {
-                    _membershipService.Login(model.Email, model.Password, out user);
-                    ShowMessages(ResponseMessage.Success("Bienvenido a SICEMED {0}.", user.NombreCompleto));
+                    _membershipService.Login(viewModel.Email, viewModel.Password, out model);
+                    ShowMessages(ResponseMessage.Success("Bienvenido a SICEMED {0}.", model.NombreCompleto));
                     return RedirectToAction("Index", "Content");
                 }
                 ModelState.AddModelError("", status.Get());
             }
 
             ViewBag.PasswordLength = _membershipService.MinPasswordLength;
-            return View(model);
+            return View(viewModel);
         }
         #endregion
 
@@ -135,5 +160,17 @@ namespace Sicemed.Web.Controllers
             throw new NotImplementedException();
         }
         #endregion
+
+        private void AppendLists(RegistroPersonaViewModel viewModel)
+        {
+            viewModel.TiposDocumentosHabilitados = DomainExtensions.GetTiposDocumentos(viewModel.DocumentoTipoDocumentoValue);
+            viewModel.ProvinciasHabilitadas = DomainExtensions.GetProvincias(SessionFactory, viewModel.DomicilioLocalidadProvinciaId);
+
+            if (viewModel.DomicilioLocalidadProvinciaId.HasValue)
+            {
+                viewModel.LocalidadesHabilitadas =
+                    DomainExtensions.GetLocalidades(SessionFactory, viewModel.DomicilioLocalidadProvinciaId.Value, viewModel.DomicilioLocalidadId);
+            }
+        }
     }
 }
