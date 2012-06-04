@@ -649,9 +649,6 @@
     <Content Include="Areas\Admin\Views\Paginas\ObtenerPaginasPadre.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Personas\Secretaria.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Admin\Views\Clinicas\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Auditoria\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Logs\Index.cshtml" />

@@ -58,9 +58,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                                                              }
                                                            : null,
                                            x.Id,
-                                           x.Apellido,
-                                           x.Nombre,
-                                           x.SegundoNombre,
+                                           x.NombreCompleto,
                                            x.FechaNacimiento,
                                            x.Telefono,
                                            Roles = x.Roles.Select(r => r.DisplayName),

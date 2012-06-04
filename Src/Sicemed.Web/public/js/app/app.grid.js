@@ -5,6 +5,7 @@
         var defaults = {
             grid: '#data',
             pager: '#pager',
+            width: 950,
             url: {
                 edit: 'Editar',
                 add: 'Nuevo',
@@ -98,7 +99,7 @@
             rowList: [10, 25, 50],
             viewrecords: true,
             height: 'auto',
-            width: '950',
+            width: settings.width.toString(),
             jsonReader: {
                 page: "Page",
                 total: "Total",
