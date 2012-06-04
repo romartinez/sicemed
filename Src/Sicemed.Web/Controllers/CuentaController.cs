@@ -166,11 +166,16 @@ namespace Sicemed.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _membershipService.RecoverPassword(viewModel.Email);
+                var status = _membershipService.RecoverPassword(viewModel.Email);
+                
+                if(status == MembershipStatus.USER_FOUND)
+                {
+                    ShowMessages(ResponseMessage.Success("Se ha enviado un mail a '{0}' con las instrucciones para cambiar su password.", viewModel.Email));
 
-                ShowMessages(ResponseMessage.Success("Se ha enviado un mail a '{0}' con las instrucciones para cambiar su password.", viewModel.Email));
+                    return RedirectToAction("Index", "Content");                    
+                }
 
-                return RedirectToAction("Index", "Content");
+                ModelState.AddModelError("", status.Get());
             }
 
             return View(viewModel);

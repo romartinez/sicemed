@@ -142,7 +142,7 @@
     <value>El Usuario se encuentra bloqueado.</value>
   </data>
   <data name="MembershipStatus_USER_NOT_FOUND" xml:space="preserve">
-    <value>Email o Password no Válido.</value>
+    <value>Usuario no encontrado.</value>
   </data>
   <data name="PropertyValueInvalid" xml:space="preserve">
     <value>El campo {1} es inválido.</value>

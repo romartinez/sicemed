@@ -133,7 +133,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email o Password no Válido..
+        ///   Looks up a localized string similar to Usuario no encontrado..
         /// </summary>
         internal static string MembershipStatus_USER_NOT_FOUND {
             get {

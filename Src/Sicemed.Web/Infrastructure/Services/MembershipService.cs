@@ -2,8 +2,10 @@ using System;
 using System.Web;
 using Castle.Core.Logging;
 using EfficientlyLazy.Crypto;
+using Mvc.Mailer;
 using NHibernate;
 using Sicemed.Web.Infrastructure.Enums;
+using Sicemed.Web.Mailers;
 using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Infrastructure.Services
@@ -28,16 +30,16 @@ namespace Sicemed.Web.Infrastructure.Services
         private const int WINDOW_MINUTES = 30;
         private const int MAX_FAILED_ATTEMPS = 3;
         private readonly IFormAuthenticationStoreService _formsAuthenticationStoreService;
-        private readonly IMailSenderService _mailSenderService;
+        private readonly IMembershipMailer _membershipMailer;
         private readonly ISessionFactory _sessionFactory;
         private ILogger _logger = NullLogger.Instance;
 
         public MembershipService(ISessionFactory sessionFactory,
-                                 IMailSenderService mailSenderService,
+                                 IMembershipMailer membershipMailer,
                                  IFormAuthenticationStoreService formsAuthenticationStoreService)
         {
             _sessionFactory = sessionFactory;
-            _mailSenderService = mailSenderService;
+            _membershipMailer = membershipMailer;
             _formsAuthenticationStoreService = formsAuthenticationStoreService;
         }
 
@@ -143,7 +145,7 @@ namespace Sicemed.Web.Infrastructure.Services
                 session.Update(persona);
                 tx.Commit();
 
-                _mailSenderService.SendPasswordResetEmail(persona, token);
+                _membershipMailer.PasswordResetEmail(persona, token).Send();
                 return status;
             }
         }
@@ -255,7 +257,7 @@ namespace Sicemed.Web.Infrastructure.Services
                 session.Save(user);
                 tx.Commit();
 
-                _mailSenderService.SendNewUserEmail(user);
+                _membershipMailer.RegistrationEmail(user).Send();
             }
 
             return MembershipStatus.USER_CREATED;

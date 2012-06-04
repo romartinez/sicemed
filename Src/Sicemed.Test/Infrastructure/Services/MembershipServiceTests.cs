@@ -13,7 +13,7 @@ namespace Sicemed.Tests.Infrastructure.Services
 
             MembershipService.CreateUser(usuario, "walter.poch@gmail.com", "testtest");
 
-            MailService.Verify(x => x.SendNewUserEmail(usuario));
+            MembershipMailer.Verify(x => x.RegistrationEmail(usuario));
 
             var usuario2 =
                 Session.QueryOver<Persona>().Where(u => u.Membership.Email == "walter.poch@gmail.com").SingleOrDefault();
@@ -140,7 +140,7 @@ namespace Sicemed.Tests.Infrastructure.Services
 
             MembershipService.RecoverPassword("walter.poch@gmail.com");
             token = usuario.Membership.PasswordResetToken;
-            MailService.Verify(x => x.SendPasswordResetEmail(usuario, token));
+            MembershipMailer.Verify(x => x.PasswordResetEmail(usuario, token));
 
 
             var usuario2 =
@@ -159,7 +159,7 @@ namespace Sicemed.Tests.Infrastructure.Services
             MembershipService.RecoverPassword("walter.poch@gmail.com");
 
             token = usuario.Membership.PasswordResetToken;
-            MailService.Verify(x => x.SendPasswordResetEmail(usuario, token));
+            MembershipMailer.Verify(x => x.PasswordResetEmail(usuario, token));
 
             MembershipService.ChangePassword("walter.poch@gmail.com", token, "walter2");
 

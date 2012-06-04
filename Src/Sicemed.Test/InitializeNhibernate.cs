@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Net.Mail;
 using EfficientlyLazy.Crypto;
 using Moq;
 using NHibernate;
@@ -10,6 +11,7 @@ using SICEMED.Web.Infrastructure.Windsor.Facilities;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.Services;
+using Sicemed.Web.Mailers;
 using Sicemed.Web.Models;
 using log4net;
 using log4net.Config;
@@ -25,7 +27,7 @@ namespace Sicemed.Tests
         private static Configuration _databaseConfiguration;
 
         private static ISessionFactory _sessionFactory;
-        private Mock<IMailSenderService> _mailService;
+        private Mock<IMembershipMailer> _membershipMailer;
         private MembershipService _membershipService;
 
         public static Configuration DatabaseConfiguration
@@ -67,9 +69,9 @@ namespace Sicemed.Tests
             get { return _sessionFactory.GetCurrentSession(); }
         }
 
-        protected Mock<IMailSenderService> MailService
+        protected Mock<IMembershipMailer> MembershipMailer
         {
-            get { return _mailService; }
+            get { return _membershipMailer; }
         }
 
         protected IMembershipService MembershipService
@@ -87,22 +89,26 @@ namespace Sicemed.Tests
             LogManager.GetRepository().Threshold = Level.Off;
 
             CurrentSessionContext.Bind(SessionFactory.OpenSession());
-            
+
             var installer = new ApplicationInstaller();
             installer.SessionFactory = SessionFactory;
 
+            var membershipMailerMock = new Mock<IMembershipMailer>();
+            membershipMailerMock.SetReturnsDefault(new MailMessage("test@aaa.com", "test@aaa.com"));
+
             installer.MembershipService = new MembershipService(SessionFactory,
-                                                                new Mock<IMailSenderService>().Object,
+                                                                membershipMailerMock.Object,
                                                                 new Mock<IFormAuthenticationStoreService>().Object);
             installer.Install(DatabaseConfiguration);
 
             LogManager.GetRepository().Threshold = Level.Info;
 
             new RijndaelEngine("WAL");
-            _mailService = new Mock<IMailSenderService>();
+            _membershipMailer = new Mock<IMembershipMailer>();
+            _membershipMailer.SetReturnsDefault(new MailMessage("a@a.com", "a@t.com"));
             var formsService = new Mock<IFormAuthenticationStoreService>();
             _membershipService = new MembershipService(SessionFactory,
-                                                       _mailService.Object,
+                                                       _membershipMailer.Object,
                                                        formsService.Object);
 
         }
@@ -113,11 +119,11 @@ namespace Sicemed.Tests
             CurrentSessionContext.Unbind(SessionFactory);
             RevertDatabaseFromSnapshot("SicemedTest", "Sicemed_Snapshot");
         }
-        
+
         [Test]
         public void PuedoCrearElSchema()
         {
-            
+
         }
 
         protected Persona CrearPersonaValida()
@@ -136,7 +142,7 @@ namespace Sicemed.Tests
                         cmd.Connection = cnn;
                         cmd.CommandTimeout = 1000;
                         cmd.CommandText = string.Format("USE master;");
-                        cmd.CommandText += string.Format("CREATE DATABASE {0} ON ( NAME = {1}, FILENAME = '{2}' ) AS SNAPSHOT OF {1};", 
+                        cmd.CommandText += string.Format("CREATE DATABASE {0} ON ( NAME = {1}, FILENAME = '{2}' ) AS SNAPSHOT OF {1};",
                             snapshotName, originalDb, snapshotPath);
 
                         cnn.Open();

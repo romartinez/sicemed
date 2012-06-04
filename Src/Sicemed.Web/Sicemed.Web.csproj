@@ -286,7 +286,6 @@
     <Compile Include="Infrastructure\Reporting\PDFGenerator.cs" />
     <Compile Include="Infrastructure\ResponseMessage.cs" />
     <Compile Include="Infrastructure\Services\FormAuthenticationStoreService.cs" />
-    <Compile Include="Infrastructure\Services\MailSenderService.cs" />
     <Compile Include="Infrastructure\Services\MembershipService.cs" />
     <Compile Include="Infrastructure\Services\SecurityService.cs" />
     <Compile Include="Infrastructure\Windsor\Facilities\NHibernateFacility.cs" />
@@ -294,6 +293,8 @@
     <Compile Include="Infrastructure\Windsor\Installers\DependenciesInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\LoggerInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\NHibernateInstaller.cs" />
+    <Compile Include="Mailers\IMembershipMailer.cs" />
+    <Compile Include="Mailers\MembershipMailer.cs" />
     <Compile Include="Models\Agenda.cs" />
     <Compile Include="Models\AuditLog.cs" />
     <Compile Include="Models\BI\CategoriaIndicador.cs" />
@@ -696,10 +697,10 @@
     <Content Include="Views\Shared\_Submit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Telefono.cshtml" />
     <Content Include="Views\Cuenta\RecuperarPassword.cshtml" />
-    <Content Include="Views\PersonaMailer\_Layout.cshtml" />
-    <Content Include="Views\PersonaMailer\RecuperarPassword.cshtml" />
+    <Content Include="Views\MembershipMailer\_Layout.cshtml" />
+    <Content Include="Views\MembershipMailer\PasswordResetEmail.cshtml" />
     <Content Include="Views\Cuenta\RecuperarPasswordMail.cshtml" />
-    <Content Include="Views\PersonaMailer\Registro.cshtml" />
+    <Content Include="Views\MembershipMailer\RegistrationEmail.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -77,7 +77,7 @@ namespace System.Web.Mvc.Html
 
         public static MvcHtmlString Submit(this HtmlHelper htmlHelper, string value = null)
         {
-            return htmlHelper.Partial("_Submit", value);
+            return htmlHelper.Partial("_Submit", new ViewDataDictionary(value));
         }
 
 
