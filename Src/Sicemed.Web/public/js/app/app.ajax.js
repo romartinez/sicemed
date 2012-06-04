@@ -26,14 +26,14 @@ var app = (function ($, app) {
     };
 
     ajax.beginXhr = function () {
-        $("#dialog-cuenta-select").remove();
         $.blockUI({ css: { backgroundColor: '#000', color: '#fff' }, message: '<h1>Espere por favor...</h1>' });
     };
 
     ajax.endXhr = function () {
         $.unblockUI();
     };
-
+    $(document).ajaxStart(ajax.beginXhr);
+    $(document).ajaxComplete(ajax.endXhr);
     $(document).ajaxError(ajax.errorXhr);
     $.ajaxSetup({
         converters: {
