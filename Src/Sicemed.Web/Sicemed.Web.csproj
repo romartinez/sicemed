@@ -293,8 +293,8 @@
     <Compile Include="Infrastructure\Windsor\Installers\DependenciesInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\LoggerInstaller.cs" />
     <Compile Include="Infrastructure\Windsor\Installers\NHibernateInstaller.cs" />
-    <Compile Include="Mailers\IMembershipMailer.cs" />
-    <Compile Include="Mailers\MembershipMailer.cs" />
+    <Compile Include="Infrastructure\Services\IMembershipMailer.cs" />
+    <Compile Include="Infrastructure\Services\MembershipMailer.cs" />
     <Compile Include="Models\Agenda.cs" />
     <Compile Include="Models\AuditLog.cs" />
     <Compile Include="Models\BI\CategoriaIndicador.cs" />

@@ -11,7 +11,6 @@ using SICEMED.Web.Infrastructure.Windsor.Facilities;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.Services;
-using Sicemed.Web.Mailers;
 using Sicemed.Web.Models;
 using log4net;
 using log4net.Config;

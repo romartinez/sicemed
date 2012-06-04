@@ -6,7 +6,6 @@ using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Providers.Cache;
 using Sicemed.Web.Infrastructure.Queries;
 using Sicemed.Web.Infrastructure.Services;
-using Sicemed.Web.Mailers;
 
 namespace SICEMED.Web.Infrastructure.Windsor.Installers
 {
@@ -22,7 +21,7 @@ namespace SICEMED.Web.Infrastructure.Windsor.Installers
                 Component.For<IFormAuthenticationStoreService>().ImplementedBy<FormAuthenticationStoreService>().
                     LifeStyle.Singleton,
                 Component.For<ICryptoEngine>().Instance(new RijndaelEngine("S3CR3t0.3spC14L")).LifeStyle.Singleton,
-                Component.For<IMembershipMailer>().ImplementedBy<MembershipMailer>().LifeStyle.Singleton,
+                Component.For<IMembershipMailer>().ImplementedBy<MembershipMailer>().LifeStyle.Transient,
                 Component.For<ISecurityService>().ImplementedBy<SecurityService>().LifeStyle.Singleton,
                 //Providers
                 Component.For<ICacheProvider>().ImplementedBy<InMemoryCacheProvider>().LifeStyle.Singleton,

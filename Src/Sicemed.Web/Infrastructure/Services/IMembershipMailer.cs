@@ -1,7 +1,7 @@
 using System.Net.Mail;
 using Sicemed.Web.Models;
 
-namespace Sicemed.Web.Mailers
+namespace Sicemed.Web.Infrastructure.Services
 {
     public interface IMembershipMailer
     {

@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Mvc.Mailer;
 using System.Net.Mail;
 using SICEMED.Web;
-using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
 
-namespace Sicemed.Web.Mailers
+namespace Sicemed.Web.Infrastructure.Services
 { 
     public class MembershipMailer : MailerBase, IMembershipMailer     
 	{

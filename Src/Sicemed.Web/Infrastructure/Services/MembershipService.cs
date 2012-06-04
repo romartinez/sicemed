@@ -5,7 +5,6 @@ using EfficientlyLazy.Crypto;
 using Mvc.Mailer;
 using NHibernate;
 using Sicemed.Web.Infrastructure.Enums;
-using Sicemed.Web.Mailers;
 using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Infrastructure.Services
