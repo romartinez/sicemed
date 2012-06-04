@@ -43,7 +43,6 @@ var model = (function () {
                         self.currentStep(stepComprobante);
                     };
                     self.turnosDisponibles.push(turno);
-                    console.log(turno);
                     var event = {
                         title: (turno.Paciente == null).toString(),
                         start: turno.FechaTurnoInicial,

@@ -135,8 +135,7 @@ namespace Sicemed.Web.Controllers
 
             //Creo los turnos libres 3 meses para adelante promedio 30 dias por mes
             var turnos = new List<TurnoViewModel>();
-            //for (var i = 0; i <= 3 * 30; i++)
-            for (var i = 0; i <= 0; i++)
+            for (var i = 0; i <= 3 * 30; i++)            
             {
                 var dia = DateTime.Now.AddDays(i);
                 var agendaDia = agendaProfesional.FirstOrDefault(a => a.Dia == dia.DayOfWeek);
