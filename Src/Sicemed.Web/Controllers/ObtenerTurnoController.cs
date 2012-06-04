@@ -44,9 +44,36 @@ namespace Sicemed.Web.Controllers
         public virtual JsonResult BuscarProfesional(long? especialidadId, string nombre)
         {
 
-            var profesionales = especialidadId.HasValue ?
-                BuscarProfesionalPorEspecialidad(especialidadId.Value, nombre)
-                : BuscarProfesionalPorNombre(nombre);
+            var session = SessionFactory.GetCurrentSession();
+
+            var query = session.QueryOver<Persona>();
+            if(!string.IsNullOrWhiteSpace(nombre))
+            {
+                query = query.Where(
+                    Restrictions.On<Persona>(p => p.Nombre).IsLike(nombre, MatchMode.Start)
+                    || Restrictions.On<Persona>(p => p.SegundoNombre).IsLike(nombre, MatchMode.Start)
+                    || Restrictions.On<Persona>(p => p.Apellido).IsLike(nombre, MatchMode.Start)
+                    );
+            }
+
+            var queryRoles  = query.JoinQueryOver<Rol>(p => p.Roles)
+                    .Where(r => r.GetType() == typeof(Profesional));
+
+            IEnumerable<Persona> results;
+
+            if(especialidadId.HasValue)
+            {
+                results = queryRoles.JoinQueryOver<Especialidad>(r => ((Profesional)r).Especialidades)
+                    .Where(e => e.Id == especialidadId)
+                    .TransformUsing(Transformers.DistinctRootEntity)
+                    .Future();
+            }
+            else
+            {
+                results = queryRoles.TransformUsing(Transformers.DistinctRootEntity).Future();
+            }
+
+            var profesionales = results.Select(BusquedaProfesionalViewModel.Create);
 
             var profesionalesConProximoTurno = new List<BusquedaProfesionalViewModel>();
             foreach (var p in profesionales)
@@ -56,48 +83,6 @@ namespace Sicemed.Web.Controllers
             }
 
             return Json(profesionalesConProximoTurno, JsonRequestBehavior.AllowGet);
-        }
-
-        private IEnumerable<BusquedaProfesionalViewModel> BuscarProfesionalPorNombre(string nombre)
-        {
-            var session = SessionFactory.GetCurrentSession();
-
-            var query = session.QueryOver<Persona>()
-                    .Where(
-                        Restrictions.On<Persona>(p => p.Nombre).IsLike(nombre, MatchMode.Start)
-                        || Restrictions.On<Persona>(p => p.SegundoNombre).IsLike(nombre, MatchMode.Start)
-                        || Restrictions.On<Persona>(p => p.Apellido).IsLike(nombre, MatchMode.Start)
-                    ).JoinQueryOver<Rol>(p => p.Roles)
-                    .Where(r => r.GetType() == typeof(Profesional))
-                    .TransformUsing(Transformers.DistinctRootEntity)
-                    .Future();
-
-            return query.Select(ConvertPersonaToProfesionalViewModel);
-        }
-
-        private IEnumerable<BusquedaProfesionalViewModel> BuscarProfesionalPorEspecialidad(long especialidadId, string nombre)
-        {
-            var session = SessionFactory.GetCurrentSession();
-
-            var query = session.QueryOver<Persona>()
-                    .Where(
-                        Restrictions.On<Persona>(p => p.Nombre).IsLike(nombre, MatchMode.Start)
-                        || Restrictions.On<Persona>(p => p.SegundoNombre).IsLike(nombre, MatchMode.Start)
-                        || Restrictions.On<Persona>(p => p.Apellido).IsLike(nombre, MatchMode.Start)
-                    ).JoinQueryOver<Rol>(p => p.Roles)
-                    .Where(r => r.GetType() == typeof(Profesional))
-                    .JoinQueryOver<Especialidad>(r => ((Profesional)r).Especialidades)
-                    .Where(e=> e.Id == especialidadId)
-                    .TransformUsing(Transformers.DistinctRootEntity)
-                    .Future();
-
-            return query
-                .Select(ConvertPersonaToProfesionalViewModel);
-        }
-
-        private static BusquedaProfesionalViewModel ConvertPersonaToProfesionalViewModel(Persona persona)
-        {
-            return BusquedaProfesionalViewModel.Create(persona);
         }
 
         private TurnoViewModel ObtenerProximoTurnoLibre(long profesionalId, long? especialidadId = null)
