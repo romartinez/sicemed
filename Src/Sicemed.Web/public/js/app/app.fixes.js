@@ -59,6 +59,9 @@
     format.fulldate = function (date) {
         return $.fullCalendar.formatDate(date, "dd/MM/yy HH:mm");
     };
+    format.hour = function (date) {
+        return $.fullCalendar.formatDate(date, "HH:mm");
+    };
 
 
     // Validators **********************************************************************        

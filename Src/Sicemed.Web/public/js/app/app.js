@@ -80,7 +80,7 @@ var app = (function ($, app) {
                             item.append($("<option />").val(this.Value).text(this.Text));
                         });
                     });
-                });                
+                });
             });
         }
     };

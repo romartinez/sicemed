@@ -31,8 +31,8 @@
       <resource path="~/public/css/app.css" />
     </resourceSet>
     <resourceSet name="js" type="js">
-      <resource path="~/public/js/libs/jquery-1.6.2.min.js" />
-      <resource path="~/public/js/libs/jquery-ui-1.8.15.min.js" />
+      <resource path="~/public/js/libs/jquery-1.7.2.min.js" />
+      <resource path="~/public/js/libs/jquery-ui-1.8.20.min.js" />
       <resource path="~/public/js/libs/i18n/grid.locale-es.js" />
       <resource path="~/public/js/libs/jquery.jqGrid.min.js" />
       <resource path="~/public/js/libs/jQuery.tmpl.js" />
@@ -44,6 +44,7 @@
       <resource path="~/public/js/libs/fullcalendar.js" />
       <resource path="~/public/js/libs/msDateJsonParser.js" />
       <resource path="~/public/js/libs/jquery.jgrowl.js" />
+      <resource path="~/public/js/libs/jquery.tools.min.js" />
 
       <resource path="~/public/js/libs/i18n/jquery.ui.datepicker-es.js" />
 

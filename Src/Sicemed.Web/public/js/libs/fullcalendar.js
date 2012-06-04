@@ -3903,7 +3903,7 @@ function AgendaEventRenderer() {
 			html += "div";
 		}
 		html +=
-			" class='" + classes.join(' ') + "'" +
+			" class='" + classes.join(' ') + " hasTooltip' title='"+ htmlEscape(event.description) +"'" +
 			" style='position:absolute;z-index:8;top:" + seg.top + "px;left:" + seg.left + "px;" + skinCss + "'" +
 			">" +
 			"<div class='fc-event-inner fc-event-skin'" + skinCssAttr + ">" +

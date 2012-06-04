@@ -1,32 +1,54 @@
 ﻿@{
     ViewBag.Title = "Obtener Turno";
 }
+@section Css{
+    <style type="text/css">
+        .turno .text-blue
+        {
+            width: 100px;
+            display: inline-block;
+        }
+        
+        .tooltip .turno {
+            padding: 15px;
+        }
+        
+        .tooltip
+        {
+            display: none;
+            background-color: #fff;
+            border: 2px solid #ca2b63;
+            padding: 3px;
+            font-size: 13px;
+            -moz-box-shadow: 2px 2px 11px #666;
+            -webkit-box-shadow: 2px 2px 11px #666;
+            z-index: 999999;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+        }
+    </style>
+}
 <h2>
     Obtener Turno
 </h2>
-
 <div class="wizard-steps" data-bind="foreach: stepModels">
-    <div data-bind="attr: {class: $parent.getClass($data) }" >
-        <a data-bind="click: $parent.changeStep" href="#">
-            <span data-bind="text: $data.id"></span>
-            <b data-bind="text: $data.name"></b>
-        </a>
+    <div data-bind="attr: {class: $parent.getClass($data) }">
+        <a data-bind="click: $parent.changeStep" href="#"><span data-bind="text: $data.id"></span>
+            <b data-bind="text: $data.name"></b></a>
     </div>
 </div>
-
-<div class="ui-helper-clearfix"></div>
-
+<div class="ui-helper-clearfix">
+</div>
 <article data-bind="template: { name: 'currentTmpl', afterRender: currentStep().init }">
 </article>
-
-<div id="calendar"></div>
-
+<div id="calendar">
+</div>
 <script id="currentTmpl" type="text/html">
     <div data-bind="template: { name: getTemplate()}"></div> 
 </script>
-
 <div id="selectProfesionales">
-    <script id="selectProfesional" type="text/html">
+    <script id="stepSeleccionProfesional" type="text/html">
         <form>
             <div class="row field_select">
                 <label>
@@ -49,10 +71,6 @@
             <div data-bind='template: { name: "profesionalEncontrado"}'> </div>
         </form>
     </script>
-
-    <script id="selectTurno" type="text/html">
-    </script>    
-  
     <script id="profesionalTemplate" type="text/html">
         <div class="row">                 
             <img alt="${Nombre}" src="../../public/images/doctor_64.png"/>           
@@ -64,49 +82,60 @@
             </ul>
         </div>
     </script>
-
+    <script id="stepSeleccionTurno" type="text/html">
+        <h4>Agenda <span data-bind="text: profesionalSeleccionado().Nombre"></span></h4>
+    </script>
     <script id="profesionalEncontrado" type="text/html">
         {{each(i, profesional) profesionalesEncontrados}}        
             {{tmpl(profesional) "#profesionalTemplate"}}
             {{if ProximoTurnoLibre}}
             <div>
-                Pr&oacute;ximo Turno: <a href="" data-bind="click:reservarTurnoLibre,text: app.format.fulldate(ProximoTurnoLibre.FechaTurnoInicial)"></a>
+                Pr&oacute;ximo Turno: <a href="" data-bind="click:function(){ profesional.reservarTurnoLibre() },text: app.format.fulldate(ProximoTurnoLibre.FechaTurnoInicial)"></a>
                 <br/>
-                <a href="" data-bind="click: elegirTurnoEnAgenda">Buscar turno en la agenda</a>
+                <a href="" data-bind="click: function(){ profesional.elegirTurnoEnAgenda()}">Buscar turno en la agenda</a>
             </div>
             {{else}}
             <div class="ui-state-error-text">El profesional no cuenta con turnos disponibles.</div>
             {{/if}}
         {{/each}}
     </script>
-    
-    <script id="selectComprobante" type="text/html">
+    <script id="stepConfirmar" type="text/html">
         <h3 class="text-blue">Profesional</h3>
         <div>
             {{tmpl(profesionalSeleccionado()) "#profesionalTemplate"}}
         </div>
         <h3 class="text-blue">Turno</h3>
-        <div>
-            <span data-bind="text: app.format.fulldate(turnoSeleccionado().FechaTurnoInicial)"></span>
-            <span data-bind="text: app.format.fulldate(turnoSeleccionado().FechaTurnoFinal)"></span>
-            <span data-bind="text: turnoSeleccionado().Consultorio.Nombre"></span>
-        </div>
-        <div class="row field_select" data-bind="visible: !especialidadSeleccionada()">
-            <label>
-                Por Especialidad:
-            </label>
+        <div class="turno">
+            <span class="text-blue">Fecha Turno:</span> <span data-bind="text: app.format.date(turnoSeleccionado().FechaTurnoInicial)"></span>
             <br/>
-            <select class="select_styled" data-bind="options: turnoSeleccionado().Agenda.EspecialidadesAtendidas, optionsText: 'Descripcion', value: especialidadAgendaSeleccionada, optionsCaption: '-- Seleccione --'">
+            <span class="text-blue">Horario:</span><span data-bind="text: app.format.hour(turnoSeleccionado().FechaTurnoInicial)"></span> / 
+            <span data-bind="text: app.format.hour(turnoSeleccionado().FechaTurnoFinal)"></span>
+            <br/>
+            <span class="text-blue">Consultorio:</span> <span data-bind="text: turnoSeleccionado().Consultorio.Descripcion"></span>
+            <br/>
+            <span class="text-blue"> Especialidad:</span>            
+            <select data-bind="visible: !especialidadSeleccionada(), options: turnoSeleccionado().Agenda.EspecialidadesAtendidas, optionsText: 'Descripcion', value: especialidadAgendaSeleccionada, optionsCaption: '-- Seleccione --'">
             </select>            
+            <span data-bind="visible: especialidadSeleccionada(), text: especialidadSeleccionada() ? especialidadSeleccionada().Descripcion : ''"></span>
         </div>
         <div>
-            <button data-bind="click: reservar, visible: turnoAsignado() == null">Reservar Turno</button>
-            <button data-bind="click: imprimir, visible: turnoAsignado() != null">Imprimir</button>
+            <button data-bind="click: reservar">Reservar Turno</button>            
+        </div>
+    </script>
+    <script id="stepComprobante" type="text/html">
+        <h3 class="text-blue">Comprobante Turno</h3>
+        <p>
+            Su turno ha sido reservado con &eacute;xito.
+        </p>
+        <p>
+            Puede descargar un comprobante del turno haciendo click en el bot&oacute;n imprimir.
+        </p>
+        <div>
+            <button data-bind="click: imprimir">Imprimir</button>
         </div>
     </script>
 </div>
-
 @section scripts{
-    <script type="text/javascript" src="@Url.Content("~/public/js/libs/jquery.mockjax.js")"></script>   
-    <script type="text/javascript" src="@Url.Content("~/public/js/features/ObtenerTurno/index.js")"></script>   
+    <script type="text/javascript" src="@Url.Content("~/public/js/libs/jquery.mockjax.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/public/js/features/ObtenerTurno/index.js")"></script>
 }
