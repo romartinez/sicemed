@@ -25,9 +25,48 @@
                 url: {
                     list: '@Url.Action("List")'
                 },
-                buttons: [
+                buttons: [                    
                     {
-                        caption: "Bloquear",
+                        caption: "",
+                        buttonicon: "ui-icon-plus",
+                        onClickButton: function () {
+                            $.postAntiForgery("@Url.Action("DesbloquearUsuario")", { usuarioId: selected }, function () {
+                                grid.trigger("reloadGrid");
+                            });
+                        }
+                    },
+                    {
+                        caption: "",
+                        buttonicon: "ui-icon-pencil",
+                        onClickButton: function () {
+                            var grid = $(this);
+                            var selected = grid.getGridParam("selrow");
+                            if(!selected) {
+                                app.ui.showError("Debe seleccionar un Usuario.");
+                                return;
+                            }
+                            $.postAntiForgery("@Url.Action("DesbloquearUsuario")", { usuarioId: selected }, function () {
+                                grid.trigger("reloadGrid");
+                            });
+                        }
+                    },
+                    {
+                        caption: "",
+                        buttonicon: "ui-icon-trash",
+                        onClickButton: function () {
+                            var grid = $(this);
+                            var selected = grid.getGridParam("selrow");
+                            if(!selected) {
+                                app.ui.showError("Debe seleccionar un Usuario.");
+                                return;
+                            }
+                            $.postAntiForgery("@Url.Action("EliminarUsuario")", { usuarioId: selected }, function () {
+                                grid.trigger("reloadGrid");
+                            });
+                        }
+                    },
+{
+                        caption: "",
                         buttonicon: "ui-icon-locked",
                         onClickButton: function () {
                             var grid = $(this);
@@ -42,7 +81,7 @@
                         }
                     },
                     {
-                        caption: "Desbloquear",
+                        caption: "",
                         buttonicon: "ui-icon-unlocked",
                         onClickButton: function () {
                             var grid = $(this);
@@ -55,7 +94,7 @@
                                 grid.trigger("reloadGrid");
                             });
                         }
-                    }
+                    }                    
                 ],
                 params: {
                     editable: false,

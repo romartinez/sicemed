@@ -9,6 +9,7 @@ using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Exceptions;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.ViewModels;
+using Sicemed.Web.Infrastructure.Helpers;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
 {
@@ -54,7 +55,8 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         {
             var session = SessionFactory.GetCurrentSession();
             var user = session.Get<Persona>(usuarioId);
-            if(user.Membership.IsLockedOut)
+            if (user == null) throw new ValidationErrorException("El usuario no existe.");
+            if (user.Membership.IsLockedOut)
                 throw new ValidationErrorException("El usuario ya se encuentra bloqueado.");
 
             MembershipService.LockUser(user.Membership.Email,
@@ -70,12 +72,27 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         {
             var session = SessionFactory.GetCurrentSession();
             var user = session.Get<Persona>(usuarioId);
+            if (user == null) throw new ValidationErrorException("El usuario no existe.");
             if (!user.Membership.IsLockedOut)
                 throw new ValidationErrorException("El usuario ya se encuentra desbloqueado.");
 
             MembershipService.UnlockUser(user.Membership.Email);
             
             ShowMessages(ResponseMessage.Success("Desbloqueo realizado con éxito."));
+        }
+
+        [HttpPost]
+        [AjaxHandleError]
+        [ValidateAntiForgeryToken]
+        public void EliminarUsuario(long usuarioId)
+        {
+            var session = SessionFactory.GetCurrentSession();
+            var user = session.Get<Persona>(usuarioId);
+            if (user == null) throw new ValidationErrorException("El usuario no existe.");
+
+            session.Delete<Persona>(usuarioId);
+            
+            ShowMessages(ResponseMessage.Success("Usuario eliminado."));
         }
 
         protected IEnumerable AplicarProjections(IEnumerable<Persona> results)
