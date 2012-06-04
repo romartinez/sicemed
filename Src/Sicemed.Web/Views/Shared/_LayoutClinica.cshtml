@@ -1,4 +1,5 @@
 ﻿@using Combres
+@using Newtonsoft.Json
 @using SICEMED.Web
 @using Sicemed.Web.Infrastructure
 @using Sicemed.Web.Infrastructure.Controllers
@@ -123,15 +124,12 @@
                 latitud: @MvcApplication.Clinica.DomicilioLatitud,
                 longitud: @MvcApplication.Clinica.DomicilioLongitud
             });
-                        
             @if (TempData.ContainsKey(BaseController.MESSAGES_KEY))
             {
                 var storedMessages = (List<ResponseMessage>)TempData[BaseController.MESSAGES_KEY];
-                foreach (var responseMessage in storedMessages)
-                {
-                    var growlSettings = responseMessage.IsSuccessful ? "header: '&Eacute;xito', theme: 'ui-state-sucess'" : "header: 'Error', theme: 'ui-state-error'";
-                    @:$.jGrowl("@responseMessage.Description", { @Html.Raw(growlSettings), sticky: true});
-                }
+                var json = JsonConvert.SerializeObject(storedMessages);
+                var encodedJson = Ajax.JavaScriptStringEncode(json);
+                @:app.ui.showNotifications(JSON.parse('@Html.Raw(encodedJson)'));
             }
         });        
     </script>

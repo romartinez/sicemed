@@ -2,33 +2,83 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Web.Mvc;
+using Sicemed.Web.Infrastructure;
+using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Exceptions;
 using Sicemed.Web.Models;
-using Sicemed.Web.Models.Enumerations;
-using Sicemed.Web.Models.Enumerations.Documentos;
+using Sicemed.Web.Models.ViewModels;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
 {
-    public class PersonasController : CrudBaseController<Persona>
+    public class PersonasController : NHibernateController
     {
-        protected override Expression<Func<Persona, object>> DefaultOrderBy
+        public ActionResult Index()
         {
-            get { return x => x.Membership.Email; }
+            return View();
         }
 
-        public override ActionResult Index()
+        [HttpPost]
+        [AjaxHandleError]
+        [ValidateAntiForgeryToken]
+        public virtual JsonResult List(long count, int page, int rows)
         {
-            using (var session = SessionFactory.OpenStatelessSession())
+            page--;
+            var session = SessionFactory.GetCurrentSession();
+            var query = session.QueryOver<Persona>();
+
+            var respuesta = new PaginableResponse();
+            query.OrderBy(x => x.Membership.Email);
+
+            if (page == 0)
             {
-                ViewData.Model = session.QueryOver<Provincia>().List();
+                var queryCount = query.ToRowCountInt64Query().FutureValue<long>();
+                respuesta.Records = queryCount.Value;
             }
-            return base.Index();
+            else
+            {
+                respuesta.Records = count;
+            }
+            respuesta.Rows = AplicarProjections(query.Take(rows).Skip(page * rows).Future());
+
+            respuesta.Page = ++page;
+            respuesta.Total = (long)Math.Ceiling(respuesta.Records / (double)rows);
+            return Json(respuesta);
         }
 
-        protected override IEnumerable AplicarProjections(IEnumerable<Persona> results)
+        [HttpPost]
+        [AjaxHandleError]
+        [ValidateAntiForgeryToken]
+        public void BloquearUsuario(long usuarioId)
+        {
+            var session = SessionFactory.GetCurrentSession();
+            var user = session.Get<Persona>(usuarioId);
+            if(user.Membership.IsLockedOut)
+                throw new ValidationErrorException("El usuario ya se encuentra bloqueado.");
+
+            MembershipService.LockUser(user.Membership.Email,
+                                       string.Format("{0:dd/mm/yy} - {1} - Bloqueo Administrativo", DateTime.Now, User));
+
+            ShowMessages(ResponseMessage.Success("Bloqueo realizado con éxito."));
+        }
+
+        [HttpPost]
+        [AjaxHandleError]
+        [ValidateAntiForgeryToken]
+        public void DesbloquearUsuario(long usuarioId)
+        {
+            var session = SessionFactory.GetCurrentSession();
+            var user = session.Get<Persona>(usuarioId);
+            if (!user.Membership.IsLockedOut)
+                throw new ValidationErrorException("El usuario ya se encuentra desbloqueado.");
+
+            MembershipService.UnlockUser(user.Membership.Email);
+            
+            ShowMessages(ResponseMessage.Success("Desbloqueo realizado con éxito."));
+        }
+
+        protected IEnumerable AplicarProjections(IEnumerable<Persona> results)
         {
             return results.Select(x => new
                                        {
@@ -70,32 +120,6 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                                                               }
                                                             : null
                                        });
-        }
-
-        protected override Persona AgregarReferencias(Persona modelo)
-        {
-            var tipoDocumentoId = RetrieveParameter<int>("Documento.TipoDocumento.Value", "Tipo De Documento");
-            var tipoDocumento = Enumeration.FromValue<TipoDocumento>(tipoDocumentoId);
-            if (tipoDocumento == null)
-                throw new ValidationErrorException("Debe seleccionar un Tipo De Documento válido.");
-
-            var password = RetrieveParameter<string>("Password");
-            var localidadId = RetrieveParameter<long>("localidadId", "Localidad", true);
-
-            var session = SessionFactory.GetCurrentSession();
-
-            Localidad localidad = null;
-            if (localidadId > 0)
-            {
-                localidad = session.Get<Localidad>(localidadId);
-                if (localidad == null) throw new ValidationErrorException("La Localidad seleccionada no existe.");
-            }
-
-            modelo.Domicilio.Localidad = localidad;
-            modelo.Documento.TipoDocumento = tipoDocumento;
-            modelo.Membership.Password = password;
-
-            return base.AgregarReferencias(modelo);
         }
     }
 }

@@ -25,6 +25,38 @@
                 url: {
                     list: '@Url.Action("List")'
                 },
+                buttons: [
+                    {
+                        caption: "Bloquear",
+                        buttonicon: "ui-icon-locked",
+                        onClickButton: function () {
+                            var grid = $(this);
+                            var selected = grid.getGridParam("selrow");
+                            if(!selected) {
+                                app.ui.showError("Debe seleccionar un Usuario.");
+                                return;
+                            }
+                            $.postAntiForgery("@Url.Action("BloquearUsuario")", { usuarioId: selected }, function () {
+                                grid.trigger("reloadGrid");
+                            });
+                        }
+                    },
+                    {
+                        caption: "Desbloquear",
+                        buttonicon: "ui-icon-unlocked",
+                        onClickButton: function () {
+                            var grid = $(this);
+                            var selected = grid.getGridParam("selrow");
+                            if(!selected) {
+                                app.ui.showError("Debe seleccionar un Usuario.");
+                                return;
+                            }
+                            $.postAntiForgery("@Url.Action("DesbloquearUsuario")", { usuarioId: selected }, function () {
+                                grid.trigger("reloadGrid");
+                            });
+                        }
+                    }
+                ],
                 params: {
                     editable: false,
                     addable: false,

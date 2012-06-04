@@ -25,6 +25,7 @@ namespace Sicemed.Web.Infrastructure.Providers.FilterAtrribute
                                 {
                                     new AuditAtrribute(),
                                     new HandleErrorAttribute(),
+                                    new AjaxMessagesFilter(), 
                                     new MenuAttribute(
                                         _container.Resolve<IMembershipService>(), 
                                         _container.Resolve<ICacheProvider>()

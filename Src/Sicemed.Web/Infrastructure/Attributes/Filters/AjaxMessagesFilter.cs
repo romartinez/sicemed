@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Helpers;
@@ -14,7 +15,9 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
                 if (filterContext.Controller.TempData.ContainsKey(BaseController.MESSAGES_KEY))
                 {
                     var storedMessages = (List<ResponseMessage>)filterContext.Controller.TempData[BaseController.MESSAGES_KEY];
-                    filterContext.HttpContext.Response.AddHeader("X-ResponseMessages", Json.SerializeObject(storedMessages));
+                    storedMessages.ForEach(x=>x.Description = HttpUtility.HtmlEncode(x.Description));
+                    var json = Json.SerializeObject(storedMessages);
+                    filterContext.HttpContext.Response.AddHeader("X-ResponseMessages", json);
                 }
             }
         }

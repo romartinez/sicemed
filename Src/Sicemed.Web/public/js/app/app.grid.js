@@ -12,6 +12,7 @@
                 del: 'Eliminar',
                 list: 'List'
             },
+            buttons: [],
             params: {
                 modalWidth: 400,
                 editable: true,
@@ -115,7 +116,7 @@
             }
         });
 
-        $(settings.grid).navGrid(
+        var navGrid = $(settings.grid).navGrid(
             settings.pager,
             {
                 edit: settings.params.editable,
@@ -130,7 +131,13 @@
             {}, //search
             {closeOnEscape: true }
         );
-    }
+
+        if (settings.buttons) {
+            $.each(settings.buttons, function() {
+                navGrid.navButtonAdd(settings.pager, this);
+            });
+        }
+    };
 
     return app;
 })(jQuery, app || {});   

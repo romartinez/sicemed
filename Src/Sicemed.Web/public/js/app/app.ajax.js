@@ -29,8 +29,14 @@ var app = (function ($, app) {
         $.blockUI({ css: { backgroundColor: '#000', color: '#fff' }, message: '<h1>Espere por favor...</h1>' });
     };
 
-    ajax.endXhr = function () {
+    ajax.endXhr = function (e, xhr, o) {
         $.unblockUI();
+        //Check for ResponseMessage to display
+        var responseMessages = xhr.getResponseHeader("X-ResponseMessages");
+        if (responseMessages) {
+            var parsedMessages = JSON.parse(responseMessages);
+            app.ui.showNotifications(parsedMessages);
+        }
     };
     $(document).ajaxStart(ajax.beginXhr);
     $(document).ajaxComplete(ajax.endXhr);

@@ -137,6 +137,14 @@
         ui.showDialog(defaults, callback);
     };
 
+    ui.showNotifications = function(notifications) {
+        $.each(notifications, function () {
+            var header = this.IsSuccessful ? "&Eacute;xito" : "ERROR";
+            var theme = this.IsSuccessful ? "ui-state-sucess" : "ui-state-error";
+            $.jGrowl(this.Description, { header: header, theme: theme});            
+        });
+    };
+
     return app;
 })(jQuery, app || {});
 
