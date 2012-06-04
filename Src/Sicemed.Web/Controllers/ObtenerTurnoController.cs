@@ -72,32 +72,30 @@ namespace Sicemed.Web.Controllers
                     .TransformUsing(Transformers.DistinctRootEntity)
                     .Future();
 
-            return query.Select(ConverPersonaToProfesionalViewModel);
+            return query.Select(ConvertPersonaToProfesionalViewModel);
         }
 
         private IEnumerable<BusquedaProfesionalViewModel> BuscarProfesionalPorEspecialidad(long especialidadId, string nombre)
         {
             var session = SessionFactory.GetCurrentSession();
 
-            var especialidadConProfesionales = session.QueryOver<Especialidad>()
-                .Where(e => e.Id == especialidadId)
-                .JoinQueryOver<Profesional>(e => e.Profesionales)
-                .JoinQueryOver(p => p.Persona)
-                .Where(
-                    Restrictions.On<Persona>(p => p.Nombre).IsLike(nombre, MatchMode.Start)
-                    || Restrictions.On<Persona>(p => p.SegundoNombre).IsLike(nombre, MatchMode.Start)
-                    || Restrictions.On<Persona>(p => p.Apellido).IsLike(nombre, MatchMode.Start)
-                )
-                .TransformUsing(Transformers.DistinctRootEntity)
-                .Future();
+            var query = session.QueryOver<Persona>()
+                    .Where(
+                        Restrictions.On<Persona>(p => p.Nombre).IsLike(nombre, MatchMode.Start)
+                        || Restrictions.On<Persona>(p => p.SegundoNombre).IsLike(nombre, MatchMode.Start)
+                        || Restrictions.On<Persona>(p => p.Apellido).IsLike(nombre, MatchMode.Start)
+                    ).JoinQueryOver<Rol>(p => p.Roles)
+                    .Where(r => r.GetType() == typeof(Profesional))
+                    .JoinQueryOver<Especialidad>(r => ((Profesional)r).Especialidades)
+                    .Where(e=> e.Id == especialidadId)
+                    .TransformUsing(Transformers.DistinctRootEntity)
+                    .Future();
 
-            return especialidadConProfesionales
-                .SelectMany(e => e.Profesionales)
-                .Select(p => p.Persona)
-                .Select(ConverPersonaToProfesionalViewModel);
+            return query
+                .Select(ConvertPersonaToProfesionalViewModel);
         }
 
-        private static BusquedaProfesionalViewModel ConverPersonaToProfesionalViewModel(Persona persona)
+        private static BusquedaProfesionalViewModel ConvertPersonaToProfesionalViewModel(Persona persona)
         {
             return BusquedaProfesionalViewModel.Create(persona);
         }
