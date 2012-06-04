@@ -35,7 +35,6 @@
       <resource path="~/public/js/libs/jquery-ui-1.8.15.min.js" />
       <resource path="~/public/js/libs/i18n/grid.locale-es.js" />
       <resource path="~/public/js/libs/jquery.jqGrid.min.js" />
-      <resource path="~/public/js/libs/msDateJsonParser.js" />
       <resource path="~/public/js/libs/jQuery.tmpl.js" />
       <resource path="~/public/js/libs/jquery.validate.min.js" />
       <resource path="~/public/js/libs/jquery.validate.unobtrusive.min.js" />
@@ -43,6 +42,7 @@
       <resource path="~/public/js/libs/jquery.blockUI.js" />
       <resource path="~/public/js/libs/knockout-2.0.0.js" />
       <resource path="~/public/js/libs/fullcalendar.js" />
+      <resource path="~/public/js/libs/msDateJsonParser.js" />
       <resource path="~/public/js/libs/jquery.jgrowl.js" />
 
       <resource path="~/public/js/libs/i18n/jquery.ui.datepicker-es.js" />

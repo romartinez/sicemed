@@ -30,7 +30,10 @@
     var jsonDateConverter = function (key, value) {
         if (typeof (value) === "string") {
             if (dateISO.test(value)) {
-                return new Date(value);
+                // No anda el new Date(value) en Chrome e IE9 (si bien parsea la fecha en __proto__ devuelve "Invalid Date" 
+                // y el calendario anda mal.
+                var date = value.replace(/(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:[.,](\d+))?/i, "new Date(parseInt('$1',10),parseInt('$2',10)-1,parseInt('$3',10),parseInt('$4',10),parseInt('$5',10),parseInt('$6',10),(function(s){return parseInt(s,10)||0;})('$7'))");
+                return (new Function("return " + date))();
             }
             if (dateNet.test(value)) {
                 return new Date(parseInt(dateNet.exec(value)[1], 10));

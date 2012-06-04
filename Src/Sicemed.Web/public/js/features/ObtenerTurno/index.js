@@ -43,8 +43,9 @@ var model = (function () {
                         self.currentStep(stepComprobante);
                     };
                     self.turnosDisponibles.push(turno);
+                    console.log(turno);
                     var event = {
-                        title: turno.Paciente ? turno.Paciente.Descripcion : 'Reservar...',
+                        title: (turno.Paciente == null).toString(),
                         start: turno.FechaTurnoInicial,
                         end: turno.FechaTurnoFinal,
                         allDay: false,
@@ -53,6 +54,7 @@ var model = (function () {
                         libre: !turno.Paciente,
                         turno: turno
                     };
+                    console.log(event);
                     events.push(event);
                 }
                 calendar.fullCalendar('addEventSource', events);
@@ -134,14 +136,14 @@ var model = (function () {
         self.reservar = function () {
             $.post('/ObtenerTurno/ReservarTurno', {
                 especialidadId: self.especialidadAgendaSeleccionada() ?
-                                    self.especialidadAgendaSeleccionada().Id 
+                                    self.especialidadAgendaSeleccionada().Id
                                     : self.especialidadSeleccionada().Id,
                 profesionalId: self.profesionalSeleccionado().Id,
                 fecha: app.format.fulldate(self.turnoSeleccionado().FechaTurnoInicial),
                 consultorioId: self.turnoSeleccionado().Consultorio.Id,
                 agendaId: self.turnoSeleccionado().Agenda.Id
             }).done(function (d) {
-                self.turnoAsignado(d);                
+                self.turnoAsignado(d);
             });
         };
 
