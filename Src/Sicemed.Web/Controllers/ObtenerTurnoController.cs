@@ -19,7 +19,6 @@ namespace Sicemed.Web.Controllers
     [AuthorizeIt(typeof(Paciente))]
     public class ObtenerTurnoController : NHibernateController
     {
-
         public virtual ActionResult Index()
         {
             return View();
@@ -47,7 +46,7 @@ namespace Sicemed.Web.Controllers
             var session = SessionFactory.GetCurrentSession();
 
             var query = session.QueryOver<Persona>();
-            if(!string.IsNullOrWhiteSpace(nombre))
+            if (!string.IsNullOrWhiteSpace(nombre))
             {
                 query = query.Where(
                     Restrictions.On<Persona>(p => p.Nombre).IsLike(nombre, MatchMode.Start)
@@ -56,12 +55,12 @@ namespace Sicemed.Web.Controllers
                     );
             }
 
-            var queryRoles  = query.JoinQueryOver<Rol>(p => p.Roles)
+            var queryRoles = query.JoinQueryOver<Rol>(p => p.Roles)
                     .Where(r => r.GetType() == typeof(Profesional));
 
             IEnumerable<Persona> results;
 
-            if(especialidadId.HasValue)
+            if (especialidadId.HasValue)
             {
                 results = queryRoles.JoinQueryOver<Especialidad>(r => ((Profesional)r).Especialidades)
                     .Where(e => e.Id == especialidadId)
@@ -93,6 +92,11 @@ namespace Sicemed.Web.Controllers
         #endregion
 
         #region Obtener Agenda
+        private string GetProfesionalCacheKey(long profesionalId)
+        {
+            return string.Format("TURNOS_CACHE_{0}", profesionalId);
+        }
+
         public virtual JsonResult ObtenerAgendaProfesional(long profesionalId, long? especialidadId = null)
         {
             return Json(ObtenerAgenda(profesionalId, especialidadId), JsonRequestBehavior.AllowGet);
@@ -104,7 +108,7 @@ namespace Sicemed.Web.Controllers
                         (x.Especialidad != null && x.Especialidad.Id == especialidadId.Value)
                         || x.Agenda.EspecialidadesAtendidas.Any(e => e.Id == especialidadId.Value));
 
-            var cacheKey = String.Format("TURNOS_{0}", profesionalId);
+            var cacheKey = GetProfesionalCacheKey(profesionalId);
             var cached = Cache.Get<List<TurnoViewModel>>(cacheKey);
             if (cached != null)
             {
@@ -197,6 +201,10 @@ namespace Sicemed.Web.Controllers
             var turno = Turno.Create(fecha, User.As<Paciente>(), profesional, especialidad, Request.UserHostAddress, agenda);
 
             session.Save(turno);
+
+            //Update del cache
+            var cacheKey = GetProfesionalCacheKey(profesionalId);
+            Cache.Remove(cacheKey);
 
             return Json(ReservaTurnoViewModel.Create(turno));
         }

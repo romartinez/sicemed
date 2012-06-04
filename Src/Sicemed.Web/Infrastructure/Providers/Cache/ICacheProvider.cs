@@ -4,7 +4,9 @@ namespace Sicemed.Web.Infrastructure.Providers.Cache
     {
         T GetUserContext<T>(string key);
         void AddUserContext(string key, object obj);
+        void RemoveUserContext(string key, object obj);
         T Get<T>(string key);
         void Add(string key, object obj);
+        void Remove(string key);
     }
 }

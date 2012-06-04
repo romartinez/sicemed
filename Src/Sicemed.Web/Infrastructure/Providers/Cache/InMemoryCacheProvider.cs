@@ -26,6 +26,12 @@ namespace Sicemed.Web.Infrastructure.Providers.Cache
             Add(key, obj);
         }
 
+        public void RemoveUserContext(string key, object obj)
+        {
+            key = GetUserContextKey(key);
+            Remove(key);
+        }
+
         public T Get<T>(string key)
         {
             if (HttpContext.Current == null) throw new ProviderException("The aren't a HttpContext available.");
@@ -36,6 +42,12 @@ namespace Sicemed.Web.Infrastructure.Providers.Cache
         {
             if (HttpContext.Current == null) throw new ProviderException("The aren't a HttpContext available.");
             HttpContext.Current.Cache.Insert(key, obj, null, GetTiempoExpiracionCache(), TimeSpan.Zero);
+        }
+
+        public void Remove(string key)
+        {
+            if (HttpContext.Current == null) throw new ProviderException("The aren't a HttpContext available.");
+            HttpContext.Current.Cache.Remove(key);
         }
 
         #endregion

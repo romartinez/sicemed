@@ -11,14 +11,16 @@ namespace Sicemed.Web.Infrastructure.Providers.Cache
             return Get<T>(key);
         }
 
-        public void AddUserContext(string key, object obj) {}
+        public void AddUserContext(string key, object obj) { }
+        public void RemoveUserContext(string key, object obj) { }
 
         public T Get<T>(string key)
         {
             return default(T);
         }
 
-        public void Add(string key, object obj) {}
+        public void Add(string key, object obj) { }
+        public void Remove(string key) { }
 
         #endregion
     }
