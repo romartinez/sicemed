@@ -6,13 +6,6 @@
         ? ViewData.ModelMetadata.AdditionalValues["DropDownProperty.PropertyName"].ToString()
         : string.Empty;
 
-    if (!string.IsNullOrWhiteSpace(name))
-    {
-        ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
-    }
-
-    var prompt = !string.IsNullOrWhiteSpace(ViewData.ModelMetadata.Watermark)
-        ? ViewData.ModelMetadata.Watermark : null;
-    
+    ViewData.TemplateInfo.HtmlFieldPrefix = Html.SkipOneLevelHtmlPrefix(name);    
 }
-@Html.DropDownList(name, model, prompt, new { multiple = "multiple" })
+@Html.ListBox(name, model)

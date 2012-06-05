@@ -72,11 +72,11 @@ namespace Sicemed.Web.Infrastructure.Helpers
                 });
         }
 
-        public static IEnumerable<SelectListItem> GetEspecialidades(ISessionFactory sessionFactory, string selectedValues)
+        public static IEnumerable<SelectListItem> GetEspecialidades(ISessionFactory sessionFactory, string[] selectedValues = null)
         {
-            var selectedIds = string.IsNullOrWhiteSpace(selectedValues)
+            var selectedIds = selectedValues == null
                                   ? new long[] {}
-                                  : selectedValues.Split(',').Select(x => Convert.ToInt64(x));
+                                  : selectedValues.Select(x => Convert.ToInt64(x));
             var especialidades = sessionFactory.GetCurrentSession().QueryOver<Especialidad>().OrderBy(x => x.Nombre).Asc.Future();
             return especialidades.Select(x =>
                 new SelectListItem()

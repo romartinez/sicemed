@@ -80,6 +80,16 @@ namespace System.Web.Mvc.Html
             return htmlHelper.Partial("_Submit", new ViewDataDictionary(value));
         }
 
+        public static string SkipOneLevelHtmlPrefix(this HtmlHelper htmlHelper, string name = null)
+        {
+            var prefix = htmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix;
+            //No viene nada de nombre lo dejo como esta.
+            if (string.IsNullOrWhiteSpace(name)) return prefix;
+            //veo si estoy dentro de un nivel ('.'), sino devuelvo el root.
+            if (!prefix.Contains(".")) return string.Empty;
+            //Estoy en un subnivel quito el ultimo punto del subnivel.
+            return prefix.Substring(0, prefix.LastIndexOf('.'));
+        }
 
         //http://blog.stevensanderson.com/2010/01/28/editing-a-variable-length-list-aspnet-mvc-2-style/
         #region Collection Items Extensions

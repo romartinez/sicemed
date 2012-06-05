@@ -37,10 +37,12 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         public long? ConsultorioId { get; set; }
 
         [UIHint("MultipleList")]
+        [DropDownProperty("EspecialidadesSeleccionadas")]
         [DisplayName("Especialidades Atendidas")]        
         public IEnumerable<SelectListItem> Especialidades { get; set; }
 
+        [Required]
         [ScaffoldColumn(false)]
-        public string EspecialidadesSeleccionadas { get; set; }
+        public string[] EspecialidadesSeleccionadas { get; set; }
     }
 }

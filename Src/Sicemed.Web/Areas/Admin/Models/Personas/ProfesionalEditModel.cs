@@ -20,9 +20,11 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
 
         [UIHint("MultipleList")]
         [DisplayName("Especialidades Atendidas")]
+        [DropDownProperty("EspecialidadesSeleccionadas")]
         public IEnumerable<SelectListItem> Especialidades { get; set; }
 
+        [Required]
         [ScaffoldColumn(false)]
-        public string EspecialidadesSeleccionadas { get; set; }
+        public string[] EspecialidadesSeleccionadas { get; set; }
     }
 }

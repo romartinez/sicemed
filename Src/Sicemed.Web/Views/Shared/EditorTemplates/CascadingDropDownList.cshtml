@@ -6,11 +6,8 @@
         ? ViewData.ModelMetadata.AdditionalValues["DropDownProperty.PropertyName"].ToString()
         : string.Empty;
 
-    if (!string.IsNullOrWhiteSpace(name))
-    {
-        ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
-    }
-
+    ViewData.TemplateInfo.HtmlFieldPrefix = Html.SkipOneLevelHtmlPrefix(name);
+    
     var attrs = new Dictionary<string, object>();
 
     var prompt = !string.IsNullOrWhiteSpace(ViewData.ModelMetadata.Watermark)
