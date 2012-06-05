@@ -11,12 +11,12 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
     {
         [UIHint("DropDownList")]
         [DisplayName("Obra Social")]
-        [DropDownProperty("Paciente.ObraSocialId")]
+        [DropDownProperty("ObraSocialId")]
         public IEnumerable<SelectListItem> ObrasSocialesHabilitadas { get; set; }
 
         [DisplayName("Plan")]
         [UIHint("CascadingDropDownList")]
-        [CascadingDropDownProperty("Paciente.PlanId", "Paciente.ObraSocialId", "GetPlanesObraSocial", "Domain", "Admin", "obraSocialId", "<< Seleccione una Obra Social >>")]
+        [CascadingDropDownProperty("PlanId", "ObraSocialId", "GetPlanesObraSocial", "Domain", "Admin", "obraSocialId", "<< Seleccione una Obra Social >>")]
         public IEnumerable<SelectListItem> PlanesObraSocialHabilitados { get; set; }
 
         [Required]

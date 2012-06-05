@@ -33,6 +33,7 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [DropDownProperty("ConsultorioId")]
         public IEnumerable<SelectListItem> Consultorios { get; set; }
 
+        [Required]
         [ScaffoldColumn(false)]
         public long? ConsultorioId { get; set; }
 
