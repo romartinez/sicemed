@@ -40,7 +40,6 @@ namespace Sicemed.Web.Areas.Admin.Models.Clinicas
         public virtual string Email { get; set; }
 
         [Required]
-        [DataType(DataType.PhoneNumber)]
         [DisplayName("Telefonos")]
         [UIHint("Telefonos")]
         public IEnumerable<Telefono> Telefonos { get; set; }
