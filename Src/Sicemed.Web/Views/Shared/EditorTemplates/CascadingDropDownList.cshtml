@@ -29,7 +29,8 @@
     
     if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ParentPropertyName"))
     {
-        attrs.Add("data-cascading-parent", ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ParentPropertyName"]);
+        var parentName = ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ParentPropertyName"].ToString();        
+        attrs.Add("data-cascading-parent", ViewData.TemplateInfo.GetFullHtmlFieldId(parentName));
     }
 
     if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ActionName"))

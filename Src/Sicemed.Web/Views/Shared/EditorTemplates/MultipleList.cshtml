@@ -12,7 +12,7 @@
     }
 
     var prompt = !string.IsNullOrWhiteSpace(ViewData.ModelMetadata.Watermark)
-        ? ViewData.ModelMetadata.Watermark : "<< Seleccione >>";
+        ? ViewData.ModelMetadata.Watermark : null;
     
 }
 @Html.DropDownList(name, model, prompt, new { multiple = "multiple" })

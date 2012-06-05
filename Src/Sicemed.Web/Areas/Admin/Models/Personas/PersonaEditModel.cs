@@ -51,20 +51,9 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [DefaultStringLength]
         public string Email { get; set; }
 
-        [Required]
-        [MinLength(MembershipService.MIN_REQUIRED_PASSWORD_LENGTH)]
-        [DefaultStringLength]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [UIHint("ResetPassword")]
+        [DisplayName("Password")]
         public string Password { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirmación Password")]
-        [Compare("Password", ErrorMessage = @"El password y su confirmación no coinciden.")]
-        [MinLength(MembershipService.MIN_REQUIRED_PASSWORD_LENGTH)]
-        [DefaultStringLength]
-        public string ConfirmacionPassword { get; set; }
 
         [Required]
         [DisplayName("Telefono")]
