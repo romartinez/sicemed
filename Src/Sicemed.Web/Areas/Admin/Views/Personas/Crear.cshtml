@@ -1,0 +1,33 @@
+﻿@model Sicemed.Web.Areas.Admin.Models.Personas.PersonaEditModel
+@{
+    ViewBag.Title = "Nuevo Usuario";
+}
+<h2>
+    Crear un Usuario
+</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.ValidationSummaryWithMessage()
+
+    @Html.EditorForModel()
+
+    @Html.Submit()        
+}
+@section Scripts
+{
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            $("#EsPaciente").click(function () {
+                $("#paciente").parents("li").toggle();
+            });
+            $("#EsSecretaria").click(function () {
+                $("#secretaria").parents("li").toggle();
+            });
+            $("#EsProfesional").click(function () {
+                $("#profesional").parents("li").toggle();
+            });
+        });        
+    </script>
+}

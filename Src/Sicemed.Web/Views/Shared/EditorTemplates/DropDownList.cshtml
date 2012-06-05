@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<SelectListItem>
 @{
+    var model = Model ?? new SelectListItem[] { };
+    
     var name = ViewData.ModelMetadata.AdditionalValues.ContainsKey("DropDownProperty.PropertyName")
         ? ViewData.ModelMetadata.AdditionalValues["DropDownProperty.PropertyName"].ToString()
         : string.Empty;
@@ -13,4 +15,4 @@
         ? ViewData.ModelMetadata.Watermark : "<< Seleccione >>";
     
 }
-@Html.DropDownList(name, Model, prompt)
+@Html.DropDownList(name, model, prompt)

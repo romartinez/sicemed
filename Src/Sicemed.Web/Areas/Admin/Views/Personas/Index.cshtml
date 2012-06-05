@@ -30,9 +30,7 @@
                         caption: "",
                         buttonicon: "ui-icon-plus",
                         onClickButton: function () {
-                            $.postAntiForgery("@Url.Action("DesbloquearUsuario")", { usuarioId: selected }, function () {
-                                grid.trigger("reloadGrid");
-                            });
+                            window.location = "@Url.Action("Nuevo")";
                         }
                     },
                     {

@@ -1,4 +1,18 @@
-﻿<fieldset class="form">
+﻿@using System.ComponentModel
+@{
+    var id = string.Empty;
+    var type = ViewData.ModelMetadata.ModelType;
+    if (type != null && ViewData.ModelMetadata.IsComplexType)
+    {
+        var attr = type.GetCustomAttributes(typeof (DisplayNameAttribute), true).FirstOrDefault() as DisplayNameAttribute;
+
+        if (attr != null)
+        {
+            id = "id=" + attr.DisplayName + "";
+        }
+    }
+}
+<fieldset @id class="form">
     <ul>
         @foreach (var prop in ViewData.ModelMetadata.Properties.Where(pm => pm.ShowForEdit && !ViewData.TemplateInfo.Visited(pm)))
         {
@@ -8,17 +22,17 @@
             }
             else
             {
-                <li>
-                    <div class="editor-label @(prop.IsRequired ? "editor-label-required" : "")">
-                        @Html.Label(prop.PropertyName)
-                    </div>
-                    <div class="editor-field">
-                        @Html.Editor(prop.PropertyName)
-                    </div>
-                    <div class="editor-validator">
-                        @Html.ValidationMessage(prop.PropertyName)
-                    </div>
-                </li>            
+            <li>
+                <div class="editor-label @(prop.IsRequired ? "editor-label-required" : "")">
+                    @Html.Label(prop.PropertyName)
+                </div>
+                <div class="editor-field">
+                    @Html.Editor(prop.PropertyName)
+                </div>
+                <div class="editor-validator">
+                    @Html.ValidationMessage(prop.PropertyName)
+                </div>
+            </li>            
             }
         }
     </ul>

@@ -189,6 +189,12 @@
     <Compile Include="Areas\Admin\Controllers\ProvinciasController.cs" />
     <Compile Include="Areas\Admin\Controllers\PersonasController.cs" />
     <Compile Include="Areas\Admin\Models\Clinicas\ClinicaEditViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\Personas\AgendaEditViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\Personas\PacienteEditModel.cs" />
+    <Compile Include="Areas\Admin\Models\Personas\PersonaEditModel.cs" />
+    <Compile Include="Areas\Admin\Models\Personas\PersonaViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\Personas\ProfesionalEditModel.cs" />
+    <Compile Include="Areas\Admin\Models\Personas\SecretariaEditViewModel.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Areas\Admin\Controllers\DomainController.cs" />
@@ -652,6 +658,7 @@
     <Content Include="Areas\Admin\Views\Clinicas\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Auditoria\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Logs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Personas\Crear.cshtml" />
     <None Include="Models\ClassDiagram.cd" />
     <Content Include="Views\Content\TemplateError.cshtml" />
     <Content Include="Views\ObtenerTurno\Index.cshtml" />

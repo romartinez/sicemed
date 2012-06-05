@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using Sicemed.Web.Areas.Admin.Models.Personas;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
@@ -61,6 +62,28 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             
             ShowMessages(ResponseMessage.Success("Desbloqueo realizado con éxito."));
         }
+
+        #region Nuevo
+        public ActionResult Crear()
+        {
+            var viewModel = new PersonaEditModel();
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [AjaxHandleError]
+        [ValidateAntiForgeryToken]
+        public ActionResult Crear(PersonaEditModel viewModel)
+        {
+            if(ModelState.IsValid)
+            {   
+                //TODO: Guardar!
+                return RedirectToAction("Index");
+            }
+
+            return View(viewModel);
+        }        
+        #endregion
 
         protected override IEnumerable AplicarProjections(IEnumerable<Persona> results)
         {
