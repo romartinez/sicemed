@@ -19,12 +19,12 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             get { return x => x.Membership.Email; }
         }
 
-        public override ActionResult Editar(long id, string oper, Persona modelo)
+        public override void Editar(long id, string oper, Persona modelo)
         {
             throw new NotSupportedException("Use la ventana de editar.");
         }
 
-        public override JsonResult Nuevo(string oper, Persona modelo, int paginaId = 0)
+        public override void Nuevo(string oper, Persona modelo, int paginaId = 0)
         {
             throw new NotSupportedException("Use la ventana de nuevo.");
         }

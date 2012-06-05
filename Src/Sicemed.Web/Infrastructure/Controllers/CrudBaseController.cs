@@ -74,7 +74,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
         [ValidateModelStateAttribute]
-        public virtual JsonResult Nuevo(string oper, T modelo, int paginaId = 0)
+        public virtual void Nuevo(string oper, T modelo, int paginaId = 0)
         {
             if (!oper.Equals("add", StringComparison.InvariantCultureIgnoreCase)) throw new ValidationErrorException();
 
@@ -84,14 +84,14 @@ namespace Sicemed.Web.Infrastructure.Controllers
 
             SessionFactory.GetCurrentSession().Save(modelo);
 
-            return Json(ResponseMessage.Success());
+            ShowMessages(ResponseMessage.Success());
         }
 
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
         [ValidateModelStateAttribute]
-        public virtual ActionResult Editar(long id, string oper, T modelo)
+        public virtual void Editar(long id, string oper, T modelo)
         {
             if (!oper.Equals("edit", StringComparison.InvariantCultureIgnoreCase)) throw new ValidationErrorException();
 
@@ -105,14 +105,14 @@ namespace Sicemed.Web.Infrastructure.Controllers
 
             EsValido(modelFromDb);
 
-            return Json(ResponseMessage.Success());
+            ShowMessages(ResponseMessage.Success());
         }
 
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
         [ValidateModelStateAttribute]
-        public virtual ActionResult Eliminar(string id, string oper)
+        public virtual void Eliminar(string id, string oper)
         {
             if (!oper.Equals("del", StringComparison.InvariantCultureIgnoreCase)) throw new ValidationErrorException();
 
@@ -123,7 +123,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
                 session.Delete<T>(Convert.ToInt64(idsSeleccionado));
             }
 
-            return Json(ResponseMessage.Success());
+            ShowMessages(ResponseMessage.Success());
         }
 
         public virtual ActionResult ObtenerLocalidadesPorProvincia(long provinciaId)
