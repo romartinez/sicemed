@@ -60,7 +60,7 @@
                                 app.ui.showError("Debe seleccionar un Usuario.");
                                 return;
                             }
-                            $.postAntiForgery("@Url.Action("EliminarUsuario")", { usuarioId: selected }, function () {
+                            $.postAntiForgery("@Url.Action("Eliminar")", { oper:"del", id: selected }, function () {
                                 grid.trigger("reloadGrid");
                             });
                         }

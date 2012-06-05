@@ -2,50 +2,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Exceptions;
 using Sicemed.Web.Models;
-using Sicemed.Web.Models.ViewModels;
-using Sicemed.Web.Infrastructure.Helpers;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
 {
-    public class PersonasController : NHibernateController
+    public class PersonasController : CrudBaseController<Persona>
     {
-        public ActionResult Index()
+        protected override Expression<Func<Persona, object>> DefaultOrderBy
         {
-            return View();
+            get { return x => x.Membership.Email; }
         }
 
-        [HttpPost]
-        [AjaxHandleError]
-        [ValidateAntiForgeryToken]
-        public virtual JsonResult List(long count, int page, int rows)
+        public override ActionResult Editar(long id, string oper, Persona modelo)
         {
-            page--;
-            var session = SessionFactory.GetCurrentSession();
-            var query = session.QueryOver<Persona>();
+            throw new NotSupportedException("Use la ventana de editar.");
+        }
 
-            var respuesta = new PaginableResponse();
-            query.OrderBy(x => x.Membership.Email);
-
-            if (page == 0)
-            {
-                var queryCount = query.ToRowCountInt64Query().FutureValue<long>();
-                respuesta.Records = queryCount.Value;
-            }
-            else
-            {
-                respuesta.Records = count;
-            }
-            respuesta.Rows = AplicarProjections(query.Take(rows).Skip(page * rows).Future());
-
-            respuesta.Page = ++page;
-            respuesta.Total = (long)Math.Ceiling(respuesta.Records / (double)rows);
-            return Json(respuesta);
+        public override JsonResult Nuevo(string oper, Persona modelo, int paginaId = 0)
+        {
+            throw new NotSupportedException("Use la ventana de nuevo.");
         }
 
         [HttpPost]
@@ -81,21 +62,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             ShowMessages(ResponseMessage.Success("Desbloqueo realizado con éxito."));
         }
 
-        [HttpPost]
-        [AjaxHandleError]
-        [ValidateAntiForgeryToken]
-        public void EliminarUsuario(long usuarioId)
-        {
-            var session = SessionFactory.GetCurrentSession();
-            var user = session.Get<Persona>(usuarioId);
-            if (user == null) throw new ValidationErrorException("El usuario no existe.");
-
-            session.Delete<Persona>(usuarioId);
-            
-            ShowMessages(ResponseMessage.Success("Usuario eliminado."));
-        }
-
-        protected IEnumerable AplicarProjections(IEnumerable<Persona> results)
+        protected override IEnumerable AplicarProjections(IEnumerable<Persona> results)
         {
             return results.Select(x => new
                                        {
