@@ -189,7 +189,7 @@
     <Compile Include="Areas\Admin\Controllers\ProvinciasController.cs" />
     <Compile Include="Areas\Admin\Controllers\PersonasController.cs" />
     <Compile Include="Areas\Admin\Models\Clinicas\ClinicaEditViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\Personas\AgendaEditViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\Personas\AgendaEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\PacienteEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\PersonaEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\PersonaViewModel.cs" />
@@ -659,6 +659,8 @@
     <Content Include="Areas\Admin\Views\Auditoria\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Logs\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Personas\Crear.cshtml" />
+    <Content Include="Areas\Admin\Views\Personas\EditorTemplates\Agendas.cshtml" />
+    <Content Include="Areas\Admin\Views\Personas\_Agenda.cshtml" />
     <None Include="Models\ClassDiagram.cd" />
     <Content Include="Views\Content\TemplateError.cshtml" />
     <Content Include="Views\ObtenerTurno\Index.cshtml" />
@@ -706,6 +708,7 @@
     <Content Include="Views\MembershipMailer\PasswordResetEmail.cshtml" />
     <Content Include="Views\Cuenta\RecuperarPasswordMail.cshtml" />
     <Content Include="Views\MembershipMailer\RegistrationEmail.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MultipleList.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

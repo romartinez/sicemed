@@ -1,0 +1,18 @@
+﻿@model IEnumerable<SelectListItem>
+@{
+    var model = Model ?? new SelectListItem[] { };
+
+    var name = ViewData.ModelMetadata.AdditionalValues.ContainsKey("DropDownProperty.PropertyName")
+        ? ViewData.ModelMetadata.AdditionalValues["DropDownProperty.PropertyName"].ToString()
+        : string.Empty;
+
+    if (!string.IsNullOrWhiteSpace(name))
+    {
+        ViewData.TemplateInfo.HtmlFieldPrefix = string.Empty;
+    }
+
+    var prompt = !string.IsNullOrWhiteSpace(ViewData.ModelMetadata.Watermark)
+        ? ViewData.ModelMetadata.Watermark : "<< Seleccione >>";
+    
+}
+@Html.DropDownList(name, model, prompt, new { multiple = "multiple" })

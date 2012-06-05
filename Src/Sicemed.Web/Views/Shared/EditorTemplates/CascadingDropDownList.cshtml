@@ -35,7 +35,14 @@
     if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ActionName"))
     {
         string url;
-        if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ControllerName"))
+        if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.AreaName"))
+        {
+            url = Url.Action(
+                ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ActionName"].ToString(),
+                ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ControllerName"].ToString(),
+                new { Area = ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.AreaName"].ToString()});
+        }
+        else if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingDropDownProperty.ControllerName"))
         {
             url = Url.Action(
                 ViewData.ModelMetadata.AdditionalValues["CascadingDropDownProperty.ActionName"].ToString(),

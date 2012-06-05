@@ -14,10 +14,15 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [DefaultStringLength]
         public virtual string Matricula { get; set; }
         
-        public virtual IEnumerable<AgendaEditViewModel> Agendas { get; set; }
+        [UIHint("Agendas")]
+        [DisplayName("Dias Atención")]
+        public virtual IEnumerable<AgendaEditModel> Agendas { get; set; }
 
         [UIHint("MultipleList")]
         [DisplayName("Especialidades Atendidas")]
         public IEnumerable<SelectListItem> Especialidades { get; set; }
+
+        [ScaffoldColumn(false)]
+        public string EspecialidadesSeleccionadas { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
 
         [DisplayName("Plan")]
         [UIHint("CascadingDropDownList")]
-        [CascadingDropDownProperty("PlanId", "ObraSocialId", "GetPlanesObraSocial", "Cuenta", "obraSocialId", "<< Seleccione una Obra Social >>")]
+        [CascadingDropDownProperty("PlanId", "ObraSocialId", "GetPlanesObraSocial", "Domain", "Admin", "obraSocialId", "<< Seleccione una Obra Social >>")]
         public IEnumerable<SelectListItem> PlanesObraSocialHabilitados { get; set; }
 
         [Required]

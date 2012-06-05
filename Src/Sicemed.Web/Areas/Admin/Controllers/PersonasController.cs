@@ -9,6 +9,7 @@ using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Exceptions;
+using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
@@ -67,6 +68,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         public ActionResult Crear()
         {
             var viewModel = new PersonaEditModel();
+            AppendLists(viewModel);
             return View(viewModel);
         }
 
@@ -75,6 +77,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Crear(PersonaEditModel viewModel)
         {
+            AppendLists(viewModel);
             if(ModelState.IsValid)
             {   
                 //TODO: Guardar!
@@ -83,6 +86,46 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
             return View(viewModel);
         }        
+
+        public ActionResult NuevaAgenda()
+        {
+            var viewModel = new AgendaEditModel();
+            AppendLists(viewModel);
+            return PartialView("_Agenda", viewModel);
+        }
+
+        private void AppendLists(PersonaEditModel viewModel)
+        {
+            viewModel.TiposDocumentosHabilitados = DomainExtensions.GetTiposDocumentos(viewModel.TipoDocumentoId);
+            viewModel.ProvinciasHabilitadas = DomainExtensions.GetProvincias(SessionFactory, viewModel.DomicilioLocalidadProvinciaId);
+
+            if (viewModel.DomicilioLocalidadProvinciaId.HasValue)
+                viewModel.LocalidadesHabilitadas =
+                    DomainExtensions.GetLocalidades(SessionFactory, viewModel.DomicilioLocalidadProvinciaId.Value, viewModel.DomicilioLocalidadId);
+
+            //Paciente
+            viewModel.Paciente.ObrasSocialesHabilitadas = DomainExtensions.GetObrasSociales(SessionFactory, viewModel.Paciente.ObraSocialId);
+            if (viewModel.Paciente.ObraSocialId.HasValue)
+                viewModel.Paciente.PlanesObraSocialHabilitados =
+                    DomainExtensions.GetPlanesObraSocial(SessionFactory, viewModel.Paciente.ObraSocialId.Value, viewModel.Paciente.PlanId);
+            
+            //Profesional
+            viewModel.Profesional.Especialidades = DomainExtensions.GetEspecialidades(SessionFactory, viewModel.Profesional.EspecialidadesSeleccionadas);
+            if(viewModel.Profesional.Agendas != null)
+            {
+                foreach (var agenda in viewModel.Profesional.Agendas)
+                {
+                    AppendLists(agenda);
+                }                
+            }
+        }
+
+        private void AppendLists(AgendaEditModel viewModel)
+        {
+            viewModel.Especialidades = DomainExtensions.GetEspecialidades(SessionFactory, viewModel.EspecialidadesSeleccionadas);
+            viewModel.Consultorios = DomainExtensions.GetConsultorios(SessionFactory, viewModel.ConsultorioId);
+        }
+
         #endregion
 
         protected override IEnumerable AplicarProjections(IEnumerable<Persona> results)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using NHibernate;
@@ -70,5 +71,33 @@ namespace Sicemed.Web.Infrastructure.Helpers
                     Selected = selectedValue.HasValue && x.Id == selectedValue.Value
                 });
         }
+
+        public static IEnumerable<SelectListItem> GetEspecialidades(ISessionFactory sessionFactory, string selectedValues)
+        {
+            var selectedIds = string.IsNullOrWhiteSpace(selectedValues)
+                                  ? new long[] {}
+                                  : selectedValues.Split(',').Select(x => Convert.ToInt64(x));
+            var especialidades = sessionFactory.GetCurrentSession().QueryOver<Especialidad>().OrderBy(x => x.Nombre).Asc.Future();
+            return especialidades.Select(x =>
+                new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Nombre,
+                    Selected = selectedIds.Contains(x.Id)
+                });
+        }
+
+        public static IEnumerable<SelectListItem> GetConsultorios(ISessionFactory sessionFactory, long? selectedValue = null)
+        {
+            var consultorios = sessionFactory.GetCurrentSession().QueryOver<Consultorio>()
+                .OrderBy(x => x.Nombre).Asc.Future();
+            return consultorios.Select(x =>
+                new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Nombre,
+                    Selected = selectedValue.HasValue && x.Id == selectedValue.Value
+                });
+        }    
     }
 }

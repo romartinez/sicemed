@@ -18,5 +18,11 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         {
             return PartialView("_Telefono", new Telefono());
         }
+
+        [HttpGet]
+        public ActionResult GetPlanesObraSocial(long obraSocialId)
+        {
+            return Json(DomainExtensions.GetPlanesObraSocial(SessionFactory, obraSocialId), JsonRequestBehavior.AllowGet);
+        }
     }
 }

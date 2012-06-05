@@ -82,7 +82,7 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
 
         [DisplayName("Localidad")]
         [UIHint("CascadingDropDownList")]
-        [CascadingDropDownProperty("DomicilioLocalidadId", "DomicilioLocalidadProvinciaId", "GetLocalidades", "Domain", "provinciaId", "<< Seleccione una Provincia >>")]
+        [CascadingDropDownProperty("DomicilioLocalidadId", "DomicilioLocalidadProvinciaId", "GetLocalidades", "Domain", "Admin","provinciaId", "<< Seleccione una Provincia >>")]
         public IEnumerable<SelectListItem> LocalidadesHabilitadas { get; set; }
 
         [Required]
@@ -115,5 +115,12 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
 
         [DisplayName("Es Administrador")]
         public bool EsAdmin { get; set; }        
+
+        public PersonaEditModel()
+        {
+            Paciente = new PacienteEditModel();
+            Secretaria = new SecretariaEditViewModel();
+            Profesional = new ProfesionalEditModel();
+        }
     }
 }

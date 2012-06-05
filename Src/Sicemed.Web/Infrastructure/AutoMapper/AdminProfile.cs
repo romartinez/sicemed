@@ -37,6 +37,8 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                                   telefonosAQuitar.ForEach(t => m.QuitarTelefono(t));
                                   v.Telefonos.ForEach(t => m.AgregarTelefono(t));
                               });
+
+            //Mapper.CreateMap<>
         }
     }
 }

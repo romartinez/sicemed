@@ -116,12 +116,6 @@ namespace Sicemed.Web.Controllers
             ViewBag.PasswordLength = _membershipService.MinPasswordLength;
             return View(viewModel);
         }
-
-        [HttpGet]
-        public ActionResult GetPlanesObraSocial(long obraSocialId)
-        {
-            return Json(DomainExtensions.GetPlanesObraSocial(SessionFactory, obraSocialId), JsonRequestBehavior.AllowGet);
-        }
         #endregion
 
         #region CambiarPassword

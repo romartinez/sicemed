@@ -7,7 +7,7 @@ using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
 
 namespace Sicemed.Web.Areas.Admin.Models.Personas
 {
-    public class AgendaEditViewModel
+    public class AgendaEditModel
     {
         [Required]
         [DisplayName("Dia")]
@@ -33,8 +33,14 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [DropDownProperty("ConsultorioId")]
         public IEnumerable<SelectListItem> Consultorios { get; set; }
 
+        [ScaffoldColumn(false)]
+        public long? ConsultorioId { get; set; }
+
         [UIHint("MultipleList")]
         [DisplayName("Especialidades Atendidas")]        
-        public IEnumerable<SelectListItem> EspecialidadesAtendidas { get; set; }
+        public IEnumerable<SelectListItem> Especialidades { get; set; }
+
+        [ScaffoldColumn(false)]
+        public string EspecialidadesSeleccionadas { get; set; }
     }
 }

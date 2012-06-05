@@ -44,6 +44,7 @@ namespace Sicemed.Web.Infrastructure
                 data.AdditionalValues.Add("CascadingDropDownProperty.ParentPrompt", cascading.ParentPrompt);
                 data.AdditionalValues.Add("CascadingDropDownProperty.ActionName", cascading.ActionName);
                 data.AdditionalValues.Add("CascadingDropDownProperty.ControllerName", cascading.ControllerName);
+                data.AdditionalValues.Add("CascadingDropDownProperty.AreaName", cascading.AreaName);
                 data.AdditionalValues.Add("CascadingDropDownProperty.ParameterName", cascading.ParameterName);
             }                
 

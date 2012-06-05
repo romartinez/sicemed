@@ -1,0 +1,12 @@
+﻿@using Sicemed.Web.Areas.Admin.Models.Personas
+@model IEnumerable<AgendaEditModel>
+<div id="agendas">
+    @if (Model != null)
+    {
+        foreach (var agenda in Model)
+        {
+        @Html.Partial("_Agenda", agenda)
+        }
+    }
+</div>
+@Html.ActionLink("Agregar", "NuevaAgenda", "Personas", new { Area = "Admin" }, new { id = "action-add" })

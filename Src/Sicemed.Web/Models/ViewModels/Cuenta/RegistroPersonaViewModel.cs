@@ -83,7 +83,7 @@ namespace Sicemed.Web.Models.ViewModels.Cuenta
 
         [DisplayName("Localidad")]
         [UIHint("CascadingDropDownList")]
-        [CascadingDropDownPropertyAttribute("DomicilioLocalidadId", "DomicilioLocalidadProvinciaId", "GetLocalidades", "Domain", "provinciaId", "<< Seleccione una Provincia >>")]
+        [CascadingDropDownPropertyAttribute("DomicilioLocalidadId", "DomicilioLocalidadProvinciaId", "GetLocalidades", "Domain", "Admin", "provinciaId", "<< Seleccione una Provincia >>")]
         public IEnumerable<SelectListItem> LocalidadesHabilitadas { get; set; }
 
         [Required]
@@ -103,7 +103,7 @@ namespace Sicemed.Web.Models.ViewModels.Cuenta
 
         [DisplayName("Plan")]
         [UIHint("CascadingDropDownList")]
-        [CascadingDropDownPropertyAttribute("PlanId", "ObraSocialId", "GetPlanesObraSocial", "Cuenta", "obraSocialId", "<< Seleccione una Obra Social >>")]
+        [CascadingDropDownPropertyAttribute("PlanId", "ObraSocialId", "GetPlanesObraSocial", "Domain", "Admin" ,"obraSocialId", "<< Seleccione una Obra Social >>")]
         public IEnumerable<SelectListItem> PlanesObraSocialHabilitados { get; set; }
 
         [Required]

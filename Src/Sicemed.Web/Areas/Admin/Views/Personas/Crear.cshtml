@@ -28,6 +28,20 @@
             $("#EsProfesional").click(function () {
                 $("#profesional").parents("li").toggle();
             });
-        });        
+            
+            $("#action-add").click(function () {
+                $.ajax({
+                    url: this.href,
+                    cache: false,
+                    success: function (html) { $("#agendas").append(html); }
+                });
+                return false;
+            });
+
+            $("a.action-delete").live("click", function () {
+                $(this).parents("div.editor-field-inner:first").remove();
+                return false;
+            });
+        });
     </script>
 }
