@@ -5,12 +5,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using DataAnnotationsExtensions;
 using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
-using Sicemed.Web.Infrastructure.Helpers;
+using Sicemed.Web.Infrastructure.ModelBinders;
 using Sicemed.Web.Models.Components;
 
 namespace Sicemed.Web.Areas.Admin.Models.Personas
 {
-    public class PersonaEditModel : IValidatableObject
+    public class PersonaEditModel : IValidatableObject, ICustomBindeableProperties
     {
         [Required]
         [Display(Name = "Nombre", Prompt = "AAAA")]
@@ -125,6 +125,13 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
             }
             errors.Add(new ValidationResult("ERROR!"));
             return errors;
+        }
+
+        public bool SkipProperty(PropertyDescriptor propertyDescriptor)
+        {
+            return (!EsPaciente && propertyDescriptor.PropertyType == typeof(PacienteEditModel))
+                || (!EsSecretaria && propertyDescriptor.PropertyType == typeof(SecretariaEditModel))
+                || (!EsProfesional && propertyDescriptor.PropertyType == typeof(ProfesionalEditModel));
         }
     }
 }

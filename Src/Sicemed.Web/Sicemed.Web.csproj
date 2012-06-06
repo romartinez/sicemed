@@ -247,7 +247,9 @@
     <Compile Include="Infrastructure\HttpModules\NHibernateSessionModule.cs" />
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
     <Compile Include="Infrastructure\Logs\ConfigAdoNetAppender.cs" />
-    <Compile Include="Infrastructure\ModelBinders\PersonaEditModelBinder.cs" />
+    <Compile Include="Infrastructure\ModelBinders\ICustomBindeableProperties.cs" />
+    <Compile Include="Infrastructure\ModelBinders\InheritanceAwareModelBinderProvider.cs" />
+    <Compile Include="Infrastructure\ModelBinders\CustomBindeablePropertiesModelBinder.cs" />
     <Compile Include="Infrastructure\NHibernate\Events\AuditEventListener.cs" />
     <Compile Include="Infrastructure\NHibernate\Events\PostFlushFixEventListener.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\AuditLogMapping.cs" />

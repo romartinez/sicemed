@@ -107,7 +107,14 @@ namespace SICEMED.Web
             DefaultModelBinder.ResourceClassKey = "Messages";
             ValidationExtensions.ResourceClassKey = "Messages";
 
-            ModelBinders.Binders.Add(typeof(PersonaEditModel), new PersonaEditModelBinder());
+            var binderProvider = new InheritanceAwareModelBinderProvider
+                            {
+                                { typeof(ICustomBindeableProperties), new CustomBindeablePropertiesModelBinder() }
+                            };
+
+            ModelBinderProviders.BinderProviders.Add(binderProvider);   
+          
+
 
             RegisterGlobalFilters(GlobalFilters.Filters);
 
