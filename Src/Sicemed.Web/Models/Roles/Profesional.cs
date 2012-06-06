@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Iesi.Collections.Generic;
+using Sicemed.Web.Infrastructure.Exceptions;
 
 namespace Sicemed.Web.Models.Roles
 {
@@ -49,7 +50,7 @@ namespace Sicemed.Web.Models.Roles
             if (agenda == null) throw new ArgumentNullException("agenda");
 
             if (!agenda.EspecialidadesAtendidas.ToList().TrueForAll(x => _especialidades.Contains(x)))
-                throw new ArgumentException(@"Alguna de las Especialidades seleccionadas no pertenece a las Especialidades del Profesional.", "especialidades");
+                throw new ToClientException(@"Alguna de las Especialidades seleccionadas para la agenda no pertenece a las Especialidades del Profesional.");
 
             agenda.Profesional = this;
             _agendas.Add(agenda);
@@ -60,11 +61,10 @@ namespace Sicemed.Web.Models.Roles
             if (especialidades == null) throw new ArgumentNullException("especialidades");
 
             if (!especialidades.ToList().TrueForAll(x => _especialidades.Contains(x)))
-                throw new ArgumentException(@"Alguna de las Especialidades seleccionadas no pertenece a las Especialidades del Profesional.", "especialidades");
+                throw new ToClientException(@"Alguna de las Especialidades seleccionadas para la agenda no pertenece a las Especialidades del Profesional.");
 
             if (horarioHasta < horarioDesde)
-                throw new ArgumentOutOfRangeException("horarioHasta",
-                                                      @"El Horario Desde es mayor al Horario Hasta de la Agenda.");
+                throw new ToClientException(@"El Horario Desde es mayor al Horario Hasta de la Agenda.");
 
             var agenda = new Agenda()
                              {

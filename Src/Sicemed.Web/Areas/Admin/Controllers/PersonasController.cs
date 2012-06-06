@@ -93,63 +93,70 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             AppendLists(viewModel);
             if(ModelState.IsValid)
             {
-                var session = SessionFactory.GetCurrentSession();
-                var persona = Mapper.Map<Persona>(viewModel);
-                //Asignaciones que no se puede hacer en el mapper
-                persona.Domicilio = new Domicilio
+                try
                 {
-                    Direccion = viewModel.DomicilioDireccion,
-                    Localidad = session.Load<Localidad>(viewModel.DomicilioLocalidadId)
-                };
-
-                if(viewModel.EsPaciente)
-                {
-                    persona.As<Paciente>().Plan = session.Load<Plan>(viewModel.Paciente.PlanId);
-                }
-
-                if(viewModel.EsProfesional)
-                {
-                    var personaProfesional = persona.As<Profesional>();
-                    if(viewModel.Profesional.EspecialidadesSeleccionadas != null)
+                    var session = SessionFactory.GetCurrentSession();
+                    var persona = Mapper.Map<Persona>(viewModel);
+                    //Asignaciones que no se puede hacer en el mapper
+                    persona.Domicilio = new Domicilio
                     {
-                        foreach (var especialidadId in viewModel.Profesional.EspecialidadesSeleccionadas)
-                        {
-                            var especialidad = session.Load<Especialidad>(especialidadId);
-                            personaProfesional.AgregarEspecialidad(especialidad);
-                        }
+                        Direccion = viewModel.DomicilioDireccion,
+                        Localidad = session.Load<Localidad>(viewModel.DomicilioLocalidadId)
+                    };
+
+                    if (viewModel.EsPaciente)
+                    {
+                        persona.As<Paciente>().Plan = session.Load<Plan>(viewModel.Paciente.PlanId);
                     }
-                    if(viewModel.Profesional.Agendas != null)
-                    {
-                        foreach (var agendaEditModel in viewModel.Profesional.Agendas)
-                        {
-                            var agendaModel = Mapper.Map<Agenda>(agendaEditModel);
 
-                            if (agendaEditModel.EspecialidadesSeleccionadas != null)
+                    if (viewModel.EsProfesional)
+                    {
+                        var personaProfesional = persona.As<Profesional>();
+                        if (viewModel.Profesional.EspecialidadesSeleccionadas != null)
+                        {
+                            foreach (var especialidadId in viewModel.Profesional.EspecialidadesSeleccionadas)
                             {
-                                foreach (var especialidadId in agendaEditModel.EspecialidadesSeleccionadas)
-                                {
-                                    var especialidad = session.Load<Especialidad>(especialidadId);
-                                    agendaModel.AgregarEspecialidad(especialidad);
-                                }
+                                var especialidad = session.Load<Especialidad>(especialidadId);
+                                personaProfesional.AgregarEspecialidad(especialidad);
                             }
-                            agendaModel.Consultorio = session.Load<Consultorio>(agendaEditModel.ConsultorioId);
-                            
-                            personaProfesional.AgregarAgenda(agendaModel);
+                        }
+                        if (viewModel.Profesional.Agendas != null)
+                        {
+                            foreach (var agendaEditModel in viewModel.Profesional.Agendas)
+                            {
+                                var agendaModel = Mapper.Map<Agenda>(agendaEditModel);
+
+                                if (agendaEditModel.EspecialidadesSeleccionadas != null)
+                                {
+                                    foreach (var especialidadId in agendaEditModel.EspecialidadesSeleccionadas)
+                                    {
+                                        var especialidad = session.Load<Especialidad>(especialidadId);
+                                        agendaModel.AgregarEspecialidad(especialidad);
+                                    }
+                                }
+                                agendaModel.Consultorio = session.Load<Consultorio>(agendaEditModel.ConsultorioId);
+
+                                personaProfesional.AgregarAgenda(agendaModel);
+                            }
                         }
                     }
-                }
 
-                //Le seteo un password cualquiera, y luego envio mail para que lo resetee
-                var status = _membershipService.CreateUser(persona, viewModel.Email, Guid.NewGuid().ToString());
-                if (status == MembershipStatus.USER_CREATED)
+                    //Le seteo un password cualquiera, y luego envio mail para que lo resetee
+                    var status = _membershipService.CreateUser(persona, viewModel.Email, Guid.NewGuid().ToString());
+                    if (status == MembershipStatus.USER_CREATED)
+                    {
+                        //Envio mail para que cargue su password
+                        _membershipService.RecoverPassword(viewModel.Email);
+                        ShowMessages(ResponseMessage.Success());
+                        return RedirectToAction("Index");
+                    }
+
+                    ModelState.AddModelError("", status.Get());                    
+                }
+                catch(Exception ex)
                 {
-                    //Envio mail para que cargue su password
-                    _membershipService.RecoverPassword(viewModel.Email);
-                    ShowMessages(ResponseMessage.Success());
-                    return RedirectToAction("Index");
+                    ModelState.AddModelError("", ex.Message);
                 }
-
-                ModelState.AddModelError("", status.Get());
             }
 
             return View(viewModel);
