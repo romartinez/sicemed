@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using AutoMapper;
 using NHibernate;
+using NHibernate.Criterion;
 using Sicemed.Web.Areas.Admin.Models.Personas;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
@@ -176,8 +177,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         [AjaxHandleError]
         public ActionResult Modificar(long personaId)
         {
-            var session = SessionFactory.GetCurrentSession();
-            var model = session.Get<Persona>(personaId);
+            var model = GetPersona(personaId);
             if (model == null)
             {
                 ShowMessages(ResponseMessage.Error("No se ha encontrado el usuario."));
@@ -200,7 +200,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 try
                 {
                     var session = SessionFactory.GetCurrentSession();
-                    var persona = session.Get<Persona>(editModel.Id);
+                    var persona = GetPersona(editModel.Id.Value);
                     if (persona == null)
                     {
                         ShowMessages(ResponseMessage.Error("No se ha encontrado el usuario."));
@@ -287,6 +287,21 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             return View(editModel);
         }
         #endregion
+
+        private Persona GetPersona(long personaId)
+        {
+            var session = SessionFactory.GetCurrentSession();
+            var persona = session.QueryOver<Persona>().Where(p => p.Id == personaId)
+                .Fetch(p => p.Roles).Eager
+                .Fetch(p => p.Domicilio.Localidad).Eager
+                .Fetch(p => p.Domicilio.Localidad.Provincia).Eager
+                .Fetch(p=> ((Profesional)p.Roles.First()).Agendas).Eager
+                .Fetch(p=> ((Profesional)p.Roles.First()).Agendas.First().EspecialidadesAtendidas).Eager
+                .Fetch(p => ((Profesional)p.Roles.First()).Especialidades).Eager
+                .Fetch(p => ((Paciente)p.Roles.First()).Plan).Eager
+                .SingleOrDefault();
+            return persona;
+        }
 
         #region Agregar Referencias
         private void AppendLists(PersonaEditModel viewModel)

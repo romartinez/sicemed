@@ -72,9 +72,9 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
 
             var auditListener = new AuditEventListener();
 
-            configuration.SetListener(ListenerType.PostDelete, auditListener);
-            configuration.SetListener(ListenerType.PostInsert, auditListener);
-            configuration.SetListener(ListenerType.PostUpdate, auditListener);
+            //configuration.SetListener(ListenerType.PostDelete, auditListener);
+            //configuration.SetListener(ListenerType.PostInsert, auditListener);
+            //configuration.SetListener(ListenerType.PostUpdate, auditListener);
 
 			configuration.SetListener(ListenerType.Flush, new PostFlushFixEventListener());
 
