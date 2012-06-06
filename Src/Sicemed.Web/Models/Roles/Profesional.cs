@@ -45,6 +45,13 @@ namespace Sicemed.Web.Models.Roles
             _especialidades.Add(especialidad);
         }
 
+        public virtual void QuitarEspecialidad(Especialidad especialidad)
+        {
+            if (especialidad == null) throw new ArgumentNullException("especialidad");
+
+            _especialidades.Remove(especialidad);
+        }
+
         public virtual void AgregarAgenda(Agenda agenda)
         {
             if (agenda == null) throw new ArgumentNullException("agenda");

@@ -17,7 +17,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Set(x => x.Profesionales, map =>
                                           {
                                               map.Access(Accessor.NoSetter);
-                                              map.Cascade(Cascade.All | Cascade.DeleteOrphans);
+                                              map.Cascade(Cascade.None);
                                               map.Inverse(false);
                                           }, rel => rel.ManyToMany());
         }

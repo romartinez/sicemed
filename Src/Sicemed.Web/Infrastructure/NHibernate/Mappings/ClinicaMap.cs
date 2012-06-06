@@ -28,7 +28,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
              Set(x => x.Telefonos, map =>
                                        {
                                            map.Access(Accessor.NoSetter);
-                                           map.Cascade(Cascade.All | Cascade.DeleteOrphans);
+                                           map.Lazy(CollectionLazy.NoLazy);
                                        }, rel => rel.Component(m=>{}));
          }
     }

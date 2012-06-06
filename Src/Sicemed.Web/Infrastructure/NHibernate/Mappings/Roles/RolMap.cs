@@ -12,7 +12,6 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Roles
 
             ManyToOne(x => x.Persona, map => { 
                 map.ForeignKey("FK_Roles_Persona");
-                map.Cascade(Cascade.All);
             });
         }
     }

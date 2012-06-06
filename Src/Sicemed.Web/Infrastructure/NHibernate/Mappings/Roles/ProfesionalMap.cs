@@ -15,13 +15,11 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Roles
                                 {
                                     map.Access(Accessor.NoSetter);
                                     map.Inverse(true);
-                                    map.Cascade(Cascade.All | Cascade.DeleteOrphans);
                                 }, rel => rel.OneToMany());
 
             Set(x => x.Especialidades, map =>
             {
                 map.Access(Accessor.NoSetter);
-                map.Cascade(Cascade.All | Cascade.DeleteOrphans);
             }, rel => rel.ManyToMany());
 
         }

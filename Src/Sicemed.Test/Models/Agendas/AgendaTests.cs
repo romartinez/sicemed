@@ -2,6 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using Sicemed.Web.Infrastructure;
+using Sicemed.Web.Infrastructure.Exceptions;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Roles;
 
@@ -47,7 +48,7 @@ namespace Sicemed.Tests.Models.Agendas
         {
             var profesional = ApplicationInstaller.PersonaProfesionalBernardoClinico.As<Profesional>();
 
-            Assert.Throws<ArgumentException>(() =>
+            Assert.Throws<ToClientException>(() =>
                 profesional.AgregarAgenda(
                     DayOfWeek.Tuesday,
                     TimeSpan.FromMinutes(15),
@@ -64,7 +65,7 @@ namespace Sicemed.Tests.Models.Agendas
         {
             var profesional = ApplicationInstaller.PersonaProfesionalBernardoClinico.As<Profesional>();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            Assert.Throws<ToClientException>(() =>
                                              profesional.AgregarAgenda(
                                                  DayOfWeek.Tuesday,
                                                  TimeSpan.FromMinutes(15),
