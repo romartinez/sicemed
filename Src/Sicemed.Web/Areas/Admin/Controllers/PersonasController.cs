@@ -143,6 +143,8 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 var status = _membershipService.CreateUser(persona, viewModel.Email, Guid.NewGuid().ToString());
                 if (status == MembershipStatus.USER_CREATED)
                 {
+                    //Envio mail para que cargue su password
+                    _membershipService.RecoverPassword(viewModel.Email);
                     ShowMessages(ResponseMessage.Success());
                     return RedirectToAction("Index");
                 }
