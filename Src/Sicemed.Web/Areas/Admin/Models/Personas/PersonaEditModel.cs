@@ -10,7 +10,7 @@ using Sicemed.Web.Models.Components;
 
 namespace Sicemed.Web.Areas.Admin.Models.Personas
 {
-    public class PersonaEditModel : IValidatableObject, ICustomBindeableProperties
+    public class PersonaEditModel : ICustomBindeableProperties
     {
         [Required]
         [Display(Name = "Nombre", Prompt = "AAAA")]
@@ -110,21 +110,6 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
             Paciente = new PacienteEditModel();
             Secretaria = new SecretariaEditModel();
             Profesional = new ProfesionalEditModel();
-            //TODO: Sacar esto
-            EsPaciente = true;
-            EsSecretaria = true;
-            EsProfesional = true;
-        }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            var errors = new List<ValidationResult>();
-            if(EsPaciente && Paciente == null)
-            {
-                errors.Add(new ValidationResult("Debe completar los campos del paciente!"));
-            }
-            errors.Add(new ValidationResult("ERROR!"));
-            return errors;
         }
 
         public bool SkipProperty(PropertyDescriptor propertyDescriptor)

@@ -145,7 +145,7 @@
     <value>Usuario no encontrado.</value>
   </data>
   <data name="PropertyValueInvalid" xml:space="preserve">
-    <value>El campo {1} es inválido.</value>
+    <value>El campo {0} es inválido.</value>
   </data>
   <data name="PropertyValueRequired" xml:space="preserve">
     <value>El campo {0} es requerido.</value>
@@ -157,7 +157,7 @@
     <value>El campo {0} debe validar la siguiente expresión regular '{1}'.</value>
   </data>
   <data name="RequiredAttribute_ValidationError" xml:space="preserve">
-    <value>El campo {1} es requerido.</value>
+    <value>El campo {0} es requerido.</value>
   </data>
   <data name="StringLengthAttribute_ValidationError" xml:space="preserve">
     <value>El campo {0} debe ser una cadena de texto con una longitud máxima de {1}.</value>

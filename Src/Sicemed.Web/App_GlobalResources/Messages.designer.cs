@@ -142,7 +142,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to El campo {1} es inválido..
+        ///   Looks up a localized string similar to El campo {0} es inválido..
         /// </summary>
         internal static string PropertyValueInvalid {
             get {
@@ -178,7 +178,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to El campo {1} es requerido..
+        ///   Looks up a localized string similar to El campo {0} es requerido..
         /// </summary>
         internal static string RequiredAttribute_ValidationError {
             get {

@@ -19,16 +19,30 @@
 {
     <script language="javascript" type="text/javascript">
         $(function () {
+            var toggle = function (chk, target) {
+                var parent = $(target).parents("li");
+                if ($(chk).is(":checked")) {
+                    parent.show().find("input, textarea, button, select").removeAttr("disabled");
+                } else {
+                    parent.hide().find("input, textarea, button, select").attr("disabled", true);
+                }
+            };
+
             $("#EsPaciente").click(function () {
-                $("#paciente").parents("li").toggle();
+                toggle(this, "#paciente");
             });
             $("#EsSecretaria").click(function () {
-                $("#secretaria").parents("li").toggle();
+                toggle(this, "#secretaria");
             });
             $("#EsProfesional").click(function () {
-                $("#profesional").parents("li").toggle();
+                toggle(this, "#profesional");
             });
-            
+
+            //Initialize
+            toggle($("#EsPaciente"), "#paciente");
+            toggle($("#EsSecretaria"), "#secretaria");
+            toggle($("#EsProfesional"), "#profesional");
+
             $("#action-add").click(function () {
                 $.ajax({
                     url: this.href,
