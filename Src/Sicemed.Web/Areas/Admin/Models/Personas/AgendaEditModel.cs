@@ -9,6 +9,9 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
 {
     public class AgendaEditModel
     {
+        [HiddenInput]
+        public virtual long? Id { get; set; }
+
         [Required]
         [DisplayName("Dia")]
         public virtual DayOfWeek Dia { get; set; }
@@ -44,6 +47,6 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
 
         [Required]
         [ScaffoldColumn(false)]
-        public string[] EspecialidadesSeleccionadas { get; set; }
+        public long[] EspecialidadesSeleccionadas { get; set; }
     }
 }

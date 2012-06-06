@@ -9,6 +9,9 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
     [DisplayName("profesional")]
     public class ProfesionalEditModel
     {
+        [HiddenInput]
+        public virtual long? Id { get; set; }
+
         [Required]
         [DisplayName("Matricula")]
         [DefaultStringLength]
@@ -25,6 +28,6 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
 
         [Required]
         [ScaffoldColumn(false)]
-        public string[] EspecialidadesSeleccionadas { get; set; }
+        public long[] EspecialidadesSeleccionadas { get; set; }
     }
 }

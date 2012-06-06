@@ -12,6 +12,9 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
 {
     public class PersonaEditModel : ICustomBindeableProperties
     {
+        [HiddenInput]
+        public virtual long? Id { get; set; }
+
         [Required]
         [Display(Name = "Nombre", Prompt = "AAAA")]
         [DefaultStringLength]
@@ -50,10 +53,6 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [Display(Name = "Email")]
         [DefaultStringLength]
         public string Email { get; set; }
-
-        [UIHint("ResetPassword")]
-        [DisplayName("Password")]
-        public string Password { get; set; }
 
         [Required]
         [DisplayName("Telefono")]

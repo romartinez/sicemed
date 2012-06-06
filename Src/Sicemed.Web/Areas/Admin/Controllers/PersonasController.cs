@@ -4,18 +4,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using AutoMapper;
 using Sicemed.Web.Areas.Admin.Models.Personas;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
+using Sicemed.Web.Infrastructure.Enums;
 using Sicemed.Web.Infrastructure.Exceptions;
 using Sicemed.Web.Infrastructure.Helpers;
+using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Components;
+using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
 {
     public class PersonasController : CrudBaseController<Persona>
     {
+        private readonly IMembershipService _membershipService;
+
+        public PersonasController(IMembershipService membershipService)
+        {
+            _membershipService = membershipService;
+        }
+
+
         protected override Expression<Func<Persona, object>> DefaultOrderBy
         {
             get { return x => x.Membership.Email; }
@@ -79,9 +92,60 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         {
             AppendLists(viewModel);
             if(ModelState.IsValid)
-            {   
-                //TODO: Guardar!
-                return RedirectToAction("Index");
+            {
+                var session = SessionFactory.GetCurrentSession();
+                var persona = Mapper.Map<Persona>(viewModel);
+                //Asignaciones que no se puede hacer en el mapper
+                persona.Domicilio = new Domicilio
+                {
+                    Direccion = viewModel.DomicilioDireccion,
+                    Localidad = session.Load<Localidad>(viewModel.DomicilioLocalidadId)
+                };
+
+                if(viewModel.EsPaciente)
+                {
+                    persona.As<Paciente>().Plan = session.Load<Plan>(viewModel.Paciente.PlanId);
+                }
+
+                if(viewModel.EsProfesional)
+                {
+                    var personaProfesional = persona.As<Profesional>();
+                    if(viewModel.Profesional.EspecialidadesSeleccionadas != null)
+                    {
+                        foreach (var especialidadId in viewModel.Profesional.EspecialidadesSeleccionadas)
+                        {
+                            var especialidad = session.Load<Especialidad>(especialidadId);
+                            personaProfesional.AgregarEspecialidad(especialidad);
+                        }
+                    }
+                    if(viewModel.Profesional.Agendas != null)
+                    {
+                        foreach (var agendaEditModel in viewModel.Profesional.Agendas)
+                        {
+                            var agendaModel = Mapper.Map<Agenda>(agendaEditModel);
+
+                            if (agendaEditModel.EspecialidadesSeleccionadas != null)
+                            {
+                                foreach (var especialidadId in agendaEditModel.EspecialidadesSeleccionadas)
+                                {
+                                    var especialidad = session.Load<Especialidad>(especialidadId);
+                                    agendaModel.AgregarEspecialidad(especialidad);
+                                }
+                            }
+                            agendaModel.Consultorio = session.Load<Consultorio>(agendaEditModel.ConsultorioId);
+                        }
+                    }
+                }
+
+                //Le seteo un password cualquiera, y luego envio mail para que lo resetee
+                var status = _membershipService.CreateUser(persona, viewModel.Email, Guid.NewGuid().ToString());
+                if (status == MembershipStatus.USER_CREATED)
+                {
+                    ShowMessages(ResponseMessage.Success());
+                    return RedirectToAction("Index");
+                }
+
+                ModelState.AddModelError("", status.Get());
             }
 
             return View(viewModel);
