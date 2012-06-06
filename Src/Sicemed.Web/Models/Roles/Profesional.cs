@@ -44,6 +44,17 @@ namespace Sicemed.Web.Models.Roles
             _especialidades.Add(especialidad);
         }
 
+        public virtual void AgregarAgenda(Agenda agenda)
+        {
+            if (agenda == null) throw new ArgumentNullException("agenda");
+
+            if (!agenda.EspecialidadesAtendidas.ToList().TrueForAll(x => _especialidades.Contains(x)))
+                throw new ArgumentException(@"Alguna de las Especialidades seleccionadas no pertenece a las Especialidades del Profesional.", "especialidades");
+
+            agenda.Profesional = this;
+            _agendas.Add(agenda);
+        }
+
         public virtual void AgregarAgenda(DayOfWeek dia, TimeSpan duracionTurno, DateTime horarioDesde, DateTime horarioHasta, Consultorio consultorio, params Especialidad[] especialidades)
         {
             if (especialidades == null) throw new ArgumentNullException("especialidades");

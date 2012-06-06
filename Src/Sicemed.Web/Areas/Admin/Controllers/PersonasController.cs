@@ -133,6 +133,8 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                                 }
                             }
                             agendaModel.Consultorio = session.Load<Consultorio>(agendaEditModel.ConsultorioId);
+                            
+                            personaProfesional.AgregarAgenda(agendaModel);
                         }
                     }
                 }
