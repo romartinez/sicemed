@@ -663,6 +663,7 @@
     <Content Include="Areas\Admin\Views\Personas\Crear.cshtml" />
     <Content Include="Areas\Admin\Views\Personas\EditorTemplates\Agendas.cshtml" />
     <Content Include="Areas\Admin\Views\Personas\_Agenda.cshtml" />
+    <Content Include="Areas\Admin\Views\Personas\Modificar.cshtml" />
     <None Include="Models\ClassDiagram.cd" />
     <Content Include="Views\Content\TemplateError.cshtml" />
     <Content Include="Views\ObtenerTurno\Index.cshtml" />

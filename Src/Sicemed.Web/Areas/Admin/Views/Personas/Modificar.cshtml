@@ -1,0 +1,61 @@
+﻿@model Sicemed.Web.Areas.Admin.Models.Personas.PersonaEditModel
+@{
+    ViewBag.Title = "Modificacion Usuario";
+}
+<h2>
+    Modificar Usuario: @Model.Apellido, @Model.Nombre @Model.SegundoNombre
+</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.ValidationSummaryWithMessage()
+
+    @Html.EditorForModel()
+
+    @Html.Submit()        
+}
+@section Scripts
+{
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            var toggle = function (chk, target) {
+                var parent = $(target).parents("li");
+                if ($(chk).is(":checked")) {
+                    parent.show().find("input, textarea, button, select").removeAttr("disabled");
+                } else {
+                    parent.hide().find("input, textarea, button, select").attr("disabled", true);
+                }
+            };
+
+            $("#EsPaciente").click(function () {
+                toggle(this, "#paciente");
+            });
+            $("#EsSecretaria").click(function () {
+                toggle(this, "#secretaria");
+            });
+            $("#EsProfesional").click(function () {
+                toggle(this, "#profesional");
+            });
+
+            //Initialize
+            toggle($("#EsPaciente"), "#paciente");
+            toggle($("#EsSecretaria"), "#secretaria");
+            toggle($("#EsProfesional"), "#profesional");
+
+            $("#action-add").click(function () {
+                $.ajax({
+                    url: this.href,
+                    cache: false,
+                    success: function (html) { $("#agendas").append(html); }
+                });
+                return false;
+            });
+
+            $("a.action-delete").live("click", function () {
+                $(this).parents("div.editor-field-inner:first").remove();
+                return false;
+            });
+        });
+    </script>
+}

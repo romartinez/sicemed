@@ -43,9 +43,7 @@
                                 app.ui.showError("Debe seleccionar un Usuario.");
                                 return;
                             }
-                            $.postAntiForgery("@Url.Action("DesbloquearUsuario")", { usuarioId: selected }, function () {
-                                grid.trigger("reloadGrid");
-                            });
+                            window.location = "@Url.Action("Modificar")?personaId=" + selected;                            
                         }
                     },
                     {

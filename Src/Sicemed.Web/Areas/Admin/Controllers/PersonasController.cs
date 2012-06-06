@@ -73,7 +73,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 throw new ValidationErrorException("El usuario ya se encuentra desbloqueado.");
 
             MembershipService.UnlockUser(user.Membership.Email);
-            
+
             ShowMessages(ResponseMessage.Success("Desbloqueo realizado con éxito."));
         }
 
@@ -91,7 +91,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         public ActionResult Crear(PersonaEditModel viewModel)
         {
             AppendLists(viewModel);
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {
@@ -151,16 +151,16 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                         return RedirectToAction("Index");
                     }
 
-                    ModelState.AddModelError("", status.Get());                    
+                    ModelState.AddModelError("", status.Get());
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ModelState.AddModelError("", ex.Message);
                 }
             }
 
             return View(viewModel);
-        }        
+        }
 
         public ActionResult NuevaAgenda()
         {
@@ -168,7 +168,104 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             AppendLists(viewModel);
             return PartialView("_Agenda", viewModel);
         }
+        #endregion
 
+        #region Editar
+        [HttpGet]
+        [AjaxHandleError]
+        public ActionResult Modificar(long personaId)
+        {
+            var session = SessionFactory.GetCurrentSession();
+            var model = session.Get<Persona>(personaId);
+            if (model == null)
+            {
+                ShowMessages(ResponseMessage.Error("No se ha encontrado el usuario."));
+                return RedirectToAction("Index");
+            }
+
+            var editModel = Mapper.Map<PersonaEditModel>(model);
+            AppendLists(editModel);
+            return View();
+        }
+
+        [HttpPost]
+        [AjaxHandleError]
+        [ValidateAntiForgeryToken]
+        public ActionResult Modificar(PersonaEditModel editModel)
+        {
+            AppendLists(editModel);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var session = SessionFactory.GetCurrentSession();
+                    var persona = session.Get<Persona>(editModel.Id);
+                    if (persona == null)
+                    {
+                        ShowMessages(ResponseMessage.Error("No se ha encontrado el usuario."));
+                        return RedirectToAction("Index");
+                    }
+
+                    Mapper.Map(editModel, persona);
+                    //Asignaciones que no se puede hacer en el mapper
+                    persona.Domicilio = new Domicilio
+                    {
+                        Direccion = editModel.DomicilioDireccion,
+                        Localidad = session.Load<Localidad>(editModel.DomicilioLocalidadId)
+                    };
+
+                    if (editModel.EsPaciente)
+                    {
+                        persona.As<Paciente>().Plan = session.Load<Plan>(editModel.Paciente.PlanId);
+                    }
+
+                    if (editModel.EsProfesional)
+                    {
+                        var personaProfesional = persona.As<Profesional>();
+                        if (editModel.Profesional.EspecialidadesSeleccionadas != null)
+                        {
+                            foreach (var especialidadId in editModel.Profesional.EspecialidadesSeleccionadas)
+                            {
+                                var especialidad = session.Load<Especialidad>(especialidadId);
+                                personaProfesional.AgregarEspecialidad(especialidad);
+                            }
+                        }
+                        personaProfesional.Agendas.Clear();
+                        if (editModel.Profesional.Agendas != null)
+                        {
+                            foreach (var agendaEditModel in editModel.Profesional.Agendas)
+                            {
+                                var agendaModel = Mapper.Map<Agenda>(agendaEditModel);
+
+                                if (agendaEditModel.EspecialidadesSeleccionadas != null)
+                                {
+                                    foreach (var especialidadId in agendaEditModel.EspecialidadesSeleccionadas)
+                                    {
+                                        var especialidad = session.Load<Especialidad>(especialidadId);
+                                        agendaModel.AgregarEspecialidad(especialidad);
+                                    }
+                                }
+                                agendaModel.Consultorio = session.Load<Consultorio>(agendaEditModel.ConsultorioId);
+
+                                personaProfesional.AgregarAgenda(agendaModel);
+                            }
+                        }
+                    }
+
+                    ShowMessages(ResponseMessage.Success());
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                return View(editModel);
+            }
+            return View(editModel);
+        }
+        #endregion
+
+        #region Agregar Referencias
         private void AppendLists(PersonaEditModel viewModel)
         {
             viewModel.TiposDocumentosHabilitados = DomainExtensions.GetTiposDocumentos(viewModel.TipoDocumentoId);
@@ -183,15 +280,15 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             if (viewModel.Paciente.ObraSocialId.HasValue)
                 viewModel.Paciente.PlanesObraSocialHabilitados =
                     DomainExtensions.GetPlanesObraSocial(SessionFactory, viewModel.Paciente.ObraSocialId.Value, viewModel.Paciente.PlanId);
-            
+
             //Profesional
             viewModel.Profesional.Especialidades = DomainExtensions.GetEspecialidades(SessionFactory, viewModel.Profesional.EspecialidadesSeleccionadas);
-            if(viewModel.Profesional.Agendas != null)
+            if (viewModel.Profesional.Agendas != null)
             {
                 foreach (var agenda in viewModel.Profesional.Agendas)
                 {
                     AppendLists(agenda);
-                }                
+                }
             }
         }
 
@@ -200,7 +297,6 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             viewModel.Especialidades = DomainExtensions.GetEspecialidades(SessionFactory, viewModel.EspecialidadesSeleccionadas);
             viewModel.Consultorios = DomainExtensions.GetConsultorios(SessionFactory, viewModel.ConsultorioId);
         }
-
         #endregion
 
         protected override IEnumerable AplicarProjections(IEnumerable<Persona> results)
