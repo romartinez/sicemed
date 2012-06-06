@@ -1,2 +1,7 @@
 2012-06-06 15:51:12,214 [1] WARN  Rhino.Licensing.AbstractLicenseValidator [(null)] - Could not find license file: C:\Users\wpoch\AppData\Local\NHibernate Profiler\license.xml
 2012-06-06 15:51:53,163 [4] INFO  HibernatingRhinos.Profiler.Client.App [(null)] - Checking for updates...
+2012-06-06 15:58:02,820 [4] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - Need to display in VS: G:\sicemed\Src\Sicemed.Web\Infrastructure\ActionResults\NewtonJsonResult.cs
+2012-06-06 15:58:03,202 [4] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - File is not opened yet so I'm going to scan solutions
+2012-06-06 15:58:03,312 [4] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - I've found any suitable VS instance so I'm returning first on list
+2012-06-06 15:58:04,276 [4] WARN  HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - Trying to ask nicely from VS to activate has failed, trying to use SetForegroundWindow for the task
+2012-06-06 15:58:04,278 [4] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - SetForegroundWindow returned: False
