@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Web;
+using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Facilities;
 using Castle.MicroKernel.Registration;
 using NHibernate;
@@ -13,6 +14,7 @@ using NHibernate.Event;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Tool.hbm2ddl;
 using Sicemed.Web.Infrastructure.HttpModules;
+using Sicemed.Web.Infrastructure.NHibernate;
 using Sicemed.Web.Infrastructure.NHibernate.Events;
 using Sicemed.Web.Models;
 
@@ -24,14 +26,18 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
         {
             var config = BuildDatabaseConfiguration();
 
-            Kernel.Register(
-                Component.For<ISessionFactory>()
-                    .UsingFactoryMethod(k =>
-                    {                                            
-                        var sf = config.BuildSessionFactory();
-                        HttpContext.Current.Application[NHibernateSessionModule.NH_SESSION_FACTORY_KEY] = sf;
-                        return sf;
-                    }));
+            Kernel.Register(Component.For<ISessionFactory>()
+                                           .UsingFactoryMethod(k => config.BuildSessionFactory()));
+
+            Kernel.Register(Component.For<NHibernateSessionModule>());
+
+            Kernel.Register(Component.For<ISessionFactoryProvider>().AsFactory());
+
+            Kernel.Register(Component.For<IEnumerable<ISessionFactory>>()
+                                        .UsingFactoryMethod(k => k.ResolveAll<ISessionFactory>()));
+
+            HttpContext.Current.Application[SessionFactoryProvider.Key]
+                            = Kernel.Resolve<ISessionFactoryProvider>();
         }
 
         public static Configuration BuildDatabaseConfiguration()
@@ -58,8 +64,11 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
 
             SchemaMetadataUpdater.QuoteTableAndColumns(configuration);
 
-            configuration.Properties[Environment.CurrentSessionContextClass] =
-                typeof(WebSessionContext).AssemblyQualifiedName;
+            //configuration.Properties[Environment.CurrentSessionContextClass] =
+            //    typeof(WebSessionContext).AssemblyQualifiedName;
+
+            configuration.Properties[Environment.CurrentSessionContextClass]
+                = typeof(LazySessionContext).AssemblyQualifiedName; 
 
             var auditListener = new AuditEventListener();
 
@@ -68,6 +77,7 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
             configuration.SetListener(ListenerType.PostUpdate, auditListener);
 
 			configuration.SetListener(ListenerType.Flush, new PostFlushFixEventListener());
+
 
             return configuration;
         }

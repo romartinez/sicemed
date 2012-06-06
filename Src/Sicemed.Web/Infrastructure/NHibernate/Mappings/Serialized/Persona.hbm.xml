@@ -34,7 +34,7 @@
       <property name="Numero" column="TelefonoNumero" />
       <property name="Prefijo" column="TelefonoPrefijo" />
     </component>
-    <set name="Roles" access="nosetter.camelcase-underscore" inverse="true" cascade="all,delete-orphan">
+    <set name="Roles" access="nosetter.camelcase-underscore" inverse="true" cascade="all,delete-orphan" lazy="false">
       <key column="PersonaId" />
       <one-to-many class="Sicemed.Web.Models.Roles.Rol" />
     </set>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using AutoMapper;
+using NHibernate;
 using Sicemed.Web.Areas.Admin.Models.Personas;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
@@ -320,6 +321,13 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             viewModel.Consultorios = DomainExtensions.GetConsultorios(SessionFactory, viewModel.ConsultorioId);
         }
         #endregion
+        
+        protected override IQueryOver<Persona> AplicarFetching(IQueryOver<Persona, Persona> query)
+        {
+            return query.Fetch(x => x.Domicilio.Localidad).Eager
+                .Fetch(x=>x.Domicilio.Localidad.Provincia).Eager
+                .Fetch(x=>x.Roles).Eager;
+        }
 
         protected override IEnumerable AplicarProjections(IEnumerable<Persona> results)
         {

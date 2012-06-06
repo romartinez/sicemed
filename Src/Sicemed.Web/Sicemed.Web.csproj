@@ -260,6 +260,8 @@
     <Compile Include="Infrastructure\ModelBinders\CustomBindeablePropertiesModelBinder.cs" />
     <Compile Include="Infrastructure\NHibernate\Events\AuditEventListener.cs" />
     <Compile Include="Infrastructure\NHibernate\Events\PostFlushFixEventListener.cs" />
+    <Compile Include="Infrastructure\NHibernate\ISessionFactoryProvider.cs" />
+    <Compile Include="Infrastructure\NHibernate\LazySessionContext.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\AuditLogMapping.cs" />
     <Compile Include="Infrastructure\NHibernate\NHibernateContractResolver.cs" />
     <Compile Include="Infrastructure\NHibernate\EnumerationType.cs" />
@@ -287,6 +289,7 @@
     <Compile Include="Infrastructure\NHibernate\Mappings\TurnoMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\PersonaMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Resolver.cs" />
+    <Compile Include="Infrastructure\NHibernate\SessionFactoryProvider.cs" />
     <Compile Include="Infrastructure\Providers\Cache\ICacheProvider.cs" />
     <Compile Include="Infrastructure\Providers\Cache\InMemoryCacheProvider.cs" />
     <Compile Include="Infrastructure\Providers\Cache\NullCacheProvider.cs" />
