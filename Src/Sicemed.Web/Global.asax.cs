@@ -17,8 +17,10 @@ using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Transform;
 using SICEMED.Web.Infrastructure.Windsor.Facilities;
+using Sicemed.Web.Areas.Admin.Models.Personas;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Controllers;
+using Sicemed.Web.Infrastructure.ModelBinders;
 using Sicemed.Web.Infrastructure.Providers.FilterAtrribute;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.ViewModels;
@@ -104,6 +106,8 @@ namespace SICEMED.Web
         {
             DefaultModelBinder.ResourceClassKey = "Messages";
             ValidationExtensions.ResourceClassKey = "Messages";
+
+            ModelBinders.Binders.Add(typeof(PersonaEditModel), new PersonaEditModelBinder());
 
             RegisterGlobalFilters(GlobalFilters.Filters);
 

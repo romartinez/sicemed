@@ -192,9 +192,8 @@
     <Compile Include="Areas\Admin\Models\Personas\AgendaEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\PacienteEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\PersonaEditModel.cs" />
-    <Compile Include="Areas\Admin\Models\Personas\PersonaViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\ProfesionalEditModel.cs" />
-    <Compile Include="Areas\Admin\Models\Personas\SecretariaEditViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\Personas\SecretariaEditModel.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Areas\Admin\Controllers\DomainController.cs" />
@@ -248,6 +247,7 @@
     <Compile Include="Infrastructure\HttpModules\NHibernateSessionModule.cs" />
     <Compile Include="Infrastructure\HttpModules\SecurityAuthenticationModule.cs" />
     <Compile Include="Infrastructure\Logs\ConfigAdoNetAppender.cs" />
+    <Compile Include="Infrastructure\ModelBinders\PersonaEditModelBinder.cs" />
     <Compile Include="Infrastructure\NHibernate\Events\AuditEventListener.cs" />
     <Compile Include="Infrastructure\NHibernate\Events\PostFlushFixEventListener.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\AuditLogMapping.cs" />

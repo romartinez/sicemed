@@ -5,12 +5,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using DataAnnotationsExtensions;
 using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
-using Sicemed.Web.Infrastructure.Services;
+using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models.Components;
 
 namespace Sicemed.Web.Areas.Admin.Models.Personas
 {
-    public class PersonaEditModel
+    public class PersonaEditModel : IValidatableObject
     {
         [Required]
         [Display(Name = "Nombre", Prompt = "AAAA")]
@@ -94,7 +94,7 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         public bool EsSecretaria { get; set; }
         
         [DisplayName("Secretaria")]
-        public SecretariaEditViewModel Secretaria { get; set; }
+        public SecretariaEditModel Secretaria { get; set; }
 
         [DisplayName("Es Profesional")]
         public bool EsProfesional { get; set; }
@@ -108,8 +108,23 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         public PersonaEditModel()
         {
             Paciente = new PacienteEditModel();
-            Secretaria = new SecretariaEditViewModel();
+            Secretaria = new SecretariaEditModel();
             Profesional = new ProfesionalEditModel();
+            //TODO: Sacar esto
+            EsPaciente = true;
+            EsSecretaria = true;
+            EsProfesional = true;
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var errors = new List<ValidationResult>();
+            if(EsPaciente && Paciente == null)
+            {
+                errors.Add(new ValidationResult("Debe completar los campos del paciente!"));
+            }
+            errors.Add(new ValidationResult("ERROR!"));
+            return errors;
         }
     }
 }
