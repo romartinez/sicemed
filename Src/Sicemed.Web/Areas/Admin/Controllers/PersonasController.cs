@@ -185,7 +185,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
             var editModel = Mapper.Map<PersonaEditModel>(model);
             AppendLists(editModel);
-            return View();
+            return View(editModel);
         }
 
         [HttpPost]
@@ -230,10 +230,23 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                                 personaProfesional.AgregarEspecialidad(especialidad);
                             }
                         }
-                        personaProfesional.Agendas.Clear();
-                        if (editModel.Profesional.Agendas != null)
+                        //Veo el tema de las agendas
+                        if (editModel.Profesional.Agendas == null || !editModel.Profesional.Agendas.Any())
                         {
-                            foreach (var agendaEditModel in editModel.Profesional.Agendas)
+                            personaProfesional.Agendas.Clear();
+                        }
+                        else
+                        {
+                            //Agendas a eliminar
+                            var agendasAEliminar =
+                                personaProfesional.Agendas.Where(m => editModel.Profesional.Agendas.All(v => v.Id != m.Id)).ToList();
+                            foreach (var agenda in agendasAEliminar)
+                            {
+                               personaProfesional.QuitarAgenda(agenda); 
+                            }
+                            //Agendas a agregar
+                            var agendasAAgregar = editModel.Profesional.Agendas.Where(x => !x.Id.HasValue);
+                            foreach (var agendaEditModel in agendasAAgregar)
                             {
                                 var agendaModel = Mapper.Map<Agenda>(agendaEditModel);
 
@@ -248,16 +261,25 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                                 agendaModel.Consultorio = session.Load<Consultorio>(agendaEditModel.ConsultorioId);
 
                                 personaProfesional.AgregarAgenda(agendaModel);
+                            }                            
+                            //Agendas a actualizar
+                            var agendasActualizar = personaProfesional.Agendas.Where(m => editModel.Profesional.Agendas.All(v => v.Id == m.Id)).ToList();
+                            foreach (var agenda in agendasActualizar)
+                            {
+                                var agendaEditModel = editModel.Profesional.Agendas.Single(v => v.Id == agenda.Id);
+                                Mapper.Map(agendaEditModel, agenda);
                             }
                         }
                     }
+
+                    session.Update(persona);
 
                     ShowMessages(ResponseMessage.Success());
                     return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", ex.Message);
+                    ModelState.AddModelError("", ex.ToString());
                 }
                 return View(editModel);
             }

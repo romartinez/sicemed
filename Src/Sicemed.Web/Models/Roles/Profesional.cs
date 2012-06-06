@@ -56,6 +56,14 @@ namespace Sicemed.Web.Models.Roles
             _agendas.Add(agenda);
         }
 
+        public virtual void QuitarAgenda(Agenda agenda)
+        {
+            if (agenda == null) throw new ArgumentNullException("agenda");
+
+            agenda.Profesional = null;
+            _agendas.Remove(agenda);
+        }
+
         public virtual void AgregarAgenda(DayOfWeek dia, TimeSpan duracionTurno, DateTime horarioDesde, DateTime horarioHasta, Consultorio consultorio, params Especialidad[] especialidades)
         {
             if (especialidades == null) throw new ArgumentNullException("especialidades");

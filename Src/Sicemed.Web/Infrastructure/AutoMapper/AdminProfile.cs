@@ -43,13 +43,64 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                                   v.Telefonos.ForEach(t => m.AgregarTelefono(t));
                               });
 
+
+            #region Persona -> PersonaEditModel
+            Mapper.CreateMap<Persona, PersonaEditModel>()
+                .ForMember(d => d.Email, m => m.MapFrom(o => o.Membership.Email))
+                .ForMember(d => d.TipoDocumentoId, m => m.MapFrom(o => o.Documento.TipoDocumento.Value))
+                .ForMember(d => d.TiposDocumentosHabilitados, m => m.Ignore())
+                .ForMember(d => d.ProvinciasHabilitadas, m => m.Ignore())
+                .ForMember(d => d.LocalidadesHabilitadas, m => m.Ignore())
+
+                .ForMember(d => d.EsPaciente, m => m.MapFrom(o => o.IsInRole<Paciente>()))
+                .ForMember(d => d.Paciente, m =>
+                {
+                    m.ResolveUsing(o => o.IsInRole<Paciente>() ? o.As<Paciente>() : null);
+                    m.NullSubstitute(new PacienteEditModel());
+                })
+
+                .ForMember(d => d.EsSecretaria, m => m.MapFrom(o => o.IsInRole<Secretaria>()))
+                .ForMember(d => d.Secretaria, m =>
+                {
+                    m.ResolveUsing(o => o.IsInRole<Secretaria>() ? o.As<Secretaria>() : null);
+                    m.NullSubstitute(new SecretariaEditModel());
+                })
+
+                .ForMember(d => d.EsProfesional, m => m.MapFrom(o => o.IsInRole<Profesional>()))
+                .ForMember(d => d.Profesional, m =>
+                {
+                    m.ResolveUsing(o => o.IsInRole<Profesional>() ? o.As<Profesional>() : null);
+                    m.NullSubstitute(new ProfesionalEditModel());
+                })
+
+
+                .ForMember(d => d.EsAdmin, m => m.MapFrom(o => o.IsInRole<Administrador>()));
+
+            Mapper.CreateMap<Paciente, PacienteEditModel>()
+                .ForMember(d => d.ObraSocialId, m => m.MapFrom(o => o.Plan.ObraSocial.Id))
+                .ForMember(d => d.ObrasSocialesHabilitadas, m => m.Ignore())
+                .ForMember(d => d.PlanesObraSocialHabilitados, m => m.Ignore());
+
+            Mapper.CreateMap<Secretaria, SecretariaEditModel>();
+
+            Mapper.CreateMap<Profesional, ProfesionalEditModel>()
+                .ForMember(d => d.EspecialidadesSeleccionadas, m => m.MapFrom(o => o.Especialidades.Select(e => e.Id)))
+                .ForMember(d => d.Especialidades, m => m.Ignore());
+
+            Mapper.CreateMap<Agenda, AgendaEditModel>()
+                .ForMember(d => d.EspecialidadesSeleccionadas, m => m.MapFrom(o => o.EspecialidadesAtendidas.Select(e => e.Id)))
+                .ForMember(d => d.Consultorios, m => m.Ignore())
+                .ForMember(d => d.Especialidades, m => m.Ignore());
+            #endregion
+
+            #region PersonaEditModel -> Persona
             Mapper.CreateMap<PersonaEditModel, Persona>()
-                .ForMember(d => d.Documento, m => m.ResolveUsing(o => 
+                .ForMember(d => d.Documento, m => m.ResolveUsing(o =>
                     new Documento
                     {
                         Numero = o.DocumentoNumero,
                         TipoDocumento = Enumeration.FromValue<TipoDocumento>(o.TipoDocumentoId)
-                }))
+                    }))
                 .ForMember(d => d.Domicilio, m => m.Ignore())
                 .AfterMap(PersonaEditModelToPersonaAfterMap);
             Mapper.CreateMap<PacienteEditModel, Paciente>()
@@ -62,18 +113,20 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
             Mapper.CreateMap<ProfesionalEditModel, Profesional>()
                 .ForMember(d => d.FechaAsignacion, m => m.Ignore())
                 //Mapeo a mano las agendas porque referencian otras entidades
-                .ForMember(d => d.Agendas, m => m.Ignore()) 
+                .ForMember(d => d.Agendas, m => m.Ignore())
                 .ForMember(d => d.Persona, m => m.Ignore());
             Mapper.CreateMap<AgendaEditModel, Agenda>()
                 .ForMember(d => d.Consultorio, m => m.Ignore())
                 .ForMember(d => d.Profesional, m => m.Ignore());
+            #endregion
         }
 
+        #region Helpers PersonaEditModel -> Persona
         private static void PersonaEditModelToPersonaAfterMap(PersonaEditModel editModel, Persona model)
         {
-            UpdateRole<Paciente>(model, editModel.EsPaciente, editModel.Paciente);
-            UpdateRole<Secretaria>(model, editModel.EsSecretaria, editModel.Secretaria);
-            UpdateRole<Profesional>(model, editModel.EsProfesional, editModel.Profesional);
+            UpdateRole<PacienteEditModel, Paciente>(model, editModel.EsPaciente, editModel.Paciente);
+            UpdateRole<SecretariaEditModel, Secretaria>(model, editModel.EsSecretaria, editModel.Secretaria);
+            UpdateRole<ProfesionalEditModel, Profesional>(model, editModel.EsProfesional, editModel.Profesional);
             //Admin
             if (editModel.EsAdmin && model.IsInRole<Administrador>()) return;
             if (editModel.EsAdmin && !model.IsInRole<Administrador>())
@@ -88,27 +141,28 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
             }
         }
 
-        private static void UpdateRole<T>(Persona persona, bool editModelIsSelected, object editModel) where T : Rol
+        private static void UpdateRole<TEditModel,TRol>(Persona persona, bool editModelIsSelected, TEditModel editModel) where TRol : Rol
         {
-            if (editModelIsSelected && persona.IsInRole<T>())
+            if (editModelIsSelected && persona.IsInRole<TRol>())
             {
                 //Update current values
-                var rol = persona.As<T>();
+                var rol = persona.As<TRol>();
                 Mapper.Map(editModel, rol);
             }
             else
             {
-                if (editModelIsSelected && !persona.IsInRole<T>())
+                if (editModelIsSelected && !persona.IsInRole<TRol>())
                 {
-                    var rol = Mapper.Map<T>(editModel);
+                    var rol = Mapper.Map<TRol>(editModel);
                     persona.AgregarRol(rol);
                 }
-                else if (!editModelIsSelected && persona.IsInRole<T>())
+                else if (!editModelIsSelected && persona.IsInRole<TRol>())
                 {
-                    var rol = persona.As<T>();
+                    var rol = persona.As<TRol>();
                     persona.QuitarRol(rol);
                 }
             }
         }
+        #endregion
     }
 }
