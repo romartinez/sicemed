@@ -161,7 +161,7 @@ namespace SICEMED.Web
                 if (clinica == default(Clinica))
                     throw new ConfigurationErrorsException(
                         string.Format("El valor configurado en el parámetro ClinicaID ('{0}') no se corresponde con ninguna clínica cargada en la base de datos.", clinicaId));
-                _clinica = Mapper.Map<ClinicaViewModel>(clinica);
+                _clinica = ServiceLocator.Current.GetInstance<IMappingEngine>().Map<ClinicaViewModel>(clinica);
             }
         }
 

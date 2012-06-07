@@ -15,13 +15,13 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
 
 		protected override void Configure()
 		{
-			Mapper.CreateMap<Enumeration, InfoViewModel>()
+			CreateMap<Enumeration, InfoViewModel>()
 				.ForMember(d => d.Id, m => m.MapFrom(o => o.Value))
 				.ForMember(d => d.Descripcion, m => m.MapFrom(o => o.DisplayName));
 		    
-            Mapper.CreateMap<Clinica, ClinicaViewModel>();
+            CreateMap<Clinica, ClinicaViewModel>();
 
-		    Mapper.CreateMap<RegistroPersonaViewModel, Persona>()
+		    CreateMap<RegistroPersonaViewModel, Persona>()
                 .ForMember(d => d.Id, m => m.Ignore())
                 .ForMember(d => d.Membership, m => m.Ignore())
                 .ForMember(d => d.Documento, m => m.Ignore())

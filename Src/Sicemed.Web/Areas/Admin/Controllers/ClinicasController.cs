@@ -17,11 +17,17 @@ namespace Sicemed.Web.Areas.Admin.Controllers
     public class ClinicasController : NHibernateController
     {
         public virtual IObtenerClinicaActivaQuery ObtenerClinicaActivaQuery { get; set; }
+        private readonly IMappingEngine _mappingEngine;
+
+        public ClinicasController(IMappingEngine mappingEngine)
+        {
+            _mappingEngine = mappingEngine;
+        }
 
         public virtual ActionResult Index()
         {
             var model = ObtenerClinicaActivaQuery.Execute();
-        	var viewModel = Mapper.Map<ClinicaEditViewModel>(model);
+            var viewModel = _mappingEngine.Map<ClinicaEditViewModel>(model);
 
         	AppendLists(viewModel);
 
@@ -53,7 +59,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
             var modelFromDb = ObtenerClinicaActivaQuery.Execute();
 
-            Mapper.Map(viewModel, modelFromDb);
+            _mappingEngine.Map(viewModel, modelFromDb);
 
             //Update not automapped properties
             modelFromDb.Documento.Numero = viewModel.DocumentoNumero;

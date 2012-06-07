@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Web.Mvc;
 using AutoMapper;
-using NHibernate;
-using NHibernate.Criterion;
 using Sicemed.Web.Areas.Admin.Models.Personas;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
@@ -26,10 +22,12 @@ namespace Sicemed.Web.Areas.Admin.Controllers
     public class PersonasController : NHibernateController
     {
         private readonly IMembershipService _membershipService;
+        private readonly IMappingEngine _mappingEngine;
 
-        public PersonasController(IMembershipService membershipService)
+        public PersonasController(IMembershipService membershipService, IMappingEngine mappingEngine)
         {
             _membershipService = membershipService;
+            _mappingEngine = mappingEngine;
         }
 
         public ActionResult Index()
@@ -62,7 +60,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 respuesta.Records = count;
             }
             var entites = query.Take(rows).Skip(page * rows).Future();
-            respuesta.Rows = Mapper.Map<IEnumerable<PersonaViewModel>>(entites);
+            respuesta.Rows = _mappingEngine.Map<IEnumerable<PersonaViewModel>>(entites);
 
             respuesta.Page = ++page;
             respuesta.Total = (long)Math.Ceiling(respuesta.Records / (double)rows);
@@ -127,65 +125,22 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
-        public ActionResult Nuevo(PersonaEditModel viewModel)
+        public ActionResult Nuevo(PersonaEditModel editModel)
         {
-            AppendLists(viewModel);
+            AppendLists(editModel);
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var session = SessionFactory.GetCurrentSession();
-                    var persona = Mapper.Map<Persona>(viewModel);
-                    //Asignaciones que no se puede hacer en el mapper
-                    persona.Domicilio = new Domicilio
-                    {
-                        Direccion = viewModel.DomicilioDireccion,
-                        Localidad = session.Load<Localidad>(viewModel.DomicilioLocalidadId)
-                    };
-
-                    if (viewModel.EsPaciente)
-                    {
-                        persona.As<Paciente>().Plan = session.Load<Plan>(viewModel.Paciente.PlanId);
-                    }
-
-                    if (viewModel.EsProfesional)
-                    {
-                        var personaProfesional = persona.As<Profesional>();
-                        if (viewModel.Profesional.EspecialidadesSeleccionadas != null)
-                        {
-                            foreach (var especialidadId in viewModel.Profesional.EspecialidadesSeleccionadas)
-                            {
-                                var especialidad = session.Load<Especialidad>(especialidadId);
-                                personaProfesional.AgregarEspecialidad(especialidad);
-                            }
-                        }
-                        if (viewModel.Profesional.Agendas != null)
-                        {
-                            foreach (var agendaEditModel in viewModel.Profesional.Agendas)
-                            {
-                                var agendaModel = Mapper.Map<Agenda>(agendaEditModel);
-
-                                if (agendaEditModel.EspecialidadesSeleccionadas != null)
-                                {
-                                    foreach (var especialidadId in agendaEditModel.EspecialidadesSeleccionadas)
-                                    {
-                                        var especialidad = session.Load<Especialidad>(especialidadId);
-                                        agendaModel.AgregarEspecialidad(especialidad);
-                                    }
-                                }
-                                agendaModel.Consultorio = session.Load<Consultorio>(agendaEditModel.ConsultorioId);
-
-                                personaProfesional.AgregarAgenda(agendaModel);
-                            }
-                        }
-                    }
+                    var persona = _mappingEngine.Map<Persona>(editModel);
+                    AdditionalMappings(editModel, persona);
 
                     //Le seteo un password cualquiera, y luego envio mail para que lo resetee
-                    var status = _membershipService.CreateUser(persona, viewModel.Email, Guid.NewGuid().ToString());
+                    var status = _membershipService.CreateUser(persona, editModel.Email, Guid.NewGuid().ToString());
                     if (status == MembershipStatus.USER_CREATED)
                     {
                         //Envio mail para que cargue su password
-                        _membershipService.RecoverPassword(viewModel.Email);
+                        _membershipService.RecoverPassword(editModel.Email);
                         ShowMessages(ResponseMessage.Success());
                         return RedirectToAction("Index");
                     }
@@ -198,7 +153,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 }
             }
 
-            return View(viewModel);
+            return View(editModel);
         }
 
         public ActionResult NuevaAgenda()
@@ -221,7 +176,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            var editModel = Mapper.Map<PersonaEditModel>(model);
+            var editModel = _mappingEngine.Map<PersonaEditModel>(model);
             AppendLists(editModel);
             return View(editModel);
         }
@@ -244,27 +199,8 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                         return RedirectToAction("Index");
                     }
 
-                    Mapper.Map(editModel, persona);
-                    //Asignaciones que no se puede hacer en el mapper
-                    persona.Domicilio = new Domicilio
-                    {
-                        Direccion = editModel.DomicilioDireccion,
-                        Localidad = session.Load<Localidad>(editModel.DomicilioLocalidadId)
-                    };
-
-                    if (editModel.EsPaciente)
-                    {
-                        persona.As<Paciente>().Plan = session.Load<Plan>(editModel.Paciente.PlanId);
-                    }
-
-                    if (editModel.EsProfesional)
-                    {
-                        var personaProfesional = persona.As<Profesional>();
-                        ProcesarEspecialidades(editModel, personaProfesional);
-                        ProcesarAgendas(editModel, personaProfesional);
-                    }
-
-                    session.Update(persona);
+                    _mappingEngine.Map(editModel, persona);
+                    AdditionalMappings(editModel, persona);
 
                     ShowMessages(ResponseMessage.Success());
                     return RedirectToAction("Index");
@@ -276,6 +212,28 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 return View(editModel);
             }
             return View(editModel);
+        }
+
+        private void AdditionalMappings(PersonaEditModel editModel, Persona persona)
+        {
+            var session = SessionFactory.GetCurrentSession();
+            persona.Domicilio = new Domicilio
+                                    {
+                                        Direccion = editModel.DomicilioDireccion,
+                                        Localidad = session.Load<Localidad>(editModel.DomicilioLocalidadId)
+                                    };
+
+            if (editModel.EsPaciente)
+            {
+                persona.As<Paciente>().Plan = session.Load<Plan>(editModel.Paciente.PlanId);
+            }
+
+            if (editModel.EsProfesional)
+            {
+                var personaProfesional = persona.As<Profesional>();
+                ProcesarEspecialidades(editModel, personaProfesional);
+                ProcesarAgendas(editModel, personaProfesional);
+            }
         }
 
         private void ProcesarEspecialidades(PersonaEditModel editModel, Profesional personaProfesional)
@@ -343,7 +301,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 var agendasAAgregar = editModel.Profesional.Agendas.Where(x => !x.Id.HasValue);
                 foreach (var agendaEditModel in agendasAAgregar)
                 {
-                    var agendaModel = Mapper.Map<Agenda>(agendaEditModel);
+                    var agendaModel = _mappingEngine.Map<Agenda>(agendaEditModel);
 
                     if (agendaEditModel.EspecialidadesSeleccionadas != null)
                     {
@@ -363,7 +321,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 foreach (var agenda in agendasActualizar)
                 {
                     var agendaEditModel = editModel.Profesional.Agendas.Single(v => v.Id == agenda.Id);
-                    Mapper.Map(agendaEditModel, agenda);
+                    _mappingEngine.Map(agendaEditModel, agenda);
                     ProcesarEspecialidades(agendaEditModel, agenda);
                     agenda.Consultorio = session.Load<Consultorio>(agendaEditModel.ConsultorioId);
                 }

@@ -1,4 +1,5 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using AutoMapper;
+using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using EfficientlyLazy.Crypto;
@@ -25,10 +26,11 @@ namespace SICEMED.Web.Infrastructure.Windsor.Installers
                 Component.For<ISecurityService>().ImplementedBy<SecurityService>().LifeStyle.Singleton,
                 //Providers
                 Component.For<ICacheProvider>().ImplementedBy<InMemoryCacheProvider>().LifeStyle.Singleton,
+                Component.For<IMappingEngine>().UsingFactoryMethod(() => Mapper.Engine).LifeStyle.Singleton,
                 //Menu Provider
                 //Queries
                 AllTypes.FromThisAssembly().BasedOn<IQuery>()
-                    .WithService.DefaultInterface().Configure(x=>x.LifeStyle.Transient),                
+                    .WithService.DefaultInterface().Configure(x => x.LifeStyle.Transient),
                 Component.For<IApplicationInstaller>().ImplementedBy<ApplicationInstaller>().LifeStyle.Singleton,
                 //Transients
                 Component.For<IMembershipService>().ImplementedBy<MembershipService>().LifeStyle.Transient

@@ -7,7 +7,6 @@ using Castle.MicroKernel.Registration;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
-using NHibernate.Context;
 using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Event;
@@ -55,26 +54,23 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
                                                   db.LogFormattedSql = true;
                                                   db.HqlToSqlSubstitutions = "true 1, false 0, yes 'Y', no 'N'";
                                               });
-
+            
+            //NOTE: Uso mapeo por XML, para fine-tunning
             //var mappings = GetHbmMappings();
-
             //mappings.ToList().ForEach(mp => configuration.AddDeserializedMapping(mp, null));
 
             configuration.AddAssembly(typeof(NHibernateFacility).Assembly);
 
             SchemaMetadataUpdater.QuoteTableAndColumns(configuration);
 
-            //configuration.Properties[Environment.CurrentSessionContextClass] =
-            //    typeof(WebSessionContext).AssemblyQualifiedName;
-
             configuration.Properties[Environment.CurrentSessionContextClass]
                 = typeof(LazySessionContext).AssemblyQualifiedName; 
 
             var auditListener = new AuditEventListener();
 
-            //configuration.SetListener(ListenerType.PostDelete, auditListener);
-            //configuration.SetListener(ListenerType.PostInsert, auditListener);
-            //configuration.SetListener(ListenerType.PostUpdate, auditListener);
+            configuration.SetListener(ListenerType.PostDelete, auditListener);
+            configuration.SetListener(ListenerType.PostInsert, auditListener);
+            configuration.SetListener(ListenerType.PostUpdate, auditListener);
 
 			configuration.SetListener(ListenerType.Flush, new PostFlushFixEventListener());
 
@@ -94,22 +90,6 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
                                                 && mi.IsComponent(propertyPath.LocalMember.DeclaringType))
                                                 map.Column(propertyPath.ToColumnName());
                                         };
-
-            //mapper.BeforeMapClass += (mi, t, map) => map.Table(t.Name.ToLowerInvariant());
-            //mapper.BeforeMapJoinedSubclass += (mi, t, map) => map.Table(t.Name.ToLowerInvariant());
-            //mapper.BeforeMapUnionSubclass += (mi, t, map) => map.Table(t.Name.ToLowerInvariant());
-
-            //mapper.BeforeMapBag += (mi, propPath, map) =>
-            //{
-            //    map.Cascade(Cascade.All.Include(Cascade.DeleteOrphans));
-            //    map.BatchSize(10);
-            //};
-
-            //mapper.BeforeMapSet += (mi, propPath, map) =>
-            //{
-            //    map.Cascade(Cascade.All.Include(Cascade.DeleteOrphans));
-            //    map.BatchSize(10);
-            //};
 
             return mapper.CompileMappingForEach(typeof(Entity).Assembly.GetTypes());
         }

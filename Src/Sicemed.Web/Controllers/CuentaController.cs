@@ -19,10 +19,12 @@ namespace Sicemed.Web.Controllers
     public class CuentaController : NHibernateController
     {
         private readonly IMembershipService _membershipService;
+        private readonly IMappingEngine _mappingEngine;
 
-        public CuentaController(IMembershipService membershipService)
+        public CuentaController(IMembershipService membershipService, IMappingEngine mappingEngine)
         {
             _membershipService = membershipService;
+            _mappingEngine = mappingEngine;
         }
 
         public ActionResult Salir()
@@ -88,7 +90,7 @@ namespace Sicemed.Web.Controllers
             {
                 var session = SessionFactory.GetCurrentSession();
                 // Attempt to register the user                
-                var model = Mapper.Map<Persona>(viewModel);
+                var model = _mappingEngine.Map<Persona>(viewModel);
                 //Update not automapped properties
                 model.Documento = new Documento
                                       {
