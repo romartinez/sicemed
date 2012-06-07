@@ -44,7 +44,9 @@ var app = (function ($, app) {
             showLeadingZero: true
         });
 
-        $("div.ctl-accordion").accordion();        
+        $("div.ctl-accordion").accordion({ 
+            collapsible: true
+        });        
     };
 
     app.initialize = function (o) {

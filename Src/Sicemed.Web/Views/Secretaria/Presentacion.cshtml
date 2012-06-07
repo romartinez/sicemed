@@ -3,25 +3,39 @@
 @section Css
 {
     <style type="text/css">
+        /* Theme fix*/
+        div.ctl-accordion h3, div.ctl-accordion h3 
+        {
+            font-size: 16px!important;
+            margin: 0 !important;
+        }
+
+        .pacientes {
+            padding: 10px;
+        }
+
+        ol.turnos {
+            margin: 0;
+        }
         ol.turnos li
         {
             list-style-type: none;
         }
         
-        ol.turnos li.ingresado span {
+        ol.turnos li.presentado span {
             color: #2e8f19;
         }
         
         ol.turnos li.atendido{
             text-decoration: line-through;
-        }        
+        }
     </style>
 }   
 @{
     ViewBag.Title = "Presentación De Turnos";
 }
 
-<h2>Turnos del d&iacute;a</h2>
+<h2>Turnos del d&iacute;a - <span class="title_pink">@DateTime.Now.ToShortDateString()</span></h2>
 
 
 <div class="ctl-accordion">
@@ -29,6 +43,10 @@
     {
         <h3><a href="#">@profesional.PersonaNombreCompleto</a></h3>
         <div>
+            <div class="ui-state-highlight pacientes">
+                Le restan @profesional.PacientesPendientes pacientes por atenderse.
+                Y @profesional.TurnosPendientes pendientes de presentarse.
+            </div>
             <ol class="turnos">
                 @foreach(var turno in profesional.Turnos)
                 {

@@ -1,8 +1,8 @@
 ﻿@model Sicemed.Web.Models.ViewModels.Secretaria.TurnoViewModel
 @{
 
-    var css = Model.FechaIngreso.HasValue ? "ingresado " : string.Empty;
-    css += Model.FechaAtencion.HasValue ? "atendido " : string.Empty;
+    var css = Model.SePresento ? "presentado " : string.Empty;
+    css += Model.SeAtendio ? "atendido " : string.Empty;
 }
 <li class="@css">
     <h4>@Model.FechaTurno.ToString("HH:mm") - @Model.Paciente.Descripcion</h4>
@@ -13,7 +13,7 @@
         <br />
     </div>
     <div>
-        @if (!Model.FechaIngreso.HasValue)
+        @if (!Model.SePresento)
         {
             using (Html.BeginForm("RegistrarIngresoPaciente","Secretaria"))
             {
@@ -22,7 +22,7 @@
                 @Html.Submit("Ingresar")
             }
         }
-        else if(!Model.FechaAtencion.HasValue)
+        else if(!Model.SeAtendio)
         {
             <span>El usuario se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes) minutos.</span>
         }
