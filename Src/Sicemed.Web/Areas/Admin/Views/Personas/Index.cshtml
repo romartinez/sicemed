@@ -48,6 +48,19 @@
                     },
                     {
                         caption: "",
+                        buttonicon: "ui-icon-key",
+                        onClickButton: function () {
+                            var grid = $(this);
+                            var selected = grid.getGridParam("selrow");
+                            if(!selected) {
+                                app.ui.showError("Debe seleccionar un Usuario.");
+                                return;
+                            }
+                            $.postAntiForgery("@Url.Action("EnviarPasswordReset")", { usuarioId: selected });
+                        }
+                    },
+                    {
+                        caption: "",
                         buttonicon: "ui-icon-locked",
                         onClickButton: function () {
                             var grid = $(this);

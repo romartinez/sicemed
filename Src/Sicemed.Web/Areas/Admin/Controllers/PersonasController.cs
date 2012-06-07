@@ -102,6 +102,20 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             ShowMessages(ResponseMessage.Success("Desbloqueo realizado con éxito."));
         }
 
+        [HttpPost]
+        [AjaxHandleError]
+        [ValidateAntiForgeryToken]
+        public void EnviarPasswordReset(long usuarioId)
+        {
+            var session = SessionFactory.GetCurrentSession();
+            var user = session.Get<Persona>(usuarioId);
+            if (user == null) throw new ValidationErrorException("El usuario no existe.");
+
+            MembershipService.RecoverPassword(user.Membership.Email);
+
+            ShowMessages(ResponseMessage.Success("Se ha enviado el mail con los pasos para recuperar el password a '{0}'.", user.Membership.Email));
+        }
+
         #region Nuevo
         public ActionResult Nuevo()
         {
