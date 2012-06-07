@@ -33,17 +33,18 @@ var app = (function ($, app) {
                     });
                 });
             });
-
-            $("input.ctl-timespan[type=text]").timepicker({
-                showHours: false
-            });
-            $("input[type=date]").datepicker();
-            $("input[type=time]").timepicker({
-                showPeriod: true,
-                showLeadingZero: true
-            });
-
         });
+
+        $("input.ctl-timespan[type=text]").timepicker({
+            showHours: false
+        });
+        $("input[type=date]").datepicker();
+        $("input[type=time]").timepicker({
+            showPeriod: true,
+            showLeadingZero: true
+        });
+
+        $("div.ctl-accordion").accordion();        
     };
 
     app.initialize = function (o) {
@@ -52,6 +53,9 @@ var app = (function ($, app) {
         };
 
         var options = $.extend(defaults, o);
+
+        //Initialize controls
+        app.initControls();
 
         if (!options.isUsingProxy) {
             //Google map
@@ -94,8 +98,6 @@ var app = (function ($, app) {
                 $("#google-map-wrapper").dialog("open");
                 return false;
             });
-
-            app.initControls();
         }
     };
     return app;

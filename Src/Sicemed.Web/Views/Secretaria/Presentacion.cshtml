@@ -1,9 +1,41 @@
 ﻿@model Sicemed.Web.Models.ViewModels.Secretaria.TurnosDelDiaViewModel
-           
+
+@section Css
+{
+    <style type="text/css">
+        ol.turnos li
+        {
+            list-style-type: none;
+        }
+        
+        ol.turnos li.ingresado span {
+            color: #2e8f19;
+        }
+        
+        ol.turnos li.atendido{
+            text-decoration: line-through;
+        }        
+    </style>
+}   
 @{
     ViewBag.Title = "Presentación De Turnos";
 }
 
 <h2>Turnos del d&iacute;a</h2>
 
+
+<div class="ctl-accordion">
+    @foreach(var profesional in Model.ProfesionalesConTurnos)
+    {
+        <h3><a href="#">@profesional.PersonaNombreCompleto</a></h3>
+        <div>
+            <ol class="turnos">
+                @foreach(var turno in profesional.Turnos)
+                {
+                    @Html.DisplayFor(m=>turno)
+                }
+            </ol>
+        </div>        
+    }
+</div>
 
