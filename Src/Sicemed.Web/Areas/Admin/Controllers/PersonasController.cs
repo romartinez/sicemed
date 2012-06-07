@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using NHibernate.Transform;
 using Sicemed.Web.Areas.Admin.Models.Personas;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
@@ -42,11 +43,12 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         {
             page--;
             var session = SessionFactory.GetCurrentSession();
-            var query = session.QueryOver<Persona>()
+            var query = session.QueryOver<Persona>()                
                 .Fetch(x => x.Domicilio.Localidad).Eager
                 .Fetch(x => x.Domicilio.Localidad.Provincia).Eager
                 .Fetch(x => x.Roles).Eager
-                .OrderBy(x => x.Membership.Email).Asc;
+                .OrderBy(x => x.Membership.Email).Asc
+                .TransformUsing(Transformers.DistinctRootEntity);
 
             var respuesta = new PaginableResponse();
 
@@ -59,7 +61,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             {
                 respuesta.Records = count;
             }
-            var entites = query.Take(rows).Skip(page * rows).Future();
+            var entites = query.Skip(page * rows).Take(rows).Future();
             respuesta.Rows = _mappingEngine.Map<IEnumerable<PersonaViewModel>>(entites);
 
             respuesta.Page = ++page;
