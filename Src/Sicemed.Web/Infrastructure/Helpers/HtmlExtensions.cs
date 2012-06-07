@@ -133,8 +133,8 @@ namespace System.Web.Mvc.Html
                 return new SelectListItem
                 {
                     Text = value,
-                    Value = value.ToString(),
-                    Selected = value.Equals(metadata.Model)
+                    Value = v.ToString(),
+                    Selected = v.Equals(metadata.Model)
                 };
             });
 

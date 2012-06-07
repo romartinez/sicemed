@@ -8,13 +8,13 @@ using Sicemed.Web.Models.ViewModels.ObtenerTurno;
 
 namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
 {
-    public interface IObtenerAgendaProfesionalQuery : IQuery<IEnumerable<TurnoViewModel>>
+    public interface IObtenerTurnosProfesionalQuery : IQuery<IEnumerable<TurnoViewModel>>
     {
         long ProfesionalId { get; set; }
         long? EspecialidadId { get; set; }        
     }
 
-    public class ObtenerAgendaProfesionalQuery : Query<IEnumerable<TurnoViewModel>>, IObtenerAgendaProfesionalQuery
+    public class ObtenerTurnosProfesionalQuery : Query<IEnumerable<TurnoViewModel>>, IObtenerTurnosProfesionalQuery
     {
         public virtual long ProfesionalId { get; set; }
         public virtual long? EspecialidadId { get; set; }

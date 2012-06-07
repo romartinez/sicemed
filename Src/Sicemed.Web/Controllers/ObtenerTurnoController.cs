@@ -65,7 +65,7 @@ namespace Sicemed.Web.Controllers
 
         private IEnumerable<TurnoViewModel> ObtenerAgenda(long profesionalId, long? especialidadId = null)
         {
-            var query = QueryFactory.Create<IObtenerAgendaProfesionalQuery>();
+            var query = QueryFactory.Create<IObtenerTurnosProfesionalQuery>();
             query.ProfesionalId = profesionalId;
             query.EspecialidadId = especialidadId;
             return query.Execute();
@@ -88,7 +88,7 @@ namespace Sicemed.Web.Controllers
             session.Save(turno);
 
             //Update del cache
-            var query = QueryFactory.Create<IObtenerAgendaProfesionalQuery>();
+            var query = QueryFactory.Create<IObtenerTurnosProfesionalQuery>();
             query.ProfesionalId = profesionalId;
             query.ClearCache();
 

@@ -98,12 +98,30 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
 
         private void AttachCorePages(ICollection<PageViewModel> pages)
         {
-			//Only show the menu to anon users or Pacientess
-			if(_membershipService.GetCurrentUser() == null 
-				|| _membershipService.GetCurrentUser().IsInRole<Paciente>())
-			{
-				pages.Add(CreateDefaultPage("Obtener Turno", "ObtenerTurno", order: 9990)); //Almost at the end				
-			}
+            var user = _membershipService.GetCurrentUser();
+            //Only show the menu to anon users or Pacientess
+            if (user == null || user.IsInRole<Paciente>())
+            {
+                pages.Add(CreateDefaultPage("Obtener Turno", "ObtenerTurno", order: 9990)); //Almost at the end				
+            }
+            if (user != null)
+            {
+                if (user.IsInRole<Secretaria>())
+                {
+                    var secretariaRoot = CreateDefaultPage("Secretaria", "#", order: 9000);
+                    secretariaRoot.Childs.Add(CreateDefaultPage("Presentación Turno", "Secretaria/Presentacion", secretariaRoot));
+                    secretariaRoot.Childs.Add(CreateDefaultPage("Otorgar Turno", "Secretaria/Otorgar", secretariaRoot));
+
+                    pages.Add(secretariaRoot);
+                }
+                if (user.IsInRole<Profesional>())
+                {
+                    var profesionalRoot = CreateDefaultPage("Profesional", "#", order: 9100);
+                    profesionalRoot.Childs.Add(CreateDefaultPage("Ver Agenda", "Profesional/Agenda", profesionalRoot));
+
+                    pages.Add(profesionalRoot);
+                }
+            }
         }
 
         private static void AttachAdminPages(ICollection<PageViewModel> pages)

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Models.ViewModels.ObtenerTurno
 {
@@ -16,7 +15,7 @@ namespace Sicemed.Web.Models.ViewModels.ObtenerTurno
 
         public static BusquedaProfesionalViewModel Create(Persona persona)
         {
-            var profesional = persona.As<Profesional>();
+            var profesional = persona.As<Roles.Profesional>();
             var vm = new BusquedaProfesionalViewModel
                          {
                              Id = profesional.Id,

@@ -34,13 +34,13 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
             }
 
             var queryRoles = query.JoinQueryOver<Rol>(p => p.Roles)
-                    .Where(r => r.GetType() == typeof(Profesional));
+                    .Where(r => r.GetType() == typeof(Models.Roles.Profesional));
 
             IEnumerable<Persona> results;
 
             if (EspecialidadId.HasValue)
             {
-                results = queryRoles.JoinQueryOver<Especialidad>(r => ((Profesional)r).Especialidades)
+                results = queryRoles.JoinQueryOver<Especialidad>(r => ((Models.Roles.Profesional)r).Especialidades)
                     .Where(e => e.Id == EspecialidadId)
                     .TransformUsing(Transformers.DistinctRootEntity)
                     .Future();
