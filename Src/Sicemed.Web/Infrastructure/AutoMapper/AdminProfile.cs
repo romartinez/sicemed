@@ -20,6 +20,7 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
 
         protected override void Configure()
         {
+            #region Clinica
             Mapper.CreateMap<Clinica, ClinicaEditViewModel>()
                 .ForMember(d => d.TiposDocumentosHabilitados, m => m.Ignore())
                 .ForMember(d => d.LocalidadesHabilitadas, m => m.Ignore())
@@ -42,7 +43,12 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                                   telefonosAQuitar.ForEach(t => m.QuitarTelefono(t));
                                   v.Telefonos.ForEach(t => m.AgregarTelefono(t));
                               });
+            #endregion
 
+            #region Persona -> PersonaViewModel
+            Mapper.CreateMap<Persona, PersonaViewModel>()
+                .ForMember(d => d.Roles, m => m.ResolveUsing(o => o.Roles.Select(r => r.DisplayName)));
+            #endregion
 
             #region Persona -> PersonaEditModel
             Mapper.CreateMap<Persona, PersonaEditModel>()
@@ -141,7 +147,7 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
             }
         }
 
-        private static void UpdateRole<TEditModel,TRol>(Persona persona, bool editModelIsSelected, TEditModel editModel) where TRol : Rol
+        private static void UpdateRole<TEditModel, TRol>(Persona persona, bool editModelIsSelected, TEditModel editModel) where TRol : Rol
         {
             if (editModelIsSelected && persona.IsInRole<TRol>())
             {

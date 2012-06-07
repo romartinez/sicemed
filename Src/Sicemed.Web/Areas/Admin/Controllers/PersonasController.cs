@@ -18,10 +18,12 @@ using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Components;
 using Sicemed.Web.Models.Roles;
+using Sicemed.Web.Models.ViewModels;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
 {
-    public class PersonasController : CrudBaseController<Persona>
+    [AuthorizeIt(typeof(Administrador))]
+    public class PersonasController : NHibernateController
     {
         private readonly IMembershipService _membershipService;
 
@@ -30,20 +32,41 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             _membershipService = membershipService;
         }
 
-
-        protected override Expression<Func<Persona, object>> DefaultOrderBy
+        public ActionResult Index()
         {
-            get { return x => x.Membership.Email; }
+            return View();
         }
 
-        public override void Editar(long id, string oper, Persona modelo)
+        [HttpPost]
+        [AjaxHandleError]
+        [ValidateAntiForgeryToken]
+        public virtual JsonResult List(long count, int page, int rows)
         {
-            throw new NotSupportedException("Use la ventana de editar.");
-        }
+            page--;
+            var session = SessionFactory.GetCurrentSession();
+            var query = session.QueryOver<Persona>()
+                .Fetch(x => x.Domicilio.Localidad).Eager
+                .Fetch(x => x.Domicilio.Localidad.Provincia).Eager
+                .Fetch(x => x.Roles).Eager
+                .OrderBy(x => x.Membership.Email).Asc;
 
-        public override void Nuevo(string oper, Persona modelo, int paginaId = 0)
-        {
-            throw new NotSupportedException("Use la ventana de nuevo.");
+            var respuesta = new PaginableResponse();
+
+            if (page == 0)
+            {
+                var queryCount = query.ToRowCountInt64Query().FutureValue<long>();
+                respuesta.Records = queryCount.Value;
+            }
+            else
+            {
+                respuesta.Records = count;
+            }
+            var entites = query.Take(rows).Skip(page * rows).Future();
+            respuesta.Rows = Mapper.Map<IEnumerable<PersonaViewModel>>(entites);
+
+            respuesta.Page = ++page;
+            respuesta.Total = (long)Math.Ceiling(respuesta.Records / (double)rows);
+            return Json(respuesta);
         }
 
         [HttpPost]
@@ -80,7 +103,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         }
 
         #region Nuevo
-        public ActionResult Crear()
+        public ActionResult Nuevo()
         {
             var viewModel = new PersonaEditModel();
             AppendLists(viewModel);
@@ -90,7 +113,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
-        public ActionResult Crear(PersonaEditModel viewModel)
+        public ActionResult Nuevo(PersonaEditModel viewModel)
         {
             AppendLists(viewModel);
             if (ModelState.IsValid)
@@ -175,7 +198,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         #region Editar
         [HttpGet]
         [AjaxHandleError]
-        public ActionResult Modificar(long personaId)
+        public ActionResult Editar(long personaId)
         {
             var model = GetPersona(personaId);
             if (model == null)
@@ -192,7 +215,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
-        public ActionResult Modificar(PersonaEditModel editModel)
+        public ActionResult Editar(PersonaEditModel editModel)
         {
             AppendLists(editModel);
             if (ModelState.IsValid)
@@ -240,7 +263,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             }
             return View(editModel);
         }
-        
+
         private void ProcesarEspecialidades(PersonaEditModel editModel, Profesional personaProfesional)
         {
             var session = SessionFactory.GetCurrentSession();
@@ -297,7 +320,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             {
                 //Agendas a eliminar
                 var agendasAEliminar =
-                    personaProfesional.Agendas.Where(m => !editModel.Profesional.Agendas.Select(x=> x.Id).Contains(m.Id)).ToList();
+                    personaProfesional.Agendas.Where(m => !editModel.Profesional.Agendas.Select(x => x.Id).Contains(m.Id)).ToList();
                 foreach (var agenda in agendasAEliminar)
                 {
                     personaProfesional.QuitarAgenda(agenda);
@@ -342,8 +365,8 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 .Fetch(p => p.Roles).Eager
                 .Fetch(p => p.Domicilio.Localidad).Eager
                 .Fetch(p => p.Domicilio.Localidad.Provincia).Eager
-                .Fetch(p=> ((Profesional)p.Roles.First()).Agendas).Eager
-                .Fetch(p=> ((Profesional)p.Roles.First()).Agendas.First().EspecialidadesAtendidas).Eager
+                .Fetch(p => ((Profesional)p.Roles.First()).Agendas).Eager
+                .Fetch(p => ((Profesional)p.Roles.First()).Agendas.First().EspecialidadesAtendidas).Eager
                 .Fetch(p => ((Profesional)p.Roles.First()).Especialidades).Eager
                 .Fetch(p => ((Paciente)p.Roles.First()).Plan).Eager
                 .SingleOrDefault();
@@ -383,56 +406,5 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             viewModel.Consultorios = DomainExtensions.GetConsultorios(SessionFactory, viewModel.ConsultorioId);
         }
         #endregion
-        
-        protected override IQueryOver<Persona> AplicarFetching(IQueryOver<Persona, Persona> query)
-        {
-            return query.Fetch(x => x.Domicilio.Localidad).Eager
-                .Fetch(x=>x.Domicilio.Localidad.Provincia).Eager
-                .Fetch(x=>x.Roles).Eager;
-        }
-
-        protected override IEnumerable AplicarProjections(IEnumerable<Persona> results)
-        {
-            return results.Select(x => new
-                                       {
-                                           x.Documento,
-                                           Domicilio = x.Domicilio != null
-                                                           ? new
-                                                             {
-                                                                 x.Domicilio.Direccion,
-                                                                 Localidad = x.Domicilio.Localidad != null
-                                                                                 ? new
-                                                                                   {
-                                                                                       x.Domicilio.Localidad.Id,
-                                                                                       x.Domicilio.Localidad.Nombre,
-                                                                                       Provincia =
-                                                                                       x.Domicilio.Localidad.Provincia !=
-                                                                                       null
-                                                                                           ? new
-                                                                                             {
-                                                                                                 x.Domicilio.Localidad.
-                                                                                                 Provincia.Id,
-                                                                                                 x.Domicilio.Localidad.
-                                                                                                 Provincia.Nombre
-                                                                                             }
-                                                                                           : null
-                                                                                   }
-                                                                                 : null
-                                                             }
-                                                           : null,
-                                           x.Id,
-                                           x.NombreCompleto,
-                                           x.FechaNacimiento,
-                                           x.Telefono,
-                                           Roles = x.Roles.Select(r => r.DisplayName),
-                                           Membership = x.Membership != null
-                                                            ? new
-                                                              {
-                                                                  x.Membership.Email,
-                                                                  x.Membership.IsLockedOut
-                                                              }
-                                                            : null
-                                       });
-        }
     }
 }

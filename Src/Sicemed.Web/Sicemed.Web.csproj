@@ -200,6 +200,7 @@
     <Compile Include="Areas\Admin\Models\Personas\AgendaEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\PacienteEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\PersonaEditModel.cs" />
+    <Compile Include="Areas\Admin\Models\Personas\PersonaViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\ProfesionalEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\SecretariaEditModel.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
@@ -672,10 +673,10 @@
     <Content Include="Areas\Admin\Views\Clinicas\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Auditoria\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Logs\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Personas\Crear.cshtml" />
+    <Content Include="Areas\Admin\Views\Personas\Nuevo.cshtml" />
     <Content Include="Areas\Admin\Views\Personas\EditorTemplates\Agendas.cshtml" />
     <Content Include="Areas\Admin\Views\Personas\_Agenda.cshtml" />
-    <Content Include="Areas\Admin\Views\Personas\Modificar.cshtml" />
+    <Content Include="Areas\Admin\Views\Personas\Editar.cshtml" />
     <None Include="Models\ClassDiagram.cd" />
     <Content Include="Views\Content\TemplateError.cshtml" />
     <Content Include="Views\ObtenerTurno\Index.cshtml" />

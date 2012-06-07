@@ -30,7 +30,7 @@
                         caption: "",
                         buttonicon: "ui-icon-plus",
                         onClickButton: function () {
-                            window.location = "@Url.Action("Crear")";
+                            window.location = "@Url.Action("Nuevo")";
                         }
                     },
                     {
@@ -43,25 +43,10 @@
                                 app.ui.showError("Debe seleccionar un Usuario.");
                                 return;
                             }
-                            window.location = "@Url.Action("Modificar")?personaId=" + selected;                            
+                            window.location = "@Url.Action("Editar")?personaId=" + selected;                            
                         }
                     },
                     {
-                        caption: "",
-                        buttonicon: "ui-icon-trash",
-                        onClickButton: function () {
-                            var grid = $(this);
-                            var selected = grid.getGridParam("selrow");
-                            if(!selected) {
-                                app.ui.showError("Debe seleccionar un Usuario.");
-                                return;
-                            }
-                            $.postAntiForgery("@Url.Action("Eliminar")", { oper:"del", id: selected }, function () {
-                                grid.trigger("reloadGrid");
-                            });
-                        }
-                    },
-{
                         caption: "",
                         buttonicon: "ui-icon-locked",
                         onClickButton: function () {
@@ -122,7 +107,7 @@
                                 width: 150,
                                 formatter: function (cellvalue, options, rowObject) {
                                     var str = "<div>" + rowObject.NombreCompleto + "</div>"
-                                        + "<div>" + rowObject.Membership.Email + "</div>";
+                                        + "<div>" + rowObject.MembershipEmail + "</div>";
                                     return str;
                                 },
                                 sortable: false
@@ -152,9 +137,8 @@
                                 index: 'Documento',
                                 width: 90,
                                 formatter: function (cellvalue, options, rowObject) {
-                                    if (!rowObject.Documento) return "";
-                                    var str = rowObject.Documento.TipoDocumento.DisplayName
-                                    + " " + rowObject.Documento.Numero;
+                                    var str = rowObject.DocumentoTipoDocumentoDisplayName
+                                    + " " + rowObject.DocumentoNumero;
                                     return str;
                                 },
                                 sortable: false
@@ -164,15 +148,9 @@
                                 index: 'Domicilio',
                                 width: 150,
                                 formatter: function (cellvalue, options, rowObject) {
-                                    if (!rowObject.Domicilio) return "";
-
-                                    var str = "<div>" + rowObject.Domicilio.Direccion + "</div>";
-                                    if (!rowObject.Domicilio.Localidad) return str;
-
-                                    str += "<div>" + rowObject.Domicilio.Localidad.Nombre;
-                                    if (!rowObject.Domicilio.Localidad.Provincia) return str + "</div>";
-
-                                    str += ", " + rowObject.Domicilio.Localidad.Provincia.Nombre + "</div>";
+                                    var str = "<div>" + rowObject.DomicilioDireccion + "</div>"
+                                        + "<div>" + rowObject.DomicilioLocalidadNombre
+                                        + ", " + rowObject.DomicilioLocalidadProvinciaNombre + "</div>";
                                     return str;
                                 },
                                 sortable: false
@@ -182,17 +160,16 @@
                                 index: 'Telefono',
                                 width: 100,
                                 formatter: function (cellvalue, options, rowObject) {
-                                    if (!rowObject.Telefono) return "";
-                                    var str = rowObject.Telefono.Prefijo && rowObject.Telefono.Prefijo != ""
-                                        ? "(" + rowObject.Telefono.Prefijo + ") " : "";
-                                    str += rowObject.Telefono.Numero;
+                                    var str = rowObject.TelefonoPrefijo != ""
+                                        ? "(" + rowObject.TelefonoPrefijo + ") " : "";
+                                    str += rowObject.TelefonoNumero;
                                     return str;
                                 },
                                 sortable: false
                             },
                             {
-                                name: 'Membership.IsLockedOut',
-                                index: 'Membership.IsLockedOut',
+                                name: 'MembershipIsLockedOut',
+                                index: 'MembershipIsLockedOut',
                                 width: 60,
                                 sortable: false
                             }
