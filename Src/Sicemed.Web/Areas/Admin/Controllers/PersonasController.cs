@@ -45,8 +45,10 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             var session = SessionFactory.GetCurrentSession();
             var query = session.QueryOver<Persona>()                
                 .Fetch(x => x.Domicilio.Localidad).Eager
-                .Fetch(x => x.Domicilio.Localidad.Provincia).Eager
-                .Fetch(x => x.Roles).Eager
+                .Fetch(x => x.Domicilio.Localidad.Provincia).Eager                
+                //NOTE: Dejo el SELECT N +1, porque sino pagina mal al
+                //paginar el producto cartesiano.
+                //.Fetch(x => x.Roles).Eager
                 .OrderBy(x => x.Membership.Email).Asc
                 .TransformUsing(Transformers.DistinctRootEntity);
 
