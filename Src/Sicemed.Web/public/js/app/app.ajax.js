@@ -36,7 +36,8 @@ var app = (function ($, app) {
         if (responseMessages) {
             var parsedMessages = JSON.parse(responseMessages);
             app.ui.showNotifications(parsedMessages);
-        }
+        }        
+        app.initControls();
     };
     $(document).ajaxStart(ajax.beginXhr);
     $(document).ajaxComplete(ajax.endXhr);

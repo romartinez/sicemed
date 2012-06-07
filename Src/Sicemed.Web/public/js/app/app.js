@@ -2,6 +2,50 @@
 /// <reference path="postAntiForgery.js" />
 
 var app = (function ($, app) {
+    app.initControls = function () {
+        //dropdown-cascading
+        $(".dropdown-cascading").each(function () {
+            var item = $(this);
+            var parent = item.data("cascading-parent");
+            $("#" + parent).change(function () {
+                item.empty();
+                var val = $(this).val();
+                if (!val) {
+                    item.append($("<option />").text(item.data("cascading-parent-prompt")));
+                    item.attr("disabled", "disabled");
+                    return;
+                }
+
+                var url = item.data("cascading-url");
+                var params = {};
+                params[item.data("cascading-parameter")] = val;
+                $.getJSON(url, params, function (r) {
+                    if (!r || r.length == 0) {
+                        item.append($("<option />").text(item.data("cascading-parent-prompt")));
+                        item.attr("disabled", "disabled");
+                        return;
+                    } else {
+                        item.append($("<option />").text(item.data("cascading-prompt")));
+                        item.removeAttr("disabled");
+                    }
+                    $.each(r, function () {
+                        item.append($("<option />").val(this.Value).text(this.Text));
+                    });
+                });
+            });
+
+            $("input.ctl-timespan[type=text]").timepicker({
+                showHours: false
+            });
+            $("input[type=date]").datepicker();
+            $("input[type=time]").timepicker({
+                showPeriod: true,
+                showLeadingZero: true
+            });
+
+        });
+    };
+
     app.initialize = function (o) {
         var defaults = {
             isUsingProxy: false
@@ -51,37 +95,7 @@ var app = (function ($, app) {
                 return false;
             });
 
-            //dropdown-cascading
-            $(".dropdown-cascading").each(function () {
-                var item = $(this);
-                var parent = item.data("cascading-parent");
-                $("#" + parent).change(function () {
-                    item.empty();
-                    var val = $(this).val();
-                    if (!val) {
-                        item.append($("<option />").text(item.data("cascading-parent-prompt")));
-                        item.attr("disabled", "disabled");
-                        return;  
-                    } 
-
-                    var url = item.data("cascading-url");
-                    var params = {};
-                    params[item.data("cascading-parameter")] = val;
-                    $.getJSON(url, params, function (r) {
-                        if (!r || r.length == 0) {
-                            item.append($("<option />").text(item.data("cascading-parent-prompt")));
-                            item.attr("disabled", "disabled");
-                            return;
-                        } else {
-                            item.append($("<option />").text(item.data("cascading-prompt")));
-                            item.removeAttr("disabled");
-                        }
-                        $.each(r, function () {
-                            item.append($("<option />").val(this.Value).text(this.Text));
-                        });
-                    });
-                });
-            });
+            app.initControls();
         }
     };
     return app;

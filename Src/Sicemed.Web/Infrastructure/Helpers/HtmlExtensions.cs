@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 using Sicemed.Web.Infrastructure.Helpers;
@@ -90,6 +92,63 @@ namespace System.Web.Mvc.Html
             //Estoy en un subnivel quito el ultimo punto del subnivel.
             return prefix.Substring(0, prefix.LastIndexOf('.'));
         }
+
+
+        //http://blogs.msdn.com/b/stuartleeks/archive/2010/05/21/asp-net-mvc-creating-a-dropdownlist-helper-for-enums.aspx
+        #region EnumDropDown
+
+        private static readonly SelectListItem[] SingleEmptyItem = new[] { new SelectListItem { Text = "", Value = "" } };
+
+        private static Type GetNonNullableModelType(ModelMetadata modelMetadata)
+        {
+            Type realModelType = modelMetadata.ModelType;
+
+            Type underlyingType = Nullable.GetUnderlyingType(realModelType);
+            if (underlyingType != null)
+            {
+                realModelType = underlyingType;
+            }
+            return realModelType;
+        }
+        
+        public static MvcHtmlString EnumDropDownListFor<TModel, TEnum>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TEnum>> expression)
+        {
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
+            Type enumType = GetNonNullableModelType(metadata);
+            IEnumerable<TEnum> values = Enum.GetValues(enumType).Cast<TEnum>();
+
+            TypeConverter converter = TypeDescriptor.GetConverter(enumType);
+
+            IEnumerable<SelectListItem> items = values.Select(v =>
+            {
+                var value = converter.ConvertToString(v);
+                if(value.Equals(v.ToString()))
+                {
+                    //El converter no hizo nada pruevo con el resource
+                    var rex = Sicemed.Web.Properties.Resources.ResourceManager.GetString(string.Format("{0}_{1}", enumType.Name, value));
+                    value = !string.IsNullOrWhiteSpace(rex)
+                                ? rex
+                                : value;
+                }
+                return new SelectListItem
+                {
+                    Text = value,
+                    Value = value.ToString(),
+                    Selected = value.Equals(metadata.Model)
+                };
+            });
+
+            if (metadata.IsNullableValueType)
+            {
+                items = SingleEmptyItem.Concat(items);
+            }
+
+            return htmlHelper.DropDownListFor(
+                expression,
+                items
+            );
+        }
+        #endregion
 
         //http://blog.stevensanderson.com/2010/01/28/editing-a-variable-length-list-aspnet-mvc-2-style/
         #region Collection Items Extensions
