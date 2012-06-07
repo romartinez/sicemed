@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using AutoMapper;
 using Castle.Core.Logging;
 using NHibernate;
 using Newtonsoft.Json;
 using Sicemed.Web.Infrastructure.Helpers;
+using Sicemed.Web.Infrastructure.Providers.Cache;
 
 namespace Sicemed.Web.Infrastructure.Queries
 {
@@ -14,6 +15,10 @@ namespace Sicemed.Web.Infrastructure.Queries
         public virtual ISessionFactory SessionFactory { get; set; }
         [JsonIgnore]
         public virtual ILogger Logger { get; set; }
+        [JsonIgnore]
+        public virtual IMappingEngine MappingEngine { get; set; }
+        [JsonIgnore]
+        public virtual ICacheProvider Cache { get; set; }
 
         protected Query()
         {
@@ -22,7 +27,7 @@ namespace Sicemed.Web.Infrastructure.Queries
 
         #region Implementation of IQuery<T>
 
-        public abstract T CoreExecute();
+        protected abstract T CoreExecute();
 
         public virtual T Execute()
         {
@@ -39,6 +44,10 @@ namespace Sicemed.Web.Infrastructure.Queries
             return result;
         }
 
+        public virtual void ClearCache()
+        {
+            //Do nothing...
+        }
         #endregion
     }
 }

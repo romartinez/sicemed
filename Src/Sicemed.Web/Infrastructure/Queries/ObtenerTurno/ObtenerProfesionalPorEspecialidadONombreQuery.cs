@@ -1,37 +1,57 @@
 using System.Collections.Generic;
+using System.Linq;
 using NHibernate.Criterion;
-using NHibernate.Util;
+using NHibernate.Transform;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Roles;
+using Sicemed.Web.Models.ViewModels.ObtenerTurno;
 
 namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
 {
-    public interface IObtenerProfesionalPorEspecialidadONombreQuery : IQuery<IEnumerable<Profesional>>
+    public interface IObtenerProfesionalPorEspecialidadONombreQuery : IQuery<IEnumerable<BusquedaProfesionalViewModel>>
     {
-        long EspecialidadId { get; set; }
+        long? EspecialidadId { get; set; }
         string Profesional { get; set; }
     }
 
-    public class ObtenerProfesionalPorEspecialidadONombreQuery : Query<IEnumerable<Profesional>>, IObtenerProfesionalPorEspecialidadONombreQuery
+    public class ObtenerProfesionalPorEspecialidadONombreQuery : Query<IEnumerable<BusquedaProfesionalViewModel>>, IObtenerProfesionalPorEspecialidadONombreQuery
     {
-        public virtual long EspecialidadId { get; set; }
+        public virtual long? EspecialidadId { get; set; }
         public virtual string Profesional { get; set; }
 
-        public override IEnumerable<Profesional> CoreExecute()
+        protected override IEnumerable<BusquedaProfesionalViewModel> CoreExecute()
         {
-            var query = SessionFactory.GetCurrentSession().QueryOver<Profesional>();
+            var session = SessionFactory.GetCurrentSession();
 
-            //if (EspecialidadId != default(long))
-            //query = query.JoinQueryOver<Especialidad>(x => x.Especialidades).Where(x=>x.Id ==EspecialidadId);
-
+            var query = session.QueryOver<Persona>();
             if (!string.IsNullOrWhiteSpace(Profesional))
-                return query.Where(
-                    Restrictions.InsensitiveLike("Persona.Nombre", Profesional)
-                    || Restrictions.InsensitiveLike("Persona.Apellido", Profesional)
-                    || Restrictions.InsensitiveLike("Persona.SegundoNombre", Profesional))
-                    .List();
+            {
+                query = query.Where(
+                    Restrictions.On<Persona>(p => p.Nombre).IsLike(Profesional, MatchMode.Start)
+                    || Restrictions.On<Persona>(p => p.SegundoNombre).IsLike(Profesional, MatchMode.Start)
+                    || Restrictions.On<Persona>(p => p.Apellido).IsLike(Profesional, MatchMode.Start)
+                    );
+            }
 
-            return query.List();
+            var queryRoles = query.JoinQueryOver<Rol>(p => p.Roles)
+                    .Where(r => r.GetType() == typeof(Profesional));
+
+            IEnumerable<Persona> results;
+
+            if (EspecialidadId.HasValue)
+            {
+                results = queryRoles.JoinQueryOver<Especialidad>(r => ((Profesional)r).Especialidades)
+                    .Where(e => e.Id == EspecialidadId)
+                    .TransformUsing(Transformers.DistinctRootEntity)
+                    .Future();
+            }
+            else
+            {
+                results = queryRoles.TransformUsing(Transformers.DistinctRootEntity).Future();
+            }
+
+            var profesionales = results.Select(BusquedaProfesionalViewModel.Create);
+            return profesionales;
         }
     }
 }

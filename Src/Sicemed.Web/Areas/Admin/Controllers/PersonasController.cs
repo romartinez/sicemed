@@ -352,21 +352,21 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         #region Agregar Referencias
         private void AppendLists(PersonaEditModel viewModel)
         {
-            viewModel.TiposDocumentosHabilitados = DomainExtensions.GetTiposDocumentos(viewModel.TipoDocumentoId);
-            viewModel.ProvinciasHabilitadas = DomainExtensions.GetProvincias(SessionFactory, viewModel.DomicilioLocalidadProvinciaId);
+            viewModel.TiposDocumentosHabilitados = GetTiposDocumentos(viewModel.TipoDocumentoId);
+            viewModel.ProvinciasHabilitadas = GetProvincias(viewModel.DomicilioLocalidadProvinciaId);
 
             if (viewModel.DomicilioLocalidadProvinciaId.HasValue)
                 viewModel.LocalidadesHabilitadas =
-                    DomainExtensions.GetLocalidades(SessionFactory, viewModel.DomicilioLocalidadProvinciaId.Value, viewModel.DomicilioLocalidadId);
+                    GetLocalidadesPorProvincia(viewModel.DomicilioLocalidadProvinciaId.Value, viewModel.DomicilioLocalidadId);
 
             //Paciente
-            viewModel.Paciente.ObrasSocialesHabilitadas = DomainExtensions.GetObrasSociales(SessionFactory, viewModel.Paciente.ObraSocialId);
+            viewModel.Paciente.ObrasSocialesHabilitadas = GetObrasSociales(viewModel.Paciente.ObraSocialId);
             if (viewModel.Paciente.ObraSocialId.HasValue)
                 viewModel.Paciente.PlanesObraSocialHabilitados =
-                    DomainExtensions.GetPlanesObraSocial(SessionFactory, viewModel.Paciente.ObraSocialId.Value, viewModel.Paciente.PlanId);
+                    GetPlanesPorObraSocial(viewModel.Paciente.ObraSocialId.Value, viewModel.Paciente.PlanId);
 
             //Profesional
-            viewModel.Profesional.Especialidades = DomainExtensions.GetEspecialidades(SessionFactory, viewModel.Profesional.EspecialidadesSeleccionadas);
+            viewModel.Profesional.Especialidades = GetEspecialidades(viewModel.Profesional.EspecialidadesSeleccionadas);
             if (viewModel.Profesional.Agendas != null)
             {
                 foreach (var agenda in viewModel.Profesional.Agendas)
@@ -378,8 +378,8 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
         private void AppendLists(AgendaEditModel viewModel)
         {
-            viewModel.Especialidades = DomainExtensions.GetEspecialidades(SessionFactory, viewModel.EspecialidadesSeleccionadas);
-            viewModel.Consultorios = DomainExtensions.GetConsultorios(SessionFactory, viewModel.ConsultorioId);
+            viewModel.Especialidades = GetEspecialidades(viewModel.EspecialidadesSeleccionadas);
+            viewModel.Consultorios = GetConsultorios(viewModel.ConsultorioId);
         }
         #endregion
     }

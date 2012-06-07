@@ -239,7 +239,6 @@
     <Compile Include="Infrastructure\Exceptions\ToClientException.cs" />
     <Compile Include="Infrastructure\Exceptions\ValidationErrorException.cs" />
     <Compile Include="Infrastructure\Helpers\DateTimeExtensions.cs" />
-    <Compile Include="Infrastructure\Helpers\DomainExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\Json.cs" />
     <Compile Include="Infrastructure\Helpers\EnumReaderExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\HexEncoding.cs" />
@@ -295,8 +294,16 @@
     <Compile Include="Infrastructure\Providers\Cache\InMemoryCacheProvider.cs" />
     <Compile Include="Infrastructure\Providers\Cache\NullCacheProvider.cs" />
     <Compile Include="Infrastructure\Providers\FilterAtrribute\WindsorFilterAttributeFilterProvider.cs" />
+    <Compile Include="Infrastructure\Queries\Domain\ObtenerConsultoriosDropDownQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Domain\ObtenerEspecialidadesDropDownQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Domain\ObtenerLocalidadesPorProvinciaDropDownQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Domain\ObtenerObrasSocialesDropDownQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Domain\ObtenerPlanesPorObraSocialDropDownQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Domain\ObtenerProvinciasDropDownQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Domain\ObtenerTiposDocumentosDropDownQuery.cs" />
     <Compile Include="Infrastructure\Queries\IQuery.cs" />
-    <Compile Include="Infrastructure\Queries\ObtenerTurno\ObtenerEspecialidadesQuery.cs" />
+    <Compile Include="Infrastructure\Queries\IQueryFactory.cs" />
+    <Compile Include="Infrastructure\Queries\ObtenerTurno\ObtenerAgendaProfesionalQuery.cs" />
     <Compile Include="Infrastructure\Queries\ObtenerTurno\ObtenerProfesionalPorEspecialidadONombreQuery.cs" />
     <Compile Include="Infrastructure\Queries\Paginas\ObtenerClinicaActivaQuery.cs" />
     <Compile Include="Infrastructure\Queries\Paginas\ObtenerEspecialidadesConProfesionalesQuery.cs" />

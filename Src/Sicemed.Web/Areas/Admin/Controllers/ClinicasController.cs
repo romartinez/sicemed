@@ -4,7 +4,6 @@ using Sicemed.Web.Areas.Admin.Models.Clinicas;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
-using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.Queries.Paginas;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Enumerations;
@@ -36,13 +35,13 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
         private void AppendLists(ClinicaEditViewModel viewModel)
         {
-            viewModel.TiposDocumentosHabilitados = DomainExtensions.GetTiposDocumentos(viewModel.DocumentoTipoDocumentoValue);
-            viewModel.ProvinciasHabilitadas = DomainExtensions.GetProvincias(SessionFactory, viewModel.DomicilioLocalidadProvinciaId);
+            viewModel.TiposDocumentosHabilitados = GetTiposDocumentos(viewModel.DocumentoTipoDocumentoValue);
+            viewModel.ProvinciasHabilitadas = GetProvincias(viewModel.DomicilioLocalidadProvinciaId);
 
             if (viewModel.DomicilioLocalidadProvinciaId.HasValue)
             {
                 viewModel.LocalidadesHabilitadas = 
-                    DomainExtensions.GetLocalidades(SessionFactory, viewModel.DomicilioLocalidadProvinciaId.Value, viewModel.DomicilioLocalidadId);
+                    GetLocalidadesPorProvincia(viewModel.DomicilioLocalidadProvinciaId.Value, viewModel.DomicilioLocalidadId);
             }
         }
 

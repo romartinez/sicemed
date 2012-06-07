@@ -207,17 +207,17 @@ namespace Sicemed.Web.Controllers
 
         private void AppendLists(RegistroPersonaViewModel viewModel)
         {
-            viewModel.TiposDocumentosHabilitados = DomainExtensions.GetTiposDocumentos(viewModel.TipoDocumentoId);
-            viewModel.ProvinciasHabilitadas = DomainExtensions.GetProvincias(SessionFactory, viewModel.DomicilioLocalidadProvinciaId);
-            viewModel.ObrasSocialesHabilitadas = DomainExtensions.GetObrasSociales(SessionFactory, viewModel.ObraSocialId);
+            viewModel.TiposDocumentosHabilitados = GetTiposDocumentos(viewModel.TipoDocumentoId);
+            viewModel.ProvinciasHabilitadas = GetProvincias(viewModel.DomicilioLocalidadProvinciaId);
+            viewModel.ObrasSocialesHabilitadas = GetObrasSociales(viewModel.ObraSocialId);
 
             if (viewModel.DomicilioLocalidadProvinciaId.HasValue)
                 viewModel.LocalidadesHabilitadas =
-                    DomainExtensions.GetLocalidades(SessionFactory, viewModel.DomicilioLocalidadProvinciaId.Value, viewModel.DomicilioLocalidadId);
+                    GetLocalidadesPorProvincia(viewModel.DomicilioLocalidadProvinciaId.Value, viewModel.DomicilioLocalidadId);
 
             if (viewModel.ObraSocialId.HasValue)
                 viewModel.PlanesObraSocialHabilitados =
-                    DomainExtensions.GetPlanesObraSocial(SessionFactory, viewModel.ObraSocialId.Value, viewModel.PlanId);
+                    GetPlanesPorObraSocial(viewModel.ObraSocialId.Value, viewModel.PlanId);
         }
     }
 }
