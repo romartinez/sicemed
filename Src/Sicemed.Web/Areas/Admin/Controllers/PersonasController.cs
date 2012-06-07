@@ -224,7 +224,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                     {
                         var personaProfesional = persona.As<Profesional>();
                         ProcesarEspecialidades(editModel, personaProfesional);
-                        //ProcesarAgendas(editModel, personaProfesional);
+                        ProcesarAgendas(editModel, personaProfesional);
                     }
 
                     session.Update(persona);
@@ -247,7 +247,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             //Especialidades a eliminar
             var especialidadesAEliminar =
                 personaProfesional.Especialidades.Where(
-                    x => !editModel.Profesional.EspecialidadesSeleccionadas.Contains(x.Id));
+                    x => !editModel.Profesional.EspecialidadesSeleccionadas.Contains(x.Id)).ToList();
             foreach (var especialidadAEliminar in especialidadesAEliminar)
             {
                 personaProfesional.QuitarEspecialidad(especialidadAEliminar);
@@ -255,14 +255,36 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             //Especialidades a agregar
             var especialidadesAAgregar =
                 editModel.Profesional.EspecialidadesSeleccionadas.Where(
-                    x => !personaProfesional.Especialidades.Select(p => p.Id).Contains(x));
+                    x => !personaProfesional.Especialidades.Select(p => p.Id).Contains(x)).ToList();
             foreach (var especialidadAAgregar in especialidadesAAgregar)
             {
                 var especialidad = session.Load<Especialidad>(especialidadAAgregar);
                 personaProfesional.AgregarEspecialidad(especialidad);
             }
         }
-        
+
+        private void ProcesarEspecialidades(AgendaEditModel editModel, Agenda agenda)
+        {
+            var session = SessionFactory.GetCurrentSession();
+            //Especialidades a eliminar
+            var especialidadesAEliminar =
+                agenda.EspecialidadesAtendidas.Where(
+                    x => !editModel.EspecialidadesSeleccionadas.Contains(x.Id)).ToList();
+            foreach (var especialidadAEliminar in especialidadesAEliminar)
+            {
+                agenda.QuitarEspecialidad(especialidadAEliminar);
+            }
+            //Especialidades a agregar
+            var especialidadesAAgregar =
+                editModel.EspecialidadesSeleccionadas.Where(
+                    x => !agenda.EspecialidadesAtendidas.Select(p => p.Id).Contains(x)).ToList();
+            foreach (var especialidadAAgregar in especialidadesAAgregar)
+            {
+                var especialidad = session.Load<Especialidad>(especialidadAAgregar);
+                agenda.AgregarEspecialidad(especialidad);
+            }
+        }
+
         private void ProcesarAgendas(PersonaEditModel editModel, Profesional personaProfesional)
         {
             var session = SessionFactory.GetCurrentSession();
@@ -275,7 +297,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             {
                 //Agendas a eliminar
                 var agendasAEliminar =
-                    personaProfesional.Agendas.Where(m => editModel.Profesional.Agendas.All(v => v.Id != m.Id)).ToList();
+                    personaProfesional.Agendas.Where(m => !editModel.Profesional.Agendas.Select(x=> x.Id).Contains(m.Id)).ToList();
                 foreach (var agenda in agendasAEliminar)
                 {
                     personaProfesional.QuitarAgenda(agenda);
@@ -300,11 +322,13 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 }
                 //Agendas a actualizar
                 var agendasActualizar =
-                    personaProfesional.Agendas.Where(m => editModel.Profesional.Agendas.All(v => v.Id == m.Id)).ToList();
+                    personaProfesional.Agendas.Where(m => editModel.Profesional.Agendas.Select(x => x.Id).Contains(m.Id)).ToList();
                 foreach (var agenda in agendasActualizar)
                 {
                     var agendaEditModel = editModel.Profesional.Agendas.Single(v => v.Id == agenda.Id);
                     Mapper.Map(agendaEditModel, agenda);
+                    ProcesarEspecialidades(agendaEditModel, agenda);
+                    agenda.Consultorio = session.Load<Consultorio>(agendaEditModel.ConsultorioId);
                 }
             }
         }

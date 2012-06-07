@@ -33,6 +33,13 @@ namespace Sicemed.Web.Models
             if (especialidad == null) throw new ArgumentNullException("especialidad");
 
             _especialidadesAtendidas.Add(especialidad);
+        }        
+        
+        public virtual void QuitarEspecialidad(Especialidad especialidad)
+        {
+            if (especialidad == null) throw new ArgumentNullException("especialidad");
+
+            _especialidadesAtendidas.Remove(especialidad);
         }
     }
 }

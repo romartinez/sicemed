@@ -6,7 +6,7 @@
     </id>
     <property name="Nombre" not-null="true" unique="true" />
     <property name="Descripcion" />
-    <set name="Profesionales" access="nosetter.camelcase-underscore" table="ProfesionalEspecialidades" cascade="none">
+    <set name="Profesionales" access="nosetter.camelcase-underscore" table="ProfesionalEspecialidades">
       <key column="EspecialidadId" foreign-key="FK_ProfesionalEspecialidad_Especialidad" />
       <many-to-many class="Sicemed.Web.Models.Roles.Profesional" column="ProfesionalId" foreign-key="FK_ProfesionalEspecialidad_PersonaRol" />
     </set>

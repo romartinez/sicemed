@@ -25,7 +25,10 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                                     });
             Property(x => x.Orden, map => map.NotNullable(true));
 
-            ManyToOne(x => x.Padre, map => map.ForeignKey("FK_Paginas_Padre"));
+            ManyToOne(x => x.Padre, map =>{ 
+                map.Lazy(LazyRelation.NoLazy);
+                map.ForeignKey("FK_Paginas_Padre");
+            });
 
             Set(
                 x => x.Hijos,

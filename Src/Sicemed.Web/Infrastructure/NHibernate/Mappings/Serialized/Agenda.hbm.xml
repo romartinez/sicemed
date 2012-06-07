@@ -10,7 +10,7 @@
     <property name="Dia" />
     <many-to-one name="Consultorio" column="ConsultorioId" foreign-key="FK_Agenda_Cosultorio" />
     <many-to-one name="Profesional" column="ProfesionalId" foreign-key="FK_Agenda_PersonaRol_Profesional" />
-    <set name="EspecialidadesAtendidas" access="nosetter.camelcase-underscore" table="AgendaEspecialidadesAtendidas" cascade="all,delete-orphan">
+    <set name="EspecialidadesAtendidas" access="nosetter.camelcase-underscore" table="AgendaEspecialidadesAtendidas" lazy="false">
       <key column="AgendaId" foreign-key="FK_AgendaEspecialidadesAtendida_Agenda" />
       <many-to-many class="Especialidad" column="EspecialidadId" foreign-key="FK_AgendaEspecialidadesAtendida_Especialidad" />
     </set>

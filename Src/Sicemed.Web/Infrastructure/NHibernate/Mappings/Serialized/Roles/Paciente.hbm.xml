@@ -5,7 +5,7 @@
     <many-to-one name="Plan" column="PlanId" foreign-key="FK_PersonaRol_Paciente_Plan" />
     <property name="InasistenciasContinuas" />
     <property name="EstaHabilitadoTurnosWeb" />
-    <set name="Turnos" access="nosetter.camelcase-underscore" inverse="true" cascade="all,delete-orphan">
+    <set name="Turnos" access="nosetter.camelcase-underscore" inverse="true">
       <key column="PacienteId" />
       <one-to-many class="Sicemed.Web.Models.Turno" />
     </set>
