@@ -5,6 +5,7 @@ using NHibernate;
 using NHibernate.Event;
 using NHibernate.Event.Default;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Sicemed.Web.Models;
 using log4net;
 
@@ -25,6 +26,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
                                                 args.ErrorContext.Handled = true;
                                             }
                             };
+            _settings.Converters.Add(new IsoDateTimeConverter());
         }
 
         private string Serialize(string[] propertyNames, object[] obj)
