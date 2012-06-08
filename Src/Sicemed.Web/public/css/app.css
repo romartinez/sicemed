@@ -78,3 +78,9 @@ div.ctl-accordion h3, div.ctl-accordion h3
     font-size: 16px!important;
     margin: 0 !important;
 }
+
+input[type=date],
+input[type=time],
+input.ctl-timespan {
+    width: 75px;
+}
