@@ -1,0 +1,18 @@
+﻿@model Sicemed.Web.Models.ViewModels.Secretaria.AltaPacienteEditModel
+
+@{
+    ViewBag.Title = "Alta Paciente";
+}
+
+<h2>Alta Paciente</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.ValidationSummaryWithMessage()
+
+    @Html.EditorForModel()
+
+    @Html.Submit("Alta")        
+}

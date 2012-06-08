@@ -6,33 +6,37 @@ var app = (function ($, app) {
         //dropdown-cascading
         $(".dropdown-cascading").each(function () {
             var item = $(this);
-            var parent = item.data("cascading-parent");
-            $("#" + parent).change(function () {
-                item.empty();
-                var val = $(this).val();
-                if (!val) {
-                    item.append($("<option />").text(item.data("cascading-parent-prompt")));
-                    item.attr("disabled", "disabled");
-                    return;
-                }
-
-                var url = item.data("cascading-url");
-                var params = {};
-                params[item.data("cascading-parameter")] = val;
-                $.getJSON(url, params, function (r) {
-                    if (!r || r.length == 0) {
+            //Prevent multiple bindings
+            if (!item.data("has-cascading")) {
+                var parent = item.data("cascading-parent");
+                $("#" + parent).change(function () {
+                    item.empty();
+                    var val = $(this).val();
+                    if (!val) {
                         item.append($("<option />").text(item.data("cascading-parent-prompt")));
                         item.attr("disabled", "disabled");
                         return;
-                    } else {
-                        item.append($("<option />").text(item.data("cascading-prompt")));
-                        item.removeAttr("disabled");
                     }
-                    $.each(r, function () {
-                        item.append($("<option />").val(this.Value).text(this.Text));
+
+                    var url = item.data("cascading-url");
+                    var params = {};
+                    params[item.data("cascading-parameter")] = val;
+                    $.getJSON(url, params, function (r) {
+                        if (!r || r.length == 0) {
+                            item.append($("<option />").text(item.data("cascading-parent-prompt")));
+                            item.attr("disabled", "disabled");
+                            return;
+                        } else {
+                            item.append($("<option />").text(item.data("cascading-prompt")));
+                            item.removeAttr("disabled");
+                        }
+                        $.each(r, function () {
+                            item.append($("<option />").val(this.Value).text(this.Text));
+                        });
                     });
                 });
-            });
+                item.data("has-cascading", true);
+            }
         });
 
         $("input.ctl-timespan[type=text]").timepicker({
@@ -54,19 +58,19 @@ var app = (function ($, app) {
             var index = self.find("h3:not(.ui-state-disabled):first").index();
             var active = self.accordion("option", "active");
             //2 items <h3> y <div> por tab
-            if(active != index) self.accordion("option", "active", (index / 2)); 
+            if (active != index) self.accordion("option", "active", (index / 2));
         });
         // Now the hack to implement the disabling functionnality
         // http: //stackoverflow.com/a/4672074
         var accordion = $("div.ctl-accordion").data("accordion");
-        if(accordion) {
+        if (accordion) {
             accordion._std_clickHandler = accordion._clickHandler;
             accordion._clickHandler = function (event, target) {
                 var clicked = $(event.currentTarget || target);
                 if (!clicked.hasClass("ui-state-disabled")) {
                     this._std_clickHandler(event, target);
                 }
-            };            
+            };
         }
     };
 

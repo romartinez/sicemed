@@ -51,6 +51,13 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                 //muestro.
                 .ForMember(d => d.Turnos, m => m.Ignore());
             CreateMap<Turno, TurnosDelDiaViewModel.TurnoViewModel>();
+
+            CreateMap<AltaPacienteEditModel, Persona>()
+                .ForMember(d => d.Id, m => m.Ignore())
+                .ForMember(d => d.Membership, m => m.Ignore())
+                .ForMember(d => d.Documento, m => m.Ignore())
+                .ForMember(d => d.Domicilio, m => m.Ignore())
+                .ForMember(d => d.Roles, m => m.Ignore());
             #endregion
 
             #region Profesional
