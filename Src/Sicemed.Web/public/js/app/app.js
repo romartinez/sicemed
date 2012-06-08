@@ -44,9 +44,28 @@ var app = (function ($, app) {
             showLeadingZero: true
         });
 
-        $("div.ctl-accordion").accordion({ 
+        $("div.ctl-accordion").accordion({
             collapsible: true
-        });        
+        });
+
+        //Selecciono el primero que no este disabled
+        $("div.ctl-accordion").each(function () {
+            var self = $(this);
+            var index = self.find("h3:not(.ui-state-disabled):first").index();
+            var active = self.accordion("option", "active");
+            //2 items <h3> y <div> por tab
+            if(active != index) self.accordion("option", "active", (index / 2)); 
+        });
+        // Now the hack to implement the disabling functionnality
+        // http: //stackoverflow.com/a/4672074
+        var accordion = $("div.ctl-accordion").data("accordion");
+        accordion._std_clickHandler = accordion._clickHandler;
+        accordion._clickHandler = function (event, target) {
+            var clicked = $(event.currentTarget || target);
+            if (!clicked.hasClass("ui-state-disabled")) {
+                this._std_clickHandler(event, target);
+            }
+        };
     };
 
     app.initialize = function (o) {

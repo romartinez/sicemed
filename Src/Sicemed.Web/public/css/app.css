@@ -71,3 +71,10 @@ fieldset.form li
 .editor-field {
     display: inline-block;
 }
+
+/* Theme fix*/
+div.ctl-accordion h3, div.ctl-accordion h3 
+{
+    font-size: 16px!important;
+    margin: 0 !important;
+}

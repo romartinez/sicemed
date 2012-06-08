@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using Castle.Core;
+﻿using AutoMapper;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Enumerations;
 using Sicemed.Web.Models.Roles;
 using Sicemed.Web.Models.ViewModels;
 using Sicemed.Web.Models.ViewModels.Cuenta;
+using Sicemed.Web.Models.ViewModels.Profesional;
 using Sicemed.Web.Models.ViewModels.Secretaria;
 
 namespace Sicemed.Web.Infrastructure.AutoMapper
@@ -47,11 +45,21 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                 .ForMember(d => d.Descripcion, m => m.MapFrom(o => o.Persona.NombreCompleto));
             #endregion
 
-            CreateMap<Profesional, ProfesionalViewModel>()
+            #region Secretaria
+            CreateMap<Profesional, TurnosDelDiaViewModel.ProfesionalViewModel>()
                 //NOTE: La lleno desde la query, ya que solo los de la fecha
                 //muestro.
                 .ForMember(d => d.Turnos, m => m.Ignore());
-            CreateMap<Turno, TurnoViewModel>();
+            CreateMap<Turno, TurnosDelDiaViewModel.TurnoViewModel>();
+            #endregion
+
+            #region Profesional
+            CreateMap<Profesional, AgendaProfesionalViewModel>()
+                //NOTE: La lleno desde la query, ya que solo los de la fecha
+                //muestro.
+                .ForMember(d => d.Turnos, m => m.Ignore());
+            CreateMap<Turno, AgendaProfesionalViewModel.TurnoViewModel>();
+            #endregion
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Sicemed.Web.Models.ViewModels.Secretaria.TurnoViewModel
+﻿@model Sicemed.Web.Models.ViewModels.Secretaria.TurnosDelDiaViewModel.TurnoViewModel
 @{
 
     var css = Model.SePresento ? "presentado " : string.Empty;
@@ -15,14 +15,14 @@
     <div>
         @if (!Model.SePresento)
         {
-            using (Html.BeginForm("RegistrarIngresoPaciente","Secretaria"))
+            using (Html.BeginForm("RegistrarIngresoPaciente", "Secretaria"))
             {
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="turnoId" value="@Model.Id"/>
                 @Html.Submit("Ingresar")
             }
         }
-        else if(!Model.SeAtendio)
+        else if (!Model.SeAtendio)
         {
             <span>El usuario se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes) minutos.</span>
         }

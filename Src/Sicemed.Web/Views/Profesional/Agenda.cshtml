@@ -1,6 +1,40 @@
 ﻿@model Sicemed.Web.Models.ViewModels.Profesional.AgendaProfesionalViewModel
 @{
-    ViewBag.Title = "Agenda";
+    ViewBag.Title = "Agenda Profesional";
 }
-
-<h2>Agenda</h2>
+@section Css
+{
+    <style type="text/css">
+        .padding
+        {
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+}
+<h2>
+    Agenda - <span class="title_pink">@DateTime.Now.ToShortDateString()</span>    
+</h2>
+<h3>@Model.PersonaNombreCompleto</h3>
+<div>
+    <a class="button_link btn_blue" href="@Url.Action("Agenda")"><span>Actualizar</span></a>            
+</div>
+@if (Model.Turnos.Any())
+{
+    <div class="ui-state-highlight padding">        
+        Le restan @Model.PacientesPendientes pacientes por atenderse. Y @Model.TurnosPendientes
+        pendientes de presentarse.
+    </div>
+    <div class="ctl-accordion">
+        @foreach (var turno in Model.Turnos)
+        {
+            @Html.DisplayFor(m => turno)
+        }
+    </div>
+}
+else
+{
+    <div class="ui-state-highlight padding">
+        No hay pacientes esperando en la sala de espera.
+    </div>    
+}

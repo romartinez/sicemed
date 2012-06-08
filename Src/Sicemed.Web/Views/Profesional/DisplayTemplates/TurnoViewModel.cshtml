@@ -1,0 +1,28 @@
+﻿@model Sicemed.Web.Models.ViewModels.Profesional.AgendaProfesionalViewModel.TurnoViewModel
+@{
+
+    var css = Model.SeAtendio || !Model.SePresento ? "ui-state-disabled " : string.Empty;
+    css += Model.SeAtendio ? "ui-state-highlight" : string.Empty;
+}
+<h3 class="@css">
+    <a href="#">@Model.FechaTurno.ToString("HH:mm") - @Model.Paciente.Descripcion @(Model.SeAtendio ? "| Atendido" : (!Model.SePresento  ? "| No Se Presentó Todavía" : string.Empty))</a>
+</h3>
+<div>
+    <div>
+        Especialidad: @Model.Especialidad.Descripcion
+    </div>
+    <div>
+        @if (Model.SePresento && !Model.SeAtendio)
+        {
+            <span>El usuario ingres&oacute; hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes) minutos.</span>
+            
+            using (Html.BeginForm("RegistrarAtencionPaciente", "Profesional"))
+            {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="turnoId" value="@Model.Id"/>
+            <textarea cols="5" rows="10" style="width: 100%;" name="nota"></textarea>
+            @Html.Submit("Atender")
+            }
+        }
+    </div>
+</div>

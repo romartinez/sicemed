@@ -11,11 +11,11 @@ namespace Sicemed.Web.Models
 
         public virtual DateTime FechaTurno { get; protected set; }
 
-        public virtual DateTime? FechaIngreso { get; set; }
+        public virtual DateTime? FechaIngreso { get; protected set; }
 
-        public virtual DateTime? FechaAtencion { get; set; }
+        public virtual DateTime? FechaAtencion { get; protected set; }
 
-        public virtual string Nota { get; set; }
+        public virtual string Nota { get; protected set; }
 
         public virtual string IpPaciente { get; protected set; }
         
@@ -63,6 +63,16 @@ namespace Sicemed.Web.Models
             {
                 return SecretariaReservadoraTurno != null && EsTelefonico;
             }
+        }
+
+        public virtual bool SePresento
+        {
+            get { return FechaIngreso.HasValue; }
+        }
+
+        public virtual bool SeAtendio
+        {
+            get { return FechaAtencion.HasValue; }
         }
 
         protected Turno(){}
@@ -153,6 +163,21 @@ namespace Sicemed.Web.Models
                            EsTelefonico = esTelefonico,
                            Agenda = agenda
                        };
+        }
+
+        public virtual void RegistrarIngreso(Secretaria secretariaRecepcionista)
+        {
+            if (FechaIngreso.HasValue) throw new NotSupportedException("No se puede marcar el Turno como Ingreso, ya lo estaba.");
+            FechaIngreso = DateTime.Now;
+            SecretariaRecepcionista = secretariaRecepcionista;
+        }
+
+        public virtual void RegistrarAtencion(string nota = null)
+        {
+            if (!FechaIngreso.HasValue) throw new NotSupportedException("No se puede marcar el Turno como Atendido, nunca se registró su Ingreso.");
+            if (FechaAtencion.HasValue) throw new NotSupportedException("No se puede marcar el Turno como Atendido, ya lo estaba.");
+            FechaAtencion = DateTime.Now;
+            Nota = nota;
         }
     }
 }

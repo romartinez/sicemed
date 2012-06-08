@@ -759,6 +759,7 @@
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Profesional\Agenda.cshtml" />
     <Content Include="Views\Secretaria\DisplayTemplates\TurnoViewModel.cshtml" />
+    <Content Include="Views\Profesional\DisplayTemplates\TurnoViewModel.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

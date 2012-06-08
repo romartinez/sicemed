@@ -43,13 +43,13 @@ namespace Sicemed.Web.Infrastructure.Queries.Secretaria
             {
                 viewModel.ProfesionalesConTurnos = turnos.Select(t => t.Profesional)
                     .Distinct()
-                    .Select(p => MappingEngine.Map<ProfesionalViewModel>(p))
+                    .Select(p => MappingEngine.Map<TurnosDelDiaViewModel.ProfesionalViewModel>(p))
                     .OrderBy(p => p.PersonaNombreCompleto)
                     .ToList();
                 foreach (var profesional in viewModel.ProfesionalesConTurnos)
                 {
                     var turnosProfesional = turnos.Where(t => t.Profesional.Id == profesional.Id);
-                    profesional.Turnos = MappingEngine.Map<List<TurnoViewModel>>(turnosProfesional);
+                    profesional.Turnos = MappingEngine.Map<List<TurnosDelDiaViewModel.TurnoViewModel>>(turnosProfesional);
                 }
             }
 

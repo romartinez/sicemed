@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
@@ -29,13 +28,13 @@ namespace Sicemed.Web.Controllers
         {
             var session = SessionFactory.GetCurrentSession();
             var turno = session.Get<Turno>(turnoId);
-            if (turno == null || turno.FechaIngreso.HasValue)
+            if (turno == null || turno.SePresento)
             {
                 ShowMessages(ResponseMessage.Error("No se encuentra el turno o ya se encuentra otorgado."));
                 return RedirectToAction("Presentacion");
             }
 
-            turno.FechaIngreso = DateTime.Now;
+            turno.RegistrarIngreso(User.As<Secretaria>());
 
             ShowMessages(ResponseMessage.Success());
             return RedirectToAction("Presentacion");

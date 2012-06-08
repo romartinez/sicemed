@@ -3,13 +3,6 @@
 @section Css
 {
     <style type="text/css">
-        /* Theme fix*/
-        div.ctl-accordion h3, div.ctl-accordion h3 
-        {
-            font-size: 16px!important;
-            margin: 0 !important;
-        }
-
         .pacientes {
             padding: 10px;
         }
@@ -37,23 +30,34 @@
 
 <h2>Turnos del d&iacute;a - <span class="title_pink">@DateTime.Now.ToShortDateString()</span></h2>
 
-
-<div class="ctl-accordion">
-    @foreach(var profesional in Model.ProfesionalesConTurnos)
-    {
-        <h3><a href="#">@profesional.PersonaNombreCompleto</a></h3>
-        <div>
-            <div class="ui-state-highlight pacientes">
-                Le restan @profesional.PacientesPendientes pacientes por atenderse.
-                Y @profesional.TurnosPendientes pendientes de presentarse.
-            </div>
-            <ol class="turnos">
-                @foreach(var turno in profesional.Turnos)
-                {
-                    @Html.DisplayFor(m=>turno)
-                }
-            </ol>
-        </div>        
-    }
+<div>
+    <a class="button_link btn_blue" href="@Url.Action("Presentacion")"><span>Actualizar</span></a>            
 </div>
 
+@if (Model.ProfesionalesConTurnos.Any())
+{
+    <div class="ctl-accordion">
+        @foreach (var profesional in Model.ProfesionalesConTurnos)
+        {
+            <h3><a href="#">@profesional.PersonaNombreCompleto</a></h3>
+            <div>
+                <div class="ui-state-highlight pacientes">
+                    Le restan @profesional.PacientesPendientes pacientes por atenderse.
+                    Y @profesional.TurnosPendientes pendientes de presentarse.
+                </div>
+                <ol class="turnos">
+                    @foreach (var turno in profesional.Turnos)
+                    {
+                        @Html.DisplayFor(m => turno)
+                    }
+                </ol>
+            </div>        
+        }
+    </div>    
+}
+else
+{
+    <div class="ui-state-highlight">
+        No hay turnos otorgados para el d&iacute; de la fecha.
+    </div>
+}
