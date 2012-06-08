@@ -57,6 +57,7 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
             CreateMap<Profesional, AgendaProfesionalViewModel>()
                 //NOTE: La lleno desde la query, ya que solo los de la fecha
                 //muestro.
+                .ForMember(d => d.FechaTurnos, m => m.Ignore())
                 .ForMember(d => d.Turnos, m => m.Ignore());
             CreateMap<Turno, AgendaProfesionalViewModel.TurnoViewModel>();
             #endregion

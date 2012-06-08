@@ -8,6 +8,7 @@ namespace Sicemed.Web.Models.ViewModels.Profesional
     {
         public long Id { get; set; }
         public string PersonaNombreCompleto { get; set; }
+        public DateTime FechaTurnos { get; set; }
 
         public long PacientesPendientes
         {

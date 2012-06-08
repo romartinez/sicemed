@@ -59,13 +59,15 @@ var app = (function ($, app) {
         // Now the hack to implement the disabling functionnality
         // http: //stackoverflow.com/a/4672074
         var accordion = $("div.ctl-accordion").data("accordion");
-        accordion._std_clickHandler = accordion._clickHandler;
-        accordion._clickHandler = function (event, target) {
-            var clicked = $(event.currentTarget || target);
-            if (!clicked.hasClass("ui-state-disabled")) {
-                this._std_clickHandler(event, target);
-            }
-        };
+        if(accordion) {
+            accordion._std_clickHandler = accordion._clickHandler;
+            accordion._clickHandler = function (event, target) {
+                var clicked = $(event.currentTarget || target);
+                if (!clicked.hasClass("ui-state-disabled")) {
+                    this._std_clickHandler(event, target);
+                }
+            };            
+        }
     };
 
     app.initialize = function (o) {

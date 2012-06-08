@@ -1,13 +1,14 @@
 ﻿@model Sicemed.Web.Models.ViewModels.Secretaria.TurnosDelDiaViewModel
-
 @section Css
 {
     <style type="text/css">
-        .pacientes {
+        .pacientes
+        {
             padding: 10px;
         }
-
-        ol.turnos {
+        
+        ol.turnos
+        {
             margin: 0;
         }
         ol.turnos li
@@ -15,45 +16,47 @@
             list-style-type: none;
         }
         
-        ol.turnos li.presentado span {
+        ol.turnos li.presentado span
+        {
             color: #2e8f19;
         }
         
-        ol.turnos li.atendido{
+        ol.turnos li.atendido
+        {
             text-decoration: line-through;
         }
         
-        .fecha {
+        .fecha
+        {
             color: #CA2B63 !important;
             font-size: 20px;
             font-weight: bold;
             width: 105px !important;
         }
     </style>
-}   
+}
 @{
     ViewBag.Title = "Presentación De Turnos";
 }
-
 @using (Html.BeginForm())
 {
     <h2>
-        Turnos del d&iacute;a - 
+        Turnos del d&iacute;a -
         <input type="date" class="fecha" name="fecha" value="@Model.FechaTurnos.ToShortDateString()" />
-        @Html.Submit("Actualizar")        
+        @Html.Submit("Actualizar")
     </h2>
 }
-
 @if (Model.ProfesionalesConTurnos.Any())
 {
     <div class="ctl-accordion">
         @foreach (var profesional in Model.ProfesionalesConTurnos)
         {
-            <h3><a href="#">@profesional.PersonaNombreCompleto</a></h3>
+            <h3>
+                <a href="#">@profesional.PersonaNombreCompleto</a></h3>
             <div>
                 <div class="ui-state-highlight pacientes">
-                    Le restan @profesional.PacientesPendientes pacientes por atenderse.
-                    Y @profesional.TurnosPendientes pendientes de presentarse.
+                    Le restan @profesional.PacientesPendientes pacientes por atenderse. Y @profesional.TurnosPendientes
+                    pendientes de presentarse.
                 </div>
                 <ol class="turnos">
                     @foreach (var turno in profesional.Turnos)
