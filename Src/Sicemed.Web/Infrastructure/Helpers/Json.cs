@@ -2,6 +2,7 @@
 using System.IO;
 using Castle.Core.Logging;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Sicemed.Web.Infrastructure.NHibernate;
 using log4net;
 
@@ -14,7 +15,8 @@ namespace Sicemed.Web.Infrastructure.Helpers
         private static readonly JsonSerializer Serializer = new JsonSerializer
         {
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            ContractResolver = new NHibernateContractResolver()
+            ContractResolver = new NHibernateContractResolver(),
+            Converters = { new IsoDateTimeConverter() }
         };
 
         public static string SerializeObject(object objectToSerialize)
