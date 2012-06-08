@@ -4,7 +4,14 @@ var model = (function () {
         var self = this;
 
         var attachTooltips = function () {
-            $(".hasTooltip[title]").tooltip({ effect: 'slide', offset: [10, 2], position: 'bottom rigth' });
+            $(".hasTooltip[title]")
+                .tooltip({ effect: 'slide', offset: [10, 2], position: 'bottom rigth' })
+                .on("mouseover", function () {
+                    $(this).addClass("event-hover");
+                })
+                .on("mouseout", function () {
+                    $(this).removeClass("event-hover");
+                });
         };
 
         //#region Wizard
