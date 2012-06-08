@@ -19,6 +19,8 @@ namespace Sicemed.Web.Infrastructure.Queries
         public virtual IMappingEngine MappingEngine { get; set; }
         [JsonIgnore]
         public virtual ICacheProvider Cache { get; set; }
+        [JsonIgnore]
+        public virtual IQueryFactory QueryFactory { get; set; }
 
         protected Query()
         {

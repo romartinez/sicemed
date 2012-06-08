@@ -110,7 +110,7 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
                 {
                     var secretariaRoot = CreateDefaultPage("Secretaria", "#", order: 9000);
                     secretariaRoot.Childs.Add(CreateDefaultPage("Presentación Turno", "Secretaria/Presentacion", secretariaRoot));
-                    secretariaRoot.Childs.Add(CreateDefaultPage("Otorgar Turno", "Secretaria/Otorgar", secretariaRoot));
+                    secretariaRoot.Childs.Add(CreateDefaultPage("Otorgar Turno", "Secretaria/OtorgarTurno", secretariaRoot));
                     secretariaRoot.Childs.Add(CreateDefaultPage("Alta Paciente", "Secretaria/AltaPaciente", secretariaRoot));
 
                     pages.Add(secretariaRoot);

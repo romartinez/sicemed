@@ -6,6 +6,7 @@ using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Enums;
 using Sicemed.Web.Infrastructure.Helpers;
+using Sicemed.Web.Infrastructure.Queries.ObtenerTurno;
 using Sicemed.Web.Infrastructure.Queries.Secretaria;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
@@ -39,9 +40,91 @@ namespace Sicemed.Web.Controllers
 
         #region Otorgar Turno
 
-        public ActionResult Otorgar()
+        public ActionResult OtorgarTurno()
         {
-            return View();
+            var editModel = new OtorgarTurnoEditModel();
+            AppendLists(editModel);
+            return View(editModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult OtorgarTurno(OtorgarTurnoEditModel editModel)
+        {
+            AppendLists(editModel);
+            if(ModelState.IsValid)
+            {
+                var session = SessionFactory.GetCurrentSession();
+                var paciente = session.Get<Paciente>(editModel.PacienteId.Value);
+                var profesional = session.Get<Profesional>(editModel.ProfesionalId.Value);
+                
+                var especialidadId =
+                    QueryFactory.Create<IObtenerEspecialidadesProfesionalDropDownQuery>()
+                        .GetEspecialidadId(editModel.EspecialidadId);
+
+                var especialidad = session.Get<Especialidad>(especialidadId);                
+
+                var turno = Turno.Create(new DateTime(editModel.TurnoId.Value), paciente, profesional, especialidad, User.As<Secretaria>(), editModel.EsTelefonico);
+
+                session.Save(turno);
+
+                //Update del cache
+                var query = QueryFactory.Create<IObtenerTurnosDisponiblesPorProfesionalDropDownQuery>();
+                query.ProfesionalId = editModel.ProfesionalId.Value;
+                query.ClearCache();
+
+                ShowMessages(ResponseMessage.Success("Turno otorgado con éxito."));
+
+                return RedirectToAction("OtorgarTurno");
+            }
+            return View(editModel);
+        }
+
+        [AjaxHandleError]
+        public JsonResult GetTurnosDisponiblesProfesional(string especialidadId)
+        {
+            var queryEspecialidades = QueryFactory.Create<IObtenerEspecialidadesProfesionalDropDownQuery>();
+            var queryTurnos = QueryFactory.Create<IObtenerTurnosDisponiblesPorProfesionalDropDownQuery>();
+            queryTurnos.ProfesionalId = queryEspecialidades.GetProfesionalId(especialidadId);
+            queryTurnos.EspecialidadId = queryEspecialidades.GetEspecialidadId(especialidadId);
+            var result = queryTurnos.Execute();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }        
+        
+        [AjaxHandleError]
+        public JsonResult GetEspecialidadesProfesional(long profesioanlId)
+        {
+            var queryEspecialidades = QueryFactory.Create<IObtenerEspecialidadesProfesionalDropDownQuery>();
+            queryEspecialidades.ProfesionalId = profesioanlId;            
+            var result = queryEspecialidades.Execute();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        private void AppendLists(OtorgarTurnoEditModel editModel)
+        {
+            var queryPacientes = QueryFactory.Create<IObtenerPacientesDropDownQuery>();
+            queryPacientes.SelectedValue = editModel.PacienteId;
+            editModel.PacientesDisponibles = queryPacientes.Execute();
+            var queryProfesionales = QueryFactory.Create<IObtenerProfesionalesDropDownQuery>();
+            queryProfesionales.SelectedValue = editModel.ProfesionalId;
+            editModel.ProfesionalesDisponibles = queryProfesionales.Execute();
+
+            if(editModel.ProfesionalId.HasValue)
+            {
+                var queryEspecialidades = QueryFactory.Create<IObtenerEspecialidadesProfesionalDropDownQuery>();
+                queryEspecialidades.ProfesionalId = editModel.ProfesionalId.Value;
+                queryEspecialidades.SelectedValue = editModel.EspecialidadId;
+                editModel.EspecialidadesProfesional = queryPacientes.Execute();
+
+                if(!string.IsNullOrWhiteSpace(editModel.EspecialidadId))
+                {
+                    var queryTurnos = QueryFactory.Create<IObtenerTurnosDisponiblesPorProfesionalDropDownQuery>();
+                    queryTurnos.ProfesionalId = editModel.ProfesionalId.Value;
+                    queryTurnos.EspecialidadId = queryEspecialidades.GetEspecialidadId(editModel.EspecialidadId);
+                    queryTurnos.SelectedValue = editModel.TurnoId;
+                    editModel.TurnosDisponibles = queryTurnos.Execute();
+                }
+            }
         }
         #endregion
 
@@ -108,7 +191,7 @@ namespace Sicemed.Web.Controllers
                 {
                     _membershipService.RecoverPassword(editModel.Email);
                     ShowMessages(ResponseMessage.Success("Paciente '{0}' registrado correctamente.", model.NombreCompleto));
-                    return RedirectToAction("Otorgar");
+                    return RedirectToAction("OtorgarTurno");
                 }
                 ModelState.AddModelError("", status.Get());
             }
