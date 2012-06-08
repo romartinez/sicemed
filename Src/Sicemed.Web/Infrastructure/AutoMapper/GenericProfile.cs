@@ -6,6 +6,7 @@ using Sicemed.Web.Models.Enumerations;
 using Sicemed.Web.Models.Roles;
 using Sicemed.Web.Models.ViewModels;
 using Sicemed.Web.Models.ViewModels.Cuenta;
+using Sicemed.Web.Models.ViewModels.Paciente;
 using Sicemed.Web.Models.ViewModels.Profesional;
 using Sicemed.Web.Models.ViewModels.Secretaria;
 
@@ -83,6 +84,15 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                 .ForMember(d => d.FechaTurnos, m => m.Ignore())
                 .ForMember(d => d.Turnos, m => m.Ignore());
             CreateMap<Turno, AgendaProfesionalViewModel.TurnoViewModel>();
+            #endregion
+
+            #region Paciente
+            CreateMap<Paciente, AgendaPacienteViewModel>()
+                //NOTE: La lleno desde la query, ya que solo los de la fecha
+                //muestro.
+                .ForMember(d => d.FechaTurnos, m => m.Ignore())
+                .ForMember(d => d.Turnos, m => m.Ignore());
+            CreateMap<Turno, AgendaPacienteViewModel.TurnoViewModel>();
             #endregion
         }
     }

@@ -1,0 +1,42 @@
+﻿@model Sicemed.Web.Models.ViewModels.Paciente.AgendaPacienteViewModel
+@{
+    ViewBag.Title = "Agenda Profesional";
+}
+@section Css
+{
+    <style type="text/css">
+        .padding
+        {
+            padding: 10px;
+            margin: 10px;
+        }
+        .fecha
+        {
+            color: #CA2B63 !important;
+            font-size: 20px;
+            font-weight: bold;
+            width: 105px !important;
+        }
+    </style>
+}
+<h2>
+    Agenda
+</h2>
+<p>
+    Aqu&iacute; podr&aacute; ver un listado de sus pr&oacute;ximos turnos.
+</p>
+@if (Model.Turnos.Any())
+{
+    <div class="ctl-accordion">
+        @foreach (var turno in Model.Turnos)
+        {
+            @Html.DisplayFor(m => turno)
+        }
+    </div>
+}
+else
+{
+    <div class="ui-state-highlight padding">
+        No hay turnos en su agenda.
+    </div>    
+}

@@ -16,7 +16,7 @@ namespace Sicemed.Web.Infrastructure.Queries.Secretaria
 
         protected override IEnumerable<SelectListItem> CoreExecute()
         {
-            var pacientes = SessionFactory.GetCurrentSession().QueryOver<Paciente>()
+            var pacientes = SessionFactory.GetCurrentSession().QueryOver<Models.Roles.Paciente>()
                 .JoinQueryOver(p=>p.Persona)
                 .OrderBy(p => p.Apellido).Asc.List();
             var result = MappingEngine.Map<IEnumerable<SelectListItem>>(pacientes).ToList();

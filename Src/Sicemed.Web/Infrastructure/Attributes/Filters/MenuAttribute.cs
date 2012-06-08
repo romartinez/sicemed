@@ -102,14 +102,21 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             //Only show the menu to anon users or Pacientess
             if (user == null || user.IsInRole<Paciente>())
             {
-                pages.Add(CreateDefaultPage("Obtener Turno", "ObtenerTurno", order: 9990)); //Almost at the end				
+                pages.Add(CreateDefaultPage("Obtener Turno", "ObtenerTurno", order: 9000)); //Almost at the end				                
             }
             if (user != null)
             {
+                if (user.IsInRole<Paciente>())
+                {
+                    var pacienteRoot = CreateDefaultPage("Paciente", "#", order: 9100);
+                    pacienteRoot.Childs.Add(CreateDefaultPage("Ver Agenda", "Paciente/Agenda", pacienteRoot));
+                    pages.Add(pacienteRoot);
+                }
+
                 if (user.IsInRole<Secretaria>())
                 {
-                    var secretariaRoot = CreateDefaultPage("Secretaria", "#", order: 9000);
-                    secretariaRoot.Childs.Add(CreateDefaultPage("Presentación Turno", "Secretaria/Presentacion", secretariaRoot));
+                    var secretariaRoot = CreateDefaultPage("Secretaria", "#", order: 9200);
+                    secretariaRoot.Childs.Add(CreateDefaultPage("Presentación Turno", "Secretaria/Agenda", secretariaRoot));
                     secretariaRoot.Childs.Add(CreateDefaultPage("Otorgar Turno", "Secretaria/OtorgarTurno", secretariaRoot));
                     secretariaRoot.Childs.Add(CreateDefaultPage("Alta Paciente", "Secretaria/AltaPaciente", secretariaRoot));
 
@@ -117,7 +124,7 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
                 }
                 if (user.IsInRole<Profesional>())
                 {
-                    var profesionalRoot = CreateDefaultPage("Profesional", "#", order: 9100);
+                    var profesionalRoot = CreateDefaultPage("Profesional", "#", order: 9300);
                     profesionalRoot.Childs.Add(CreateDefaultPage("Ver Agenda", "Profesional/Agenda", profesionalRoot));
 
                     pages.Add(profesionalRoot);

@@ -30,7 +30,7 @@ namespace Sicemed.Web.Controllers
             _membershipService = membershipService;
         }
 
-        public ActionResult Presentacion(DateTime? fecha = null)
+        public ActionResult Agenda(DateTime? fecha = null)
         {
             var query = QueryFactory.Create<IObtenerTurnosPorFechaQuery>();
             query.Fecha = fecha;
@@ -144,13 +144,13 @@ namespace Sicemed.Web.Controllers
             if (turno == null || turno.SePresento)
             {
                 ShowMessages(ResponseMessage.Error("No se encuentra el turno o ya se encuentra otorgado."));
-                return RedirectToAction("Presentacion");
+                return RedirectToAction("Agenda");
             }
 
             turno.RegistrarIngreso(User.As<Secretaria>());
 
             ShowMessages(ResponseMessage.Success());
-            return RedirectToAction("Presentacion");
+            return RedirectToAction("Agenda");
         }
 
         #endregion
