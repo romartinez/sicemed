@@ -5,7 +5,7 @@
       <generator class="hilo" />
     </id>
     <property name="Nombre" not-null="true" />
-    <set name="Localidades" access="nosetter.camelcase-underscore" inverse="true">
+    <set name="Localidades" access="nosetter.camelcase-underscore" inverse="true" cascade="all,delete-orphan">
       <key column="ProvinciaId" />
       <one-to-many class="Localidad" />
     </set>

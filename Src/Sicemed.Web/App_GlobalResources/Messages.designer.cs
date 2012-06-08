@@ -79,7 +79,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Emial o Password no válido..
+        ///   Looks up a localized string similar to Email o Password no válido..
         /// </summary>
         internal static string MembershipStatus_BAD_PASSWORD {
             get {

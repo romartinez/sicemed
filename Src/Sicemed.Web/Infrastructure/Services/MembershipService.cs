@@ -24,7 +24,7 @@ namespace Sicemed.Web.Infrastructure.Services
 
     public class MembershipService : IMembershipService
     {
-    	public const int MIN_REQUIRED_PASSWORD_LENGTH = 6;
+        public const int MIN_REQUIRED_PASSWORD_LENGTH = 6;
         private const string SHA1_SALT = "!-3453dfg4";
         private const int WINDOW_MINUTES = 30;
         private const int MAX_FAILED_ATTEMPS = 3;
@@ -103,7 +103,8 @@ namespace Sicemed.Web.Infrastructure.Services
                                 "The persona '{0}' was locked. Maximum failed password attemp reached: #{1}", email,
                                 persona.Membership.FailedPasswordAttemptCount);
                     }
-                } else
+                }
+                else
                 {
                     persona.Membership.FailedPasswordAttemptCount = 1;
                     persona.Membership.FailedPasswordAttemptWindowStart = DateTime.UtcNow;
@@ -144,7 +145,8 @@ namespace Sicemed.Web.Infrastructure.Services
                 session.Update(persona);
                 tx.Commit();
 
-                _membershipMailer.PasswordResetEmail(persona, token).Send();
+                var mail = _membershipMailer.PasswordResetEmail(persona, token);
+                if (mail != null) mail.Send();
                 return status;
             }
         }
@@ -256,7 +258,8 @@ namespace Sicemed.Web.Infrastructure.Services
                 session.Save(user);
                 tx.Commit();
 
-                _membershipMailer.RegistrationEmail(user).Send();
+                var mail = _membershipMailer.RegistrationEmail(user);
+                if (mail != null) mail.Send();
             }
 
             return MembershipStatus.USER_CREATED;
@@ -265,7 +268,7 @@ namespace Sicemed.Web.Infrastructure.Services
         public virtual Persona GetCurrentUser()
         {
             if (!HttpContext.Current.User.Identity.IsAuthenticated) return null;
-            return (Persona) HttpContext.Current.User;
+            return (Persona)HttpContext.Current.User;
         }
 
         public int MinPasswordLength

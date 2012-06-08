@@ -15,6 +15,7 @@ namespace Sicemed.Web.Infrastructure.Services
 
         public MailMessage PasswordResetEmail(Persona user, string token)
         {
+            if (MvcApplication.Clinica == null) return null; //Inicializacion
             var mailMessage = new MailMessage
             {
                 Subject = "SICEMED - Recuperar Password"
@@ -31,6 +32,7 @@ namespace Sicemed.Web.Infrastructure.Services
 
         public MailMessage RegistrationEmail(Persona user)
         {
+            if (MvcApplication.Clinica == null) return null; //Inicializacion
             var mailMessage = new MailMessage { Subject = "SICEMED - Bienvenido" };
 
             mailMessage.To.Add(user.Membership.Email);

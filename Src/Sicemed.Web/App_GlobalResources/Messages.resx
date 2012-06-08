@@ -124,7 +124,7 @@
     <value>El campo {0} debe ser una dirección de email válida.</value>
   </data>
   <data name="MembershipStatus_BAD_PASSWORD" xml:space="preserve">
-    <value>Emial o Password no válido.</value>
+    <value>Email o Password no válido.</value>
   </data>
   <data name="MembershipStatus_DUPLICATED_USER" xml:space="preserve">
     <value>El Email ingresado ya se encuentra registrado.</value>

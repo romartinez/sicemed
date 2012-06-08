@@ -3,6 +3,10 @@ var model = (function () {
     var ViewModel = function () {
         var self = this;
 
+        var attachTooltips = function () {
+            $(".hasTooltip[title]").tooltip({ effect: 'slide', offset: [10, 2], position: 'bottom rigth' });
+        };
+
         //#region Wizard
         var step = function (id, name, template, initFunction) {
             this.id = id;
@@ -43,7 +47,7 @@ var model = (function () {
                         self.currentStep(stepConfirmar);
                     };
                     self.turnosDisponibles.push(turno);
-                    var especialidadesAtendidasTurno = $.map(turno.Agenda.EspecialidadesAtendidas, function (especialidad) {
+                    var especialidadesAtendidasTurno = $.map(turno.EspecialidadesAtendidas, function (especialidad) {
                         return especialidad.Descripcion;
                     }).join(",");
                     var description = "<div class='turno'>"
@@ -66,7 +70,7 @@ var model = (function () {
                 }
                 calendar.fullCalendar('addEventSource', events);
                 //Tooltip
-                $(".hasTooltip[title]").tooltip({ effect: 'slide', offset: [10, 2], position: 'bottom rigth' });
+                attachTooltips();
             });
         });
 
@@ -74,8 +78,8 @@ var model = (function () {
             $('#calendar').hide();
             //Si no tiene especialidad elegida y,
             //si la agenda del turno seleccionado tiene una sola especialidad se la asigno
-            if (!self.especialidadSeleccionada() && self.turnoSeleccionado().Agenda.EspecialidadesAtendidas.length === 1) {
-                self.especialidadSeleccionada(self.turnoSeleccionado().Agenda.EspecialidadesAtendidas[0]);
+            if (!self.especialidadSeleccionada() && self.turnoSeleccionado().EspecialidadesAtendidas.length === 1) {
+                self.especialidadSeleccionada(self.turnoSeleccionado().EspecialidadesAtendidas[0]);
             }
         });
 
@@ -156,8 +160,7 @@ var model = (function () {
                                     : self.especialidadSeleccionada().Id,
                 profesionalId: self.profesionalSeleccionado().Id,
                 fecha: app.format.fulldate(self.turnoSeleccionado().FechaTurnoInicial),
-                consultorioId: self.turnoSeleccionado().Consultorio.Id,
-                agendaId: self.turnoSeleccionado().Agenda.Id
+                consultorioId: self.turnoSeleccionado().Consultorio.Id
             }).done(function (d) {
                 self.turnoAsignado(d);
                 self.currentStep(stepComprobante);
@@ -211,6 +214,9 @@ var model = (function () {
             },
             eventMouseover: function (event, jsEvent, view) {
                 if (event.libre) $(this).css('cursor', 'pointer');
+            },
+            viewDisplay: function () {
+                attachTooltips();
             },
             events: []
         }).hide();

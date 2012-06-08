@@ -22,8 +22,7 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
         protected override IEnumerable<TurnoViewModel> CoreExecute()
         {
             var filtroEspecialidad = new Func<TurnoViewModel, bool>(x =>
-                        (x.Especialidad != null && x.Especialidad.Id == EspecialidadId.Value)
-                        || x.Agenda.EspecialidadesAtendidas.Any(e => e.Id == EspecialidadId.Value));
+                        (x.EspecialidadesAtendidas.Any(e => e.Id == EspecialidadId.Value)));
 
             var cacheKey = GetProfesionalCacheKey();
             var cached = Cache.Get<List<TurnoViewModel>>(cacheKey);
@@ -63,9 +62,6 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
             //Quito los turnos otorgados
             turnos.RemoveAll(x => turnosProfesional.Any(t => t.FechaTurno == x.FechaTurnoInicial));
 
-            //Agrego los turnos otorgados
-            turnos.AddRange(turnosProfesional.Select(TurnoViewModel.Create));
-
             Cache.Add(cacheKey, turnos);
 
             //Filtro por especialidad
@@ -90,6 +86,7 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
             for (var minutes = 0; minutes < tiempoAtencion.TotalMinutes; minutes += (int)agendaDia.DuracionTurno.TotalMinutes)
             {
                 var diaConHora = dia.SetTimeWith(agendaDia.HorarioDesde).AddMinutes(minutes);
+
                 turnos.AddRange(TurnoViewModel.Create(diaConHora, agendaDia));
             }
 

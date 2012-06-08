@@ -62,9 +62,14 @@ namespace Sicemed.Web.Controllers
                     QueryFactory.Create<IObtenerEspecialidadesProfesionalDropDownQuery>()
                         .GetEspecialidadId(editModel.EspecialidadId);
 
-                var especialidad = session.Get<Especialidad>(especialidadId);                
+                var especialidad = session.Get<Especialidad>(especialidadId);
 
-                var turno = Turno.Create(new DateTime(editModel.TurnoId.Value), paciente, profesional, especialidad, User.As<Secretaria>(), editModel.EsTelefonico);
+                var queryTurno = QueryFactory.Create<IObtenerTurnosDisponiblesPorProfesionalDropDownQuery>();
+                var consultorioId = queryTurno.GetConsultorioId(editModel.TurnoId);
+                var consultorio = session.Load<Consultorio>(consultorioId);
+                var fechaTurno = queryTurno.GetFechaTurno(editModel.TurnoId);
+
+                var turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, User.As<Secretaria>(), consultorio, editModel.EsTelefonico);
 
                 session.Save(turno);
 

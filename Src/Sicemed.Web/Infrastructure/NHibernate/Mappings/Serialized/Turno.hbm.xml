@@ -17,6 +17,5 @@
     <many-to-one name="SecretariaRecepcionista" column="SecretariaRecepcionistaId" foreign-key="FK_Turno_PersonaRol_Secretaria_Recepcionista" />
     <many-to-one name="Especialidad" column="EspecialidadId" not-null="true" foreign-key="FK_Turno_Especialidad" />
     <many-to-one name="Consultorio" column="ConsultorioId" foreign-key="FK_Turno_Consultorio" />
-    <many-to-one name="Agenda" column="AgendaId" foreign-key="FK_Turno_Agenda" />
   </class>
 </hibernate-mapping>

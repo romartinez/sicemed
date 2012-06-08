@@ -114,7 +114,7 @@
             <span class="text-blue">Consultorio:</span> <span data-bind="text: turnoSeleccionado().Consultorio.Descripcion"></span>
             <br/>
             <span class="text-blue"> Especialidad:</span>            
-            <select data-bind="visible: !especialidadSeleccionada(), options: turnoSeleccionado().Agenda.EspecialidadesAtendidas, optionsText: 'Descripcion', value: especialidadAgendaSeleccionada, optionsCaption: '-- Seleccione --'">
+            <select data-bind="visible: !especialidadSeleccionada(), options: turnoSeleccionado().EspecialidadesAtendidas, optionsText: 'Descripcion', value: especialidadAgendaSeleccionada, optionsCaption: '-- Seleccione --'">
             </select>            
             <span data-bind="visible: especialidadSeleccionada(), text: especialidadSeleccionada() ? especialidadSeleccionada().Descripcion : ''"></span>
         </div>

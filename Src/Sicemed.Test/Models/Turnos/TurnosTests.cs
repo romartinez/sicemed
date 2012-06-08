@@ -11,16 +11,17 @@ namespace Sicemed.Tests.Models.Turnos
     public class TurnosTests : InitializeNhibernate
     {
         [Test]
-        public void PuedoOtorgarUnTurnoPersonalmenteSinAgenda()
+        public void PuedoOtorgarUnTurnoPersonalmente()
         {
             var paciente = ApplicationInstaller.PersonaPacientePablo.As<Paciente>();
             var profesional = ApplicationInstaller.PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>();
             var especialidad = ApplicationInstaller.EspecialidadClinico;
             var secretariaOtorgaTurno = ApplicationInstaller.PersonaSecretariaJuana.As<Secretaria>();
+            var consultorio = ApplicationInstaller.ConsultorioA;
             var fechaTurno = new DateTime(2011, 02, 01);
 
             var session = SessionFactory.GetCurrentSession();
-            var turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, secretariaOtorgaTurno);
+            var turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, secretariaOtorgaTurno, consultorio);
 
             session.Save(turno);
 
@@ -40,15 +41,16 @@ namespace Sicemed.Tests.Models.Turnos
         }
 
         [Test]
-        public void PuedoOtorgarUnTurnoViaWebSinAgenda()
+        public void PuedoOtorgarUnTurnoViaWeb()
         {
             var paciente = ApplicationInstaller.PersonaPacientePablo.As<Paciente>();
             var profesional = ApplicationInstaller.PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>();
             var especialidad = ApplicationInstaller.EspecialidadClinico;
+            var consultorio = ApplicationInstaller.ConsultorioA;
             var fechaTurno = new DateTime(2011, 02, 01);
 
             var session = SessionFactory.GetCurrentSession();
-            var turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, "127.0.0.1");
+            var turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, consultorio, "127.0.0.1");
 
             session.Save(turno);
 
@@ -73,17 +75,20 @@ namespace Sicemed.Tests.Models.Turnos
             var paciente = ApplicationInstaller.PersonaPacientePablo.As<Paciente>();
             var profesional = ApplicationInstaller.PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>();
             var especialidad = ApplicationInstaller.EspecialidadPediatra;
+            var consultorio = ApplicationInstaller.ConsultorioA;
             var fechaTurno = new DateTime(2011, 02, 01);
 
-            Assert.Throws<ArgumentException>(() => Turno.Create(fechaTurno, paciente, profesional, especialidad, "127.0.0.1"));
+            Assert.Throws<ArgumentException>(() => Turno.Create(fechaTurno, paciente, profesional, especialidad, consultorio, "127.0.0.1"));
         }
 
         [Test]
-        public void PuedoOtorgarUnTurnoViaWebConAgenda()
+        public void PuedoOtorgarUnTurnoViaWeb2()
         {
             var paciente = ApplicationInstaller.PersonaPacientePablo.As<Paciente>();
             var profesional = ApplicationInstaller.PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>();
             var especialidad = ApplicationInstaller.EspecialidadClinico;
+            var consultorio = ApplicationInstaller.ConsultorioA;
+
             var fechaTurno = new DateTime(2011, 02, 01);
 
             profesional.AgregarAgenda(
@@ -95,15 +100,13 @@ namespace Sicemed.Tests.Models.Turnos
                 ApplicationInstaller.EspecialidadClinico
             );
 
-            var agenda = profesional.Agendas.First();
-
             var session = SessionFactory.GetCurrentSession();
 
             session.Update(profesional);
             session.Flush();
             session.Evict(profesional);
             
-            var turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, "127.0.0.1", agenda);
+            var turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, consultorio, "127.0.0.1");
 
             session.Save(turno);
 
@@ -119,7 +122,6 @@ namespace Sicemed.Tests.Models.Turnos
             Assert.AreEqual(turno.Especialidad, turnoDb.Especialidad);
             Assert.AreEqual(turno.FechaTurno, turnoDb.FechaTurno);
             Assert.AreEqual(turno.IpPaciente, turnoDb.IpPaciente);
-            Assert.AreEqual(turno.Agenda, turnoDb.Agenda);
             Assert.IsNull(turnoDb.SecretariaReservadoraTurno);
         }
 
@@ -128,7 +130,8 @@ namespace Sicemed.Tests.Models.Turnos
         {
             var paciente = ApplicationInstaller.PersonaPacientePablo.As<Paciente>();
             var profesional = ApplicationInstaller.PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>();
-            var especialidad = ApplicationInstaller.EspecialidadClinico;
+            var especialidad = ApplicationInstaller.EspecialidadPediatra;
+            var consultorio = ApplicationInstaller.ConsultorioA;
             var fechaTurno = new DateTime(2011, 02, 01);
 
             var agenda = new Agenda()
@@ -147,7 +150,7 @@ namespace Sicemed.Tests.Models.Turnos
             session.Flush();
             session.Evict(profesional);
 
-            Assert.Throws<ArgumentException>(() => Turno.Create(fechaTurno, paciente, profesional, especialidad, "127.0.0.1", agenda));
+            Assert.Throws<ArgumentException>(() => Turno.Create(fechaTurno, paciente, profesional, especialidad, consultorio, "127.0.0.1"));
         }
 
     }

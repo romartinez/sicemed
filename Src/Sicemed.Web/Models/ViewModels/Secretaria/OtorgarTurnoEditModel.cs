@@ -37,7 +37,7 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
         
         [Required]
         [ScaffoldColumn(false)]
-        public long? TurnoId { get; set; }
+        public string TurnoId { get; set; }
 
         [DisplayName("Turno")]
         [UIHint("CascadingDropDownList")]
