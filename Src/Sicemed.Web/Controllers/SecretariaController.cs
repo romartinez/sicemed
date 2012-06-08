@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
@@ -11,9 +12,11 @@ namespace Sicemed.Web.Controllers
     [AuthorizeIt(typeof(Secretaria))]
     public class SecretariaController : NHibernateController
     {
-        public ActionResult Presentacion()
+        public ActionResult Presentacion(DateTime? fecha = null)
         {
-            var viewModel = QueryFactory.Create<IObtenerTurnosPorFechaQuery>().Execute();
+            var query = QueryFactory.Create<IObtenerTurnosPorFechaQuery>();
+            query.Fecha = fecha;
+            var viewModel = query.Execute();
             return View(viewModel);
         }
 

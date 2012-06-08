@@ -9,21 +9,18 @@ namespace Sicemed.Web.Infrastructure.Queries.Secretaria
 {
     public interface IObtenerTurnosPorFechaQuery : IQuery<TurnosDelDiaViewModel>
     {
-        DateTime? Desde { get; set; }
-        DateTime? Hasta { get; set; }
+        DateTime? Fecha { get; set; }
     }
 
     public class ObtenerTurnosPorFechaQuery : Query<TurnosDelDiaViewModel>, IObtenerTurnosPorFechaQuery
     {
-        public virtual DateTime? Desde { get; set; }
-        public virtual DateTime? Hasta { get; set; }
+        public virtual DateTime? Fecha { get; set; }
 
         protected override TurnosDelDiaViewModel CoreExecute()
         {
-            var dateDesde = Desde ?? DateTime.Now;
-            dateDesde = dateDesde.ToMidnigth();
-            var dateHasta = Hasta ?? DateTime.Now.AddDays(1);
-            dateHasta = dateHasta.ToMidnigth();
+            var desde = Fecha ?? DateTime.Now;
+            desde = desde.ToMidnigth();
+            var hasta = desde.AddDays(1).ToMidnigth();
 
             var session = SessionFactory.GetCurrentSession();
 
@@ -33,12 +30,12 @@ namespace Sicemed.Web.Infrastructure.Queries.Secretaria
                 .Fetch(t => t.Profesional.Persona).Eager
                 .Fetch(t => t.Paciente).Eager
                 .Fetch(t => t.Paciente.Persona).Eager
-                .Where(t => t.FechaTurno >= dateDesde)
-                .And(t => t.FechaTurno <= dateHasta)
+                .Where(t => t.FechaTurno >= desde)
+                .And(t => t.FechaTurno <= hasta)
                 .OrderBy(t => t.FechaTurno).Asc
                 .List();
 
-            var viewModel = new TurnosDelDiaViewModel();
+            var viewModel = new TurnosDelDiaViewModel { FechaTurnos = desde };
             if (turnos != null)
             {
                 viewModel.ProfesionalesConTurnos = turnos.Select(t => t.Profesional)

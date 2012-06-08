@@ -6,6 +6,8 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
 {
     public class TurnosDelDiaViewModel
     {
+        public DateTime FechaTurnos { get; set; }
+
         public List<ProfesionalViewModel> ProfesionalesConTurnos { get; set; }
 
         public TurnosDelDiaViewModel()

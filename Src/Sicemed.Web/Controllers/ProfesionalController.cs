@@ -12,10 +12,12 @@ namespace Sicemed.Web.Controllers
     [AuthorizeIt(typeof(Profesional))]
     public class ProfesionalController : NHibernateController
     {
-         public ActionResult Agenda()
+         public ActionResult Agenda(DateTime? fecha = null)
          {
              var query = QueryFactory.Create<IObtenerAgendaProfesionalQuery>();
              query.ProfesionalId = User.As<Profesional>().Id;
+             query.Desde = fecha;
+             query.Hasta = fecha.HasValue ? (DateTime?)fecha.Value.AddDays(1) : null;
              var viewModel = query.Execute();
              return View(viewModel);
          }

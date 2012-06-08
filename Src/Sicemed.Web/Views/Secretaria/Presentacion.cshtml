@@ -22,17 +22,27 @@
         ol.turnos li.atendido{
             text-decoration: line-through;
         }
+        
+        .fecha {
+            color: #CA2B63 !important;
+            font-size: 20px;
+            font-weight: bold;
+            width: 105px !important;
+        }
     </style>
 }   
 @{
     ViewBag.Title = "Presentación De Turnos";
 }
 
-<h2>Turnos del d&iacute;a - <span class="title_pink">@DateTime.Now.ToShortDateString()</span></h2>
-
-<div>
-    <a class="button_link btn_blue" href="@Url.Action("Presentacion")"><span>Actualizar</span></a>            
-</div>
+@using (Html.BeginForm())
+{
+    <h2>
+        Turnos del d&iacute;a - 
+        <input type="date" class="fecha" name="fecha" value="@Model.FechaTurnos.ToShortDateString()" />
+        @Html.Submit("Actualizar")        
+    </h2>
+}
 
 @if (Model.ProfesionalesConTurnos.Any())
 {
@@ -58,6 +68,6 @@
 else
 {
     <div class="ui-state-highlight">
-        No hay turnos otorgados para el d&iacute; de la fecha.
+        No hay turnos otorgados para el d&iacute;a.
     </div>
 }
