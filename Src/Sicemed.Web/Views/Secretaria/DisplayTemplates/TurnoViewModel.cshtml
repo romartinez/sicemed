@@ -7,7 +7,10 @@
 <li class="@css">
     <h4>@Model.FechaTurno.ToString("HH:mm") - @Model.Paciente.Descripcion</h4>
     <div>
-        Consultorio: @Model.Consultorio.Descripcion
+        @if(@Model.Consultorio != null)
+        {
+            @:Consultorio: @Model.Consultorio.Descripcion            
+        }
         <br />
         Especialidad: @Model.Especialidad.Descripcion
         <br />
