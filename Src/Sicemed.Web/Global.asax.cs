@@ -62,7 +62,7 @@ namespace SICEMED.Web
         {
             routes.MapRoute(
                 "Pagina - " + pagina.Nombre,
-                pagina.Url, // URL with parameters
+                pagina.Url == "/" ? string.Empty : pagina.Url, // URL with parameters
                 new { controller = "Content", action = "Index", id = pagina.Id }
                 );
 
