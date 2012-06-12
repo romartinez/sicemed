@@ -11,6 +11,7 @@ namespace Sicemed.Web.Models.ViewModels
         public long DocumentoNumero { get; set; }
         public string Email { get; set; }
         public IEnumerable<Telefono> Telefonos { get; set; }
+        public IEnumerable<DayOfWeek> DiasHabilitados { get; set; }
 
         public string DomicilioDireccion { get; set; }        
 		public string DomicilioLocalidadNombre { get; set; }        

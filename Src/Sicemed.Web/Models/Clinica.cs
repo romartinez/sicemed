@@ -8,10 +8,12 @@ namespace Sicemed.Web.Models
     public class Clinica : Entity
     {
         private readonly ISet<Telefono> _telefonos;
+        private readonly ISet<DayOfWeek> _diasHabilitados;
 
         public Clinica()
         {
             _telefonos = new HashedSet<Telefono>();
+            _diasHabilitados = new HashedSet<DayOfWeek>();
         }
 
         public virtual string RazonSocial { get; set; }
@@ -21,6 +23,11 @@ namespace Sicemed.Web.Models
         public virtual ISet<Telefono> Telefonos
         {
             get { return _telefonos; }
+        }
+
+        public virtual ISet<DayOfWeek> DiasHabilitados
+        {
+            get { return _diasHabilitados; }
         }
 
         public virtual string Email { get; set; }
@@ -57,6 +64,20 @@ namespace Sicemed.Web.Models
             if (telefono == null) throw new ArgumentNullException("telefono");
 
             _telefonos.Remove(telefono);
+
+            return this;
+        }        
+        
+        public virtual Clinica AgregarDiaHabilitado(DayOfWeek dia)
+        {
+            _diasHabilitados.Add(dia);
+
+            return this;
+        }
+
+        public virtual Clinica QuitarDiaHabilitado(DayOfWeek dia)
+        {
+            _diasHabilitados.Remove(dia);
 
             return this;
         }

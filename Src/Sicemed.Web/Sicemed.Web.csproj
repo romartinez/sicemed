@@ -771,6 +771,7 @@
     <Content Include="Views\Secretaria\AltaPaciente.cshtml" />
     <Content Include="Views\Paciente\Agenda.cshtml" />
     <Content Include="Views\Paciente\DisplayTemplates\TurnoViewModel.cshtml" />
+    <Content Include="Views\ObtenerTurno\UsuarioBloqueado.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

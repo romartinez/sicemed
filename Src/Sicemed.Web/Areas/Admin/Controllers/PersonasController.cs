@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using NHibernate.Transform;
+using SICEMED.Web;
 using Sicemed.Web.Areas.Admin.Models.Personas;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
