@@ -1,5 +1,6 @@
 ﻿@using Combres
 @using Newtonsoft.Json
+@using Newtonsoft.Json.Converters
 @using SICEMED.Web
 @using Sicemed.Web.Infrastructure
 @using Sicemed.Web.Infrastructure.Controllers
@@ -121,8 +122,7 @@
         $(function () {
             app.initialize({
                 isUsingProxy : @MvcApplication.IsUsingProxy.ToString().ToLower(),
-                latitud: @MvcApplication.Clinica.DomicilioLatitud,
-                longitud: @MvcApplication.Clinica.DomicilioLongitud
+                clinica: "@Html.Raw(HttpUtility.JavaScriptStringEncode(JsonConvert.SerializeObject(MvcApplication.Clinica, new IsoDateTimeConverter())))"
             });
             @if (TempData.ContainsKey(BaseController.MESSAGES_KEY))
             {

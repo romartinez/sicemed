@@ -2,6 +2,8 @@
 /// <reference path="postAntiForgery.js" />
 
 var app = (function ($, app) {
+    app.clinica = null;
+
     app.initControls = function () {
         //dropdown-cascading
         $(".dropdown-cascading").each(function () {
@@ -81,13 +83,15 @@ var app = (function ($, app) {
 
         var options = $.extend(defaults, o);
 
+        app.clinica = $.parseJSON(options.clinica, true);
+
         //Initialize controls
         app.initControls();
 
         if (!options.isUsingProxy) {
             //Google map
-            var clinicaLocation = new google.maps.LatLng(-32.92501, -60.67679);
-            //var clinicaLocation = new google.maps.LatLng(o.latitud, o.longitud);
+            //var clinicaLocation = new google.maps.LatLng(-32.92501, -60.67679);
+            var clinicaLocation = new google.maps.LatLng(app.clinica.DomicilioLatitud, app.clinica.DomicilioLongitud);
 
             var mapOptions = {
                 center: clinicaLocation,
