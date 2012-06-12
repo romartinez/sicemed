@@ -80,6 +80,8 @@ namespace Sicemed.Web.Models
             if (FechaIngreso.HasValue) throw new NotSupportedException("No se puede marcar el Turno como Ingreso, ya lo estaba.");
             FechaIngreso = DateTime.Now;
             SecretariaRecepcionista = secretariaRecepcionista;
+            //Reseteo de las inasistencias
+            Paciente.InasistenciasContinuas = 0;
         }
 
         public virtual void RegistrarAtencion(string nota = null)

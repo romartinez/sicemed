@@ -1,0 +1,25 @@
+﻿@using SICEMED.Web
+@model string
+@{
+    ViewBag.Title = "Obtener Turno - Denegado";
+}
+<h2>
+    Obtener Turno - Denegado
+</h2>
+<p>
+    Usted cuenta con @Model inasistencias continuas en el sistema.
+    <br />
+    Debido a pol&iacute;ticas de la Cl&iacute;nica luego de @MvcApplication.Clinica.NumeroInasistenciasConsecutivasGeneranBloqueo
+    inasistencias consecutivas su usario permanecer&aacute; bloqueado.
+</p>
+<p>
+    Igualmente puede obtener sus turno comunic&aacute;ndose telef&oacute;nicamente a
+    cualquiera de nuestros n&uacute;meros:
+    <br />
+    <ul>
+        @foreach (var telefono in MvcApplication.Clinica.Telefonos)
+        {
+            <li>@Html.DisplayFor(x => telefono)</li>            
+        }
+    </ul>
+</p>

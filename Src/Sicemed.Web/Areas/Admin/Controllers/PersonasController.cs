@@ -138,7 +138,8 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 {
                     var persona = _mappingEngine.Map<Persona>(editModel);
                     AdditionalMappings(editModel, persona);
-
+                    //Lo habilito para turnos web
+                    if (persona.IsInRole<Paciente>()) persona.As<Paciente>().EstaHabilitadoTurnosWeb = true;
                     //Le seteo un password cualquiera, y luego envio mail para que lo resetee
                     var status = _membershipService.CreateUser(persona, editModel.Email, Guid.NewGuid().ToString());
                     if (status == MembershipStatus.USER_CREATED)
@@ -195,7 +196,6 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             {
                 try
                 {
-                    var session = SessionFactory.GetCurrentSession();
                     var persona = GetPersona(editModel.Id.Value);
                     if (persona == null)
                     {
