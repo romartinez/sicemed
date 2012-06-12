@@ -34,11 +34,5 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [DisplayName("Número Afiliado")]
         [DefaultStringLength]
         public virtual string NumeroAfiliado { get; set; }
-
-        [DisplayName("Habilitado Turnos Web?")]
-        public virtual bool EstaHabilitadoTurnosWeb { get; set; }
-
-        [DisplayName("Inasistencias Continuas")]
-        public virtual int InasistenciasContinuas { get; set; }
     }
 }
