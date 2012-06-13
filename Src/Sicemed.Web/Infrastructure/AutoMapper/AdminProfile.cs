@@ -112,6 +112,8 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
             CreateMap<PacienteEditModel, Paciente>()
                 .ForMember(d => d.FechaAsignacion, m => m.Ignore())
                 .ForMember(d => d.Plan, m => m.Ignore())
+                .ForMember(d => d.InasistenciasContinuas, m => m.Ignore())
+                .ForMember(d => d.EstaHabilitadoTurnosWeb, m => m.Ignore())
                 .ForMember(d => d.Persona, m => m.Ignore());
             CreateMap<SecretariaEditModel, Secretaria>()
                 .ForMember(d => d.FechaAsignacion, m => m.Ignore())
