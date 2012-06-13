@@ -21,7 +21,13 @@
                 refresheable: true,
                 loadComplete: null,
                 rowNum: 10,
-                rowList: [10, 25, 50]
+                rowList: [10, 25, 50],
+                postData: function () {
+                    return {
+                        count: getGridCount,
+                        __RequestVerificationToken: app.helpers.getAntiForgeryToken
+                    };
+                }
             }
         };
 
@@ -94,10 +100,7 @@
             colNames: settings.params.colNames,
             colModel: settings.params.colModel,
             multiselect: false,
-            postData: {
-                count: getGridCount,
-                __RequestVerificationToken: app.helpers.getAntiForgeryToken
-            },
+            postData: settings.params.postData(),
             pager: settings.pager,
             rowNum: settings.params.rowNum,
             rowList: settings.params.rowList,
@@ -137,7 +140,7 @@
         );
 
         if (settings.buttons) {
-            $.each(settings.buttons, function() {
+            $.each(settings.buttons, function () {
                 navGrid.navButtonAdd(settings.pager, this);
             });
         }

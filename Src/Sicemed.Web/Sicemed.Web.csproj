@@ -203,6 +203,7 @@
     <Compile Include="Areas\Admin\Models\Personas\PersonaViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\ProfesionalEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\SecretariaEditModel.cs" />
+    <Compile Include="Areas\Admin\Models\RangoFechasViewModel.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Areas\Admin\Controllers\DomainController.cs" />

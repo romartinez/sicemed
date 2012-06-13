@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Sicemed.Web.Areas.Admin.Models.RangoFechasViewModel
+@{
     ViewBag.Title = "Visualización de Logs";
 }
 @section Css{
@@ -28,6 +29,11 @@
 <h2>
     Visualizaci&oacute;n de Logs
 </h2>
+
+<form id="filtering" style="margin-bottom: 10px;">   
+    @Html.EditorForModel()
+</form>
+
 @Html.Partial("GrillaBase")
 <div id="detalle" title="Detalle" class="ui-helper-hidden">
     <div>
@@ -93,7 +99,7 @@
                             var row = data.Rows[i];
                             grid.find("#" + row.Id).find("td").addClass("error-"+row.Level.toLowerCase());                            
                         }
-                    },                    
+                    },             
                     colModel: [
                             {
                                 name: 'Id',

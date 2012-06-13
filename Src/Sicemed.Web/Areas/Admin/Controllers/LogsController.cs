@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
 using NHibernate.Transform;
+using Sicemed.Web.Areas.Admin.Models;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
+using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Roles;
 using Sicemed.Web.Models.ViewModels;
@@ -14,13 +16,16 @@ namespace Sicemed.Web.Areas.Admin.Controllers
     {
         public virtual ActionResult Index()
         {
-            return View();
+            var viewModel = new RangoFechasViewModel();
+            viewModel.Dasde = DateTime.Now.AddDays(-7).ToMidnigth();
+            viewModel.Hasta = DateTime.Now.AddDays(1).ToMidnigth();
+            return View(viewModel);
         }
 
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
-        public virtual JsonResult List(long count, int page, int rows)
+        public virtual JsonResult List(long count, int page, int rows, RangoFechasViewModel extra = null)
         {
             page--;
 
