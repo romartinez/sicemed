@@ -18,7 +18,10 @@
                 editable: true,
                 addable: true,
                 deleteable: true,
-                refresheable: true
+                refresheable: true,
+                loadComplete: null,
+                rowNum: 10,
+                rowList: [10, 25, 50]
             }
         };
 
@@ -96,8 +99,8 @@
                 __RequestVerificationToken: app.helpers.getAntiForgeryToken
             },
             pager: settings.pager,
-            rowNum: 10,
-            rowList: [10, 25, 50],
+            rowNum: settings.params.rowNum,
+            rowList: settings.params.rowList,
             viewrecords: true,
             height: 'auto',
             width: settings.width.toString(),
@@ -113,6 +116,7 @@
             emptyrecords: settings.params.emptyrecords,
             loadComplete: function (data) {
                 app.fixes.gridLoadFix($(this), data);
+                if ($.isFunction(settings.params.loadComplete)) settings.params.loadComplete.call(this, data);
             }
         });
 

@@ -1,20 +1,41 @@
 ﻿@{
     ViewBag.Title = "Visualización de Logs";
 }
-
+@section Css{
+    <style type="text/css">
+        .error-fatal
+        {
+            color: purple;
+        }
+        .error-error
+        {
+            color: red;
+        }
+        .error-warn
+        {
+            color: orange;
+        }
+        .error-info
+        {
+            color: green;
+        }
+        .error-debug
+        {
+            color: black;
+        }
+    </style>
+}
 <h2>
     Visualizaci&oacute;n de Logs
 </h2>
-
 @Html.Partial("GrillaBase")
-
 <div id="detalle" title="Detalle" class="ui-helper-hidden">
-    <div></div>
+    <div>
+    </div>
 </div>
-
 <script id="tmplDetalle" type="text/html">
     <div>
-        <table class="detail">
+        <table class="detail error-${Level.toLowerCase()}">
             <tr>
                 <th>Date</th>
                 <td>${app.format.fulldate(Date)}</td>
@@ -50,7 +71,6 @@
         </table>
     </div>
 </script>
-
 @section Scripts{
     <script type="text/javascript">
         jQuery(document).ready(function($) {
@@ -65,6 +85,15 @@
                     caption: 'Visualizaci&oacute;n de Logs',
                     emptyrecords: 'No hay registros de logs.',
                     colNames: ['Id', 'Date', 'Level', 'Logger', 'Thread', 'UserId', 'UserIp'],
+                    rowNum: 25,
+                    rowList: [25, 50, 100],                    
+                    loadComplete: function(data){
+                        var grid = $(this);
+                        for(var i = data.Rows.length - 1; i >= 0; i--) {
+                            var row = data.Rows[i];
+                            grid.find("#" + row.Id).find("td").addClass("error-"+row.Level.toLowerCase());                            
+                        }
+                    },                    
                     colModel: [
                             {
                                 name: 'Id',
