@@ -420,6 +420,7 @@
     <Content Include="public\css\jquery-ui.css" />
     <Content Include="public\css\jquery.jgrowl.css" />
     <Content Include="public\css\jquery.ui.timepicker.css" />
+    <Content Include="public\css\jsondiffpatch.css" />
     <Content Include="public\css\theme_ie.css" />
     <Content Include="public\css\theme.css" />
     <Content Include="public\css\jqgrid.css" />
@@ -591,6 +592,7 @@
     <Content Include="public\js\libs\fullcalendar.js" />
     <Content Include="public\js\libs\i18n\grid.locale-es.js" />
     <Content Include="public\js\libs\i18n\jquery.ui.datepicker-es.js" />
+    <Content Include="public\js\libs\jsondiffpatch.html.js" />
     <Content Include="public\js\libs\jquery-1.7.2.min.js" />
     <Content Include="public\js\libs\jquery-ui-1.8.20.min.js" />
     <Content Include="public\js\libs\jquery.blockUI.js" />
@@ -602,6 +604,7 @@
     <Content Include="public\js\libs\jquery.ui.timepicker.js" />
     <Content Include="public\js\libs\jquery.validate.min.js" />
     <Content Include="public\js\libs\jquery.validate.unobtrusive.min.js" />
+    <Content Include="public\js\libs\jsondiffpatch.js" />
     <Content Include="public\js\libs\knockout-2.0.0.js" />
     <Content Include="public\js\libs\msDateJsonParser.js" />
     <Content Include="public\js\libs\postAntiForgery.js" />

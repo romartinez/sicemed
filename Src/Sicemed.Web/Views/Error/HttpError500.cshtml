@@ -2,8 +2,14 @@
 <div align="center" style="margin-top: 20px;">
     <div class="ui-state-error ui-corner-all" style="padding: 0.7em;">
         <p>
-            Se ha producido un error en la aplicaci&oacute;n, por favor int&eacute;ntelo nuevamente
-            en unos instantes.
+            @if(!string.IsNullOrWhiteSpace(Model))
+            {
+                @Model
+            }
+            else
+            {
+                @:Se ha producido un error en la aplicaci&oacute;n, por favor int&eacute;ntelo nuevamente en unos instantes.                
+            }
         </p>
     </div>
 </div>

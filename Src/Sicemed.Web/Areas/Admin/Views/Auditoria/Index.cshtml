@@ -1,35 +1,32 @@
 ﻿@{
     ViewBag.Title = "Visualización de Auditoría";
 }
-
+@section Css
+{
+    <link type="text/css" rel="stylesheet" href="@Url.Content("~/public/css/jsondiffpatch.css")"/>
+}
 <h2>
     Visualizaci&oacute;n de Auditor&iacute;a
 </h2>
-
 @Html.Partial("GrillaBase")
-
 <div id="detalle" title="Detalle" class="ui-helper-hidden">
-    <div></div>
+    <div class="contenido">
+    </div>
 </div>
-
 <script id="tmplDetalle" type="text/html">
-    <div>
+    <div class="contenido">
         <h2>Entidad: ${Entidad}</h2>
         <h3>Id: ${EntidadId}</h3>
-        <table class="detail">
-            <caption>${app.format.fulldate(Fecha)} - ${Accion}</caption>
-            <tr>
-                <th style="background: #f6f6f6;">Antes</th>
-                <th>Despu&eacute;s</th>
-            </tr>
-            <tr>
-                <td style="background: #f6f6f6;">{{html EntidadAntes.replace(/\r\n/gi, "<br/>").replace(/\s/gi, "&nbsp;")}}</td>
-                <td>{{html EntidadDespues.replace(/\r\n/gi, "<br/>").replace(/\s/gi, "&nbsp;")}}</td>
-            </tr>
-        </table>
+        <h4>${app.format.fulldate(Fecha)} - ${Accion}</h4>
+        <div class="diff">
+                
+        </div>
     </div>
 </script>
 @section Scripts{
+    <script type="text/javascript" src="@Url.Content("~/public/js/libs/jsondiffpatch.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/public/js/libs/jsondiffpatch.html.js")"></script>
+
     <script type="text/javascript">
         jQuery(document).ready(function($) {
             app.grid.initialize({
@@ -104,7 +101,10 @@
                         return;
                     }
                     $.postAntiForgery("@Url.Action("Get")", { id: selected }).done(function (audit) {
-                        $("#detalle div").replaceWith($("#tmplDetalle").tmpl(audit));
+                        var d = jsondiffpatch.diff(audit.EntidadAntes, audit.EntidadDespues);
+                        var diffElement = jsondiffpatch.html.diffToHtml(audit.EntidadAntes, audit.EntidadDespues, d);
+                        $("#detalle .contenido").replaceWith($("#tmplDetalle").tmpl(audit));
+                        $("#detalle .diff").append(diffElement);
                         $("#detalle").dialog('open');
                     });
                 }, 

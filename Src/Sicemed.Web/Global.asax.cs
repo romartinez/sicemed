@@ -195,7 +195,6 @@ namespace SICEMED.Web
 
                 // clear error on server
                 Server.ClearError();
-
                 Response.Redirect(String.Format("/Error/{0}/?message={1}", action, exception.Message));
             }
         }
