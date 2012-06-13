@@ -89,8 +89,7 @@ var app = (function ($, app) {
         app.initControls();
 
         if (!options.isUsingProxy) {
-            //Google map
-            //var clinicaLocation = new google.maps.LatLng(-32.92501, -60.67679);
+            //Google map            
             var clinicaLocation = new google.maps.LatLng(app.clinica.DomicilioLatitud, app.clinica.DomicilioLongitud);
 
             var mapOptions = {

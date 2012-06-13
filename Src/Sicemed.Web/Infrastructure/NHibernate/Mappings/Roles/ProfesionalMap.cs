@@ -15,11 +15,22 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Roles
                                 {
                                     map.Access(Accessor.NoSetter);
                                     map.Inverse(true);
+                                    map.Key(k =>
+                                    {
+                                        k.ForeignKey("FK_PersonaRoles_Profesional");
+                                        k.Column("ProfesionalId");
+                                    });
                                 }, rel => rel.OneToMany());
 
             Set(x => x.Especialidades, map =>
             {
                 map.Access(Accessor.NoSetter);
+                map.Key(k =>
+                {
+                    k.ForeignKey("FK_ProfesionalEspecialidad_PersonaRol");
+                    k.Column("ProfesionalId");
+                });
+                map.Table("ProfesionalEspecialidades");
             }, rel => rel.ManyToMany());
 
         }

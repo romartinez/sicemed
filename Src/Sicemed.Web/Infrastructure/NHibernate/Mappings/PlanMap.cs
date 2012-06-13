@@ -6,6 +6,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
         public PlanMap()
         {
+            Table("Planes");
+
             Property(x => x.Descripcion);
             Property(x => x.Nombre, map => map.NotNullable(true));
 

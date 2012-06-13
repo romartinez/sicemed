@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Castle.Core.Logging;
@@ -11,6 +13,8 @@ using Sicemed.Web.Infrastructure.Queries;
 using Sicemed.Web.Infrastructure.Queries.Domain;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Enumerations;
+using Sicemed.Web.Models.Enumerations.Documentos;
 
 namespace Sicemed.Web.Infrastructure.Controllers
 {
@@ -130,10 +134,42 @@ namespace Sicemed.Web.Infrastructure.Controllers
 
         protected virtual IEnumerable<SelectListItem> GetTiposDocumentos(long? selectedValue)
         {
-            var query = QueryFactory.Create<IObtenerTiposDocumentosDropDownQuery>();
-            query.SelectedValue = selectedValue;
-            return query.Execute();
+            return Enumeration.GetAll<TipoDocumento>().Select(x =>
+                new SelectListItem()
+                {
+                    Value = x.Value.ToString(),
+                    Text = x.DisplayName,
+                    Selected = selectedValue.HasValue && x.Value == selectedValue.Value
+                });
         }
+
+        protected virtual IEnumerable<SelectListItem> GetDiasSemana(DayOfWeek[] selectedValues)
+        {
+            var enumType = typeof (DayOfWeek);
+            var values = Enum.GetValues(typeof (DayOfWeek)).Cast<DayOfWeek>();
+            var converter = TypeDescriptor.GetConverter(enumType);
+
+            var items = values.Select(v =>
+            {
+                var value = converter.ConvertToString(v);
+                if (value.Equals(v.ToString()))
+                {
+                    //El converter no hizo nada pruevo con el resource
+                    var rex = Properties.Resources.ResourceManager.GetString(string.Format("{0}_{1}", enumType.Name, value));
+                    value = !string.IsNullOrWhiteSpace(rex)
+                                ? rex
+                                : value;
+                }
+                return new SelectListItem
+                {
+                    Text = value,
+                    Value = v.ToString(),
+                    Selected = selectedValues != null && selectedValues.Contains(v)
+                };
+            });
+
+            return items;
+        }        
         #endregion
     }
 }

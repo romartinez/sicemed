@@ -20,6 +20,10 @@
         <property name="Prefijo" column="Prefijo" />
       </composite-element>
     </set>
+    <set name="DiasHabilitados" access="nosetter.camelcase-underscore" table="ClinicaDiasHabilitados" lazy="false">
+      <key column="ClinicaId" foreign-key="FK_Clinica_ClinicaDiasHabilitados" />
+      <element type="NHibernate.Type.EnumType`1[[System.DayOfWeek, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], NHibernate" />
+    </set>
     <property name="Email" not-null="true" />
     <property name="HorarioMatutinoDesde" not-null="true" />
     <property name="HorarioMatutinoHasta" not-null="true" />

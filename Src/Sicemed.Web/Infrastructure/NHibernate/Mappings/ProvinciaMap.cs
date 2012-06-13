@@ -14,6 +14,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                                         map.Inverse(true);
                                         map.Access(Accessor.NoSetter);
                                         map.Cascade(Cascade.All | Cascade.DeleteOrphans);
+                                        map.Key(k => k.Column("ProvinviaId"));
                                     }, rel => rel.OneToMany());
         }
     }

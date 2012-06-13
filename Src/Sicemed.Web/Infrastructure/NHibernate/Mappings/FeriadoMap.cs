@@ -6,6 +6,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
         public FeriadoMap()
         {
+            Table("Feriados");
             Property(x => x.Fecha, map =>
                                    {
                                        map.NotNullable(true);

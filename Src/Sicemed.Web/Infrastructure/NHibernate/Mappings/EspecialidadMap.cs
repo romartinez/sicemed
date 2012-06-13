@@ -7,6 +7,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
         public EspecialidadMap()
         {
+            Table("Especialidades");
             Property(x => x.Descripcion);
             Property(x => x.Nombre, map =>
             {
@@ -19,6 +20,12 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                                               map.Access(Accessor.NoSetter);
                                               map.Cascade(Cascade.None);
                                               map.Inverse(false);
+                                              map.Key(k =>
+                                              {
+                                                  k.ForeignKey("FK_ProfesionalEspecialidad_Especialidad");
+                                                  k.Column("EspecialidadId");
+                                              });
+                                              map.Table("ProfesionalEspecialidades");
                                           }, rel => rel.ManyToMany());
         }
     }

@@ -13,12 +13,17 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Roles
             Property(x => x.NumeroAfiliado);
             Property(x => x.EstaHabilitadoTurnosWeb);
 
-            ManyToOne(x => x.Plan, map => map.ForeignKey("FK_Pacientes_Plan"));
+            ManyToOne(x => x.Plan, map =>
+                                       {
+                                           map.ForeignKey("FK_PersonaRol_Paciente_Plan");
+                                           map.Column("PlanId");
+                                       });
 
             Set(x => x.Turnos, map =>
                                {
                                    map.Inverse(true);
                                    map.Access(Accessor.NoSetter);
+                                   map.Key(k => k.Column("PacienteId"));
                                }, rel => rel.OneToMany());
         }
     }

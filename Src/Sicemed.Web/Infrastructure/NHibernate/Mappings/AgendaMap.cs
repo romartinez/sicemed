@@ -7,6 +7,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
         public AgendaMap()
         {
+            Table("Agendas");
             Property(x => x.Dia);
             Property(x => x.DuracionTurno);
             Property(x => x.HorarioDesde);
@@ -19,6 +20,12 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                                                 {
                                                     map.Access(Accessor.NoSetter);
                                                     map.Lazy(CollectionLazy.NoLazy);
+                                                    map.Key(k =>
+                                                    {
+                                                        k.ForeignKey("FK_AgendaEspecialidadesAtendida_Agenda");
+                                                        k.Column("AgendaId");
+                                                    });
+                                                    map.Table("AgendaEspecialidadesAtendidas");
                                                 }, rel => rel.ManyToMany());
         }
     }

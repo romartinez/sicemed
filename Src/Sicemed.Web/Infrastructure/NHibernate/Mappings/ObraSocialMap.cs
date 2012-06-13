@@ -7,6 +7,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
         public ObraSocialMap()
         {
+            Table("ObrasSociales");
+
             Property(x => x.RazonSocial, map => map.NotNullable(true));
 
             Component(x => x.Documento);
@@ -17,6 +19,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                                {
                                    map.Inverse(true);
                                    map.Access(Accessor.NoSetter);
+                                   map.Key(k => k.Column("ObraSocialId"));                                   
                                }, rel => rel.OneToMany());
         }
     }

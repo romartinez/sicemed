@@ -6,6 +6,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
         public LocalidadMap()
         {
+            Table("Localidades");
             Property(x => x.Caracteristicas);
             Property(x => x.CodigoPostal);
             Property(x => x.Nombre, map => map.NotNullable(true));

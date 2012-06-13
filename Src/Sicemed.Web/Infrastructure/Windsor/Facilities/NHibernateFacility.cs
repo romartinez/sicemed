@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Web;
 using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Facilities;
@@ -55,7 +56,7 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
                                                   db.HqlToSqlSubstitutions = "true 1, false 0, yes 'Y', no 'N'";
                                               });
             
-            //NOTE: Uso mapeo por XML, para fine-tunning
+            //NOTE: Uso mapeo por XML, para fine-tunning, por problemas en los many-to-many
             //var mappings = GetHbmMappings();
             //mappings.ToList().ForEach(mp => configuration.AddDeserializedMapping(mp, null));
 

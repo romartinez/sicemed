@@ -113,13 +113,13 @@ namespace System.Web.Mvc.Html
         
         public static MvcHtmlString EnumDropDownListFor<TModel, TEnum>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TEnum>> expression)
         {
-            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
-            Type enumType = GetNonNullableModelType(metadata);
-            IEnumerable<TEnum> values = Enum.GetValues(enumType).Cast<TEnum>();
+            var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
+            var enumType = GetNonNullableModelType(metadata);
+            var values = Enum.GetValues(enumType).Cast<TEnum>();
 
-            TypeConverter converter = TypeDescriptor.GetConverter(enumType);
+            var converter = TypeDescriptor.GetConverter(enumType);
 
-            IEnumerable<SelectListItem> items = values.Select(v =>
+            var items = values.Select(v =>
             {
                 var value = converter.ConvertToString(v);
                 if(value.Equals(v.ToString()))

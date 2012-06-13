@@ -303,7 +303,6 @@
     <Compile Include="Infrastructure\Queries\Domain\ObtenerObrasSocialesDropDownQuery.cs" />
     <Compile Include="Infrastructure\Queries\Domain\ObtenerPlanesPorObraSocialDropDownQuery.cs" />
     <Compile Include="Infrastructure\Queries\Domain\ObtenerProvinciasDropDownQuery.cs" />
-    <Compile Include="Infrastructure\Queries\Domain\ObtenerTiposDocumentosDropDownQuery.cs" />
     <Compile Include="Infrastructure\Queries\IQuery.cs" />
     <Compile Include="Infrastructure\Queries\IQueryFactory.cs" />
     <Compile Include="Infrastructure\Queries\ObtenerTurno\ObtenerTurnosProfesionalQuery.cs" />

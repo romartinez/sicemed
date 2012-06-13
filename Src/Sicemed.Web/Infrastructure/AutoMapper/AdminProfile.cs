@@ -24,6 +24,7 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
             CreateMap<Clinica, ClinicaEditViewModel>()
                 .ForMember(d => d.TiposDocumentosHabilitados, m => m.Ignore())
                 .ForMember(d => d.LocalidadesHabilitadas, m => m.Ignore())
+                .ForMember(d => d.DiasHabilitadosPosibles, m => m.Ignore())
                 .ForMember(d => d.ProvinciasHabilitadas, m => m.Ignore());
 
             CreateMap<ClinicaEditViewModel, Clinica>()
@@ -42,6 +43,10 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                                   var telefonosAQuitar = m.Telefonos.ToList();
                                   telefonosAQuitar.ForEach(t => m.QuitarTelefono(t));
                                   v.Telefonos.ForEach(t => m.AgregarTelefono(t));
+                                  //NOTE: m.DiasHabilitados.Clear(); no funciona!
+                                  var diasAQuitar = m.DiasHabilitados.ToList();
+                                  diasAQuitar.ForEach(d => m.QuitarDiaHabilitado(d));
+                                  v.DiasHabilitados.ForEach(d => m.AgregarDiaHabilitado(d));
                               });
             #endregion
 

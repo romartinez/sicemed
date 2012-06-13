@@ -9,6 +9,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
         public ParametroMap()
         {
+            Table("Parametros");
+
             Id(x => x.Key, map => map.Type(new EnumStringType<Parametro.Keys>()));
             Property("_value", map =>
                                {

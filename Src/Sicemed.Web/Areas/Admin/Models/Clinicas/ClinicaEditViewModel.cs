@@ -31,7 +31,6 @@ namespace Sicemed.Web.Areas.Admin.Models.Clinicas
         [DisplayName("Número Documento")]
         public virtual long DocumentoNumero { get; set; }
 
-
         [Required]
         [DataType(DataType.EmailAddress)]
         [DisplayName("Email")]
@@ -76,6 +75,15 @@ namespace Sicemed.Web.Areas.Admin.Models.Clinicas
 		[Required]
 		[DisplayName("Domicilio Longitud")]
 		public virtual double DomicilioLongitud { get; set; }
+
+        [UIHint("MultipleList")]
+        [DisplayName("Dias Habilitados")]
+        [DropDownProperty("DiasHabilitados")]
+        public IEnumerable<SelectListItem> DiasHabilitadosPosibles { get; set; }
+
+        [Required]
+        [ScaffoldColumn(false)]
+        public DayOfWeek[] DiasHabilitados { get; set; }
 
 		[Required]
 		[DisplayName("Horario Matutino Desde")]

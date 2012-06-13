@@ -7,6 +7,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
         public PersonaMap()
         {
+            Table("Personas");
+
             Property(x => x.Nombre, map => map.NotNullable(true));
             Property(x => x.Apellido, map => map.NotNullable(true));
             Property(x => x.SegundoNombre);
@@ -23,6 +25,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                                   map.Access(Accessor.NoSetter);
                                   map.Cascade(Cascade.All | Cascade.DeleteOrphans);
                                   map.Lazy(CollectionLazy.NoLazy);
+                                  map.Key(k => k.Column("PersonaId"));
                               }, rel => rel.OneToMany());
         }
     }

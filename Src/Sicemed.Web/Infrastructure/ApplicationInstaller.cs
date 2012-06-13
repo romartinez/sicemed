@@ -165,9 +165,12 @@ namespace Sicemed.Web.Infrastructure
                                   Domicilio = new Domicilio
                                                   {
                                                       Direccion = "Av. Velez Sarsfield 453",
-                                                      Localidad = LocalidadRosario
+                                                      Localidad = LocalidadRosario,
+                                                      Latitud = -32.92501,
+                                                      Longitud = -60.67679
                                                   },
-                                  Email = "contacto@sicemed.com.ar"
+                                  Email = "contacto@sicemed.com.ar"    ,
+                                  GoogleMapsKey = "asdfsdfsjWERWER"
                               };
             clinica
                 .AgregarTelefono(
@@ -175,6 +178,12 @@ namespace Sicemed.Web.Infrastructure
                 ).AgregarTelefono(
                         new Telefono { Numero = "4487610", Prefijo = "0341" }
                 );
+
+            clinica.AgregarDiaHabilitado(DayOfWeek.Monday);
+            clinica.AgregarDiaHabilitado(DayOfWeek.Tuesday);
+            clinica.AgregarDiaHabilitado(DayOfWeek.Wednesday);
+            clinica.AgregarDiaHabilitado(DayOfWeek.Thursday);
+            clinica.AgregarDiaHabilitado(DayOfWeek.Friday);
 
             session.Save(clinica);
         }

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using AutoMapper;
 using Sicemed.Web.Areas.Admin.Models.Clinicas;
 using Sicemed.Web.Infrastructure;
@@ -37,6 +38,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         {
             viewModel.TiposDocumentosHabilitados = GetTiposDocumentos(viewModel.DocumentoTipoDocumentoValue);
             viewModel.ProvinciasHabilitadas = GetProvincias(viewModel.DomicilioLocalidadProvinciaId);
+            viewModel.DiasHabilitadosPosibles = GetDiasSemana(viewModel.DiasHabilitados);
 
             if (viewModel.DomicilioLocalidadProvinciaId.HasValue)
             {

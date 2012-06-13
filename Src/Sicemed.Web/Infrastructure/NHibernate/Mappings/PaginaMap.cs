@@ -8,6 +8,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
     {
         public PaginaMap()
         {
+            Table("Paginas");
+
             Property(x => x.Contenido, map =>
                                        {
                                            map.NotNullable(true);
@@ -38,6 +40,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                     map.Access(Accessor.NoSetter);
                     map.Inverse(true);
                     map.Lazy(CollectionLazy.NoLazy);
+                    map.Key(k => k.Column("PaginaPadreId"));
                 },
                 rel => rel.OneToMany());
         }
