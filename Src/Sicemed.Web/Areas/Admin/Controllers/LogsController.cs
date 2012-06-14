@@ -66,7 +66,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             if (!string.IsNullOrWhiteSpace(searchFilters.LogLevelSeleccionado))
                 query = query.SetString("Level", searchFilters.LogLevelSeleccionado);
             if (!string.IsNullOrWhiteSpace(searchFilters.Filtro))
-                query = query.SetString("Filtro", searchFilters.Filtro);
+                query = query.SetString("Filtro", searchFilters.Filtro + "%");
             return query;
         }
 
