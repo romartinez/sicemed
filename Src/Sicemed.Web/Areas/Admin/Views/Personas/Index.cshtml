@@ -88,6 +88,21 @@
                                 grid.trigger("reloadGrid");
                             });
                         }
+                    },
+                    {
+                        caption: "",
+                        buttonicon: "ui-icon-home",
+                        onClickButton: function () {
+                            var grid = $(this);
+                            var selected = grid.getGridParam("selrow");
+                            if(!selected) {
+                                app.ui.showError("Debe seleccionar un Usuario.");
+                                return;
+                            }
+                            $.postAntiForgery("@Url.Action("ResetInasistencias")", { usuarioId: selected }, function () {
+                                grid.trigger("reloadGrid");
+                            });
+                        }
                     }                    
                 ],
                 params: {

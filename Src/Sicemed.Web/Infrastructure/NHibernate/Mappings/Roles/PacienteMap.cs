@@ -11,7 +11,6 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Roles
             DiscriminatorValue(Rol.PACIENTE);
             Property(x => x.InasistenciasContinuas);
             Property(x => x.NumeroAfiliado);
-            Property(x => x.EstaHabilitadoTurnosWeb);
 
             ManyToOne(x => x.Plan, map =>
                                        {

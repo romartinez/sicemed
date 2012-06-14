@@ -21,9 +21,17 @@ namespace Sicemed.Web.Models.Roles
 
         public virtual Plan Plan { get; set; }
 
-        public virtual int InasistenciasContinuas { get; set; }
+        public virtual int InasistenciasContinuas { get; protected set; }
 
-        public virtual bool EstaHabilitadoTurnosWeb { get; set; }
+        public virtual bool EstaHabilitadoTurnosWeb(int inasistenciasContinuasAdmitidas)
+        {
+            return InasistenciasContinuas < inasistenciasContinuasAdmitidas;
+        }
+
+        public virtual void ResetInasistencias()
+        {
+            InasistenciasContinuas = 0;
+        }
 
         public virtual ISet<Turno> Turnos
         {
@@ -34,8 +42,7 @@ namespace Sicemed.Web.Models.Roles
         {
             return new Paciente
                    {
-                       NumeroAfiliado = numeroAfiliado,
-                       EstaHabilitadoTurnosWeb = true,
+                       NumeroAfiliado = numeroAfiliado,                       
                        InasistenciasContinuas = 0
                    };
         }

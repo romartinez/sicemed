@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security;
 using System.Web.Mvc;
+using SICEMED.Web;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Exceptions;
@@ -19,7 +20,7 @@ namespace Sicemed.Web.Controllers
     {
         public virtual ActionResult Index()
         {
-            if (!User.As<Paciente>().EstaHabilitadoTurnosWeb)
+            if (!User.As<Paciente>().EstaHabilitadoTurnosWeb(MvcApplication.Clinica.NumeroInasistenciasConsecutivasGeneranBloqueo))
                 return View("UsuarioBloqueado");
             return View();
         }
@@ -84,7 +85,7 @@ namespace Sicemed.Web.Controllers
 
             var paciente = User.As<Paciente>();
 
-            if (!paciente.EstaHabilitadoTurnosWeb)
+            if (!paciente.EstaHabilitadoTurnosWeb(MvcApplication.Clinica.NumeroInasistenciasConsecutivasGeneranBloqueo))
                 throw new ValidationErrorException("Su usuario no se encuentra habilitado para obtener turnos web, por favor hágalo llamando a nuestros teléfonos.");
 
             var turno = Turno.Create(fecha, paciente, profesional, especialidad, consultorio, Request.UserHostAddress);

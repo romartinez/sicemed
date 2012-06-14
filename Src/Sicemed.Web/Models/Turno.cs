@@ -81,7 +81,7 @@ namespace Sicemed.Web.Models
             FechaIngreso = DateTime.Now;
             SecretariaRecepcionista = secretariaRecepcionista;
             //Reseteo de las inasistencias
-            Paciente.InasistenciasContinuas = 0;
+            Paciente.ResetInasistencias();            
         }
 
         public virtual void RegistrarAtencion(string nota = null)

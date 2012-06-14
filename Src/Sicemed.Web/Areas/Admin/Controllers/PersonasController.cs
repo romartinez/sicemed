@@ -44,9 +44,9 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         {
             page--;
             var session = SessionFactory.GetCurrentSession();
-            var query = session.QueryOver<Persona>()                
+            var query = session.QueryOver<Persona>()
                 .Fetch(x => x.Domicilio.Localidad).Eager
-                .Fetch(x => x.Domicilio.Localidad.Provincia).Eager                
+                .Fetch(x => x.Domicilio.Localidad.Provincia).Eager
                 //NOTE: Dejo el SELECT N +1, porque sino pagina mal al
                 //paginar el producto cartesiano.
                 //.Fetch(x => x.Roles).Eager
@@ -108,6 +108,26 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
+        public void ResetInasistencias(long usuarioId)
+        {
+            var session = SessionFactory.GetCurrentSession();
+            var user = session.Get<Persona>(usuarioId);
+            if (user == null) throw new ValidationErrorException("El usuario no existe.");
+            if (!user.IsInRole<Paciente>())
+                throw new ValidationErrorException("El usuario no es un paciente.");
+
+            var paciente = user.As<Paciente>();
+            if (paciente.EstaHabilitadoTurnosWeb(MvcApplication.Clinica.NumeroInasistenciasConsecutivasGeneranBloqueo))
+                throw new ValidationErrorException("El paciente se encuentra habilitado para obtener turnos online.");
+
+            paciente.ResetInasistencias();
+
+            ShowMessages(ResponseMessage.Success("Paciente habilitado para obtener turnos online con éxito."));
+        }
+
+        [HttpPost]
+        [AjaxHandleError]
+        [ValidateAntiForgeryToken]
         public void EnviarPasswordReset(long usuarioId)
         {
             var session = SessionFactory.GetCurrentSession();
@@ -138,9 +158,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 try
                 {
                     var persona = _mappingEngine.Map<Persona>(editModel);
-                    AdditionalMappings(editModel, persona);
-                    //Lo habilito para turnos web
-                    if (persona.IsInRole<Paciente>()) persona.As<Paciente>().EstaHabilitadoTurnosWeb = true;
+                    AdditionalMappings(editModel, persona);                    
                     //Le seteo un password cualquiera, y luego envio mail para que lo resetee
                     var status = _membershipService.CreateUser(persona, editModel.Email, Guid.NewGuid().ToString());
                     if (status == MembershipStatus.USER_CREATED)
