@@ -108,8 +108,10 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             {
                 if (user.IsInRole<Paciente>())
                 {
+                    var paciente = user.As<Paciente>();
                     var pacienteRoot = CreateDefaultPage("Paciente", "#", order: 9100);
                     pacienteRoot.Childs.Add(CreateDefaultPage("Ver Agenda", "Paciente/Agenda", pacienteRoot));
+                    pacienteRoot.Childs.Add(CreateDefaultPage("Ver Historial Atenciones", string.Format("HistorialAtenciones/?pacienteId={0}", paciente.Id), pacienteRoot));
                     pages.Add(pacienteRoot);
                 }
 

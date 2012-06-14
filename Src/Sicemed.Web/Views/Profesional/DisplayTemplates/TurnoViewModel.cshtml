@@ -5,7 +5,12 @@
     css += Model.SeAtendio ? "ui-state-highlight" : string.Empty;
 }
 <h3 class="@css">
-    <a href="#">@Model.FechaTurno.ToString("HH:mm") - @Model.Paciente.Descripcion @(Model.SeAtendio ? "| Atendido" : (!Model.SePresento  ? "| No Se Presentó Todavía" : string.Empty))</a>
+    <a href="#">
+        @Model.FechaTurno.ToString("HH:mm") 
+        - @Model.Paciente.Descripcion 
+        - @Html.ActionLink("Historial Atenciones", "Index", "HistorialAtenciones")
+        - @(Model.SeAtendio ? "| Atendido" : (!Model.SePresento ? "| No Se Presentó Todavía" : string.Empty))
+    </a>
 </h3>
 <div>
     <div>
@@ -14,7 +19,8 @@
     <div>
         @if (Model.SePresento && !Model.SeAtendio)
         {
-            <span>El usuario ingres&oacute; hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes) minutos.</span>
+            <span>El usuario ingres&oacute; hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
+                minutos.</span>
             
             using (Html.BeginForm("RegistrarAtencionPaciente", "Profesional"))
             {
