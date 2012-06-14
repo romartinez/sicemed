@@ -1,4 +1,4 @@
-﻿@model Sicemed.Web.Areas.Admin.Models.RangoFechasViewModel
+﻿@model Sicemed.Web.Areas.Admin.Models.Logs.LogsSearchFiltersViewModel
 @{
     ViewBag.Title = "Visualización de Logs";
 }
@@ -30,15 +30,22 @@
     Visualizaci&oacute;n de Logs
 </h2>
 
-<form id="filtering" style="margin-bottom: 10px;">   
+@using (Html.BeginForm("Index", "Logs", FormMethod.Post, new { id = "search-filters" }))
+{
+    @Html.ValidationSummaryWithMessage()
+
     @Html.EditorForModel()
-</form>
+    
+    @Html.Submit("Filtrar")    
+}
 
 @Html.Partial("GrillaBase")
+
 <div id="detalle" title="Detalle" class="ui-helper-hidden">
     <div>
     </div>
 </div>
+
 <script id="tmplDetalle" type="text/html">
     <div>
         <table class="detail error-${Level.toLowerCase()}">
@@ -93,6 +100,11 @@
                     colNames: ['Id', 'Date', 'Level', 'Logger', 'Thread', 'UserId', 'UserIp'],
                     rowNum: 25,
                     rowList: [25, 50, 100],                    
+                    serializeGridData: function (postData) {
+                        var searchData = $("#search-filters").serializeObject();
+                        var newData = $.extend({}, postData, searchData);
+                        return newData;
+                    },
                     loadComplete: function(data){
                         var grid = $(this);
                         for(var i = data.Rows.length - 1; i >= 0; i--) {

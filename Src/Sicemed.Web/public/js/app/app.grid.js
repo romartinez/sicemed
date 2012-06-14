@@ -22,11 +22,8 @@
                 loadComplete: null,
                 rowNum: 10,
                 rowList: [10, 25, 50],
-                postData: function () {
-                    return {
-                        count: getGridCount,
-                        __RequestVerificationToken: app.helpers.getAntiForgeryToken
-                    };
+                serializeGridData: function (postData) {
+                    return $.param(postData);
                 }
             }
         };
@@ -100,7 +97,11 @@
             colNames: settings.params.colNames,
             colModel: settings.params.colModel,
             multiselect: false,
-            postData: settings.params.postData(),
+            postData: {
+                count: getGridCount,
+                __RequestVerificationToken: app.helpers.getAntiForgeryToken
+            },
+            serializeGridData: settings.params.serializeGridData,
             pager: settings.pager,
             rowNum: settings.params.rowNum,
             rowList: settings.params.rowList,
