@@ -14,5 +14,10 @@ namespace Sicemed.Web.Infrastructure.Helpers
         {
             return new DateTime(originalDate.Year, originalDate.Month, originalDate.Day, 0, 0, 0);
         }
+        
+        public static DateTime OnlyTime(this DateTime originalDate)
+        {
+            return new DateTime(2000, 1, 1, originalDate.Hour, originalDate.Minute, originalDate.Second);
+        }
     }
 }
