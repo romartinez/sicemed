@@ -196,6 +196,7 @@
     <Compile Include="Areas\Admin\Controllers\LocalidadesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProvinciasController.cs" />
     <Compile Include="Areas\Admin\Controllers\PersonasController.cs" />
+    <Compile Include="Areas\Admin\Models\Auditoria\AuditSearchFiltersViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Clinicas\ClinicaEditViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Logs\LogsSearchFiltersViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\AgendaEditModel.cs" />

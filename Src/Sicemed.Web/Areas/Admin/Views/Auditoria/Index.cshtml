@@ -1,13 +1,36 @@
-﻿@{
+﻿@model Sicemed.Web.Areas.Admin.Models.Auditoria.AuditSearchFiltersViewModel
+@{
     ViewBag.Title = "Visualización de Auditoría";
 }
 @section Css
 {
     <link type="text/css" rel="stylesheet" href="@Url.Content("~/public/css/jsondiffpatch.css")"/>
+    <style type="text/css">
+        .accion-delete
+        {
+            color: red;
+        }
+        .accion-update
+        {
+            color: orange;
+        }
+        .accion-insert
+        {
+            color: green;
+        }
+    </style>
 }
 <h2>
     Visualizaci&oacute;n de Auditor&iacute;a
 </h2>
+@using (Html.BeginForm("Index", "Auditoria", FormMethod.Post, new { id = "search-filters" }))
+{
+    @Html.ValidationSummaryWithMessage()
+
+    @Html.EditorForModel()
+    
+    @Html.Submit("Filtrar")    
+}
 @Html.Partial("GrillaBase")
 <div id="detalle" title="Detalle" class="ui-helper-hidden">
     <div class="contenido">
@@ -26,7 +49,6 @@
 @section Scripts{
     <script type="text/javascript" src="@Url.Content("~/public/js/libs/jsondiffpatch.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/public/js/libs/jsondiffpatch.html.js")"></script>
-
     <script type="text/javascript">
         jQuery(document).ready(function($) {
             app.grid.initialize({
@@ -37,8 +59,22 @@
                     editable: false,
                     addable: false,
                     deleteable: false,
+                    rowNum: 25,
+                    rowList: [25, 50, 100],                    
+                    serializeGridData: function (postData) {
+                        var searchData = $("#search-filters").serializeObject();
+                        var newData = $.extend({}, postData, searchData);
+                        return newData;
+                    },
+                    loadComplete: function(data){
+                        var grid = $(this);
+                        for(var i = data.Rows.length - 1; i >= 0; i--) {
+                            var row = data.Rows[i];
+                            grid.find("#" + row.Id).find("td").addClass("accion-" + row.Accion.toLowerCase());                            
+                        }
+                    },                                 
                     caption: 'Visualizaci&oacute;n de Auditor&iacute;a',
-                    emptyrecords: 'No hay registros auditados.',
+                    emptyrecords: 'No hay registros auditados.',                    
                     colNames: ['Id', 'Fecha', 'Usuario', 'Entidad Id', 'Entidad', 'Accion'],
                     colModel: [
                             {
