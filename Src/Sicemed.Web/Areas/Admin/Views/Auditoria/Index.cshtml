@@ -23,7 +23,7 @@
 <h2>
     Visualizaci&oacute;n de Auditor&iacute;a
 </h2>
-@using (Html.BeginForm("Index", "Auditoria", FormMethod.Post, new { id = "search-filters" }))
+@using (Html.BeginForm("Index", "Auditoria", FormMethod.Get, new { id = "search-filters" }))
 {
     @Html.ValidationSummaryWithMessage()
 

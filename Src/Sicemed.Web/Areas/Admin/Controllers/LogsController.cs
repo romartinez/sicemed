@@ -14,17 +14,10 @@ namespace Sicemed.Web.Areas.Admin.Controllers
     [AuthorizeIt(typeof(Administrador))]
     public class LogsController : NHibernateController
     {
-        public virtual ActionResult Index()
+        public virtual ActionResult Index(LogsSearchFiltersViewModel viewModel = null)
         {
-            var viewModel = new LogsSearchFiltersViewModel();
-            viewModel.Desde = DateTime.Now.AddDays(-7).ToMidnigth();
-            viewModel.Hasta = DateTime.Now.AddDays(1).ToMidnigth();
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public virtual ActionResult Index(LogsSearchFiltersViewModel viewModel)
-        {
+            if (viewModel == null) 
+                viewModel = new LogsSearchFiltersViewModel() { Desde = DateTime.Now.AddDays(-7).ToMidnigth() };
             return View(viewModel);
         }
 

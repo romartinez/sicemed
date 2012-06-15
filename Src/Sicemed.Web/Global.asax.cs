@@ -109,7 +109,8 @@ namespace SICEMED.Web
 
             var binderProvider = new InheritanceAwareModelBinderProvider
                             {
-                                { typeof(ICustomBindeableProperties), new CustomBindeablePropertiesModelBinder() }
+                                { typeof(ICustomBindeableProperties), new CustomBindeablePropertiesModelBinder() },
+                                { typeof(DateTime), new DateTimeCurrentCultureModelBinder() }
                             };
 
             ModelBinderProviders.BinderProviders.Add(binderProvider);   

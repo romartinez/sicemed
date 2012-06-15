@@ -1,0 +1,45 @@
+﻿@model Sicemed.Web.Models.ViewModels.Historial.AtencionesViewModel
+
+@{
+    ViewBag.Title = "Historial Atenciones";
+}
+
+<h2>Historia Atenciones</h2>
+<h3>@Model.PacienteNombre</h3>
+
+@using (Html.BeginForm("Atenciones", "Historial", FormMethod.Get, new { id = "search-filters" }))
+{
+    @Html.ValidationSummaryWithMessage()
+
+    @Html.EditorFor(x=>x.Filters)
+    
+    @Html.HiddenFor(x=>x.PacienteId)
+    
+    @Html.Submit("Filtrar")    
+}
+
+
+@if(!Model.Turnos.Any())
+{
+    <div>
+        El paciente no posee histor&iacute;a en las fechas seleccionadas.
+    </div>    
+}
+else
+{
+    <div>
+        @foreach(var turno in Model.Turnos)
+        {
+            <h3>@turno.FechaTurno.ToShortDateString() @turno.FechaTurno.ToShortTimeString() - @turno.Profesional</h3>
+            <div>
+                Especialidad: @turno.Especialidad
+                <br/>
+                Consultorio: @turno.Consultorio                
+            </div>
+            <h4>Diagn&oacute;stico</h4>
+            <div>
+                @Html.Nl2Br(turno.Nota)
+            </div>            
+        }
+    </div>        
+}

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
+using Sicemed.Web.Models.ViewModels;
 
 namespace Sicemed.Web.Areas.Admin.Models.Auditoria
 {

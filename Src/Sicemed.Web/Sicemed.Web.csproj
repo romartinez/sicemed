@@ -203,12 +203,13 @@
     <Compile Include="Areas\Admin\Models\Personas\PersonaViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\ProfesionalEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\SecretariaEditModel.cs" />
-    <Compile Include="Areas\Admin\Models\SearchFiltersViewModel.cs" />
+    <Compile Include="Infrastructure\ModelBinders\DateTimeCurrentCultureModelBinder.cs" />
+    <Compile Include="Models\ViewModels\SearchFiltersViewModel.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Areas\Admin\Controllers\DomainController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\HistorialAtencionesController.cs" />
+    <Compile Include="Controllers\HistorialController.cs" />
     <Compile Include="Controllers\ObtenerTurnoController.cs" />
     <Compile Include="Controllers\PacienteController.cs" />
     <Compile Include="Controllers\ProfesionalController.cs" />
@@ -306,7 +307,8 @@
     <Compile Include="Infrastructure\Queries\Domain\ObtenerObrasSocialesDropDownQuery.cs" />
     <Compile Include="Infrastructure\Queries\Domain\ObtenerPlanesPorObraSocialDropDownQuery.cs" />
     <Compile Include="Infrastructure\Queries\Domain\ObtenerProvinciasDropDownQuery.cs" />
-    <Compile Include="Infrastructure\Queries\HistorialAtenciones\ObtenerHistorialAtencionesQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Historial\ObtenerAtencionesQuery.cs" />
     <Compile Include="Infrastructure\Queries\IQuery.cs" />
     <Compile Include="Infrastructure\Queries\IQueryFactory.cs" />
     <Compile Include="Infrastructure\Queries\ObtenerTurno\ObtenerTurnosProfesionalQuery.cs" />
@@ -359,7 +361,8 @@
     <Compile Include="Models\ViewModels\Cuenta\RecuperarPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\Cuenta\InciarSesionViewModel.cs" />
     <Compile Include="Models\ViewModels\Cuenta\RegistroPersonaViewModel.cs" />
-    <Compile Include="Models\ViewModels\HistorialAtenciones\HistorialAtencionesViewModel.cs" />
+    <Compile Include="Models\ViewModels\Historial\AtencionesViewModel.cs" />
+    <Compile Include="Models\ViewModels\Historial\TurnosViewModel.cs" />
     <Compile Include="Models\ViewModels\InfoViewModel.cs" />
     <Compile Include="Models\ViewModels\Menu\PageViewModel.cs" />
     <Compile Include="Models\ViewModels\ObtenerTurno\BusquedaProfesionalViewModel.cs" />
@@ -778,7 +781,9 @@
     <Content Include="Views\Paciente\Agenda.cshtml" />
     <Content Include="Views\Paciente\DisplayTemplates\TurnoViewModel.cshtml" />
     <Content Include="Views\ObtenerTurno\UsuarioBloqueado.cshtml" />
-    <Content Include="Views\HistorialAtenciones\Index.cshtml" />
+    <Content Include="Views\Historial\Atenciones.cshtml" />
+    <Content Include="Views\Historial\Turnos.cshtml" />
+    <Content Include="Views\Historial\TurnosPorPaciente.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

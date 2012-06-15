@@ -1,0 +1,34 @@
+﻿@using Sicemed.Web.Models
+@using Sicemed.Web.Models.Roles
+@model Sicemed.Web.Models.ViewModels.Historial.TurnosViewModel
+
+@{
+    ViewBag.Title = "Historial Turnos";
+}
+
+<h2>Historia Turnos</h2>
+
+@if(!Model.Turnos.Any())
+{
+    <div>
+        El usuario no posee histor&iacute;a en las fechas seleccionadas.
+    </div>    
+}
+else
+{
+    <div>
+        @foreach(var turno in Model.Turnos)
+        {
+            <h3>@turno.FechaTurno.ToShortDateString() @turno.FechaTurno.ToShortTimeString() - @turno.Profesional</h3>
+            <div>
+                Especialidad: @turno.Especialidad
+                <br/>
+                Consultorio: @turno.Consultorio                
+            </div>
+            <h4>Diagn&oacute;stico</h4>
+            <div>
+                @Html.Nl2Br(turno.Nota)
+            </div>                             
+        }
+    </div>        
+}

@@ -17,17 +17,10 @@ namespace Sicemed.Web.Areas.Admin.Controllers
     [AuthorizeIt(typeof(Administrador))]
     public class AuditoriaController : NHibernateController
     {
-        public virtual ActionResult Index()
+        public virtual ActionResult Index(AuditSearchFiltersViewModel viewModel = null)
         {
-            var viewModel = new AuditSearchFiltersViewModel();
-            viewModel.Desde = DateTime.Now.AddDays(-7).ToMidnigth();
-            viewModel.Hasta = DateTime.Now.AddDays(1).ToMidnigth();
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public virtual ActionResult Index(AuditSearchFiltersViewModel viewModel)
-        {
+            if (viewModel == null)
+                viewModel = new AuditSearchFiltersViewModel { Desde = DateTime.Now.AddDays(-7).ToMidnigth() };
             return View(viewModel);
         }
 
@@ -60,9 +53,9 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             if (!string.IsNullOrWhiteSpace(searchFilters.Entidad))
                 query = query.And(Restrictions.InsensitiveLike("Entidad", searchFilters.Entidad, MatchMode.Start));
             if (!string.IsNullOrWhiteSpace(searchFilters.Accion))
-                query = query.And(x=>x.Accion == searchFilters.Accion);
+                query = query.And(x => x.Accion == searchFilters.Accion);
             if (searchFilters.EntidadId.HasValue)
-                query = query.And(x=>x.EntidadId == searchFilters.EntidadId);
+                query = query.And(x => x.EntidadId == searchFilters.EntidadId);
             if (!string.IsNullOrWhiteSpace(searchFilters.Usuario))
                 query = query.And(Restrictions.InsensitiveLike("Usuario", searchFilters.Usuario, MatchMode.Start));
 

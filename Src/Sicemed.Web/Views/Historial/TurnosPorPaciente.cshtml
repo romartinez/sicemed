@@ -1,10 +1,14 @@
-﻿@model Sicemed.Web.Models.ViewModels.HistorialAtenciones.HistorialAtencionesViewModel
+﻿@using Sicemed.Web.Models
+@using Sicemed.Web.Models.Roles
+@model Sicemed.Web.Models.ViewModels.Historial.TurnosViewModel
 
 @{
-    ViewBag.Title = "Historial Atenciones";
+    ViewBag.Title = "Historial Turnos";
 }
 
-<h2>Historia Atenciones - @Model.Paciente</h2>
+<h2>Historia Turnos Por Paciente
+    - @Model.Paciente 
+</h2>
 
 @if(!Model.Turnos.Any())
 {
@@ -21,12 +25,13 @@ else
             <div>
                 Especialidad: @turno.Especialidad
                 <br/>
-                Especialidad: @turno.Consultorio                
+                Consultorio: @turno.Consultorio                
+                <br/>
+                @if(turno.Consultorio == "")
+                {
+                    
+                }
             </div>
-            <h4>Diagn&oacute;stico</h4>
-            <div>
-                @Html.Nl2Br(turno.Nota)
-            </div>            
         }
     </div>        
 }

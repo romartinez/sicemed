@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sicemed.Web.Models;
-using Sicemed.Web.Models.ViewModels.HistorialAtenciones;
+using Sicemed.Web.Models.ViewModels.Historial;
 
-namespace Sicemed.Web.Infrastructure.Queries.HistorialAtenciones
+namespace Sicemed.Web.Infrastructure.Queries.Historial
 {
-    public interface IObtenerHistorialAtencionesQuery : IQuery<HistorialAtencionesViewModel>
+
+    public interface IObtenerTurnosQuery : IQuery<TurnosViewModel>
     {
         DateTime FechaHasta { get; set; }
         DateTime FechaDesde { get; set; }
         long PacienteId { get; set; }
-        long? ProfesionalId { get; set; }
     }
 
-    public class ObtenerHistorialAtencionesQuery : Query<HistorialAtencionesViewModel>, IObtenerHistorialAtencionesQuery
+    public class ObtenerTurnosQuery : Query<TurnosViewModel>, IObtenerTurnosQuery
     {
         public DateTime FechaHasta { get; set; }
         public DateTime FechaDesde { get; set; }
         
         public long PacienteId { get; set; }
-        public long? ProfesionalId { get; set; }
 
-        protected override HistorialAtencionesViewModel CoreExecute()
+        protected override TurnosViewModel CoreExecute()
         {
             var session = SessionFactory.GetCurrentSession();
             var paciente = session.Load<Models.Roles.Paciente>(PacienteId);
@@ -35,18 +34,15 @@ namespace Sicemed.Web.Infrastructure.Queries.HistorialAtenciones
                 .Where(t=>t.FechaTurno >= FechaDesde)
                 .Where(t=>t.FechaTurno <= FechaHasta)
                 .OrderBy(t=>t.FechaTurno).Desc
-                .Where(t => t.Paciente == paciente)
-                .Where(t => t.FechaAtencion != null);
-
-            if (ProfesionalId.HasValue) query = query.Where(t => t.Profesional == session.Load<Models.Roles.Profesional>(ProfesionalId));
+                .Where(t => t.Paciente == paciente);
 
             var turnos = query.Future();
-            var hc = new HistorialAtencionesViewModel
+            var hc = new TurnosViewModel
                          {
-                             Paciente = paciente.Persona.NombreCompleto
+                             //Paciente = paciente.Persona.NombreCompleto
                          };
 
-            hc.Turnos = MappingEngine.Map<IEnumerable<HistorialAtencionesViewModel.HistorialItem>>(turnos);
+            hc.Turnos = MappingEngine.Map<IEnumerable<TurnosViewModel.HistorialItem>>(turnos);
 
             return hc;
         }

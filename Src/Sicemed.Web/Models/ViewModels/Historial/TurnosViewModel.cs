@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Sicemed.Web.Models.ViewModels.HistorialAtenciones
+namespace Sicemed.Web.Models.ViewModels.Historial
 {
-    public class HistorialAtencionesViewModel
+    public class TurnosViewModel
     {
-        public string Paciente { get; set; }
+        public SearchFiltersViewModel Filters { get; set; }
+
+        public InfoViewModel Paciente { get; set; }
+
         public IEnumerable<HistorialItem> Turnos { get; set; }
 
-        public HistorialAtencionesViewModel()
+        public TurnosViewModel()
         {
             Turnos = new List<HistorialItem>();
         }

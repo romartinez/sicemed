@@ -6,7 +6,7 @@ using Sicemed.Web.Models.Enumerations;
 using Sicemed.Web.Models.Roles;
 using Sicemed.Web.Models.ViewModels;
 using Sicemed.Web.Models.ViewModels.Cuenta;
-using Sicemed.Web.Models.ViewModels.HistorialAtenciones;
+using Sicemed.Web.Models.ViewModels.Historial;
 using Sicemed.Web.Models.ViewModels.Paciente;
 using Sicemed.Web.Models.ViewModels.Profesional;
 using Sicemed.Web.Models.ViewModels.Secretaria;
@@ -96,9 +96,14 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
             CreateMap<Turno, AgendaPacienteViewModel.TurnoViewModel>();
             #endregion
 
-            #region Historia Clinica
+            #region Historial
 
-            CreateMap<Turno, HistorialAtencionesViewModel.HistorialItem>()
+            CreateMap<Turno, AtencionesViewModel.HistorialItem>()
+                .ForMember(d=>d.Consultorio, m=>m.MapFrom(o=>o.Consultorio.Nombre))                
+                .ForMember(d=>d.Profesional, m=>m.MapFrom(o=>o.Profesional.Persona.NombreCompleto))
+                .ForMember(d=>d.Especialidad, m=>m.MapFrom(o=>o.Especialidad.Nombre));
+
+            CreateMap<Turno, TurnosViewModel.HistorialItem>()
                 .ForMember(d=>d.Consultorio, m=>m.MapFrom(o=>o.Consultorio.Nombre))                
                 .ForMember(d=>d.Profesional, m=>m.MapFrom(o=>o.Profesional.Persona.NombreCompleto))
                 .ForMember(d=>d.Especialidad, m=>m.MapFrom(o=>o.Especialidad.Nombre));

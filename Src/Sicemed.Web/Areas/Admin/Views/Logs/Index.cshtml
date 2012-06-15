@@ -30,7 +30,7 @@
     Visualizaci&oacute;n de Logs
 </h2>
 
-@using (Html.BeginForm("Index", "Logs", FormMethod.Post, new { id = "search-filters" }))
+@using (Html.BeginForm("Index", "Logs", FormMethod.Get, new { id = "search-filters" }))
 {
     @Html.ValidationSummaryWithMessage()
 

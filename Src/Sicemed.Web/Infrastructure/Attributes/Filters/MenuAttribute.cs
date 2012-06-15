@@ -110,8 +110,8 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
                 {
                     var paciente = user.As<Paciente>();
                     var pacienteRoot = CreateDefaultPage("Paciente", "#", order: 9100);
-                    pacienteRoot.Childs.Add(CreateDefaultPage("Ver Agenda", "Paciente/Agenda", pacienteRoot));
-                    pacienteRoot.Childs.Add(CreateDefaultPage("Ver Historial Atenciones", string.Format("HistorialAtenciones/?pacienteId={0}", paciente.Id), pacienteRoot));
+                    pacienteRoot.Childs.Add(CreateDefaultPage("Agenda", "Paciente/Agenda", pacienteRoot));
+                    pacienteRoot.Childs.Add(CreateDefaultPage("Historial Turnos", "Historial/Turnos", pacienteRoot));
                     pages.Add(pacienteRoot);
                 }
 
@@ -121,13 +121,14 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
                     secretariaRoot.Childs.Add(CreateDefaultPage("Presentación Turno", "Secretaria/Agenda", secretariaRoot));
                     secretariaRoot.Childs.Add(CreateDefaultPage("Otorgar Turno", "Secretaria/OtorgarTurno", secretariaRoot));
                     secretariaRoot.Childs.Add(CreateDefaultPage("Alta Paciente", "Secretaria/AltaPaciente", secretariaRoot));
+                    secretariaRoot.Childs.Add(CreateDefaultPage("Historial Turnos Paciente", "Historial/TurnosPorPaciente", secretariaRoot));
 
                     pages.Add(secretariaRoot);
                 }
                 if (user.IsInRole<Profesional>())
                 {
                     var profesionalRoot = CreateDefaultPage("Profesional", "#", order: 9300);
-                    profesionalRoot.Childs.Add(CreateDefaultPage("Ver Agenda", "Profesional/Agenda", profesionalRoot));
+                    profesionalRoot.Childs.Add(CreateDefaultPage("Agenda", "Profesional/Agenda", profesionalRoot));
 
                     pages.Add(profesionalRoot);
                 }
