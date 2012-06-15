@@ -6,14 +6,14 @@
 }
 <h3 class="@css">
     <a href="#">
-        @Model.FechaTurno.ToString("HH:mm") 
-        - @Model.Paciente.Descripcion 
-        - @(Model.SeAtendio ? "| Atendido" : (!Model.SePresento ? "| No Se Presentó Todavía" : string.Empty))
+        @Model.FechaTurno.ToString("HH:mm")
+        - @Model.Paciente.Descripcion
+        @(Model.SeAtendio ? "| Atendido" : (!Model.SePresento ? "| No Se Presentó Todavía" : string.Empty))
     </a>
 </h3>
 <div>
     <div>
-        @Html.ActionLink("Historial Atenciones", "Index", "HistorialAtenciones")<br/>
+        @Html.ActionLink("Historial Atenciones", "Index", "HistorialAtenciones", new { pacienteId = Model.Paciente.Id }, new { target = "_blank"})<br />
         Especialidad: @Model.Especialidad.Descripcion
     </div>
     <div>

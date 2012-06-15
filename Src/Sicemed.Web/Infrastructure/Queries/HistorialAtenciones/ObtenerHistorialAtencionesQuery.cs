@@ -35,7 +35,8 @@ namespace Sicemed.Web.Infrastructure.Queries.HistorialAtenciones
                 .Where(t=>t.FechaTurno >= FechaDesde)
                 .Where(t=>t.FechaTurno <= FechaHasta)
                 .OrderBy(t=>t.FechaTurno).Desc
-                .Where(t => t.Paciente == paciente);
+                .Where(t => t.Paciente == paciente)
+                .Where(t => t.FechaAtencion != null);
 
             if (ProfesionalId.HasValue) query = query.Where(t => t.Profesional == session.Load<Models.Roles.Profesional>(ProfesionalId));
 

@@ -1,7 +1,7 @@
 ﻿@model Sicemed.Web.Models.ViewModels.HistorialAtenciones.HistorialAtencionesViewModel
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Historial Atenciones";
 }
 
 <h2>Historia Atenciones - @Model.Paciente</h2>
@@ -17,7 +17,7 @@ else
     <div>
         @foreach(var turno in Model.Turnos)
         {
-            <h3>@turno.FechaTurno.ToShortDateString() - @turno.Profesional</h3>
+            <h3>@turno.FechaTurno.ToShortDateString() @turno.FechaTurno.ToShortTimeString() - @turno.Profesional</h3>
             <div>
                 Especialidad: @turno.Especialidad
                 <br/>
@@ -25,7 +25,7 @@ else
             </div>
             <h4>Diagn&oacute;stico</h4>
             <div>
-                @turno.Nota
+                @Html.Nl2Br(turno.Nota)
             </div>            
         }
     </div>        

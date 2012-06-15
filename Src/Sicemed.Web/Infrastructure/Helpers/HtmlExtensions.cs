@@ -93,6 +93,14 @@ namespace System.Web.Mvc.Html
             return prefix.Substring(0, prefix.LastIndexOf('.'));
         }
 
+        /// <summary>
+        /// http://stackoverflow.com/a/5032975/103085
+        /// </summary>
+        public static IHtmlString Nl2Br(this HtmlHelper htmlHelper, string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return new HtmlString(string.Empty);
+            return htmlHelper.Raw(HttpUtility.HtmlEncode(text).Replace("\n", "</br>"));
+        }
 
         //http://blogs.msdn.com/b/stuartleeks/archive/2010/05/21/asp-net-mvc-creating-a-dropdownlist-helper-for-enums.aspx
         #region EnumDropDown

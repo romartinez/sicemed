@@ -87,7 +87,7 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
             {
                 var diaConHora = dia.SetTimeWith(agendaDia.HorarioDesde).AddMinutes(minutes);
 
-                turnos.AddRange(TurnoViewModel.Create(diaConHora, agendaDia));
+                turnos.Add(TurnoViewModel.Create(diaConHora, agendaDia));
             }
 
             //Quito los turnos anteriores a que abra la clinica
