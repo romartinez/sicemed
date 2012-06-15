@@ -723,7 +723,6 @@
     <Content Include="Areas\Admin\Views\Personas\_Agenda.cshtml" />
     <Content Include="Areas\Admin\Views\Personas\Editar.cshtml" />
     <None Include="Models\ClassDiagram.cd" />
-    <Content Include="Views\Content\TemplateError.cshtml" />
     <Content Include="Views\ObtenerTurno\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutClinica.cshtml" />
     <Content Include="Views\Shared\_MenuClinica.cshtml" />
