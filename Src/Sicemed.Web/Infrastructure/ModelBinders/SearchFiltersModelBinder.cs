@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 
 namespace Sicemed.Web.Infrastructure.ModelBinders
 {
@@ -9,8 +10,14 @@ namespace Sicemed.Web.Infrastructure.ModelBinders
     {
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
-            //Si el formulario es posteado, la variable viene como string.Empty, si es NULL es porque no fue posteado
-            if (bindingContext.ValueProvider.GetValue("Filtro") == null) return null;            
+            var prefix = string.Empty;
+            if (!String.IsNullOrEmpty(bindingContext.ModelName)
+                && bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName))
+                prefix = bindingContext.ModelName + ".";
+
+
+            var valueProvided = bindingContext.ValueProvider.GetValue(string.Format("{0}Filtro", prefix));
+            if (valueProvided == null) return null;
 
             return base.BindModel(controllerContext, bindingContext);
         }
