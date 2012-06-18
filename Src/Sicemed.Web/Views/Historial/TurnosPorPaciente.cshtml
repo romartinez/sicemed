@@ -1,19 +1,17 @@
 ﻿@using Sicemed.Web.Models
 @using Sicemed.Web.Models.Roles
-@model Sicemed.Web.Models.ViewModels.Historial.TurnosViewModel
+@model Sicemed.Web.Models.ViewModels.Historial.TurnosPacienteViewModel
 
 @{
     ViewBag.Title = "Historial Turnos";
 }
 
-<h2>Historia Turnos Por Paciente
-    - @Model.Paciente 
-</h2>
+<h2>Historia Turnos</h2>
 
 @if(!Model.Turnos.Any())
 {
     <div>
-        El usuario no posee histor&iacute;a en las fechas seleccionadas.
+        El paciente no posee histor&iacute;a en las fechas seleccionadas.
     </div>    
 }
 else
@@ -27,10 +25,6 @@ else
                 <br/>
                 Consultorio: @turno.Consultorio                
                 <br/>
-                @if(turno.Consultorio == "")
-                {
-                    
-                }
             </div>
         }
     </div>        

@@ -3,15 +3,13 @@ using System.Collections.Generic;
 
 namespace Sicemed.Web.Models.ViewModels.Historial
 {
-    public class TurnosViewModel
+    public class TurnosPacienteViewModel
     {
         public SearchFiltersViewModel Filters { get; set; }
 
-        public InfoViewModel Paciente { get; set; }
-
         public IEnumerable<HistorialItem> Turnos { get; set; }
 
-        public TurnosViewModel()
+        public TurnosPacienteViewModel()
         {
             Turnos = new List<HistorialItem>();
         }
@@ -23,6 +21,11 @@ namespace Sicemed.Web.Models.ViewModels.Historial
             public string Especialidad { get; set; }
             public string Consultorio { get; set; }
             public string Nota { get; set; }
+            public bool SePresento { get; protected set; }
+            public bool SeAtendio { get; protected set; }
+            public bool EsObtenidoWeb { get; protected set; }
+            public bool EsObtenidoPersonalmente { get; protected set; }
+            public bool EsObtenidoTelefonicamente { get; protected set; }
         }
     }
 }

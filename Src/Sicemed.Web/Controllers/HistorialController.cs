@@ -33,25 +33,25 @@ namespace Sicemed.Web.Controllers
             return View(viewModel);
         }
 
-        //[AuthorizeIt(typeof(Paciente))]
-        //public ActionResult Turnos(DateTime? desde = null, DateTime? hasta = null)
-        //{
-        //    var query = QueryFactory.Create<IObtenerTurnosQuery>();
-        //    query.FechaDesde = desde.HasValue ? desde.Value : DateTime.Now.AddMonths(-1 * DEFAULT_PREVIOUS_MONTHS);
-        //    query.FechaHasta = hasta.HasValue ? hasta.Value : DateTime.Now;
-        //    query.PacienteId = User.As<Paciente>().Id;
+        [AuthorizeIt(typeof(Paciente))]
+        public ActionResult Turnos()
+        {
+            var query = QueryFactory.Create<IObtenerTurnosPacienteQuery>();
+            query.FechaDesde = desde.HasValue ? desde.Value : DateTime.Now.AddMonths(-1 * DEFAULT_PREVIOUS_MONTHS);
+            query.FechaHasta = hasta.HasValue ? hasta.Value : DateTime.Now;
+            query.PacienteId = User.As<Paciente>().Id;
 
-        //    var turnos = query.Execute();
+            var turnos = query.Execute();
 
-        //    return View(turnos);
-        //}
+            return View(turnos);
+        }
 
         //[AuthorizeIt(typeof(Secretaria))]
         //public ActionResult TurnosPorPaciente(long? pacienteId = null, DateTime? desde = null, DateTime? hasta = null)
         //{
-        //    if (!pacienteId.HasValue) return View(new TurnosViewModel());
+        //    if (!pacienteId.HasValue) return View(new TurnosPacienteViewModel());
             
-        //    var query = QueryFactory.Create<IObtenerTurnosQuery>();
+        //    var query = QueryFactory.Create<IObtenerTurnosPacienteQuery>();
         //    query.FechaDesde = desde.HasValue ? desde.Value : DateTime.Now.AddMonths(-1 * DEFAULT_PREVIOUS_MONTHS);
         //    query.FechaHasta = hasta.HasValue ? hasta.Value : DateTime.Now;
         //    query.PacienteId = pacienteId.Value;

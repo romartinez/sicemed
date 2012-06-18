@@ -6,21 +6,21 @@ using Sicemed.Web.Models.ViewModels.Historial;
 namespace Sicemed.Web.Infrastructure.Queries.Historial
 {
 
-    public interface IObtenerTurnosQuery : IQuery<TurnosViewModel>
+    public interface IObtenerTurnosPacienteQuery : IQuery<TurnosPacienteViewModel>
     {
         DateTime FechaHasta { get; set; }
         DateTime FechaDesde { get; set; }
         long PacienteId { get; set; }
     }
 
-    public class ObtenerTurnosQuery : Query<TurnosViewModel>, IObtenerTurnosQuery
+    public class ObtenerTurnosPacientePacienteQuery : Query<TurnosPacienteViewModel>, IObtenerTurnosPacienteQuery
     {
         public DateTime FechaHasta { get; set; }
         public DateTime FechaDesde { get; set; }
         
         public long PacienteId { get; set; }
 
-        protected override TurnosViewModel CoreExecute()
+        protected override TurnosPacienteViewModel CoreExecute()
         {
             var session = SessionFactory.GetCurrentSession();
             var paciente = session.Load<Models.Roles.Paciente>(PacienteId);
@@ -37,12 +37,9 @@ namespace Sicemed.Web.Infrastructure.Queries.Historial
                 .Where(t => t.Paciente == paciente);
 
             var turnos = query.Future();
-            var hc = new TurnosViewModel
-                         {
-                             //Paciente = paciente.Persona.NombreCompleto
-                         };
+            var hc = new TurnosPacienteViewModel();
 
-            hc.Turnos = MappingEngine.Map<IEnumerable<TurnosViewModel.HistorialItem>>(turnos);
+            hc.Turnos = MappingEngine.Map<IEnumerable<TurnosPacienteViewModel.HistorialItem>>(turnos);
 
             return hc;
         }

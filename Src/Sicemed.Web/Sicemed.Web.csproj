@@ -308,7 +308,7 @@
     <Compile Include="Infrastructure\Queries\Domain\ObtenerObrasSocialesDropDownQuery.cs" />
     <Compile Include="Infrastructure\Queries\Domain\ObtenerPlanesPorObraSocialDropDownQuery.cs" />
     <Compile Include="Infrastructure\Queries\Domain\ObtenerProvinciasDropDownQuery.cs" />
-    <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosPacienteQuery.cs" />
     <Compile Include="Infrastructure\Queries\Historial\ObtenerAtencionesQuery.cs" />
     <Compile Include="Infrastructure\Queries\IQuery.cs" />
     <Compile Include="Infrastructure\Queries\IQueryFactory.cs" />
@@ -363,7 +363,7 @@
     <Compile Include="Models\ViewModels\Cuenta\InciarSesionViewModel.cs" />
     <Compile Include="Models\ViewModels\Cuenta\RegistroPersonaViewModel.cs" />
     <Compile Include="Models\ViewModels\Historial\AtencionesViewModel.cs" />
-    <Compile Include="Models\ViewModels\Historial\TurnosViewModel.cs" />
+    <Compile Include="Models\ViewModels\Historial\TurnosPacienteViewModel.cs" />
     <Compile Include="Models\ViewModels\InfoViewModel.cs" />
     <Compile Include="Models\ViewModels\Menu\PageViewModel.cs" />
     <Compile Include="Models\ViewModels\ObtenerTurno\BusquedaProfesionalViewModel.cs" />
