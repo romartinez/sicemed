@@ -2,12 +2,10 @@
 using System.Web.Mvc;
 using NHibernate;
 using NHibernate.Criterion;
-using Sicemed.Web.Areas.Admin.Models;
 using Sicemed.Web.Areas.Admin.Models.Auditoria;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Helpers;
-using Sicemed.Web.Infrastructure.Queries;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Roles;
 using Sicemed.Web.Models.ViewModels;
