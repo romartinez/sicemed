@@ -36,7 +36,7 @@ namespace Sicemed.Web.Infrastructure.Queries.Historial
                 .Where(t => t.FechaTurno >= FechaDesde)
                 .Where(t => t.FechaTurno <= FechaHasta)
                 .Where(t => t.Paciente == paciente)
-                .Where(t => t.FechaAtencion != null)
+                .Where(t => t.FechaAtencion == null)
                 .OrderBy(t => t.FechaTurno).Desc;
 
             if (!string.IsNullOrWhiteSpace(Filtro))

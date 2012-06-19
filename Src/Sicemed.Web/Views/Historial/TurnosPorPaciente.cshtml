@@ -17,7 +17,7 @@
     
     @Html.HiddenFor(x => x.SeleccionPaciente.BusquedaEfectuada)
     
-    @Html.Submit("Filtrar")    
+    @Html.Submit("Buscar")    
     }
 
 
@@ -28,13 +28,11 @@
             foreach (var paciente in Model.SeleccionPaciente.PacientesEncontrados)
             {
     <div>
-        @using (Html.BeginForm("SeleccionPaciente", "Historial", FormMethod.Get))
+        @using (Html.BeginForm("TurnosPorPaciente", "Historial", FormMethod.Get))
         {
-            @Html.HiddenFor(x => x.SeleccionPaciente)
-
-            @paciente.Descripcion    
-            
             @Html.Hidden("SeleccionPaciente.PacienteSeleccionado.Id", paciente.Id)
+
+            @paciente.Descripcion                
             
             @Html.Submit("Seleccionar")
         }
@@ -51,13 +49,14 @@
 else
 {
     <h3>@Model.SeleccionPaciente.PacienteSeleccionado.Descripcion</h3>
-    using (Html.BeginForm("Turnos", "Historial", FormMethod.Get, new { id = "search-filters" }))
+    using (Html.BeginForm("TurnosPorPaciente", "Historial", FormMethod.Get, new { id = "search-filters" }))
     {
     @Html.ValidationSummaryWithMessage()
 
     @Html.EditorFor(x => x.Filters)   
     
-    @Html.HiddenFor(x => x.SeleccionPaciente)
+    @Html.HiddenFor(x => x.SeleccionPaciente.BusquedaEfectuada)
+    @Html.HiddenFor(x => x.SeleccionPaciente.PacienteSeleccionado.Id)
     
     @Html.Submit("Filtrar")    
     }

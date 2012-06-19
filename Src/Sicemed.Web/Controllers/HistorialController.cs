@@ -68,7 +68,23 @@ namespace Sicemed.Web.Controllers
         [AuthorizeIt(typeof(Secretaria))]
         public ActionResult TurnosPorPaciente(TurnosPorPacienteViewModel viewModel)
         {
-            AppendLists(viewModel);
+            if(viewModel.SeleccionPaciente.HayPacienteSeleccionado)
+            {
+                var paciente = SessionFactory.GetCurrentSession().Get<Paciente>(viewModel.SeleccionPaciente.PacienteSeleccionado.Id);
+
+                viewModel.SeleccionPaciente.PacienteSeleccionado = MappingEngine.Map<InfoViewModel>(paciente);
+
+                viewModel.SeleccionPaciente.PacienteSeleccionado = MappingEngine.Map<InfoViewModel>(paciente);
+
+                var query = QueryFactory.Create<IObtenerTurnosPorPacienteQuery>();
+                query.FechaDesde = viewModel.Filters.Desde;
+                query.FechaHasta = viewModel.Filters.Hasta;
+                query.Filtro = viewModel.Filters.Filtro;
+                query.PacienteId = paciente.Id;
+
+                viewModel.Turnos = query.Execute();                
+            }
+
             return View(viewModel);
         }
 
@@ -76,25 +92,6 @@ namespace Sicemed.Web.Controllers
         {
             viewModel.SeleccionPaciente.TipoDocumentosHabilitados =
                 GetTiposDocumentos(viewModel.SeleccionPaciente.TipoDocumento);
-        }
-
-        [AuthorizeIt(typeof(Secretaria))]
-        public ActionResult SeleccionPaciente(TurnosPorPacienteViewModel viewModel)
-        {
-            var paciente =
-                SessionFactory.GetCurrentSession().Get<Paciente>(viewModel.SeleccionPaciente.PacienteSeleccionado.Id);
-
-            viewModel.SeleccionPaciente.PacienteSeleccionado = MappingEngine.Map<InfoViewModel>(paciente);
-
-            var query = QueryFactory.Create<IObtenerTurnosPorPacienteQuery>();
-            query.FechaDesde = viewModel.Filters.Desde;
-            query.FechaHasta = viewModel.Filters.Hasta;
-            query.Filtro = viewModel.Filters.Filtro;
-            query.PacienteId = paciente.Id;
-
-            viewModel.Turnos = query.Execute();
-
-            return View("TurnosPorPaciente", viewModel);
         }
     }
 }

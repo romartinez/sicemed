@@ -108,6 +108,11 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                 .ForMember(d=>d.Profesional, m=>m.MapFrom(o=>o.Profesional.Persona.NombreCompleto))
                 .ForMember(d=>d.Especialidad, m=>m.MapFrom(o=>o.Especialidad.Nombre));
 
+            CreateMap<Turno, TurnosPorPacienteViewModel.HistorialItem>()
+                .ForMember(d=>d.Consultorio, m=>m.MapFrom(o=>o.Consultorio.Nombre))                
+                .ForMember(d=>d.Profesional, m=>m.MapFrom(o=>o.Profesional.Persona.NombreCompleto))
+                .ForMember(d=>d.Especialidad, m=>m.MapFrom(o=>o.Especialidad.Nombre));
+
             #endregion
         }
     }
