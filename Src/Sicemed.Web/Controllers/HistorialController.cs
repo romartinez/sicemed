@@ -3,8 +3,10 @@ using System.Web.Mvc;
 using NHibernate;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
+using Sicemed.Web.Infrastructure.Queries.Busqueda;
 using Sicemed.Web.Infrastructure.Queries.Historial;
 using Sicemed.Web.Models.Roles;
+using Sicemed.Web.Models.ViewModels;
 using Sicemed.Web.Models.ViewModels.Historial;
 
 namespace Sicemed.Web.Controllers
@@ -47,20 +49,52 @@ namespace Sicemed.Web.Controllers
             return View(turnos);
         }
 
-        //[AuthorizeIt(typeof(Secretaria))]
-        //public ActionResult TurnosPorPaciente(long? pacienteId = null, DateTime? desde = null, DateTime? hasta = null)
-        //{
-        //    if (!pacienteId.HasValue) return View(new TurnosPacienteViewModel());
+        [ValidateModelState]
+        [AuthorizeIt(typeof(Secretaria))]
+        public ActionResult BusquedaPaciente(TurnosPorPacienteViewModel viewModel)
+        {
+            AppendLists(viewModel);
+            var query = QueryFactory.Create<IBusquedaPacienteQuery>();
+            query.Nombre = viewModel.SeleccionPaciente.Nombre;
+            query.TipoDocumento = viewModel.SeleccionPaciente.TipoDocumento;
+            query.NumeroDocumento = viewModel.SeleccionPaciente.NumeroDocumento;
 
-        //    var query = QueryFactory.Create<IObtenerTurnosPacienteQuery>();
-        //    query.FechaDesde = desde.HasValue ? desde.Value : DateTime.Now.AddMonths(-1 * DEFAULT_PREVIOUS_MONTHS);
-        //    query.FechaHasta = hasta.HasValue ? hasta.Value : DateTime.Now;
-        //    query.PacienteId = pacienteId.Value;
+            viewModel.SeleccionPaciente.PacientesEncontrados = query.Execute();
+            viewModel.SeleccionPaciente.BusquedaEfectuada = true;
 
-        //    var turnos = query.Execute();
+            return View("TurnosPorPaciente", viewModel);
+        }
 
-        //    return View(turnos);
-        //}
+        [AuthorizeIt(typeof(Secretaria))]
+        public ActionResult TurnosPorPaciente(TurnosPorPacienteViewModel viewModel)
+        {
+            AppendLists(viewModel);
+            return View(viewModel);
+        }
 
+        private void AppendLists(TurnosPorPacienteViewModel viewModel)
+        {
+            viewModel.SeleccionPaciente.TipoDocumentosHabilitados =
+                GetTiposDocumentos(viewModel.SeleccionPaciente.TipoDocumento);
+        }
+
+        [AuthorizeIt(typeof(Secretaria))]
+        public ActionResult SeleccionPaciente(TurnosPorPacienteViewModel viewModel)
+        {
+            var paciente =
+                SessionFactory.GetCurrentSession().Get<Paciente>(viewModel.SeleccionPaciente.PacienteSeleccionado.Id);
+
+            viewModel.SeleccionPaciente.PacienteSeleccionado = MappingEngine.Map<InfoViewModel>(paciente);
+
+            var query = QueryFactory.Create<IObtenerTurnosPorPacienteQuery>();
+            query.FechaDesde = viewModel.Filters.Desde;
+            query.FechaHasta = viewModel.Filters.Hasta;
+            query.Filtro = viewModel.Filters.Filtro;
+            query.PacienteId = paciente.Id;
+
+            viewModel.Turnos = query.Execute();
+
+            return View("TurnosPorPaciente", viewModel);
+        }
     }
 }

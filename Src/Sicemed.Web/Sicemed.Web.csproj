@@ -205,6 +205,10 @@
     <Compile Include="Areas\Admin\Models\Personas\SecretariaEditModel.cs" />
     <Compile Include="Infrastructure\ModelBinders\DateTimeCurrentCultureModelBinder.cs" />
     <Compile Include="Infrastructure\ModelBinders\SearchFiltersModelBinder.cs" />
+    <Compile Include="Infrastructure\Queries\Busqueda\BusquedaPacienteQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosPorPacienteQuery.cs" />
+    <Compile Include="Models\ViewModels\Historial\TurnosPorPacienteViewModel.cs" />
+    <Compile Include="Models\ViewModels\PacienteSearchViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchFiltersViewModel.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\ContentController.cs" />

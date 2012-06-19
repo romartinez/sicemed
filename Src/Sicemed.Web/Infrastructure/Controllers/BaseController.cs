@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using AutoMapper;
 using Castle.Core.Logging;
 using Sicemed.Web.Infrastructure.ActionResults;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
@@ -31,6 +32,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
 
         public IMembershipService MembershipService { get; set; }
         public IQueryFactory QueryFactory { get; set; }
+        public IMappingEngine MappingEngine { get; set; }
 
         public ICacheProvider Cache { get; set; }
 

@@ -1,31 +1,89 @@
 ﻿@using Sicemed.Web.Models
 @using Sicemed.Web.Models.Roles
-@model Sicemed.Web.Models.ViewModels.Historial.TurnosPacienteViewModel
-
+@model Sicemed.Web.Models.ViewModels.Historial.TurnosPorPacienteViewModel
 @{
     ViewBag.Title = "Historial Turnos";
 }
-
-<h2>Historia Turnos</h2>
-
-@if(!Model.Turnos.Any())
+<h2>
+    Historial Turnos
+</h2>
+@if (!Model.SeleccionPaciente.HayPacienteSeleccionado)
 {
+    using (Html.BeginForm("BusquedaPaciente", "Historial", FormMethod.Get, new { id = "search-filters" }))
+    {
+    @Html.ValidationSummaryWithMessage()
+
+    @Html.EditorFor(x => x.SeleccionPaciente)       
+    
+    @Html.HiddenFor(x => x.SeleccionPaciente.BusquedaEfectuada)
+    
+    @Html.Submit("Filtrar")    
+    }
+
+
+    if (Model.SeleccionPaciente.BusquedaEfectuada)
+    {
+        if (Model.SeleccionPaciente.PacientesEncontrados.Any())
+        {
+            foreach (var paciente in Model.SeleccionPaciente.PacientesEncontrados)
+            {
     <div>
-        El paciente no posee histor&iacute;a en las fechas seleccionadas.
-    </div>    
+        @using (Html.BeginForm("SeleccionPaciente", "Historial", FormMethod.Get))
+        {
+            @Html.HiddenFor(x => x.SeleccionPaciente)
+
+            @paciente.Descripcion    
+            
+            @Html.Hidden("SeleccionPaciente.PacienteSeleccionado.Id", paciente.Id)
+            
+            @Html.Submit("Seleccionar")
+        }
+    </div>
+            }
+        }
+        else
+        {
+    <div>
+        No se encuentran pacientes con los par&aacute;metros seleccionados.</div>
+        }
+    }
 }
 else
 {
+    <h3>@Model.SeleccionPaciente.PacienteSeleccionado.Descripcion</h3>
+    using (Html.BeginForm("Turnos", "Historial", FormMethod.Get, new { id = "search-filters" }))
+    {
+    @Html.ValidationSummaryWithMessage()
+
+    @Html.EditorFor(x => x.Filters)   
+    
+    @Html.HiddenFor(x => x.SeleccionPaciente)
+    
+    @Html.Submit("Filtrar")    
+    }
+
+    if (!Model.Turnos.Any())
+    {
     <div>
-        @foreach(var turno in Model.Turnos)
+        El usuario no posee histor&iacute;a en las fechas seleccionadas.
+    </div>    
+    }
+    else
+    {
+    <div class="historial">
+        @foreach (var turno in Model.Turnos)
         {
-            <h3>@turno.FechaTurno.ToShortDateString() @turno.FechaTurno.ToShortTimeString() - @turno.Profesional</h3>
-            <div>
-                Especialidad: @turno.Especialidad
-                <br/>
-                Consultorio: @turno.Consultorio                
-                <br/>
+            var css = turno.SePresento ? "presento" : "ausente";
+            css = turno.SeAtendio ? "atendio" : css;            
+            <div class="turno @css">
+                <h3>@turno.FechaTurno.ToShortDateString() @turno.FechaTurno.ToShortTimeString() - @turno.Profesional</h3>
+                <div>
+                    Especialidad: @turno.Especialidad
+                    <br />
+                    Consultorio: @turno.Consultorio
+                </div>
             </div>
         }
     </div>        
+    }
 }
