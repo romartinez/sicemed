@@ -5,3 +5,29 @@
 2012-06-06 15:58:03,312 [4] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - I've found any suitable VS instance so I'm returning first on list
 2012-06-06 15:58:04,276 [4] WARN  HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - Trying to ask nicely from VS to activate has failed, trying to use SetForegroundWindow for the task
 2012-06-06 15:58:04,278 [4] DEBUG HibernatingRhinos.Profiler.Client.Services.StackTraceExplorer [(null)] - SetForegroundWindow returned: False
+2012-06-19 09:51:21,711 [1] WARN  Rhino.Licensing.AbstractLicenseValidator [(null)] - Could not find license file: C:\Users\pochw.SANTAFE\AppData\Local\NHibernate Profiler\license.xml
+2012-06-19 09:52:32,863 [1] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 09:52:32,865 [1] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 09:52:33,179 [1] DEBUG Rhino.Licensing.AbstractLicenseValidator [(null)] - License accepted for NHibernate Profiler
+2012-06-19 09:52:33,463 [1] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 09:52:33,464 [1] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 09:52:33,613 [1] DEBUG Rhino.Licensing.AbstractLicenseValidator [(null)] - License accepted for NHibernate Profiler
+2012-06-19 09:52:37,349 [12] INFO  HibernatingRhinos.Profiler.Client.App [(null)] - Checking for updates...
+2012-06-19 09:52:39,761 [18] ERROR HibernatingRhinos.Profiler.Client.App [(null)] - Error while checking for updates: System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 216.121.112.229:80
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Int32 timeout, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetResponse()
+   at NAppUpdate.Framework.Sources.SimpleWebSource.GetUpdatesFeed() in z:\Projects\NAppUpdate\src\NAppUpdate.Framework\Sources\SimpleWebSource.cs:line 36
+   at NAppUpdate.Framework.UpdateManager.CheckForUpdates(IUpdateSource source, Action`1 callback) in z:\Projects\NAppUpdate\src\NAppUpdate.Framework\UpdateManager.cs:line 133
+   at NAppUpdate.Framework.UpdateManager.<>c__DisplayClass2.<CheckForUpdateAsync>b__1() in z:\Projects\NAppUpdate\src\NAppUpdate.Framework\UpdateManager.cs:line 175
+2012-06-19 09:57:33,472 [21] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 09:57:33,473 [21] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 10:02:33,493 [17] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 10:02:33,494 [17] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 10:07:33,511 [17] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 10:07:33,516 [17] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 10:12:33,534 [19] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 10:12:33,535 [19] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 10:17:33,548 [21] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 10:17:33,559 [21] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00

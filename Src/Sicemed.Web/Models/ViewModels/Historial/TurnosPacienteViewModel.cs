@@ -12,6 +12,7 @@ namespace Sicemed.Web.Models.ViewModels.Historial
         public TurnosPacienteViewModel()
         {
             Turnos = new List<HistorialItem>();
+            Filters = new SearchFiltersViewModel();
         }
 
         public class HistorialItem

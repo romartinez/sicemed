@@ -38,15 +38,15 @@ namespace Sicemed.Web.Infrastructure.Queries.Historial
                 .Fetch(t => t.Profesional.Persona).Eager
                 .Fetch(t => t.Consultorio).Eager
                 .Fetch(t => t.Especialidad).Eager
-                .Where(t=>t.FechaTurno >= FechaDesde)
-                .Where(t=>t.FechaTurno <= FechaHasta)
-                .OrderBy(t=>t.FechaTurno).Desc
+                .Where(t => t.FechaTurno >= FechaDesde)
+                .Where(t => t.FechaTurno <= FechaHasta)
+                .OrderBy(t => t.FechaTurno).Desc
                 .Where(t => t.Paciente == paciente)
                 .Where(t => t.FechaAtencion != null)
                 .Where(t => t.Profesional == profesional);
 
             if (!string.IsNullOrWhiteSpace(Filtro))
-                query = query.Where(Restrictions.InsensitiveLike("Nota", Filtro, MatchMode.Anywhere));
+                query = query.Where(Restrictions.On<Turno>(x => x.Nota).IsInsensitiveLike(Filtro, MatchMode.Anywhere));
 
             var turnos = query.Future();
 

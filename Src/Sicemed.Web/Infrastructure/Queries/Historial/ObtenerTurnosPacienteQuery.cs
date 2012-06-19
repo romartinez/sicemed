@@ -15,7 +15,7 @@ namespace Sicemed.Web.Infrastructure.Queries.Historial
         long PacienteId { get; set; }
     }
 
-    public class ObtenerTurnosPacientePacienteQuery : Query<TurnosPacienteViewModel>, IObtenerTurnosPacienteQuery
+    public class ObtenerTurnosPacienteQuery : Query<TurnosPacienteViewModel>, IObtenerTurnosPacienteQuery
     {
         public DateTime FechaHasta { get; set; }
         public DateTime FechaDesde { get; set; }
@@ -35,15 +35,22 @@ namespace Sicemed.Web.Infrastructure.Queries.Historial
                 .Fetch(t => t.Especialidad).Eager
                 .Where(t => t.FechaTurno >= FechaDesde)
                 .Where(t => t.FechaTurno <= FechaHasta)
-                .OrderBy(t => t.FechaTurno).Desc
-                .Where(t => t.Paciente == paciente);
+                .Where(t => t.Paciente == paciente)
+                .OrderBy(t => t.FechaTurno).Desc;
 
             if (!string.IsNullOrWhiteSpace(Filtro))
             {
-                query = query.Where(Restrictions.InsensitiveLike("Nota", Filtro, MatchMode.Anywhere)
-                    || Restrictions.InsensitiveLike("Profesional.Persona.Nombre", Filtro, MatchMode.Anywhere)
-                    || Restrictions.InsensitiveLike("Profesional.Persona.Apellido", Filtro, MatchMode.Anywhere)
-                    || Restrictions.InsensitiveLike("Profesional.Persona.SegundoNombre", Filtro, MatchMode.Anywhere));
+                Models.Roles.Profesional profesional = null;
+                Persona persona = null;
+
+                query.Left.JoinAlias(x => x.Profesional, ()=> profesional)
+                    .Left.JoinAlias(x => profesional.Persona, () => persona)
+                .Where(
+                    Restrictions.On<Turno>(x => x.Nota).IsInsensitiveLike(Filtro, MatchMode.Anywhere)
+                        || Restrictions.On(()=>persona.Nombre).IsInsensitiveLike(Filtro, MatchMode.Anywhere)
+                        || Restrictions.On(() => persona.SegundoNombre).IsInsensitiveLike(Filtro, MatchMode.Anywhere)
+                        || Restrictions.On(() => persona.Apellido).IsInsensitiveLike(Filtro, MatchMode.Anywhere)
+                );
             }
 
             var turnos = query.Future();
