@@ -31,3 +31,9 @@
 2012-06-19 10:12:33,535 [19] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
 2012-06-19 10:17:33,548 [21] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
 2012-06-19 10:17:33,559 [21] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 10:22:33,582 [19] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 10:22:33,583 [19] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 10:27:33,599 [19] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 10:27:33,601 [19] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 10:32:33,618 [17] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-19 10:32:33,619 [17] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00

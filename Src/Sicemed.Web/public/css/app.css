@@ -84,3 +84,22 @@ input[type=time],
 input.ctl-timespan {
     width: 75px;
 }
+
+/* TURNOS
+**/
+
+.historial .turno {
+    border: 3px solid #474747;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+.historial .presento {
+    border-color:#474747;
+}
+.historial .atendio {
+    border-color:#CA2B63;
+}
+.historial .ausente {
+    border-color:#12A0A9;
+}
