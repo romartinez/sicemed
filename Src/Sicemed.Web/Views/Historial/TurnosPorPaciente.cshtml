@@ -25,24 +25,31 @@
     {
         if (Model.SeleccionPaciente.PacientesEncontrados.Any())
         {
-            foreach (var paciente in Model.SeleccionPaciente.PacientesEncontrados)
-            {
-    <div>
-        @using (Html.BeginForm("TurnosPorPaciente", "Historial", FormMethod.Get))
+    <h3>
+        Se han encontrado los siguientes pacientes
+    </h3>
+    <ul>
+        @foreach (var paciente in Model.SeleccionPaciente.PacientesEncontrados)
         {
-            @Html.Hidden("SeleccionPaciente.PacienteSeleccionado.Id", paciente.Id)
-
-            @paciente.Descripcion                
+            <li>
+                @using (Html.BeginForm("TurnosPorPaciente", "Historial", FormMethod.Get))
+                {
+                    @Html.Hidden("SeleccionPaciente.PacienteSeleccionado.Id", paciente.Id)
             
-            @Html.Submit("Seleccionar")
+                        
+                    <h4>
+                        @Html.LinkSubmit(paciente.Descripcion)
+                    </h4>                        
+                }
+            </li>
         }
-    </div>
-            }
+    </ul>
         }
         else
         {
-    <div>
-        No se encuentran pacientes con los par&aacute;metros seleccionados.</div>
+    <div class="msg-error">
+        No se encuentran pacientes con los par&aacute;metros seleccionados.
+    </div>
         }
     }
 }
@@ -63,8 +70,8 @@ else
 
     if (!Model.Turnos.Any())
     {
-    <div>
-        El usuario no posee histor&iacute;a en las fechas seleccionadas.
+    <div class="msg-error">
+        El paciente no posee turnos en las fechas seleccionadas.
     </div>    
     }
     else

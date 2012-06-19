@@ -54,6 +54,11 @@ var app = (function ($, app) {
             collapsible: true
         });
 
+        $(".link-submit").click(function () {
+            $(this).parents("form").submit();
+            return false;
+        });
+
         //Selecciono el primero que no este disabled
         $("div.ctl-accordion").each(function () {
             var self = $(this);
