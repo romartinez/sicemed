@@ -35,8 +35,7 @@
                 @using (Html.BeginForm("TurnosPorPaciente", "Historial", FormMethod.Get))
                 {
                     @Html.Hidden("SeleccionPaciente.PacienteSeleccionado.Id", paciente.Id)
-            
-                        
+                                    
                     <h4>
                         @Html.LinkSubmit(paciente.Descripcion)
                     </h4>                        
