@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NHibernate.Criterion;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.ViewModels.Historial;
 
@@ -10,6 +11,7 @@ namespace Sicemed.Web.Infrastructure.Queries.Historial
     {
         DateTime FechaHasta { get; set; }
         DateTime FechaDesde { get; set; }
+        string Filtro { get; set; }
         long PacienteId { get; set; }
     }
 
@@ -17,7 +19,7 @@ namespace Sicemed.Web.Infrastructure.Queries.Historial
     {
         public DateTime FechaHasta { get; set; }
         public DateTime FechaDesde { get; set; }
-        
+        public string Filtro { get; set; }
         public long PacienteId { get; set; }
 
         protected override TurnosPacienteViewModel CoreExecute()
@@ -31,10 +33,18 @@ namespace Sicemed.Web.Infrastructure.Queries.Historial
                 .Fetch(t => t.Profesional.Persona).Eager
                 .Fetch(t => t.Consultorio).Eager
                 .Fetch(t => t.Especialidad).Eager
-                .Where(t=>t.FechaTurno >= FechaDesde)
-                .Where(t=>t.FechaTurno <= FechaHasta)
-                .OrderBy(t=>t.FechaTurno).Desc
+                .Where(t => t.FechaTurno >= FechaDesde)
+                .Where(t => t.FechaTurno <= FechaHasta)
+                .OrderBy(t => t.FechaTurno).Desc
                 .Where(t => t.Paciente == paciente);
+
+            if (!string.IsNullOrWhiteSpace(Filtro))
+            {
+                query = query.Where(Restrictions.InsensitiveLike("Nota", Filtro, MatchMode.Anywhere)
+                    || Restrictions.InsensitiveLike("Profesional.Persona.Nombre", Filtro, MatchMode.Anywhere)
+                    || Restrictions.InsensitiveLike("Profesional.Persona.Apellido", Filtro, MatchMode.Anywhere)
+                    || Restrictions.InsensitiveLike("Profesional.Persona.SegundoNombre", Filtro, MatchMode.Anywhere));
+            }
 
             var turnos = query.Future();
             var hc = new TurnosPacienteViewModel();

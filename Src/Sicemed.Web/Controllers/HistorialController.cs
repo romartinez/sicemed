@@ -24,7 +24,7 @@ namespace Sicemed.Web.Controllers
             query.FechaDesde = viewModel.Filters.Desde;
             query.FechaHasta = viewModel.Filters.Hasta;
             query.Filtro = viewModel.Filters.Filtro;
-            query.PacienteId = viewModel.PacienteId;            
+            query.PacienteId = viewModel.PacienteId;
             query.ProfesionalId = User.As<Profesional>().Id;
 
             viewModel.Turnos = query.Execute();
@@ -34,11 +34,12 @@ namespace Sicemed.Web.Controllers
         }
 
         [AuthorizeIt(typeof(Paciente))]
-        public ActionResult Turnos()
+        public ActionResult Turnos(TurnosPacienteViewModel viewModel)
         {
             var query = QueryFactory.Create<IObtenerTurnosPacienteQuery>();
-            query.FechaDesde = desde.HasValue ? desde.Value : DateTime.Now.AddMonths(-1 * DEFAULT_PREVIOUS_MONTHS);
-            query.FechaHasta = hasta.HasValue ? hasta.Value : DateTime.Now;
+            query.FechaDesde = viewModel.Filters.Desde;
+            query.FechaHasta = viewModel.Filters.Hasta;
+            query.Filtro = viewModel.Filters.Filtro;
             query.PacienteId = User.As<Paciente>().Id;
 
             var turnos = query.Execute();
@@ -50,7 +51,7 @@ namespace Sicemed.Web.Controllers
         //public ActionResult TurnosPorPaciente(long? pacienteId = null, DateTime? desde = null, DateTime? hasta = null)
         //{
         //    if (!pacienteId.HasValue) return View(new TurnosPacienteViewModel());
-            
+
         //    var query = QueryFactory.Create<IObtenerTurnosPacienteQuery>();
         //    query.FechaDesde = desde.HasValue ? desde.Value : DateTime.Now.AddMonths(-1 * DEFAULT_PREVIOUS_MONTHS);
         //    query.FechaHasta = hasta.HasValue ? hasta.Value : DateTime.Now;
