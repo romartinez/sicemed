@@ -5,8 +5,8 @@
     <div>
         @if (@Model.Consultorio != null)
         {
-            @:Consultorio: @Model.Consultorio.Descripcion            
-        }
+            @:Consultorio: @Model.Consultorio.Descripcion
+                }
         <br />
         Especialidad: @Model.Especialidad.Descripcion
         <br />
@@ -16,24 +16,21 @@
         {
             using (Html.BeginForm("RegistrarIngresoPaciente", "Secretaria"))
             {
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="turnoId" value="@Model.Id"/>
-                @Html.Submit("Ingresar")
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="turnoId" value="@Model.Id"/>
+            @Html.Submit("Ingresar")
             }
         }
-        
-        @if(Model.Estado == Turno.EstadoTurno.Presentado)
+        @if (Model.Estado == Turno.EstadoTurno.Presentado)
         {
-            <span>El usuario se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes) minutos.</span>            
+            <span>El usuario se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
+                minutos.</span>            
         }
-            
         @if (Model.PuedoCancelar)
         {
             using (Html.BeginForm("CancelarTurno", "Secretaria"))
             {
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="turnoId" value="@Model.Id"/>
-                @Html.Submit("Cancelar")
+                @Html.Partial("_CancelarTurno")
             }
         }
     </div>

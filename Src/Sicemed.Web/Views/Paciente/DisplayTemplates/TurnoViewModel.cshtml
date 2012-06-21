@@ -23,6 +23,13 @@
                 <span>Se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
                     minutos.</span>
             }
+            @if (Model.PuedoCancelar)
+            {
+                using (Html.BeginForm("CancelarTurno", "Paciente"))
+                {
+                    @Html.Partial("_CancelarTurno")
+                }
+            }                                   
         </div>
     </div>
 </div>

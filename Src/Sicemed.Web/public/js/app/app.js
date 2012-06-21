@@ -64,6 +64,19 @@ var app = (function ($, app) {
             return false;
         });
 
+        $(".ctl-cancelar-prompt").click(function () {
+            var form = $(this).parents("form");
+            app.ui.showInput("Ingrese el motivo de cancelaci&oacute;n:", function (val) {
+                if (!val) {
+                    app.ui.showError("El campo es obligatorio.");
+                    return;
+                }
+                form.find("[name='prompt']").val(val);
+                form.submit();
+            });
+            return false;
+        });
+
         //Selecciono el primero que no este disabled
         $("div.ctl-accordion").each(function () {
             var self = $(this);

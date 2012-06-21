@@ -33,7 +33,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
         public IMembershipService MembershipService { get; set; }
         public IQueryFactory QueryFactory { get; set; }
         public IMappingEngine MappingEngine { get; set; }
-
+        public INotificationService NotificationService { get; set; }
         public ICacheProvider Cache { get; set; }
 
         protected new Persona User

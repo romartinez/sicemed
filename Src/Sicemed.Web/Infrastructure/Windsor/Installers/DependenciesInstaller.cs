@@ -24,6 +24,7 @@ namespace SICEMED.Web.Infrastructure.Windsor.Installers
                     LifeStyle.Singleton,
                 Component.For<ICryptoEngine>().Instance(new RijndaelEngine("S3CR3t0.3spC14L")).LifeStyle.Singleton,
                 Component.For<IMembershipMailer>().ImplementedBy<MembershipMailer>().LifeStyle.Transient,
+                Component.For<INotificationService>().ImplementedBy<NotificationService>().LifeStyle.Transient,
                 Component.For<ISecurityService>().ImplementedBy<SecurityService>().LifeStyle.Singleton,
                 //Providers
                 Component.For<ICacheProvider>().ImplementedBy<NullCacheProvider>().LifeStyle.Singleton,

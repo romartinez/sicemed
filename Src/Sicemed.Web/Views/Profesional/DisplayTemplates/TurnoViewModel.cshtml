@@ -26,12 +26,19 @@
             
                 using (Html.BeginForm("RegistrarAtencionPaciente", "Profesional"))
                 {
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="turnoId" value="@Model.Id"/>
-                <textarea cols="5" rows="10" style="width: 100%;" name="nota"></textarea>
-                @Html.Submit("Atender")
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="turnoId" value="@Model.Id"/>
+                    <textarea cols="5" rows="10" style="width: 100%;" name="nota"></textarea>
+                    @Html.Submit("Atender")
                 }
-            }
+            } 
+            @if (Model.PuedoCancelar)
+            {
+                using (Html.BeginForm("CancelarTurno", "Profesional"))
+                {
+                    @Html.Partial("_CancelarTurno")
+                }
+            }                       
         </div>
     </div>
 </div>

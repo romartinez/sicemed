@@ -62,6 +62,8 @@ namespace Sicemed.Web.Models
         public virtual DateTime? FechaAtencion { get; protected set; }
 
         public virtual string Nota { get; protected set; }
+        
+        public virtual string MotivoCancelacion { get; protected set; }
 
         public virtual string IpPaciente { get; protected set; }
 
@@ -169,11 +171,12 @@ namespace Sicemed.Web.Models
             return this;
         }
 
-        public virtual Turno CancelarTurno(Persona canceladoPor)
+        public virtual Turno CancelarTurno(Persona canceladoPor, string motivoCancelacion)
         {
             MoverEstado(EventoTurno.Cancelar);
             FechaCancelacion = DateTime.Now;
             CanceladoPor = canceladoPor;
+            MotivoCancelacion = motivoCancelacion;
             Paciente.AgregarInasistencia();
             return this;
         }

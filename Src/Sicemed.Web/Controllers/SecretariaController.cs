@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using AutoMapper;
+using Mvc.Mailer;
 using SICEMED.Web;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
@@ -20,7 +21,7 @@ using Sicemed.Web.Models.ViewModels.Secretaria;
 namespace Sicemed.Web.Controllers
 {
     [AuthorizeIt(typeof(Secretaria))]
-    public class SecretariaController : NHibernateController
+    public class SecretariaController : AdministracionDeTurnosBaseController
     {
         private readonly IMembershipService _membershipService;
         private readonly IMappingEngine _mappingEngine;
@@ -31,7 +32,7 @@ namespace Sicemed.Web.Controllers
             _membershipService = membershipService;
         }
 
-        public ActionResult Agenda(DateTime? fecha = null)
+        public override ActionResult Agenda(DateTime? fecha = null)
         {
             var query = QueryFactory.Create<IObtenerTurnosPorFechaQuery>();
             query.Fecha = fecha;
@@ -149,24 +150,6 @@ namespace Sicemed.Web.Controllers
             }
 
             turno.RegistrarIngreso(User.As<Secretaria>());
-
-            ShowMessages(ResponseMessage.Success());
-            return RedirectToAction("Agenda");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CancelarTurno(long turnoId)
-        {
-            var session = SessionFactory.GetCurrentSession();
-            var turno = session.Get<Turno>(turnoId);
-            if (turno == null || !turno.PuedeAplicar(Turno.EventoTurno.Cancelar))
-            {
-                ShowMessages(ResponseMessage.Error("No se encuentra el turno o no se puede cancelar el mismo."));
-                return RedirectToAction("Agenda");
-            }
-            
-            turno.CancelarTurno(User);            
 
             ShowMessages(ResponseMessage.Success());
             return RedirectToAction("Agenda");

@@ -1,0 +1,23 @@
+﻿@model Sicemed.Web.Models.Turno
+@{
+    Layout = "~/Views/Shared/_MailLayout.cshtml";
+}
+<p>
+    El usuario @ViewBag.Usuario ha cancelado el turno.
+</p>
+<h3>
+    Motivo
+</h3>
+<p>    
+    @Model.MotivoCancelacion
+</p>
+<h3>
+    Detalle Turno
+</h3>
+<p>
+    Fecha: @Model.FechaTurno.ToShortDateString() @Model.FechaTurno.ToShortTimeString()<br />
+    Paciente: @Model.Paciente.Persona.NombreCompleto<br />
+    Profesional: @Model.Profesional.Persona.NombreCompleto<br />
+    Especialidad: @Model.Especialidad.Nombre<br />
+    Consultorio: @Model.Consultorio.Nombre<br />
+</p>

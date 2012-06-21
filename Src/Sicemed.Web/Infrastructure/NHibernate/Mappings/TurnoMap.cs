@@ -16,6 +16,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Property(x => x.IpPaciente);
             Property(x => x.EsTelefonico);
             Property(x => x.Nota);
+            Property(x => x.MotivoCancelacion);
             Property(x => x.Estado);
             Property(x => x.FechaEstado);
 

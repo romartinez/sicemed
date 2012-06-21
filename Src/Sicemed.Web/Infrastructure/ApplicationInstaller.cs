@@ -404,13 +404,13 @@ namespace Sicemed.Web.Infrastructure
             //Turno Cancelado antes de presentarse
             session.Save(Turno.Create(DateTime.Now.SetTimeWith(hInicio).AddMinutes(90), PersonaAdminProfesionalWalter.As<Paciente>(),
                          PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1")
-                         .CancelarTurno(PersonaAdminProfesionalWalter));
+                         .CancelarTurno(PersonaAdminProfesionalWalter, "No me puedo presentar"));
 
             //Turno Cancelado luego de ingresar a la sala de espera
             session.Save(Turno.Create(DateTime.Now.SetTimeWith(hInicio).AddMinutes(120), PersonaAdminProfesionalWalter.As<Paciente>(),
                          PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1")
                          .RegistrarIngreso(PersonaAdminProfesionalWalter.As<Secretaria>())
-                         .CancelarTurno(PersonaAdminProfesionalWalter));
+                         .CancelarTurno(PersonaAdminProfesionalWalter, "Me tuve que ir\n Saludos."));
 
 
             PersonaPacientePablo = new Persona

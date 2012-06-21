@@ -10,6 +10,7 @@
     <property name="FechaAtencion" />
     <property name="FechaCancelacion" />
     <property name="Nota" />
+    <property name="MotivoCancelacion" />
     <property name="IpPaciente" />
     <property name="EsTelefonico" />
     <property name="Estado" />

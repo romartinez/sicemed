@@ -45,6 +45,8 @@ namespace Sicemed.Web.Models.ViewModels.Profesional
             public InfoViewModel Paciente { get; set; }
             public InfoViewModel Especialidad { get; set; }
             public Turno.EstadoTurno Estado { get; set; }            
+            public DateTime FechaEstado { get; set; }            
+            public bool PuedoCancelar { get; set; }            
         }        
     }
 }
