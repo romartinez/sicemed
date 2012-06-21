@@ -1,10 +1,54 @@
 using System;
+using System.Collections.Generic;
 using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Models
 {
     public class Turno : Entity
     {
+        public enum EstadoTurno
+        {            
+            Otorgado,
+            Presentado,
+            Atendido,
+            Cancelado,
+            Ausente
+        }
+
+        public enum EventoTurno
+        {
+            Obtener,
+            Presentar,
+            Atender,
+            Cancelar,
+            Ausentarse
+        }
+
+        public class CambioEstadoTurno
+        {
+            readonly EstadoTurno _currentState;
+            readonly EventoTurno _eventoTurno;
+
+            public CambioEstadoTurno(EstadoTurno currentState, EventoTurno eventoTurno)
+            {
+                _currentState = currentState;
+                _eventoTurno = eventoTurno;
+            }
+
+            public override int GetHashCode()
+            {
+                return 17 + 31 * _currentState.GetHashCode() + 31 * _eventoTurno.GetHashCode();
+            }
+
+            public override bool Equals(object obj)
+            {
+                var other = obj as CambioEstadoTurno;
+                return other != null && this._currentState == other._currentState && this._eventoTurno == other._eventoTurno;
+            }
+        }
+        
+        Dictionary<CambioEstadoTurno, EstadoTurno> _transiciones;
+        
         #region Primitive Properties
 
         public virtual DateTime FechaGeneracion { get; protected set; }
@@ -12,6 +56,8 @@ namespace Sicemed.Web.Models
         public virtual DateTime FechaTurno { get; protected set; }
 
         public virtual DateTime? FechaIngreso { get; protected set; }
+        
+        public virtual DateTime? FechaCancelacion { get; protected set; }
 
         public virtual DateTime? FechaAtencion { get; protected set; }
 
@@ -20,6 +66,10 @@ namespace Sicemed.Web.Models
         public virtual string IpPaciente { get; protected set; }
 
         public virtual bool EsTelefonico { get; protected set; }
+        
+        public virtual EstadoTurno Estado { get; protected set; }
+        
+        public virtual DateTime FechaEstado { get; protected set; }
 
         #endregion
 
@@ -32,6 +82,8 @@ namespace Sicemed.Web.Models
         public virtual Secretaria SecretariaReservadoraTurno { get; protected set; }
 
         public virtual Secretaria SecretariaRecepcionista { get; set; }
+        
+        public virtual Persona CanceladoPor { get; set; }
 
         public virtual Especialidad Especialidad { get; protected set; }
 
@@ -63,33 +115,74 @@ namespace Sicemed.Web.Models
             }
         }
 
-        public virtual bool SePresento
+        protected Turno()
         {
-            get { return FechaIngreso.HasValue; }
+            Estado = EstadoTurno.Otorgado;
+            FechaEstado = DateTime.Now;
+            _transiciones = new Dictionary<CambioEstadoTurno, EstadoTurno>
+            {
+                { new CambioEstadoTurno(EstadoTurno.Otorgado, EventoTurno.Presentar), EstadoTurno.Presentado },
+                { new CambioEstadoTurno(EstadoTurno.Otorgado, EventoTurno.Cancelar), EstadoTurno.Cancelado },
+                { new CambioEstadoTurno(EstadoTurno.Otorgado, EventoTurno.Ausentarse), EstadoTurno.Ausente },
+                { new CambioEstadoTurno(EstadoTurno.Presentado, EventoTurno.Atender), EstadoTurno.Atendido },
+                { new CambioEstadoTurno(EstadoTurno.Presentado, EventoTurno.Cancelar), EstadoTurno.Cancelado },
+            };
         }
 
-        public virtual bool SeAtendio
+        public virtual bool PuedeAplicar(EventoTurno eventoTurno)
         {
-            get { return FechaAtencion.HasValue; }
+            var transicion = new CambioEstadoTurno(Estado, eventoTurno);
+            return _transiciones.ContainsKey(transicion);
         }
 
-        protected Turno() { }
-
-        public virtual void RegistrarIngreso(Secretaria secretariaRecepcionista)
+        protected virtual EstadoTurno ProximoEstado(EventoTurno eventoTurno)
         {
-            if (FechaIngreso.HasValue) throw new NotSupportedException("No se puede marcar el Turno como Ingreso, ya lo estaba.");
+            var transicion = new CambioEstadoTurno(Estado, eventoTurno);
+            EstadoTurno proximoEstado;
+            if (!_transiciones.TryGetValue(transicion, out proximoEstado))
+                throw new Exception("Cambio de Estado inválido: " + Estado + " -> " + eventoTurno);
+            return proximoEstado;
+        }
+
+        protected virtual EstadoTurno MoverEstado(EventoTurno eventoTurno)
+        {
+            Estado = ProximoEstado(eventoTurno);
+            FechaEstado = DateTime.Now;
+            return Estado;
+        }
+
+        public virtual Turno RegistrarIngreso(Secretaria secretariaRecepcionista)
+        {
+            MoverEstado(EventoTurno.Presentar);
             FechaIngreso = DateTime.Now;
             SecretariaRecepcionista = secretariaRecepcionista;
             //Reseteo de las inasistencias
-            Paciente.ResetInasistencias();            
+            Paciente.ResetInasistencias();
+            return this;
         }
 
-        public virtual void RegistrarAtencion(string nota = null)
+        public virtual Turno RegistrarAtencion(string nota = null)
         {
-            if (!FechaIngreso.HasValue) throw new NotSupportedException("No se puede marcar el Turno como Atendido, nunca se registró su Ingreso.");
-            if (FechaAtencion.HasValue) throw new NotSupportedException("No se puede marcar el Turno como Atendido, ya lo estaba.");
+            MoverEstado(EventoTurno.Atender);
             FechaAtencion = DateTime.Now;
             Nota = nota;
+            return this;
+        }
+
+        public virtual Turno CancelarTurno(Persona canceladoPor)
+        {
+            MoverEstado(EventoTurno.Cancelar);
+            FechaCancelacion = DateTime.Now;
+            CanceladoPor = canceladoPor;
+            Paciente.AgregarInasistencia();
+            return this;
+        }
+
+        public virtual Turno MarcarAusente()
+        {
+            MoverEstado(EventoTurno.Ausentarse);
+            Paciente.AgregarInasistencia();
+            return this;
         }
 
         #region Creates

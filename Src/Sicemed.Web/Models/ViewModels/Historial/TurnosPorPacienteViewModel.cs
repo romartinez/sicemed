@@ -25,8 +25,11 @@ namespace Sicemed.Web.Models.ViewModels.Historial
             public string Especialidad { get; set; }
             public string Consultorio { get; set; }
             public string Nota { get; set; }
-            public bool SePresento { get; protected set; }
-            public bool SeAtendio { get; protected set; }
+            public Turno.EstadoTurno Estado { get; protected set; }
+            public DateTime FechaEstado { get; protected set; }
+            public bool PuedoCancelar { get; set; }
+            public bool PuedoPresentar { get; set; }
+            public bool PuedoAtender { get; set; }
             public bool EsObtenidoWeb { get; protected set; }
             public bool EsObtenidoPersonalmente { get; protected set; }
             public bool EsObtenidoTelefonicamente { get; protected set; }

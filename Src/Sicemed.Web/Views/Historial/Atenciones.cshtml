@@ -21,7 +21,7 @@ else
     <di class="historial">
         @foreach (var turno in Model.Turnos)
         {            
-            <div class="turno">
+            <div class="turno turno-@turno.Estado.ToString().ToLower()">
                 <h3>@turno.FechaTurno.ToShortDateString() @turno.FechaTurno.ToShortTimeString() - @turno.Profesional</h3>
                 <div>
                     Especialidad: @turno.Especialidad

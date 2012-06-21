@@ -6,6 +6,7 @@ using NHibernate.Cfg;
 using NHibernate.Context;
 using NHibernate.Exceptions;
 using NHibernate.Tool.hbm2ddl;
+using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Components;
@@ -360,10 +361,57 @@ namespace Sicemed.Web.Infrastructure
                                                     new Documento { Numero = 31364468, TipoDocumento = TipoDocumento.Dni },
                                                 Telefono = new Telefono { Prefijo = "0341", Numero = "153353273" }
                                             };
-            PersonaAdminProfesionalWalter.AgregarRol(Administrador.Create());
-            MembershipService.CreateUser(PersonaAdminProfesionalWalter, "walter@gmail.com", "sicemedWalter");
 
+            PersonaAdminProfesionalWalter.AgregarRol(Administrador.Create());
+            PersonaAdminProfesionalWalter.AgregarRol(Paciente.Create("79887987"));
+            PersonaAdminProfesionalWalter.AgregarRol(Profesional.Create("8888888"));
+            PersonaAdminProfesionalWalter.AgregarRol(Secretaria.Create(DateTime.Now));
+            PersonaAdminProfesionalWalter.As<Paciente>().Plan = PlanOsdeGold;
+
+            var hInicio = new DateTime(2012, 01, 01, 10, 00, 00);
+            var hfin = new DateTime(2012, 01, 01, 20, 00, 00);
+
+            PersonaAdminProfesionalWalter.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
+            PersonaAdminProfesionalWalter.As<Profesional>().AgregarAgenda(DayOfWeek.Monday, TimeSpan.FromMinutes(30), hInicio, hfin, ConsultorioA, EspecialidadClinico);
+            PersonaAdminProfesionalWalter.As<Profesional>().AgregarAgenda(DayOfWeek.Tuesday, TimeSpan.FromMinutes(30), hInicio, hfin, ConsultorioA, EspecialidadClinico);
+            PersonaAdminProfesionalWalter.As<Profesional>().AgregarAgenda(DayOfWeek.Wednesday, TimeSpan.FromMinutes(30), hInicio, hfin, ConsultorioA, EspecialidadClinico);
+            PersonaAdminProfesionalWalter.As<Profesional>().AgregarAgenda(DayOfWeek.Thursday, TimeSpan.FromMinutes(30), hInicio, hfin, ConsultorioA, EspecialidadClinico);
+            PersonaAdminProfesionalWalter.As<Profesional>().AgregarAgenda(DayOfWeek.Friday, TimeSpan.FromMinutes(30), hInicio, hfin, ConsultorioA, EspecialidadClinico);
+            
+            MembershipService.CreateUser(PersonaAdminProfesionalWalter, "walter@gmail.com", "sicemedWalter");
             session.Update(PersonaAdminProfesionalWalter);
+            
+            //Turno Ausente
+            session.Save(Turno.Create(DateTime.Now.AddDays(-1).SetTimeWith(hInicio), PersonaAdminProfesionalWalter.As<Paciente>(),
+                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1")
+                         .MarcarAusente());
+
+            //Turno Pendiente de Presentarse
+            session.Save(Turno.Create(DateTime.Now.SetTimeWith(hInicio), PersonaAdminProfesionalWalter.As<Paciente>(),
+                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1"));
+
+            //Turno Presentado
+            session.Save(Turno.Create(DateTime.Now.SetTimeWith(hInicio).AddMinutes(30), PersonaAdminProfesionalWalter.As<Paciente>(),
+                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1")
+                         .RegistrarIngreso(PersonaAdminProfesionalWalter.As<Secretaria>()));
+
+            //Turno Atendido
+            session.Save(Turno.Create(DateTime.Now.SetTimeWith(hInicio).AddMinutes(60), PersonaAdminProfesionalWalter.As<Paciente>(),
+                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1")
+                         .RegistrarIngreso(PersonaAdminProfesionalWalter.As<Secretaria>())
+                         .RegistrarAtencion("El paciente se presentó con dolor de cabeza. \n Se le recetaron 2mg de Ibuprofeno cada 8hs."));
+
+            //Turno Cancelado antes de presentarse
+            session.Save(Turno.Create(DateTime.Now.SetTimeWith(hInicio).AddMinutes(90), PersonaAdminProfesionalWalter.As<Paciente>(),
+                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1")
+                         .CancelarTurno(PersonaAdminProfesionalWalter));
+
+            //Turno Cancelado luego de ingresar a la sala de espera
+            session.Save(Turno.Create(DateTime.Now.SetTimeWith(hInicio).AddMinutes(120), PersonaAdminProfesionalWalter.As<Paciente>(),
+                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1")
+                         .RegistrarIngreso(PersonaAdminProfesionalWalter.As<Secretaria>())
+                         .CancelarTurno(PersonaAdminProfesionalWalter));
+
 
             PersonaPacientePablo = new Persona
                                    {

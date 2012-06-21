@@ -47,6 +47,12 @@ namespace Sicemed.Web.Models.Roles
                    };
         }
 
+        public virtual Paciente AgregarInasistencia()
+        {
+            InasistenciasContinuas++;
+            return this;
+        }
+
         public virtual Paciente AgregarTurno(Turno turno)
         {
             if (turno == null) throw new ArgumentNullException("turno");

@@ -1,23 +1,28 @@
-﻿@model Sicemed.Web.Models.ViewModels.Paciente.AgendaPacienteViewModel.TurnoViewModel
+﻿@using Sicemed.Web.Models
+@model Sicemed.Web.Models.ViewModels.Paciente.AgendaPacienteViewModel.TurnoViewModel
 @{
 
-    var css = Model.SeAtendio ? "ui-state-disabled " : string.Empty;
-    css += Model.SePresento && !Model.SeAtendio ? "ui-state-highlight" : string.Empty;
+    var css = Model.Estado == Turno.EstadoTurno.Atendido ? "ui-state-disabled " : string.Empty;
+    css += Model.Estado == Turno.EstadoTurno.Presentado ? "ui-state-highlight" : string.Empty;
 }
 <h3 class="@css">
-    <a href="#">@Model.FechaTurno.ToString("ddddd dd/MM/yyyy HH:mm") - @Model.Profesional.Descripcion @(Model.SeAtendio ? "| Ya Fue Atendido" : string.Empty)</a>
+    <a href="#">@Model.FechaTurno.ToString("ddddd dd/MM/yyyy HH:mm") - @Model.Profesional.Descripcion
+        @(Model.Estado == Turno.EstadoTurno.Atendido ? "| Ya Fue Atendido" : string.Empty)</a>
 </h3>
 <div>
-    <div>
-        Consultorio: @Model.Consultorio.Descripcion
-        <br/>
-        Especialidad: @Model.Especialidad.Descripcion
-    </div>
-    <div>
-        <br/>
-        @if (Model.SePresento && !Model.SeAtendio)
-        {
-            <span>Se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes) minutos.</span>
-        }
+    <div class="turno turno-@Model.Estado.ToString().ToLower()">
+        <div>
+            Consultorio: @Model.Consultorio.Descripcion
+            <br />
+            Especialidad: @Model.Especialidad.Descripcion
+        </div>
+        <div>
+            <br />
+            @if (Model.Estado == Turno.EstadoTurno.Presentado)
+            {
+                <span>Se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
+                    minutos.</span>
+            }
+        </div>
     </div>
 </div>

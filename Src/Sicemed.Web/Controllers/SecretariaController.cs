@@ -142,13 +142,31 @@ namespace Sicemed.Web.Controllers
         {
             var session = SessionFactory.GetCurrentSession();
             var turno = session.Get<Turno>(turnoId);
-            if (turno == null || turno.SePresento)
+            if (turno == null || !turno.PuedeAplicar(Turno.EventoTurno.Presentar))
             {
-                ShowMessages(ResponseMessage.Error("No se encuentra el turno o ya se encuentra otorgado."));
+                ShowMessages(ResponseMessage.Error("No se encuentra el turno o no se puede marcar su ingreso."));
                 return RedirectToAction("Agenda");
             }
 
             turno.RegistrarIngreso(User.As<Secretaria>());
+
+            ShowMessages(ResponseMessage.Success());
+            return RedirectToAction("Agenda");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CancelarTurno(long turnoId)
+        {
+            var session = SessionFactory.GetCurrentSession();
+            var turno = session.Get<Turno>(turnoId);
+            if (turno == null || !turno.PuedeAplicar(Turno.EventoTurno.Cancelar))
+            {
+                ShowMessages(ResponseMessage.Error("No se encuentra el turno o no se puede cancelar el mismo."));
+                return RedirectToAction("Agenda");
+            }
+            
+            turno.CancelarTurno(User);            
 
             ShowMessages(ResponseMessage.Success());
             return RedirectToAction("Agenda");

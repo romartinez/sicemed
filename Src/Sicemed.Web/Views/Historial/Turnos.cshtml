@@ -21,16 +21,14 @@ else
     <div class="historial">
         @foreach (var turno in Model.Turnos)
         {
-            var css = turno.SePresento? "presento" : "ausente";
-            css = turno.SeAtendio ? "atendio" : css;            
-            <div class="turno @css">
+            <div class="turno turno-@turno.Estado.ToString().ToLower()">
             <h3>@turno.FechaTurno.ToShortDateString() @turno.FechaTurno.ToShortTimeString() - @turno.Profesional</h3>
             <div>
                 Especialidad: @turno.Especialidad
                 <br />
                 Consultorio: @turno.Consultorio
             </div>
-            @if (turno.SeAtendio)
+            @if (turno.Estado == Turno.EstadoTurno.Atendido)
             {
             <h4>
                 Diagn&oacute;stico</h4>

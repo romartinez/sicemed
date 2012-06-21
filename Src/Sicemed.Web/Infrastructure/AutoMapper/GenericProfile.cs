@@ -47,6 +47,10 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
             CreateMap<Rol, InfoViewModel>()
                 .ForMember(d => d.Id, m => m.MapFrom(o => o.Id))
                 .ForMember(d => d.Descripcion, m => m.MapFrom(o => o.Persona.NombreCompleto));
+
+            CreateMap<Persona, InfoViewModel>()
+                .ForMember(d => d.Id, m => m.MapFrom(o => o.Id))
+                .ForMember(d => d.Descripcion, m => m.MapFrom(o => o.NombreCompleto));
             #endregion
 
             #region Secretaria
@@ -54,7 +58,10 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                 //NOTE: La lleno desde la query, ya que solo los de la fecha
                 //muestro.
                 .ForMember(d => d.Turnos, m => m.Ignore());
-            CreateMap<Turno, TurnosDelDiaViewModel.TurnoViewModel>();
+            CreateMap<Turno, TurnosDelDiaViewModel.TurnoViewModel>()
+                .ForMember(x => x.PuedoAtender, m => m.ResolveUsing(o => o.PuedeAplicar(Turno.EventoTurno.Atender)))
+                .ForMember(x => x.PuedoCancelar, m => m.ResolveUsing(o => o.PuedeAplicar(Turno.EventoTurno.Cancelar)))
+                .ForMember(x => x.PuedoPresentar, m => m.ResolveUsing(o => o.PuedeAplicar(Turno.EventoTurno.Presentar)));
 
             CreateMap<AltaPacienteEditModel, Persona>()
                 .ForMember(d => d.Id, m => m.Ignore())
@@ -65,16 +72,16 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
 
             CreateMap<Paciente, SelectListItem>()
                 .ForMember(d => d.Selected, m => m.Ignore())
-                .ForMember(d => d.Text, m => m.MapFrom(o => 
-                    string.Format("{0} - {1} {2}", 
+                .ForMember(d => d.Text, m => m.MapFrom(o =>
+                    string.Format("{0} - {1} {2}",
                         o.Persona.NombreCompleto, o.Persona.Documento.TipoDocumento.DisplayName, o.Persona.Documento.Numero)))
                 .ForMember(d => d.Value, m => m.MapFrom(o => o.Id));
 
             CreateMap<Profesional, SelectListItem>()
                 .ForMember(d => d.Selected, m => m.Ignore())
-                .ForMember(d => d.Text, m => m.MapFrom(o => 
-                    string.Format("{0} - {1}", 
-                        o.Persona.NombreCompleto, string.Join(", ", o.Especialidades.Select(e=>e.Nombre).ToArray()))))
+                .ForMember(d => d.Text, m => m.MapFrom(o =>
+                    string.Format("{0} - {1}",
+                        o.Persona.NombreCompleto, string.Join(", ", o.Especialidades.Select(e => e.Nombre).ToArray()))))
                 .ForMember(d => d.Value, m => m.MapFrom(o => o.Id));
             #endregion
 
@@ -99,19 +106,28 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
             #region Historial
 
             CreateMap<Turno, AtencionesViewModel.HistorialItem>()
-                .ForMember(d=>d.Consultorio, m=>m.MapFrom(o=>o.Consultorio.Nombre))                
-                .ForMember(d=>d.Profesional, m=>m.MapFrom(o=>o.Profesional.Persona.NombreCompleto))
-                .ForMember(d=>d.Especialidad, m=>m.MapFrom(o=>o.Especialidad.Nombre));
+                .ForMember(d => d.Consultorio, m => m.MapFrom(o => o.Consultorio.Nombre))
+                .ForMember(d => d.Profesional, m => m.MapFrom(o => o.Profesional.Persona.NombreCompleto))
+                .ForMember(d => d.Especialidad, m => m.MapFrom(o => o.Especialidad.Nombre))
+                .ForMember(x => x.PuedoAtender, m => m.ResolveUsing(o => o.PuedeAplicar(Turno.EventoTurno.Atender)))
+                .ForMember(x => x.PuedoCancelar, m => m.ResolveUsing(o => o.PuedeAplicar(Turno.EventoTurno.Cancelar)))
+                .ForMember(x => x.PuedoPresentar, m => m.ResolveUsing(o => o.PuedeAplicar(Turno.EventoTurno.Presentar)));
 
             CreateMap<Turno, TurnosPacienteViewModel.HistorialItem>()
-                .ForMember(d=>d.Consultorio, m=>m.MapFrom(o=>o.Consultorio.Nombre))                
-                .ForMember(d=>d.Profesional, m=>m.MapFrom(o=>o.Profesional.Persona.NombreCompleto))
-                .ForMember(d=>d.Especialidad, m=>m.MapFrom(o=>o.Especialidad.Nombre));
+                .ForMember(d => d.Consultorio, m => m.MapFrom(o => o.Consultorio.Nombre))
+                .ForMember(d => d.Profesional, m => m.MapFrom(o => o.Profesional.Persona.NombreCompleto))
+                .ForMember(d => d.Especialidad, m => m.MapFrom(o => o.Especialidad.Nombre))
+                .ForMember(x => x.PuedoAtender, m => m.ResolveUsing(o => o.PuedeAplicar(Turno.EventoTurno.Atender)))
+                .ForMember(x => x.PuedoCancelar, m => m.ResolveUsing(o => o.PuedeAplicar(Turno.EventoTurno.Cancelar)))
+                .ForMember(x => x.PuedoPresentar, m => m.ResolveUsing(o => o.PuedeAplicar(Turno.EventoTurno.Presentar)));
 
             CreateMap<Turno, TurnosPorPacienteViewModel.HistorialItem>()
-                .ForMember(d=>d.Consultorio, m=>m.MapFrom(o=>o.Consultorio.Nombre))                
-                .ForMember(d=>d.Profesional, m=>m.MapFrom(o=>o.Profesional.Persona.NombreCompleto))
-                .ForMember(d=>d.Especialidad, m=>m.MapFrom(o=>o.Especialidad.Nombre));
+                .ForMember(d => d.Consultorio, m => m.MapFrom(o => o.Consultorio.Nombre))
+                .ForMember(d => d.Profesional, m => m.MapFrom(o => o.Profesional.Persona.NombreCompleto))
+                .ForMember(d => d.Especialidad, m => m.MapFrom(o => o.Especialidad.Nombre))
+                .ForMember(x => x.PuedoAtender, m => m.ResolveUsing(o => o.PuedeAplicar(Turno.EventoTurno.Atender)))
+                .ForMember(x => x.PuedoCancelar, m => m.ResolveUsing(o => o.PuedeAplicar(Turno.EventoTurno.Cancelar)))
+                .ForMember(x => x.PuedoPresentar, m => m.ResolveUsing(o => o.PuedeAplicar(Turno.EventoTurno.Presentar)));
 
             #endregion
         }

@@ -1,13 +1,9 @@
-﻿@model Sicemed.Web.Models.ViewModels.Secretaria.TurnosDelDiaViewModel.TurnoViewModel
-@{
-
-    var css = Model.SePresento ? "presentado " : string.Empty;
-    css += Model.SeAtendio ? "atendido " : string.Empty;
-}
-<li class="@css">
+﻿@using Sicemed.Web.Models
+@model Sicemed.Web.Models.ViewModels.Secretaria.TurnosDelDiaViewModel.TurnoViewModel
+<li class="turno turno-@Model.Estado.ToString().ToLower()">
     <h4>@Model.FechaTurno.ToString("HH:mm") - @Model.Paciente.Descripcion</h4>
     <div>
-        @if(@Model.Consultorio != null)
+        @if (@Model.Consultorio != null)
         {
             @:Consultorio: @Model.Consultorio.Descripcion            
         }
@@ -16,7 +12,7 @@
         <br />
     </div>
     <div>
-        @if (!Model.SePresento)
+        @if (Model.PuedoPresentar)
         {
             using (Html.BeginForm("RegistrarIngresoPaciente", "Secretaria"))
             {
@@ -25,9 +21,20 @@
                 @Html.Submit("Ingresar")
             }
         }
-        else if (!Model.SeAtendio)
+        
+        @if(Model.Estado == Turno.EstadoTurno.Presentado)
         {
-            <span>El usuario se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes) minutos.</span>
+            <span>El usuario se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes) minutos.</span>            
+        }
+            
+        @if (Model.PuedoCancelar)
+        {
+            using (Html.BeginForm("CancelarTurno", "Secretaria"))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="turnoId" value="@Model.Id"/>
+                @Html.Submit("Cancelar")
+            }
         }
     </div>
 </li>

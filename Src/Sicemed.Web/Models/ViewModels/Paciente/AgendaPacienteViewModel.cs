@@ -24,8 +24,7 @@ namespace Sicemed.Web.Models.ViewModels.Paciente
             public InfoViewModel Consultorio { get; set; }
             public InfoViewModel Profesional { get; set; }
             public InfoViewModel Especialidad { get; set; }
-            public bool SePresento { get; set; }
-            public bool SeAtendio { get; set; }
+            public Turno.EstadoTurno Estado { get; set; }
         }
     }
 }

@@ -28,9 +28,9 @@ namespace Sicemed.Web.Controllers
         {
             var session = SessionFactory.GetCurrentSession();
             var turno = session.Get<Turno>(turnoId);
-            if (turno == null || turno.SeAtendio)
+            if (turno == null)
             {
-                ShowMessages(ResponseMessage.Error("No se encuentra el turno o ya se encuentra atendido."));
+                ShowMessages(ResponseMessage.Error("No se encuentra el turno."));
                 return RedirectToAction("Agenda");
             }
 

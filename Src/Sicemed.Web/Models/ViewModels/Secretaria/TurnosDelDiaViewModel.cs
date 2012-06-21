@@ -25,7 +25,7 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
                 get
                 {
                     if (Turnos == null) return 0;
-                    return Turnos.Count(t => t.SePresento && !t.SeAtendio);
+                    return Turnos.Count(t => t.Estado == Turno.EstadoTurno.Presentado);
                 }
             }
 
@@ -34,7 +34,7 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
                 get
                 {
                     if (Turnos == null) return 0;
-                    return Turnos.Count(t => !t.SePresento);
+                    return Turnos.Count(t => t.Estado == Turno.EstadoTurno.Otorgado);
                 }
             }
 
@@ -52,11 +52,16 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
             public DateTime FechaTurno { get; set; }
             public DateTime? FechaIngreso { get; set; }
             public DateTime? FechaAtencion { get; set; }
+            public DateTime? FechaCancelacion { get; set; }
             public InfoViewModel Consultorio { get; set; }
             public InfoViewModel Paciente { get; set; }
             public InfoViewModel Especialidad { get; set; }
-            public bool SePresento { get; set; }
-            public bool SeAtendio { get; set; }
+            public InfoViewModel CanceladoPor { get; set; }
+            public Turno.EstadoTurno Estado { get; set; }
+            public DateTime FechaEstado { get; set; }
+            public bool PuedoCancelar { get; set; }
+            public bool PuedoPresentar { get; set; }
+            public bool PuedoAtender { get; set; }
         }
     }
 }
