@@ -54,6 +54,11 @@ var app = (function ($, app) {
             collapsible: true
         });
 
+        $("div.ctl-collapsible").accordion({
+            collapsible: true,
+            active: false
+        });
+
         $(".link-submit").click(function () {
             $(this).parents("form").submit();
             return false;

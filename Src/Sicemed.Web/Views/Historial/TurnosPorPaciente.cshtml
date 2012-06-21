@@ -57,14 +57,11 @@ else
     <h3>@Model.SeleccionPaciente.PacienteSeleccionado.Descripcion</h3>
     using (Html.BeginForm("TurnosPorPaciente", "Historial", FormMethod.Get, new { id = "search-filters" }))
     {
-    @Html.ValidationSummaryWithMessage()
+    @Html.HiddenFor(x => x.SeleccionPaciente.BusquedaEfectuada)
+    @Html.HiddenFor(x => x.SeleccionPaciente.PacienteSeleccionado.Id)    
 
     @Html.EditorFor(x => x.Filters)   
     
-    @Html.HiddenFor(x => x.SeleccionPaciente.BusquedaEfectuada)
-    @Html.HiddenFor(x => x.SeleccionPaciente.PacienteSeleccionado.Id)
-    
-    @Html.Submit("Filtrar")    
     }
 
     if (!Model.Turnos.Any())

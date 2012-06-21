@@ -790,6 +790,7 @@
     <Content Include="Views\Historial\Turnos.cshtml" />
     <Content Include="Views\Historial\TurnosPorPaciente.cshtml" />
     <Content Include="Views\Shared\_LinkSubmit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SearchFiltersViewModel.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

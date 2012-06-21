@@ -1,0 +1,43 @@
+﻿@model Sicemed.Web.Models.ViewModels.SearchFiltersViewModel
+<div class="ctl-collapsible">
+    <h3>
+        <a href="#">
+            Filtros
+        </a>
+    </h3>
+    <div>
+        @Html.ValidationSummaryWithMessage()
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(x => x.Desde)
+                    @Html.EditorFor(x => x.Desde)
+                </td>
+                <td>
+                    @Html.LabelFor(x => x.Hasta)
+                    @Html.EditorFor(x => x.Hasta)
+                </td>
+                <td>
+                    @Html.LabelFor(x => x.Filtro)
+                    @Html.EditorFor(x => x.Filtro)
+                </td>
+                <td>
+                    @Html.Submit("Filtrar")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.ValidationMessageFor(x => x.Desde)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(x => x.Hasta)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(x => x.Filtro)
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

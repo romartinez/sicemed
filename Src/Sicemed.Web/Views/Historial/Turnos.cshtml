@@ -8,11 +8,7 @@
     Historial Turnos</h2>
 @using (Html.BeginForm("Turnos", "Historial", FormMethod.Get, new { id = "search-filters" }))
 {
-    @Html.ValidationSummaryWithMessage()
-
-    @Html.EditorFor(x => x.Filters)   
-    
-    @Html.Submit("Filtrar")    
+    @Html.EditorFor(x => x.Filters)       
 }
 @if (!Model.Turnos.Any())
 {

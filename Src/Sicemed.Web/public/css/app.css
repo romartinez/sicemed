@@ -73,7 +73,12 @@ fieldset.form li
 }
 
 /* Theme fix*/
-div.ctl-accordion h3, div.ctl-accordion h3 
+div.ctl-collapsible {
+    margin-bottom: 15px;    
+}
+
+div.ctl-accordion h3, div.ctl-collapsible h3,
+div.ctl-accordion h3, div.ctl-collapsible h3 
 {
     font-size: 16px!important;
     margin: 0 !important;
