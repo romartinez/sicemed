@@ -19,9 +19,6 @@ namespace Sicemed.Web.Infrastructure.Jobs
                 if (_databaseConfiguration == null)
                 {
                     _databaseConfiguration = NHibernateFacility.BuildDatabaseConfiguration();
-
-                    _databaseConfiguration.Properties[global::NHibernate.Cfg.Environment.CurrentSessionContextClass] =
-                        typeof(ThreadStaticSessionContext).AssemblyQualifiedName;
                 }
 
                 return _databaseConfiguration;
@@ -30,12 +27,13 @@ namespace Sicemed.Web.Infrastructure.Jobs
 
         protected static ISessionFactory SessionFactory
         {
-            get { return _sessionFactory ?? (_sessionFactory = DatabaseConfiguration.BuildSessionFactory()); }
-        }
+            get
+            {
+                if(_sessionFactory == null) 
+                    _sessionFactory = DatabaseConfiguration.BuildSessionFactory();
 
-        protected static ISession Session
-        {
-            get { return _sessionFactory.GetCurrentSession(); }
+                return _sessionFactory;
+            }
         }
 
         protected NHibernateJob(string name, TimeSpan interval, TimeSpan timeout) 

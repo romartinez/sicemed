@@ -10,7 +10,7 @@ namespace Sicemed.Web.Infrastructure.Jobs
         private static readonly ILog Log = LogManager.GetLogger(typeof(AusentarTurnosVencidosJob));
 
         public AusentarTurnosVencidosJob()
-            : base("Ausentar Turnos Vencidos", TimeSpan.FromMinutes(15), TimeSpan.FromSeconds(30))
+            : base("Ausentar Turnos Vencidos", TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(30))
         {
         }
 
@@ -22,17 +22,30 @@ namespace Sicemed.Web.Infrastructure.Jobs
         private static void Run()
         {
             if (Log.IsInfoEnabled) Log.Info("Running AusentarTurnosVencidosJob");
-            var turnos = Session.QueryOver<Turno>()
-                .Where(t => t.Estado == Turno.EstadoTurno.Otorgado
-                    && t.FechaTurno <= DateTime.Now.AddDays(-1))
-                .List();            
-
-            foreach (var turno in turnos)
+            using (var session = SessionFactory.OpenSession())
+            using (var tx = session.BeginTransaction())
             {
-                turno.MarcarAusente();
-            }
+                try
+                {
+                    var turnos = session.QueryOver<Turno>()
+                        .Where(t => t.Estado == Turno.EstadoTurno.Otorgado
+                            && t.FechaTurno <= DateTime.Now.AddDays(-1))
+                        .List();
 
-            if (Log.IsDebugEnabled) Log.DebugFormat("Marcados como ausentes {0} turnos.", turnos.Count);
+                    foreach (var turno in turnos)
+                    {
+                        turno.MarcarAusente();
+                    }
+
+                    if (Log.IsDebugEnabled) Log.DebugFormat("Marcados como ausentes {0} turnos.", turnos.Count);
+
+                    tx.Commit();
+                }catch(Exception ex)
+                {
+                    if (Log.IsFatalEnabled) Log.Fatal(ex);
+                    tx.Rollback();
+                }
+            }
         }
     }
 }
