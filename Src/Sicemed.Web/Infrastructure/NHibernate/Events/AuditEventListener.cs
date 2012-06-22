@@ -21,6 +21,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
             _settings = new JsonSerializerSettings()
                             {
                                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                                ContractResolver = new NHibernateContractResolver(),
                                 Error = (sender, args) =>
                                             {
                                                 args.ErrorContext.Handled = true;

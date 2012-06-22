@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
+using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Queries.Profesional;
+using Sicemed.Web.Models;
 using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Controllers
@@ -18,5 +20,24 @@ namespace Sicemed.Web.Controllers
              var viewModel = query.Execute();
              return View(viewModel);
          }
+
+         [HttpPost]
+         [AjaxHandleError]
+         [ValidateAntiForgeryToken]
+         public ActionResult RegistrarAtencionPaciente(long turnoId, string nota = null)
+         {
+             var session = SessionFactory.GetCurrentSession();
+             var turno = session.Get<Turno>(turnoId);
+             if (turno == null)
+             {
+                 ShowMessages(ResponseMessage.Error("No se encuentra el turno."));
+                 return RedirectToAction("Agenda");
+             }
+
+             turno.RegistrarAtencion(nota);
+
+             ShowMessages(ResponseMessage.Success());
+             return RedirectToAction("Agenda");
+         }    
     }
 }
