@@ -210,11 +210,11 @@
     <Compile Include="Infrastructure\Controllers\AdministracionDeTurnosBaseController.cs" />
     <Compile Include="Infrastructure\Jobs\AusentarTurnosVencidosJob.cs" />
     <Compile Include="Infrastructure\Jobs\KeepAliveJob.cs" />
+    <Compile Include="Infrastructure\Jobs\NHibernateJob.cs" />
     <Compile Include="Infrastructure\ModelBinders\DateTimeCurrentCultureModelBinder.cs" />
     <Compile Include="Infrastructure\ModelBinders\SearchFiltersModelBinder.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaPacienteQuery.cs" />
     <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosPorPacienteQuery.cs" />
-    <Compile Include="Infrastructure\Queries\Jobs\ObtenerTurnosAMarcarComoAusentadosQuery.cs" />
     <Compile Include="Infrastructure\Services\INotificationService.cs" />
     <Compile Include="Infrastructure\Services\NotificationService.cs" />
     <Compile Include="Models\ViewModels\Historial\TurnosPorPacienteViewModel.cs" />
