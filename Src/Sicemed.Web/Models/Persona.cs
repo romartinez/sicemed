@@ -103,7 +103,7 @@ namespace Sicemed.Web.Models
 
         public override string ToString()
         {
-            return Membership.Email;
+            return string.Format("{0}-{1}", base.ToString(), Membership.Email);
         }
     }
 }
