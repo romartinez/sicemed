@@ -37,7 +37,7 @@ namespace Sicemed.Web.Controllers
              turno.RegistrarAtencion(nota);
 
              ShowMessages(ResponseMessage.Success());
-             return RedirectToAction("Agenda");
+             return RedirectToAction("Agenda", new { fecha = turno.FechaTurno.ToShortDateString() });
          }    
     }
 }

@@ -54,12 +54,12 @@ namespace Sicemed.Web.Controllers
         public ActionResult OtorgarTurno(OtorgarTurnoEditModel editModel)
         {
             AppendLists(editModel);
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var session = SessionFactory.GetCurrentSession();
                 var paciente = session.Get<Paciente>(editModel.PacienteId.Value);
                 var profesional = session.Get<Profesional>(editModel.ProfesionalId.Value);
-                
+
                 var especialidadId =
                     QueryFactory.Create<IObtenerEspecialidadesProfesionalDropDownQuery>()
                         .GetEspecialidadId(editModel.EspecialidadId);
@@ -96,13 +96,13 @@ namespace Sicemed.Web.Controllers
             queryTurnos.EspecialidadId = queryEspecialidades.GetEspecialidadId(especialidadId);
             var result = queryTurnos.Execute();
             return Json(result, JsonRequestBehavior.AllowGet);
-        }        
-        
+        }
+
         [AjaxHandleError]
         public JsonResult GetEspecialidadesProfesional(long profesioanlId)
         {
             var queryEspecialidades = QueryFactory.Create<IObtenerEspecialidadesProfesionalDropDownQuery>();
-            queryEspecialidades.ProfesionalId = profesioanlId;            
+            queryEspecialidades.ProfesionalId = profesioanlId;
             var result = queryEspecialidades.Execute();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -116,14 +116,14 @@ namespace Sicemed.Web.Controllers
             queryProfesionales.SelectedValue = editModel.ProfesionalId;
             editModel.ProfesionalesDisponibles = queryProfesionales.Execute();
 
-            if(editModel.ProfesionalId.HasValue)
+            if (editModel.ProfesionalId.HasValue)
             {
                 var queryEspecialidades = QueryFactory.Create<IObtenerEspecialidadesProfesionalDropDownQuery>();
                 queryEspecialidades.ProfesionalId = editModel.ProfesionalId.Value;
                 queryEspecialidades.SelectedValue = editModel.EspecialidadId;
                 editModel.EspecialidadesProfesional = queryPacientes.Execute();
 
-                if(!string.IsNullOrWhiteSpace(editModel.EspecialidadId))
+                if (!string.IsNullOrWhiteSpace(editModel.EspecialidadId))
                 {
                     var queryTurnos = QueryFactory.Create<IObtenerTurnosDisponiblesPorProfesionalDropDownQuery>();
                     queryTurnos.ProfesionalId = editModel.ProfesionalId.Value;
@@ -152,7 +152,7 @@ namespace Sicemed.Web.Controllers
             turno.RegistrarIngreso(User.As<Secretaria>());
 
             ShowMessages(ResponseMessage.Success());
-            return RedirectToAction("Agenda");
+            return RedirectToAction("Agenda", new { fecha = turno.FechaTurno.ToShortDateString() });
         }
 
         #endregion

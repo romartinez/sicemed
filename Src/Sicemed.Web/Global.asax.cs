@@ -109,6 +109,7 @@ namespace SICEMED.Web
                             {
                                 { typeof(ICustomBindeableProperties), new CustomBindeablePropertiesModelBinder() },
                                 { typeof(DateTime), new DateTimeCurrentCultureModelBinder() },
+                                { typeof(DateTime?), new DateTimeCurrentCultureModelBinder() },
                                 { typeof(SearchFiltersViewModel), new SearchFiltersModelBinder()}
                             };
 

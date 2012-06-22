@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
-using System.Reflection;
 using NHibernate;
 using NHibernate.Metadata;
 using NHibernate.Type;
+using Sicemed.Web.Models;
 using log4net;
 
 namespace Sicemed.Web.Infrastructure.NHibernate
@@ -13,61 +13,45 @@ namespace Sicemed.Web.Infrastructure.NHibernate
     {
         private static ILog _log = LogManager.GetLogger(typeof(Resolver));
 
-        public static List<T> ResolveList<T>(List<T> entityList, ISession session) where T : class
+        public static object[] ResolveArray(object[] entityArray, ISession session)
         {
             // create a resolved entities list for peace and sharing
-            List<Object> resolvedEntities = new List<Object>();
-            // loop over elements
-            for (int entityListIndex = 0; entityListIndex < entityList.Count; entityListIndex++)
-                entityList[entityListIndex] = Resolve<T>(entityList[entityListIndex], session, resolvedEntities);
-
-            // done
-            return entityList;
-        }
-
-        public static T[] ResolveArray<T>(T[] entityArray, ISession session) where T : class
-        {
-            // create a resolved entities list for peace and sharing
-            List<Object> resolvedEntities = new List<Object>();
+            var resolvedEntities = new List<Object>();
             // loop over elements
             if (entityArray == null) return null;
 
-            for (int entityArrayIndex = 0; entityArrayIndex < entityArray.Length; entityArrayIndex++)
-                entityArray[entityArrayIndex] = Resolve<T>(entityArray[entityArrayIndex], session, resolvedEntities);
+            for (var i = 0; i < entityArray.Length; i++)
+                entityArray[i] = Resolve(entityArray[i], session, resolvedEntities);
 
             // done
             return entityArray;
         }
 
-        public static T Resolve<T>(T entity, ISession session) where T : class
-        {
-            // forward to resolver
-            return Resolve<T>(entity, session, new List<Object>());
-        }
-
-        private static T Resolve<T>(T entity, ISession session, List<Object> resolvedEntities) where T : class
+        private static object Resolve(object entity, ISession session, ICollection<object> resolvedEntities)
         {
             // CHECKS //
+            // Do not loop over included intities
+            if (entity is Entity) return entity.ToString();
 
             // if the entity is null, just skip it
             if (entity == null)
-                return default(T);
+                return null;
             // if we have already resolved it, return that
             if (resolvedEntities.Contains(entity))
                 return entity;
 
             // RESOLVE ENTITY //
 
-            T resolvedEntity = default(T);
+            object resolvedEntity;
             // now lets go ahead and make sure everything is unproxied
             try
             {
-                resolvedEntity = (T)session.GetSessionImplementation().PersistenceContext.Unproxy(entity);
+                resolvedEntity = session.GetSessionImplementation().PersistenceContext.Unproxy(entity);
             }
             catch (Exception ex)
             {
                 _log.Error(ex);
-                return default(T);
+                return null;
             }
             // add entity to the list of resolved entities
             resolvedEntities.Add(resolvedEntity);
@@ -76,7 +60,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate
 
             IClassMetadata entityMetadata = null;
             // get the entity type
-            Type entityType = entity.GetType();
+            var entityType = entity.GetType();
             // get the entity meta data from the type
             try
             {
@@ -85,43 +69,39 @@ namespace Sicemed.Web.Infrastructure.NHibernate
             catch (Exception ex)
             {
                 _log.Error(ex);
-                return default(T);
+                return null;
             }
 
             // PERFORM PROPERTY DIVE //
 
-            String propertyName;
-            Object propertyValue;
-            Type propertyListType;
-            IType entityPropertyType = null;
-            Type propertyListInternalType;
             // get properties for this object
-            PropertyInfo[] propertyInfos = entityType.GetProperties();
+            var propertyInfos = entityType.GetProperties();
             // loop over source properties & compare
-            foreach (PropertyInfo propertyInfo in propertyInfos)
+            foreach (var propertyInfo in propertyInfos)
             {
                 try
                 {
                     // get property name
-                    propertyName = propertyInfo.Name;
+                    var propertyName = propertyInfo.Name;
                     // get property type
+                    IType entityPropertyType = null;
                     try { entityPropertyType = entityMetadata.GetPropertyType(propertyName); }
                     catch (Exception) { continue; }
                     // get property value
-                    propertyValue = propertyInfo.GetValue(entity, null);
+                    var propertyValue = propertyInfo.GetValue(entity, null);
                     // these are not the good kind of bags :P
                     if (entityPropertyType.IsCollectionType)
                     {
                         // first get the property list's internal type
-                        propertyListInternalType = propertyInfo.PropertyType.GetGenericArguments()[0];
+                        var propertyListInternalType = propertyInfo.PropertyType.GetGenericArguments()[0];
                         // create new array type based on the internal type
-                        propertyListType = typeof(List<>).MakeGenericType(propertyListInternalType);
+                        var propertyListType = typeof(List<>).MakeGenericType(propertyListInternalType);
                         // create a new property list of the internal type
-                        IList propertyList = (IList)Activator.CreateInstance(propertyListType);
+                        var propertyList = (IList)Activator.CreateInstance(propertyListType);
                         // set the property list in the resolved object
                         propertyInfo.SetValue(resolvedEntity, propertyList, null);
                         // get the enumerator for this property value
-                        IEnumerator enumerator = ((IEnumerable)propertyValue).GetEnumerator();
+                        var enumerator = ((IEnumerable)propertyValue).GetEnumerator();
                         // loop over items to also perform resolution
                         while (enumerator.MoveNext())
                             propertyList.Add(Resolve(enumerator.Current, session, resolvedEntities));

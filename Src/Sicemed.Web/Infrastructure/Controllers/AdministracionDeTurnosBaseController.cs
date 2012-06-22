@@ -19,7 +19,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CancelarTurno(long turnoId, string prompt)
         {
-            if(String.IsNullOrWhiteSpace(prompt))
+            if (String.IsNullOrWhiteSpace(prompt))
             {
                 ShowMessages(ResponseMessage.Error("Debe ingresar un motivo de cancelación."));
                 return RedirectToAction("Agenda");
@@ -37,7 +37,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
             if (mail != null) mail.Send();
 
             ShowMessages(ResponseMessage.Success());
-            return RedirectToAction("Agenda");
+            return RedirectToAction("Agenda", new { fecha = turno.FechaTurno.ToShortDateString() });
         }
 
         [HttpPost]
@@ -46,13 +46,13 @@ namespace Sicemed.Web.Infrastructure.Controllers
         [AuthorizeIt(typeof(Profesional))]
         public ActionResult CancelarTurnosProfesional(string prompt, DateTime fecha, long? profesionalId = null)
         {
-            if(String.IsNullOrWhiteSpace(prompt))
+            if (String.IsNullOrWhiteSpace(prompt))
             {
                 ShowMessages(ResponseMessage.Error("Debe ingresar un motivo de cancelación."));
                 return RedirectToAction("Agenda");
             }
 
-            if(!profesionalId.HasValue && !User.IsInRole<Profesional>())
+            if (!profesionalId.HasValue && !User.IsInRole<Profesional>())
             {
                 ShowMessages(ResponseMessage.Error("Debe ingresar un profesional."));
                 return RedirectToAction("Agenda");
@@ -63,18 +63,18 @@ namespace Sicemed.Web.Infrastructure.Controllers
 
             if (User.IsInRole<Secretaria>() && profesionalId.HasValue) query.ProfesionalId = profesionalId.Value;
             else if (User.IsInRole<Profesional>()) query.ProfesionalId = User.As<Profesional>().Id;
-            
+
             var turnos = query.Execute();
 
             foreach (var turno in turnos)
             {
                 turno.CancelarTurno(User, prompt);
                 var mail = NotificationService.CancelacionTurno(User, turno);
-                if (mail != null) mail.Send();                
+                if (mail != null) mail.Send();
             }
 
             ShowMessages(ResponseMessage.Success());
-            return RedirectToAction("Agenda");
+            return RedirectToAction("Agenda", new { fecha = fecha.ToShortDateString() });
         }
     }
 }
