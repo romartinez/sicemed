@@ -213,6 +213,7 @@
     <Compile Include="Infrastructure\Jobs\NHibernateJob.cs" />
     <Compile Include="Infrastructure\ModelBinders\DateTimeCurrentCultureModelBinder.cs" />
     <Compile Include="Infrastructure\ModelBinders\SearchFiltersModelBinder.cs" />
+    <Compile Include="Infrastructure\Queries\AdministracionDeTurnos\ObtenerTurnosACancelarQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaPacienteQuery.cs" />
     <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosPorPacienteQuery.cs" />
     <Compile Include="Infrastructure\Services\INotificationService.cs" />

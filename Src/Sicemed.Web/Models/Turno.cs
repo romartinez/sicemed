@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Models
@@ -47,7 +48,7 @@ namespace Sicemed.Web.Models
             }
         }
         
-        Dictionary<CambioEstadoTurno, EstadoTurno> _transiciones;
+        private static Dictionary<CambioEstadoTurno, EstadoTurno> _transiciones;
         
         #region Primitive Properties
 
@@ -117,10 +118,8 @@ namespace Sicemed.Web.Models
             }
         }
 
-        protected Turno()
+        static Turno()
         {
-            Estado = EstadoTurno.Otorgado;
-            FechaEstado = DateTime.Now;
             _transiciones = new Dictionary<CambioEstadoTurno, EstadoTurno>
             {
                 { new CambioEstadoTurno(EstadoTurno.Otorgado, EventoTurno.Presentar), EstadoTurno.Presentado },
@@ -129,6 +128,25 @@ namespace Sicemed.Web.Models
                 { new CambioEstadoTurno(EstadoTurno.Presentado, EventoTurno.Atender), EstadoTurno.Atendido },
                 { new CambioEstadoTurno(EstadoTurno.Presentado, EventoTurno.Cancelar), EstadoTurno.Cancelado },
             };
+        }
+
+        protected Turno()
+        {
+            Estado = EstadoTurno.Otorgado;
+            FechaEstado = DateTime.Now;
+        }
+
+        public static EstadoTurno[] EstadosAplicaEvento(EventoTurno eventoTurno)
+        {
+            return Enum.GetValues(typeof(EstadoTurno))
+                .Cast<EstadoTurno>()
+                .Where(estado => PuedeAplicar(estado, eventoTurno)).ToArray();
+        }
+
+        public static bool PuedeAplicar(EstadoTurno estado, EventoTurno eventoTurno)
+        {
+            var transicion = new CambioEstadoTurno(estado, eventoTurno);
+            return _transiciones.ContainsKey(transicion);
         }
 
         public virtual bool PuedeAplicar(EventoTurno eventoTurno)

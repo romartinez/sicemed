@@ -28,6 +28,17 @@
     </h2>
 }
 <h3>@Model.PersonaNombreCompleto</h3>
+
+<div>
+    @using (Html.BeginForm("CancelarTurnosProfesional", "Profesional"))
+    {
+        @Html.AntiForgeryToken()        
+        <input type="hidden" name="fecha" value="@Model.FechaTurnos.ToShortDateString()"/>
+        <input type="hidden" name="prompt" value="" />
+        <a href="#" class="ctl-cancelar-prompt">Cancelar Todos Los Turnos de la Fecha</a>
+    }
+</div>
+
 @if (Model.Turnos.Any())
 {
     <div class="ui-state-highlight padding">

@@ -20,7 +20,7 @@
         {
             color: #2e8f19;
         }
-
+        
         ol.turnos li.cancelado span
         {
             color: #CA2B63;
@@ -63,6 +63,16 @@
                 <div class="ui-state-highlight pacientes">
                     Le restan @profesional.PacientesPendientes pacientes por atenderse. Y @profesional.TurnosPendientes
                     pendientes de presentarse.
+                </div>
+                <div>
+                    @using (Html.BeginForm("CancelarTurnosProfesional", "Secretaria"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="profesionalId" value="@profesional.Id"/>
+                        <input type="hidden" name="fecha" value="@Model.FechaTurnos.ToShortDateString()"/>
+                        <input type="hidden" name="prompt" value="" />
+                        <a href="#" class="ctl-cancelar-prompt">Cancelar Todos Los Turnos de la Fecha</a>
+                    }
                 </div>
                 <ol class="turnos">
                     @foreach (var turno in profesional.Turnos)

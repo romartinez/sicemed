@@ -22,13 +22,13 @@
                 defaultIgnorePipelineWhenDebug="true" localChangeMonitorInterval="30" remoteChangeMonitorInterval="60"
                 defaultCssMinifierRef="yui" defaultJSMinifierRef="yui" defaultCompressionEnabled="true">
     <resourceSet name="css" type="css">
-      <resource path="~/public/css/theme.css" />
       <resource path="~/public/css/jquery-ui.css" />
       <resource path="~/public/css/jqgrid.css" />
       <resource path="~/public/css/fullcalendar.css" />
       <resource path="~/public/css/wizard.css" />
       <resource path="~/public/css/jquery.jgrowl.css" />
       <resource path="~/public/css/jquery.ui.timepicker.css" />
+      <resource path="~/public/css/theme.css" />
       <resource path="~/public/css/app.css" />
     </resourceSet>
     <resourceSet name="js" type="js">
