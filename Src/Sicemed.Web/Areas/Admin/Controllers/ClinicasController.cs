@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using AutoMapper;
+using SICEMED.Web;
 using Sicemed.Web.Areas.Admin.Models.Clinicas;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
@@ -71,6 +72,9 @@ namespace Sicemed.Web.Areas.Admin.Controllers
             modelFromDb.Domicilio.Latitud = viewModel.DomicilioLatitud;
             modelFromDb.Domicilio.Longitud = viewModel.DomicilioLongitud;
             modelFromDb.Domicilio.Localidad = SessionFactory.GetCurrentSession().Load<Localidad>(viewModel.DomicilioLocalidadId);
+
+            //Recargo la clinica del modelo
+            MvcApplication.CargarClinica(modelFromDb);
 
             ShowMessages(ResponseMessage.Success());
 

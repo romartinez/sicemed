@@ -12,7 +12,7 @@ namespace Sicemed.Web.Infrastructure.Providers.Cache
         }
 
         public void AddUserContext(string key, object obj) { }
-        public void RemoveUserContext(string key, object obj) { }
+        public void RemoveUserContext(string key) { }
 
         public T Get<T>(string key)
         {

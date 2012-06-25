@@ -26,7 +26,7 @@ namespace Sicemed.Web.Infrastructure.Providers.Cache
             Add(key, obj);
         }
 
-        public void RemoveUserContext(string key, object obj)
+        public void RemoveUserContext(string key)
         {
             key = GetUserContextKey(key);
             Remove(key);
