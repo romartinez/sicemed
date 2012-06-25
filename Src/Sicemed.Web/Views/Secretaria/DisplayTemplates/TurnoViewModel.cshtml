@@ -1,37 +1,44 @@
 ﻿@using Sicemed.Web.Models
 @model Sicemed.Web.Models.ViewModels.Secretaria.TurnosDelDiaViewModel.TurnoViewModel
 <li class="turno turno-@Model.Estado.ToString().ToLower()">
-    <h4>@Model.FechaTurno.ToString("HH:mm") - @Model.Paciente.Descripcion</h4>
+    <h4>@Model.FechaTurno.ToShortTimeString() - @Model.Paciente.Descripcion | @Model.Estado</h4>
+    @if (Model.Estado == Turno.EstadoTurno.Otorgado || Model.Estado == Turno.EstadoTurno.Presentado)
+    {
     <div>
         @if (@Model.Consultorio != null)
         {
             @:Consultorio: @Model.Consultorio.Descripcion
-                }
+        }
         <br />
         Especialidad: @Model.Especialidad.Descripcion
         <br />
-    </div>
+    </div>        
+    }
     <div>
+        @if (Model.Estado == Turno.EstadoTurno.Presentado)
+        {
+            <div>El usuario se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
+                minutos.</div>            
+        }
+        @if (Model.PuedoCancelar)
+        {
+            <div>
+            @using (Html.BeginForm("CancelarTurno", "Secretaria"))
+            {
+                @Html.Partial("_CancelarTurno")
+            }                
+            </div>
+        }
         @if (Model.PuedoPresentar)
         {
-            using (Html.BeginForm("RegistrarIngresoPaciente", "Secretaria"))
+            <div >
+            @using (Html.BeginForm("RegistrarIngresoPaciente", "Secretaria"))
             {
             @Html.AntiForgeryToken()
             <input type="hidden" name="turnoId" value="@Model.Id"/>
             @Html.Submit("Ingresar")
             }
-        }
-        @if (Model.Estado == Turno.EstadoTurno.Presentado)
-        {
-            <span>El usuario se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
-                minutos.</span>            
-        }
-        @if (Model.PuedoCancelar)
-        {
-            using (Html.BeginForm("CancelarTurno", "Secretaria"))
-            {
-                @Html.Partial("_CancelarTurno")
-            }
+            </div>
         }
     </div>
 </li>

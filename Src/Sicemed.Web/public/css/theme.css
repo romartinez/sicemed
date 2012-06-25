@@ -790,7 +790,7 @@ input[type="reset"],input[type="submit"],input[type="button"], button{
 	background:url(../images/theme/buttons_submit.png) 0 0 repeat-x;
 	border:none;
 	color:#fff;
-	margin:10px 0;
+	margin:5px 0;
 	outline-width:0;
 	padding:3px 35px 3px 15px;
 	height:32px;

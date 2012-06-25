@@ -2,14 +2,14 @@
 @model Sicemed.Web.Models.ViewModels.Profesional.AgendaProfesionalViewModel.TurnoViewModel
 @{
 
-    var css = Model.Estado == Turno.EstadoTurno.Atendido ? "ui-state-disabled " : string.Empty;
+    var css = Model.Estado != Turno.EstadoTurno.Presentado || Model.Estado != Turno.EstadoTurno.Otorgado ? "ui-state-disabled " : string.Empty;
     css += Model.Estado == Turno.EstadoTurno.Presentado ? "ui-state-highlight" : string.Empty;
 }
 <h3 class="@css">
     <a href="#">
-        @Model.FechaTurno.ToString("HH:mm")
+        @Model.FechaTurno.ToShortTimeString()
         - @Model.Paciente.Descripcion
-        @(Model.Estado == Turno.EstadoTurno.Atendido ? "| Atendido" : (Model.Estado == Turno.EstadoTurno.Otorgado ? "| No Se Presentó Todavía" : string.Empty))
+        | @Model.Estado
     </a>
 </h3>
 <div>
