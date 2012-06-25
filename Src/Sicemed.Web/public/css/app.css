@@ -130,9 +130,13 @@ input[type=date], input[type=time], input.ctl-timespan
     margin: 10px;
     padding: 10px;
 }
-.turno-presentado
+.turno-otorgado
 {
     border-color: #474747;
+}
+.turno-presentado
+{
+    border-color: #00ff5c;
 }
 .turno-cancelado
 {
@@ -140,12 +144,41 @@ input[type=date], input[type=time], input.ctl-timespan
 }
 .turno-atendido
 {
-    border-color: #CA2B63;
-}
-.turno-ausentado
-{
     border-color: #12A0A9;
 }
+.turno-ausente {
+    border-color: #a700e8;
+}
+
+.ctl-accordion .turno
+{
+    border: none;
+    margin: inherit;
+    padding: inherit;
+}
+.ctl-accordion .turno-otorgado
+{
+    color: #474747;
+}
+.ctl-accordion .turno-presentado
+{
+    color: #00ff5c;
+}
+.ctl-accordion .turno-cancelado
+{
+    color: #cd0a0a;
+    text-decoration: line-through;
+}
+.ctl-accordion .turno-atendido
+{
+    border-color: #12A0A9;
+    font-style: italic;
+}
+.ctl-accordion .turno-ausente {
+    border-color: #a700e8;
+    text-decoration: line-through;
+}
+
 
 .msg-error
 {

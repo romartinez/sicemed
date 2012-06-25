@@ -1,18 +1,20 @@
-﻿@using Sicemed.Web.Models
+﻿@using Sicemed.Web.Infrastructure.Helpers
+@using Sicemed.Web.Models
 @using Sicemed.Web.Models.Roles
 @model Sicemed.Web.Models.ViewModels.Historial.TurnosPacienteViewModel
 @{
     ViewBag.Title = "Historial Turnos";
 }
 <h2>
-    Historial Turnos</h2>
+    Historial Turnos
+</h2>
 @using (Html.BeginForm("Turnos", "Historial", FormMethod.Get, new { id = "search-filters" }))
 {
     @Html.EditorFor(x => x.Filters)       
 }
 @if (!Model.Turnos.Any())
 {
-    <div>
+    <div class="msg-error">
         El usuario no posee histor&iacute;a en las fechas seleccionadas.
     </div>    
 }
@@ -22,7 +24,7 @@ else
         @foreach (var turno in Model.Turnos)
         {
             <div class="turno turno-@turno.Estado.ToString().ToLower()">
-            <h3>@turno.FechaTurno.ToShortDateString() @turno.FechaTurno.ToShortTimeString() - @turno.Profesional</h3>
+            <h4>@turno.FechaTurno.ToFullDate() - @turno.Profesional | @turno.Estado</h4>
             <div>
                 Especialidad: @turno.Especialidad
                 <br />
@@ -30,11 +32,21 @@ else
             </div>
             @if (turno.Estado == Turno.EstadoTurno.Atendido)
             {
-            <h4>
-                Diagn&oacute;stico</h4>
-            <div>
-                @Html.Nl2Br(turno.Nota)
-            </div>                                              
+                <strong>Diagn&oacute;stico</strong>
+                <div>
+                    @Html.Nl2Br(turno.Nota)
+                </div>                                              
+            }                
+            @if (turno.Estado == Turno.EstadoTurno.Cancelado)
+            {
+                <strong>Cancelaci&oacute;n</strong>
+                <div>
+                    Cancelado por @turno.CanceladoPor.Descripcion el @turno.FechaCancelacion.Value.ToFullDate()
+                </div>
+                <strong>Motivo</strong>
+                <div>                    
+                    @Html.Nl2Br(turno.MotivoCancelacion)
+                </div>
             }                
             </div>
         }

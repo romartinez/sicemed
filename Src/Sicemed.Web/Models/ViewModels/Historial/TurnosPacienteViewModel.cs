@@ -18,10 +18,13 @@ namespace Sicemed.Web.Models.ViewModels.Historial
         public class HistorialItem
         {
             public DateTime FechaTurno { get; set; }
+            public DateTime? FechaCancelacion { get; set; }
             public string Profesional { get; set; }
             public string Especialidad { get; set; }
             public string Consultorio { get; set; }
             public string Nota { get; set; }
+            public string MotivoCancelacion { get; set; }
+            public InfoViewModel CanceladoPor { get; set; }
             public bool EsObtenidoWeb { get; protected set; }
             public bool EsObtenidoPersonalmente { get; protected set; }
             public bool EsObtenidoTelefonicamente { get; protected set; }
