@@ -129,6 +129,7 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
                 {
                     var profesionalRoot = CreateDefaultPage("Profesional", "#", order: 9300);
                     profesionalRoot.Childs.Add(CreateDefaultPage("Agenda", "Profesional/Agenda", profesionalRoot));
+                    //profesionalRoot.Childs.Add(CreateDefaultPage("Calendario", "Profesional/Calendario", profesionalRoot));
 
                     pages.Add(profesionalRoot);
                 }

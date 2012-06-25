@@ -93,6 +93,12 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                 .ForMember(d => d.Turnos, m => m.Ignore());
             CreateMap<Turno, AgendaProfesionalViewModel.TurnoViewModel>()
                 .ForMember(x => x.PuedoCancelar, m => m.ResolveUsing(o => o.PuedeAplicar(Turno.EventoTurno.Cancelar)));
+
+            CreateMap<Profesional, CalendarioProfesionalViewModel>()
+                //NOTE: La lleno desde la query, ya que solo los de la fecha
+                //muestro.
+                .ForMember(d => d.Turnos, m => m.Ignore());
+            CreateMap<Turno, CalendarioProfesionalViewModel.TurnoViewModel>();
             #endregion
 
             #region Paciente

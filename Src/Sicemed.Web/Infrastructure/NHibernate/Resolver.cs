@@ -49,7 +49,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate
             }
 
             // return the resolved entity :)
-            return resolvedEntity.ToString();
+            return resolvedEntity;
         }
     }
 }

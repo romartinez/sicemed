@@ -220,6 +220,7 @@
     <Compile Include="Infrastructure\Services\NotificationService.cs" />
     <Compile Include="Models\ViewModels\Historial\TurnosPorPacienteViewModel.cs" />
     <Compile Include="Models\ViewModels\PacienteSearchViewModel.cs" />
+    <Compile Include="Models\ViewModels\Profesional\CalendarioProfesionalViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchFiltersViewModel.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
@@ -803,6 +804,7 @@
     <Content Include="Views\Shared\EditorTemplates\SearchFiltersViewModel.cshtml" />
     <Content Include="Views\NotificationService\CancelacionTurno.cshtml" />
     <Content Include="Views\Shared\_CancelarTurno.cshtml" />
+    <Content Include="Views\Profesional\Calendario.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
