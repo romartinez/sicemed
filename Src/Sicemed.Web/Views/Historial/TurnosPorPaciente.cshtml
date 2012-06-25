@@ -1,4 +1,5 @@
-﻿@using Sicemed.Web.Models
+﻿@using Sicemed.Web.Infrastructure.Helpers
+@using Sicemed.Web.Models
 @using Sicemed.Web.Models.Roles
 @model Sicemed.Web.Models.ViewModels.Historial.TurnosPorPacienteViewModel
 @{
@@ -76,12 +77,23 @@ else
         @foreach (var turno in Model.Turnos)
         {
             <div class="turno turno-@turno.Estado.ToString().ToLower()">
-                <h3>@turno.FechaTurno.ToShortDateString() @turno.FechaTurno.ToShortTimeString() - @turno.Profesional</h3>
+                <h4>@turno.FechaTurno.ToFullDate() - @turno.Profesional.Descripcion | @turno.Estado</h4>
                 <div>
-                    Especialidad: @turno.Especialidad
+                    Especialidad: @turno.Especialidad.Descripcion
                     <br />
-                    Consultorio: @turno.Consultorio
+                    Consultorio: @turno.Consultorio.Descripcion
                 </div>
+                @if (turno.Estado == Turno.EstadoTurno.Cancelado)
+                {
+                    <strong>Cancelaci&oacute;n</strong>
+                    <div>
+                        Cancelado por @turno.CanceladoPor.Descripcion el @turno.FechaCancelacion.Value.ToFullDate()
+                    </div>
+                    <strong>Motivo</strong>
+                    <div>                    
+                        @Html.Nl2Br(turno.MotivoCancelacion)
+                    </div>
+                }                
             </div>
         }
     </div>        
