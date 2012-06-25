@@ -2,43 +2,28 @@
 @{
     ViewBag.Title = "Agenda Profesional";
 }
-@section Css
-{
-    <style type="text/css">
-        .fecha
-        {
-            color: #CA2B63 !important;
-            font-size: 20px;
-            font-weight: bold;
-            width: 105px !important;
-        }
-    </style>
-}
 @using (Html.BeginForm())
 {
     <h2>
         Agenda -
-        <input type="date" class="fecha" name="fecha" value="@Model.FechaTurnos.ToShortDateString()" />
+        <input type="date" class="fecha-filtro" name="fecha" value="@Model.FechaTurnos.ToShortDateString()" />
         @Html.Submit("Actualizar")
     </h2>
 }
 <h3>@Model.PersonaNombreCompleto</h3>
-
-<div>
-    @using (Html.BeginForm("CancelarTurnosProfesional", "Profesional"))
-    {
-        @Html.AntiForgeryToken()        
-        <input type="hidden" name="fecha" value="@Model.FechaTurnos.ToShortDateString()"/>
-        <input type="hidden" name="prompt" value="" />
-        <a href="#" class="ctl-cancelar-prompt">Cancelar Todos Los Turnos de la Fecha</a>
-    }
-</div>
 
 @if (Model.Turnos.Any())
 {
     <div class="msg-info">
         Le restan @Model.PacientesPendientes pacientes por atenderse. Y @Model.TurnosPendientes
         pendientes de presentarse.
+        @using (Html.BeginForm("CancelarTurnosProfesional", "Profesional"))
+        {
+            @Html.AntiForgeryToken()        
+            <input type="hidden" name="fecha" value="@Model.FechaTurnos.ToShortDateString()"/>
+            <input type="hidden" name="prompt" value="" />
+            <a href="#" class="ctl-cancelar-prompt button_link btn_black"><span>Cancelar Todos Los Turnos de la Fecha</span></a>
+        }
     </div>
     <div class="ctl-accordion">
         @foreach (var turno in Model.Turnos)
