@@ -58,6 +58,7 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
             public InfoViewModel Especialidad { get; set; }
             public InfoViewModel CanceladoPor { get; set; }
             public Turno.EstadoTurno Estado { get; set; }
+            public string MotivoCancelacion { get; set; }
             public DateTime FechaEstado { get; set; }
             public bool PuedoCancelar { get; set; }
             public bool PuedoPresentar { get; set; }

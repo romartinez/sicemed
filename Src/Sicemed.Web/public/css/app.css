@@ -156,30 +156,29 @@ input[type=date], input[type=time], input.ctl-timespan
     margin: inherit;
     padding: inherit;
 }
-.ctl-accordion .turno-otorgado,
-.ctl-accordion .turno-otorgado h4
+.ctl-accordion ol.turnos .turno-otorgado,
+.ctl-accordion ol.turnos .turno-otorgado h4
 {
     color: #474747;
 }
-.ctl-accordion .turno-presentado,
-.ctl-accordion .turno-presentado h4
+.ctl-accordion ol.turnos .turno-presentado,
+.ctl-accordion ol.turnos .turno-presentado h4
 {
     color: #008932;
 }
-.ctl-accordion .turno-cancelado,
-.ctl-accordion .turno-cancelado h4
+.ctl-accordion ol.turnos .turno-cancelado,
+.ctl-accordion ol.turnos .turno-cancelado h4
 {
     color: #cd0a0a;
-    text-decoration: line-through;
 }
-.ctl-accordion .turno-atendido,
-.ctl-accordion .turno-atendido h4
+.ctl-accordion ol.turnos .turno-atendido,
+.ctl-accordion ol.turnos .turno-atendido h4
 {
     color: #12A0A9;
     font-style: italic;
 }
-.ctl-accordion .turno-ausente,
-.ctl-accordion .turno-ausente h4 {
+.ctl-accordion ol.turnos .turno-ausente,
+.ctl-accordion ol.turnos .turno-ausente h4 {
     color: #a700e8;
     text-decoration: line-through;
 }

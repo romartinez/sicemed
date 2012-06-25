@@ -20,10 +20,14 @@ namespace Sicemed.Web.Models.ViewModels.Paciente
             public long Id { get; set; }
             public DateTime FechaTurno { get; set; }
             public DateTime? FechaIngreso { get; set; }
+            public DateTime? FechaCancelacion { get; set; }
             public DateTime? FechaAtencion { get; set; }
             public InfoViewModel Consultorio { get; set; }
             public InfoViewModel Profesional { get; set; }
             public InfoViewModel Especialidad { get; set; }
+            public InfoViewModel CanceladoPor { get; set; }
+            public string MotivoCancelacion { get; set; }
+            public string Nota { get; set; }
             public Turno.EstadoTurno Estado { get; set; }
             public DateTime FechaEstado { get; set; }
             public bool PuedoCancelar { get; set; }
