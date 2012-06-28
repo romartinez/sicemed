@@ -82,6 +82,11 @@ namespace System.Web.Mvc.Html
             return htmlHelper.Partial("_Submit", new ViewDataDictionary(value));
         }
 
+        public static MvcHtmlString LinkSubmit(this HtmlHelper htmlHelper, string value = null)
+        {
+            return htmlHelper.Partial("_LinkSubmit", new ViewDataDictionary(value));
+        }
+
         public static string SkipOneLevelHtmlPrefix(this HtmlHelper htmlHelper, string name = null)
         {
             var prefix = htmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix;

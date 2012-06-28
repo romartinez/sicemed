@@ -638,8 +638,7 @@ h1 span, h2 span, h3 span ,h4 span, h5 span {
 	margin:35px 0 10px;}
 
 .entry h4, .post-item .entry h4 {
-	font-size:18px;
-	margin:30px 0 10px;
+	font-size:18px;	
 	font-family:Georgia, "Times New Roman", Times, serif;
 	color:#ca2b63;
 	font-style:italic}
@@ -791,7 +790,7 @@ input[type="reset"],input[type="submit"],input[type="button"], button{
 	background:url(../images/theme/buttons_submit.png) 0 0 repeat-x;
 	border:none;
 	color:#fff;
-	margin:10px 0;
+	margin:5px 0;
 	outline-width:0;
 	padding:3px 35px 3px 15px;
 	height:32px;

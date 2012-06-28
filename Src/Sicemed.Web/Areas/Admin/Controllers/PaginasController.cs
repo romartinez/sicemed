@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using SICEMED.Web;
+using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Exceptions;
 using Sicemed.Web.Models;
@@ -76,12 +78,23 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         public override void Nuevo(string oper, Pagina modelo, int paginaId = 0)
         {
             base.Nuevo(oper, modelo, paginaId);
+            MvcApplication.ResetRoutes();
+            Cache.RemoveUserContext(MenuAttribute.CacheKey);
         }
 
         [ValidateInput(false)]
         public override void Editar(long id, string oper, Pagina modelo)
         {
             base.Editar(id, oper, modelo);
+            MvcApplication.ResetRoutes();
+            Cache.RemoveUserContext(MenuAttribute.CacheKey);
+        }
+
+        public override void Eliminar(string id, string oper)
+        {
+            base.Eliminar(id, oper);
+            MvcApplication.ResetRoutes();
+            Cache.RemoveUserContext(MenuAttribute.CacheKey);
         }
     }
 }

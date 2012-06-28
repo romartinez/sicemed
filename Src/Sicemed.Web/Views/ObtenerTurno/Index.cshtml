@@ -2,14 +2,8 @@
     ViewBag.Title = "Obtener Turno";
 }
 @section Css{
-    <style type="text/css">
-        .turno .text-blue
-        {
-            width: 100px;
-            display: inline-block;
-        }
-        
-        .tooltip .turno {
+    <style type="text/css">        
+        .tooltip .turno-libre {
             padding: 15px;
         }
         
@@ -35,6 +29,14 @@
             background: #fbf9ee url(../../public/images/jquery-ui/ui-bg_glass_55_fbf9ee_1x400.png) 50% 50% repeat-x !important; 
             color: #363636!important;        
         }
+        
+        .profesional {
+            float: left;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #12A0A9;
+        }
     </style>
 }
 <h2>
@@ -58,30 +60,25 @@
 <div id="selectProfesionales">
     <script id="stepSeleccionProfesional" type="text/html">
         <form>
-            <div class="row field_select">
+            <div class="row">
                 <label>
-                    Por Especialidad:
+                    Especialidad:
                 </label>
-                <br/>
                 <select class="select_styled" data-bind="options: especialidades, optionsText: 'Nombre', value: especialidadSeleccionada, optionsCaption: '-- Todas --'">
                 </select>            
-            </div>
-            <div class="row field_text">
+                &nbsp;
                 <label>
-                    Por Profesional:
+                    Profesional:
                 </label>
-                <br/>
                 <input type="text" class="inputtext required" data-bind="value: profesionalABuscar" />
-            </div>
-            <div class="row">
+                &nbsp;
                 <button data-bind="click: buscarProfesionales">Buscar</button>
             </div>
             <div data-bind='template: { name: "profesionalEncontrado"}'> </div>
         </form>
     </script>
     <script id="profesionalTemplate" type="text/html">
-        <div class="row">                 
-            <img alt="${Nombre}" src="../../public/images/doctor_64.png"/>           
+        <div class="row">                             
             <h4>${Nombre}</h4>                        
             <ul>
                 {{each Especialidades}}
@@ -95,6 +92,7 @@
     </script>
     <script id="profesionalEncontrado" type="text/html">
         {{each(i, profesional) profesionalesEncontrados}}        
+        <div class="profesional">
             {{tmpl(profesional) "#profesionalTemplate"}}
             {{if ProximoTurnoLibre}}
             <div>
@@ -105,15 +103,22 @@
             {{else}}
             <div class="ui-state-error-text">El profesional no cuenta con turnos disponibles.</div>
             {{/if}}
+        </div>
         {{/each}}
     </script>
-    <script id="stepConfirmar" type="text/html">
-        <h3 class="text-blue">Profesional</h3>
+    <script id="stepConfirmar" type="text/html">        
+        <h3 class="text-blue">Reservar Turno</h3>
         <div>
-            {{tmpl(profesionalSeleccionado()) "#profesionalTemplate"}}
+            A continuaci&oacute;n podr&aacute; revisar los datos del turno y profesional seleccionado. 
+            Una vez que haya comprobado que son correctos, proceda de reservar el turno haciendo click en el bot&oacute;n 
+            "Reservar Turno"
         </div>
-        <h3 class="text-blue">Turno</h3>
-        <div class="turno">
+        <div style="float: left; margin: 30px;">
+            <h3 class="text-blue">Profesional</h3>
+            {{tmpl(profesionalSeleccionado()) "#profesionalTemplate"}}
+        </div>        
+        <div style="float: left; margin: 30px;">
+            <h3 class="text-blue">Turno</h3>
             <span class="text-blue">Fecha Turno:</span> <span data-bind="text: app.format.date(turnoSeleccionado().FechaTurnoInicial)"></span>
             <br/>
             <span class="text-blue">Horario:</span><span data-bind="text: app.format.hour(turnoSeleccionado().FechaTurnoInicial)"></span> / 
@@ -126,7 +131,7 @@
             </select>            
             <span data-bind="visible: especialidadSeleccionada(), text: especialidadSeleccionada() ? especialidadSeleccionada().Descripcion : ''"></span>
         </div>
-        <div>
+        <div  style="clear: both;">
             <button data-bind="click: reservar">Reservar Turno</button>            
         </div>
     </script>

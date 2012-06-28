@@ -49,18 +49,18 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                 .Where(x => x.Fecha <= searchFilters.Hasta);
 
             if (!string.IsNullOrWhiteSpace(searchFilters.Entidad))
-                query = query.And(Restrictions.InsensitiveLike("Entidad", searchFilters.Entidad, MatchMode.Start));
+                query = query.And(Restrictions.On<AuditLog>(x => x.Entidad).IsInsensitiveLike(searchFilters.Entidad, MatchMode.Start));
             if (!string.IsNullOrWhiteSpace(searchFilters.Accion))
                 query = query.And(x => x.Accion == searchFilters.Accion);
             if (searchFilters.EntidadId.HasValue)
                 query = query.And(x => x.EntidadId == searchFilters.EntidadId);
             if (!string.IsNullOrWhiteSpace(searchFilters.Usuario))
-                query = query.And(Restrictions.InsensitiveLike("Usuario", searchFilters.Usuario, MatchMode.Start));
+                query = query.And(Restrictions.On<AuditLog>(x => x.Usuario).IsInsensitiveLike(searchFilters.Usuario, MatchMode.Start));
 
             if (!string.IsNullOrWhiteSpace(searchFilters.Filtro))
             {
-                query.And(Restrictions.InsensitiveLike("EntidadAntes", searchFilters.Filtro, MatchMode.Anywhere)
-                    || Restrictions.InsensitiveLike("EntidadDespues", searchFilters.Filtro, MatchMode.Anywhere));
+                query.And(Restrictions.On<AuditLog>(x => x.EntidadAntes).IsInsensitiveLike(searchFilters.Filtro, MatchMode.Anywhere)
+                    || Restrictions.On<AuditLog>(x => x.EntidadDespues).IsInsensitiveLike(searchFilters.Filtro, MatchMode.Anywhere));
             }
 
             return query;

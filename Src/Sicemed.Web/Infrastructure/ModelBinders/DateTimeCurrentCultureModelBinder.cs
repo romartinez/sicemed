@@ -15,6 +15,8 @@ namespace Sicemed.Web.Infrastructure.ModelBinders
                 object actualValue = null;
                 try
                 {
+                    if (bindingContext.ModelType == typeof(DateTime?) 
+                        && (valueResult == null || string.IsNullOrWhiteSpace(valueResult.AttemptedValue))) return null;
                     actualValue = Convert.ToDateTime(valueResult.AttemptedValue, CultureInfo.CurrentCulture);
                 }
                 catch (FormatException e)

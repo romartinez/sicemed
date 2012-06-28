@@ -57,7 +57,7 @@ var model = (function () {
                     var especialidadesAtendidasTurno = $.map(turno.EspecialidadesAtendidas, function (especialidad) {
                         return especialidad.Descripcion;
                     }).join(",");
-                    var description = "<div class='turno'>"
+                    var description = "<div class='turno-libre'>"
                         + "<span class='text-blue'>Fecha Turno:</span><span>" + app.format.date(turno.FechaTurnoInicial) + "</span><br/>"
                         + "<span class='text-blue'>Horario:</span><span>" + app.format.hour(turno.FechaTurnoInicial) + " / " + app.format.hour(turno.FechaTurnoFinal) + "</span><br/>"
                         + "<span class='text-blue'>Consultorio:</span><span>" + turno.Consultorio.Descripcion + "</span><br/>"

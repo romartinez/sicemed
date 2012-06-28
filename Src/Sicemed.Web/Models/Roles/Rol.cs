@@ -19,5 +19,10 @@ namespace Sicemed.Web.Models.Roles
         public virtual Persona Persona { get; set; }
 
         public abstract string DisplayName { get; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}-{1}", base.ToString(), Persona);
+        }
     }
 }

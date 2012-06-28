@@ -15,7 +15,7 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
 {
     public class MenuAttribute : NHibernateBaseAttribute
     {
-        private const string CACHE_KEY = "MENU_PAGES";
+        public const string CacheKey = "MENU_PAGES";
 
         private readonly IMembershipService _membershipService;
         private readonly ICacheProvider _cacheProvider;
@@ -31,7 +31,7 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             var currentUser = _membershipService.GetCurrentUser();
 
             //Check the cache for the menu
-            var pages = _cacheProvider.GetUserContext<List<PageViewModel>>(CACHE_KEY);
+            var pages = _cacheProvider.GetUserContext<List<PageViewModel>>(CacheKey);
             if (pages == null)
             {
                 var session = SessionFactory.GetCurrentSession();
@@ -54,7 +54,7 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
 
                 pages = FixHierarchy(pages);
 
-                _cacheProvider.AddUserContext(CACHE_KEY, pages);
+                _cacheProvider.AddUserContext(CacheKey, pages);
             }
 
             //Set the current Page
@@ -129,6 +129,7 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
                 {
                     var profesionalRoot = CreateDefaultPage("Profesional", "#", order: 9300);
                     profesionalRoot.Childs.Add(CreateDefaultPage("Agenda", "Profesional/Agenda", profesionalRoot));
+                    //profesionalRoot.Childs.Add(CreateDefaultPage("Calendario", "Profesional/Calendario", profesionalRoot));
 
                     pages.Add(profesionalRoot);
                 }

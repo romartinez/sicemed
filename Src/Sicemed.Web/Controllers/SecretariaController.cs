@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using AutoMapper;
+using Mvc.Mailer;
 using SICEMED.Web;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
@@ -20,7 +21,7 @@ using Sicemed.Web.Models.ViewModels.Secretaria;
 namespace Sicemed.Web.Controllers
 {
     [AuthorizeIt(typeof(Secretaria))]
-    public class SecretariaController : NHibernateController
+    public class SecretariaController : AdministracionDeTurnosBaseController
     {
         private readonly IMembershipService _membershipService;
         private readonly IMappingEngine _mappingEngine;
@@ -31,7 +32,7 @@ namespace Sicemed.Web.Controllers
             _membershipService = membershipService;
         }
 
-        public ActionResult Agenda(DateTime? fecha = null)
+        public override ActionResult Agenda(DateTime? fecha = null)
         {
             var query = QueryFactory.Create<IObtenerTurnosPorFechaQuery>();
             query.Fecha = fecha;
@@ -53,12 +54,12 @@ namespace Sicemed.Web.Controllers
         public ActionResult OtorgarTurno(OtorgarTurnoEditModel editModel)
         {
             AppendLists(editModel);
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var session = SessionFactory.GetCurrentSession();
                 var paciente = session.Get<Paciente>(editModel.PacienteId.Value);
                 var profesional = session.Get<Profesional>(editModel.ProfesionalId.Value);
-                
+
                 var especialidadId =
                     QueryFactory.Create<IObtenerEspecialidadesProfesionalDropDownQuery>()
                         .GetEspecialidadId(editModel.EspecialidadId);
@@ -95,13 +96,13 @@ namespace Sicemed.Web.Controllers
             queryTurnos.EspecialidadId = queryEspecialidades.GetEspecialidadId(especialidadId);
             var result = queryTurnos.Execute();
             return Json(result, JsonRequestBehavior.AllowGet);
-        }        
-        
+        }
+
         [AjaxHandleError]
         public JsonResult GetEspecialidadesProfesional(long profesioanlId)
         {
             var queryEspecialidades = QueryFactory.Create<IObtenerEspecialidadesProfesionalDropDownQuery>();
-            queryEspecialidades.ProfesionalId = profesioanlId;            
+            queryEspecialidades.ProfesionalId = profesioanlId;
             var result = queryEspecialidades.Execute();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -115,14 +116,14 @@ namespace Sicemed.Web.Controllers
             queryProfesionales.SelectedValue = editModel.ProfesionalId;
             editModel.ProfesionalesDisponibles = queryProfesionales.Execute();
 
-            if(editModel.ProfesionalId.HasValue)
+            if (editModel.ProfesionalId.HasValue)
             {
                 var queryEspecialidades = QueryFactory.Create<IObtenerEspecialidadesProfesionalDropDownQuery>();
                 queryEspecialidades.ProfesionalId = editModel.ProfesionalId.Value;
                 queryEspecialidades.SelectedValue = editModel.EspecialidadId;
                 editModel.EspecialidadesProfesional = queryPacientes.Execute();
 
-                if(!string.IsNullOrWhiteSpace(editModel.EspecialidadId))
+                if (!string.IsNullOrWhiteSpace(editModel.EspecialidadId))
                 {
                     var queryTurnos = QueryFactory.Create<IObtenerTurnosDisponiblesPorProfesionalDropDownQuery>();
                     queryTurnos.ProfesionalId = editModel.ProfesionalId.Value;
@@ -142,16 +143,16 @@ namespace Sicemed.Web.Controllers
         {
             var session = SessionFactory.GetCurrentSession();
             var turno = session.Get<Turno>(turnoId);
-            if (turno == null || turno.SePresento)
+            if (turno == null || !turno.PuedeAplicar(Turno.EventoTurno.Presentar))
             {
-                ShowMessages(ResponseMessage.Error("No se encuentra el turno o ya se encuentra otorgado."));
+                ShowMessages(ResponseMessage.Error("No se encuentra el turno o no se puede marcar su ingreso."));
                 return RedirectToAction("Agenda");
             }
 
             turno.RegistrarIngreso(User.As<Secretaria>());
 
             ShowMessages(ResponseMessage.Success());
-            return RedirectToAction("Agenda");
+            return RedirectToAction("Agenda", new { fecha = turno.FechaTurno.ToShortDateString() });
         }
 
         #endregion

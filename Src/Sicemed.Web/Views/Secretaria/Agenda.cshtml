@@ -1,40 +1,4 @@
 ﻿@model Sicemed.Web.Models.ViewModels.Secretaria.TurnosDelDiaViewModel
-@section Css
-{
-    <style type="text/css">
-        .pacientes
-        {
-            padding: 10px;
-        }
-        
-        ol.turnos
-        {
-            margin: 0;
-        }
-        ol.turnos li
-        {
-            list-style-type: none;
-        }
-        
-        ol.turnos li.presentado span
-        {
-            color: #2e8f19;
-        }
-        
-        ol.turnos li.atendido
-        {
-            text-decoration: line-through;
-        }
-        
-        .fecha
-        {
-            color: #CA2B63 !important;
-            font-size: 20px;
-            font-weight: bold;
-            width: 105px !important;
-        }
-    </style>
-}
 @{
     ViewBag.Title = "Presentación De Turnos";
 }
@@ -42,7 +6,7 @@
 {
     <h2>
         Turnos del d&iacute;a -
-        <input type="date" class="fecha" name="fecha" value="@Model.FechaTurnos.ToShortDateString()" />
+        <input type="date" class="fecha-filtro" name="fecha" value="@Model.FechaTurnos.ToShortDateString()" />
         @Html.Submit("Actualizar")
     </h2>
 }
@@ -52,11 +16,20 @@
         @foreach (var profesional in Model.ProfesionalesConTurnos)
         {
             <h3>
-                <a href="#">@profesional.PersonaNombreCompleto</a></h3>
+                <a href="#">@profesional.PersonaNombreCompleto</a>
+            </h3>
             <div>
-                <div class="ui-state-highlight pacientes">
+                <div class="msg-info">
                     Le restan @profesional.PacientesPendientes pacientes por atenderse. Y @profesional.TurnosPendientes
                     pendientes de presentarse.
+                    @using (Html.BeginForm("CancelarTurnosProfesional", "Secretaria"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="profesionalId" value="@profesional.Id"/>
+                        <input type="hidden" name="fecha" value="@Model.FechaTurnos.ToShortDateString()"/>
+                        <input type="hidden" name="prompt" value="" />
+                        <a href="#" class="ctl-cancelar-prompt button_link btn_black"><span>Cancelar Todos Los Turnos de la Fecha</span></a>
+                    }
                 </div>
                 <ol class="turnos">
                     @foreach (var turno in profesional.Turnos)
@@ -70,7 +43,7 @@
 }
 else
 {
-    <div class="ui-state-highlight">
+    <div class="msg-error">
         No hay turnos otorgados para el d&iacute;a.
     </div>
 }

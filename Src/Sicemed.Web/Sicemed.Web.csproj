@@ -170,6 +170,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
     </Reference>
+    <Reference Include="WebBackgrounder">
+      <HintPath>..\packages\WebBackgrounder.0.1\lib\net40\WebBackgrounder.dll</HintPath>
+    </Reference>
     <Reference Include="Yahoo.Yui.Compressor">
       <HintPath>..\packages\YUICompressor.NET.1.5.0.0\lib\NET35\Yahoo.Yui.Compressor.dll</HintPath>
     </Reference>
@@ -181,6 +184,7 @@
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\NHibernateProfilerBootstrapper.cs" />
+    <Compile Include="App_Start\WebBackgrounderSetup.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AuditoriaController.cs" />
     <Compile Include="Areas\Admin\Controllers\ClinicasController.cs" />
@@ -203,8 +207,20 @@
     <Compile Include="Areas\Admin\Models\Personas\PersonaViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\ProfesionalEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\SecretariaEditModel.cs" />
+    <Compile Include="Infrastructure\Controllers\AdministracionDeTurnosBaseController.cs" />
+    <Compile Include="Infrastructure\Jobs\AusentarTurnosVencidosJob.cs" />
+    <Compile Include="Infrastructure\Jobs\KeepAliveJob.cs" />
+    <Compile Include="Infrastructure\Jobs\NHibernateJob.cs" />
     <Compile Include="Infrastructure\ModelBinders\DateTimeCurrentCultureModelBinder.cs" />
     <Compile Include="Infrastructure\ModelBinders\SearchFiltersModelBinder.cs" />
+    <Compile Include="Infrastructure\Queries\AdministracionDeTurnos\ObtenerTurnosACancelarQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Busqueda\BusquedaPacienteQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosPorPacienteQuery.cs" />
+    <Compile Include="Infrastructure\Services\INotificationService.cs" />
+    <Compile Include="Infrastructure\Services\NotificationService.cs" />
+    <Compile Include="Models\ViewModels\Historial\TurnosPorPacienteViewModel.cs" />
+    <Compile Include="Models\ViewModels\PacienteSearchViewModel.cs" />
+    <Compile Include="Models\ViewModels\Profesional\CalendarioProfesionalViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchFiltersViewModel.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
@@ -401,7 +417,6 @@
   <ItemGroup>
     <Content Include="App_Data\combres.xml" />
     <Content Include="App_Data\LogTable.sql" />
-    <Content Include="App_Start\NHibernateProfilerBootstrapper.vb" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Roles\Administrador.hbm.xml" />
@@ -768,7 +783,7 @@
     <Content Include="Views\Shared\_Submit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Telefono.cshtml" />
     <Content Include="Views\Cuenta\RecuperarPassword.cshtml" />
-    <Content Include="Views\MembershipMailer\_Layout.cshtml" />
+    <Content Include="Views\Shared\_MailLayout.cshtml" />
     <Content Include="Views\MembershipMailer\PasswordResetEmail.cshtml" />
     <Content Include="Views\Cuenta\RecuperarPasswordMail.cshtml" />
     <Content Include="Views\MembershipMailer\RegistrationEmail.cshtml" />
@@ -785,6 +800,10 @@
     <Content Include="Views\Historial\Atenciones.cshtml" />
     <Content Include="Views\Historial\Turnos.cshtml" />
     <Content Include="Views\Historial\TurnosPorPaciente.cshtml" />
+    <Content Include="Views\Shared\_LinkSubmit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SearchFiltersViewModel.cshtml" />
+    <Content Include="Views\NotificationService\CancelacionTurno.cshtml" />
+    <Content Include="Views\Shared\_CancelarTurno.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

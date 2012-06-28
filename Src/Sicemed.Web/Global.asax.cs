@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -17,7 +16,6 @@ using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Transform;
 using SICEMED.Web.Infrastructure.Windsor.Facilities;
-using Sicemed.Web.Areas.Admin.Models.Personas;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.ModelBinders;
@@ -111,6 +109,7 @@ namespace SICEMED.Web
                             {
                                 { typeof(ICustomBindeableProperties), new CustomBindeablePropertiesModelBinder() },
                                 { typeof(DateTime), new DateTimeCurrentCultureModelBinder() },
+                                { typeof(DateTime?), new DateTimeCurrentCultureModelBinder() },
                                 { typeof(SearchFiltersViewModel), new SearchFiltersModelBinder()}
                             };
 
@@ -146,8 +145,20 @@ namespace SICEMED.Web
             RegisterRoutes(RouteTable.Routes);
         }
 
-        private static void CargarClinica()
+        public static void ResetRoutes()
         {
+            RouteTable.Routes.Clear();
+            RegisterRoutes(RouteTable.Routes);
+        }
+
+        public static void CargarClinica(Clinica clinica = null)
+        {
+            if (clinica != null)
+            {
+                _clinica = ServiceLocator.Current.GetInstance<IMappingEngine>().Map<ClinicaViewModel>(clinica);
+                return;
+            }
+            
             var clinicaIdStr = ConfigurationManager.AppSettings["ClinicaID"];
             if (string.IsNullOrWhiteSpace(clinicaIdStr))
                 throw new ConfigurationErrorsException(
@@ -155,14 +166,18 @@ namespace SICEMED.Web
             long clinicaId = 0;
             if (!long.TryParse(clinicaIdStr, out clinicaId))
                 throw new ConfigurationErrorsException(
-                    string.Format("El valor configurado en el parámetro ClinicaID ('{0}') no es del tipo long.", clinicaIdStr));
+                    string.Format("El valor configurado en el parámetro ClinicaID ('{0}') no es del tipo long.",
+                                  clinicaIdStr));
 
             using (var session = ServiceLocator.Current.GetInstance<ISessionFactory>().OpenSession())
             {
-                var clinica = session.Get<Clinica>(clinicaId);
+                clinica = session.Get<Clinica>(clinicaId);
                 if (clinica == default(Clinica))
                     throw new ConfigurationErrorsException(
-                        string.Format("El valor configurado en el parámetro ClinicaID ('{0}') no se corresponde con ninguna clínica cargada en la base de datos.", clinicaId));
+                        string.Format(
+                            "El valor configurado en el parámetro ClinicaID ('{0}') no se corresponde con ninguna clínica cargada en la base de datos.",
+                            clinicaId));
+
                 _clinica = ServiceLocator.Current.GetInstance<IMappingEngine>().Map<ClinicaViewModel>(clinica);
             }
         }

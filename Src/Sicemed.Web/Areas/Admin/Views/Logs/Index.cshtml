@@ -32,11 +32,7 @@
 
 @using (Html.BeginForm("Index", "Logs", FormMethod.Get, new { id = "search-filters" }))
 {
-    @Html.ValidationSummaryWithMessage()
-
     @Html.EditorForModel()
-    
-    @Html.Submit("Filtrar")    
 }
 
 @Html.Partial("GrillaBase")

@@ -10,16 +10,16 @@ using Sicemed.Web.Models.Roles;
 namespace Sicemed.Web.Controllers
 {
     [AuthorizeIt(typeof(Profesional))]
-    public class ProfesionalController : NHibernateController
+    public class ProfesionalController : AdministracionDeTurnosBaseController
     {
-         public ActionResult Agenda(DateTime? fecha = null)
-         {
-             var query = QueryFactory.Create<IObtenerAgendaProfesionalQuery>();
-             query.ProfesionalId = User.As<Profesional>().Id;
-             query.Fecha = fecha;
-             var viewModel = query.Execute();
-             return View(viewModel);
-         }
+        public override ActionResult Agenda(DateTime? fecha = null)
+        {
+            var query = QueryFactory.Create<IObtenerAgendaProfesionalQuery>();
+            query.ProfesionalId = User.As<Profesional>().Id;
+            query.Fecha = fecha;
+            var viewModel = query.Execute();
+            return View(viewModel);
+        }
 
         [HttpPost]
         [AjaxHandleError]
@@ -28,16 +28,16 @@ namespace Sicemed.Web.Controllers
         {
             var session = SessionFactory.GetCurrentSession();
             var turno = session.Get<Turno>(turnoId);
-            if (turno == null || turno.SeAtendio)
+            if (turno == null)
             {
-                ShowMessages(ResponseMessage.Error("No se encuentra el turno o ya se encuentra atendido."));
+                ShowMessages(ResponseMessage.Error("No se encuentra el turno."));
                 return RedirectToAction("Agenda");
             }
 
             turno.RegistrarAtencion(nota);
 
             ShowMessages(ResponseMessage.Success());
-            return RedirectToAction("Agenda");            
+            return RedirectToAction("Agenda", new { fecha = turno.FechaTurno.ToShortDateString() });
         }
     }
 }

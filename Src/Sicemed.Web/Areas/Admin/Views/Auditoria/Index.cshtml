@@ -25,11 +25,7 @@
 </h2>
 @using (Html.BeginForm("Index", "Auditoria", FormMethod.Get, new { id = "search-filters" }))
 {
-    @Html.ValidationSummaryWithMessage()
-
-    @Html.EditorForModel()
-    
-    @Html.Submit("Filtrar")    
+    @Html.EditorForModel()    
 }
 @Html.Partial("GrillaBase")
 <div id="detalle" title="Detalle" class="ui-helper-hidden">

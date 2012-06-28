@@ -19,5 +19,10 @@ namespace Sicemed.Web.Infrastructure.Helpers
         {
             return new DateTime(2000, 1, 1, originalDate.Hour, originalDate.Minute, originalDate.Second);
         }
+
+        public static string ToFullDate(this DateTime date)
+        {
+            return date.ToShortDateString() + " " + date.ToShortTimeString();
+        }
     }
 }

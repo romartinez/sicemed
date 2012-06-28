@@ -1,33 +1,61 @@
-﻿@model Sicemed.Web.Models.ViewModels.Secretaria.TurnosDelDiaViewModel.TurnoViewModel
-@{
-
-    var css = Model.SePresento ? "presentado " : string.Empty;
-    css += Model.SeAtendio ? "atendido " : string.Empty;
-}
-<li class="@css">
-    <h4>@Model.FechaTurno.ToString("HH:mm") - @Model.Paciente.Descripcion</h4>
+﻿@using Sicemed.Web.Infrastructure.Helpers
+@using Sicemed.Web.Models
+@model Sicemed.Web.Models.ViewModels.Secretaria.TurnosDelDiaViewModel.TurnoViewModel
+<li class="turno turno-@Model.Estado.ToString().ToLower()">
+    <h4>@Model.FechaTurno.ToShortTimeString() - @Model.Paciente.Descripcion | @Model.Estado</h4>
+    @if (Model.Estado == Turno.EstadoTurno.Otorgado || Model.Estado == Turno.EstadoTurno.Presentado)
+    {
     <div>
-        @if(@Model.Consultorio != null)
+        @if (@Model.Consultorio != null)
         {
-            @:Consultorio: @Model.Consultorio.Descripcion            
+            @:Consultorio: @Model.Consultorio.Descripcion
         }
         <br />
         Especialidad: @Model.Especialidad.Descripcion
         <br />
-    </div>
+    </div>        
+    }
     <div>
-        @if (!Model.SePresento)
+        @if (Model.Estado == Turno.EstadoTurno.Presentado)
         {
-            using (Html.BeginForm("RegistrarIngresoPaciente", "Secretaria"))
-            {
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="turnoId" value="@Model.Id"/>
-                @Html.Submit("Ingresar")
-            }
+            <div>El usuario se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
+                minutos.</div>            
         }
-        else if (!Model.SeAtendio)
+        @if (Model.Estado == Turno.EstadoTurno.Presentado)
         {
-            <span>El usuario se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes) minutos.</span>
+            <span>Se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
+                minutos.</span>
+        }
+        @if (Model.Estado == Turno.EstadoTurno.Cancelado)
+        {
+            <strong>Cancelaci&oacute;n</strong>
+            <div>
+                Cancelado por @Model.CanceladoPor.Descripcion el @Model.FechaCancelacion.Value.ToFullDate()
+            </div>
+            <strong>Motivo</strong>
+            <div>                    
+                @Html.Nl2Br(Model.MotivoCancelacion)
+            </div>
+        }                 
+        @if (Model.PuedoCancelar)
+        {
+            <div>
+            @using (Html.BeginForm("CancelarTurno", "Secretaria"))
+            {
+                @Html.Partial("_CancelarTurno")
+            }                
+            </div>
+        }
+        @if (Model.PuedoPresentar)
+        {
+            <div >
+            @using (Html.BeginForm("RegistrarIngresoPaciente", "Secretaria"))
+            {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="turnoId" value="@Model.Id"/>
+            @Html.Submit("Ingresar")
+            }
+            </div>
         }
     </div>
 </li>
