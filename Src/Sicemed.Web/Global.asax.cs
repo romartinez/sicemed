@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Linq;
 using System.Security;
 using System.Web;
 using System.Web.Mvc;
@@ -160,24 +161,11 @@ namespace SICEMED.Web
                 return;
             }
             
-            var clinicaIdStr = ConfigurationManager.AppSettings["ClinicaID"];
-            if (string.IsNullOrWhiteSpace(clinicaIdStr))
-                throw new ConfigurationErrorsException(
-                    "No se ha configurado el parámetro ClinicaID en el web.config con el valor de la clínica por defecto.");
-            long clinicaId = 0;
-            if (!long.TryParse(clinicaIdStr, out clinicaId))
-                throw new ConfigurationErrorsException(
-                    string.Format("El valor configurado en el parámetro ClinicaID ('{0}') no es del tipo long.",
-                                  clinicaIdStr));
-
             using (var session = ServiceLocator.Current.GetInstance<ISessionFactory>().OpenSession())
             {
-                clinica = session.Get<Clinica>(clinicaId);
+                clinica = session.QueryOver<Clinica>().Take(1).List().FirstOrDefault();
                 if (clinica == default(Clinica))
-                    throw new ConfigurationErrorsException(
-                        string.Format(
-                            "El valor configurado en el parámetro ClinicaID ('{0}') no se corresponde con ninguna clínica cargada en la base de datos.",
-                            clinicaId));
+                    throw new ConfigurationErrorsException("No se encuentra ninguna clínica cargada en la base de datos.");
 
                 _clinica = ServiceLocator.Current.GetInstance<IMappingEngine>().Map<ClinicaViewModel>(clinica);
             }

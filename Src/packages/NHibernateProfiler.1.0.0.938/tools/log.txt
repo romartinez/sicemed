@@ -167,3 +167,25 @@
 2012-06-19 17:34:44,388 [36] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
 2012-06-19 17:39:44,372 [38] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
 2012-06-19 17:39:44,373 [38] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-29 15:14:24,865 [1] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-29 15:14:25,061 [1] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-29 15:14:25,318 [1] DEBUG Rhino.Licensing.AbstractLicenseValidator [(null)] - License accepted for NHibernate Profiler
+2012-06-29 15:14:27,344 [9] INFO  HibernatingRhinos.Profiler.Client.App [(null)] - Checking for updates...
+2012-06-29 15:14:30,055 [4] ERROR HibernatingRhinos.Profiler.Client.App [(null)] - Error while checking for updates: System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 216.121.112.229:80
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Int32 timeout, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetResponse()
+   at NAppUpdate.Framework.Sources.SimpleWebSource.GetUpdatesFeed() in z:\Projects\NAppUpdate\src\NAppUpdate.Framework\Sources\SimpleWebSource.cs:line 36
+   at NAppUpdate.Framework.UpdateManager.CheckForUpdates(IUpdateSource source, Action`1 callback) in z:\Projects\NAppUpdate\src\NAppUpdate.Framework\UpdateManager.cs:line 133
+   at NAppUpdate.Framework.UpdateManager.<>c__DisplayClass2.<CheckForUpdateAsync>b__1() in z:\Projects\NAppUpdate\src\NAppUpdate.Framework\UpdateManager.cs:line 175
+2012-06-29 15:19:25,083 [17] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-29 15:19:25,084 [17] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-29 15:24:25,103 [19] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-29 15:24:25,103 [19] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-29 15:29:25,133 [16] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-29 15:29:25,134 [16] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-29 15:34:25,180 [15] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-29 15:34:25,181 [15] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-29 15:39:25,199 [23] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
+2012-06-29 15:39:25,200 [23] INFO  Rhino.Licensing.AbstractLicenseValidator [(null)] - License expiration date is 07/07/2012 00:00:00
