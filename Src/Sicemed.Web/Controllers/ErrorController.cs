@@ -22,5 +22,11 @@ namespace Sicemed.Web.Controllers
             ViewData.Model = message;
             return View();
         }
+
+        public ActionResult Security(string message)
+        {
+            ViewData.Model = message;
+            return View();
+        }
     }
 }

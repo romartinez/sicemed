@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Security;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -212,7 +213,14 @@ namespace SICEMED.Web
 
                 // clear error on server
                 Server.ClearError();
-                Response.Redirect(String.Format("/Error/{0}/?message={1}", action, exception.Message));
+                Response.Redirect(String.Format("/Error/{0}/", action));
+            }
+
+            if(exception as SecurityException != null)
+            {
+                // clear error on server
+                Server.ClearError();
+                Response.Redirect(String.Format("/Error/Security/"));
             }
         }
 
