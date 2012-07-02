@@ -78,8 +78,16 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
             if (!(@event.Entity is Entity))
                 return;
 
-            AuditEvent(@event.Session.GetSession(EntityMode.Poco), @event.Id,
-                "DELETE", @event.Entity.GetType().Name, Serialize(@event.Persister.EntityMetamodel.PropertyNames, Resolver.ResolveArray(@event.DeletedState, @event.Session)), string.Empty);
+            var session = @event.Session.GetSession(EntityMode.Poco);
+            var entityName = @event.Entity.GetType().Name;
+            var propertyNames = @event.Persister.EntityMetamodel.PropertyNames;
+            var beforeState = Resolver.ResolveArray(@event.DeletedState, @event.Session);
+            var before = Serialize(propertyNames, beforeState);            
+            var after = string.Empty;
+
+            Log.Debug(before);
+            
+            AuditEvent(session, @event.Id, "DELETE", entityName, before, after);
         }
 
         public void OnPostInsert(PostInsertEvent @event)
@@ -87,17 +95,35 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
             if (!(@event.Entity is Entity))
                 return;
 
-            AuditEvent(@event.Session.GetSession(EntityMode.Poco), @event.Id,
-                "INSERT", @event.Entity.GetType().Name, string.Empty, Serialize(@event.Persister.EntityMetamodel.PropertyNames, Resolver.ResolveArray(@event.State, @event.Session)));
+            var session = @event.Session.GetSession(EntityMode.Poco);
+            var entityName = @event.Entity.GetType().Name;
+            var propertyNames = @event.Persister.EntityMetamodel.PropertyNames;
+            var before = string.Empty;
+            var afterState = Resolver.ResolveArray(@event.State, @event.Session);
+            var after = Serialize(propertyNames, afterState);
+
+            Log.Debug(after);
+
+            AuditEvent(session, @event.Id, "INSERT", entityName, before, after);
         }
 
         public void OnPostUpdate(PostUpdateEvent @event)
         {
             if (!(@event.Entity is Entity))
                 return;
+            
+            var session = @event.Session.GetSession(EntityMode.Poco);
+            var entityName = @event.Entity.GetType().Name;
+            var propertyNames = @event.Persister.EntityMetamodel.PropertyNames;
+            var beforeState = Resolver.ResolveArray(@event.OldState, @event.Session);
+            var before = Serialize(propertyNames, beforeState);
+            var afterState = Resolver.ResolveArray(@event.State, @event.Session);
+            var after = Serialize(propertyNames, afterState);
 
-            AuditEvent(@event.Session.GetSession(EntityMode.Poco), @event.Id,
-                "UPDATE", @event.Entity.GetType().Name, Serialize(@event.Persister.EntityMetamodel.PropertyNames, Resolver.ResolveArray(@event.OldState, @event.Session)), Serialize(@event.Persister.EntityMetamodel.PropertyNames, Resolver.ResolveArray(@event.State, @event.Session)));
+            Log.Debug(before);
+            Log.Debug(after);
+
+            AuditEvent(session, @event.Id, "UPDATE", entityName, before, after);
         }
     }
 }

@@ -65,13 +65,13 @@ namespace SICEMED.Web.Infrastructure.Windsor.Facilities
             SchemaMetadataUpdater.QuoteTableAndColumns(configuration);
 
             configuration.Properties[Environment.CurrentSessionContextClass]
-                = typeof(LazySessionContext).AssemblyQualifiedName; 
+                = typeof(LazySessionContext).AssemblyQualifiedName;
 
-            //var auditListener = new AuditEventListener();
+            var auditListener = new AuditEventListener();
 
-            //configuration.SetListener(ListenerType.PostDelete, auditListener);
-            //configuration.SetListener(ListenerType.PostInsert, auditListener);
-            //configuration.SetListener(ListenerType.PostUpdate, auditListener);
+            configuration.SetListener(ListenerType.PostDelete, auditListener);
+            configuration.SetListener(ListenerType.PostInsert, auditListener);
+            configuration.SetListener(ListenerType.PostUpdate, auditListener);
 
 			configuration.SetListener(ListenerType.Flush, new PostFlushFixEventListener());
 

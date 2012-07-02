@@ -85,6 +85,7 @@ namespace Sicemed.Tests
             //var path = @"D:\Program Files\Microsoft SQL Server\MSSQL.2\MSSQL\Data\Sicemed_Snapshot.ss";
             var path = @"C:\Program Files\Microsoft SQL Server\MSSQL10.MSSQLSERVER\MSSQL\DATA\Sicemed_Snapshot.ss";
             CreateDatabaseSnapshot("Sicemed_Snapshot", "SicemedTest", path);
+            var logLevel = LogManager.GetRepository().Threshold;
             LogManager.GetRepository().Threshold = Level.Off;
 
             CurrentSessionContext.Bind(SessionFactory.OpenSession());
@@ -100,7 +101,7 @@ namespace Sicemed.Tests
                                                                 new Mock<IFormAuthenticationStoreService>().Object);
             installer.Install(DatabaseConfiguration);
 
-            LogManager.GetRepository().Threshold = Level.Info;
+            LogManager.GetRepository().Threshold = logLevel;
 
             new RijndaelEngine("WAL");
             _membershipMailer = new Mock<IMembershipMailer>();
