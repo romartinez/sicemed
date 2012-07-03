@@ -8,7 +8,7 @@ namespace Sicemed.Web.Models
     public class Turno : Entity
     {
         public enum EstadoTurno
-        {            
+        {
             Otorgado,
             Presentado,
             Atendido,
@@ -47,9 +47,9 @@ namespace Sicemed.Web.Models
                 return other != null && this._currentState == other._currentState && this._eventoTurno == other._eventoTurno;
             }
         }
-        
+
         private static Dictionary<CambioEstadoTurno, EstadoTurno> _transiciones;
-        
+
         #region Primitive Properties
 
         public virtual DateTime FechaGeneracion { get; protected set; }
@@ -57,21 +57,21 @@ namespace Sicemed.Web.Models
         public virtual DateTime FechaTurno { get; protected set; }
 
         public virtual DateTime? FechaIngreso { get; protected set; }
-        
+
         public virtual DateTime? FechaCancelacion { get; protected set; }
 
         public virtual DateTime? FechaAtencion { get; protected set; }
 
         public virtual string Nota { get; protected set; }
-        
+
         public virtual string MotivoCancelacion { get; protected set; }
 
         public virtual string IpPaciente { get; protected set; }
 
         public virtual bool EsTelefonico { get; protected set; }
-        
+
         public virtual EstadoTurno Estado { get; protected set; }
-        
+
         public virtual DateTime FechaEstado { get; protected set; }
 
         #endregion
@@ -85,7 +85,7 @@ namespace Sicemed.Web.Models
         public virtual Secretaria SecretariaReservadoraTurno { get; protected set; }
 
         public virtual Secretaria SecretariaRecepcionista { get; set; }
-        
+
         public virtual Persona CanceladoPor { get; set; }
 
         public virtual Especialidad Especialidad { get; protected set; }
@@ -195,7 +195,7 @@ namespace Sicemed.Web.Models
             FechaCancelacion = DateTime.Now;
             CanceladoPor = canceladoPor;
             MotivoCancelacion = motivoCancelacion;
-            Paciente.AgregarInasistencia();
+            if (Paciente.Persona == canceladoPor) Paciente.AgregarInasistencia();
             return this;
         }
 
