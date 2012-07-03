@@ -28,5 +28,10 @@ namespace Sicemed.Web.Models.Components
         public virtual DateTime? LastLockoutDate { get; set; }
         public virtual int FailedPasswordAttemptCount { get; set; }
         public virtual DateTime? FailedPasswordAttemptWindowStart { get; set; }
+
+        public override string ToString()
+        {
+            return Email;
+        }
     }
 }

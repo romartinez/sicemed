@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Web;
 using NHibernate;
 using NHibernate.Event;
-using NHibernate.Event.Default;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Sicemed.Web.Models;
@@ -21,13 +20,15 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
             _settings = new JsonSerializerSettings()
                             {
                                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                                ContractResolver = new NHibernateContractResolver(),
+                                ContractResolver = new NHibernateAuditContractResolver(),
                                 Error = (sender, args) =>
                                             {
                                                 args.ErrorContext.Handled = true;
                                             }
                             };
             _settings.Converters.Add(new IsoDateTimeConverter());
+            _settings.Converters.Add(new EntityConverter());
+            _settings.Converters.Add(new StringEnumConverter());
         }
 
         private string Serialize(string[] propertyNames, object[] obj)
@@ -81,8 +82,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
             var session = @event.Session.GetSession(EntityMode.Poco);
             var entityName = @event.Entity.GetType().Name;
             var propertyNames = @event.Persister.EntityMetamodel.PropertyNames;
-            var beforeState = Resolver.ResolveArray(@event.DeletedState, @event.Session);
-            var before = Serialize(propertyNames, beforeState);            
+            var before = Serialize(propertyNames, @event.DeletedState);            
             var after = string.Empty;
 
             Log.Debug(before);
@@ -99,8 +99,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
             var entityName = @event.Entity.GetType().Name;
             var propertyNames = @event.Persister.EntityMetamodel.PropertyNames;
             var before = string.Empty;
-            var afterState = Resolver.ResolveArray(@event.State, @event.Session);
-            var after = Serialize(propertyNames, afterState);
+            var after = Serialize(propertyNames, @event.State);
 
             Log.Debug(after);
 
@@ -115,10 +114,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
             var session = @event.Session.GetSession(EntityMode.Poco);
             var entityName = @event.Entity.GetType().Name;
             var propertyNames = @event.Persister.EntityMetamodel.PropertyNames;
-            var beforeState = Resolver.ResolveArray(@event.OldState, @event.Session);
-            var before = Serialize(propertyNames, beforeState);
-            var afterState = Resolver.ResolveArray(@event.State, @event.Session);
-            var after = Serialize(propertyNames, afterState);
+            var before = Serialize(propertyNames, @event.OldState);
+            var after = Serialize(propertyNames, @event.State);
 
             Log.Debug(before);
             Log.Debug(after);
