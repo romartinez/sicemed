@@ -1,13 +1,11 @@
 ﻿using System;
 using NHibernate;
 using NHibernate.Cfg;
-using NHibernate.Context;
 using SICEMED.Web.Infrastructure.Windsor.Facilities;
-using WebBackgrounder;
 
 namespace Sicemed.Web.Infrastructure.Jobs
 {
-    public abstract class NHibernateJob : Job
+    public abstract class NHibernateJob : SimpleJob
     {        
         private static Configuration _databaseConfiguration;
         private static ISessionFactory _sessionFactory;
@@ -41,5 +39,25 @@ namespace Sicemed.Web.Infrastructure.Jobs
 
         protected NHibernateJob(string name, TimeSpan interval) 
             : base(name, interval){}
+
+        protected override void Run()
+        {
+            using (var session = SessionFactory.OpenSession())
+            using (var tx = session.BeginTransaction())
+            {
+                try
+                {
+                    Run(session);                    
+                    tx.Commit();
+                }
+                catch (Exception ex)
+                {
+                    if (Log.IsFatalEnabled) Log.Fatal(ex);
+                    tx.Rollback();
+                }
+            }            
+        }
+
+        protected abstract void Run(ISession session);
     }
 }

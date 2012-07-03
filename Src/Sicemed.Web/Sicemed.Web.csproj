@@ -207,10 +207,15 @@
     <Compile Include="Areas\Admin\Models\Personas\PersonaViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\ProfesionalEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\SecretariaEditModel.cs" />
+    <Compile Include="Controllers\PingController.cs" />
     <Compile Include="Infrastructure\Controllers\AdministracionDeTurnosBaseController.cs" />
+    <Compile Include="Infrastructure\Helpers\Dapper.cs" />
     <Compile Include="Infrastructure\Jobs\AusentarTurnosVencidosJob.cs" />
     <Compile Include="Infrastructure\Jobs\KeepAliveJob.cs" />
+    <Compile Include="Infrastructure\Jobs\MoverHistoricoJob.cs" />
     <Compile Include="Infrastructure\Jobs\NHibernateJob.cs" />
+    <Compile Include="Infrastructure\Jobs\RawSqlJob.cs" />
+    <Compile Include="Infrastructure\Jobs\SimpleJob.cs" />
     <Compile Include="Infrastructure\ModelBinders\DateTimeCurrentCultureModelBinder.cs" />
     <Compile Include="Infrastructure\ModelBinders\SearchFiltersModelBinder.cs" />
     <Compile Include="Infrastructure\NHibernate\EntityConverter.cs" />
@@ -417,7 +422,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\combres.xml" />
-    <Content Include="App_Data\LogTable.sql" />
+    <Content Include="App_Data\001_LogTable.sql" />
+    <Content Include="App_Data\002_LogHistoricoTable.sql" />
+    <Content Include="App_Data\003_AuditLogHistoricoTable.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Roles\Administrador.hbm.xml" />

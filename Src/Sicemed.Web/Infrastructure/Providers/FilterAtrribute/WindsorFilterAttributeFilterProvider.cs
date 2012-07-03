@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Security;
 using System.Web.Mvc;
 using Castle.Windsor;
+using Sicemed.Web.Controllers;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.Providers.Cache;
@@ -53,6 +54,9 @@ namespace Sicemed.Web.Infrastructure.Providers.FilterAtrribute
         protected override IEnumerable<FilterAttribute> GetActionAttributes(
             ControllerContext controllerContext, ActionDescriptor actionDescriptor)
         {
+            //Ping controller lo excluyo
+            if (controllerContext.Controller.GetType() == typeof(PingController)) return new List<FilterAttribute>();
+
             var attributes = new List<FilterAttribute>();
             attributes.AddRange(base.GetControllerAttributes(controllerContext, actionDescriptor));
             attributes.AddRange(base.GetActionAttributes(controllerContext, actionDescriptor));

@@ -1,4 +1,7 @@
 using System;
+using System.Data;
+using System.IO;
+using System.Linq;
 using System.Web;
 using Castle.Core.Logging;
 using NHibernate;
@@ -12,6 +15,7 @@ using Sicemed.Web.Models;
 using Sicemed.Web.Models.Components;
 using Sicemed.Web.Models.Enumerations.Documentos;
 using Sicemed.Web.Models.Roles;
+using Dapper;
 
 namespace Sicemed.Web.Infrastructure
 {
@@ -144,6 +148,24 @@ namespace Sicemed.Web.Infrastructure
 
             Console.WriteLine(@"*************************************************");
             Console.WriteLine(@"*************************************************");
+
+            //Create Additional Tables and Scripts
+            var sqlPath = HttpContext.Current != null ? HttpContext.Current.Server.MapPath("~/App_Data") :
+                @"D:\Documents\Projects\sicemed\Src\Sicemed.Web\App_Data";
+            var files = Directory.GetFiles(sqlPath, "*.sql").OrderBy(x => x);
+
+            foreach (var file in files)
+            {
+                Logger.DebugFormat("Executing custom sql: {0}", file);
+                try
+                {
+                    session.Connection.Execute(File.ReadAllText(file));
+                }
+                catch (Exception ex)
+                {
+                    Logger.ErrorFormat("Error al ejecutar el SQL: {0}. Exc: {1}", file, ex);
+                }
+            }
         }
 
         #region Entity Creation Methods
@@ -170,7 +192,7 @@ namespace Sicemed.Web.Infrastructure
                                                       Latitud = -32.92501,
                                                       Longitud = -60.67679
                                                   },
-                                  Email = "contacto@sicemed.com.ar"    ,
+                                  Email = "contacto@sicemed.com.ar",
                                   GoogleMapsKey = "asdfsdfsjWERWER"
                               };
             clinica
@@ -377,10 +399,10 @@ namespace Sicemed.Web.Infrastructure
             PersonaAdminProfesionalWalter.As<Profesional>().AgregarAgenda(DayOfWeek.Wednesday, TimeSpan.FromMinutes(30), hInicio, hfin, ConsultorioA, EspecialidadClinico);
             PersonaAdminProfesionalWalter.As<Profesional>().AgregarAgenda(DayOfWeek.Thursday, TimeSpan.FromMinutes(30), hInicio, hfin, ConsultorioA, EspecialidadClinico);
             PersonaAdminProfesionalWalter.As<Profesional>().AgregarAgenda(DayOfWeek.Friday, TimeSpan.FromMinutes(30), hInicio, hfin, ConsultorioA, EspecialidadClinico);
-            
+
             MembershipService.CreateUser(PersonaAdminProfesionalWalter, "walter@gmail.com", "sicemedWalter");
             session.Update(PersonaAdminProfesionalWalter);
-            
+
             //Turno Ausente
             session.Save(Turno.Create(DateTime.Now.AddDays(-1).SetTimeWith(hInicio), PersonaAdminProfesionalWalter.As<Paciente>(),
                          PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1")
