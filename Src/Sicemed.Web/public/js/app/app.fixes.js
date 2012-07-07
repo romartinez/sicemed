@@ -77,3 +77,13 @@
 
     return app;
 })(jQuery, app || {});
+
+
+/* CUSTOM Date Validator */
+$.validator.addMethod("isdate", function(value, element) {
+    var isDate = function(value) {
+        var validDate = /^(\d{2})\/(\d{2})\/(\d{4})?$/ ;
+        return validDate.test(value);
+    }; 
+    return isDate(value);
+});

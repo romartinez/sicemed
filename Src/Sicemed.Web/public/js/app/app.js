@@ -44,7 +44,7 @@ var app = (function ($, app) {
         $("input.ctl-timespan[type=text]").timepicker({
             showHours: false
         });
-        $("input.date").datepicker();
+        $("input.date").datepicker({ dateFormat: "dd/mm/yy" });
         $("input.time").timepicker({
             showPeriod: true,
             showLeadingZero: true
