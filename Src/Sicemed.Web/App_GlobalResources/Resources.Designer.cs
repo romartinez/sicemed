@@ -60,9 +60,9 @@ namespace Resources {
             }
         }
         
-        internal static byte[] comprobanteturno1 {
+        internal static byte[] ComprobanteTurno {
             get {
-                object obj = ResourceManager.GetObject("comprobanteturno1", resourceCulture);
+                object obj = ResourceManager.GetObject("ComprobanteTurno", resourceCulture);
                 return ((byte[])(obj));
             }
         }

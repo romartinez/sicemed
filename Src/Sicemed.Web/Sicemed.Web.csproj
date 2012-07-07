@@ -822,7 +822,7 @@
     <Content Include="Views\NotificationService\CancelacionTurno.cshtml" />
     <Content Include="Views\Shared\_CancelarTurno.cshtml" />
     <Content Include="Views\Error\Security.cshtml" />
-    <None Include="Reports\comprobanteturno1.pdf" />
+    <None Include="Reports\ComprobanteTurno" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

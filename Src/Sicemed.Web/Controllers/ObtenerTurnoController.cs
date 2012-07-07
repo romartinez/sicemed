@@ -109,7 +109,7 @@ namespace Sicemed.Web.Controllers
                 throw new SecurityException("El usuario actual no es al que se le otorgó el turno.");
 
             // Read the template            
-            var reader = new PdfReader(Resources.Resources.comprobanteturno1);
+            var reader = new PdfReader(Resources.Resources.ComprobanteTurno);
 
             // Writes the modified template to http response
             this.HttpContext.Response.Clear();
