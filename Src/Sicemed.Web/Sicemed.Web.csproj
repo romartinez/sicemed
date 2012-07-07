@@ -183,6 +183,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\NHibernateProfilerBootstrapper.cs" />
     <Compile Include="App_Start\WebBackgrounderSetup.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
@@ -427,6 +432,10 @@
     <Content Include="App_Data\003_AuditLogHistoricoTable.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="App_GlobalResources\Resources.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Roles\Administrador.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Agenda.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Clinica.hbm.xml" />
@@ -813,6 +822,7 @@
     <Content Include="Views\NotificationService\CancelacionTurno.cshtml" />
     <Content Include="Views\Shared\_CancelarTurno.cshtml" />
     <Content Include="Views\Error\Security.cshtml" />
+    <None Include="Reports\comprobanteturno1.pdf" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
