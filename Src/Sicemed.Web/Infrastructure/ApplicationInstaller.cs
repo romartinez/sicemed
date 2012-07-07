@@ -193,7 +193,7 @@ namespace Sicemed.Web.Infrastructure
                                                       Longitud = -60.67679
                                                   },
                                   Email = "contacto@sicemed.com.ar",
-                                  GoogleMapsKey = "asdfsdfsjWERWER"
+                                  GoogleMapsKey = "AIzaSyBKt3eKqEI-zr5bqGJG3mCCZJK0asao5-0"
                               };
             clinica
                 .AgregarTelefono(

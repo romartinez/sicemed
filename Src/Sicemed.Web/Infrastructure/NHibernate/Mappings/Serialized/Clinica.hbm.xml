@@ -11,6 +11,8 @@
     </component>
     <component class="Sicemed.Web.Models.Components.Domicilio" name="Domicilio">
       <property name="Direccion" column="DomicilioDireccion" />
+      <property name="Latitud" column="DomicilioLatitud" />
+      <property name="Longitud" column="DomicilioLongitud" />
       <many-to-one name="Localidad" column="DomicilioLocalidadId" foreign-key="FK_Clinica_Localidad" />
     </component>
     <set name="Telefonos" access="nosetter.camelcase-underscore" table="ClinicaTelefonos" lazy="false">
