@@ -28,7 +28,7 @@ namespace Sicemed.Web.Controllers
         public JsonResult ObtenerEspecialidades()
         {
             //Lo dejo asi sino tengo que tocar el JS.
-            var result = GetEspecialidades().Select(x => new { Id = x.Value, Nombre = x.Text });
+            var result = GetEspecialidades().Select(x => new {Id = x.Value, Nombre = x.Text});
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -109,7 +109,7 @@ namespace Sicemed.Web.Controllers
                 throw new SecurityException("El usuario actual no es al que se le otorgó el turno.");
 
             // Read the template            
-            var reader = new PdfReader(Resources.Resources.ComprobanteTurno);
+            var reader = new PdfReader(Server.MapPath("~/Reports/ComprobanteTurno.pdf"));
 
             // Writes the modified template to http response
             this.HttpContext.Response.Clear();
