@@ -7,6 +7,7 @@ using EfficientlyLazy.Crypto;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Providers.Cache;
 using Sicemed.Web.Infrastructure.Queries;
+using Sicemed.Web.Infrastructure.Reports;
 using Sicemed.Web.Infrastructure.Services;
 
 namespace SICEMED.Web.Infrastructure.Windsor.Installers
@@ -32,6 +33,8 @@ namespace SICEMED.Web.Infrastructure.Windsor.Installers
                 //Menu Provider
                 //Queries
                 AllTypes.FromThisAssembly().BasedOn<IQuery>()
+                    .WithService.DefaultInterface().Configure(x => x.LifeStyle.Transient),
+                AllTypes.FromThisAssembly().BasedOn<IReport>()
                     .WithService.DefaultInterface().Configure(x => x.LifeStyle.Transient),
                 Component.For<IQueryFactory>().AsFactory(),
                 Component.For<IApplicationInstaller>().ImplementedBy<ApplicationInstaller>().LifeStyle.Singleton,

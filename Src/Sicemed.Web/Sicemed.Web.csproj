@@ -113,6 +113,8 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -223,8 +225,14 @@
     <Compile Include="Infrastructure\Queries\AdministracionDeTurnos\ObtenerTurnosACancelarQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaPacienteQuery.cs" />
     <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosPorPacienteQuery.cs" />
+    <Compile Include="Infrastructure\Reports\IReport.cs" />
+    <Compile Include="Infrastructure\Reports\ReporteBase.cs" />
+    <Compile Include="Infrastructure\Reports\ReportInfo.cs" />
+    <Compile Include="Infrastructure\Reports\ServiceReport.cs" />
+    <Compile Include="Infrastructure\Reports\TurnosPorProfesionalReporte.cs" />
     <Compile Include="Infrastructure\Services\INotificationService.cs" />
     <Compile Include="Infrastructure\Services\NotificationService.cs" />
+    <Compile Include="Models\Reports\TurnosPorProfesionalReportModel.cs" />
     <Compile Include="Models\ViewModels\Historial\TurnosPorPacienteViewModel.cs" />
     <Compile Include="Models\ViewModels\PacienteSearchViewModel.cs" />
     <Compile Include="Models\ViewModels\Profesional\CalendarioProfesionalViewModel.cs" />
@@ -418,6 +426,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Report.aspx.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Report.aspx.designer.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -641,6 +656,7 @@
     <Content Include="public\js\libs\msDateJsonParser.js" />
     <Content Include="public\js\libs\postAntiForgery.js" />
     <Content Include="Reports\logo.png" />
+    <Content Include="Reports\Report.aspx" />
     <Content Include="Views\Secretaria\OtorgarTurno.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -660,7 +676,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\TurnosPorProfesional.rdlc" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
