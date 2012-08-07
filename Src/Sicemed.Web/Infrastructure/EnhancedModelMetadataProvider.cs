@@ -48,6 +48,14 @@ namespace Sicemed.Web.Infrastructure
                 data.AdditionalValues.Add("CascadingDropDownProperty.ParameterName", cascading.ParameterName);
             }                
 
+            var searchDropDown = attributes.SingleOrDefault(a => a is SearcheableDropDownPropertyAttribute);
+            if (searchDropDown != null)
+            {
+                var search = (SearcheableDropDownPropertyAttribute)searchDropDown;
+                data.AdditionalValues.Add("SearcheableDropDownPropertyAttribute.ActionName", search.ActionName);
+                data.AdditionalValues.Add("SearcheableDropDownPropertyAttribute.ControllerName", search.ControllerName);
+            }                
+
             return data;
         }
     }

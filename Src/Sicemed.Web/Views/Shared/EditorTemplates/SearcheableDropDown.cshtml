@@ -1,0 +1,10 @@
+﻿@{
+    var attrs = new Dictionary<string, object>();
+    attrs.Add("data-prompt", ViewData.ModelMetadata.Watermark);
+    var action = ViewData.ModelMetadata.AdditionalValues["SearcheableDropDownPropertyAttribute.ActionName"].ToString();
+    var controller = ViewData.ModelMetadata.AdditionalValues["SearcheableDropDownPropertyAttribute.ControllerName"].ToString();
+    attrs.Add("data-url", Url.Action(action, controller));
+    attrs.Add("class", "searcheable");
+    
+}
+@Html.HiddenFor(x => x, attrs)

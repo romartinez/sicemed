@@ -111,10 +111,10 @@ namespace Sicemed.Web.Controllers
         {
             var queryPacientes = QueryFactory.Create<IObtenerPacientesDropDownQuery>();
             queryPacientes.SelectedValue = editModel.PacienteId;
-            editModel.PacientesDisponibles = queryPacientes.Execute();
+            //editModel.PacientesDisponibles = queryPacientes.Execute();
             var queryProfesionales = QueryFactory.Create<IObtenerProfesionalesDropDownQuery>();
             queryProfesionales.SelectedValue = editModel.ProfesionalId;
-            editModel.ProfesionalesDisponibles = queryProfesionales.Execute();
+            //editModel.ProfesionalesDisponibles = queryProfesionales.Execute();
 
             if (editModel.ProfesionalId.HasValue)
             {

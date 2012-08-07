@@ -9,22 +9,16 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
     public class OtorgarTurnoEditModel
     {
         [Required]
-        [ScaffoldColumn(false)]
+        [UIHint("SearcheableDropDown")]
+        [SearcheableDropDownProperty("Paciente", "Busqueda")]
+        [Display(Name = "Paciente", Prompt = "Seleccione Paciente")]
         public long? PacienteId { get; set; }
 
-        [DisplayName("Paciente")]
-        [UIHint("DropDownList")]
-        [DropDownProperty("PacienteId")]
-        public IEnumerable<SelectListItem> PacientesDisponibles { get; set; }
-
         [Required]
-        [ScaffoldColumn(false)]
+        [UIHint("SearcheableDropDown")]
+        [SearcheableDropDownProperty("Profesional", "Busqueda")]
+        [Display(Name = "Profesional", Prompt = "Seleccione Profesional")]
         public long? ProfesionalId { get; set; }
-
-        [DisplayName("Profesional")]
-        [UIHint("DropDownList")]
-        [DropDownProperty("ProfesionalId")]
-        public IEnumerable<SelectListItem> ProfesionalesDisponibles { get; set; }
 
         [Required]
         [ScaffoldColumn(false)]

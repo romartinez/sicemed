@@ -18,8 +18,6 @@
     
     @Html.ValidationSummaryWithMessage()
 
-    <input type="hidden" id="hdnPacienteId" />
-
     @Html.EditorForModel()
 
     @Html.Submit("Otorgar")        
@@ -27,13 +25,14 @@
 @section Scripts{
     <script type="text/javascript">
         jQuery(function ($) {
-            $("#hdnPacienteId").select2({
-                placeholder: "Seleccione un Paciente",
+            var searcheable = $(".searcheable");
+            searcheable.select2({
+                placeholder: searcheable.data("prompt"),
                 allowClear: true,
                 minimumInputLength: 3,
                 ajax: {
                     quietMillis: 500,
-                    url: "/Busqueda/Paciente",
+                    url: searcheable.data("url"),
                     dataType: "json",
                     data: function (term, page) {
                         return { filtro: term };
@@ -67,7 +66,6 @@
                 formatSelectionTooBig: function (limit) { return "Sólo puede seleccionar " + limit + " elementos."; },
                 formatLoadMore: function (pageNumber) { return "Cargando más resultados..."; },
             });
-            $("#ProfesionalId").select2();
         });
     </script>
 }

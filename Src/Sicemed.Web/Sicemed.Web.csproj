@@ -221,6 +221,7 @@
     <Compile Include="Areas\Admin\Models\Personas\SecretariaEditModel.cs" />
     <Compile Include="Controllers\BusquedaController.cs" />
     <Compile Include="Controllers\PingController.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\SearcheableDropDownPropertyAttribute.cs" />
     <Compile Include="Infrastructure\Controllers\AdministracionDeTurnosBaseController.cs" />
     <Compile Include="Infrastructure\Helpers\Dapper.cs" />
     <Compile Include="Infrastructure\Jobs\AusentarTurnosVencidosJob.cs" />
@@ -848,6 +849,7 @@
     <Content Include="Views\NotificationService\CancelacionTurno.cshtml" />
     <Content Include="Views\Shared\_CancelarTurno.cshtml" />
     <Content Include="Views\Error\Security.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SearcheableDropDown.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
