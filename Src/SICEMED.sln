@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sicemed.Web", "Sicemed.Web\Sicemed.Web.csproj", "{0696847C-4CB8-4AE0-97CB-E28A8D0E452A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sicemed.Tests", "Sicemed.Test\Sicemed.Tests.csproj", "{E97B81CA-12F6-4E26-8B06-17C86F758F85}"
@@ -25,8 +25,8 @@ Global
 		{0696847C-4CB8-4AE0-97CB-E28A8D0E452A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0696847C-4CB8-4AE0-97CB-E28A8D0E452A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0696847C-4CB8-4AE0-97CB-E28A8D0E452A}.Release|x86.ActiveCfg = Release|Any CPU
-		{E97B81CA-12F6-4E26-8B06-17C86F758F85}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{E97B81CA-12F6-4E26-8B06-17C86F758F85}.Debug|Any CPU.Build.0 = Debug|x86
+		{E97B81CA-12F6-4E26-8B06-17C86F758F85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E97B81CA-12F6-4E26-8B06-17C86F758F85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E97B81CA-12F6-4E26-8B06-17C86F758F85}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{E97B81CA-12F6-4E26-8B06-17C86F758F85}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{E97B81CA-12F6-4E26-8B06-17C86F758F85}.Debug|x86.ActiveCfg = Debug|x86

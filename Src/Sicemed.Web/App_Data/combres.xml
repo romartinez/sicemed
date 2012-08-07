@@ -29,6 +29,7 @@
       <resource path="~/public/css/jquery.jgrowl.css" />
       <resource path="~/public/css/jquery.ui.timepicker.css" />
       <resource path="~/public/css/theme.css" />
+      <resource path="~/public/css/select2.css" />
       <resource path="~/public/css/app.css" />
     </resourceSet>
     <resourceSet name="js" type="js">
@@ -46,6 +47,7 @@
       <resource path="~/public/js/libs/msDateJsonParser.js" />
       <resource path="~/public/js/libs/jquery.jgrowl.js" />
       <resource path="~/public/js/libs/jquery.tools.min.js" />
+      <resource path="~/public/js/libs/select2.js" />
       <resource path="~/public/js/libs/jquery.ui.timepicker.js" />
 
       <resource path="~/public/js/libs/i18n/jquery.ui.datepicker-es.js" />

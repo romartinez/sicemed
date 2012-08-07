@@ -17,7 +17,37 @@
     
     @Html.ValidationSummaryWithMessage()
 
+    <input type="hidden" id="hdnPacienteId"/>
+
     @Html.EditorForModel()
 
     @Html.Submit("Otorgar")        
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $("#hdnPacienteId").select2({
+                placeholder: "Seleccione un Paciente",
+                allowClear: true,
+                minimumInputLength: 3,
+                ajax: {
+                    url: "/Busqueda/Paciente",
+                    dataType: "json",
+                    data: function (term, page) {
+                        return { filtro: term };
+                    },
+                    results: function (data, page) {
+                        var d = { results: [] };
+                        for (var i = data.length - 1; i >= 0; i--) {
+                            var p = data[i];
+                            d.results.push({ id: p.Id, text: p.Descripcion });
+                        }
+                        return data;
+                    }
+                }
+            });
+            $("#ProfesionalId").select2();
+        });
+    </script>
 }
