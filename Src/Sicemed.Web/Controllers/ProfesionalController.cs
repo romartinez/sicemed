@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Web.Mvc;
+using SICEMED.Web;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Queries.Profesional;
+using Sicemed.Web.Infrastructure.Reports;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Reports;
 using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Controllers
@@ -38,6 +41,15 @@ namespace Sicemed.Web.Controllers
 
             ShowMessages(ResponseMessage.Success());
             return RedirectToAction("Agenda", new { fecha = turno.FechaTurno.ToShortDateString() });
+        }
+
+        public ActionResult Report()
+        {
+            var report = new ServiceReport();
+            var reportData = MvcApplication.Container.Resolve<ITurnosPorProfesionalReporte>();
+            var reportInfo = new ReportInfo("TurnosPorProfesional", "Turnos", "", reportData.Execute);
+            var reportBytes = report.BuildReport(reportInfo, "PDF");
+            return File(reportBytes, "application/pdf", "reporte.pdf");
         }
     }
 }
