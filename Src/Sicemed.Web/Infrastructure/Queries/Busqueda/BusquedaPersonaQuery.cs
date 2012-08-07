@@ -8,18 +8,18 @@ using Sicemed.Web.Models.ViewModels;
 
 namespace Sicemed.Web.Infrastructure.Queries.Busqueda
 {
-    public interface IBusquedaPersonaQuery : IQuery<IEnumerable<InfoViewModel>>
+    public interface IBusquedaPersonaQuery : IQuery<IEnumerable<PersonaViewModel>>
     {
         Type Rol { get; set; }
         string Filtro { get; set; }
     }
 
-    public class BusquedaPersonaQueryQuery : Query<IEnumerable<InfoViewModel>>, IBusquedaPersonaQuery
+    public class BusquedaPersonaQuery : Query<IEnumerable<PersonaViewModel>>, IBusquedaPersonaQuery
     {
         public Type Rol { get; set; }
         public string Filtro { get; set; }
 
-        protected override IEnumerable<InfoViewModel> CoreExecute()
+        protected override IEnumerable<PersonaViewModel> CoreExecute()
         {
             var session = SessionFactory.GetCurrentSession();
 
@@ -42,7 +42,7 @@ namespace Sicemed.Web.Infrastructure.Queries.Busqueda
 
             var personas = query.Future();
 
-            return MappingEngine.Map<IEnumerable<InfoViewModel>>(personas);
+            return MappingEngine.Map<IEnumerable<PersonaViewModel>>(personas);
         }
     }
 }

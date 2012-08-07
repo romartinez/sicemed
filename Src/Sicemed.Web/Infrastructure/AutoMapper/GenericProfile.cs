@@ -51,6 +51,12 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
             CreateMap<Persona, InfoViewModel>()
                 .ForMember(d => d.Id, m => m.MapFrom(o => o.Id))
                 .ForMember(d => d.Descripcion, m => m.MapFrom(o => o.NombreCompleto));
+
+            CreateMap<Persona, PersonaViewModel>()
+                .ForMember(d => d.Id, m => m.MapFrom(o => o.Id))
+                .ForMember(d => d.TipoDocumento, m => m.MapFrom(o => o.Documento.TipoDocumento.DisplayName))
+                .ForMember(d => d.Documento, m => m.MapFrom(o => o.Documento.Numero))
+                .ForMember(d => d.NombreCompleto, m => m.MapFrom(o => o.NombreCompleto));
             #endregion
 
             #region Secretaria

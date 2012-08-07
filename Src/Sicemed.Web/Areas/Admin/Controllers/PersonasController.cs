@@ -17,6 +17,7 @@ using Sicemed.Web.Models;
 using Sicemed.Web.Models.Components;
 using Sicemed.Web.Models.Roles;
 using Sicemed.Web.Models.ViewModels;
+using PersonaViewModel = Sicemed.Web.Areas.Admin.Models.Personas.PersonaViewModel;
 
 namespace Sicemed.Web.Areas.Admin.Controllers
 {

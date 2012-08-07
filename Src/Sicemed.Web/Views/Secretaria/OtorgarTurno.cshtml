@@ -4,7 +4,8 @@
 }
 @section Css{
     <style type="text/css">
-        select {
+        select
+        {
             width: 100%;
         }
     </style>
@@ -17,13 +18,12 @@
     
     @Html.ValidationSummaryWithMessage()
 
-    <input type="hidden" id="hdnPacienteId"/>
+    <input type="hidden" id="hdnPacienteId" />
 
     @Html.EditorForModel()
 
     @Html.Submit("Otorgar")        
 }
-
 @section Scripts{
     <script type="text/javascript">
         jQuery(function ($) {
@@ -32,20 +32,40 @@
                 allowClear: true,
                 minimumInputLength: 3,
                 ajax: {
+                    quietMillis: 500,
                     url: "/Busqueda/Paciente",
                     dataType: "json",
                     data: function (term, page) {
                         return { filtro: term };
                     },
                     results: function (data, page) {
-                        var d = { results: [] };
-                        for (var i = data.length - 1; i >= 0; i--) {
-                            var p = data[i];
-                            d.results.push({ id: p.Id, text: p.Descripcion });
-                        }
-                        return data;
+                        return { results: data };
                     }
-                }
+                },
+                formatResult: function (p, container, query) {
+                    var text = p.NombreCompleto + "<br/><small>" + p.TipoDocumento + " " + p.Documento + "</small>";
+                    var markup = [];
+                    var match = text.toUpperCase().indexOf(query.term.toUpperCase()), tl = query.term.length;
+
+                    if (match < 0) {
+                        markup.push(text);
+                    } else {
+                        markup.push(text.substring(0, match));
+                        markup.push("<span class='select2-match'>");
+                        markup.push(text.substring(match, match + tl));
+                        markup.push("</span>");
+                        markup.push(text.substring(match + tl, text.length));
+                    }
+                    return markup.join("");;
+                },
+                formatSelection: function (p) {
+                    return p.NombreCompleto;
+                },
+                id: function (e) { return e.Id; },
+                formatNoMatches: function () { return "No se encuentran coincidencias."; },
+                formatInputTooShort: function (input, min) { return "Por favor ingrese " + (min - input.length) + " caracteres más."; },
+                formatSelectionTooBig: function (limit) { return "Sólo puede seleccionar " + limit + " elementos."; },
+                formatLoadMore: function (pageNumber) { return "Cargando más resultados..."; },
             });
             $("#ProfesionalId").select2();
         });
