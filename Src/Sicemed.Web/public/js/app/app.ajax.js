@@ -25,11 +25,13 @@ var app = (function ($, app) {
         app.ui.showError(msj);
     };
 
-    ajax.beginXhr = function () {
+    ajax.beginXhr = function (e, xhr, settings) {        
+        if (!settings || settings.url.indexOf("/Busqueda/") >= 0) return;
         $.blockUI({ css: { backgroundColor: '#000', color: '#fff' }, message: '<h1>Espere por favor...</h1>' });
     };
 
-    ajax.endXhr = function (e, xhr, o) {
+    ajax.endXhr = function (e, xhr, settings) {                
+        if (!settings || settings.url.indexOf("/Busqueda/") >= 0) return;
         $.unblockUI();
         //Check for ResponseMessage to display
         var responseMessages = xhr.getResponseHeader("X-ResponseMessages");
@@ -49,6 +51,5 @@ var app = (function ($, app) {
             }
         }
     });
-
     return app;
 } (jQuery, app || {}));

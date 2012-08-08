@@ -7,11 +7,7 @@ namespace Sicemed.Web.Infrastructure.Attributes.DataAnnotations
     {
         public string ActionName { get; set; }
         public string ControllerName { get; set; }
-
-        public SearcheableDropDownPropertyAttribute(string actionName, string controllerName) 
-        {
-            ActionName = actionName;
-            ControllerName = controllerName;
-        }
+        public string Template { get; set; }
+        public string DisplayProperty { get; set; }
     }
 }

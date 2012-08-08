@@ -54,6 +54,8 @@ namespace Sicemed.Web.Infrastructure
                 var search = (SearcheableDropDownPropertyAttribute)searchDropDown;
                 data.AdditionalValues.Add("SearcheableDropDownPropertyAttribute.ActionName", search.ActionName);
                 data.AdditionalValues.Add("SearcheableDropDownPropertyAttribute.ControllerName", search.ControllerName);
+                data.AdditionalValues.Add("SearcheableDropDownPropertyAttribute.Template", search.Template);
+                data.AdditionalValues.Add("SearcheableDropDownPropertyAttribute.DisplayProperty", search.DisplayProperty);
             }                
 
             return data;

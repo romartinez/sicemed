@@ -10,13 +10,13 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
     {
         [Required]
         [UIHint("SearcheableDropDown")]
-        [SearcheableDropDownProperty("Paciente", "Busqueda")]
+        [SearcheableDropDownProperty(ActionName= "Paciente", ControllerName = "Busqueda", DisplayProperty = "NombreCompleto", Template = "tmplBusquedaPaciente")]
         [Display(Name = "Paciente", Prompt = "Seleccione Paciente")]
         public long? PacienteId { get; set; }
 
         [Required]
-        [UIHint("SearcheableDropDown")]
-        [SearcheableDropDownProperty("Profesional", "Busqueda")]
+        //[UIHint("SearcheableDropDown")]
+        //[SearcheableDropDownProperty("Profesional", "Busqueda")]
         [Display(Name = "Profesional", Prompt = "Seleccione Profesional")]
         public long? ProfesionalId { get; set; }
 

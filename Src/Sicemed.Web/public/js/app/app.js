@@ -3,6 +3,23 @@
 
 var app = (function ($, app) {
     app.clinica = null;
+    
+    var highligthMatch = function (text, term) {
+        var markup = [];
+        var match = text.toUpperCase().indexOf(term.toUpperCase()),
+            tl = term.length;
+
+        if (match < 0) {
+            markup.push(text);
+        } else {
+            markup.push(text.substring(0, match));
+            markup.push("<span class='select2-match'>");
+            markup.push(text.substring(match, match + tl));
+            markup.push("</span>");
+            markup.push(text.substring(match + tl, text.length));
+        }
+        return markup.join("");;
+    };
 
     app.initControls = function () {
         //dropdown-cascading
@@ -97,6 +114,54 @@ var app = (function ($, app) {
                 }
             };
         }
+        
+        //Searcheable
+        $(".searcheable").each(function (i, el) {
+            var searcheable = $(el);
+            if (searcheable.data("template")) {
+                var templateName = searcheable.data("template");
+                $("#" + templateName).template(templateName);
+            }
+            var formatSelection = function (obj) {
+                if (searcheable.data("display-property")) {
+                    return obj[searcheable.data("display-property")];
+                }
+                return obj.Descripcion;
+            };
+            var formatResult = function (obj, container, query) {
+                var text;
+                if (searcheable.data("template")) {
+                    text = $("<div/>").append($.tmpl(searcheable.data("template"), obj)).html();
+                } else {
+                    text = obj.Descripcion;
+                }
+                return highligthMatch(text, query.term);
+            };            
+            searcheable.select2({
+                placeholder: searcheable.data("prompt"),
+                allowClear: true,
+                minimumInputLength: 3,
+                ajax: {
+                    quietMillis: 500,
+                    url: searcheable.data("url"),
+                    dataType: "json",
+                    data: function (term, page) {
+                        return { filtro: term };
+                    },
+                    results: function (data, page) {
+                        return { results: data };
+                    }
+                },
+                formatResult: formatResult,
+                formatSelection: formatSelection,
+                width: '300px',
+                id: function (e) { return e.Id; },
+                formatNoMatches: function () { return "No se encuentran coincidencias."; },
+                formatInputTooShort: function (input, min) { return "Por favor ingrese " + (min - input.length) + " caracteres más."; },
+                formatSelectionTooBig: function (limit) { return "Sólo puede seleccionar " + limit + " elementos."; },
+                formatLoadMore: function (pageNumber) { return "Cargando más resultados..."; },
+            });
+        });
     };
 
     app.initialize = function (o) {
