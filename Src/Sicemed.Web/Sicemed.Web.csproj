@@ -237,6 +237,7 @@
     <Compile Include="Infrastructure\Queries\AdministracionDeTurnos\ObtenerTurnosACancelarQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaPacienteQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaPersonaQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Busqueda\BusquedaProfesionalConEspecialidadesQuery.cs" />
     <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosPorPacienteQuery.cs" />
     <Compile Include="Infrastructure\Reports\IReport.cs" />
     <Compile Include="Infrastructure\Reports\ReporteBase.cs" />
@@ -250,6 +251,7 @@
     <Compile Include="Models\ViewModels\PacienteSearchViewModel.cs" />
     <Compile Include="Models\ViewModels\PersonaViewModel.cs" />
     <Compile Include="Models\ViewModels\Profesional\CalendarioProfesionalViewModel.cs" />
+    <Compile Include="Models\ViewModels\Profesional\ProfesionalConEspecialidadesViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchFiltersViewModel.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\ContentController.cs" />

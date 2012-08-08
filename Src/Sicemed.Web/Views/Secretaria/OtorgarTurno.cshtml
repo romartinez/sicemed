@@ -26,3 +26,8 @@
 <script id="tmplBusquedaPaciente" type="text/x-jquery-tmpl">
     ${NombreCompleto} <br/><span style="font-style: italic; font-size: x-small"> ${TipoDocumento} ${Documento} </span>
 </script>
+<script id="tmplBusquedaProfesional" type="text/x-jquery-tmpl">
+    ${NombreCompleto} <br/><span style="font-style: italic; font-size: x-small"> ${TipoDocumento} ${Documento} </span>
+    <br/>
+    {{each Especialidades}}${Descripcion} - {{/each}}
+</script>

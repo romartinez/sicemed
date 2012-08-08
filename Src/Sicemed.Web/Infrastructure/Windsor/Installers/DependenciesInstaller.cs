@@ -28,7 +28,7 @@ namespace SICEMED.Web.Infrastructure.Windsor.Installers
                 Component.For<INotificationService>().ImplementedBy<NotificationService>().LifeStyle.Transient,
                 Component.For<ISecurityService>().ImplementedBy<SecurityService>().LifeStyle.Singleton,
                 //Providers
-                Component.For<ICacheProvider>().ImplementedBy<NullCacheProvider>().LifeStyle.Singleton,
+                Component.For<ICacheProvider>().ImplementedBy<InMemoryCacheProvider>().LifeStyle.Singleton,
                 Component.For<IMappingEngine>().UsingFactoryMethod(() => Mapper.Engine).LifeStyle.Singleton,
                 //Menu Provider
                 //Queries

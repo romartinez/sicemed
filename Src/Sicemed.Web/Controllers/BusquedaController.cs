@@ -15,5 +15,12 @@ namespace Sicemed.Web.Controllers
             return Json(query.Execute(), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Profesional(string filtro)
+        {
+            var query = QueryFactory.Create<IBusquedaProfesionalConEspecialidadesQuery>();
+            query.Filtro = filtro;
+            return Json(query.Execute(), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
