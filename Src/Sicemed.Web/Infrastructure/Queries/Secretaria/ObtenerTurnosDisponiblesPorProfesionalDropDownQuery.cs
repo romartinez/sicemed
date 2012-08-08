@@ -45,7 +45,7 @@ namespace Sicemed.Web.Infrastructure.Queries.Secretaria
                     string.Join(", ", t.EspecialidadesAtendidas.Select(e => e.Descripcion).ToArray()),
                     t.Consultorio.Descripcion
                     ),
-                Value = string.Join("{0}_{1}", t.FechaTurnoInicial.Ticks, t.Consultorio.Id)
+                Value = string.Format("{0}_{1}", t.FechaTurnoInicial.Ticks, t.Consultorio.Id)
             }).ToList();
 
             result.ForEach(s => s.Selected = (!string.IsNullOrWhiteSpace(SelectedValue) && SelectedValue == s.Value));

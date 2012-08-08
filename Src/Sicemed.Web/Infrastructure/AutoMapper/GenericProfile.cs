@@ -52,11 +52,11 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                 .ForMember(d => d.Id, m => m.MapFrom(o => o.Id))
                 .ForMember(d => d.Descripcion, m => m.MapFrom(o => o.NombreCompleto));
 
-            CreateMap<Persona, PersonaViewModel>()
+            CreateMap<Paciente, PersonaViewModel>()
                 .ForMember(d => d.Id, m => m.MapFrom(o => o.Id))
-                .ForMember(d => d.TipoDocumento, m => m.MapFrom(o => o.Documento.TipoDocumento.DisplayName))
-                .ForMember(d => d.Documento, m => m.MapFrom(o => o.Documento.Numero))
-                .ForMember(d => d.NombreCompleto, m => m.MapFrom(o => o.NombreCompleto));
+                .ForMember(d => d.TipoDocumento, m => m.MapFrom(o => o.Persona.Documento.TipoDocumento.DisplayName))
+                .ForMember(d => d.Documento, m => m.MapFrom(o => o.Persona.Documento.Numero))
+                .ForMember(d => d.NombreCompleto, m => m.MapFrom(o => o.Persona.NombreCompleto));
 
             CreateMap<Profesional, ProfesionalConEspecialidadesViewModel>()
                 .ForMember(d => d.Id, m => m.MapFrom(o => o.Id))

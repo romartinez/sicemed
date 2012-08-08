@@ -236,7 +236,7 @@
     <Compile Include="Infrastructure\NHibernate\NHibernateAuditContractResolver.cs" />
     <Compile Include="Infrastructure\Queries\AdministracionDeTurnos\ObtenerTurnosACancelarQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaPacienteQuery.cs" />
-    <Compile Include="Infrastructure\Queries\Busqueda\BusquedaPersonaQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Busqueda\BusquedaGeneralPacienteQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaProfesionalConEspecialidadesQuery.cs" />
     <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosPorPacienteQuery.cs" />
     <Compile Include="Infrastructure\Reports\IReport.cs" />
