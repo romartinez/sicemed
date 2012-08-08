@@ -26,12 +26,10 @@ var app = (function ($, app) {
     };
 
     ajax.beginXhr = function (e, xhr, settings) {        
-        if (!settings || settings.url.indexOf("/Busqueda/") >= 0) return;
         $.blockUI({ css: { backgroundColor: '#000', color: '#fff' }, message: '<h1>Espere por favor...</h1>' });
     };
 
     ajax.endXhr = function (e, xhr, settings) {                
-        if (!settings || settings.url.indexOf("/Busqueda/") >= 0) return;
         $.unblockUI();
         //Check for ResponseMessage to display
         var responseMessages = xhr.getResponseHeader("X-ResponseMessages");
@@ -39,7 +37,7 @@ var app = (function ($, app) {
             var parsedMessages = JSON.parse(responseMessages);
             app.ui.showNotifications(parsedMessages);
         }        
-        app.initControls();
+        app.initControls({isAjax: true});
     };
     $(document).ajaxStart(ajax.beginXhr);
     $(document).ajaxComplete(ajax.endXhr);
