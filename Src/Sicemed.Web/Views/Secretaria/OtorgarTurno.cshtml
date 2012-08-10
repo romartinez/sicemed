@@ -18,16 +18,201 @@
     
     @Html.ValidationSummaryWithMessage()
 
-    @Html.EditorForModel()
+    <fieldset class="form">
+        <ul>
+            <li>
+                <div class="editor-label editor-label-required">
+                    @Html.LabelFor(x => x.EsTelefonico)
+                </div>
+                <div class="editor-field">
+                    @Html.CheckBoxFor(x => x.EsTelefonico)
+                </div>
+                <div class="editor-validator">
+                    @Html.ValidationMessageFor(x => x.EsTelefonico)
+                </div>
+            </li>
+            <li>
+                <div class="editor-label editor-label-required">
+                    @Html.LabelFor(x => x.PacienteId)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(x => x.PacienteId)
+                </div>
+                <div class="editor-validator">
+                    @Html.ValidationMessageFor(x => x.PacienteId)
+                </div>
+            </li>
+            <li>
+                <div class="editor-label editor-label-required">
+                    @Html.LabelFor(x => x.ProfesionalId)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(x => x.ProfesionalId)
+                </div>
+                <div class="editor-validator">
+                    @Html.ValidationMessageFor(x => x.ProfesionalId)
+                </div>
+            </li>
+            <li>
+                <div class="editor-label editor-label-required">
+                    @Html.LabelFor(x => x.EspecialidadId)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(x => x.EspecialidadId)
+                </div>
+                <div class="editor-validator">
+                    @Html.ValidationMessageFor(x => x.EspecialidadId)
+                </div>
+            </li>
+            <li>
+                <div id="calendar">
+                </div>
+            </li>
+        </ul>
+    </fieldset>
 
     @Html.Submit("Otorgar")        
 }
 
 <script id="tmplBusquedaPaciente" type="text/x-jquery-tmpl">
-    ${NombreCompleto} <br/><span style="font-style: italic; font-size: x-small"> ${TipoDocumento} ${Documento} </span>
+    ${NombreCompleto}
+    <br />
+    <span style="font-style: italic; font-size: x-small">${TipoDocumento} ${Documento}
+    </span>
 </script>
 <script id="tmplBusquedaProfesional" type="text/x-jquery-tmpl">
-    ${NombreCompleto} <br/><span style="font-style: italic; font-size: x-small"> ${TipoDocumento} ${Documento} </span>
-    <br/>
+    ${NombreCompleto}
+    <br />
+    <span style="font-style: italic; font-size: x-small">${TipoDocumento} ${Documento}
+    </span>
+    <br />
     {{each Especialidades}}${Descripcion} - {{/each}}
 </script>
+
+@section Scripts{
+    <script type="text/javascript">
+        
+        var attachTooltips = function () {
+            $(".hasTooltip[title]")
+                .tooltip({ effect: 'slide', offset: [10, 2], position: 'bottom rigth' })
+                .on("mouseover", function () {
+                    $(this).addClass("event-hover");
+                })
+                .on("mouseout", function () {
+                    $(this).removeClass("event-hover");
+                });
+        };
+
+        var renderCalendar = function(data) {
+            var events = [];
+            var calendar = $("#calendar");
+            calendar.fullCalendar('removeEvents');
+            for (var i = data.length - 1; i >= 0; i--) {
+                var turno = data[i];
+                var especialidadesAtendidasTurno = $.map(turno.EspecialidadesAtendidas, function(especialidad) {
+                    return especialidad.Descripcion;
+                }).join(",");
+                var description = "<div class='turno-libre'>"
+                    + "<span class='text-blue'>Fecha Turno:</span><span>" + app.format.date(turno.FechaTurnoInicial) + "</span><br/>"
+                    + "<span class='text-blue'>Horario:</span><span>" + app.format.hour(turno.FechaTurnoInicial) + " / " + app.format.hour(turno.FechaTurnoFinal) + "</span><br/>"
+                    + "<span class='text-blue'>Consultorio:</span><span>" + turno.Consultorio.Descripcion + "</span><br/>"
+                    + "<span class='text-blue'>Especialidades:</span><span>" + especialidadesAtendidasTurno + "</span>"
+                    + "</div>";
+                var event = {
+                    title: turno.Paciente ? turno.Paciente.Descripcion : "Reservar...",
+                    start: turno.FechaTurnoInicial,
+                    end: turno.FechaTurnoFinal,
+                    allDay: false,
+                    description: turno.Paciente ? '' : description,
+                    color: turno.Paciente ? '#F00' : null,
+                    libre: !turno.Paciente,
+                    turno: turno
+                };
+                events.push(event);
+            }
+            calendar.fullCalendar('addEventSource', events);
+            //Tooltip
+            attachTooltips();
+            calendar.show();
+        };
+
+        var profesionalSelect = function (e) {
+            var param = { profesionalId: e.val };
+            $.getJSON("@Url.Action("GetTurnosDisponiblesProfesional")", param, renderCalendar);            
+            $.getJSON("@Url.Action("GetEspecialidadesProfesional")", param, function (d) {
+                var format = function(obj) {
+                    return obj.Descripcion;
+                };
+                $("#EspecialidadId").select2({
+                    data: d,
+                    width: '300px',
+                    placeholder: "Seleccione Especialidad",
+                    id: function (e) { return e.Id; },
+                    allowClear: true,
+                    formatResult: format,
+                    formatSelection: format
+                }).change(especialidadSelect);
+            });            
+        };
+
+        var especialidadSelect = function (e) {
+            var parameters = {
+                especialidadId: e.val,
+                profesionalId: $("#ProfesionalId").val()
+            };
+            $.getJSON("@Url.Action("GetTurnosDisponiblesProfesional")", parameters, renderCalendar);            
+        };
+
+        jQuery(function () {
+            $("#ProfesionalId").change(profesionalSelect);
+            $('#calendar').fullCalendar({
+                theme: true,
+                header: {
+                    left: 'title',
+                    center: '',
+                    right: 'today prev,next'
+                },
+                weekends: false,
+                defaultView: 'agendaWeek',
+                allDaySlot: false,
+                minTime: '7:00', //Horario apertura clinica
+                maxTime: '20:00', //Horario cierre clinica
+                slotMinutes: 15, //Duracion por defecto turno
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab'],
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
+                            'Agosto', 'Septiembre', 'Ocubtre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                            'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec'],
+                buttonText: {
+                    today: 'hoy',
+                    month: 'mes',
+                    week: 'semana',
+                    day: 'dia'
+                },
+                columnFormat: {
+                    month: 'ddd',
+                    week: 'ddd d/M',
+                    day: 'dddd d/M'
+                },
+                eventClick: function (calEvent, jsEvent, view) {
+                    if (calEvent.libre) {
+                        //self.turnoSeleccionado(calEvent.turno);
+                        //self.currentStep(stepConfirmar);
+                    }
+                },
+                eventMouseout: function (event, jsEvent, view) {
+                    $(this).css('cursor', 'auto');
+                },
+                eventMouseover: function (event, jsEvent, view) {
+                    if (event.libre) $(this).css('cursor', 'pointer');
+                },
+                viewDisplay: function () {
+                    attachTooltips();
+                },
+                events: []
+            }).hide();
+            
+        })
+    </script>
+}

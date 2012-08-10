@@ -368,7 +368,6 @@
     <Compile Include="Infrastructure\Queries\Secretaria\ObtenerEspecialidadesProfesionalDropDownQuery.cs" />
     <Compile Include="Infrastructure\Queries\Secretaria\ObtenerPacientesDropDownQuery.cs" />
     <Compile Include="Infrastructure\Queries\Secretaria\ObtenerProfesionalesDropDownQuery.cs" />
-    <Compile Include="Infrastructure\Queries\Secretaria\ObtenerTurnosDisponiblesPorProfesionalDropDownQuery.cs" />
     <Compile Include="Infrastructure\Queries\Secretaria\ObtenerTurnosPorFechaQuery.cs" />
     <Compile Include="Infrastructure\Queries\Query.cs" />
     <Compile Include="Infrastructure\Reporting\PDFDeviceInfo.cs" />
