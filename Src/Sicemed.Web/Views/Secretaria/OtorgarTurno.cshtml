@@ -137,6 +137,16 @@
         };
 
         var profesionalSelect = function (e) {
+            if(!e.val) {
+                $("#EspecialidadId").select2({
+                    data: {results:[]},
+                    width: '300px',
+                    placeholder: "Seleccione un Profesional",
+                    id: function(e) { return e.Id; },
+                    allowClear: true
+                }).select2("disable");
+                return;
+            }
             var param = { profesionalId: e.val };            
             $.getJSON("@Url.Action("GetEspecialidadesProfesional")", param, function (d) {
                 var format = function(obj) {
@@ -150,7 +160,8 @@
                     allowClear: true,
                     formatResult: format,
                     formatSelection: format
-                }).change(especialidadSelect);
+                }).select2("enable").change(especialidadSelect);
+                if(d.length > 0) $("#EspecialidadId").select2("data", d[0]).trigger("change");
             });            
         };
 
@@ -164,6 +175,13 @@
 
         jQuery(function () {
             $("#ProfesionalId").change(profesionalSelect);
+            $("#EspecialidadId").select2({
+                data: {results:[]},
+                width: '300px',
+                placeholder: "Seleccione un Profesional",
+                id: function(e) { return e.Id; },
+                allowClear: true
+            }).select2("disable");
             $('#calendar').fullCalendar({
                 theme: true,
                 header: {
