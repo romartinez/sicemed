@@ -65,13 +65,13 @@
                 </div>
             </li>
             <li>
+                @Html.HiddenFor(x => x.ConsultorioId)
+                @Html.HiddenFor(x => x.FechaTurno)
                 <div id="calendar">
                 </div>
             </li>
         </ul>
-    </fieldset>
-
-    @Html.Submit("Otorgar")        
+    </fieldset>   
 }
 
 <script id="tmplBusquedaPaciente" type="text/x-jquery-tmpl">
@@ -103,7 +103,7 @@
                 });
         };
 
-        var renderCalendar = function(data) {
+        var renderCalendar = function(param, data) {
             var events = [];
             var calendar = $("#calendar");
             calendar.fullCalendar('removeEvents');
@@ -137,8 +137,7 @@
         };
 
         var profesionalSelect = function (e) {
-            var param = { profesionalId: e.val };
-            $.getJSON("@Url.Action("GetTurnosDisponiblesProfesional")", param, renderCalendar);            
+            var param = { profesionalId: e.val };            
             $.getJSON("@Url.Action("GetEspecialidadesProfesional")", param, function (d) {
                 var format = function(obj) {
                     return obj.Descripcion;
@@ -156,11 +155,11 @@
         };
 
         var especialidadSelect = function (e) {
-            var parameters = {
+            var param = {
                 especialidadId: e.val,
                 profesionalId: $("#ProfesionalId").val()
             };
-            $.getJSON("@Url.Action("GetTurnosDisponiblesProfesional")", parameters, renderCalendar);            
+            $.getJSON("@Url.Action("GetTurnosDisponiblesProfesional")", param, function (d) { renderCalendar(param, d); });            
         };
 
         jQuery(function () {
@@ -196,9 +195,13 @@
                     day: 'dddd d/M'
                 },
                 eventClick: function (calEvent, jsEvent, view) {
+                    console.log(calEvent);
                     if (calEvent.libre) {
-                        //self.turnoSeleccionado(calEvent.turno);
-                        //self.currentStep(stepConfirmar);
+                        app.ui.showConfirmation("¿Est&aacute; seguro que quiere otorgar este turno?", function() {
+                            $("#FechaTurno").val(app.format.fulldate(calEvent.turno.FechaTurnoInicial));
+                            $("#ConsultorioId").val(calEvent.turno.Consultorio.Id);
+                            $("form").submit();
+                        });
                     }
                 },
                 eventMouseout: function (event, jsEvent, view) {
