@@ -136,8 +136,9 @@
             calendar.show();
         };
 
-        var profesionalSelect = function (e) {
-            if(!e.val) {
+        var profesionalSelect = function () {
+            var val = $("#ProfesionalId").val();
+            if(!val) {
                 $("#EspecialidadId").select2({
                     data: {results:[]},
                     width: '300px',
@@ -147,17 +148,17 @@
                 }).select2("disable");
                 return;
             }
-            var param = { profesionalId: e.val };            
+            var param = { profesionalId: val };            
             $.getJSON("@Url.Action("GetEspecialidadesProfesional")", param, function (d) {
                 var format = function(obj) {
                     return obj.Descripcion;
                 };
                 $("#EspecialidadId").select2({
-                    data: d,
+                    data: {results: d, text: 'Descripcion'},
                     width: '300px',
                     placeholder: "Seleccione Especialidad",
                     id: function (e) { return e.Id; },
-                    allowClear: true,
+                    allowClear: true,                    
                     formatResult: format,
                     formatSelection: format
                 }).select2("enable").change(especialidadSelect);
@@ -165,9 +166,14 @@
             });            
         };
 
-        var especialidadSelect = function (e) {
+        var especialidadSelect = function () {
+            var val = $("#EspecialidadId").val();
+            if(!val) {
+                $('#calendar').hide();
+                return;
+            }
             var param = {
-                especialidadId: e.val,
+                especialidadId: val,
                 profesionalId: $("#ProfesionalId").val()
             };
             $.getJSON("@Url.Action("GetTurnosDisponiblesProfesional")", param, function (d) { renderCalendar(param, d); });            
