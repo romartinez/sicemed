@@ -6,6 +6,7 @@
             modal: true,
             title: 'NBSF - Registro De Firmas',
             message: '',
+            width: '400px',
             buttons: {
                 "Aceptar": function () {
                     $(this).dialog("close");
