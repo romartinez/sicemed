@@ -5,7 +5,15 @@ namespace Sicemed.Web.Models.BI.Components
 {
     public class MedicionIndicador : ComponentBase
     {
-        public virtual double Valor { get; set; }
-        public virtual DateTime Fecha { get; set; }
+        public virtual decimal Valor { get; set; }
+        public virtual DateTime FechaLectura { get; set; }
+
+        public MedicionIndicador(decimal valor) : this(valor, DateTime.Now) { }
+
+        public MedicionIndicador(decimal valor, DateTime fecha)
+        {
+            Valor = valor;
+            FechaLectura = fecha;
+        }
     }
 }

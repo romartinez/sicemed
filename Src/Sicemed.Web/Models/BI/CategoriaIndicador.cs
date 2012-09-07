@@ -6,6 +6,5 @@ namespace Sicemed.Web.Models.BI
     {
         [Required]
         public virtual string Nombre { get; set; }
-        public virtual string Descripcion { get; set; }
     }
 }
