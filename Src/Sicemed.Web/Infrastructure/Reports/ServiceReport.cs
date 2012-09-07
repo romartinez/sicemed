@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web;
-using Microsoft.Reporting.WebForms;
+//using Microsoft.Reporting.WebForms;
 
 namespace Sicemed.Web.Infrastructure.Reports
 {
