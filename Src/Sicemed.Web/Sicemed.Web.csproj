@@ -200,6 +200,7 @@
     <Compile Include="Areas\Admin\Controllers\ClinicasController.cs" />
     <Compile Include="Areas\Admin\Controllers\ConsultoriosController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriasIndicadorController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ObjetivosController.cs" />
     <Compile Include="Areas\Admin\Controllers\IndicadoresController.cs" />
     <Compile Include="Areas\Admin\Controllers\EspecialidadesController.cs" />
     <Compile Include="Areas\Admin\Controllers\LogsController.cs" />
@@ -794,6 +795,8 @@
     <Content Include="Areas\Admin\Views\Personas\Editar.cshtml" />
     <Content Include="Areas\Admin\Views\CategoriasIndicador\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Indicadores\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Tablero\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Objetivos\Index.cshtml" />
     <None Include="Models\ClassDiagram.cd" />
     <Content Include="Views\ObtenerTurno\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutClinica.cshtml" />
