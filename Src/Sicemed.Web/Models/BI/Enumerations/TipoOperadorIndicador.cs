@@ -7,6 +7,7 @@ namespace Sicemed.Web.Models.BI.Enumerations
         public static readonly TipoOperadorIndicador Mayor = new TipoOperadorIndicador(1, "Mayor");
         public static readonly TipoOperadorIndicador Menor = new TipoOperadorIndicador(-1, "Menor");
 
+        public TipoOperadorIndicador() { }
         protected TipoOperadorIndicador(long value, string displayName) : base(value, displayName) { }
     }
 }

@@ -110,6 +110,7 @@
     <Compile Include="Infrastructure\Services\MembershipServiceTests.cs" />
     <Compile Include="InitializeNhibernate.cs" />
     <Compile Include="Models\Agendas\AgendaTests.cs" />
+    <Compile Include="Models\BI\CreacionTest.cs" />
     <Compile Include="Models\Especialidades\EspecialidadesTests.cs" />
     <Compile Include="Models\Feriados\FeriadoTests.cs" />
     <Compile Include="Models\Localidades\LocalidadesTests.cs" />

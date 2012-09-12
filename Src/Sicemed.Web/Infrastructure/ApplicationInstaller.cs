@@ -12,6 +12,8 @@ using NHibernate.Tool.hbm2ddl;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.BI;
+using Sicemed.Web.Models.BI.Enumerations;
 using Sicemed.Web.Models.Components;
 using Sicemed.Web.Models.Enumerations.Documentos;
 using Sicemed.Web.Models.Roles;
@@ -68,6 +70,9 @@ namespace Sicemed.Web.Infrastructure
         public static Persona PersonaProfesionalBernardoClinico;
         public static Persona PersonaProfesionalJoseClinicoYDermatologo;
         public static Persona PersonaAdminProfesionalWalter;
+
+        public static CategoriaIndicador CategoriaIndicadorOperativo;
+        public static CategoriaIndicador CategoriaIndicadorGerencial;
 
         #endregion
 
@@ -136,6 +141,8 @@ namespace Sicemed.Web.Infrastructure
             CrearPaginas(session);
             CrearPersonas(session);
             CrearClinica(session);
+            CrearCategoriasBI(session);
+            CrearIndicadoresBI(session);
             //Lo guardo al parametro nuevo.
             using (var tx = session.BeginTransaction())
             {
@@ -167,6 +174,68 @@ namespace Sicemed.Web.Infrastructure
                 }
             }
         }
+
+        private void CrearIndicadoresBI(ISession session)
+        {
+            var indicadorTurnos = new Indicador
+                {
+                    Categoria = CategoriaIndicadorGerencial,
+                    Nombre = "Turnos Por Mes",
+                    Descripcion = "Este indicador es para ver los turnos dados en el mes.",
+                    Habilitado = true,
+                    DenominadorSql = "SELECT 1",
+                    NumeradorSql = "SELECT COUNT(*) FROM Turnos WHERE MONTH(FechaTurno) = @Mes AND YEAR(FechaTurno) = @Anio",
+                    TipoOperador = TipoOperadorIndicador.Mayor
+                };
+            for(var i = 1; i < 12; i++)
+            {
+                var objetivo = new ObjetivoIndicador
+                    {
+                        Anio = 2012,
+                        Mes = i,
+                        Indicador = indicadorTurnos,
+                        ValorMinimo = 10,
+                        ValorMaximo = 10 + i*2
+                    };
+                indicadorTurnos.AgregarObjetivo(objetivo);
+            }
+            session.Save(indicadorTurnos);
+
+            var ratioDeTurnosPresentadosVsAusencias = new Indicador
+                {
+                    Categoria = CategoriaIndicadorGerencial,
+                    Nombre = "Ratio Turnos Otorgados vs Presentados",
+                    Descripcion = "Este indicador sirve para ver si se estan otorgando muchos turnos pero pocos se presentan.",
+                    Habilitado = true,
+                    DenominadorSql =    "SELECT COUNT(*) FROM Turnos WHERE MONTH(FechaTurno) = @Mes AND YEAR(FechaTurno) = @Anio AND FechaAtencion IS NULL",
+                    NumeradorSql =      "SELECT COUNT(*) FROM Turnos WHERE MONTH(FechaTurno) = @Mes AND YEAR(FechaTurno) = @Anio AND FechaAtencion IS NOT NULL",
+                    TipoOperador = TipoOperadorIndicador.Mayor
+                };
+            for(var i = 1; i < 12; i++)
+            {
+                var objetivo = new ObjetivoIndicador
+                    {
+                        Anio = 2012,
+                        Mes = i,
+                        Indicador = ratioDeTurnosPresentadosVsAusencias,
+                        ValorMinimo = 0.9m,
+                        ValorMaximo = 1000
+                    };
+                ratioDeTurnosPresentadosVsAusencias.AgregarObjetivo(objetivo);
+            }
+            session.Save(ratioDeTurnosPresentadosVsAusencias);
+        }
+
+        private void CrearCategoriasBI(ISession session)
+        {
+            CategoriaIndicadorOperativo = new CategoriaIndicador { Nombre = "Operativo" };
+            CategoriaIndicadorGerencial = new CategoriaIndicador { Nombre = "Gerencial" };
+
+            session.Save(CategoriaIndicadorOperativo);
+            session.Save(CategoriaIndicadorGerencial);
+        }
+
+
 
         #region Entity Creation Methods
         private void CrearClinica(ISession session)

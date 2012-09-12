@@ -199,6 +199,8 @@
     <Compile Include="Areas\Admin\Controllers\AuditoriaController.cs" />
     <Compile Include="Areas\Admin\Controllers\ClinicasController.cs" />
     <Compile Include="Areas\Admin\Controllers\ConsultoriosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoriasIndicadorController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IndicadoresController.cs" />
     <Compile Include="Areas\Admin\Controllers\EspecialidadesController.cs" />
     <Compile Include="Areas\Admin\Controllers\LogsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlanesController.cs" />
@@ -231,6 +233,9 @@
     <Compile Include="Infrastructure\ModelBinders\DateTimeCurrentCultureModelBinder.cs" />
     <Compile Include="Infrastructure\ModelBinders\SearchFiltersModelBinder.cs" />
     <Compile Include="Infrastructure\NHibernate\EntityConverter.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\CategoriaIndicadorMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\IndicadorMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\ObjetivoIndicadorMap.cs" />
     <Compile Include="Infrastructure\NHibernate\NHibernateAuditContractResolver.cs" />
     <Compile Include="Infrastructure\Queries\AdministracionDeTurnos\ObtenerTurnosACancelarQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaPacienteQuery.cs" />
@@ -244,6 +249,7 @@
     <Compile Include="Infrastructure\Reports\TurnosPorProfesionalReporte.cs" />
     <Compile Include="Infrastructure\Services\INotificationService.cs" />
     <Compile Include="Infrastructure\Services\NotificationService.cs" />
+    <Compile Include="Models\BI\Enumerations\EstadoObjetivo.cs" />
     <Compile Include="Models\Reports\TurnosPorProfesionalReportModel.cs" />
     <Compile Include="Models\ViewModels\Historial\TurnosPorPacienteViewModel.cs" />
     <Compile Include="Models\ViewModels\PacienteSearchViewModel.cs" />
@@ -384,7 +390,6 @@
     <Compile Include="Models\Agenda.cs" />
     <Compile Include="Models\AuditLog.cs" />
     <Compile Include="Models\BI\CategoriaIndicador.cs" />
-    <Compile Include="Models\BI\Components\MedicionIndicador.cs" />
     <Compile Include="Models\BI\Enumerations\TipoOperadorIndicador.cs" />
     <Compile Include="Models\BI\Indicador.cs" />
     <Compile Include="Models\BI\ObjetivoIndicador.cs" />
@@ -455,6 +460,9 @@
     <Content Include="App_Data\003_AuditLogHistoricoTable.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\CategoriaIndicador.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Indicador.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\ObjetivoIndicador.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Roles\Administrador.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Agenda.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Clinica.hbm.xml" />
@@ -784,6 +792,8 @@
     <Content Include="Areas\Admin\Views\Personas\EditorTemplates\Agendas.cshtml" />
     <Content Include="Areas\Admin\Views\Personas\_Agenda.cshtml" />
     <Content Include="Areas\Admin\Views\Personas\Editar.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoriasIndicador\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Indicadores\Index.cshtml" />
     <None Include="Models\ClassDiagram.cd" />
     <Content Include="Views\ObtenerTurno\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutClinica.cshtml" />

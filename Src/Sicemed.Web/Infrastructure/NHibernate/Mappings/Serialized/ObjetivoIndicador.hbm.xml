@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" namespace="Sicemed.Web.Models.BI" assembly="Sicemed.Web" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="ObjetivoIndicador" table="IndicadorObjetivos">
+    <id name="Id" type="Int64">
+      <generator class="hilo" />
+    </id>
+    <many-to-one name="Indicador" not-null="true" foreign-key="FK_IndicadorObjetivos_Indicador" />
+    <property name="Valor" />
+    <property name="FechaLectura" />
+    <property name="Anio" not-null="true" />
+    <property name="Mes" not-null="true" />
+    <property name="ValorMinimo" not-null="true" />
+    <property name="ValorMaximo" not-null="true" />
+  </class>
+</hibernate-mapping>
