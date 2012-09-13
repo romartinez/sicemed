@@ -226,6 +226,7 @@
     <Compile Include="Infrastructure\Controllers\AdministracionDeTurnosBaseController.cs" />
     <Compile Include="Infrastructure\Helpers\Dapper.cs" />
     <Compile Include="Infrastructure\Jobs\AusentarTurnosVencidosJob.cs" />
+    <Compile Include="Infrastructure\Jobs\CalculadorIndicadoresJob.cs" />
     <Compile Include="Infrastructure\Jobs\KeepAliveJob.cs" />
     <Compile Include="Infrastructure\Jobs\MoverHistoricoJob.cs" />
     <Compile Include="Infrastructure\Jobs\NHibernateJob.cs" />
