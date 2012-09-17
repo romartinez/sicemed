@@ -56,10 +56,18 @@ namespace Sicemed.Web.Controllers
                 var paciente = session.Get<Paciente>(editModel.PacienteId.Value);
                 var profesional = session.Get<Profesional>(editModel.ProfesionalId.Value);
                 var especialidad = session.Get<Especialidad>(editModel.EspecialidadId);
-                var consultorio = session.Load<Consultorio>(editModel.ConsultorioId);
                 var fechaTurno = editModel.FechaTurno;
 
-                var turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, User.As<Secretaria>(), consultorio, editModel.EsTelefonico);
+                Turno turno;
+                if(!editModel.EsSobreTurno)
+                {
+                    var consultorio = session.Load<Consultorio>(editModel.ConsultorioId);
+                    turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, User.As<Secretaria>(), consultorio, editModel.EsTelefonico);
+                }
+                else
+                {
+                    turno = Turno.CreateSobreTurno(fechaTurno, paciente, profesional, especialidad, User.As<Secretaria>(), editModel.EsTelefonico);                    
+                }
 
                 session.Save(turno);
 

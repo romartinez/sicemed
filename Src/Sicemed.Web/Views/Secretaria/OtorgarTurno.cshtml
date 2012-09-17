@@ -52,6 +52,12 @@
                 </div>
                 <div class="editor-field">
                     @Html.EditorFor(x => x.EspecialidadId)
+                    <div style="display: inline;">
+                        @Html.HiddenFor(x => x.EsSobreTurno)
+                        <input type="text" class="text-box single-line date" id="txtSobreTurnoFecha" value="@DateTime.Now.ToShortDateString()"></input>
+                        <input type="text" class="text-box single-line time" id="txtSobreTurnoHora" value="@DateTime.Now.ToShortTimeString()"></input>
+                        <a href="#" id="cmdSobreTurno" class="button_link btn_pink"><span>Otorgar Sobreturno</span></a>                        
+                    </div>
                 </div>
                 <div class="editor-validator">
                     @Html.ValidationMessageFor(x => x.EspecialidadId)
@@ -125,8 +131,9 @@
             }
             calendar.fullCalendar('addEventSource', events);
             //Tooltip
-            attachTooltips();
             calendar.show();
+            calendar.fullCalendar('rerenderEvents');
+            attachTooltips();            
         };
 
         var profesionalSelect = function () {
@@ -172,7 +179,27 @@
             $.getJSON("@Url.Action("GetTurnosDisponiblesProfesional")", param, function (d) { renderCalendar(param, d); });            
         };
 
+        var otorgarSobreTurno = function() {
+            var date = $.datepicker.parseDate("dd/mm/yy", $("#txtSobreTurnoFecha").val());
+            var minutes = $.fullCalendar.parseTime($("#txtSobreTurnoHora").val());            
+            date.setMinutes(minutes);            
+            var fecha = app.format.fulldate(date);
+            var text = "¿Est&aacute; seguro que quiere otorgar al paciente"
+                +" <strong>"+$("#PacienteId").select2("data").NombreCompleto+"</strong>"
+                +" un sobre turno para el d&iacute;a <strong>"+fecha+"</strong> "
+                +" para el profesional <strong>"+$("#ProfesionalId").select2("data").NombreCompleto+"</strong>?";
+            app.ui.showConfirmation(text, function() {
+                $("#FechaTurno").val(fecha);
+                $("#ConsultorioId").val(null);
+                $("#EsSobreTurno").val(true);
+                $("form").submit();
+            });            
+        };
+
         jQuery(function () {
+            $("#sobreTurnoFecha").datepicker({ dateFormat: "dd/mm/yy" });
+            
+            $("#cmdSobreTurno").click(otorgarSobreTurno);
             $("#ProfesionalId").change(profesionalSelect);
             $("#EspecialidadId").select2({
                 data: {results:[]},
