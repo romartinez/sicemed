@@ -23,19 +23,19 @@ namespace Sicemed.Web.Infrastructure.Jobs
                         if (Log.IsInfoEnabled) Log.InfoFormat("Calculando el indicador '{0}) {1}'", indicador.Id, indicador.Nombre);
                         var fecha = DateTime.Now;
 
-                        var denominador = session.CreateSQLQuery(indicador.DenominadorSql)
-                            .SetParameter("Mes", fecha.Month)
-                            .SetParameter("Anio", fecha.Year)
-                            .UniqueResult<int>();
+                        var denominadorQuery = session.CreateSQLQuery(indicador.DenominadorSql);
+                        if(indicador.DenominadorSql.Contains(":Mes")) denominadorQuery.SetParameter("Mes", fecha.Month);
+                        if(indicador.DenominadorSql.Contains(":Anio")) denominadorQuery.SetParameter("Anio", fecha.Year);                            
+                        var denominador = denominadorQuery.UniqueResult<int>();
+
                         if (Log.IsDebugEnabled) Log.DebugFormat("Calculando denominador para el indicador '{0}) {1}': {2}", indicador.Id, indicador.Nombre, denominador);
 
-                        var numerador = session.CreateSQLQuery(indicador.NumeradorSql)
-                            .SetParameter("Mes", fecha.Month)
-                            .SetParameter("Anio", fecha.Year)
-                            .UniqueResult<int>();
+                        var numeradorQuery = session.CreateSQLQuery(indicador.NumeradorSql);
+                        if(indicador.NumeradorSql.Contains(":Mes")) numeradorQuery.SetParameter("Mes", fecha.Month);
+                        if(indicador.NumeradorSql.Contains(":Anio")) numeradorQuery.SetParameter("Anio", fecha.Year);                        
+                        var numerador = numeradorQuery.UniqueResult<int>();
 
                         if (Log.IsDebugEnabled) Log.DebugFormat("Calculando numerador para el indicador '{0}) {1}': {2}", indicador.Id, indicador.Nombre, numerador);
-
 
                         var valor = Convert.ToDecimal(numerador / denominador);
 
