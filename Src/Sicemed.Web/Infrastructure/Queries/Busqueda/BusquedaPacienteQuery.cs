@@ -30,9 +30,9 @@ namespace Sicemed.Web.Infrastructure.Queries.Busqueda
             if (!string.IsNullOrWhiteSpace(Nombre))
             {
                 query.Where(
-                    Restrictions.On<Persona>(x => x.Nombre).IsInsensitiveLike(Nombre, MatchMode.Anywhere)
-                    || Restrictions.On<Persona>(x => x.SegundoNombre).IsInsensitiveLike(Nombre, MatchMode.Anywhere)
-                    || Restrictions.On<Persona>(x => x.Apellido).IsInsensitiveLike(Nombre, MatchMode.Anywhere)
+                    Restrictions.On<Persona>(x => x.Nombre).IsInsensitiveLike(Nombre, MatchMode.Start)
+                    || Restrictions.On<Persona>(x => x.SegundoNombre).IsInsensitiveLike(Nombre, MatchMode.Start)
+                    || Restrictions.On<Persona>(x => x.Apellido).IsInsensitiveLike(Nombre, MatchMode.Start)
                 );
             }
 

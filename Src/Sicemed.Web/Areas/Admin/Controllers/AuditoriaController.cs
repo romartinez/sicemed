@@ -59,8 +59,8 @@ namespace Sicemed.Web.Areas.Admin.Controllers
 
             if (!string.IsNullOrWhiteSpace(searchFilters.Filtro))
             {
-                query.And(Restrictions.On<AuditLog>(x => x.EntidadAntes).IsInsensitiveLike(searchFilters.Filtro, MatchMode.Anywhere)
-                    || Restrictions.On<AuditLog>(x => x.EntidadDespues).IsInsensitiveLike(searchFilters.Filtro, MatchMode.Anywhere));
+                query.And(Restrictions.On<AuditLog>(x => x.EntidadAntes).IsInsensitiveLike(searchFilters.Filtro, MatchMode.Start)
+                    || Restrictions.On<AuditLog>(x => x.EntidadDespues).IsInsensitiveLike(searchFilters.Filtro, MatchMode.Start));
             }
 
             return query;
