@@ -20,6 +20,7 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
         public long? ProfesionalId { get; set; }
 
         [Required]
+        [Display(Name = "Especialidad")]
         public long? EspecialidadId { get; set; }
         
         [Required]        
@@ -30,5 +31,10 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
 
         [DisplayName("Es Telefónico?")]
         public bool EsTelefonico { get; set; }
+
+        public OtorgarTurnoEditModel()
+        {
+            EsTelefonico = true;
+        }
     }
 }
