@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using Sicemed.Web.Models;
@@ -7,6 +8,7 @@ using Sicemed.Web.Models.Roles;
 using Sicemed.Web.Models.ViewModels;
 using Sicemed.Web.Models.ViewModels.Cuenta;
 using Sicemed.Web.Models.ViewModels.Historial;
+using Sicemed.Web.Models.ViewModels.ObtenerTurno;
 using Sicemed.Web.Models.ViewModels.Paciente;
 using Sicemed.Web.Models.ViewModels.Profesional;
 using Sicemed.Web.Models.ViewModels.Secretaria;
@@ -30,6 +32,12 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                 .ForMember(d => d.Documento, m => m.Ignore())
                 .ForMember(d => d.Domicilio, m => m.Ignore())
                 .ForMember(d => d.Roles, m => m.Ignore());
+
+            CreateMap<Turno, TurnoViewModel>()
+                .ForMember(x => x.FechaTurnoInicial, m => m.MapFrom(o => o.FechaTurno))
+                .ForMember(x => x.FechaTurnoFinal, m => m.ResolveUsing(t => t.FechaTurno.AddMinutes(15)))
+                .ForMember(x => x.EspecialidadesAtendidas, m => m.ResolveUsing(t => new List<Especialidad> { t.Especialidad }));
+
 
             #region InfoViewModel maps
             CreateMap<Enumeration, InfoViewModel>()

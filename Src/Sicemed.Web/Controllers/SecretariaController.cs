@@ -84,11 +84,12 @@ namespace Sicemed.Web.Controllers
         }
 
         [AjaxHandleError]
-        public JsonResult GetTurnosDisponiblesProfesional(long profesionalId, long? especialidadId)
+        public JsonResult GetTurnosProfesional(long profesionalId, long? especialidadId)
         {
             var queryTurnos = QueryFactory.Create<IObtenerTurnosProfesionalQuery>();
             queryTurnos.ProfesionalId = profesionalId;
             queryTurnos.EspecialidadId = especialidadId;
+            queryTurnos.AgregarOtorgados = true;
             var result = queryTurnos.Execute();
             return Json(result, JsonRequestBehavior.AllowGet);
         }

@@ -52,11 +52,12 @@
                 </div>
                 <div class="editor-field">
                     @Html.EditorFor(x => x.EspecialidadId)
-                    <div style="display: inline;">
+                    <div id="sobreTurnoView" style="display: none;">
                         @Html.HiddenFor(x => x.EsSobreTurno)
                         <input type="text" class="text-box single-line date" id="txtSobreTurnoFecha" value="@DateTime.Now.ToShortDateString()"></input>
                         <input type="text" class="text-box single-line time" id="txtSobreTurnoHora" value="@DateTime.Now.ToShortTimeString()"></input>
-                        <a href="#" id="cmdSobreTurno" class="button_link btn_pink"><span>Otorgar Sobreturno</span></a>                        
+                        <a href="#" id="cmdSobreTurno" class="button_link btn_pink">
+                            <span>Otorgar Sobreturno</span></a>
                     </div>
                 </div>
                 <div class="editor-validator">
@@ -111,18 +112,23 @@
                 var especialidadesAtendidasTurno = $.map(turno.EspecialidadesAtendidas, function(especialidad) {
                     return especialidad.Descripcion;
                 }).join(",");
+
                 var description = "<div class='turno-libre'>"
                     + "<span class='text-blue'>Fecha Turno:</span><span>" + app.format.date(turno.FechaTurnoInicial) + "</span><br/>"
-                    + "<span class='text-blue'>Horario:</span><span>" + app.format.hour(turno.FechaTurnoInicial) + " / " + app.format.hour(turno.FechaTurnoFinal) + "</span><br/>"
-                    + "<span class='text-blue'>Consultorio:</span><span>" + turno.Consultorio.Descripcion + "</span><br/>"
-                    + "<span class='text-blue'>Especialidades:</span><span>" + especialidadesAtendidasTurno + "</span>"
+                    + "<span class='text-blue'>Horario:</span><span>" + app.format.hour(turno.FechaTurnoInicial) + " / " + app.format.hour(turno.FechaTurnoFinal) + "</span><br/>";
+
+                if(turno.Paciente) description += "<span class='text-blue'>Paciente:</span><span>" + turno.Paciente.Descripcion + "</span><br/>";
+                if(turno.Consultorio) description += "<span class='text-blue'>Consultorio:</span><span>" + turno.Consultorio.Descripcion + "</span><br/>";
+                    
+                description += "<span class='text-blue'>Especialidades:</span><span>" + especialidadesAtendidasTurno + "</span>"
                     + "</div>";
+                
                 var event = {
                     title: turno.Paciente ? turno.Paciente.Descripcion : "Reservar...",
                     start: turno.FechaTurnoInicial,
                     end: turno.FechaTurnoFinal,
                     allDay: false,
-                    description: turno.Paciente ? '' : description,
+                    description: description,
                     color: turno.Paciente ? '#F00' : null,
                     libre: !turno.Paciente,
                     turno: turno
@@ -162,6 +168,7 @@
                     formatResult: format,
                     formatSelection: format
                 }).select2("enable").change(especialidadSelect);
+                $("#sobreTurnoView").show();
                 if(d.length > 0) $("#EspecialidadId").select2("data", d[0]).trigger("change");
             });            
         };
@@ -170,13 +177,15 @@
             var val = $("#EspecialidadId").val();
             if(!val) {
                 $('#calendar').hide();
+                $("#sobreTurnoView").hide();
                 return;
             }
+            $("#sobreTurnoView").show();
             var param = {
                 especialidadId: val,
                 profesionalId: $("#ProfesionalId").val()
             };
-            $.getJSON("@Url.Action("GetTurnosDisponiblesProfesional")", param, function (d) { renderCalendar(param, d); });            
+            $.getJSON("@Url.Action("GetTurnosProfesional")", param, function (d) { renderCalendar(param, d); });            
         };
 
         var otorgarSobreTurno = function() {

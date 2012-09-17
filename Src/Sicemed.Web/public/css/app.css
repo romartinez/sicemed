@@ -288,6 +288,10 @@ input.time, input.date, input[type=date], input[type=time], input.ctl-timespan
     padding: 15px;
 }
 
+.tooltip .turno-ocupado {
+    background-color: #ca2b63;
+}
+
 .tooltip
 {
     display: none;
