@@ -32,6 +32,8 @@ namespace Sicemed.Web.Models.Roles
         }
 
         public virtual string Matricula { get; set; }
+        public virtual decimal? RetencionFija { get; set; }
+        public virtual decimal? RetencionPorcentaje { get; set; }
 
         public static Rol Create(string matricula)
         {

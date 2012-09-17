@@ -10,6 +10,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings.Roles
         {
             DiscriminatorValue(Rol.PROFESIONAL);
             Property(x => x.Matricula);
+            Property(x => x.RetencionFija);
+            Property(x => x.RetencionPorcentaje);
 
             Set(x => x.Agendas, map =>
                                 {

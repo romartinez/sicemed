@@ -16,6 +16,12 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [DisplayName("Matricula")]
         [DefaultStringLength]
         public virtual string Matricula { get; set; }
+
+        [DisplayName("Retención Fija")]        
+        public virtual string RetencionFija { get; set; }
+
+        [DisplayName("Retención Porcentaje")]        
+        public virtual string RetencionPorcentaje { get; set; }
         
         [UIHint("Agendas")]
         [DisplayName("Dias Atención")]

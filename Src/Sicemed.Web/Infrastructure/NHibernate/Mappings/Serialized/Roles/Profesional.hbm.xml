@@ -10,5 +10,7 @@
       <one-to-many class="Sicemed.Web.Models.Agenda" />
     </set>
     <property name="Matricula" />
+    <property name="RetencionFija" />
+    <property name="RetencionPorcentaje" />
   </subclass>
 </hibernate-mapping>
