@@ -162,7 +162,7 @@ var app = (function ($, app) {
                     formatNoMatches: function () { return "No se encuentran coincidencias."; },
                     formatInputTooShort: function (input, min) { return "Por favor ingrese " + (min - input.length) + " caracteres más."; },
                     formatSelectionTooBig: function (limit) { return "Sólo puede seleccionar " + limit + " elementos."; },
-                    formatLoadMore: function (pageNumber) { return "Cargando más resultados..."; },
+                    formatLoadMore: function (pageNumber) { return "Cargando más resultados..."; }
                 });
             });
         }
