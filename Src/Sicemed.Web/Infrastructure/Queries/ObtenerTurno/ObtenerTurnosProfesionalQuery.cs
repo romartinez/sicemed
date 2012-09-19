@@ -39,9 +39,11 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
             }
 
             var session = SessionFactory.GetCurrentSession();
+            var maximoTurnosFuturos = DateTime.Now.AddMonths(3);
+            var lunesDeEstaSemana = DateTime.Now.StartOfWeek(DayOfWeek.Tuesday).ToMidnigth();
             var turnosProfesional = session.QueryOver<Turno>()
                 .Fetch(x => x.Paciente).Eager
-                .Where(t => t.FechaTurno > DateTime.Now.AddDays(-1) && t.FechaTurno < DateTime.Now.AddMonths(3))
+                .Where(t => t.FechaTurno > lunesDeEstaSemana && t.FechaTurno < maximoTurnosFuturos)
                 .JoinQueryOver(x => x.Profesional)
                 .Where(p => p.Id == ProfesionalId)
                 .JoinQueryOver(p => p.Especialidades)
@@ -69,11 +71,12 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
             {
                 var turnosOtorgados = MappingEngine.Map<List<TurnoViewModel>>(turnosProfesional);
                 //Le calculo la fecha de fin a los turnos
-                turnosOtorgados.ForEach(t=>
+                turnosOtorgados.ForEach(t =>
                     {
                         var agendaDia = agendaProfesional.FirstOrDefault(a => a.Dia == t.FechaTurnoInicial.DayOfWeek);
-                        if (agendaDia != null) t.FechaTurnoFinal = t.FechaTurnoInicial + agendaDia.DuracionTurno;
-                    } );
+                        t.FechaTurnoFinal = t.FechaTurnoInicial 
+                            + (agendaDia == null ? MvcApplication.Clinica.DuracionTurnoPorDefecto : agendaDia.DuracionTurno);
+                    });
                 turnos.AddRange(turnosOtorgados);
             }
 

@@ -58,7 +58,7 @@
                     <div id="sobreTurnoView" style="display: none;">
                         @Html.HiddenFor(x => x.EsSobreTurno)
                         <input type="text" class="text-box single-line date" id="txtSobreTurnoFecha" value="@DateTime.Now.ToShortDateString()"></input>
-                        <input type="text" class="text-box single-line time" id="txtSobreTurnoHora" value="@DateTime.Now.ToShortTimeString()"></input>
+                        <input type="text" class="text-box single-line time" id="txtSobreTurnoHora" value="@DateTime.Now.ToShortTimeString().Replace(".", string.Empty).ToUpper()"></input>
                         <a href="#" id="cmdSobreTurno" class="button_link btn_pink">
                             <span>Otorgar Sobreturno</span>
                         </a>
