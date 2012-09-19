@@ -12,10 +12,16 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [HiddenInput]
         public virtual long? Id { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Matricula")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public virtual string Matricula { get; set; }
+
+        [DisplayName("Retención Fija")]        
+        public virtual string RetencionFija { get; set; }
+
+        [DisplayName("Retención Porcentaje")]        
+        public virtual string RetencionPorcentaje { get; set; }
         
         [UIHint("Agendas")]
         [DisplayName("Dias Atención")]
@@ -26,7 +32,7 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [DropDownProperty("EspecialidadesSeleccionadas")]
         public IEnumerable<SelectListItem> Especialidades { get; set; }
 
-        [Required]
+        [Requerido]
         [ScaffoldColumn(false)]
         public long[] EspecialidadesSeleccionadas { get; set; }
     }

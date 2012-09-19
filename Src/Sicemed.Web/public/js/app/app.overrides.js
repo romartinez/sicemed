@@ -1,9 +1,9 @@
 ﻿//Console overrides
 if (!window.console) console = {};
-console.log = console.log || function(){};
-console.warn = console.warn || function(){};
-console.error = console.error || function(){};
-console.info = console.info || function(){};
+console.log = console.log || function () { };
+console.warn = console.warn || function () { };
+console.error = console.error || function () { };
+console.info = console.info || function () { };
 
 //overwrite common methods
 function alert(content) {
@@ -66,6 +66,33 @@ $.validator.methods.range = function (value, element, param) {
 $.validator.methods.number = function (value, element) {
     return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
 };
+
+// The validator function
+$.validator.addMethod('rangeDate', function (value, element, param) {
+    if (!value) {
+        return true; // not testing 'is required' here!
+    }
+    try {
+        var dateValue = $.datepicker.parseDate("dd/mm/yy", value);
+    }
+    catch (e) {
+        return false;
+    }
+    return param.min <= dateValue && dateValue <= param.max;
+});
+
+// The adapter to support ASP.NET MVC unobtrusive validation
+$.validator.unobtrusive.adapters.add('rangedate', ['min', 'max'], function (options) {
+    var params = {
+        min: $.datepicker.parseDate("dd/mm/yy", options.params.min),
+        max: $.datepicker.parseDate("dd/mm/yy", options.params.max)
+    };
+
+    options.rules['rangeDate'] = params;
+    if (options.message) {
+        options.messages['rangeDate'] = options.message;
+    }
+});
 
 $(document).ready(function () {
     $.validator.addMethod("requiredIfEnabled", app.validators.requiredIfEnabled, "El campo es requerido.");

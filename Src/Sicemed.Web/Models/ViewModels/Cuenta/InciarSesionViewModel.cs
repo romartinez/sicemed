@@ -7,17 +7,17 @@ namespace Sicemed.Web.Models.ViewModels.Cuenta
 {
     public class InciarSesionViewModel
     {
-        [Required]
+        [Requerido]
         [DisplayName("Email")]
         [DataType(DataType.EmailAddress)]
-        [DefaultStringLength]
-        [Email]
+        [LargoCadenaPorDefecto]
+        [Correo]
         public string Email { get; set; }
 
-        [Required]
+        [Requerido]
         [DataType(DataType.Password)]
         [DisplayName("Password")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public string Password { get; set; }
 
         [DisplayName("Recordarme?")]

@@ -214,6 +214,9 @@
     <Compile Include="Areas\Admin\Controllers\AuditoriaController.cs" />
     <Compile Include="Areas\Admin\Controllers\ClinicasController.cs" />
     <Compile Include="Areas\Admin\Controllers\ConsultoriosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoriasIndicadorController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ObjetivosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IndicadoresController.cs" />
     <Compile Include="Areas\Admin\Controllers\EspecialidadesController.cs" />
     <Compile Include="Areas\Admin\Controllers\LogsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlanesController.cs" />
@@ -234,10 +237,17 @@
     <Compile Include="Areas\Admin\Models\Personas\SecretariaEditModel.cs" />
     <Compile Include="Controllers\BusquedaController.cs" />
     <Compile Include="Controllers\PingController.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\CorreoAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\LargoCadenaAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\LargoCadenaMinimoAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\RangoAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\RegexpLocalizableAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\RequeridoAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\DataAnnotations\SearcheableDropDownPropertyAttribute.cs" />
     <Compile Include="Infrastructure\Controllers\AdministracionDeTurnosBaseController.cs" />
     <Compile Include="Infrastructure\Helpers\Dapper.cs" />
     <Compile Include="Infrastructure\Jobs\AusentarTurnosVencidosJob.cs" />
+    <Compile Include="Infrastructure\Jobs\CalculadorIndicadoresJob.cs" />
     <Compile Include="Infrastructure\Jobs\KeepAliveJob.cs" />
     <Compile Include="Infrastructure\Jobs\MoverHistoricoJob.cs" />
     <Compile Include="Infrastructure\Jobs\NHibernateJob.cs" />
@@ -246,7 +256,11 @@
     <Compile Include="Infrastructure\ModelBinders\DateTimeCurrentCultureModelBinder.cs" />
     <Compile Include="Infrastructure\ModelBinders\SearchFiltersModelBinder.cs" />
     <Compile Include="Infrastructure\NHibernate\EntityConverter.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\CategoriaIndicadorMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\IndicadorMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\ObjetivoIndicadorMap.cs" />
     <Compile Include="Infrastructure\NHibernate\NHibernateAuditContractResolver.cs" />
+    <Compile Include="Infrastructure\Providers\CustomClientDataTypeModelValidatorProvider.cs" />
     <Compile Include="Infrastructure\Queries\AdministracionDeTurnos\ObtenerTurnosACancelarQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaPacienteQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaGeneralPacienteQuery.cs" />
@@ -259,6 +273,7 @@
     <Compile Include="Infrastructure\Reports\TurnosPorProfesionalReporte.cs" />
     <Compile Include="Infrastructure\Services\INotificationService.cs" />
     <Compile Include="Infrastructure\Services\NotificationService.cs" />
+    <Compile Include="Models\BI\Enumerations\EstadoObjetivo.cs" />
     <Compile Include="Models\Reports\TurnosPorProfesionalReportModel.cs" />
     <Compile Include="Models\ViewModels\Historial\TurnosPorPacienteViewModel.cs" />
     <Compile Include="Models\ViewModels\PacienteSearchViewModel.cs" />
@@ -282,7 +297,7 @@
     <Compile Include="Infrastructure\ApplicationInstaller.cs" />
     <Compile Include="Infrastructure\Attributes\DataAnnotations\CascadingDropDownPropertyAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\DataAnnotations\DropDownPropertyAttribute.cs" />
-    <Compile Include="Infrastructure\Attributes\DataAnnotations\SqlDateTimeRangeAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\FechaAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AjaxHandleError.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AjaxMessagesFilter.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AuditAtrribute.cs" />
@@ -291,7 +306,7 @@
     <Compile Include="Infrastructure\Attributes\Filters\NHibernateBaseAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\PermanentCacheAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\ValidateModelStateAttribute.cs" />
-    <Compile Include="Infrastructure\Attributes\DataAnnotations\DefaultStringLengthAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\LargoCadenaPorDefectoAttribute.cs" />
     <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\AutoMapper\AdminProfile.cs" />
     <Compile Include="Infrastructure\AutoMapper\AutoMapperExtensions.cs" />
@@ -399,7 +414,6 @@
     <Compile Include="Models\Agenda.cs" />
     <Compile Include="Models\AuditLog.cs" />
     <Compile Include="Models\BI\CategoriaIndicador.cs" />
-    <Compile Include="Models\BI\Components\MedicionIndicador.cs" />
     <Compile Include="Models\BI\Enumerations\TipoOperadorIndicador.cs" />
     <Compile Include="Models\BI\Indicador.cs" />
     <Compile Include="Models\BI\ObjetivoIndicador.cs" />
@@ -470,6 +484,9 @@
     <Content Include="App_Data\003_AuditLogHistoricoTable.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\CategoriaIndicador.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Indicador.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\ObjetivoIndicador.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Roles\Administrador.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Agenda.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Clinica.hbm.xml" />
@@ -668,6 +685,7 @@
     <Content Include="public\js\features\ObtenerTurno\mocks\ObtenerAgendaProfesional.js" />
     <Content Include="public\js\features\ObtenerTurno\mocks\ObtenerEspecialidades.js" />
     <Content Include="public\js\libs\fullcalendar.js" />
+    <Content Include="public\js\libs\i18n\messages_es.js" />
     <Content Include="public\js\libs\i18n\grid.locale-es.js" />
     <Content Include="public\js\libs\i18n\jquery.ui.datepicker-es.js" />
     <Content Include="public\js\libs\jsondiffpatch.html.js" />
@@ -680,8 +698,6 @@
     <Content Include="public\js\libs\jquery.tmpl.js" />
     <Content Include="public\js\libs\jquery.tools.min.js" />
     <Content Include="public\js\libs\jquery.ui.timepicker.js" />
-    <Content Include="public\js\libs\jquery.validate.min.js" />
-    <Content Include="public\js\libs\jquery.validate.unobtrusive.min.js" />
     <Content Include="public\js\libs\jsondiffpatch.js" />
     <Content Include="public\js\libs\knockout-2.0.0.js" />
     <Content Include="public\js\libs\msDateJsonParser.js" />
@@ -689,6 +705,15 @@
     <Content Include="public\js\libs\select2.js" />
     <Content Include="Reports\logo.png" />
     <Content Include="Reports\Report.aspx" />
+    <None Include="public\js\libs\jquery.validate-vsdoc.js" />
+    <Content Include="public\js\libs\jquery.validate.js" />
+    <Content Include="public\js\libs\jquery.validate.min.js">
+      <DependentUpon>jquery.validate.js</DependentUpon>
+    </Content>
+    <Content Include="public\js\libs\jquery.validate.unobtrusive.js" />
+    <Content Include="public\js\libs\jquery.validate.unobtrusive.min.js">
+      <DependentUpon>jquery.validate.unobtrusive.js</DependentUpon>
+    </Content>
     <Content Include="Views\Secretaria\OtorgarTurno.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -800,6 +825,10 @@
     <Content Include="Areas\Admin\Views\Personas\EditorTemplates\Agendas.cshtml" />
     <Content Include="Areas\Admin\Views\Personas\_Agenda.cshtml" />
     <Content Include="Areas\Admin\Views\Personas\Editar.cshtml" />
+    <Content Include="Areas\Admin\Views\CategoriasIndicador\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Indicadores\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Tablero\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Objetivos\Index.cshtml" />
     <None Include="Models\ClassDiagram.cd" />
     <Content Include="Views\ObtenerTurno\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutClinica.cshtml" />

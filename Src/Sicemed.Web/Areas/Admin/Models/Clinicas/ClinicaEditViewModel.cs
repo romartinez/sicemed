@@ -12,9 +12,9 @@ namespace Sicemed.Web.Areas.Admin.Models.Clinicas
 	public class ClinicaEditViewModel
 	{
 
-        [Required]
+        [Requerido]
         [DisplayName("Razón Social")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public virtual string RazonSocial { get; set; }
         
         [UIHint("DropDownList")]        
@@ -22,30 +22,30 @@ namespace Sicemed.Web.Areas.Admin.Models.Clinicas
         [DropDownProperty("DocumentoTipoDocumentoValue")]
         public IEnumerable<SelectListItem> TiposDocumentosHabilitados { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Tipo Documento")]
         [ScaffoldColumn(false)]
         public virtual int DocumentoTipoDocumentoValue { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Número Documento")]
         public virtual long DocumentoNumero { get; set; }
 
-        [Required]
+        [Requerido]
         [DataType(DataType.EmailAddress)]
         [DisplayName("Email")]
-        [Email]
-        [DefaultStringLength]
+        [Correo]
+        [LargoCadenaPorDefecto]
         public virtual string Email { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Telefonos")]
         [UIHint("Telefonos")]
         public IEnumerable<Telefono> Telefonos { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Domicilio")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public virtual string DomicilioDireccion { get; set; }
         
         [UIHint("DropDownList")]
@@ -58,21 +58,21 @@ namespace Sicemed.Web.Areas.Admin.Models.Clinicas
         [CascadingDropDownPropertyAttribute("DomicilioLocalidadId", "DomicilioLocalidadProvinciaId", "GetLocalidades", "Domain", "Admin", "provinciaId", "<< Seleccione una Provincia >>")]
         public IEnumerable<SelectListItem> LocalidadesHabilitadas { get; set; }
 
-		[Required]
+		[Requerido]
         [DisplayName("Localidad")]
         [ScaffoldColumn(false)]
 		public virtual long? DomicilioLocalidadId { get; set; }
         
-        [Required]
+        [Requerido]
         [DisplayName("Provincia")]
         [ScaffoldColumn(false)]
         public virtual long? DomicilioLocalidadProvinciaId { get; set; }	
 
-		[Required]
+		[Requerido]
 		[DisplayName("Domicilio Latitud")]
 		public virtual double DomicilioLatitud { get; set; }
 
-		[Required]
+		[Requerido]
 		[DisplayName("Domicilio Longitud")]
 		public virtual double DomicilioLongitud { get; set; }
 
@@ -81,39 +81,39 @@ namespace Sicemed.Web.Areas.Admin.Models.Clinicas
         [DropDownProperty("DiasHabilitados")]
         public IEnumerable<SelectListItem> DiasHabilitadosPosibles { get; set; }
 
-        [Required]
+        [Requerido]
         [ScaffoldColumn(false)]
         public DayOfWeek[] DiasHabilitados { get; set; }
 
-		[Required]
+		[Requerido]
 		[DisplayName("Horario Matutino Desde")]
         [DataType(DataType.Time)]
-		public virtual DateTime HorarioMatutinoDesde { get; set; }
-		[Required]
+		public virtual TimeSpan HorarioMatutinoDesde { get; set; }
+		[Requerido]
 		[DisplayName("Horario Matutino Hasta")]
         [DataType(DataType.Time)]
-        public virtual DateTime HorarioMatutinoHasta { get; set; }
+        public virtual TimeSpan HorarioMatutinoHasta { get; set; }
 
 		[DisplayName("Horario Vespertino Desde")]
         [DataType(DataType.Time)]
-        public virtual DateTime? HorarioVespertinoDesde { get; set; }
+        public virtual TimeSpan? HorarioVespertinoDesde { get; set; }
 		[DisplayName("Horario Vespertino Hasta")]
         [DataType(DataType.Time)]
-        public virtual DateTime? HorarioVespertinoHasta { get; set; }
+        public virtual TimeSpan? HorarioVespertinoHasta { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Duracion Por Defecto Turno")]
         [DataType(DataType.Duration)]
         public virtual TimeSpan DuracionTurnoPorDefecto { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Inasistencias Consecutivas")]
         [Range(1, int.MaxValue)]
         public virtual int NumeroInasistenciasConsecutivasGeneranBloqueo { get; set; }
         
-        [Required]
+        [Requerido]
 		[DisplayName("Google Maps Key")]
-		[DefaultStringLength]
+		[LargoCadenaPorDefecto]
 		public virtual string GoogleMapsKey { get; set; }
 	}
 }

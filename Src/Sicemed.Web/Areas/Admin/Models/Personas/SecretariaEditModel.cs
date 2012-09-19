@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
 
 namespace Sicemed.Web.Areas.Admin.Models.Personas
 {
@@ -13,6 +14,7 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
 
         [Display(Name = "Fecha Ingreso")]
         [DataType(DataType.Date)]
+        [Fecha]
         public DateTime FechaIngreso { get; set; }
     }
 }

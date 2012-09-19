@@ -30,6 +30,9 @@
                 </div>
                 <div class="editor-field">
                     @Html.EditorFor(x => x.PacienteId)
+                    <a href="@Url.Action("AltaPaciente")" target="_blank" class="button_link btn_blue">
+                        <span>Alta Paciente</span>
+                    </a>
                 </div>
                 <div class="editor-validator">
                     @Html.ValidationMessageFor(x => x.PacienteId)
@@ -52,6 +55,14 @@
                 </div>
                 <div class="editor-field">
                     @Html.EditorFor(x => x.EspecialidadId)
+                    <div id="sobreTurnoView" style="display: none;">
+                        @Html.HiddenFor(x => x.EsSobreTurno)
+                        <input type="text" class="text-box single-line date" id="txtSobreTurnoFecha" value="@DateTime.Now.ToShortDateString()"></input>
+                        <input type="text" class="text-box single-line time" id="txtSobreTurnoHora" value="@DateTime.Now.ToShortTimeString().Replace(".", string.Empty).ToUpper()"></input>
+                        <a href="#" id="cmdSobreTurno" class="button_link btn_pink">
+                            <span>Otorgar Sobreturno</span>
+                        </a>
+                    </div>
                 </div>
                 <div class="editor-validator">
                     @Html.ValidationMessageFor(x => x.EspecialidadId)
@@ -105,18 +116,23 @@
                 var especialidadesAtendidasTurno = $.map(turno.EspecialidadesAtendidas, function(especialidad) {
                     return especialidad.Descripcion;
                 }).join(",");
+
                 var description = "<div class='turno-libre'>"
                     + "<span class='text-blue'>Fecha Turno:</span><span>" + app.format.date(turno.FechaTurnoInicial) + "</span><br/>"
-                    + "<span class='text-blue'>Horario:</span><span>" + app.format.hour(turno.FechaTurnoInicial) + " / " + app.format.hour(turno.FechaTurnoFinal) + "</span><br/>"
-                    + "<span class='text-blue'>Consultorio:</span><span>" + turno.Consultorio.Descripcion + "</span><br/>"
-                    + "<span class='text-blue'>Especialidades:</span><span>" + especialidadesAtendidasTurno + "</span>"
+                    + "<span class='text-blue'>Horario:</span><span>" + app.format.hour(turno.FechaTurnoInicial) + " / " + app.format.hour(turno.FechaTurnoFinal) + "</span><br/>";
+
+                if(turno.Paciente) description += "<span class='text-blue'>Paciente:</span><span>" + turno.Paciente.Descripcion + "</span><br/>";
+                if(turno.Consultorio) description += "<span class='text-blue'>Consultorio:</span><span>" + turno.Consultorio.Descripcion + "</span><br/>";
+                    
+                description += "<span class='text-blue'>Especialidades:</span><span>" + especialidadesAtendidasTurno + "</span>"
                     + "</div>";
+                
                 var event = {
                     title: turno.Paciente ? turno.Paciente.Descripcion : "Reservar...",
                     start: turno.FechaTurnoInicial,
                     end: turno.FechaTurnoFinal,
                     allDay: false,
-                    description: turno.Paciente ? '' : description,
+                    description: description,
                     color: turno.Paciente ? '#F00' : null,
                     libre: !turno.Paciente,
                     turno: turno
@@ -125,8 +141,9 @@
             }
             calendar.fullCalendar('addEventSource', events);
             //Tooltip
-            attachTooltips();
             calendar.show();
+            calendar.fullCalendar('rerenderEvents');
+            attachTooltips();            
         };
 
         var profesionalSelect = function () {
@@ -155,6 +172,7 @@
                     formatResult: format,
                     formatSelection: format
                 }).select2("enable").change(especialidadSelect);
+                $("#sobreTurnoView").show();
                 if(d.length > 0) $("#EspecialidadId").select2("data", d[0]).trigger("change");
             });            
         };
@@ -163,16 +181,38 @@
             var val = $("#EspecialidadId").val();
             if(!val) {
                 $('#calendar').hide();
+                $("#sobreTurnoView").hide();
                 return;
             }
+            $("#sobreTurnoView").show();
             var param = {
                 especialidadId: val,
                 profesionalId: $("#ProfesionalId").val()
             };
-            $.getJSON("@Url.Action("GetTurnosDisponiblesProfesional")", param, function (d) { renderCalendar(param, d); });            
+            $.getJSON("@Url.Action("GetTurnosProfesional")", param, function (d) { renderCalendar(param, d); });            
+        };
+
+        var otorgarSobreTurno = function() {
+            var date = $.datepicker.parseDate("dd/mm/yy", $("#txtSobreTurnoFecha").val());
+            var minutes = $.fullCalendar.parseTime($("#txtSobreTurnoHora").val());            
+            date.setMinutes(minutes);            
+            var fecha = app.format.fulldate(date);
+            var text = "¿Est&aacute; seguro que quiere otorgar al paciente"
+                +" <strong>"+$("#PacienteId").select2("data").NombreCompleto+"</strong>"
+                +" un sobre turno para el d&iacute;a <strong>"+fecha+"</strong> "
+                +" para el profesional <strong>"+$("#ProfesionalId").select2("data").NombreCompleto+"</strong>?";
+            app.ui.showConfirmation(text, function() {
+                $("#FechaTurno").val(fecha);
+                $("#ConsultorioId").val(null);
+                $("#EsSobreTurno").val(true);
+                $("form").submit();
+            });            
         };
 
         jQuery(function () {
+            $("#sobreTurnoFecha").datepicker({ dateFormat: "dd/mm/yy" });
+            
+            $("#cmdSobreTurno").click(otorgarSobreTurno);
             $("#ProfesionalId").change(profesionalSelect);
             $("#EspecialidadId").select2({
                 data: {results:[]},
@@ -237,6 +277,8 @@
                 events: []
             }).hide();
             
+            //Quito el Cargando para esta página que queda mal.
+            $(document).unbind("ajaxStart");
         })
     </script>
 }

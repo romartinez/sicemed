@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Iesi.Collections.Generic;
+using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
 using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Models
@@ -8,9 +9,9 @@ namespace Sicemed.Web.Models
     {
         #region Primitive Properties
 
-        [Required]
+        [Requerido]
         public virtual string Nombre { get; set; }
-
+        [LargoCadenaPorDefecto]
         public virtual string Descripcion { get; set; }
 
         #endregion

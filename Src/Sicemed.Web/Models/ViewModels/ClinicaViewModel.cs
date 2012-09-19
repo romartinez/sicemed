@@ -20,11 +20,11 @@ namespace Sicemed.Web.Models.ViewModels
 		public double DomicilioLatitud { get; set; }
 		public double DomicilioLongitud { get; set; }
 
-		public DateTime HorarioMatutinoDesde { get; set; }
-        public DateTime HorarioMatutinoHasta { get; set; }
+        public TimeSpan HorarioMatutinoDesde { get; set; }
+        public TimeSpan HorarioMatutinoHasta { get; set; }
 
-        public DateTime? HorarioVespertinoDesde { get; set; }
-        public DateTime? HorarioVespertinoHasta { get; set; }
+        public TimeSpan? HorarioVespertinoDesde { get; set; }
+        public TimeSpan? HorarioVespertinoHasta { get; set; }
 
         public bool EsHorarioCorrido { get; set; }
 

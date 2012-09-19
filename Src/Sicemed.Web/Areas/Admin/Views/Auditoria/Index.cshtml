@@ -36,7 +36,7 @@
     <div class="contenido">
         <h2>Entidad: ${Entidad}</h2>
         <h3>Id: ${EntidadId}</h3>
-        <h4>${app.format.fulldate(Fecha)} - ${Accion}</h4>
+        <h4>${Fecha} - ${Accion}</h4>
         <div class="diff">
                 
         </div>
@@ -85,11 +85,7 @@
                                 index: 'Fecha',
                                 width: 90,
                                 editable: true,
-                                sortable: false,
-                                formatter: 'date',
-                                formatoptions: {
-                                    newformat: 'd/m/Y h:i:s'
-                                }
+                                sortable: false
                             },
                             {
                                 name: 'Usuario',
@@ -123,6 +119,15 @@
                 }
             });
 
+            // Fix para que no parsee las fechas en esta pantalla.
+            var originalParse = $.parseJSON;
+
+            $.extend({
+                parseJSON: function (data, convertDates) {
+                    return originalParse(data, false);
+                }
+            });
+            
             $("#data").jqGrid('navButtonAdd',"#pager", {
                 caption:"Detalle", 
                 buttonicon:"ui-icon-newwin", 
@@ -132,12 +137,19 @@
                         app.ui.showError("Debe seleccionar un elemento de la lista.");
                         return;
                     }
-                    $.postAntiForgery("@Url.Action("Get")", { id: selected }).done(function (audit) {
+                    $.postAntiForgery("@Url.Action("Get")", { id: selected }, function (audit) {
+                        audit.EntidadAntes = $.parseJSON(audit.EntidadAntes);
+                        audit.EntidadDespues = $.parseJSON(audit.EntidadDespues);
                         var d = jsondiffpatch.diff(audit.EntidadAntes, audit.EntidadDespues);
-                        var diffElement = jsondiffpatch.html.diffToHtml(audit.EntidadAntes, audit.EntidadDespues, d);
                         $("#detalle .contenido").replaceWith($("#tmplDetalle").tmpl(audit));
-                        $("#detalle .diff").append(diffElement);
-                        $("#detalle").dialog('open');
+                        if (d) {
+                            var diffElement = jsondiffpatch.html.diffToHtml(audit.EntidadAntes, audit.EntidadDespues, d);
+                            $("#detalle .diff").append(diffElement);
+                            $("#detalle").dialog('open');
+                        } else {
+                            $("#detalle .diff").append("<div>Entidades Iguales</div>");
+                            $("#detalle").dialog('open');
+                        }
                     });
                 }, 
                 position: "last", 

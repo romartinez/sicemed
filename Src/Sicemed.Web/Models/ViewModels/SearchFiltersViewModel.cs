@@ -8,14 +8,14 @@ namespace Sicemed.Web.Models.ViewModels
 {
     public class SearchFiltersViewModel : IValidatableObject
     {
-        [Required]
+        [Requerido]
         [DataType(DataType.Date)]
-        [SqlDateTimeRange]
+        [Fecha]
         public DateTime Desde { get; set; }
 
-        [Required]
+        [Requerido]
         [DataType(DataType.Date)]
-        [SqlDateTimeRange]
+        [Fecha]
         public DateTime Hasta { get; set; }
 
         public string Filtro { get; set; }

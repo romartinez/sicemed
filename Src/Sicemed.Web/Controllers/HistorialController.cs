@@ -82,7 +82,11 @@ namespace Sicemed.Web.Controllers
                 query.Filtro = viewModel.Filters.Filtro;
                 query.PacienteId = paciente.Id;
 
-                viewModel.Turnos = query.Execute();                
+                viewModel.Turnos = query.Execute();
+            }
+            else
+            {
+                AppendLists(viewModel);
             }
 
             return View(viewModel);

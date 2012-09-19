@@ -48,9 +48,9 @@ namespace Sicemed.Web.Infrastructure.Queries.Historial
                     .Left.JoinAlias(x => profesional.Persona, () => persona)
                 .Where(
                     Restrictions.On<Turno>(x => x.Nota).IsInsensitiveLike(Filtro, MatchMode.Anywhere)
-                        || Restrictions.On(()=>persona.Nombre).IsInsensitiveLike(Filtro, MatchMode.Anywhere)
-                        || Restrictions.On(() => persona.SegundoNombre).IsInsensitiveLike(Filtro, MatchMode.Anywhere)
-                        || Restrictions.On(() => persona.Apellido).IsInsensitiveLike(Filtro, MatchMode.Anywhere)
+                        || Restrictions.On(() => persona.Nombre).IsInsensitiveLike(Filtro, MatchMode.Start)
+                        || Restrictions.On(() => persona.SegundoNombre).IsInsensitiveLike(Filtro, MatchMode.Start)
+                        || Restrictions.On(() => persona.Apellido).IsInsensitiveLike(Filtro, MatchMode.Start)
                 );
             }
 

@@ -22,17 +22,17 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [CascadingDropDownProperty("PlanId", "ObraSocialId", "GetPlanesObraSocial", "Domain", "Admin", "obraSocialId", "<< Seleccione una Obra Social >>")]
         public IEnumerable<SelectListItem> PlanesObraSocialHabilitados { get; set; }
 
-        [Required]
+        [Requerido]
         [ScaffoldColumn(false)]
         public virtual long? PlanId { get; set; }
 
-        [Required]
+        [Requerido]
         [ScaffoldColumn(false)]
         public virtual long? ObraSocialId { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Número Afiliado")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public virtual string NumeroAfiliado { get; set; }
     }
 }

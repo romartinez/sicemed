@@ -56,10 +56,18 @@ namespace Sicemed.Web.Controllers
                 var paciente = session.Get<Paciente>(editModel.PacienteId.Value);
                 var profesional = session.Get<Profesional>(editModel.ProfesionalId.Value);
                 var especialidad = session.Get<Especialidad>(editModel.EspecialidadId);
-                var consultorio = session.Load<Consultorio>(editModel.ConsultorioId);
                 var fechaTurno = editModel.FechaTurno;
 
-                var turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, User.As<Secretaria>(), consultorio, editModel.EsTelefonico);
+                Turno turno;
+                if(!editModel.EsSobreTurno)
+                {
+                    var consultorio = session.Load<Consultorio>(editModel.ConsultorioId);
+                    turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, User.As<Secretaria>(), consultorio, editModel.EsTelefonico);
+                }
+                else
+                {
+                    turno = Turno.CreateSobreTurno(fechaTurno, paciente, profesional, especialidad, User.As<Secretaria>(), editModel.EsTelefonico);                    
+                }
 
                 session.Save(turno);
 
@@ -76,11 +84,12 @@ namespace Sicemed.Web.Controllers
         }
 
         [AjaxHandleError]
-        public JsonResult GetTurnosDisponiblesProfesional(long profesionalId, long? especialidadId)
+        public JsonResult GetTurnosProfesional(long profesionalId, long? especialidadId)
         {
             var queryTurnos = QueryFactory.Create<IObtenerTurnosProfesionalQuery>();
             queryTurnos.ProfesionalId = profesionalId;
             queryTurnos.EspecialidadId = especialidadId;
+            queryTurnos.AgregarOtorgados = true;
             var result = queryTurnos.Execute();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -141,7 +150,7 @@ namespace Sicemed.Web.Controllers
                 //Update not automapped properties
                 model.Documento = new Documento
                 {
-                    Numero = editModel.DocumentoNumero,
+                    Numero = editModel.DocumentoNumero.Value,
                     TipoDocumento = Enumeration.FromValue<TipoDocumento>(editModel.TipoDocumentoId)
                 };
                 model.Domicilio = new Domicilio

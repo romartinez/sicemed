@@ -31,6 +31,7 @@ namespace Sicemed.Web.App_Start
                 new KeepAliveJob(),                 
                 new AusentarTurnosVencidosJob(), 
                 new MoverHistoricoJob(), 
+                new CalculadorIndicadoresJob(), 
             };
             
             var manager = new JobManager(jobs, JobHost);

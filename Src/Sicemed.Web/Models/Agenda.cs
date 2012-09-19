@@ -13,8 +13,8 @@ namespace Sicemed.Web.Models
             _especialidadesAtendidas = new HashedSet<Especialidad>();
         }
 
-        public virtual DateTime HorarioDesde { get; set; }
-        public virtual DateTime HorarioHasta { get; set; }
+        public virtual TimeSpan HorarioDesde { get; set; }
+        public virtual TimeSpan HorarioHasta { get; set; }
 
         public virtual TimeSpan DuracionTurno { get; set; }
 

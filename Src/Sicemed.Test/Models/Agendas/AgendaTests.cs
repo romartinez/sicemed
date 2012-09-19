@@ -24,8 +24,8 @@ namespace Sicemed.Tests.Models.Agendas
             profesional.AgregarAgenda(
                 DayOfWeek.Tuesday,
                 TimeSpan.FromMinutes(15),
-                new DateTime(2000, 1, 1, 10, 0, 0),
-                new DateTime(2000, 1, 1, 12, 0, 0),
+                new TimeSpan(10, 0, 0),
+                new TimeSpan(12, 0, 0),
                 consultorio,
                 clinico
             );
@@ -52,8 +52,8 @@ namespace Sicemed.Tests.Models.Agendas
                 profesional.AgregarAgenda(
                     DayOfWeek.Tuesday,
                     TimeSpan.FromMinutes(15),
-                    new DateTime(2000, 1, 1, 10, 0, 0),
-                    new DateTime(2000, 1, 1, 12, 0, 0),
+                    new TimeSpan(10, 0, 0),
+                    new TimeSpan(12, 0, 0),
                     ApplicationInstaller.ConsultorioA,
                     ApplicationInstaller.EspecialidadDermatologo
                 )
@@ -69,8 +69,8 @@ namespace Sicemed.Tests.Models.Agendas
                                              profesional.AgregarAgenda(
                                                  DayOfWeek.Tuesday,
                                                  TimeSpan.FromMinutes(15),
-                                                 new DateTime(2000, 1, 1, 10, 0, 0),
-                                                 new DateTime(2000, 1, 1, 9, 0, 0),
+                                                 new TimeSpan(10, 0, 0),
+                                                 new TimeSpan(9, 0, 0),
                                                  ApplicationInstaller.ConsultorioA,
                                                  ApplicationInstaller.EspecialidadClinico
                                                  )

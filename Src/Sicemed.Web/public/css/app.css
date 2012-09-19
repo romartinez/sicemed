@@ -125,7 +125,7 @@ div.ctl-collapsible
         margin: 0 !important;
     }
 
-input[type=date], input[type=time], input.ctl-timespan
+input.time, input.date, input[type=date], input[type=time], input.ctl-timespan
 {
     width: 75px;
 }
@@ -286,6 +286,10 @@ input[type=date], input[type=time], input.ctl-timespan
 .tooltip .turno-libre
 {
     padding: 15px;
+}
+
+.tooltip .turno-ocupado {
+    background-color: #ca2b63;
 }
 
 .tooltip

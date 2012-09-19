@@ -1,0 +1,114 @@
+﻿@using Sicemed.Web.Models
+@model IEnumerable<Sicemed.Web.Models.BI.CategoriaIndicador>
+@{
+    ViewBag.Title = "Administración De Indicadores";
+}
+<h2>
+    Administraci&oacute;n de Indicadores
+</h2>
+
+@Html.Partial("GrillaBase")
+
+@section Scripts{
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            app.grid.initialize({
+                    url: {
+                        edit: '@Url.Action("Editar")',
+                    add: '@Url.Action("Nuevo")',
+                    del: '@Url.Action("Eliminar")',
+                    list: '@Url.Action("List")'
+                },
+                params: {
+                    caption: 'Gesti&oacute;n De Indicadores',
+                    emptyrecords: 'No hay Indicadores cargados.',
+                    colNames: ['Id', 'Nombre', 'Descipci&oacute;n', 'Habilitado', 'Tipo Operador', 'Categoria'],
+                    colModel: [
+                            {
+                                name: 'Id',
+                                index: 'Id',
+                                width: 55,
+                                sortable: false,
+                                hidden: true
+                            },
+                            {
+                                name: 'Nombre',
+                                index: 'Nombre',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                editrules: {
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Nombre (*)',
+                                    maxlength: '255',
+                                    size: '255'
+                                }
+                            },
+                            {
+                                name: 'Descipcion',
+                                index: 'Descipcion',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                formoptions: {
+                                    label: 'Descipci&oacute;n',
+                                    maxlength: '30',
+                                    size: '30'
+                                }
+                            },
+                            {
+                                name: 'Habilitado',
+                                index: 'Habilitado',
+                                width: 300,
+                                editable: true,
+                                sortable: false,
+                                edittype: 'textarea',
+                                editoptions: {
+                                    rows: '10',
+                                    cols: '30'
+                                },
+                                formoptions: {
+                                    label: 'Habilitado'
+                                }
+                            },
+                            {
+                                name: 'TipoOperador',
+                                index: 'TipoOperador',
+                                width: 300,
+                                editable: true,
+                                sortable: false,
+                                edittype: 'textarea',
+                                editoptions: {
+                                    rows: '10',
+                                    cols: '30'
+                                },
+                                formoptions: {
+                                    label: 'Tipo Operador'
+                                }
+                            },
+                            {
+                                name: 'CategoriaId',
+                                index: 'Categoria',
+                                formatter: function ( cellvalue, options, rowObject )
+                                {                                
+                                    return rowObject.Categoria.Nombre;
+                                },
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                edittype: 'select',
+                                editoptions: {
+                                    value: @Html.SelectJsonValues(x => x.Id, x => x.Nombre)
+                                },
+                                formoptions: {
+                                    label: 'Categoria (*)'
+                                }
+                            }                        
+                        ]
+                }
+            });
+        });
+    </script>
+}

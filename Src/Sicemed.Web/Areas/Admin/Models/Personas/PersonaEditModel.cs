@@ -15,18 +15,18 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [HiddenInput]
         public virtual long? Id { get; set; }
 
-        [Required]
+        [Requerido]        
         [Display(Name = "Nombre", Prompt = "AAAA")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public string Nombre { get; set; }
 
         [Display(Name = "Segundo Nombre")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public string SegundoNombre { get; set; }
 
-        [Required]
+        [Requerido]
         [Display(Name = "Apellido")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public string Apellido { get; set; }
 
         [UIHint("DropDownList")]
@@ -34,12 +34,12 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [DropDownProperty("TipoDocumentoId")]
         public IEnumerable<SelectListItem> TiposDocumentosHabilitados { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Tipo Documento")]
         [ScaffoldColumn(false)]
         public virtual int TipoDocumentoId { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Número Documento")]
         public virtual long DocumentoNumero { get; set; }
 
@@ -47,20 +47,20 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [DataType(DataType.Date)]
         public DateTime? FechaNacimiento { get; set; }
 
-        [Required]
-        [Email]
+        [Requerido]
+        [Correo]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public string Email { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Telefono")]
         public Telefono Telefono { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Domicilio")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public virtual string DomicilioDireccion { get; set; }
 
         [UIHint("DropDownList")]
@@ -73,12 +73,12 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [CascadingDropDownProperty("DomicilioLocalidadId", "DomicilioLocalidadProvinciaId", "GetLocalidades", "Domain", "Admin","provinciaId", "<< Seleccione una Provincia >>")]
         public IEnumerable<SelectListItem> LocalidadesHabilitadas { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Localidad")]
         [ScaffoldColumn(false)]
         public virtual long? DomicilioLocalidadId { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Provincia")]
         [ScaffoldColumn(false)]
         public virtual long? DomicilioLocalidadProvinciaId { get; set; }

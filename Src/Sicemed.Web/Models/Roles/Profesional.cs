@@ -32,6 +32,8 @@ namespace Sicemed.Web.Models.Roles
         }
 
         public virtual string Matricula { get; set; }
+        public virtual decimal? RetencionFija { get; set; }
+        public virtual decimal? RetencionPorcentaje { get; set; }
 
         public static Rol Create(string matricula)
         {
@@ -71,7 +73,7 @@ namespace Sicemed.Web.Models.Roles
             _agendas.Remove(agenda);
         }
 
-        public virtual void AgregarAgenda(DayOfWeek dia, TimeSpan duracionTurno, DateTime horarioDesde, DateTime horarioHasta, Consultorio consultorio, params Especialidad[] especialidades)
+        public virtual void AgregarAgenda(DayOfWeek dia, TimeSpan duracionTurno, TimeSpan horarioDesde, TimeSpan horarioHasta, Consultorio consultorio, params Especialidad[] especialidades)
         {
             if (especialidades == null) throw new ArgumentNullException("especialidades");
 

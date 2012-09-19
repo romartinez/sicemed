@@ -11,7 +11,7 @@ namespace Sicemed.Web.Models.ViewModels.ObtenerTurno
         public DateTime FechaTurnoInicial { get; set; }
         public DateTime FechaTurnoFinal { get; set; }
         public InfoViewModel Consultorio { get; set; }
-        public InfoViewModel Paciente { get; set; }        
+        public InfoViewModel Paciente { get; set; }
         public List<InfoViewModel> EspecialidadesAtendidas { get; set; }
 
         public static TurnoViewModel Create(DateTime diaConHora, Agenda agendaDia)

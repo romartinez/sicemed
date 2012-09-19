@@ -253,7 +253,7 @@ namespace Sicemed.Web.Models
             if (paciente == null) throw new ArgumentNullException("paciente");
             if (profesional == null) throw new ArgumentNullException("profesional");
             if (especialidad == null) throw new ArgumentNullException("especialidad");
-            if (consultorio == null) throw new ArgumentNullException("consultorio");
+            if (consultorio == null) throw new ArgumentNullException("consultorio");            
             if (secretariaReservadoraTurno == null) throw new ArgumentNullException("secretariaReservadoraTurno");
 
             if (!profesional.Especialidades.Contains(especialidad))
@@ -272,5 +272,27 @@ namespace Sicemed.Web.Models
             };
         }
         #endregion
+
+        public static Turno CreateSobreTurno(DateTime fechaTurno, Paciente paciente, Profesional profesional, Especialidad especialidad, Secretaria secretariaReservadoraTurno, bool esTelefonico)
+        {
+            if (paciente == null) throw new ArgumentNullException("paciente");
+            if (profesional == null) throw new ArgumentNullException("profesional");
+            if (especialidad == null) throw new ArgumentNullException("especialidad");
+            if (secretariaReservadoraTurno == null) throw new ArgumentNullException("secretariaReservadoraTurno");
+
+            if (!profesional.Especialidades.Contains(especialidad))
+                throw new ArgumentException(@"El Profesional seleccionado para el turno no atiende la Especialidad seleccionada", "especialidad");
+
+            return new Turno
+            {
+                FechaGeneracion = DateTime.Now,
+                FechaTurno = fechaTurno,
+                Paciente = paciente,
+                Profesional = profesional,
+                Especialidad = especialidad,
+                SecretariaReservadoraTurno = secretariaReservadoraTurno,
+                EsTelefonico = esTelefonico,
+            };
+        }
     }
 }

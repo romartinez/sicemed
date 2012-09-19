@@ -38,8 +38,8 @@
       <resource path="~/public/js/libs/i18n/grid.locale-es.js" />
       <resource path="~/public/js/libs/jquery.jqGrid.min.js" />
       <resource path="~/public/js/libs/jQuery.tmpl.js" />
-      <resource path="~/public/js/libs/jquery.validate.min.js" />
-      <resource path="~/public/js/libs/jquery.validate.unobtrusive.min.js" />
+      <resource path="~/public/js/libs/jquery.validate.js" />
+      <resource path="~/public/js/libs/jquery.validate.unobtrusive.js" />
       <resource path="~/public/js/libs/postAntiForgery.js" />
       <resource path="~/public/js/libs/jquery.blockUI.js" />
       <resource path="~/public/js/libs/knockout-2.0.0.js" />
@@ -51,6 +51,7 @@
       <resource path="~/public/js/libs/jquery.ui.timepicker.js" />
 
       <resource path="~/public/js/libs/i18n/jquery.ui.datepicker-es.js" />
+      <resource path="~/public/js/libs/i18n/messages_es.js" />
 
       <resource path="~/public/js/app/app.js" />
       <resource path="~/public/js/app/app.ajax.js" />

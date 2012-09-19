@@ -24,10 +24,10 @@ namespace Sicemed.Web.Infrastructure.Queries.Busqueda
             if (!string.IsNullOrWhiteSpace(Filtro))
             {
                 query.JoinQueryOver(p => p.Persona).Where(
-                    Restrictions.On<Persona>(x => x.Nombre).IsInsensitiveLike(Filtro, MatchMode.Anywhere)
-                    || Restrictions.On<Persona>(x => x.SegundoNombre).IsInsensitiveLike(Filtro, MatchMode.Anywhere)
-                    || Restrictions.On<Persona>(x => x.Apellido).IsInsensitiveLike(Filtro, MatchMode.Anywhere)
-                    || Restrictions.Like(Projections.Cast(NHibernateUtil.String, Projections.Property<Persona>(x => x.Documento.Numero)), Filtro, MatchMode.Anywhere)
+                    Restrictions.On<Persona>(x => x.Nombre).IsInsensitiveLike(Filtro, MatchMode.Start)
+                    || Restrictions.On<Persona>(x => x.SegundoNombre).IsInsensitiveLike(Filtro, MatchMode.Start)
+                    || Restrictions.On<Persona>(x => x.Apellido).IsInsensitiveLike(Filtro, MatchMode.Start)
+                    || Restrictions.Like(Projections.Cast(NHibernateUtil.String, Projections.Property<Persona>(x => x.Documento.Numero)), Filtro, MatchMode.Start)
                     );
             }
 

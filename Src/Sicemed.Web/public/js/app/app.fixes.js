@@ -75,6 +75,10 @@
         try { $.datepicker.parseDate('dd/mm/yy', value); return true; } catch (error) { return false; }
     };
 
+    jQuery.validator.methods["date"] = function (value, element) {
+        return validators.datepickerIsDate(value);
+    };
+
     return app;
 })(jQuery, app || {});
 

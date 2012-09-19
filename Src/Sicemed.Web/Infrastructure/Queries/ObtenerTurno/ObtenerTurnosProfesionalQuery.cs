@@ -11,13 +11,15 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
     public interface IObtenerTurnosProfesionalQuery : IQuery<IEnumerable<TurnoViewModel>>
     {
         long ProfesionalId { get; set; }
-        long? EspecialidadId { get; set; }        
+        long? EspecialidadId { get; set; }
+        bool AgregarOtorgados { get; set; }
     }
 
     public class ObtenerTurnosProfesionalQuery : Query<IEnumerable<TurnoViewModel>>, IObtenerTurnosProfesionalQuery
     {
         public virtual long ProfesionalId { get; set; }
         public virtual long? EspecialidadId { get; set; }
+        public virtual bool AgregarOtorgados { get; set; }
 
         protected override IEnumerable<TurnoViewModel> CoreExecute()
         {
@@ -37,8 +39,11 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
             }
 
             var session = SessionFactory.GetCurrentSession();
+            var maximoTurnosFuturos = DateTime.Now.AddMonths(3);
+            var lunesDeEstaSemana = DateTime.Now.StartOfWeek(DayOfWeek.Tuesday).ToMidnigth();
             var turnosProfesional = session.QueryOver<Turno>()
-                .Where(t => t.FechaTurno > DateTime.Now.AddDays(-1) && t.FechaTurno < DateTime.Now.AddMonths(3))
+                .Fetch(x => x.Paciente).Eager
+                .Where(t => t.FechaTurno > lunesDeEstaSemana && t.FechaTurno < maximoTurnosFuturos)
                 .JoinQueryOver(x => x.Profesional)
                 .Where(p => p.Id == ProfesionalId)
                 .JoinQueryOver(p => p.Especialidades)
@@ -62,6 +67,19 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
             //Quito los turnos otorgados
             turnos.RemoveAll(x => turnosProfesional.Any(t => t.FechaTurno == x.FechaTurnoInicial));
 
+            if (AgregarOtorgados)
+            {
+                var turnosOtorgados = MappingEngine.Map<List<TurnoViewModel>>(turnosProfesional);
+                //Le calculo la fecha de fin a los turnos
+                turnosOtorgados.ForEach(t =>
+                    {
+                        var agendaDia = agendaProfesional.FirstOrDefault(a => a.Dia == t.FechaTurnoInicial.DayOfWeek);
+                        t.FechaTurnoFinal = t.FechaTurnoInicial 
+                            + (agendaDia == null ? MvcApplication.Clinica.DuracionTurnoPorDefecto : agendaDia.DuracionTurno);
+                    });
+                turnos.AddRange(turnosOtorgados);
+            }
+
             Cache.Add(cacheKey, turnos);
 
             //Filtro por especialidad
@@ -78,7 +96,7 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
         {
             return string.Format("TURNOS_CACHE_{0}", ProfesionalId);
         }
-        
+
         private IEnumerable<TurnoViewModel> CalcularTurnos(DateTime dia, Agenda agendaDia)
         {
             var turnos = new List<TurnoViewModel>();

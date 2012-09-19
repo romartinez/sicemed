@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Presentación De Turnos";
 }
-@using (Html.BeginForm())
+@using (Html.BeginForm("Agenda", "Secretaria", FormMethod.Get))
 {
     <h2>
         Turnos del d&iacute;a -

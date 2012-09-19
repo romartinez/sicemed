@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" namespace="Sicemed.Web.Models.BI" assembly="Sicemed.Web" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Indicador" table="Indicadores">
+    <id name="Id" type="Int64">
+      <generator class="hilo" />
+    </id>
+    <many-to-one name="Categoria" foreign-key="FK_IndicadorCategorias_Indicadores" />
+    <property name="Nombre" not-null="true" />
+    <property name="Habilitado" />
+    <property name="Descripcion" />
+    <property name="NumeradorSql" />
+    <property name="DenominadorSql" />
+    <property name="TipoOperador" type="Sicemed.Web.Infrastructure.NHibernate.EnumerationType`1[[Sicemed.Web.Models.BI.Enumerations.TipoOperadorIndicador, Sicemed.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Sicemed.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <set name="Objetivos" access="nosetter.camelcase-underscore" inverse="true" cascade="all,delete-orphan">
+      <key column="IndicadorId" />
+      <one-to-many class="ObjetivoIndicador" />
+    </set>
+  </class>
+</hibernate-mapping>

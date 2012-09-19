@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Linq;
 using System.Security;
@@ -14,13 +15,16 @@ using Castle.Windsor.Installer;
 using Combres;
 using CommonServiceLocator.WindsorAdapter;
 using DataAnnotationsExtensions.ClientValidation;
+using DataAnnotationsExtensions.ClientValidation.Adapters;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Transform;
 using SICEMED.Web.Infrastructure.Windsor.Facilities;
 using Sicemed.Web.Infrastructure;
+using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.ModelBinders;
+using Sicemed.Web.Infrastructure.Providers;
 using Sicemed.Web.Infrastructure.Providers.FilterAtrribute;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.ViewModels;
@@ -106,6 +110,17 @@ namespace SICEMED.Web
         {
             DefaultModelBinder.ResourceClassKey = "Messages";
             ValidationExtensions.ResourceClassKey = "Messages";
+            DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes = false;
+            // Remove the item that validates fields are numeric!
+            ModelValidatorProviders.Providers.Remove(ModelValidatorProviders.Providers.FirstOrDefault(prov => prov.GetType() == typeof(ClientDataTypeModelValidatorProvider)));
+            // Add our own of the above with a custom message!
+            ModelValidatorProviders.Providers.Add(new CustomDataTypeModelValidatorProvider());
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RequeridoAttribute), typeof(RequiredAttributeAdapter));
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RangoAttribute), typeof(RangeAttributeAdapter));            
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RegularExpressionAttribute), typeof(RegularExpressionAttributeAdapter));
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(LargoCadenaAttribute), typeof(StringLengthAttributeAdapter));
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(LargoCadenaPorDefectoAttribute), typeof(StringLengthAttributeAdapter));
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(CorreoAttribute), typeof(EmailAttributeAdapter));
 
             var binderProvider = new InheritanceAwareModelBinderProvider
                             {
@@ -160,7 +175,7 @@ namespace SICEMED.Web
                 _clinica = ServiceLocator.Current.GetInstance<IMappingEngine>().Map<ClinicaViewModel>(clinica);
                 return;
             }
-            
+
             using (var session = ServiceLocator.Current.GetInstance<ISessionFactory>().OpenSession())
             {
                 clinica = session.QueryOver<Clinica>().Take(1).List().FirstOrDefault();
@@ -204,7 +219,7 @@ namespace SICEMED.Web
                 Response.Redirect(String.Format("/Error/{0}/", action));
             }
 
-            if(exception as SecurityException != null)
+            if (exception as SecurityException != null)
             {
                 // clear error on server
                 Server.ClearError();

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
 
 namespace Sicemed.Web.Models
 {
@@ -6,7 +7,7 @@ namespace Sicemed.Web.Models
     {
         #region Primitive Properties
 
-        [Required]
+        [Requerido]
         public virtual string Nombre { get; set; }
 
         public virtual string Descripcion { get; set; }

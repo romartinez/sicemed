@@ -28,7 +28,8 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         {
             page--;
 
-            var sql = AppendWhere(@"SELECT * FROM [Log]", searchFilters)
+            var sql = AppendWhere(@"SELECT [Id] ,[Date] ,[Thread] ,[UserId] ,[UserIp] ,[SessionId] ,[Level] ,[Logger] "
+                + " FROM [Log]", searchFilters)
                 + @" ORDER BY [Date] DESC";
 
             var session = SessionFactory.GetCurrentSession();

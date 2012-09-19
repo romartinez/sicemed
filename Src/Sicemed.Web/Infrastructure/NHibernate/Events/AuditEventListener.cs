@@ -44,7 +44,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Events
                     values.Add(propertyNames[i], obj[i]);
                 }
 
-                return JsonConvert.SerializeObject(values, Formatting.Indented, _settings);
+                return JsonConvert.SerializeObject(values, Formatting.None, _settings);
             }
             catch (Exception ex)
             {

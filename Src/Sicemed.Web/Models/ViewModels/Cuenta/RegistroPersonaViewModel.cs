@@ -13,18 +13,18 @@ namespace Sicemed.Web.Models.ViewModels.Cuenta
 {
     public class RegistroPersonaViewModel
     {
-        [Required]
+        [Requerido]
         [Display(Name = "Nombre", Prompt = "AAAA")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public string Nombre { get; set; }
 
         [Display(Name = "Segundo Nombre")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public string SegundoNombre { get; set; }
 
-        [Required]
+        [Requerido]
         [Display(Name = "Apellido")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public string Apellido { get; set; }
 
         [UIHint("DropDownList")]
@@ -32,12 +32,12 @@ namespace Sicemed.Web.Models.ViewModels.Cuenta
         [DropDownProperty("TipoDocumentoId")]
         public IEnumerable<SelectListItem> TiposDocumentosHabilitados { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Tipo Documento")]
         [ScaffoldColumn(false)]
         public virtual int TipoDocumentoId { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Número Documento")]
         public virtual long DocumentoNumero { get; set; }
 
@@ -45,35 +45,35 @@ namespace Sicemed.Web.Models.ViewModels.Cuenta
         [DataType(DataType.Date)]
         public DateTime? FechaNacimiento { get; set; }
 
-        [Required]
-        [Email]
+        [Requerido]
+        [Correo]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public string Email { get; set; }
 
-        [Required]
-        [MinLength(MembershipService.MIN_REQUIRED_PASSWORD_LENGTH)]
-        [DefaultStringLength]
+        [Requerido]
+        [LargoCadenaMinimo(MembershipService.MIN_REQUIRED_PASSWORD_LENGTH)]
+        [LargoCadenaPorDefecto]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Required]
+        [Requerido]
         [DataType(DataType.Password)]
         [Display(Name = "Confirmación Password")]
         [Compare("Password", ErrorMessage = @"El password y su confirmación no coinciden.")]
-        [MinLength(MembershipService.MIN_REQUIRED_PASSWORD_LENGTH)]
-        [DefaultStringLength]
+        [LargoCadenaMinimo(MembershipService.MIN_REQUIRED_PASSWORD_LENGTH)]
+        [LargoCadenaPorDefecto]
         public string ConfirmacionPassword { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Telefono")]
         public Telefono Telefono { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Domicilio")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public virtual string DomicilioDireccion { get; set; }
 
         [UIHint("DropDownList")]
@@ -86,12 +86,12 @@ namespace Sicemed.Web.Models.ViewModels.Cuenta
         [CascadingDropDownPropertyAttribute("DomicilioLocalidadId", "DomicilioLocalidadProvinciaId", "GetLocalidades", "Domain", "Admin", "provinciaId", "<< Seleccione una Provincia >>")]
         public IEnumerable<SelectListItem> LocalidadesHabilitadas { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Localidad")]
         [ScaffoldColumn(false)]
         public virtual long? DomicilioLocalidadId { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Provincia")]
         [ScaffoldColumn(false)]
         public virtual long? DomicilioLocalidadProvinciaId { get; set; }
@@ -106,17 +106,17 @@ namespace Sicemed.Web.Models.ViewModels.Cuenta
         [CascadingDropDownPropertyAttribute("PlanId", "ObraSocialId", "GetPlanesObraSocial", "Domain", "Admin" ,"obraSocialId", "<< Seleccione una Obra Social >>")]
         public IEnumerable<SelectListItem> PlanesObraSocialHabilitados { get; set; }
 
-        [Required]
+        [Requerido]
         [ScaffoldColumn(false)]
         public virtual long? PlanId { get; set; }
 
-        [Required]
+        [Requerido]
         [ScaffoldColumn(false)]
         public virtual long? ObraSocialId { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Número Afiliado")]
-        [DefaultStringLength]
+        [LargoCadenaPorDefecto]
         public virtual string NumeroAfiliado { get; set; }
     }
 }

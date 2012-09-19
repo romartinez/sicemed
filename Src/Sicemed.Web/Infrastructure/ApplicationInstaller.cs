@@ -12,6 +12,8 @@ using NHibernate.Tool.hbm2ddl;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.BI;
+using Sicemed.Web.Models.BI.Enumerations;
 using Sicemed.Web.Models.Components;
 using Sicemed.Web.Models.Enumerations.Documentos;
 using Sicemed.Web.Models.Roles;
@@ -68,6 +70,9 @@ namespace Sicemed.Web.Infrastructure
         public static Persona PersonaProfesionalBernardoClinico;
         public static Persona PersonaProfesionalJoseClinicoYDermatologo;
         public static Persona PersonaAdminProfesionalWalter;
+
+        public static CategoriaIndicador CategoriaIndicadorOperativo;
+        public static CategoriaIndicador CategoriaIndicadorGerencial;
 
         #endregion
 
@@ -136,6 +141,8 @@ namespace Sicemed.Web.Infrastructure
             CrearPaginas(session);
             CrearPersonas(session);
             CrearClinica(session);
+            CrearCategoriasBI(session);
+            CrearIndicadoresBI(session);
             //Lo guardo al parametro nuevo.
             using (var tx = session.BeginTransaction())
             {
@@ -168,6 +175,68 @@ namespace Sicemed.Web.Infrastructure
             }
         }
 
+        private void CrearIndicadoresBI(ISession session)
+        {
+            var indicadorTurnos = new Indicador
+                {
+                    Categoria = CategoriaIndicadorGerencial,
+                    Nombre = "Turnos Por Mes",
+                    Descripcion = "Este indicador es para ver los turnos dados en el mes.",
+                    Habilitado = false,
+                    DenominadorSql = "SELECT 1",
+                    NumeradorSql = "SELECT COUNT(*) FROM Turnos WHERE MONTH(FechaTurno) = :Mes AND YEAR(FechaTurno) = :Anio",
+                    TipoOperador = TipoOperadorIndicador.Mayor
+                };
+            for(var i = 1; i < 12; i++)
+            {
+                var objetivo = new ObjetivoIndicador
+                    {
+                        Anio = 2012,
+                        Mes = i,
+                        Indicador = indicadorTurnos,
+                        ValorMinimo = 10,
+                        ValorMaximo = 10 + i*2
+                    };
+                indicadorTurnos.AgregarObjetivo(objetivo);
+            }
+            session.Save(indicadorTurnos);
+
+            var ratioDeTurnosPresentadosVsAusencias = new Indicador
+                {
+                    Categoria = CategoriaIndicadorGerencial,
+                    Nombre = "Ratio Turnos Otorgados vs Presentados",
+                    Descripcion = "Este indicador sirve para ver si se estan otorgando muchos turnos pero pocos se presentan.",
+                    Habilitado = false,
+                    DenominadorSql =    "SELECT COUNT(*) FROM Turnos WHERE MONTH(FechaTurno) = :Mes AND YEAR(FechaTurno) = :Anio AND FechaAtencion IS NULL",
+                    NumeradorSql =      "SELECT COUNT(*) FROM Turnos WHERE MONTH(FechaTurno) = :Mes AND YEAR(FechaTurno) = :Anio AND FechaAtencion IS NOT NULL",
+                    TipoOperador = TipoOperadorIndicador.Mayor
+                };
+            for(var i = 1; i < 12; i++)
+            {
+                var objetivo = new ObjetivoIndicador
+                    {
+                        Anio = 2012,
+                        Mes = i,
+                        Indicador = ratioDeTurnosPresentadosVsAusencias,
+                        ValorMinimo = 0.9m,
+                        ValorMaximo = 1000
+                    };
+                ratioDeTurnosPresentadosVsAusencias.AgregarObjetivo(objetivo);
+            }
+            session.Save(ratioDeTurnosPresentadosVsAusencias);
+        }
+
+        private void CrearCategoriasBI(ISession session)
+        {
+            CategoriaIndicadorOperativo = new CategoriaIndicador { Nombre = "Operativo" };
+            CategoriaIndicadorGerencial = new CategoriaIndicador { Nombre = "Gerencial" };
+
+            session.Save(CategoriaIndicadorOperativo);
+            session.Save(CategoriaIndicadorGerencial);
+        }
+
+
+
         #region Entity Creation Methods
         private void CrearClinica(ISession session)
         {
@@ -175,10 +244,10 @@ namespace Sicemed.Web.Infrastructure
                               {
                                   RazonSocial = "Centro Médico Integral Velez Sarsfield",
                                   DuracionTurnoPorDefecto = TimeSpan.FromMinutes(30),
-                                  HorarioMatutinoDesde = new DateTime(2000, 1, 1, 8, 0, 0),
-                                  HorarioMatutinoHasta = new DateTime(2000, 1, 1, 12, 0, 0),
-                                  HorarioVespertinoDesde = new DateTime(2000, 1, 1, 15, 0, 0),
-                                  HorarioVespertinoHasta = new DateTime(2000, 1, 1, 19, 0, 0),
+                                  HorarioMatutinoDesde = new TimeSpan(8, 0, 0),
+                                  HorarioMatutinoHasta = new TimeSpan(12, 0, 0),
+                                  HorarioVespertinoDesde = new TimeSpan(15, 0, 0),
+                                  HorarioVespertinoHasta = new TimeSpan(19, 0, 0),
                                   NumeroInasistenciasConsecutivasGeneranBloqueo = 5,
                                   Documento = new Documento
                                                   {
@@ -390,8 +459,8 @@ namespace Sicemed.Web.Infrastructure
             PersonaAdminProfesionalWalter.AgregarRol(Secretaria.Create(DateTime.Now));
             PersonaAdminProfesionalWalter.As<Paciente>().Plan = PlanOsdeGold;
 
-            var hInicio = new DateTime(2012, 01, 01, 10, 00, 00);
-            var hfin = new DateTime(2012, 01, 01, 20, 00, 00);
+            var hInicio = new TimeSpan(10, 00, 00);
+            var hfin = new TimeSpan(20, 00, 00);
 
             PersonaAdminProfesionalWalter.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
             PersonaAdminProfesionalWalter.As<Profesional>().AgregarAgenda(DayOfWeek.Monday, TimeSpan.FromMinutes(30), hInicio, hfin, ConsultorioA, EspecialidadClinico);
@@ -491,8 +560,8 @@ namespace Sicemed.Web.Infrastructure
                                          };
             PersonaProfesionalBernardoClinico.AgregarRol(Profesional.Create("546546"));
             PersonaProfesionalBernardoClinico.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
-            var horarioComienzo = new DateTime(2012, 01, 01, 10, 00, 00);
-            var horarioFin = new DateTime(2012, 01, 01, 20, 00, 00);
+            var horarioComienzo = new TimeSpan(10, 00, 00);
+            var horarioFin = new TimeSpan(20, 00, 00);
             PersonaProfesionalBernardoClinico.As<Profesional>().AgregarAgenda(DayOfWeek.Monday, TimeSpan.FromMinutes(30), horarioComienzo, horarioFin, ConsultorioA, EspecialidadClinico);
             PersonaProfesionalBernardoClinico.As<Profesional>().AgregarAgenda(DayOfWeek.Wednesday, TimeSpan.FromMinutes(30), horarioComienzo, horarioFin, ConsultorioA, EspecialidadClinico);
             PersonaProfesionalBernardoClinico.As<Profesional>().AgregarAgenda(DayOfWeek.Friday, TimeSpan.FromMinutes(30), horarioComienzo, horarioFin, ConsultorioA, EspecialidadClinico);
@@ -513,8 +582,8 @@ namespace Sicemed.Web.Infrastructure
                                          Telefono = new Telefono { Prefijo = "0341", Numero = "1661234" }
                                      };
             PersonaProfesionalJoseClinicoYDermatologo.AgregarRol(Profesional.Create("546465489"));
-            var horarioComienzo2 = new DateTime(2012, 01, 01, 11, 00, 00);
-            var horarioFin2 = new DateTime(2012, 01, 01, 16, 00, 00);
+            var horarioComienzo2 = new TimeSpan(11, 00, 00);
+            var horarioFin2 = new TimeSpan(16, 00, 00);
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Tuesday, TimeSpan.FromMinutes(15), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadClinico);
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Thursday, TimeSpan.FromMinutes(15), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadClinico);
