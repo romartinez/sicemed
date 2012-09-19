@@ -38,7 +38,7 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
 
         [Requerido]
         [DisplayName("Número Documento")]
-        public virtual long DocumentoNumero { get; set; }
+        public virtual long? DocumentoNumero { get; set; }
 
         [Display(Name = "Fecha Nacimiento")]
         [DataType(DataType.Date)]

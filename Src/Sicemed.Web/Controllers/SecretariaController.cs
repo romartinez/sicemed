@@ -150,7 +150,7 @@ namespace Sicemed.Web.Controllers
                 //Update not automapped properties
                 model.Documento = new Documento
                 {
-                    Numero = editModel.DocumentoNumero,
+                    Numero = editModel.DocumentoNumero.Value,
                     TipoDocumento = Enumeration.FromValue<TipoDocumento>(editModel.TipoDocumentoId)
                 };
                 model.Domicilio = new Domicilio
