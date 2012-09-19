@@ -94,8 +94,8 @@ namespace Sicemed.Tests.Models.Turnos
             profesional.AgregarAgenda(
                 DayOfWeek.Tuesday,
                 TimeSpan.FromMinutes(15),
-                new DateTime(2000, 1, 1, 10, 0, 0),
-                new DateTime(2000, 1, 1, 12, 0, 0),
+                new TimeSpan(10, 0, 0),
+                new TimeSpan(12, 0, 0),
                 ApplicationInstaller.ConsultorioA,
                 ApplicationInstaller.EspecialidadClinico
             );
@@ -138,8 +138,8 @@ namespace Sicemed.Tests.Models.Turnos
                              {
                                  Dia = DayOfWeek.Tuesday,
                                  DuracionTurno = TimeSpan.FromMinutes(15),
-                                 HorarioDesde = new DateTime(2000, 1, 1, 10, 0, 0),
-                                 HorarioHasta = new DateTime(2000, 1, 1, 12, 0, 0),
+                                 HorarioDesde = new TimeSpan(10, 0, 0),
+                                 HorarioHasta = new TimeSpan(12, 0, 0),
                                  Consultorio = ApplicationInstaller.ConsultorioA                                 
                              };
             agenda.AgregarEspecialidad(ApplicationInstaller.EspecialidadClinico);

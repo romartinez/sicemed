@@ -244,10 +244,10 @@ namespace Sicemed.Web.Infrastructure
                               {
                                   RazonSocial = "Centro Médico Integral Velez Sarsfield",
                                   DuracionTurnoPorDefecto = TimeSpan.FromMinutes(30),
-                                  HorarioMatutinoDesde = new DateTime(2000, 1, 1, 8, 0, 0),
-                                  HorarioMatutinoHasta = new DateTime(2000, 1, 1, 12, 0, 0),
-                                  HorarioVespertinoDesde = new DateTime(2000, 1, 1, 15, 0, 0),
-                                  HorarioVespertinoHasta = new DateTime(2000, 1, 1, 19, 0, 0),
+                                  HorarioMatutinoDesde = new TimeSpan(8, 0, 0),
+                                  HorarioMatutinoHasta = new TimeSpan(12, 0, 0),
+                                  HorarioVespertinoDesde = new TimeSpan(15, 0, 0),
+                                  HorarioVespertinoHasta = new TimeSpan(19, 0, 0),
                                   NumeroInasistenciasConsecutivasGeneranBloqueo = 5,
                                   Documento = new Documento
                                                   {
@@ -459,8 +459,8 @@ namespace Sicemed.Web.Infrastructure
             PersonaAdminProfesionalWalter.AgregarRol(Secretaria.Create(DateTime.Now));
             PersonaAdminProfesionalWalter.As<Paciente>().Plan = PlanOsdeGold;
 
-            var hInicio = new DateTime(2012, 01, 01, 10, 00, 00);
-            var hfin = new DateTime(2012, 01, 01, 20, 00, 00);
+            var hInicio = new TimeSpan(10, 00, 00);
+            var hfin = new TimeSpan(20, 00, 00);
 
             PersonaAdminProfesionalWalter.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
             PersonaAdminProfesionalWalter.As<Profesional>().AgregarAgenda(DayOfWeek.Monday, TimeSpan.FromMinutes(30), hInicio, hfin, ConsultorioA, EspecialidadClinico);
@@ -560,8 +560,8 @@ namespace Sicemed.Web.Infrastructure
                                          };
             PersonaProfesionalBernardoClinico.AgregarRol(Profesional.Create("546546"));
             PersonaProfesionalBernardoClinico.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
-            var horarioComienzo = new DateTime(2012, 01, 01, 10, 00, 00);
-            var horarioFin = new DateTime(2012, 01, 01, 20, 00, 00);
+            var horarioComienzo = new TimeSpan(10, 00, 00);
+            var horarioFin = new TimeSpan(20, 00, 00);
             PersonaProfesionalBernardoClinico.As<Profesional>().AgregarAgenda(DayOfWeek.Monday, TimeSpan.FromMinutes(30), horarioComienzo, horarioFin, ConsultorioA, EspecialidadClinico);
             PersonaProfesionalBernardoClinico.As<Profesional>().AgregarAgenda(DayOfWeek.Wednesday, TimeSpan.FromMinutes(30), horarioComienzo, horarioFin, ConsultorioA, EspecialidadClinico);
             PersonaProfesionalBernardoClinico.As<Profesional>().AgregarAgenda(DayOfWeek.Friday, TimeSpan.FromMinutes(30), horarioComienzo, horarioFin, ConsultorioA, EspecialidadClinico);
@@ -582,8 +582,8 @@ namespace Sicemed.Web.Infrastructure
                                          Telefono = new Telefono { Prefijo = "0341", Numero = "1661234" }
                                      };
             PersonaProfesionalJoseClinicoYDermatologo.AgregarRol(Profesional.Create("546465489"));
-            var horarioComienzo2 = new DateTime(2012, 01, 01, 11, 00, 00);
-            var horarioFin2 = new DateTime(2012, 01, 01, 16, 00, 00);
+            var horarioComienzo2 = new TimeSpan(11, 00, 00);
+            var horarioFin2 = new TimeSpan(16, 00, 00);
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Tuesday, TimeSpan.FromMinutes(15), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadClinico);
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Thursday, TimeSpan.FromMinutes(15), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadClinico);

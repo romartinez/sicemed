@@ -27,12 +27,12 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [Requerido]
         [DisplayName("Horario Desde")]
         [DataType(DataType.Time)]
-        public virtual DateTime HorarioDesde { get; set; }
+        public virtual TimeSpan HorarioDesde { get; set; }
 
         [Requerido]
         [DisplayName("Horario Hasta")]
         [DataType(DataType.Time)]
-        public virtual DateTime HorarioHasta { get; set; }
+        public virtual TimeSpan HorarioHasta { get; set; }
 
         [UIHint("DropDownList")]
         [DisplayName("Consultorio")]
@@ -61,36 +61,36 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         {
             var errors = new List<ValidationResult>();
 
-            var desde = HorarioDesde.OnlyTime();
-            var hasta = HorarioHasta.OnlyTime();
+            var desde = HorarioDesde;
+            var hasta = HorarioHasta;
 
             if (desde >= hasta)
                 errors.Add(new ValidationResult("El Horario Desde debe ser menor a Horario Hasta", new[] { "desde" }));
 
             if (MvcApplication.Clinica.EsHorarioCorrido)
             {
-                if (desde < MvcApplication.Clinica.HorarioMatutinoDesde.OnlyTime())
+                if (desde < MvcApplication.Clinica.HorarioMatutinoDesde)
                     errors.Add(new ValidationResult(string.Format("El Horario Desde debe ser mayor al Horario de apertura de la clínica ({0}).",
-                        MvcApplication.Clinica.HorarioMatutinoDesde.ToShortTimeString()), new[] { "desde" }));
+                        MvcApplication.Clinica.HorarioMatutinoDesde.ToString()), new[] { "desde" }));
 
-                if (hasta > MvcApplication.Clinica.HorarioMatutinoHasta.OnlyTime())
+                if (hasta > MvcApplication.Clinica.HorarioMatutinoHasta)
                     errors.Add(new ValidationResult(string.Format("El Horario Hasta debe ser menor al Horario de cierre de la clínica ({0}).",
-                        MvcApplication.Clinica.HorarioMatutinoHasta.ToShortTimeString()), new[] { "hasta" }));
+                        MvcApplication.Clinica.HorarioMatutinoHasta.ToString()), new[] { "hasta" }));
             }
             else
             {
                 //Horario cortado
-                if (desde < MvcApplication.Clinica.HorarioMatutinoDesde.OnlyTime()
-                    || (desde > MvcApplication.Clinica.HorarioMatutinoHasta.OnlyTime() && desde < MvcApplication.Clinica.HorarioVespertinoDesde.Value.OnlyTime()))
+                if (desde < MvcApplication.Clinica.HorarioMatutinoDesde
+                    || (desde > MvcApplication.Clinica.HorarioMatutinoHasta && desde < MvcApplication.Clinica.HorarioVespertinoDesde.Value))
                     errors.Add(new ValidationResult(string.Format("El Horario Desde debe ser mayor al Horario de apertura de la clínica ({0} / {1}).",
-                        MvcApplication.Clinica.HorarioMatutinoDesde.ToShortTimeString(),
-                        MvcApplication.Clinica.HorarioVespertinoDesde.Value.ToShortTimeString()), new[] { "desde" }));
+                        MvcApplication.Clinica.HorarioMatutinoDesde.ToString(),
+                        MvcApplication.Clinica.HorarioVespertinoDesde.Value.ToString()), new[] { "desde" }));
 
-                if (hasta > MvcApplication.Clinica.HorarioVespertinoHasta.Value.OnlyTime()
-                    || (hasta > MvcApplication.Clinica.HorarioMatutinoHasta.OnlyTime() && hasta < MvcApplication.Clinica.HorarioVespertinoDesde.Value.OnlyTime()))
+                if (hasta > MvcApplication.Clinica.HorarioVespertinoHasta.Value
+                    || (hasta > MvcApplication.Clinica.HorarioMatutinoHasta && hasta < MvcApplication.Clinica.HorarioVespertinoDesde.Value))
                     errors.Add(new ValidationResult(string.Format("El Horario Hasta debe ser menor al Horario de cierre de la clínica ({0}/{1}).",
-                        MvcApplication.Clinica.HorarioMatutinoHasta.ToShortTimeString(),
-                        MvcApplication.Clinica.HorarioVespertinoHasta.Value.ToShortTimeString()), new[] { "desde" }));
+                        MvcApplication.Clinica.HorarioMatutinoHasta.ToString(),
+                        MvcApplication.Clinica.HorarioVespertinoHasta.Value.ToString()), new[] { "desde" }));
             }
 
             if (hasta.Subtract(desde) < DuracionTurno)            

@@ -32,10 +32,10 @@ namespace Sicemed.Web.Models
 
         public virtual string Email { get; set; }
         public virtual TimeSpan DuracionTurnoPorDefecto { get; set; }
-        public virtual DateTime HorarioMatutinoDesde { get; set; }
-        public virtual DateTime HorarioMatutinoHasta { get; set; }
-        public virtual DateTime? HorarioVespertinoDesde { get; set; }
-        public virtual DateTime? HorarioVespertinoHasta { get; set; }
+        public virtual TimeSpan HorarioMatutinoDesde { get; set; }
+        public virtual TimeSpan HorarioMatutinoHasta { get; set; }
+        public virtual TimeSpan? HorarioVespertinoDesde { get; set; }
+        public virtual TimeSpan? HorarioVespertinoHasta { get; set; }
 
         public virtual bool EsHorarioCorrido
         {

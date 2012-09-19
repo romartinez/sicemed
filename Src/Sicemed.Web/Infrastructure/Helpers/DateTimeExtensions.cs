@@ -10,6 +10,12 @@ namespace Sicemed.Web.Infrastructure.Helpers
                 time.Hour, time.Minute, time.Second);
         }
 
+        public static DateTime SetTimeWith(this DateTime originalDate, TimeSpan time)
+        {
+            return new DateTime(originalDate.Year, originalDate.Month, originalDate.Day,
+                time.Hours, time.Minutes, time.Seconds);
+        }
+
         public static DateTime ToMidnigth(this DateTime originalDate)
         {
             return new DateTime(originalDate.Year, originalDate.Month, originalDate.Day, 0, 0, 0);

@@ -88,18 +88,18 @@ namespace Sicemed.Web.Areas.Admin.Models.Clinicas
 		[Requerido]
 		[DisplayName("Horario Matutino Desde")]
         [DataType(DataType.Time)]
-		public virtual DateTime HorarioMatutinoDesde { get; set; }
+		public virtual TimeSpan HorarioMatutinoDesde { get; set; }
 		[Requerido]
 		[DisplayName("Horario Matutino Hasta")]
         [DataType(DataType.Time)]
-        public virtual DateTime HorarioMatutinoHasta { get; set; }
+        public virtual TimeSpan HorarioMatutinoHasta { get; set; }
 
 		[DisplayName("Horario Vespertino Desde")]
         [DataType(DataType.Time)]
-        public virtual DateTime? HorarioVespertinoDesde { get; set; }
+        public virtual TimeSpan? HorarioVespertinoDesde { get; set; }
 		[DisplayName("Horario Vespertino Hasta")]
         [DataType(DataType.Time)]
-        public virtual DateTime? HorarioVespertinoHasta { get; set; }
+        public virtual TimeSpan? HorarioVespertinoHasta { get; set; }
 
         [Requerido]
         [DisplayName("Duracion Por Defecto Turno")]
