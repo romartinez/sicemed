@@ -61,7 +61,10 @@ var app = (function ($, app) {
         });
 
         $("input.ctl-timespan[type=text]").timepicker({
-            showHours: false
+            showHours: true,
+            showPeriod: false,
+            showPeriodLabels: false,
+            showLeadingZero: true
         });
         $("input.date").each(function () {
             function getDateYymmdd(value) {
@@ -79,7 +82,8 @@ var app = (function ($, app) {
         });
 
         $("input.time").timepicker({
-            showPeriod: true,
+            showPeriod: false,
+            showPeriodLabels: false,
             showLeadingZero: true
         });
 
