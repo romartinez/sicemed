@@ -182,7 +182,7 @@ namespace Sicemed.Web.Infrastructure
                     Categoria = CategoriaIndicadorGerencial,
                     Nombre = "Turnos Por Mes",
                     Descripcion = "Este indicador es para ver los turnos dados en el mes.",
-                    Habilitado = true,
+                    Habilitado = false,
                     DenominadorSql = "SELECT 1",
                     NumeradorSql = "SELECT COUNT(*) FROM Turnos WHERE MONTH(FechaTurno) = :Mes AND YEAR(FechaTurno) = :Anio",
                     TipoOperador = TipoOperadorIndicador.Mayor
@@ -206,7 +206,7 @@ namespace Sicemed.Web.Infrastructure
                     Categoria = CategoriaIndicadorGerencial,
                     Nombre = "Ratio Turnos Otorgados vs Presentados",
                     Descripcion = "Este indicador sirve para ver si se estan otorgando muchos turnos pero pocos se presentan.",
-                    Habilitado = true,
+                    Habilitado = false,
                     DenominadorSql =    "SELECT COUNT(*) FROM Turnos WHERE MONTH(FechaTurno) = :Mes AND YEAR(FechaTurno) = :Anio AND FechaAtencion IS NULL",
                     NumeradorSql =      "SELECT COUNT(*) FROM Turnos WHERE MONTH(FechaTurno) = :Mes AND YEAR(FechaTurno) = :Anio AND FechaAtencion IS NOT NULL",
                     TipoOperador = TipoOperadorIndicador.Mayor
