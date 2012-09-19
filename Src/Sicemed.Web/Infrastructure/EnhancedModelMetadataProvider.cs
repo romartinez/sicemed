@@ -34,7 +34,17 @@ namespace Sicemed.Web.Infrastructure
             }
 
             var dropDown = attributes.SingleOrDefault(a => a is DropDownPropertyAttribute);
-            if (dropDown != null) data.AdditionalValues.Add("DropDownProperty.PropertyName", ((DropDownPropertyAttribute)dropDown).PropertyName);
+            if (dropDown != null)
+            {
+                var drop = ((DropDownPropertyAttribute) dropDown);
+                data.AdditionalValues.Add("DropDownProperty.PropertyName", drop.PropertyName);
+                var property = containerType.GetProperty(drop.PropertyName);
+                if(property!= null)
+                {
+                    var attr = property.GetCustomAttributes(typeof(RequeridoAttribute), true);
+                    data.IsRequired = attr.Any();
+                }
+            }
 
             var cascadingDropDown = attributes.SingleOrDefault(a => a is CascadingDropDownPropertyAttribute);
             if (cascadingDropDown != null)
