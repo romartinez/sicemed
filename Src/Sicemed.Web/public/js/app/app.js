@@ -3,7 +3,7 @@
 
 var app = (function ($, app) {
     app.clinica = null;
-    
+
     var highligthMatch = function (text, term) {
         var markup = [];
         var match = text.toUpperCase().indexOf(term.toUpperCase()),
@@ -63,7 +63,21 @@ var app = (function ($, app) {
         $("input.ctl-timespan[type=text]").timepicker({
             showHours: false
         });
-        $("input.date").datepicker({ dateFormat: "dd/mm/yy" });
+        $("input.date").each(function () {
+            function getDateYymmdd(value) {
+                if (value == null)
+                    return null;
+                return $.datepicker.parseDate("dd/mm/yy", value);
+            }
+            var minDate = getDateYymmdd($(this).data("val-rangedate-min"));
+            var maxDate = getDateYymmdd($(this).data("val-rangedate-max"));
+            $(this).datepicker({
+                dateFormat: "dd/mm/yy",
+                minDate: minDate,
+                maxDate: maxDate
+            });
+        });
+
         $("input.time").timepicker({
             showPeriod: true,
             showLeadingZero: true
@@ -116,7 +130,7 @@ var app = (function ($, app) {
                 }
             };
         }
-        
+
         if (!settings.isAjax) {
             //Searcheable
             $(".searcheable").each(function (i, el) {

@@ -245,6 +245,7 @@
     <Compile Include="Infrastructure\NHibernate\Mappings\IndicadorMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\ObjetivoIndicadorMap.cs" />
     <Compile Include="Infrastructure\NHibernate\NHibernateAuditContractResolver.cs" />
+    <Compile Include="Infrastructure\Providers\CustomClientDataTypeModelValidatorProvider.cs" />
     <Compile Include="Infrastructure\Queries\AdministracionDeTurnos\ObtenerTurnosACancelarQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaPacienteQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaGeneralPacienteQuery.cs" />
@@ -281,7 +282,7 @@
     <Compile Include="Infrastructure\ApplicationInstaller.cs" />
     <Compile Include="Infrastructure\Attributes\DataAnnotations\CascadingDropDownPropertyAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\DataAnnotations\DropDownPropertyAttribute.cs" />
-    <Compile Include="Infrastructure\Attributes\DataAnnotations\SqlDateTimeRangeAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\FechaAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AjaxHandleError.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AjaxMessagesFilter.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\AuditAtrribute.cs" />

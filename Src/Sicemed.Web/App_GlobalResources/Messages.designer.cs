@@ -61,6 +61,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El campo {0} debe ser una fecha..
+        /// </summary>
+        internal static string ClientDataTypeModelValidatorProvider_FieldMustBeDate {
+            get {
+                return ResourceManager.GetString("ClientDataTypeModelValidatorProvider_FieldMustBeDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El campo {0} debe ser un número..
+        /// </summary>
+        internal static string ClientDataTypeModelValidatorProvider_FieldMustBeNumeric {
+            get {
+                return ResourceManager.GetString("ClientDataTypeModelValidatorProvider_FieldMustBeNumeric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El parámetro {0} no puede ser blanco o null..
+        /// </summary>
+        internal static string Common_NullOrEmpty {
+            get {
+                return ResourceManager.GetString("Common_NullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} no es válido..
         /// </summary>
         internal static string CustomValidationAttribute_ValidationError {
@@ -75,6 +102,15 @@ namespace Resources {
         internal static string EmailAttribute_ValidationError {
             get {
                 return ResourceManager.GetString("EmailAttribute_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El campo {0} debe ser una fecha y encontrarse entre los valores {1:d} y {2:d}..
+        /// </summary>
+        internal static string FechaAttribute_ValidationError {
+            get {
+                return ResourceManager.GetString("FechaAttribute_ValidationError", resourceCulture);
             }
         }
         

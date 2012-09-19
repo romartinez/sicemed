@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ClientDataTypeModelValidatorProvider_FieldMustBeDate" xml:space="preserve">
+    <value>El campo {0} debe ser una fecha.</value>
+  </data>
+  <data name="ClientDataTypeModelValidatorProvider_FieldMustBeNumeric" xml:space="preserve">
+    <value>El campo {0} debe ser un número.</value>
+  </data>
+  <data name="Common_NullOrEmpty" xml:space="preserve">
+    <value>El parámetro {0} no puede ser blanco o null.</value>
+  </data>
   <data name="CustomValidationAttribute_ValidationError" xml:space="preserve">
     <value>{0} no es válido.</value>
   </data>
   <data name="EmailAttribute_ValidationError" xml:space="preserve">
     <value>El campo {0} debe ser una dirección de email válida.</value>
+  </data>
+  <data name="FechaAttribute_ValidationError" xml:space="preserve">
+    <value>El campo {0} debe ser una fecha y encontrarse entre los valores {1:d} y {2:d}.</value>
   </data>
   <data name="MembershipStatus_BAD_PASSWORD" xml:space="preserve">
     <value>Email o Password no válido.</value>
