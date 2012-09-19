@@ -15,21 +15,21 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [HiddenInput]
         public virtual long? Id { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Dia")]
         public virtual DayOfWeek Dia { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Duración Turno")]
         [DataType(DataType.Duration)]
         public virtual TimeSpan DuracionTurno { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Horario Desde")]
         [DataType(DataType.Time)]
         public virtual DateTime HorarioDesde { get; set; }
 
-        [Required]
+        [Requerido]
         [DisplayName("Horario Hasta")]
         [DataType(DataType.Time)]
         public virtual DateTime HorarioHasta { get; set; }
@@ -39,7 +39,7 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [DropDownProperty("ConsultorioId")]
         public IEnumerable<SelectListItem> Consultorios { get; set; }
 
-        [Required]
+        [Requerido]
         [ScaffoldColumn(false)]
         public long? ConsultorioId { get; set; }
 
@@ -48,7 +48,7 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [DisplayName("Especialidades Atendidas")]
         public IEnumerable<SelectListItem> Especialidades { get; set; }
 
-        [Required]
+        [Requerido]
         [ScaffoldColumn(false)]
         public long[] EspecialidadesSeleccionadas { get; set; }
 

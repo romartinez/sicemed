@@ -222,6 +222,12 @@
     <Compile Include="Areas\Admin\Models\Personas\SecretariaEditModel.cs" />
     <Compile Include="Controllers\BusquedaController.cs" />
     <Compile Include="Controllers\PingController.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\CorreoAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\LargoCadenaAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\LargoCadenaMinimoAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\RangoAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\RegexpLocalizableAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\RequeridoAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\DataAnnotations\SearcheableDropDownPropertyAttribute.cs" />
     <Compile Include="Infrastructure\Controllers\AdministracionDeTurnosBaseController.cs" />
     <Compile Include="Infrastructure\Helpers\Dapper.cs" />
@@ -284,7 +290,7 @@
     <Compile Include="Infrastructure\Attributes\Filters\NHibernateBaseAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\PermanentCacheAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\Filters\ValidateModelStateAttribute.cs" />
-    <Compile Include="Infrastructure\Attributes\DataAnnotations\DefaultStringLengthAttribute.cs" />
+    <Compile Include="Infrastructure\Attributes\DataAnnotations\LargoCadenaPorDefectoAttribute.cs" />
     <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
     <Compile Include="Infrastructure\AutoMapper\AdminProfile.cs" />
     <Compile Include="Infrastructure\AutoMapper\AutoMapperExtensions.cs" />
@@ -663,6 +669,7 @@
     <Content Include="public\js\features\ObtenerTurno\mocks\ObtenerAgendaProfesional.js" />
     <Content Include="public\js\features\ObtenerTurno\mocks\ObtenerEspecialidades.js" />
     <Content Include="public\js\libs\fullcalendar.js" />
+    <Content Include="public\js\libs\i18n\messages_es.js" />
     <Content Include="public\js\libs\i18n\grid.locale-es.js" />
     <Content Include="public\js\libs\i18n\jquery.ui.datepicker-es.js" />
     <Content Include="public\js\libs\jsondiffpatch.html.js" />

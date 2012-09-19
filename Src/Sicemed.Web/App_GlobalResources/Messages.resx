@@ -144,6 +144,9 @@
   <data name="MembershipStatus_USER_NOT_FOUND" xml:space="preserve">
     <value>Usuario no encontrado.</value>
   </data>
+  <data name="MinLengthAttribute_ValidationError" xml:space="preserve">
+    <value>El campo {0} debe ser una cadena de texto con una longitud mínima de {1}.</value>
+  </data>
   <data name="PropertyValueInvalid" xml:space="preserve">
     <value>El campo {0} es inválido.</value>
   </data>

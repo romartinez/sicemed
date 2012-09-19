@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Iesi.Collections.Generic;
+using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
 
 namespace Sicemed.Web.Models
 {
@@ -13,16 +14,16 @@ namespace Sicemed.Web.Models
             _hijos = new HashedSet<Pagina>();
         }
 
-        [Required]
+        [Requerido]
         public virtual string Nombre { get; set; }
 
-        [Required]
+        [Requerido]
         public virtual string Contenido { get; set; }
 
-        [Required]
+        [Requerido]
         public virtual string Url { get; set; }
 
-        [Required]
+        [Requerido]
         public virtual int Orden { get; set; }
 
         public virtual Pagina Padre { get; set; }

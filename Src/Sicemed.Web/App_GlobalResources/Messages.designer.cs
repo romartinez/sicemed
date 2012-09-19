@@ -142,6 +142,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El campo {0} debe ser una cadena de texto con una longitud mínima de {1}..
+        /// </summary>
+        internal static string MinLengthAttribute_ValidationError {
+            get {
+                return ResourceManager.GetString("MinLengthAttribute_ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to El campo {0} es inválido..
         /// </summary>
         internal static string PropertyValueInvalid {

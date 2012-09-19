@@ -1,16 +1,17 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Iesi.Collections.Generic;
+using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
 using Sicemed.Web.Models.BI.Enumerations;
 
 namespace Sicemed.Web.Models.BI
 {
     public class Indicador : Entity
     {
-        [Required]
+        [Requerido]
         public virtual CategoriaIndicador Categoria { get; set; }
 
-        [Required]
+        [Requerido]
         public virtual string Nombre { get; set; }
         public virtual bool Habilitado { get; set; }
         public virtual string Descripcion { get; set; }
@@ -18,7 +19,7 @@ namespace Sicemed.Web.Models.BI
         public virtual string NumeradorSql { get; set; }
         public virtual string DenominadorSql { get; set; }
 
-        [Required]
+        [Requerido]
         public virtual TipoOperadorIndicador TipoOperador { get; set; }
 
         private readonly ISet<ObjetivoIndicador> _objetivos;

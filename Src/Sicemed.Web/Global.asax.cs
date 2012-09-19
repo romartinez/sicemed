@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Linq;
 using System.Security;
@@ -14,13 +15,16 @@ using Castle.Windsor.Installer;
 using Combres;
 using CommonServiceLocator.WindsorAdapter;
 using DataAnnotationsExtensions.ClientValidation;
+using DataAnnotationsExtensions.ClientValidation.Adapters;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Transform;
 using SICEMED.Web.Infrastructure.Windsor.Facilities;
 using Sicemed.Web.Infrastructure;
+using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.ModelBinders;
+using Sicemed.Web.Infrastructure.Providers;
 using Sicemed.Web.Infrastructure.Providers.FilterAtrribute;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.ViewModels;
@@ -106,6 +110,12 @@ namespace SICEMED.Web
         {
             DefaultModelBinder.ResourceClassKey = "Messages";
             ValidationExtensions.ResourceClassKey = "Messages";
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RequeridoAttribute), typeof(RequiredAttributeAdapter));
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RangoAttribute), typeof(RangeAttributeAdapter));
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RegularExpressionAttribute), typeof(RegularExpressionAttributeAdapter));
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(LargoCadenaAttribute), typeof(StringLengthAttributeAdapter));
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(LargoCadenaPorDefectoAttribute), typeof(StringLengthAttributeAdapter));
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(CorreoAttribute), typeof(EmailAttributeAdapter));            
 
             var binderProvider = new InheritanceAwareModelBinderProvider
                             {

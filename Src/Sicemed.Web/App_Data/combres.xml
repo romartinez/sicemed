@@ -51,6 +51,7 @@
       <resource path="~/public/js/libs/jquery.ui.timepicker.js" />
 
       <resource path="~/public/js/libs/i18n/jquery.ui.datepicker-es.js" />
+      <resource path="~/public/js/libs/i18n/messages_es.js" />
 
       <resource path="~/public/js/app/app.js" />
       <resource path="~/public/js/app/app.ajax.js" />
