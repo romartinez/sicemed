@@ -31,7 +31,7 @@
                         <a href="@Url.Content("~/")">
                             @if (!MvcApplication.IsUsingProxy)
                             {
-                                <img src="../../public/images/theme/logo.png" alt="SICEMED" height="80" width="210" />
+                                <img src="@Url.Content("~/public/images/theme/logo.png")" alt="SICEMED" height="80" width="210" />
                             }
                         </a>
                     </div>
@@ -72,7 +72,7 @@
                 <div class="container">
                     @if (!MvcApplication.IsUsingProxy)
                     {
-                        <img src="../../public/images/theme/header_image_2.jpg" alt="" height="142" width="960" />
+                        <img src="@Url.Content("~/public/images/theme/header_image_2.jpg")" alt="" height="142" width="960" />
                     }
                 </div>
             </div>
