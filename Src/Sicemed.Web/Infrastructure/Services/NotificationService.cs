@@ -7,12 +7,19 @@ namespace Sicemed.Web.Infrastructure.Services
 {
     public class NotificationService : MailerBase, INotificationService
     {
+        public NotificationService() : base()
+        {
+            MasterName = "_MailLayout";
+        }
+
         public MailMessage CancelacionTurno(Persona user, Turno turno)
         {            
             var mailMessage = new MailMessage
             {
-                Subject = string.Format("SICEMED - Cancelación Turno: {0} {1}", 
-                turno.FechaTurno.ToShortDateString(), turno.FechaTurno.ToShortTimeString())
+                Subject = string.Format("{0} - Cancelación Turno: {1} {2}", 
+                MvcApplication.Clinica.RazonSocial,
+                turno.FechaTurno.ToShortDateString(), 
+                turno.FechaTurno.ToShortTimeString())
             };
 
             mailMessage.Bcc.Add(turno.Profesional.Persona.Membership.Email);
