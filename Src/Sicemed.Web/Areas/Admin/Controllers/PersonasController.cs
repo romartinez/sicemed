@@ -12,6 +12,7 @@ using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Enums;
 using Sicemed.Web.Infrastructure.Exceptions;
 using Sicemed.Web.Infrastructure.Helpers;
+using Sicemed.Web.Infrastructure.Queries.ObtenerTurno;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Components;
@@ -350,6 +351,11 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                     agenda.Consultorio = session.Load<Consultorio>(agendaEditModel.ConsultorioId);
                 }
             }
+            
+            //Limpio el cache de turnos, para que procese a partir de la nueva agenda
+            var query = QueryFactory.Create<IObtenerTurnosProfesionalQuery>();
+            query.ProfesionalId = personaProfesional.Id;
+            query.ClearCache();
         }
 
         #endregion
