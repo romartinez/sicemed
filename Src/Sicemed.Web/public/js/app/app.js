@@ -118,6 +118,9 @@ var app = (function ($, app) {
         $("div.ctl-accordion").each(function () {
             var self = $(this);
             var index = self.find("h3:not(.ui-state-disabled):first").index();
+            var indexActive = self.find("h3.ui-state-highlight:first").index();
+            // Check if someone is highlighted and select it
+            if (indexActive && indexActive > 0) index = indexActive;
             var active = self.accordion("option", "active");
             //2 items <h3> y <div> por tab
             if (active != index) self.accordion("option", "active", (index / 2));
