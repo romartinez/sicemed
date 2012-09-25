@@ -1,2 +1,131 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Sicemed.Web.Models.Caja.Valor">
+    <Position X="8.25" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAQAAAEAAI=</HashCode>
+      <FileName>Models\Caja\Valor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Moneda" />
+      <Property Name="Proveedor" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Caja.Cheque">
+    <Position X="7.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAgAQAAAARAAAAAAAAA=</HashCode>
+      <FileName>Models\Caja\Valor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TipoCheque" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Caja.Tarjeta">
+    <Position X="11.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Models\Caja\Valor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TipoTarjeta" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Caja.Efectivo">
+    <Position X="5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Caja\Valor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Caja.Transferencia">
+    <Position X="9.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Caja\Valor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Caja.Factura">
+    <Position X="15.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABABAAAAAgAIEAAACAAAQAAAAICgAgEIAg=</HashCode>
+      <FileName>Models\Caja\Factura.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Caja.FacturaRecibida">
+    <Position X="16.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Caja\Factura.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Caja.FacturaEmitida">
+    <Position X="13" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Caja\Factura.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Caja.Movimiento">
+    <Position X="13.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Models\Caja\Movimiento.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Caja" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Items" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Caja.MovimientoFactura">
+    <Position X="13" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAgAAAAEAAA=</HashCode>
+      <FileName>Models\Caja\MovimientoFactura.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Factura" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Valores" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Moneda">
+    <Position X="5.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAACAAAAAAAAAAQAA=</HashCode>
+      <FileName>Models\Moneda.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Proveedor">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAEAAAAAAAAAAAAAACAAAAAgAAAAA=</HashCode>
+      <FileName>Models\Proveedor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Caja.TipoTarjeta">
+    <Position X="11.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAgAAAAAAAAAAABAAAQAAAAAA=</HashCode>
+      <FileName>Models\Caja\TipoTarjeta.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Caja.Caja" Collapsed="true">
+    <Position X="18.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAQAAAAIAA=</HashCode>
+      <FileName>Models\Caja\Caja.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sicemed.Web.Models.Caja.TipoCheque">
+    <Position X="7.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAQAEAAAA=</HashCode>
+      <FileName>Models\Caja\TipoCheque.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
