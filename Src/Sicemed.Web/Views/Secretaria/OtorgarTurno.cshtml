@@ -140,10 +140,12 @@
                 events.push(event);
             }
             calendar.fullCalendar('addEventSource', events);
-            //Tooltip
             calendar.show();
-            calendar.fullCalendar('rerenderEvents');
-            attachTooltips();            
+            //Le cuesta el rendering
+            setTimeout(function () {
+                $("#calendar").fullCalendar('rerenderEvents');
+                attachTooltips();            
+            }, 500);
         };
 
         var profesionalSelect = function () {
@@ -206,7 +208,8 @@
                 $("#ConsultorioId").val(null);
                 $("#EsSobreTurno").val(true);
                 $("form").submit();
-            });            
+            });
+            return false;
         };
 
         jQuery(function () {

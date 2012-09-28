@@ -1,31 +1,31 @@
-using Mvc.Mailer;
 using System.Net.Mail;
+using Mvc.Mailer;
 using SICEMED.Web;
 using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Infrastructure.Services
-{ 
-    public class MembershipMailer : MailerBase, IMembershipMailer     
-	{
-		public MembershipMailer():
-			base()
-		{
-			MasterName="_Layout";
-		}
+{
+    public class MembershipMailer : MailerBase, IMembershipMailer
+    {
+        public MembershipMailer() :
+            base()
+        {
+            MasterName = "_MailLayout";
+        }
 
         public MailMessage PasswordResetEmail(Persona user, string token)
         {
             if (MvcApplication.Clinica == null) return null; //Inicializacion
             var mailMessage = new MailMessage
             {
-                Subject = "SICEMED - Recuperar Password"
+                Subject = string.Format("{0} - Recuperar Password", MvcApplication.Clinica.RazonSocial)
             };
 
             mailMessage.To.Add(user.Membership.Email);
             mailMessage.From = new MailAddress(MvcApplication.Clinica.Email);
             ViewData.Model = user;
             ViewBag.Token = token;
-            PopulateBody(mailMessage, viewName: "PasswordResetEmail");
+            PopulateBody(mailMessage, "PasswordResetEmail");
 
             return mailMessage;
         }
@@ -33,14 +33,17 @@ namespace Sicemed.Web.Infrastructure.Services
         public MailMessage RegistrationEmail(Persona user)
         {
             if (MvcApplication.Clinica == null) return null; //Inicializacion
-            var mailMessage = new MailMessage { Subject = "SICEMED - Bienvenido" };
+            var mailMessage = new MailMessage
+                {
+                    Subject = string.Format("{0} - Bienvenido", MvcApplication.Clinica.RazonSocial)
+                };
 
             mailMessage.To.Add(user.Membership.Email);
             mailMessage.From = new MailAddress(MvcApplication.Clinica.Email);
             ViewData.Model = user;
-            PopulateBody(mailMessage, viewName: "RegistrationEmail");
+            PopulateBody(mailMessage, "RegistrationEmail");
 
             return mailMessage;
         }
-	}
+    }
 }
