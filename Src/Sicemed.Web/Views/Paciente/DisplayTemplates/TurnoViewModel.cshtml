@@ -15,9 +15,12 @@
 <div>
     <div class="turno turno-@Model.Estado.ToString().ToLower()">
         <div>
-            Consultorio: @Model.Consultorio.Descripcion
-            <br />
             Especialidad: @Model.Especialidad.Descripcion
+            @if(Model.Consultorio != null)
+            {
+                <br />
+                @:Consultorio: @Model.Consultorio.Descripcion                
+            }
         </div>
         <div>
             @if (Model.Estado == Turno.EstadoTurno.Presentado)
