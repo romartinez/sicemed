@@ -16,5 +16,8 @@
     Paciente: @Model.Paciente.Persona.NombreCompleto<br />
     Profesional: @Model.Profesional.Persona.NombreCompleto<br />
     Especialidad: @Model.Especialidad.Nombre<br />
-    Consultorio: @Model.Consultorio.Nombre<br />
+    @if(@Model.Consultorio != null)
+    {
+        @:Consultorio: @Model.Consultorio.Nombre<br />        
+    }
 </p>
