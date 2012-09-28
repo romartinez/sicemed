@@ -291,7 +291,6 @@
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\Reports\TurnosPorProfesionalReportModel.cs" />
     <Compile Include="Models\ViewModels\Historial\TurnosPorPacienteViewModel.cs" />
-    <Compile Include="Models\ViewModels\PacienteSearchViewModel.cs" />
     <Compile Include="Models\ViewModels\PersonaViewModel.cs" />
     <Compile Include="Models\ViewModels\Profesional\CalendarioProfesionalViewModel.cs" />
     <Compile Include="Models\ViewModels\Profesional\ProfesionalConEspecialidadesViewModel.cs" />

@@ -1,22 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
+using Sicemed.Web.Infrastructure.Helpers;
 
 namespace Sicemed.Web.Models.ViewModels.Historial
 {
-    public class TurnosPorPacienteViewModel
+    public class TurnosPorPacienteViewModel : IValidatableObject
     {
-        public PacienteSearchViewModel SeleccionPaciente { get; set; }
+        public bool BusquedaEfectuada { get; set; }
 
-        public SearchFiltersViewModel Filters { get; set; }
+        [Requerido]
+        [DataType(DataType.Date)]
+        [Fecha]
+        public DateTime Desde { get; set; }
+
+        [Requerido]
+        [DataType(DataType.Date)]
+        [Fecha]
+        public DateTime Hasta { get; set; }
+
+        public string Filtro { get; set; }
+
+        [Requerido]
+        [UIHint("SearcheableDropDown")]
+        [SearcheableDropDownProperty(ActionName = "Paciente", ControllerName = "Busqueda", DisplayProperty = "NombreCompleto", Template = "tmplBusquedaPaciente")]
+        [Display(Name = "Paciente", Prompt = "Seleccione Paciente")]
+        public long? PacienteId { get; set; }
 
         public IEnumerable<HistorialItem> Turnos { get; set; }
 
         public TurnosPorPacienteViewModel()
         {
+            BusquedaEfectuada = false;
             Turnos = new List<HistorialItem>();
-            Filters = new SearchFiltersViewModel();
-            SeleccionPaciente = new PacienteSearchViewModel();
-        }        
+            Desde = DateTime.Now.AddMonths(-3).ToMidnigth();
+            Hasta = DateTime.Now.AddDays(1).ToMidnigth();
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Desde > Hasta)
+                yield return new ValidationResult("La fecha Desde debe ser menor o igual a la fecha Hasta",
+                    new[] { "Desde" });
+        }
 
         public class HistorialItem
         {

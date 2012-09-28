@@ -49,53 +49,29 @@ namespace Sicemed.Web.Controllers
             return View(turnos);
         }
 
-        [ValidateModelState]
-        [AuthorizeIt(typeof(Secretaria))]
-        public ActionResult BusquedaPaciente(TurnosPorPacienteViewModel viewModel)
-        {
-            AppendLists(viewModel);
-            var query = QueryFactory.Create<IBusquedaPacienteQuery>();
-            query.Nombre = viewModel.SeleccionPaciente.Nombre;
-            query.TipoDocumento = viewModel.SeleccionPaciente.TipoDocumento;
-            query.NumeroDocumento = viewModel.SeleccionPaciente.NumeroDocumento;
-
-            viewModel.SeleccionPaciente.PacientesEncontrados = query.Execute();
-            viewModel.SeleccionPaciente.BusquedaEfectuada = true;
-
-            return View("TurnosPorPaciente", viewModel);
-        }
-
         [AuthorizeIt(typeof(Secretaria))]
         public ActionResult TurnosPorPaciente(TurnosPorPacienteViewModel viewModel)
         {
-            if(viewModel.SeleccionPaciente.HayPacienteSeleccionado)
+            if (!viewModel.BusquedaEfectuada)
             {
-                var paciente = SessionFactory.GetCurrentSession().Get<Paciente>(viewModel.SeleccionPaciente.PacienteSeleccionado.Id);
-
-                viewModel.SeleccionPaciente.PacienteSeleccionado = MappingEngine.Map<InfoViewModel>(paciente);
-
-                viewModel.SeleccionPaciente.PacienteSeleccionado = MappingEngine.Map<InfoViewModel>(paciente);
-
-                var query = QueryFactory.Create<IObtenerTurnosPorPacienteQuery>();
-                query.FechaDesde = viewModel.Filters.Desde;
-                query.FechaHasta = viewModel.Filters.Hasta;
-                query.Filtro = viewModel.Filters.Filtro;
-                query.PacienteId = paciente.Id;
-
-                viewModel.Turnos = query.Execute();
+                foreach (var modelValue in ModelState.Values)
+                {
+                    modelValue.Errors.Clear();
+                }
+                return View(new TurnosPorPacienteViewModel());
             }
-            else
-            {
-                AppendLists(viewModel);
-            }
+
+            if (!ModelState.IsValid) return View(viewModel);
+
+            var query = QueryFactory.Create<IObtenerTurnosPorPacienteQuery>();
+            query.FechaDesde = viewModel.Desde;
+            query.FechaHasta = viewModel.Hasta;
+            query.Filtro = viewModel.Filtro;
+            query.PacienteId = viewModel.PacienteId.Value;
+
+            viewModel.Turnos = query.Execute();
 
             return View(viewModel);
-        }
-
-        private void AppendLists(TurnosPorPacienteViewModel viewModel)
-        {
-            viewModel.SeleccionPaciente.TipoDocumentosHabilitados =
-                GetTiposDocumentos(viewModel.SeleccionPaciente.TipoDocumento);
         }
     }
 }
