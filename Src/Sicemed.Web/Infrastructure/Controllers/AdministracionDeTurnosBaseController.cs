@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Mvc.Mailer;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Queries.AdministracionDeTurnos;
+using Sicemed.Web.Infrastructure.Queries.ObtenerTurno;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Roles;
 
@@ -36,6 +37,11 @@ namespace Sicemed.Web.Infrastructure.Controllers
             var mail = NotificationService.CancelacionTurno(User, turno);
             if (mail != null) mail.Send();
 
+            //Actualizamos la cache de turnos
+            var cached = QueryFactory.Create<IObtenerTurnosProfesionalQuery>();
+            cached.ProfesionalId = turno.Profesional.Id;
+            cached.ClearCache();
+
             ShowMessages(ResponseMessage.Success());
             return RedirectToAction("Agenda", new { fecha = turno.FechaTurno.ToShortDateString() });
         }
@@ -66,11 +72,16 @@ namespace Sicemed.Web.Infrastructure.Controllers
 
             var turnos = query.Execute();
 
+            var cached = QueryFactory.Create<IObtenerTurnosProfesionalQuery>();
+
             foreach (var turno in turnos)
             {
                 turno.CancelarTurno(User, prompt);
                 var mail = NotificationService.CancelacionTurno(User, turno);
                 if (mail != null) mail.Send();
+
+                cached.ProfesionalId = turno.Profesional.Id;
+                cached.ClearCache();
             }
 
             ShowMessages(ResponseMessage.Success());
