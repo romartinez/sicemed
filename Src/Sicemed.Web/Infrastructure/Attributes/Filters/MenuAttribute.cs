@@ -152,13 +152,13 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             abmsPage.Childs.Add(CreateDefaultPage("Especialidades", "Admin/Especialidades", adminPage));
             abmsPage.Childs.Add(CreateDefaultPage("Consultorios", "Admin/Consultorios", adminPage));
             adminPage.Childs.Add(abmsPage);
-            //BI
-            var biPage = CreateDefaultPage("BI", "#", adminPage, 20);
-            biPage.Childs.Add(CreateDefaultPage("Tablero De Control", "Admin/Tablero", biPage));
-            biPage.Childs.Add(CreateDefaultPage("Categoría Indicadores", "Admin/CategoriasIndicador", biPage));
-            biPage.Childs.Add(CreateDefaultPage("Indicadores", "Admin/Indicadores", biPage));
-            biPage.Childs.Add(CreateDefaultPage("Objetivos", "Admin/Objetivos", biPage));            
-            adminPage.Childs.Add(biPage);
+            ////BI
+            //var biPage = CreateDefaultPage("BI", "#", adminPage, 20);
+            //biPage.Childs.Add(CreateDefaultPage("Tablero De Control", "Admin/Tablero", biPage));
+            //biPage.Childs.Add(CreateDefaultPage("Categoría Indicadores", "Admin/CategoriasIndicador", biPage));
+            //biPage.Childs.Add(CreateDefaultPage("Indicadores", "Admin/Indicadores", biPage));
+            //biPage.Childs.Add(CreateDefaultPage("Objetivos", "Admin/Objetivos", biPage));            
+            //adminPage.Childs.Add(biPage);
 
             var auditPage = CreateDefaultPage("Auditoria", "Admin/Auditoria", adminPage, 30);
             adminPage.Childs.Add(auditPage);

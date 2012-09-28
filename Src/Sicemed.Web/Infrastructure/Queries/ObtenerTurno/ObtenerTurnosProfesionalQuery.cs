@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NHibernate.Transform;
 using SICEMED.Web;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models;
@@ -47,6 +48,7 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
                 .JoinQueryOver(x => x.Profesional)
                 .Where(p => p.Id == ProfesionalId)
                 .JoinQueryOver(p => p.Especialidades)
+                .TransformUsing(Transformers.DistinctRootEntity)
                 .Future();
 
             var agendaProfesional = session.QueryOver<Agenda>()
@@ -72,11 +74,11 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
                 var turnosOtorgados = MappingEngine.Map<List<TurnoViewModel>>(turnosProfesional);
                 //Le calculo la fecha de fin a los turnos
                 turnosOtorgados.ForEach(t =>
-                    {
-                        var agendaDia = agendaProfesional.FirstOrDefault(a => a.Dia == t.FechaTurnoInicial.DayOfWeek);
-                        t.FechaTurnoFinal = t.FechaTurnoInicial 
-                            + (agendaDia == null ? MvcApplication.Clinica.DuracionTurnoPorDefecto : agendaDia.DuracionTurno);
-                    });
+                {
+                    var agendaDia = agendaProfesional.FirstOrDefault(a => a.Dia == t.FechaTurnoInicial.DayOfWeek);
+                    t.FechaTurnoFinal = t.FechaTurnoInicial
+                        + (agendaDia == null ? MvcApplication.Clinica.DuracionTurnoPorDefecto : agendaDia.DuracionTurno);
+                });
                 turnos.AddRange(turnosOtorgados);
             }
 

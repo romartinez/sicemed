@@ -15,7 +15,7 @@
     <AssemblyName>Sicemed.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>true</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -705,6 +705,7 @@
     <Content Include="public\js\libs\select2.js" />
     <Content Include="Reports\logo.png" />
     <Content Include="Reports\Report.aspx" />
+    <None Include="Properties\PublishProfiles\D.pubxml" />
     <None Include="public\js\libs\jquery.validate-vsdoc.js" />
     <Content Include="public\js\libs\jquery.validate.js" />
     <Content Include="public\js\libs\jquery.validate.min.js">
@@ -917,8 +918,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>False</AutoAssignPort>
-          <DevelopmentServerPort>9090</DevelopmentServerPort>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>25052</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
