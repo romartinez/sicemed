@@ -159,7 +159,7 @@ namespace Sicemed.Web.Controllers
                     Localidad = session.Load<Localidad>(editModel.DomicilioLocalidadId)
                 };
                 var pacienteRol = Paciente.Create(editModel.NumeroAfiliado);
-                pacienteRol.Plan = session.Load<Plan>(editModel.PlanId);
+                if(editModel.PlanId.HasValue) pacienteRol.Plan = session.Load<Plan>(editModel.PlanId);
                 model.AgregarRol(pacienteRol);
                 //Seteo un password cualquiera y luego le mando mail re recupero
                 var status = _membershipService.CreateUser(model, editModel.Email, Guid.NewGuid().ToString());

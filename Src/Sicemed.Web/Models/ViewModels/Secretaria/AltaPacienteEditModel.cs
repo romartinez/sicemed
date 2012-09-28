@@ -90,15 +90,12 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
         [CascadingDropDownProperty("PlanId", "ObraSocialId", "GetPlanesObraSocial", "Domain", "Admin", "obraSocialId", "<< Seleccione una Obra Social >>")]
         public IEnumerable<SelectListItem> PlanesObraSocialHabilitados { get; set; }
 
-        [Requerido]
         [ScaffoldColumn(false)]
         public virtual long? PlanId { get; set; }
 
-        [Requerido]
         [ScaffoldColumn(false)]
         public virtual long? ObraSocialId { get; set; }
 
-        [Requerido]
         [DisplayName("Número Afiliado")]
         [LargoCadenaPorDefecto]
         public virtual string NumeroAfiliado { get; set; }

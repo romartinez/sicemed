@@ -248,7 +248,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                                         Localidad = session.Load<Localidad>(editModel.DomicilioLocalidadId)
                                     };
 
-            if (editModel.EsPaciente)
+            if (editModel.EsPaciente && editModel.Paciente.PlanId.HasValue)
             {
                 persona.As<Paciente>().Plan = session.Load<Plan>(editModel.Paciente.PlanId);
             }
