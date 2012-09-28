@@ -80,8 +80,12 @@ else
                 <h4>@turno.FechaTurno.ToFullDate() - @turno.Profesional.Descripcion | @turno.Estado</h4>
                 <div>
                     Especialidad: @turno.Especialidad.Descripcion
-                    <br />
-                    Consultorio: @turno.Consultorio.Descripcion
+                    
+                    @if(@turno.Consultorio != null)
+                    {
+                        <br />
+                        @:Consultorio: @turno.Consultorio.Descripcion                        
+                    }
                 </div>
                 @if (turno.Estado == Turno.EstadoTurno.Cancelado)
                 {
