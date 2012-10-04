@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NHibernate.Transform;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.ViewModels.Secretaria;
@@ -32,6 +33,7 @@ namespace Sicemed.Web.Infrastructure.Queries.Secretaria
                 .Fetch(t => t.Paciente.Persona).Eager
                 .Where(t => t.FechaTurno >= desde)
                 .And(t => t.FechaTurno <= hasta)
+                .TransformUsing(Transformers.DistinctRootEntity)
                 .OrderBy(t => t.FechaTurno).Asc
                 .List();
 

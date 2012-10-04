@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NHibernate.Transform;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.ViewModels.Profesional;
@@ -37,6 +38,7 @@ namespace Sicemed.Web.Infrastructure.Queries.Profesional
                 .OrderBy(t => t.FechaTurno).Asc
                 .JoinQueryOver(t => t.Profesional)
                 .Where(p => p.Id == ProfesionalId)
+                .TransformUsing(Transformers.DistinctRootEntity)
                 .List();
 
             var viewModel = new AgendaProfesionalViewModel { FechaTurnos = desde };

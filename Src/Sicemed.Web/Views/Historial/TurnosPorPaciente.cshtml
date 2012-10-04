@@ -1,5 +1,6 @@
 ﻿@using Sicemed.Web.Infrastructure.Helpers
 @using Sicemed.Web.Models
+@using Sicemed.Web.Models.Enumerations
 @using Sicemed.Web.Models.Roles
 @model Sicemed.Web.Models.ViewModels.Historial.TurnosPorPacienteViewModel
 @{
@@ -87,7 +88,7 @@ else
                         @:Consultorio: @turno.Consultorio.Descripcion                        
                     }
                 </div>
-                @if (turno.Estado == Turno.EstadoTurno.Cancelado)
+                @if (turno.Estado == EstadoTurno.Cancelado)
                 {
                     <strong>Cancelaci&oacute;n</strong>
                     <div>

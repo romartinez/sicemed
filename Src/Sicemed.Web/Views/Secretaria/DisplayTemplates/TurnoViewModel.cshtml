@@ -1,9 +1,10 @@
 ﻿@using Sicemed.Web.Infrastructure.Helpers
 @using Sicemed.Web.Models
+@using Sicemed.Web.Models.Enumerations
 @model Sicemed.Web.Models.ViewModels.Secretaria.TurnosDelDiaViewModel.TurnoViewModel
 <li class="turno turno-@Model.Estado.ToString().ToLower()">
     <h4>@Model.FechaTurno.ToShortTimeString() - @Model.Paciente.Descripcion | @Model.Estado</h4>
-    @if (Model.Estado == Turno.EstadoTurno.Otorgado || Model.Estado == Turno.EstadoTurno.Presentado)
+    @if (Model.Estado == EstadoTurno.Otorgado || Model.Estado == EstadoTurno.Presentado)
     {
     <div>
         @if (@Model.Consultorio != null)
@@ -16,17 +17,17 @@
     </div>        
     }
     <div>
-        @if (Model.Estado == Turno.EstadoTurno.Presentado)
+        @if (Model.Estado == EstadoTurno.Presentado)
         {
             <div>El usuario se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
                 minutos.</div>            
         }
-        @if (Model.Estado == Turno.EstadoTurno.Presentado)
+        @if (Model.Estado == EstadoTurno.Presentado)
         {
             <span>Se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
                 minutos.</span>
         }
-        @if (Model.Estado == Turno.EstadoTurno.Cancelado)
+        @if (Model.Estado == EstadoTurno.Cancelado)
         {
             <strong>Cancelaci&oacute;n</strong>
             <div>

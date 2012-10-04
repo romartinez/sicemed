@@ -76,7 +76,7 @@ namespace Sicemed.Web.Controllers
 
         #region Reservar Turno
         [HttpPost]
-        public virtual JsonResult ReservarTurno(long profesionalId, DateTime fecha, long especialidadId, long consultorioId)
+        public virtual JsonResult ReservarTurno(long profesionalId, DateTime fecha, TimeSpan duracion, long especialidadId, long consultorioId)
         {
             var session = SessionFactory.GetCurrentSession();
             var profesional = session.Get<Profesional>(profesionalId);
@@ -88,7 +88,7 @@ namespace Sicemed.Web.Controllers
             if (!paciente.EstaHabilitadoTurnosWeb(MvcApplication.Clinica.NumeroInasistenciasConsecutivasGeneranBloqueo))
                 throw new ValidationErrorException("Su usuario no se encuentra habilitado para obtener turnos web, por favor hágalo llamando a nuestros teléfonos.");
 
-            var turno = Turno.Create(fecha, paciente, profesional, especialidad, consultorio, Request.UserHostAddress);
+            var turno = Turno.Create(fecha, duracion, paciente, profesional, especialidad, consultorio, Request.UserHostAddress);
 
             session.Save(turno);
 

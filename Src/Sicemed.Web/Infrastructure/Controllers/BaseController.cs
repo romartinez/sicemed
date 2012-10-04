@@ -41,11 +41,6 @@ namespace Sicemed.Web.Infrastructure.Controllers
             get { return MembershipService.GetCurrentUser(); }
         }
 
-        protected Persona Persona
-        {
-            get { return User; }
-        }
-
         protected virtual T RetrieveParameter<T>(string paramName, string paramNameDescription = null,
                                                  bool allowNulls = false)
         {

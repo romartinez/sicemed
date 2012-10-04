@@ -1,5 +1,6 @@
 ﻿@using Sicemed.Web.Infrastructure.Helpers
 @using Sicemed.Web.Models
+@using Sicemed.Web.Models.Enumerations
 @using Sicemed.Web.Models.Roles
 @model Sicemed.Web.Models.ViewModels.Historial.TurnosPacienteViewModel
 @{
@@ -30,14 +31,14 @@ else
                 <br />
                 Consultorio: @turno.Consultorio
             </div>
-            @if (turno.Estado == Turno.EstadoTurno.Atendido)
+            @if (turno.Estado == EstadoTurno.Atendido)
             {
                 <strong>Diagn&oacute;stico</strong>
                 <div>
                     @Html.Nl2Br(turno.Nota)
                 </div>                                              
             }                
-            @if (turno.Estado == Turno.EstadoTurno.Cancelado)
+            @if (turno.Estado == EstadoTurno.Cancelado)
             {
                 <strong>Cancelaci&oacute;n</strong>
                 <div>

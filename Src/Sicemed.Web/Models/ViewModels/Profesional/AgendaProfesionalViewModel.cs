@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sicemed.Web.Models.Enumerations;
 
 namespace Sicemed.Web.Models.ViewModels.Profesional
 {
@@ -15,7 +16,7 @@ namespace Sicemed.Web.Models.ViewModels.Profesional
             get
             {
                 if (Turnos == null) return 0;
-                return Turnos.Count(t => t.Estado == Turno.EstadoTurno.Presentado);
+                return Turnos.Count(t => t.Estado == EstadoTurno.Presentado);
             }
         }
 
@@ -24,7 +25,7 @@ namespace Sicemed.Web.Models.ViewModels.Profesional
             get
             {
                 if (Turnos == null) return 0;
-                return Turnos.Count(t => t.Estado == Turno.EstadoTurno.Otorgado);
+                return Turnos.Count(t => t.Estado == EstadoTurno.Otorgado);
             }
         }
 
@@ -44,7 +45,7 @@ namespace Sicemed.Web.Models.ViewModels.Profesional
             public InfoViewModel Consultorio { get; set; }
             public InfoViewModel Paciente { get; set; }
             public InfoViewModel Especialidad { get; set; }
-            public Turno.EstadoTurno Estado { get; set; }            
+            public EstadoTurno Estado { get; set; }            
             public DateTime FechaEstado { get; set; }            
             public bool PuedoCancelar { get; set; }            
         }        

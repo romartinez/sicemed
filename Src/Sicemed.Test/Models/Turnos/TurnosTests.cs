@@ -21,7 +21,7 @@ namespace Sicemed.Tests.Models.Turnos
             var fechaTurno = new DateTime(2011, 02, 01);
 
             var session = SessionFactory.GetCurrentSession();
-            var turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, secretariaOtorgaTurno, consultorio);
+            var turno = Turno.Create(fechaTurno, TimeSpan.FromMinutes(15), paciente, profesional, especialidad, secretariaOtorgaTurno, consultorio);
 
             session.Save(turno);
 
@@ -50,7 +50,7 @@ namespace Sicemed.Tests.Models.Turnos
             var fechaTurno = new DateTime(2011, 02, 01);
 
             var session = SessionFactory.GetCurrentSession();
-            var turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, consultorio, "127.0.0.1");
+            var turno = Turno.Create(fechaTurno, TimeSpan.FromMinutes(15), paciente, profesional, especialidad, consultorio, "127.0.0.1");
 
             session.Save(turno);
 
@@ -78,7 +78,7 @@ namespace Sicemed.Tests.Models.Turnos
             var consultorio = ApplicationInstaller.ConsultorioA;
             var fechaTurno = new DateTime(2011, 02, 01);
 
-            Assert.Throws<ArgumentException>(() => Turno.Create(fechaTurno, paciente, profesional, especialidad, consultorio, "127.0.0.1"));
+            Assert.Throws<ArgumentException>(() => Turno.Create(fechaTurno, TimeSpan.FromMinutes(15), paciente, profesional, especialidad, consultorio, "127.0.0.1"));
         }
 
         [Test]
@@ -105,8 +105,8 @@ namespace Sicemed.Tests.Models.Turnos
             session.Update(profesional);
             session.Flush();
             session.Evict(profesional);
-            
-            var turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, consultorio, "127.0.0.1");
+
+            var turno = Turno.Create(fechaTurno, TimeSpan.FromMinutes(15), paciente, profesional, especialidad, consultorio, "127.0.0.1");
 
             session.Save(turno);
 
@@ -150,7 +150,7 @@ namespace Sicemed.Tests.Models.Turnos
             session.Flush();
             session.Evict(profesional);
 
-            Assert.Throws<ArgumentException>(() => Turno.Create(fechaTurno, paciente, profesional, especialidad, consultorio, "127.0.0.1"));
+            Assert.Throws<ArgumentException>(() => Turno.Create(fechaTurno, TimeSpan.FromMinutes(15), paciente, profesional, especialidad, consultorio, "127.0.0.1"));
         }
 
     }

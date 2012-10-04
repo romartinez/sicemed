@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sicemed.Web.Models.Enumerations;
 
 namespace Sicemed.Web.Models.ViewModels.Profesional
 {
@@ -25,7 +26,7 @@ namespace Sicemed.Web.Models.ViewModels.Profesional
             public InfoViewModel Consultorio { get; set; }
             public InfoViewModel Paciente { get; set; }
             public InfoViewModel Especialidad { get; set; }
-            public Turno.EstadoTurno Estado { get; set; }
+            public EstadoTurno Estado { get; set; }
             public DateTime FechaEstado { get; set; }
         }
     }

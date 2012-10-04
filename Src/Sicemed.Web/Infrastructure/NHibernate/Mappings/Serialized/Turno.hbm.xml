@@ -4,23 +4,28 @@
     <id name="Id" type="Int64">
       <generator class="hilo" />
     </id>
-    <property name="FechaGeneracion" not-null="true" />
     <property name="FechaTurno" not-null="true" />
-    <property name="FechaIngreso" />
-    <property name="FechaAtencion" />
-    <property name="FechaCancelacion" />
     <property name="Nota" />
     <property name="MotivoCancelacion" />
     <property name="IpPaciente" />
-    <property name="EsTelefonico" />
-    <property name="Estado" />
-    <property name="FechaEstado" />
-    <many-to-one name="Paciente" column="PacienteId" not-null="true" foreign-key="FK_Turno_PersonaRol_Paciente" />
-    <many-to-one name="Profesional" column="ProfesionalId" not-null="true" foreign-key="FK_Turno_PersonaRol_Profesional" />
-    <many-to-one name="SecretariaReservadoraTurno" column="SecretariaReservadoraTurnoId" foreign-key="FK_Turno_PersonaRol_Secretaria_ReservadoraTurno" />
-    <many-to-one name="SecretariaRecepcionista" column="SecretariaRecepcionistaId" foreign-key="FK_Turno_PersonaRol_Secretaria_Recepcionista" />
-    <many-to-one name="CanceladoPor" column="CanceladoPorId" foreign-key="FK_Turno_Persona_CanceladoPor" />
-    <many-to-one name="Especialidad" column="EspecialidadId" not-null="true" foreign-key="FK_Turno_Especialidad" />
-    <many-to-one name="Consultorio" column="ConsultorioId" foreign-key="FK_Turno_Consultorio" />
+    <property name="EsTelefonico" not-null="true" />
+    <property name="EsSobreTurno" not-null="true" />
+    <property name="Estado" not-null="true" />
+    <property name="FechaEstado" not-null="true" />
+    <many-to-one name="Paciente" not-null="true" foreign-key="FK_Turno_PersonaRol_Paciente" />
+    <many-to-one name="Profesional" not-null="true" foreign-key="FK_Turno_PersonaRol_Profesional" />
+    <many-to-one name="Especialidad" not-null="true" foreign-key="FK_Turno_Especialidad" />
+    <many-to-one name="Consultorio" foreign-key="FK_Turno_Consultorio" />
+    <property name="DuracionTurno" not-null="true" />
+    <list name="CambiosDeEstado" table="TurnosCambioEstados" lazy="false" fetch="join">
+      <key column="TurnoId" foreign-key="FK_TurnosCambioEstados_Turno" />
+      <list-index />
+      <composite-element class="Sicemed.Web.Models.Components.CambioEstadoTurno">
+        <property name="Estado" type="NHibernate.Type.EnumStringType`1[[Sicemed.Web.Models.Enumerations.EstadoTurno, Sicemed.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], NHibernate, Version=3.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4" not-null="true" />
+        <property name="Evento" type="NHibernate.Type.EnumStringType`1[[Sicemed.Web.Models.Enumerations.EventoTurno, Sicemed.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], NHibernate, Version=3.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4" not-null="true" />
+        <many-to-one name="Responsable" foreign-key="FK_TurnosCambioEstados_Personal" />
+        <property name="Fecha" not-null="true" />
+      </composite-element>
+    </list>
   </class>
 </hibernate-mapping>

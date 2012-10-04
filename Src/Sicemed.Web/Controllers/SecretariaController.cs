@@ -59,14 +59,14 @@ namespace Sicemed.Web.Controllers
                 var fechaTurno = editModel.FechaTurno;
 
                 Turno turno;
-                if(!editModel.EsSobreTurno)
+                if (!editModel.EsSobreTurno)
                 {
                     var consultorio = session.Load<Consultorio>(editModel.ConsultorioId);
-                    turno = Turno.Create(fechaTurno, paciente, profesional, especialidad, User.As<Secretaria>(), consultorio, editModel.EsTelefonico);
+                    turno = Turno.Create(fechaTurno, editModel.DuracionTurno, paciente, profesional, especialidad, User.As<Secretaria>(), consultorio, editModel.EsTelefonico);
                 }
                 else
                 {
-                    turno = Turno.CreateSobreTurno(fechaTurno, paciente, profesional, especialidad, User.As<Secretaria>(), editModel.EsTelefonico);                    
+                    turno = Turno.CreateSobreTurno(fechaTurno, editModel.DuracionTurno, paciente, profesional, especialidad, User.As<Secretaria>(), editModel.EsTelefonico);
                 }
 
                 session.Save(turno);
@@ -112,7 +112,7 @@ namespace Sicemed.Web.Controllers
         {
             var session = SessionFactory.GetCurrentSession();
             var turno = session.Get<Turno>(turnoId);
-            if (turno == null || !turno.PuedeAplicar(Turno.EventoTurno.Presentar))
+            if (turno == null || !turno.PuedeAplicar(EventoTurno.Presentar))
             {
                 ShowMessages(ResponseMessage.Error("No se encuentra el turno o no se puede marcar su ingreso."));
                 return RedirectToAction("Agenda");
@@ -159,7 +159,7 @@ namespace Sicemed.Web.Controllers
                     Localidad = session.Load<Localidad>(editModel.DomicilioLocalidadId)
                 };
                 var pacienteRol = Paciente.Create(editModel.NumeroAfiliado);
-                if(editModel.PlanId.HasValue) pacienteRol.Plan = session.Load<Plan>(editModel.PlanId);
+                if (editModel.PlanId.HasValue) pacienteRol.Plan = session.Load<Plan>(editModel.PlanId);
                 model.AgregarRol(pacienteRol);
                 //Seteo un password cualquiera y luego le mando mail re recupero
                 var status = _membershipService.CreateUser(model, editModel.Email, Guid.NewGuid().ToString());

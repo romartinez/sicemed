@@ -1,9 +1,10 @@
 ﻿@using Sicemed.Web.Models
+@using Sicemed.Web.Models.Enumerations
 @model Sicemed.Web.Models.ViewModels.Profesional.AgendaProfesionalViewModel.TurnoViewModel
 @{
 
-    var css = Model.Estado != Turno.EstadoTurno.Presentado && Model.Estado != Turno.EstadoTurno.Otorgado ? "ui-state-disabled " : string.Empty;
-    css += Model.Estado == Turno.EstadoTurno.Presentado ? "ui-state-highlight" : string.Empty;
+    var css = Model.Estado != EstadoTurno.Presentado && Model.Estado != EstadoTurno.Otorgado ? "ui-state-disabled " : string.Empty;
+    css += Model.Estado == EstadoTurno.Presentado ? "ui-state-highlight" : string.Empty;
 }
 <h3 class="@css">
     <a href="#">
@@ -20,7 +21,7 @@
             @Html.ActionLink("Historial Atenciones", "Atenciones", "Historial", new { pacienteId = Model.Paciente.Id }, new { target = "_blank" })
         </div>
         <div>
-            @if (Model.Estado == Turno.EstadoTurno.Presentado)
+            @if (Model.Estado == EstadoTurno.Presentado)
             {
                 <span>El usuario ingres&oacute; hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
                     minutos.</span>

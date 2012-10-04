@@ -1,66 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sicemed.Web.Models.Components;
+using Sicemed.Web.Models.Enumerations;
 using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Models
 {
     public class Turno : Entity
     {
-        public enum EstadoTurno
-        {
-            Otorgado,
-            Presentado,
-            Atendido,
-            Cancelado,
-            Ausente
-        }
 
-        public enum EventoTurno
-        {
-            Obtener,
-            Presentar,
-            Atender,
-            Cancelar,
-            Ausentarse
-        }
-
-        public class CambioEstadoTurno
-        {
-            readonly EstadoTurno _currentState;
-            readonly EventoTurno _eventoTurno;
-
-            public CambioEstadoTurno(EstadoTurno currentState, EventoTurno eventoTurno)
-            {
-                _currentState = currentState;
-                _eventoTurno = eventoTurno;
-            }
-
-            public override int GetHashCode()
-            {
-                return 17 + 31 * _currentState.GetHashCode() + 31 * _eventoTurno.GetHashCode();
-            }
-
-            public override bool Equals(object obj)
-            {
-                var other = obj as CambioEstadoTurno;
-                return other != null && this._currentState == other._currentState && this._eventoTurno == other._eventoTurno;
-            }
-        }
-
-        private static Dictionary<CambioEstadoTurno, EstadoTurno> _transiciones;
+        private static readonly Dictionary<CambioEstadoTurno, EstadoTurno> Transiciones;
 
         #region Primitive Properties
 
-        public virtual DateTime FechaGeneracion { get; protected set; }
-
         public virtual DateTime FechaTurno { get; protected set; }
 
-        public virtual DateTime? FechaIngreso { get; protected set; }
-
-        public virtual DateTime? FechaCancelacion { get; protected set; }
-
-        public virtual DateTime? FechaAtencion { get; protected set; }
+        public virtual TimeSpan DuracionTurno { get; protected set; }
 
         public virtual string Nota { get; protected set; }
 
@@ -69,6 +25,8 @@ namespace Sicemed.Web.Models
         public virtual string IpPaciente { get; protected set; }
 
         public virtual bool EsTelefonico { get; protected set; }
+
+        public virtual bool EsSobreTurno { get; protected set; }
 
         public virtual EstadoTurno Estado { get; protected set; }
 
@@ -82,17 +40,63 @@ namespace Sicemed.Web.Models
 
         public virtual Profesional Profesional { get; protected set; }
 
-        public virtual Secretaria SecretariaReservadoraTurno { get; protected set; }
-
-        public virtual Secretaria SecretariaRecepcionista { get; set; }
-
-        public virtual Persona CanceladoPor { get; set; }
-
         public virtual Especialidad Especialidad { get; protected set; }
 
         public virtual Consultorio Consultorio { get; set; }
 
+        public virtual IList<CambioEstadoTurno> CambiosDeEstado { get; set; }
+
         #endregion
+
+        #region Propiedades Calculadas
+
+        public virtual DateTime FechaGeneracion
+        {
+            get { return ObtenerFechaEstado(EventoTurno.Obtener).Value; }
+        }
+
+        public virtual DateTime? FechaIngreso
+        {
+            get { return ObtenerFechaEstado(EventoTurno.Presentar); }
+        }
+
+        public virtual DateTime? FechaCancelacion
+        {
+            get { return ObtenerFechaEstado(EventoTurno.Cancelar); }
+        }
+
+        public virtual DateTime? FechaAtencion
+        {
+            get { return ObtenerFechaEstado(EventoTurno.Atender); }
+        }
+
+        public virtual Secretaria SecretariaReservadoraTurno
+        {
+            get
+            {
+                var persona = ObtenerResponsableEstado(EventoTurno.Obtener);
+                if (!persona.IsInRole<Secretaria>()) return null;
+                return persona.As<Secretaria>();
+            }
+        }
+
+        public virtual Secretaria SecretariaRecepcionista
+        {
+            get
+            {
+                var persona = ObtenerResponsableEstado(EventoTurno.Obtener);
+                if (persona == null) return null;
+                return persona.As<Secretaria>();
+            }
+        }
+
+        public virtual Persona CanceladoPor
+        {
+            get
+            {
+                return ObtenerResponsableEstado(EventoTurno.Cancelar);
+            }
+        }
 
         public virtual bool EsObtenidoWeb
         {
@@ -118,9 +122,11 @@ namespace Sicemed.Web.Models
             }
         }
 
+        #endregion
+
         static Turno()
         {
-            _transiciones = new Dictionary<CambioEstadoTurno, EstadoTurno>
+            Transiciones = new Dictionary<CambioEstadoTurno, EstadoTurno>
             {
                 { new CambioEstadoTurno(EstadoTurno.Otorgado, EventoTurno.Presentar), EstadoTurno.Presentado },
                 { new CambioEstadoTurno(EstadoTurno.Otorgado, EventoTurno.Cancelar), EstadoTurno.Cancelado },
@@ -130,10 +136,20 @@ namespace Sicemed.Web.Models
             };
         }
 
-        protected Turno()
+        protected Turno() { }
+
+        protected Turno(Persona persona)
         {
+            var fecha = DateTime.Now;
+            CambiosDeEstado = new List<CambioEstadoTurno>
+                {
+                    new CambioEstadoTurno(EstadoTurno.Otorgado, EventoTurno.Obtener)
+                        {
+                            Fecha = fecha, Responsable = persona
+                        }
+                };
             Estado = EstadoTurno.Otorgado;
-            FechaEstado = DateTime.Now;
+            FechaEstado = fecha;
         }
 
         public static EstadoTurno[] EstadosAplicaEvento(EventoTurno eventoTurno)
@@ -146,54 +162,53 @@ namespace Sicemed.Web.Models
         public static bool PuedeAplicar(EstadoTurno estado, EventoTurno eventoTurno)
         {
             var transicion = new CambioEstadoTurno(estado, eventoTurno);
-            return _transiciones.ContainsKey(transicion);
+            return Transiciones.ContainsKey(transicion);
         }
 
         public virtual bool PuedeAplicar(EventoTurno eventoTurno)
         {
             var transicion = new CambioEstadoTurno(Estado, eventoTurno);
-            return _transiciones.ContainsKey(transicion);
+            return Transiciones.ContainsKey(transicion);
         }
 
         protected virtual EstadoTurno ProximoEstado(EventoTurno eventoTurno)
         {
             var transicion = new CambioEstadoTurno(Estado, eventoTurno);
             EstadoTurno proximoEstado;
-            if (!_transiciones.TryGetValue(transicion, out proximoEstado))
+            if (!Transiciones.TryGetValue(transicion, out proximoEstado))
                 throw new Exception("Cambio de Estado inválido: " + Estado + " -> " + eventoTurno);
             return proximoEstado;
         }
 
-        protected virtual EstadoTurno MoverEstado(EventoTurno eventoTurno)
+        protected virtual EstadoTurno MoverEstado(EventoTurno eventoTurno, Persona persona)
         {
-            Estado = ProximoEstado(eventoTurno);
-            FechaEstado = DateTime.Now;
-            return Estado;
+            var estado = ProximoEstado(eventoTurno);
+            var fecha = DateTime.Now;
+            var cambioEstado = new CambioEstadoTurno(estado, eventoTurno) { Fecha = fecha, Responsable = persona };
+            CambiosDeEstado.Add(cambioEstado);
+            Estado = estado;
+            FechaEstado = fecha;
+            return estado;
         }
 
         public virtual Turno RegistrarIngreso(Secretaria secretariaRecepcionista)
         {
-            MoverEstado(EventoTurno.Presentar);
-            FechaIngreso = DateTime.Now;
-            SecretariaRecepcionista = secretariaRecepcionista;
+            MoverEstado(EventoTurno.Presentar, secretariaRecepcionista.Persona);
             //Reseteo de las inasistencias
             Paciente.ResetInasistencias();
             return this;
         }
 
-        public virtual Turno RegistrarAtencion(string nota = null)
+        public virtual Turno RegistrarAtencion(Profesional profesional, string nota = null)
         {
-            MoverEstado(EventoTurno.Atender);
-            FechaAtencion = DateTime.Now;
+            MoverEstado(EventoTurno.Atender, profesional.Persona);
             Nota = nota;
             return this;
         }
 
         public virtual Turno CancelarTurno(Persona canceladoPor, string motivoCancelacion)
         {
-            MoverEstado(EventoTurno.Cancelar);
-            FechaCancelacion = DateTime.Now;
-            CanceladoPor = canceladoPor;
+            MoverEstado(EventoTurno.Cancelar, canceladoPor);
             MotivoCancelacion = motivoCancelacion;
             if (Paciente.Persona == canceladoPor) Paciente.AgregarInasistencia();
             return this;
@@ -201,9 +216,28 @@ namespace Sicemed.Web.Models
 
         public virtual Turno MarcarAusente()
         {
-            MoverEstado(EventoTurno.Ausentarse);
+            MoverEstado(EventoTurno.Ausentarse, null);
             Paciente.AgregarInasistencia();
             return this;
+        }
+
+        private CambioEstadoTurno ObtenerCambioEstado(EventoTurno evento)
+        {
+            return CambiosDeEstado.SingleOrDefault(x => x.Evento == evento);
+        }
+
+        private DateTime? ObtenerFechaEstado(EventoTurno evento)
+        {
+            var cambioEstado = ObtenerCambioEstado(evento);
+            if (cambioEstado == null) return null;
+            return cambioEstado.Fecha;
+        }
+
+        private Persona ObtenerResponsableEstado(EventoTurno evento)
+        {
+            var cambioEstado = ObtenerCambioEstado(evento);
+            if (cambioEstado == null) return null;
+            return cambioEstado.Responsable;
         }
 
         #region Creates
@@ -213,6 +247,7 @@ namespace Sicemed.Web.Models
         /// <returns></returns>
         public static Turno Create(
             DateTime fechaTurno,
+            TimeSpan duracionTurno,
             Paciente paciente,
             Profesional profesional,
             Especialidad especialidad,
@@ -226,9 +261,8 @@ namespace Sicemed.Web.Models
             if (!profesional.Especialidades.Contains(especialidad))
                 throw new ArgumentException(@"El Profesional seleccionado para el turno no atiende la Especialidad seleccionada", "especialidad");
 
-            return new Turno
+            var turno = new Turno(paciente.Persona)
             {
-                FechaGeneracion = DateTime.Now,
                 FechaTurno = fechaTurno,
                 Paciente = paciente,
                 Profesional = profesional,
@@ -236,6 +270,8 @@ namespace Sicemed.Web.Models
                 IpPaciente = ipPaciente,
                 Consultorio = consultorio
             };
+
+            return turno;
         }
 
         /// <summary>
@@ -243,6 +279,7 @@ namespace Sicemed.Web.Models
         /// </summary>
         public static Turno Create(
             DateTime fechaTurno,
+            TimeSpan duracionTurno,
             Paciente paciente,
             Profesional profesional,
             Especialidad especialidad,
@@ -253,27 +290,29 @@ namespace Sicemed.Web.Models
             if (paciente == null) throw new ArgumentNullException("paciente");
             if (profesional == null) throw new ArgumentNullException("profesional");
             if (especialidad == null) throw new ArgumentNullException("especialidad");
-            if (consultorio == null) throw new ArgumentNullException("consultorio");            
+            if (consultorio == null) throw new ArgumentNullException("consultorio");
             if (secretariaReservadoraTurno == null) throw new ArgumentNullException("secretariaReservadoraTurno");
 
             if (!profesional.Especialidades.Contains(especialidad))
                 throw new ArgumentException(@"El Profesional seleccionado para el turno no atiende la Especialidad seleccionada", "especialidad");
 
-            return new Turno
+            var turno = new Turno(secretariaReservadoraTurno.Persona)
             {
-                FechaGeneracion = DateTime.Now,
                 FechaTurno = fechaTurno,
+                DuracionTurno = duracionTurno,
                 Paciente = paciente,
                 Profesional = profesional,
                 Especialidad = especialidad,
-                SecretariaReservadoraTurno = secretariaReservadoraTurno,
                 Consultorio = consultorio,
                 EsTelefonico = esTelefonico,
+                EsSobreTurno = false
             };
+
+            return turno;
         }
         #endregion
 
-        public static Turno CreateSobreTurno(DateTime fechaTurno, Paciente paciente, Profesional profesional, Especialidad especialidad, Secretaria secretariaReservadoraTurno, bool esTelefonico)
+        public static Turno CreateSobreTurno(DateTime fechaTurno, TimeSpan duracionTurno, Paciente paciente, Profesional profesional, Especialidad especialidad, Secretaria secretariaReservadoraTurno, bool esTelefonico)
         {
             if (paciente == null) throw new ArgumentNullException("paciente");
             if (profesional == null) throw new ArgumentNullException("profesional");
@@ -283,16 +322,18 @@ namespace Sicemed.Web.Models
             if (!profesional.Especialidades.Contains(especialidad))
                 throw new ArgumentException(@"El Profesional seleccionado para el turno no atiende la Especialidad seleccionada", "especialidad");
 
-            return new Turno
+            var turno = new Turno(secretariaReservadoraTurno.Persona)
             {
-                FechaGeneracion = DateTime.Now,
                 FechaTurno = fechaTurno,
+                DuracionTurno = duracionTurno,
                 Paciente = paciente,
                 Profesional = profesional,
                 Especialidad = especialidad,
-                SecretariaReservadoraTurno = secretariaReservadoraTurno,
                 EsTelefonico = esTelefonico,
+                EsSobreTurno = true
             };
+
+            return turno;
         }
     }
 }

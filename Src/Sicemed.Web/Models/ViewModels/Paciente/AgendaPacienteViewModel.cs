@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sicemed.Web.Models.Enumerations;
 
 namespace Sicemed.Web.Models.ViewModels.Paciente
 {
@@ -28,7 +29,7 @@ namespace Sicemed.Web.Models.ViewModels.Paciente
             public InfoViewModel CanceladoPor { get; set; }
             public string MotivoCancelacion { get; set; }
             public string Nota { get; set; }
-            public Turno.EstadoTurno Estado { get; set; }
+            public EstadoTurno Estado { get; set; }
             public DateTime FechaEstado { get; set; }
             public bool PuedoCancelar { get; set; }
         }

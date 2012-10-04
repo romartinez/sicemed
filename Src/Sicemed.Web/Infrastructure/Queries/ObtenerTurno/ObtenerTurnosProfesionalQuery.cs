@@ -5,6 +5,7 @@ using NHibernate.Transform;
 using SICEMED.Web;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Enumerations;
 using Sicemed.Web.Models.ViewModels.ObtenerTurno;
 
 namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
@@ -45,7 +46,7 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
             var turnosProfesional = session.QueryOver<Turno>()
                 .Fetch(x => x.Paciente).Eager
                 .Where(t => t.FechaTurno > lunesDeEstaSemana && t.FechaTurno < maximoTurnosFuturos)
-                .WhereNot(t=>t.Estado == Turno.EstadoTurno.Cancelado)
+                .WhereNot(t=>t.Estado == EstadoTurno.Cancelado)
                 .JoinQueryOver(x => x.Profesional)
                 .Where(p => p.Id == ProfesionalId)
                 .JoinQueryOver(p => p.Especialidades)

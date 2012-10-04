@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Enumerations;
 using Sicemed.Web.Models.ViewModels.Profesional;
 
 namespace Sicemed.Web.Infrastructure.Queries.AdministracionDeTurnos
@@ -34,7 +35,7 @@ namespace Sicemed.Web.Infrastructure.Queries.AdministracionDeTurnos
                 .Where(t => t.FechaTurno >= desde)
                 .And(t => t.FechaTurno <= hasta)
                 .AndRestrictionOn(t => t.Estado)
-                .IsIn(Turno.EstadosAplicaEvento(Turno.EventoTurno.Cancelar))
+                .IsIn(Turno.EstadosAplicaEvento(EventoTurno.Cancelar))
                 .OrderBy(t => t.FechaTurno).Asc
                 .JoinQueryOver(t => t.Profesional)
                 .Where(p => p.Id == ProfesionalId)

@@ -5,6 +5,7 @@ using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Queries.AdministracionDeTurnos;
 using Sicemed.Web.Infrastructure.Queries.ObtenerTurno;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Enumerations;
 using Sicemed.Web.Models.Roles;
 
 namespace Sicemed.Web.Infrastructure.Controllers
@@ -27,7 +28,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
             }
             var session = SessionFactory.GetCurrentSession();
             var turno = session.Get<Turno>(turnoId);
-            if (turno == null || !turno.PuedeAplicar(Turno.EventoTurno.Cancelar))
+            if (turno == null || !turno.PuedeAplicar(EventoTurno.Cancelar))
             {
                 ShowMessages(ResponseMessage.Error("No se encuentra el turno o no se puede cancelar el mismo."));
                 return RedirectToAction("Agenda");

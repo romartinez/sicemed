@@ -257,6 +257,7 @@
     <Compile Include="Infrastructure\ModelBinders\SearchFiltersModelBinder.cs" />
     <Compile Include="Infrastructure\NHibernate\EntityConverter.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\CategoriaIndicadorMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\Components\DocumentoMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\IndicadorMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\ObjetivoIndicadorMap.cs" />
     <Compile Include="Infrastructure\NHibernate\NHibernateAuditContractResolver.cs" />
@@ -287,6 +288,9 @@
     <Compile Include="Models\Caja\TipoIva.cs" />
     <Compile Include="Models\Caja\TipoTarjeta.cs" />
     <Compile Include="Models\Caja\Valor.cs" />
+    <Compile Include="Models\Components\CambioEstadoTurno.cs" />
+    <Compile Include="Models\Enumerations\EstadoTurno.cs" />
+    <Compile Include="Models\Enumerations\EventoTurno.cs" />
     <Compile Include="Models\Moneda.cs" />
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\Reports\TurnosPorProfesionalReportModel.cs" />
@@ -370,7 +374,7 @@
     <Compile Include="Infrastructure\NHibernate\Mappings\Roles\SecretariaMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Roles\PacienteMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Roles\RolMap.cs" />
-    <Compile Include="Infrastructure\NHibernate\Mappings\Components\DocumentoMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\Components\CambioEstadoTurnoMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\DomicilioMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\MembershipMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\TelefonoMap.cs" />

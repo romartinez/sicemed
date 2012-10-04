@@ -1,6 +1,7 @@
 ﻿using System;
 using NHibernate;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Enumerations;
 
 namespace Sicemed.Web.Infrastructure.Jobs
 {
@@ -16,7 +17,7 @@ namespace Sicemed.Web.Infrastructure.Jobs
             if (Log.IsInfoEnabled) Log.Info("Running AusentarTurnosVencidosJob");
             
             var turnos = session.QueryOver<Turno>()
-                .Where(t => t.Estado == Turno.EstadoTurno.Otorgado
+                .Where(t => t.Estado == EstadoTurno.Otorgado
                     && t.FechaTurno <= DateTime.Now.AddDays(-1))
                 .List();
 

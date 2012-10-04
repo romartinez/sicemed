@@ -1,4 +1,5 @@
-﻿using Sicemed.Web.Models;
+﻿using NHibernate.Mapping.ByCode;
+using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
 {
@@ -8,29 +9,21 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
         {
             Table("Turnos");
 
-            Property(x => x.FechaAtencion);
-            Property(x => x.FechaGeneracion, map => map.NotNullable(true));
-            Property(x => x.FechaIngreso);
-            Property(x => x.FechaCancelacion);
             Property(x => x.FechaTurno, map => map.NotNullable(true));
+            Property(x => x.DuracionTurno, map => map.NotNullable(true));
             Property(x => x.IpPaciente);
-            Property(x => x.EsTelefonico);
+            Property(x => x.EsTelefonico, map => map.NotNullable(true));
+            Property(x => x.EsSobreTurno, map => map.NotNullable(true));
             Property(x => x.Nota);
             Property(x => x.MotivoCancelacion);
-            Property(x => x.Estado);
-            Property(x => x.FechaEstado);
+            Property(x => x.Estado, map => map.NotNullable(true));
+            Property(x => x.FechaEstado, map => map.NotNullable(true));
 
             ManyToOne(x => x.Paciente, map =>
                                        {
                                            map.NotNullable(true);
                                            map.ForeignKey("FK_Turno_PersonaRol_Paciente");
                                        });
-
-            ManyToOne(x => x.SecretariaReservadoraTurno, map => map.ForeignKey("FK_Turno_PersonaRol_Secretaria_ReservadoraTurno"));
-
-            ManyToOne(x => x.SecretariaRecepcionista, map => map.ForeignKey("FK_Turno_PersonaRol_Secretaria_Recepcionista"));
-
-            ManyToOne(x => x.CanceladoPor, map => map.ForeignKey("FK_Turno_Persona_CanceladoPor"));
 
             ManyToOne(x => x.Profesional, map =>
                                           {
@@ -44,7 +37,25 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
                                                map.ForeignKey("FK_Turno_Especialidad");
                                            });
 
-            ManyToOne(x => x.Consultorio, map => map.ForeignKey("FK_Turno_Consultorio"));            
+            ManyToOne(x => x.Consultorio, map => map.ForeignKey("FK_Turno_Consultorio"));
+
+            List(x => x.CambiosDeEstado, collectionMap =>
+                {
+                    collectionMap.Table("TurnosCambioEstados");
+                    collectionMap.Lazy(CollectionLazy.NoLazy);
+                    collectionMap.Fetch(CollectionFetchMode.Join);
+                    collectionMap.Key(m =>
+                        {
+                            m.Column("TurnoId"); 
+                            m.ForeignKey("FK_TurnosCambioEstados_Turno");
+                        });
+                }, rel => rel.Component(m =>
+                    {
+                        m.Property(x => x.Estado, x => x.Column("Estado"));
+                        m.Property(x => x.Evento, x => x.Column("Evento"));
+                        m.Property(x => x.Fecha, x => x.Column("Fecha"));
+                        m.ManyToOne(x => x.Responsable, x => x.Column("Responsable"));
+                    }));
         }
     }
 }

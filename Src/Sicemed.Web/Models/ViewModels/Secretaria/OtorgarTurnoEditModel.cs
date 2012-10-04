@@ -32,6 +32,11 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
         [HiddenInput]
         public bool EsSobreTurno { get; set; }
 
+        [Requerido]
+        [DisplayName("Es Telefónico?")]
+        [HiddenInput]
+        public TimeSpan DuracionTurno { get; set; }
+        
         [DisplayName("Es Telefónico?")]
         public bool EsTelefonico { get; set; }
 

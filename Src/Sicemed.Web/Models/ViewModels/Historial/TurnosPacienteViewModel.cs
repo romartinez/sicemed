@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sicemed.Web.Models.Enumerations;
 
 namespace Sicemed.Web.Models.ViewModels.Historial
 {
@@ -28,7 +29,7 @@ namespace Sicemed.Web.Models.ViewModels.Historial
             public bool EsObtenidoWeb { get; protected set; }
             public bool EsObtenidoPersonalmente { get; protected set; }
             public bool EsObtenidoTelefonicamente { get; protected set; }
-            public Turno.EstadoTurno Estado { get; protected set; }
+            public EstadoTurno Estado { get; protected set; }
             public DateTime FechaEstado { get; protected set; }
             public bool PuedoCancelar { get; set; }
             public bool PuedoPresentar { get; set; }
