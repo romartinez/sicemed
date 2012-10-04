@@ -62,13 +62,14 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
             for (var i = 0; i <= 3 * 30; i++)
             {
                 var dia = DateTime.Now.AddDays(i);
-                var agendaDia = agendaProfesional.FirstOrDefault(a => a.Dia == dia.DayOfWeek);
-
-                if (agendaDia != null) turnos.AddRange(CalcularTurnos(dia, agendaDia));
+                foreach (var agendaDia in agendaProfesional.Where(a => a.Dia == dia.DayOfWeek))
+                {
+                    turnos.AddRange(CalcularTurnos(dia, agendaDia));
+                }
             }
 
             //Quito los turnos otorgados
-            turnos.RemoveAll(x => turnosProfesional.Any(t => t.FechaTurno == x.FechaTurnoInicial));
+            turnos.RemoveAll(x => turnosProfesional.Any(t => t.FechaTurno >= x.FechaTurnoInicial && t.FechaTurno <= x.FechaTurnoFinal));
 
             if (AgregarOtorgados)
             {
