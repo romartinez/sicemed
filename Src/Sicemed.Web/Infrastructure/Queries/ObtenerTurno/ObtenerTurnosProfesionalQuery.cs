@@ -75,13 +75,6 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
             if (AgregarOtorgados)
             {
                 var turnosOtorgados = MappingEngine.Map<List<TurnoViewModel>>(turnosProfesional);
-                //Le calculo la fecha de fin a los turnos
-                turnosOtorgados.ForEach(t =>
-                {
-                    var agendaDia = agendaProfesional.FirstOrDefault(a => a.Dia == t.FechaTurnoInicial.DayOfWeek);
-                    t.FechaTurnoFinal = t.FechaTurnoInicial
-                        + (agendaDia == null ? MvcApplication.Clinica.DuracionTurnoPorDefecto : agendaDia.DuracionTurno);
-                });
                 turnos.AddRange(turnosOtorgados);
             }
 

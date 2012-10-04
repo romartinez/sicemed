@@ -1,4 +1,5 @@
-﻿@model Sicemed.Web.Models.ViewModels.Secretaria.OtorgarTurnoEditModel
+﻿@using SICEMED.Web
+@model Sicemed.Web.Models.ViewModels.Secretaria.OtorgarTurnoEditModel
 @{
     ViewBag.Title = "Otorgar Turno";
 }
@@ -59,6 +60,9 @@
                         @Html.HiddenFor(x => x.EsSobreTurno)
                         <input type="text" class="text-box single-line date" id="txtSobreTurnoFecha" value="@DateTime.Now.ToShortDateString()"></input>
                         <input type="text" class="text-box single-line time" id="txtSobreTurnoHora" value="@DateTime.Now.ToShortTimeString().Replace(".", string.Empty).ToUpper()"></input>
+
+                        Duraci&oacute;n:
+                        <input type="text" class="text-box single-line time" id="txtSobreTurnoDuracion" value="@MvcApplication.Clinica.DuracionTurnoPorDefecto.ToString()"></input>
                         <a href="#" id="cmdSobreTurno" class="button_link btn_pink">
                             <span>Otorgar Sobreturno</span>
                         </a>
@@ -71,6 +75,7 @@
             <li>
                 @Html.HiddenFor(x => x.ConsultorioId)
                 @Html.HiddenFor(x => x.FechaTurno)
+                @Html.HiddenFor(x => x.DuracionTurno)
                 <div id="calendar">
                 </div>
             </li>
@@ -197,16 +202,18 @@
         var otorgarSobreTurno = function() {
             var date = $.datepicker.parseDate("dd/mm/yy", $("#txtSobreTurnoFecha").val());
             var minutes = $.fullCalendar.parseTime($("#txtSobreTurnoHora").val());            
-            date.setMinutes(minutes);            
+            date.setMinutes(minutes);
+            var duracion = $("#txtSobreTurnoDuracion").val();
             var fecha = app.format.fulldate(date);
             var text = "¿Est&aacute; seguro que quiere otorgar al paciente"
                 +" <strong>"+$("#PacienteId").select2("data").NombreCompleto+"</strong>"
-                +" un sobre turno para el d&iacute;a <strong>"+fecha+"</strong> "
+                +" un sobre turno para el d&iacute;a <strong>"+fecha+"</strong> con una duraci&oacute;n de <strong>"+duracion+"</strong> "
                 +" para el profesional <strong>"+$("#ProfesionalId").select2("data").NombreCompleto+"</strong>?";
             app.ui.showConfirmation(text, function() {
                 $("#FechaTurno").val(fecha);
                 $("#ConsultorioId").val(null);
                 $("#EsSobreTurno").val(true);
+                $("#DuracionTurno").val(duracion);
                 $("form").submit();
             });
             return false;
@@ -257,9 +264,10 @@
                 eventClick: function (calEvent, jsEvent, view) {
                     if (calEvent.libre) {
                         var fecha = app.format.fulldate(calEvent.turno.FechaTurnoInicial);
+                        var duracion = calEvent.turno.DuracionTurno;
                         var text = "¿Est&aacute; seguro que quiere otorgar al paciente"
                             +" <strong>"+$("#PacienteId").select2("data").NombreCompleto+"</strong>"
-                            +" un turno para el d&iacute;a <strong>"+fecha+"</strong> "
+                            +" un turno para el d&iacute;a <strong>"+fecha+"</strong> con una duraci&oacute;n de <strong>"+duracion+"</strong> "
                             +" para el profesional <strong>"+$("#ProfesionalId").select2("data").NombreCompleto+"</strong>?";
                         app.ui.showConfirmation(text, function() {
                             $("#FechaTurno").val(fecha);

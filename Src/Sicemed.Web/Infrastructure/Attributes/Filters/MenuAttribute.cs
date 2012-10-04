@@ -102,7 +102,8 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             //Only show the menu to anon users or Pacientess
             if (user == null || user.IsInRole<Paciente>())
             {
-                pages.Add(CreateDefaultPage("Obtener Turno", "ObtenerTurno", order: 9000)); //Almost at the end				                
+                //NOTE: Deshabilitado por ahora...
+                //pages.Add(CreateDefaultPage("Obtener Turno", "ObtenerTurno", order: 9000)); //Almost at the end				                
             }
             if (user != null)
             {

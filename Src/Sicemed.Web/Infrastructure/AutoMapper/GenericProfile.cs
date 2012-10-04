@@ -35,7 +35,7 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
 
             CreateMap<Turno, TurnoViewModel>()
                 .ForMember(x => x.FechaTurnoInicial, m => m.MapFrom(o => o.FechaTurno))
-                .ForMember(x => x.FechaTurnoFinal, m => m.ResolveUsing(t => t.FechaTurno.AddMinutes(15)))
+                .ForMember(x => x.DuracionTurno, m => m.MapFrom(o => o.DuracionTurno))
                 .ForMember(x => x.EspecialidadesAtendidas, m => m.ResolveUsing(t => new List<Especialidad> { t.Especialidad }));
 
 
