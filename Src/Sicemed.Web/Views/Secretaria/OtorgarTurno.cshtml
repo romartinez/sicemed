@@ -272,6 +272,7 @@
                         app.ui.showConfirmation(text, function() {
                             $("#FechaTurno").val(fecha);
                             $("#ConsultorioId").val(calEvent.turno.Consultorio.Id);
+                            $("#DuracionTurno").val(calEvent.turno.DuracionTurno);
                             $("form").submit();
                         });
                     }
