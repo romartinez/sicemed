@@ -50,6 +50,11 @@ namespace Sicemed.Web.Models
 
         #region Propiedades Calculadas
 
+        public virtual DateTime FechaTurnoFinal
+        {
+            get { return FechaTurno.Add(DuracionTurno); }
+        }
+
         public virtual DateTime FechaGeneracion
         {
             get { return ObtenerFechaEstado(EventoTurno.Obtener).Value; }

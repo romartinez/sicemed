@@ -70,7 +70,7 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
             }
 
             //Quito los turnos otorgados
-            turnos.RemoveAll(x => turnosProfesional.Any(t => t.FechaTurno >= x.FechaTurnoInicial && t.FechaTurno <= x.FechaTurnoFinal));
+            turnos.RemoveAll(turnoLibre => turnosProfesional.Any(turnoLibre.SeSolapaConTurno));
 
             if (AgregarOtorgados)
             {
