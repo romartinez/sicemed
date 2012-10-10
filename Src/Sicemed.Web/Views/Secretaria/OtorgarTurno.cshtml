@@ -131,14 +131,18 @@
                     
                 description += "<span class='text-blue'>Especialidades:</span><span>" + especialidadesAtendidasTurno + "</span>"
                     + "</div>";
-                
+
+                var duracion = $.fullCalendar.parseTime(turno.DuracionTurno);
+
+                var color = duracion <= 10 ? "#33CC52" : (duracion <= 20 ? "#36C" : "#6A33CC");
+
                 var event = {
                     title: turno.Paciente ? turno.Paciente.Descripcion : "Reservar...",
                     start: turno.FechaTurnoInicial,
                     end: turno.FechaTurnoFinal,
                     allDay: false,
                     description: description,
-                    color: turno.Paciente ? '#F00' : null,
+                    color: turno.Paciente ? '#F00' : color,
                     libre: !turno.Paciente,
                     turno: turno
                 };
@@ -166,7 +170,7 @@
                 return;
             }
             var param = { profesionalId: val };            
-            $.getJSON("@Url.Action("GetEspecialidadesProfesional")", param, function (d) {
+            $.getJSON('@Url.Action("GetEspecialidadesProfesional")', param, function (d) {
                 var format = function(obj) {
                     return obj.Descripcion;
                 };
@@ -196,7 +200,7 @@
                 especialidadId: val,
                 profesionalId: $("#ProfesionalId").val()
             };
-            $.getJSON("@Url.Action("GetTurnosProfesional")", param, function (d) { renderCalendar(param, d); });            
+            $.getJSON('@Url.Action("GetTurnosProfesional")', param, function (d) { renderCalendar(param, d); });            
         };
 
         var otorgarSobreTurno = function() {
@@ -283,7 +287,13 @@
                 eventMouseover: function (event, jsEvent, view) {
                     if (event.libre) $(this).css('cursor', 'pointer');
                 },
-                viewDisplay: function () {
+                viewDisplay: function (view) {
+                    var n = view.name,
+                        body_h = $('div.fc-view-' + n + ' > div > div > div').height();
+
+
+                    $('div.fc-view-' + n + ' > div > div, div.fc-view-' + n + ' .fc-agenda-days').height(body_h + 20 + 'px');
+                    $('div.fc-view-' + n + ' .fc-agenda-days thead th').height(20);
                     attachTooltips();
                 },
                 events: []
