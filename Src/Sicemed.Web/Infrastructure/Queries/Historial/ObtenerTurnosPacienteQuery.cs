@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using NHibernate.Criterion;
+using NHibernate.Linq;
+using NHibernate.Transform;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Components;
 using Sicemed.Web.Models.ViewModels.Historial;
 
 namespace Sicemed.Web.Infrastructure.Queries.Historial
@@ -52,6 +55,9 @@ namespace Sicemed.Web.Infrastructure.Queries.Historial
                         || Restrictions.On(() => persona.Apellido).IsInsensitiveLike(Filtro, MatchMode.Start)
                 );
             }
+
+            query.JoinQueryOver<CambioEstadoTurno>(x => x.CambiosDeEstado).JoinQueryOver(x => x.Responsable)
+                .TransformUsing(new DistinctRootEntityResultTransformer());
 
             var turnos = query.Future();
             var hc = new TurnosPacienteViewModel();

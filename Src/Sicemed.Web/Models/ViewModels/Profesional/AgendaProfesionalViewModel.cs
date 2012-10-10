@@ -40,14 +40,20 @@ namespace Sicemed.Web.Models.ViewModels.Profesional
         {
             public long Id { get; set; }
             public DateTime FechaTurno { get; set; }
+            public TimeSpan DuracionTurno { get; set; }
             public DateTime? FechaIngreso { get; set; }
             public DateTime? FechaAtencion { get; set; }
             public InfoViewModel Consultorio { get; set; }
             public InfoViewModel Paciente { get; set; }
             public InfoViewModel Especialidad { get; set; }
-            public EstadoTurno Estado { get; set; }            
-            public DateTime FechaEstado { get; set; }            
-            public bool PuedoCancelar { get; set; }            
-        }        
+            public EstadoTurno Estado { get; set; }
+            public DateTime FechaEstado { get; set; }
+            public bool PuedoCancelar { get; set; }
+
+            public DateTime FechaTurnoFinal
+            {
+                get { return FechaTurno.Add(DuracionTurno); }
+            }
+        }
     }
 }

@@ -166,6 +166,19 @@ input.time, input.date, input[type=date], input[type=time], input.ctl-timespan
     border-color: #a700e8;
 }
 
+.turno-duracion-corto {
+    color: #33CC52 !important;
+    font-weight: bold;
+}
+.turno-duracion-mediano {
+    color: #36C !important;
+    font-weight: bold;
+}
+.turno-duracion-largo {
+    color: #6A33CC !important;
+    font-weight: bold;
+}
+
 .ctl-accordion .turno
 {
     border: none;

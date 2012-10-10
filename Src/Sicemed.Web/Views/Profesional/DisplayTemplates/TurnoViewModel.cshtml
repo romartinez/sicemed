@@ -5,11 +5,13 @@
 
     var css = Model.Estado != EstadoTurno.Presentado && Model.Estado != EstadoTurno.Otorgado ? "ui-state-disabled " : string.Empty;
     css += Model.Estado == EstadoTurno.Presentado ? "ui-state-highlight" : string.Empty;
+
+    var cssDuracion = Model.DuracionTurno <= TimeSpan.FromMinutes(10) ? "turno-duracion-corto" : (Model.DuracionTurno <= TimeSpan.FromMinutes(20) ? "turno-duracion-mediano" : "turno-duracion-largo");
 }
 <h3 class="@css">
-    <a href="#">
-        @Model.FechaTurno.ToShortTimeString()
-        - @Model.Paciente.Descripcion
+    <a href="#" >
+        <span class="@cssDuracion">@Model.FechaTurno.ToShortTimeString() / @Model.FechaTurnoFinal.ToShortTimeString()</span>
+        | @Model.Paciente.Descripcion
         | @Model.Estado
     </a>
 </h3>

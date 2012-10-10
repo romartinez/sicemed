@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using NHibernate.Criterion;
+using NHibernate.Transform;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Components;
+using Sicemed.Web.Models.Enumerations;
 using Sicemed.Web.Models.ViewModels.Historial;
 
 namespace Sicemed.Web.Infrastructure.Queries.Historial
@@ -42,11 +45,14 @@ namespace Sicemed.Web.Infrastructure.Queries.Historial
                 .Where(t => t.FechaTurno <= FechaHasta)
                 .OrderBy(t => t.FechaTurno).Desc
                 .Where(t => t.Paciente == paciente)
-                .Where(t => t.FechaAtencion != null)
+                .Where(t => t.Estado != EstadoTurno.Otorgado)
                 .Where(t => t.Profesional == profesional);
 
             if (!string.IsNullOrWhiteSpace(Filtro))
                 query = query.Where(Restrictions.On<Turno>(x => x.Nota).IsInsensitiveLike(Filtro, MatchMode.Anywhere));
+
+            query.JoinQueryOver<CambioEstadoTurno>(x => x.CambiosDeEstado).JoinQueryOver(x => x.Responsable)
+                .TransformUsing(new DistinctRootEntityResultTransformer());
 
             var turnos = query.Future();
 
