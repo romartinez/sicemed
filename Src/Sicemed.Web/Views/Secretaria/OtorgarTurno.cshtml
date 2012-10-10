@@ -100,7 +100,7 @@
 
 @section Scripts{
     <script type="text/javascript">
-        
+
         var attachTooltips = function () {
             $(".hasTooltip[title]")
                 .tooltip({ effect: 'slide', offset: [10, 2], position: 'bottom rigth' })
@@ -112,13 +112,13 @@
                 });
         };
 
-        var renderCalendar = function(param, data) {
+        var renderCalendar = function (param, data) {
             var events = [];
             var calendar = $("#calendar");
             calendar.fullCalendar('removeEvents');
             for (var i = data.length - 1; i >= 0; i--) {
                 var turno = data[i];
-                var especialidadesAtendidasTurno = $.map(turno.EspecialidadesAtendidas, function(especialidad) {
+                var especialidadesAtendidasTurno = $.map(turno.EspecialidadesAtendidas, function (especialidad) {
                     return especialidad.Descripcion;
                 }).join(",");
 
@@ -126,9 +126,9 @@
                     + "<span class='text-blue'>Fecha Turno:</span><span>" + app.format.date(turno.FechaTurnoInicial) + "</span><br/>"
                     + "<span class='text-blue'>Horario:</span><span>" + app.format.hour(turno.FechaTurnoInicial) + " / " + app.format.hour(turno.FechaTurnoFinal) + "</span><br/>";
 
-                if(turno.Paciente) description += "<span class='text-blue'>Paciente:</span><span>" + turno.Paciente.Descripcion + "</span><br/>";
-                if(turno.Consultorio) description += "<span class='text-blue'>Consultorio:</span><span>" + turno.Consultorio.Descripcion + "</span><br/>";
-                    
+                if (turno.Paciente) description += "<span class='text-blue'>Paciente:</span><span>" + turno.Paciente.Descripcion + "</span><br/>";
+                if (turno.Consultorio) description += "<span class='text-blue'>Consultorio:</span><span>" + turno.Consultorio.Descripcion + "</span><br/>";
+
                 description += "<span class='text-blue'>Especialidades:</span><span>" + especialidadesAtendidasTurno + "</span>"
                     + "</div>";
 
@@ -153,44 +153,44 @@
             //Le cuesta el rendering
             setTimeout(function () {
                 $("#calendar").fullCalendar('rerenderEvents');
-                attachTooltips();            
+                attachTooltips();
             }, 500);
         };
 
         var profesionalSelect = function () {
             var val = $("#ProfesionalId").val();
-            if(!val) {
+            if (!val) {
                 $("#EspecialidadId").select2({
-                    data: {results:[]},
+                    data: { results: [] },
                     width: '300px',
                     placeholder: "Seleccione un Profesional",
-                    id: function(e) { return e.Id; },
+                    id: function (e) { return e.Id; },
                     allowClear: true
                 }).select2("disable");
                 return;
             }
-            var param = { profesionalId: val };            
+            var param = { profesionalId: val };
             $.getJSON('@Url.Action("GetEspecialidadesProfesional")', param, function (d) {
-                var format = function(obj) {
+                var format = function (obj) {
                     return obj.Descripcion;
                 };
                 $("#EspecialidadId").select2({
-                    data: {results: d, text: 'Descripcion'},
+                    data: { results: d, text: 'Descripcion' },
                     width: '300px',
                     placeholder: "Seleccione Especialidad",
                     id: function (e) { return e.Id; },
-                    allowClear: true,                    
+                    allowClear: true,
                     formatResult: format,
                     formatSelection: format
                 }).select2("enable").change(especialidadSelect);
                 $("#sobreTurnoView").show();
-                if(d.length > 0) $("#EspecialidadId").select2("data", d[0]).trigger("change");
-            });            
+                if (d.length > 0) $("#EspecialidadId").select2("data", d[0]).trigger("change");
+            });
         };
 
         var especialidadSelect = function () {
             var val = $("#EspecialidadId").val();
-            if(!val) {
+            if (!val) {
                 $('#calendar').hide();
                 $("#sobreTurnoView").hide();
                 return;
@@ -200,20 +200,20 @@
                 especialidadId: val,
                 profesionalId: $("#ProfesionalId").val()
             };
-            $.getJSON('@Url.Action("GetTurnosProfesional")', param, function (d) { renderCalendar(param, d); });            
+            $.getJSON('@Url.Action("GetTurnosProfesional")', param, function (d) { renderCalendar(param, d); });
         };
 
-        var otorgarSobreTurno = function() {
+        var otorgarSobreTurno = function () {
             var date = $.datepicker.parseDate("dd/mm/yy", $("#txtSobreTurnoFecha").val());
-            var minutes = $.fullCalendar.parseTime($("#txtSobreTurnoHora").val());            
+            var minutes = $.fullCalendar.parseTime($("#txtSobreTurnoHora").val());
             date.setMinutes(minutes);
             var duracion = $("#txtSobreTurnoDuracion").val();
             var fecha = app.format.fulldate(date);
             var text = "¿Est&aacute; seguro que quiere otorgar al paciente"
-                +" <strong>"+$("#PacienteId").select2("data").NombreCompleto+"</strong>"
-                +" un sobre turno para el d&iacute;a <strong>"+fecha+"</strong> con una duraci&oacute;n de <strong>"+duracion+"</strong> "
-                +" para el profesional <strong>"+$("#ProfesionalId").select2("data").NombreCompleto+"</strong>?";
-            app.ui.showConfirmation(text, function() {
+                + " <strong>" + $("#PacienteId").select2("data").NombreCompleto + "</strong>"
+                + " un sobre turno para el d&iacute;a <strong>" + fecha + "</strong> con una duraci&oacute;n de <strong>" + duracion + "</strong> "
+                + " para el profesional <strong>" + $("#ProfesionalId").select2("data").NombreCompleto + "</strong>?";
+            app.ui.showConfirmation(text, function () {
                 $("#FechaTurno").val(fecha);
                 $("#ConsultorioId").val(null);
                 $("#EsSobreTurno").val(true);
@@ -225,14 +225,14 @@
 
         jQuery(function () {
             $("#sobreTurnoFecha").datepicker({ dateFormat: "dd/mm/yy" });
-            
+
             $("#cmdSobreTurno").click(otorgarSobreTurno);
             $("#ProfesionalId").change(profesionalSelect);
             $("#EspecialidadId").select2({
-                data: {results:[]},
+                data: { results: [] },
                 width: '300px',
                 placeholder: "Seleccione un Profesional",
-                id: function(e) { return e.Id; },
+                id: function (e) { return e.Id; },
                 allowClear: true
             }).select2("disable");
             $('#calendar').fullCalendar({
@@ -260,6 +260,11 @@
                     week: 'semana',
                     day: 'dia'
                 },
+                timeFormat: {
+                    agenda: 'H:mm{ - H:mm}',
+                    axisFormat: 'H(:mm)t',
+                    '': 'H(:mm)t'
+                },
                 columnFormat: {
                     month: 'ddd',
                     week: 'ddd d/M',
@@ -270,10 +275,10 @@
                         var fecha = app.format.fulldate(calEvent.turno.FechaTurnoInicial);
                         var duracion = calEvent.turno.DuracionTurno;
                         var text = "¿Est&aacute; seguro que quiere otorgar al paciente"
-                            +" <strong>"+$("#PacienteId").select2("data").NombreCompleto+"</strong>"
-                            +" un turno para el d&iacute;a <strong>"+fecha+"</strong> con una duraci&oacute;n de <strong>"+duracion+"</strong> "
-                            +" para el profesional <strong>"+$("#ProfesionalId").select2("data").NombreCompleto+"</strong>?";
-                        app.ui.showConfirmation(text, function() {
+                            + " <strong>" + $("#PacienteId").select2("data").NombreCompleto + "</strong>"
+                            + " un turno para el d&iacute;a <strong>" + fecha + "</strong> con una duraci&oacute;n de <strong>" + duracion + "</strong> "
+                            + " para el profesional <strong>" + $("#ProfesionalId").select2("data").NombreCompleto + "</strong>?";
+                        app.ui.showConfirmation(text, function () {
                             $("#FechaTurno").val(fecha);
                             $("#ConsultorioId").val(calEvent.turno.Consultorio.Id);
                             $("#DuracionTurno").val(calEvent.turno.DuracionTurno);
@@ -288,17 +293,19 @@
                     if (event.libre) $(this).css('cursor', 'pointer');
                 },
                 viewDisplay: function (view) {
+                    //http://code.google.com/p/fullcalendar/issues/detail?id=610#c5
                     var n = view.name,
                         body_h = $('div.fc-view-' + n + ' > div > div > div').height();
 
 
                     $('div.fc-view-' + n + ' > div > div, div.fc-view-' + n + ' .fc-agenda-days').height(body_h + 20 + 'px');
                     $('div.fc-view-' + n + ' .fc-agenda-days thead th').height(20);
+
                     attachTooltips();
                 },
                 events: []
             }).hide();
-            
+
             //Quito el Cargando para esta página que queda mal.
             $(document).unbind("ajaxStart");
         })
