@@ -14,6 +14,7 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Property(x => x.IpPaciente);
             Property(x => x.EsTelefonico, map => map.NotNullable(true));
             Property(x => x.EsSobreTurno, map => map.NotNullable(true));
+            Property(x => x.EsObtenidoWeb, map => map.NotNullable(true));
             Property(x => x.Nota);
             Property(x => x.MotivoCancelacion);
             Property(x => x.Estado, map => map.NotNullable(true));

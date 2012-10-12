@@ -15,7 +15,7 @@
     <AssemblyName>Sicemed.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>true</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -480,6 +480,7 @@
     <Compile Include="Models\Turno.cs" />
     <Compile Include="Models\ViewModels\Profesional\AgendaProfesionalViewModel.cs" />
     <Compile Include="Models\ViewModels\Secretaria\AltaPacienteEditModel.cs" />
+    <Compile Include="Models\ViewModels\Secretaria\EdicionPacienteEditModel.cs" />
     <Compile Include="Models\ViewModels\Secretaria\OtorgarTurnoEditModel.cs" />
     <Compile Include="Models\ViewModels\Secretaria\TurnosDelDiaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -757,6 +758,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\TurnosPorProfesional.rdlc" />
+    <Content Include="Views\Secretaria\EdicionPaciente.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

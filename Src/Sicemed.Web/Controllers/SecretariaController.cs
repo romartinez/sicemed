@@ -148,16 +148,22 @@ namespace Sicemed.Web.Controllers
                 // Attempt to register the user                
                 var model = _mappingEngine.Map<Persona>(editModel);
                 //Update not automapped properties
-                model.Documento = new Documento
+                if(editModel.TipoDocumentoId.HasValue)
                 {
-                    Numero = editModel.DocumentoNumero.Value,
-                    TipoDocumento = Enumeration.FromValue<TipoDocumento>(editModel.TipoDocumentoId)
-                };
+                    model.Documento = new Documento
+                    {
+                        Numero = editModel.DocumentoNumero.Value,
+                        TipoDocumento = Enumeration.FromValue<TipoDocumento>(editModel.TipoDocumentoId.Value)
+                    };                    
+                }
                 model.Domicilio = new Domicilio
                 {
-                    Direccion = editModel.DomicilioDireccion,
-                    Localidad = session.Load<Localidad>(editModel.DomicilioLocalidadId)
+                    Direccion = editModel.DomicilioDireccion,                    
                 };
+                if (editModel.DomicilioLocalidadId.HasValue)
+                {
+                    model.Domicilio.Localidad = session.Load<Localidad>(editModel.DomicilioLocalidadId);
+                }
                 var pacienteRol = Paciente.Create(editModel.NumeroAfiliado);
                 if (editModel.PlanId.HasValue) pacienteRol.Plan = session.Load<Plan>(editModel.PlanId);
                 model.AgregarRol(pacienteRol);
@@ -176,6 +182,85 @@ namespace Sicemed.Web.Controllers
         }
 
         private void AppendLists(AltaPacienteEditModel viewModel)
+        {
+            viewModel.TiposDocumentosHabilitados = GetTiposDocumentos(viewModel.TipoDocumentoId);
+            viewModel.ProvinciasHabilitadas = GetProvincias(viewModel.DomicilioLocalidadProvinciaId);
+            viewModel.ObrasSocialesHabilitadas = GetObrasSociales(viewModel.ObraSocialId);
+
+            if (viewModel.DomicilioLocalidadProvinciaId.HasValue)
+                viewModel.LocalidadesHabilitadas =
+                    GetLocalidadesPorProvincia(viewModel.DomicilioLocalidadProvinciaId.Value, viewModel.DomicilioLocalidadId);
+
+            if (viewModel.ObraSocialId.HasValue)
+                viewModel.PlanesObraSocialHabilitados =
+                    GetPlanesPorObraSocial(viewModel.ObraSocialId.Value, viewModel.PlanId);
+        }
+        #endregion
+
+        #region Edicion Paciente
+
+        [HttpGet]
+        public ActionResult EdicionPaciente(long? id = null)
+        {
+            EdicionPacienteEditModel editModel = null;
+            if(id.HasValue)
+            {
+                var paciente = SessionFactory.GetCurrentSession().Load<Paciente>(id.Value);
+                if (paciente != null) editModel = MappingEngine.Map<EdicionPacienteEditModel>(paciente.Persona);
+            }
+
+            if(editModel == null) editModel = new EdicionPacienteEditModel();
+
+            AppendLists(editModel);
+            return View(editModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EdicionPaciente(EdicionPacienteEditModel editModel)
+        {
+            AppendLists(editModel);
+
+            if (ModelState.IsValid)
+            {
+                var session = SessionFactory.GetCurrentSession();
+                // Attempt to register the user                
+                var model = _mappingEngine.Map<Persona>(editModel);
+                //Update not automapped properties
+                if (editModel.TipoDocumentoId.HasValue)
+                {
+                    model.Documento = new Documento
+                    {
+                        Numero = editModel.DocumentoNumero.Value,
+                        TipoDocumento = Enumeration.FromValue<TipoDocumento>(editModel.TipoDocumentoId.Value)
+                    };
+                }
+                model.Domicilio = new Domicilio
+                {
+                    Direccion = editModel.DomicilioDireccion,
+                };
+                if (editModel.DomicilioLocalidadId.HasValue)
+                {
+                    model.Domicilio.Localidad = session.Load<Localidad>(editModel.DomicilioLocalidadId);
+                }
+                var pacienteRol = Paciente.Create(editModel.NumeroAfiliado);
+                if (editModel.PlanId.HasValue) pacienteRol.Plan = session.Load<Plan>(editModel.PlanId);
+                model.AgregarRol(pacienteRol);
+                //Seteo un password cualquiera y luego le mando mail re recupero
+                var status = _membershipService.CreateUser(model, editModel.Email, Guid.NewGuid().ToString());
+                if (status == MembershipStatus.USER_CREATED)
+                {
+                    _membershipService.RecoverPassword(editModel.Email);
+                    ShowMessages(ResponseMessage.Success("Paciente '{0}' modificado correctamente.", model.NombreCompleto));
+                    return RedirectToAction("OtorgarTurno");
+                }
+                ModelState.AddModelError("", status.Get());
+            }
+
+            return View(editModel);
+        }
+
+        private void AppendLists(EdicionPacienteEditModel viewModel)
         {
             viewModel.TiposDocumentosHabilitados = GetTiposDocumentos(viewModel.TipoDocumentoId);
             viewModel.ProvinciasHabilitadas = GetProvincias(viewModel.DomicilioLocalidadProvinciaId);

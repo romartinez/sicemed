@@ -8,8 +8,14 @@ using Sicemed.Web.Models.Components;
 
 namespace Sicemed.Web.Models.ViewModels.Secretaria
 {
-    public class AltaPacienteEditModel
+    public class EdicionPacienteEditModel
     {
+        [Requerido]
+        [UIHint("SearcheableDropDown")]
+        [SearcheableDropDownProperty(ActionName = "Paciente", ControllerName = "Busqueda", DisplayProperty = "NombreCompleto", Template = "tmplBusquedaPaciente")]
+        [Display(Name = "Paciente", Prompt = "Seleccione Paciente")]
+        public long? Id { get; set; }
+
         [Requerido]
         [Display(Name = "Nombre", Prompt = "AAAA")]
         [LargoCadenaPorDefecto]

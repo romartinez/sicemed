@@ -36,7 +36,6 @@ namespace Sicemed.Tests.Models.Turnos
             Assert.AreEqual(turno.Profesional, turnoDb.Profesional);
             Assert.AreEqual(turno.Especialidad, turnoDb.Especialidad);
             Assert.AreEqual(turno.FechaTurno, turnoDb.FechaTurno);
-            Assert.AreEqual(turno.SecretariaReservadoraTurno, turnoDb.SecretariaReservadoraTurno);
             Assert.IsNullOrEmpty(turnoDb.IpPaciente);
         }
 
@@ -66,7 +65,6 @@ namespace Sicemed.Tests.Models.Turnos
             Assert.AreEqual(turno.Especialidad, turnoDb.Especialidad);
             Assert.AreEqual(turno.FechaTurno, turnoDb.FechaTurno);
             Assert.AreEqual(turno.IpPaciente, turnoDb.IpPaciente);
-            Assert.IsNull(turnoDb.SecretariaReservadoraTurno);
         }
 
         [Test]
@@ -122,7 +120,6 @@ namespace Sicemed.Tests.Models.Turnos
             Assert.AreEqual(turno.Especialidad, turnoDb.Especialidad);
             Assert.AreEqual(turno.FechaTurno, turnoDb.FechaTurno);
             Assert.AreEqual(turno.IpPaciente, turnoDb.IpPaciente);
-            Assert.IsNull(turnoDb.SecretariaReservadoraTurno);
         }
 
         [Test]

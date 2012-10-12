@@ -1,0 +1,54 @@
+﻿@model Sicemed.Web.Models.ViewModels.Secretaria.EdicionPacienteEditModel
+@{
+    ViewBag.Title = "Edición Paciente";
+}
+
+<h2>Edici&oacute;n Paciente</h2>
+
+@if (!Model.Id.HasValue)
+{
+    using (Html.BeginForm("EdicionPaciente", "Secretaria", FormMethod.Get))
+    {
+    @Html.ValidationSummaryWithMessage()
+
+    <fieldset class="form">
+        <ul>
+            <li>
+                <div class="editor-label editor-label-required">
+                    @Html.LabelFor(x => x.Id)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(x => x.Id)
+                </div>
+                <div class="editor-validator">
+                    @Html.ValidationMessageFor(x => x.Id)
+                </div>
+            </li>
+        </ul>
+    </fieldset>    
+
+    @Html.Submit("Editar")        
+    }    
+}
+else
+{
+    <h3>@Model.Apellido, @Model.Nombre</h3>
+    
+    using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+    
+    @Html.ValidationSummaryWithMessage()
+
+    @Html.EditorForModel()
+
+    @Html.Submit("Guardar")        
+    }
+}
+
+<script id="tmplBusquedaPaciente" type="text/x-jquery-tmpl">
+    ${NombreCompleto}
+    <br />
+    <span style="font-style: italic; font-size: x-small">${TipoDocumento} ${Documento}
+    </span>
+</script>

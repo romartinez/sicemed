@@ -27,6 +27,8 @@ namespace Sicemed.Web.Models
         public virtual bool EsTelefonico { get; protected set; }
 
         public virtual bool EsSobreTurno { get; protected set; }
+        
+        public virtual bool EsObtenidoWeb { get; protected set; }
 
         public virtual EstadoTurno Estado { get; protected set; }
 
@@ -103,19 +105,11 @@ namespace Sicemed.Web.Models
             }
         }
 
-        public virtual bool EsObtenidoWeb
-        {
-            get
-            {
-                return SecretariaReservadoraTurno == null;
-            }
-        }
-
         public virtual bool EsObtenidoPersonalmente
         {
             get
             {
-                return SecretariaReservadoraTurno != null && !EsTelefonico;
+                return !EsObtenidoWeb && !EsTelefonico;
             }
         }
 
@@ -123,7 +117,7 @@ namespace Sicemed.Web.Models
         {
             get
             {
-                return SecretariaReservadoraTurno != null && EsTelefonico;
+                return !EsObtenidoWeb && EsTelefonico;
             }
         }
 
@@ -273,7 +267,8 @@ namespace Sicemed.Web.Models
                 Profesional = profesional,
                 Especialidad = especialidad,
                 IpPaciente = ipPaciente,
-                Consultorio = consultorio
+                Consultorio = consultorio,
+                EsObtenidoWeb = true
             };
 
             return turno;
@@ -310,7 +305,8 @@ namespace Sicemed.Web.Models
                 Especialidad = especialidad,
                 Consultorio = consultorio,
                 EsTelefonico = esTelefonico,
-                EsSobreTurno = false
+                EsSobreTurno = false,
+                EsObtenidoWeb = false
             };
 
             return turno;
@@ -335,7 +331,8 @@ namespace Sicemed.Web.Models
                 Profesional = profesional,
                 Especialidad = especialidad,
                 EsTelefonico = esTelefonico,
-                EsSobreTurno = true
+                EsSobreTurno = true,
+                EsObtenidoWeb = false
             };
 
             return turno;

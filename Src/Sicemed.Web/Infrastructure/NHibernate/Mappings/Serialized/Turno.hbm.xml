@@ -10,6 +10,7 @@
     <property name="IpPaciente" />
     <property name="EsTelefonico" not-null="true" />
     <property name="EsSobreTurno" not-null="true" />
+    <property name="EsObtenidoWeb" not-null="true" />
     <property name="Estado" not-null="true" />
     <property name="FechaEstado" not-null="true" />
     <many-to-one name="Paciente" not-null="true" foreign-key="FK_Turno_PersonaRol_Paciente" />

@@ -122,6 +122,7 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
                     secretariaRoot.Childs.Add(CreateDefaultPage("Presentación Turno", "Secretaria/Agenda", secretariaRoot));
                     secretariaRoot.Childs.Add(CreateDefaultPage("Otorgar Turno", "Secretaria/OtorgarTurno", secretariaRoot));
                     secretariaRoot.Childs.Add(CreateDefaultPage("Alta Paciente", "Secretaria/AltaPaciente", secretariaRoot));
+                    secretariaRoot.Childs.Add(CreateDefaultPage("Edición Paciente", "Secretaria/EdicionPaciente", secretariaRoot));
                     secretariaRoot.Childs.Add(CreateDefaultPage("Historial Turnos Paciente", "Historial/TurnosPorPaciente", secretariaRoot));
 
                     pages.Add(secretariaRoot);

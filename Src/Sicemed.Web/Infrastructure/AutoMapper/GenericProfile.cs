@@ -91,6 +91,24 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                 .ForMember(d => d.Domicilio, m => m.Ignore())
                 .ForMember(d => d.Roles, m => m.Ignore());
 
+            CreateMap<Persona, EdicionPacienteEditModel>()
+                .ForMember(d => d.TiposDocumentosHabilitados, m => m.Ignore())
+                .ForMember(d => d.TipoDocumentoId, m => m.Ignore())
+                .ForMember(d => d.Email, m => m.Ignore())
+                .ForMember(d => d.ProvinciasHabilitadas, m => m.Ignore())
+                .ForMember(d => d.LocalidadesHabilitadas, m => m.Ignore())
+                .ForMember(d => d.ObrasSocialesHabilitadas, m => m.Ignore())
+                .ForMember(d => d.PlanesObraSocialHabilitados, m => m.Ignore())
+                .ForMember(d => d.PlanId, m => m.Ignore())
+                .ForMember(d => d.ObraSocialId, m => m.Ignore())
+                .ForMember(d => d.NumeroAfiliado, m => m.Ignore());
+
+            CreateMap<EdicionPacienteEditModel, Persona>()                
+                .ForMember(d => d.Membership, m => m.Ignore())
+                .ForMember(d => d.Documento, m => m.Ignore())
+                .ForMember(d => d.Domicilio, m => m.Ignore())
+                .ForMember(d => d.Roles, m => m.Ignore());
+
             CreateMap<Paciente, SelectListItem>()
                 .ForMember(d => d.Selected, m => m.Ignore())
                 .ForMember(d => d.Text, m => m.MapFrom(o =>
