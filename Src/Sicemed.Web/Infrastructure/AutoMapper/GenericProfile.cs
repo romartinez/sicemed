@@ -94,7 +94,7 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
             CreateMap<Persona, EdicionPacienteEditModel>()
                 .ForMember(d => d.TiposDocumentosHabilitados, m => m.Ignore())
                 .ForMember(d => d.TipoDocumentoId, m => m.Ignore())
-                .ForMember(d => d.Email, m => m.Ignore())
+                .ForMember(d => d.Email, m => m.MapFrom(o => o.Membership.Email))
                 .ForMember(d => d.ProvinciasHabilitadas, m => m.Ignore())
                 .ForMember(d => d.LocalidadesHabilitadas, m => m.Ignore())
                 .ForMember(d => d.ObrasSocialesHabilitadas, m => m.Ignore())
@@ -104,6 +104,7 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                 .ForMember(d => d.NumeroAfiliado, m => m.Ignore());
 
             CreateMap<EdicionPacienteEditModel, Persona>()                
+                .ForMember(d => d.Id, m => m.Ignore())
                 .ForMember(d => d.Membership, m => m.Ignore())
                 .ForMember(d => d.Documento, m => m.Ignore())
                 .ForMember(d => d.Domicilio, m => m.Ignore())

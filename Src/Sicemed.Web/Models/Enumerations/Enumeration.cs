@@ -91,6 +91,12 @@ namespace Sicemed.Web.Models.Enumerations
             return matchingItem;
         }
 
+        public static T FromValue<T>(long value) where T : Enumeration, new()
+        {
+            var matchingItem = Parse<T, long>(value, "value", item => item.Value == value);
+            return matchingItem;
+        }
+
         public static T FromDisplayName<T>(string displayName) where T : Enumeration, new()
         {
             var matchingItem = Parse<T, string>(displayName, "display name", item => item.DisplayName == displayName);

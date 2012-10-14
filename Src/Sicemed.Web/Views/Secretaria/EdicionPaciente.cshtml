@@ -15,13 +15,13 @@
         <ul>
             <li>
                 <div class="editor-label editor-label-required">
-                    @Html.LabelFor(x => x.Id)
+                    <label for="Id">Paciente</label>
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(x => x.Id)
+                    <input class="searcheable" data-display-property="NombreCompleto" data-prompt="Seleccione Paciente" data-template="tmplBusquedaPaciente" data-url="/Busqueda/Paciente" data-val="true" data-val-number="El campo Paciente debe ser un n&amp;#250;mero." data-val-required="El campo Paciente es requerido." id="Id" name="Id" type="hidden" value="327682" style="display: none; ">
                 </div>
                 <div class="editor-validator">
-                    @Html.ValidationMessageFor(x => x.Id)
+                    <span class="field-validation-valid" data-valmsg-for="Id" data-valmsg-replace="true"></span>
                 </div>
             </li>
         </ul>

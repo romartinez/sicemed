@@ -206,7 +206,25 @@ namespace Sicemed.Web.Controllers
             if(id.HasValue)
             {
                 var paciente = SessionFactory.GetCurrentSession().Load<Paciente>(id.Value);
-                if (paciente != null) editModel = MappingEngine.Map<EdicionPacienteEditModel>(paciente.Persona);
+                if (paciente != null)
+                {
+                    editModel = MappingEngine.Map<EdicionPacienteEditModel>(paciente.Persona);
+                    if(paciente.Plan != null)
+                    {
+                        editModel.PlanId = paciente.Plan.Id;
+                        editModel.ObraSocialId = paciente.Plan.ObraSocial.Id;
+                    }
+                    if(paciente.Persona.Documento != null && paciente.Persona.Documento.TipoDocumento != null)
+                    {
+                        editModel.TipoDocumentoId = paciente.Persona.Documento.TipoDocumento.Value;
+                    }
+                    if(paciente.Persona.Domicilio != null && paciente.Persona.Domicilio.Localidad != null)
+                    {
+                        editModel.DomicilioLocalidadProvinciaId = paciente.Persona.Domicilio.Localidad.Provincia.Id;
+                        editModel.DomicilioLocalidadId = paciente.Persona.Domicilio.Localidad.Id;
+                    }
+                    editModel.NumeroAfiliado = paciente.NumeroAfiliado;
+                }
             }
 
             if(editModel == null) editModel = new EdicionPacienteEditModel();
@@ -224,16 +242,29 @@ namespace Sicemed.Web.Controllers
             if (ModelState.IsValid)
             {
                 var session = SessionFactory.GetCurrentSession();
+                var paciente = session.Load<Paciente>(editModel.Id);
                 // Attempt to register the user                
-                var model = _mappingEngine.Map<Persona>(editModel);
+                var model = _mappingEngine.Map(editModel, paciente.Persona);
                 //Update not automapped properties
-                if (editModel.TipoDocumentoId.HasValue)
+                model.Membership.Email = editModel.Email;
+                if(editModel.PlanId.HasValue)
                 {
-                    model.Documento = new Documento
-                    {
-                        Numero = editModel.DocumentoNumero.Value,
-                        TipoDocumento = Enumeration.FromValue<TipoDocumento>(editModel.TipoDocumentoId.Value)
-                    };
+                    paciente.Plan = session.Load<Plan>(editModel.PlanId.Value);
+                }
+                else
+                {
+                    paciente.Plan = null;
+                }
+                paciente.NumeroAfiliado = editModel.NumeroAfiliado;
+                if (editModel.TipoDocumentoId.HasValue || editModel.DocumentoNumero.HasValue)
+                {
+                    model.Documento = new Documento();
+                    if(editModel.DocumentoNumero.HasValue) model.Documento.Numero = editModel.DocumentoNumero.Value;
+                    model.Documento.TipoDocumento = Enumeration.FromValue<TipoDocumento>(editModel.TipoDocumentoId.Value);
+                }
+                else
+                {
+                    model.Documento = null;
                 }
                 model.Domicilio = new Domicilio
                 {
@@ -243,18 +274,12 @@ namespace Sicemed.Web.Controllers
                 {
                     model.Domicilio.Localidad = session.Load<Localidad>(editModel.DomicilioLocalidadId);
                 }
-                var pacienteRol = Paciente.Create(editModel.NumeroAfiliado);
-                if (editModel.PlanId.HasValue) pacienteRol.Plan = session.Load<Plan>(editModel.PlanId);
-                model.AgregarRol(pacienteRol);
-                //Seteo un password cualquiera y luego le mando mail re recupero
-                var status = _membershipService.CreateUser(model, editModel.Email, Guid.NewGuid().ToString());
-                if (status == MembershipStatus.USER_CREATED)
+                else
                 {
-                    _membershipService.RecoverPassword(editModel.Email);
-                    ShowMessages(ResponseMessage.Success("Paciente '{0}' modificado correctamente.", model.NombreCompleto));
-                    return RedirectToAction("OtorgarTurno");
+                    model.Domicilio.Localidad = null;
                 }
-                ModelState.AddModelError("", status.Get());
+                ShowMessages(ResponseMessage.Success("Paciente '{0}' modificado correctamente.", model.NombreCompleto));
+                return RedirectToAction("OtorgarTurno");
             }
 
             return View(editModel);

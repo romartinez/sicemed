@@ -11,9 +11,7 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
     public class EdicionPacienteEditModel
     {
         [Requerido]
-        [UIHint("SearcheableDropDown")]
-        [SearcheableDropDownProperty(ActionName = "Paciente", ControllerName = "Busqueda", DisplayProperty = "NombreCompleto", Template = "tmplBusquedaPaciente")]
-        [Display(Name = "Paciente", Prompt = "Seleccione Paciente")]
+        [HiddenInput]
         public long? Id { get; set; }
 
         [Requerido]
@@ -37,7 +35,7 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
 
         [DisplayName("Tipo Documento")]
         [ScaffoldColumn(false)]
-        public virtual int? TipoDocumentoId { get; set; }
+        public virtual long? TipoDocumentoId { get; set; }
 
         [DisplayName("Número Documento")]
         public virtual long? DocumentoNumero { get; set; }
