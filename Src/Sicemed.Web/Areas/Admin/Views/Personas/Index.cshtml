@@ -29,6 +29,7 @@
                     {
                         caption: "",
                         buttonicon: "ui-icon-plus",
+                        title: "Agregar persona",
                         onClickButton: function () {
                             window.location = "@Url.Action("Nuevo")";
                         }
@@ -36,6 +37,7 @@
                     {
                         caption: "",
                         buttonicon: "ui-icon-pencil",
+                        title: "Editar persona",
                         onClickButton: function () {
                             var grid = $(this);
                             var selected = grid.getGridParam("selrow");
@@ -49,6 +51,7 @@
                     {
                         caption: "",
                         buttonicon: "ui-icon-key",
+                        title: "Reiniciar clave y enviar correo",
                         onClickButton: function () {
                             var grid = $(this);
                             var selected = grid.getGridParam("selrow");
@@ -62,6 +65,7 @@
                     {
                         caption: "",
                         buttonicon: "ui-icon-locked",
+                        title: "Bloquear persona",
                         onClickButton: function () {
                             var grid = $(this);
                             var selected = grid.getGridParam("selrow");
@@ -77,6 +81,7 @@
                     {
                         caption: "",
                         buttonicon: "ui-icon-unlocked",
+                        title: "Desbloquear usuario",
                         onClickButton: function () {
                             var grid = $(this);
                             var selected = grid.getGridParam("selrow");
@@ -92,6 +97,7 @@
                     {
                         caption: "",
                         buttonicon: "ui-icon-home",
+                        title: "Ir al inicio",
                         onClickButton: function () {
                             var grid = $(this);
                             var selected = grid.getGridParam("selrow");
@@ -138,7 +144,8 @@
                                         + "<div>" + rowObject.MembershipEmail + "</div>";
                                     return str;
                                 },
-                                sortable: false
+                                sortable: true,
+                                searchoptions: { sopt: ['cn']}
                             },
                             {
                                 name: 'Roles',
@@ -148,7 +155,8 @@
                                     return rowObject.Roles.join(", ");
                                 },
                                 editable: false,
-                                sortable: false
+                                sortable: true,
+                                searchoptions: { sopt: ['eq']}
                             },
                             {
                                 name: 'FechaNacimiento',
@@ -169,7 +177,8 @@
                                     + " " + rowObject.DocumentoNumero;
                                     return str;
                                 },
-                                sortable: false
+                                sortable: false,
+                                searchoptions: { sopt: ['eq']}
                             },
                             {
                                 name: 'Domicilio',
@@ -199,7 +208,7 @@
                                 name: 'MembershipIsLockedOut',
                                 index: 'MembershipIsLockedOut',
                                 width: 60,
-                                sortable: false
+                                sortable: true
                             }
                         ]
                 }

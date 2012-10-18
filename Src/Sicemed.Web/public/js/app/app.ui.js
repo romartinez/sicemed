@@ -4,7 +4,7 @@
     ui.showDialog = function (options, callback) {
         var defaults = {
             modal: true,
-            title: 'NBSF - Registro De Firmas',
+            title: 'CLIP {+Soluciones} - SICEMED',
             message: '',
             width: '400px',
             buttons: {

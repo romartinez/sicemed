@@ -130,14 +130,13 @@
                 edit: settings.params.editable,
                 add: settings.params.addable,
                 del: settings.params.deleteable,
-                search: false,
+                search: true,
                 refresh: settings.params.refresheable
             },
             getEditOptions(),
             getAddOptions(),
             getDeleteOptions(),
-            {}, //search
-            {closeOnEscape: true }
+            {closeOnEscape: true, multipleSearch: false }
         );
 
         if (settings.buttons) {

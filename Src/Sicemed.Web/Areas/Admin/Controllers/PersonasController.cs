@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using NHibernate.Criterion;
 using NHibernate.Transform;
 using SICEMED.Web;
 using Sicemed.Web.Areas.Admin.Models.Personas;
@@ -42,17 +43,53 @@ namespace Sicemed.Web.Areas.Admin.Controllers
         [HttpPost]
         [AjaxHandleError]
         [ValidateAntiForgeryToken]
-        public virtual JsonResult List(long count, int page, int rows)
+        public virtual JsonResult List(long count, int page, int rows, string sidx, string sord, string searchField, string searchString, string searchOper)
         {
             page--;
             var session = SessionFactory.GetCurrentSession();
             var query = session.QueryOver<Persona>()
-                .Fetch(x => x.Domicilio.Localidad).Eager
-                .Fetch(x => x.Domicilio.Localidad.Provincia).Eager
                 //NOTE: Dejo el SELECT N +1, porque sino pagina mal al
                 //paginar el producto cartesiano.
                 //.Fetch(x => x.Roles).Eager
-                .OrderBy(x => x.Membership.Email).Asc
+                ;
+
+            if (!string.IsNullOrEmpty(searchField))
+            {
+                switch (searchField.ToLower())
+                {
+                    case "usuario":
+                        query = query.WhereRestrictionOn(x => x.Apellido).IsInsensitiveLike(searchString, MatchMode.Anywhere);
+                        break;
+                    case "roles":
+                        query = query.WhereRestrictionOn(x => x.Roles).IsInsensitiveLike(searchString, MatchMode.Anywhere);
+                        break;
+                }
+            }
+
+            query = query.Fetch(x => x.Domicilio.Localidad).Eager
+                .Fetch(x => x.Domicilio.Localidad.Provincia).Eager;
+
+            if (string.IsNullOrEmpty(sidx))
+            {
+                query = query.OrderBy(x => x.Apellido).Asc;
+            }
+            else
+            {
+                switch(sidx.ToLower())
+                {
+                    case "roles":
+                        query = (sord == "asc") ? query.OrderBy(x => x.Roles).Asc : query.OrderBy(x => x.Roles).Desc;
+                        break;
+                    case "usuario":
+                        query = (sord == "asc") ? query.OrderBy(x => x.Apellido).Asc : query.OrderBy(x => x.Apellido).Desc;
+                        break;
+                    case "membershipislockedout":
+                        query = (sord == "asc") ? query.OrderBy(x => x.Membership.IsLockedOut).Asc : query.OrderBy(x => x.Membership.IsLockedOut).Desc;
+                        break;
+                }
+            }
+
+            query = query
                 .TransformUsing(Transformers.DistinctRootEntity);
 
             var respuesta = new PaginableResponse();
