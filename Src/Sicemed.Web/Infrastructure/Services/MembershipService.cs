@@ -145,8 +145,15 @@ namespace Sicemed.Web.Infrastructure.Services
                 session.Update(persona);
                 tx.Commit();
 
-                var mail = _membershipMailer.PasswordResetEmail(persona, token);
-                if (mail != null) mail.Send();
+                try
+                {
+                    var mail = _membershipMailer.PasswordResetEmail(persona, token);
+                    if (mail != null) mail.Send();                    
+                }
+                catch(Exception ex)
+                {
+                    Logger.Error("Error al enviar el mail.", ex);    
+                }
                 return status;
             }
         }
@@ -258,8 +265,15 @@ namespace Sicemed.Web.Infrastructure.Services
                 session.Save(user);
                 tx.Commit();
 
-                var mail = _membershipMailer.RegistrationEmail(user);
-                if (mail != null) mail.Send();
+                try
+                {
+                    var mail = _membershipMailer.RegistrationEmail(user);
+                    if (mail != null) mail.Send();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error("Error al enviar el mail.", ex);
+                }
             }
 
             return MembershipStatus.USER_CREATED;
