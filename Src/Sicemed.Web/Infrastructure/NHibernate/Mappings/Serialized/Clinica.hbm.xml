@@ -27,6 +27,7 @@
       <element type="NHibernate.Type.EnumType`1[[System.DayOfWeek, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], NHibernate" />
     </set>
     <property name="Email" not-null="true" />
+    <property name="DuracionTurnoPorDefecto" />
     <property name="HorarioMatutinoDesde" not-null="true" />
     <property name="HorarioMatutinoHasta" not-null="true" />
     <property name="HorarioVespertinoDesde" />

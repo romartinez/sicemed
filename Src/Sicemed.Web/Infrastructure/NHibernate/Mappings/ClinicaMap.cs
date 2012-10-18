@@ -16,6 +16,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Property(x => x.HorarioMatutinoDesde, map => map.NotNullable(true));
             Property(x => x.HorarioMatutinoHasta, map => map.NotNullable(true));
 
+            Property(x => x.DuracionTurnoPorDefecto);
+
             Property(x => x.HorarioVespertinoDesde);
             Property(x => x.HorarioVespertinoHasta);
 
