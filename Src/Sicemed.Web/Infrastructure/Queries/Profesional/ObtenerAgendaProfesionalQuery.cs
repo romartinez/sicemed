@@ -4,6 +4,7 @@ using System.Linq;
 using NHibernate.Transform;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models;
+using Sicemed.Web.Models.Enumerations;
 using Sicemed.Web.Models.ViewModels.Profesional;
 
 namespace Sicemed.Web.Infrastructure.Queries.Profesional
@@ -46,10 +47,42 @@ namespace Sicemed.Web.Infrastructure.Queries.Profesional
             {
                 viewModel = MappingEngine.Map<AgendaProfesionalViewModel>(turnos.First().Profesional);
                 viewModel.FechaTurnos = desde; //Me lo pisa el mapper
-                viewModel.Turnos = MappingEngine.Map<List<AgendaProfesionalViewModel.TurnoViewModel>>(turnos);
+
+                //Calculo los datos del paciente
+                foreach (var turno in turnos)
+                {
+                    var turnoViewModel = MappingEngine.Map<AgendaProfesionalViewModel.TurnoViewModel>(turno);
+                    turnoViewModel.Paciente = CrearPaciente(turno);
+                    viewModel.Turnos.Add(turnoViewModel);
+                }
             }
 
             return viewModel;
+        }
+
+        private AgendaProfesionalViewModel.PacienteViewModel CrearPaciente(Turno turno)
+        {
+            var session = SessionFactory.GetCurrentSession();
+            var paciente = new AgendaProfesionalViewModel.PacienteViewModel();
+            paciente.Descripcion = turno.Paciente.Persona.NombreCompleto;
+            paciente.Id = turno.Paciente.Id;
+            paciente.NumeroAfiliado = turno.Paciente.NumeroAfiliado;
+            if (turno.Paciente.Plan != null)
+            {
+                paciente.Plan = turno.Paciente.Plan.Nombre;
+                paciente.ObraSocial = turno.Paciente.Plan.ObraSocial.RazonSocial;
+            }
+
+            //NOTE: Ver de armar otra query para calcular si es la primera vez.
+            //Es la primera vez si hay un turno en estado atendido.
+            var turnoAtendido = session.QueryOver<Turno>().Where(x => x.Paciente == turno.Paciente)
+                    .And(x => x.Profesional == turno.Profesional)
+                    .And(x => x.Especialidad == turno.Especialidad)
+                    .And(x => x.Estado == EstadoTurno.Atendido).Take(1).SingleOrDefault();
+            
+            paciente.EsPrimeraVez = turnoAtendido == default(Turno);
+
+            return paciente;
         }
     }
 }

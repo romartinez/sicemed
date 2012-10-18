@@ -132,6 +132,7 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                 .ForMember(d => d.FechaTurnos, m => m.Ignore())
                 .ForMember(d => d.Turnos, m => m.Ignore());
             CreateMap<Turno, AgendaProfesionalViewModel.TurnoViewModel>()
+                .ForMember(d => d.Paciente, m => m.Ignore())
                 .ForMember(x => x.PuedoCancelar, m => m.ResolveUsing(o => o.PuedeAplicar(EventoTurno.Cancelar)));
 
             CreateMap<Profesional, CalendarioProfesionalViewModel>()

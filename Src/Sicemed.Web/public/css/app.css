@@ -166,6 +166,15 @@ input.time, input.date, input[type=date], input[type=time], input.ctl-timespan
     border-color: #a700e8;
 }
 
+.paciente-primera-vez {
+    color: #33CC52 !important;
+    font-weight: bold;
+}
+.paciente-control {
+    color: #36C !important;
+    font-style: italic;
+}
+
 .turno-duracion-corto {
     color: #33CC52 !important;
     font-weight: bold;

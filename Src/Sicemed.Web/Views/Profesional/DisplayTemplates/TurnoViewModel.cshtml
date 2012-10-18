@@ -13,20 +13,39 @@
         <span class="@cssDuracion">@Model.FechaTurno.ToShortTimeString() / @Model.FechaTurnoFinal.ToShortTimeString()</span>
         | @Model.Paciente.Descripcion
         | @Model.Estado
-    </a>
+    </a>    
 </h3>
 <div>
     <div class="turno turno-@Model.Estado.ToString().ToLower()">
         <div>
             Especialidad: @Model.Especialidad.Descripcion
             <br/>
-            @Html.ActionLink("Historial Atenciones", "Atenciones", "Historial", new { pacienteId = Model.Paciente.Id }, new { target = "_blank" })
+            <div class="@(Model.Paciente.EsPrimeraVez? "paciente-primera-vez": "paciente-control")">
+                @if(Model.Paciente.EsPrimeraVez)
+                {
+                    @:El paciente es la primera vez que se atiende.    
+                }
+                else
+                {
+                    @:El paciente ya se ha atendido con anterioridad.
+                    @Html.ActionLink("Historial Atenciones", "Atenciones", "Historial", new { pacienteId = Model.Paciente.Id }, new { target = "_blank" })
+                }
+            </div>               
+            <div>
+                N&uacute;mero de Afiliado: @Model.Paciente.NumeroAfiliado<br/>
+                @if(!string.IsNullOrWhiteSpace(Model.Paciente.Plan))
+                {
+                    @:Obra Social: @Model.Paciente.Plan, @Model.Paciente.ObraSocial                    
+                }
+            </div>
         </div>
         <div>
             @if (Model.Estado == EstadoTurno.Presentado)
             {
-                <span>El usuario ingres&oacute; hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
-                    minutos.</span>
+                <div>
+                    <span>El usuario ingres&oacute; hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
+                              minutos.</span>
+                </div> 
             
                 using (Html.BeginForm("RegistrarAtencionPaciente", "Profesional"))
                 {

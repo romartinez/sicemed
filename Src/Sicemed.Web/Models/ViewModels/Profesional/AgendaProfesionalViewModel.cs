@@ -44,7 +44,7 @@ namespace Sicemed.Web.Models.ViewModels.Profesional
             public DateTime? FechaIngreso { get; set; }
             public DateTime? FechaAtencion { get; set; }
             public InfoViewModel Consultorio { get; set; }
-            public InfoViewModel Paciente { get; set; }
+            public PacienteViewModel Paciente { get; set; }
             public InfoViewModel Especialidad { get; set; }
             public EstadoTurno Estado { get; set; }
             public DateTime FechaEstado { get; set; }
@@ -54,6 +54,16 @@ namespace Sicemed.Web.Models.ViewModels.Profesional
             {
                 get { return FechaTurno.Add(DuracionTurno); }
             }
+        }
+
+        public class PacienteViewModel
+        {
+            public long Id { get; set; }
+            public string Descripcion { get; set; }
+            public string NumeroAfiliado { get; set; }
+            public string Plan { get; set; }
+            public string ObraSocial { get; set; }
+            public bool EsPrimeraVez { get; set; }
         }
     }
 }
