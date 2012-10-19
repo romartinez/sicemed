@@ -20,7 +20,7 @@ namespace Sicemed.Web.Infrastructure.Services
             var authTicket = new FormsAuthenticationTicket(1,
                                                            user.Membership.Email,
                                                            DateTime.Now,
-                                                           DateTime.Now.AddMinutes(15),
+                                                           DateTime.Now.Add(FormsAuthentication.Timeout),
                                                            rememberMe,
                                                            user.Id.ToString());
             var encTicket = FormsAuthentication.Encrypt(authTicket);
