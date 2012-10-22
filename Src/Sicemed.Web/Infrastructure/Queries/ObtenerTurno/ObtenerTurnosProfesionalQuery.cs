@@ -46,7 +46,7 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
             var turnosProfesional = session.QueryOver<Turno>()
                 .Fetch(x => x.Paciente).Eager
                 .Where(t => t.FechaTurno > lunesDeEstaSemana && t.FechaTurno < maximoTurnosFuturos)
-                .WhereNot(t=>t.Estado == EstadoTurno.Cancelado)
+                .WhereNot(t => t.Estado == EstadoTurno.Cancelado)
                 .JoinQueryOver(x => x.Profesional)
                 .Where(p => p.Id == ProfesionalId)
                 .JoinQueryOver(p => p.Especialidades)
@@ -77,6 +77,21 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
                 var turnosOtorgados = MappingEngine.Map<List<TurnoViewModel>>(turnosProfesional);
                 turnos.AddRange(turnosOtorgados);
             }
+
+            //Quito los feriados y ausencias
+            var feriados = session.QueryOver<Feriado>()
+                .Where(x => x.Fecha > lunesDeEstaSemana && x.Fecha < maximoTurnosFuturos)
+                .Future();
+
+            var ausencias = session.QueryOver<Ausencia>()
+                .Where(x => x.Fecha > lunesDeEstaSemana && x.Fecha < maximoTurnosFuturos)
+                .Future();
+
+            var feriadosSoloFecha = feriados.Select(x => x.Fecha.ToMidnigth());
+            turnos.RemoveAll(t => feriadosSoloFecha.Contains(t.FechaTurnoInicial.ToMidnigth()));
+
+            turnos.RemoveAll(t => ausencias.Any(a => a.EnPeriodoDeAusencia(t.FechaTurnoInicial)
+                || a.EnPeriodoDeAusencia(t.FechaTurnoFinal)));
 
             Cache.Add(cacheKey, turnos);
 

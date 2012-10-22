@@ -236,6 +236,7 @@
     <Compile Include="Areas\Admin\Models\Personas\ProfesionalEditModel.cs" />
     <Compile Include="Areas\Admin\Models\Personas\SecretariaEditModel.cs" />
     <Compile Include="Controllers\BusquedaController.cs" />
+    <Compile Include="Controllers\AusenciasController.cs" />
     <Compile Include="Controllers\PingController.cs" />
     <Compile Include="Infrastructure\Attributes\DataAnnotations\CorreoAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\DataAnnotations\LargoCadenaAttribute.cs" />
@@ -258,6 +259,7 @@
     <Compile Include="Infrastructure\NHibernate\EntityConverter.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\CategoriaIndicadorMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\Components\DocumentoMap.cs" />
+    <Compile Include="Infrastructure\NHibernate\Mappings\AusenciaMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\IndicadorMap.cs" />
     <Compile Include="Infrastructure\NHibernate\Mappings\ObjetivoIndicadorMap.cs" />
     <Compile Include="Infrastructure\NHibernate\NHibernateAuditContractResolver.cs" />
@@ -274,6 +276,7 @@
     <Compile Include="Infrastructure\Reports\TurnosPorProfesionalReporte.cs" />
     <Compile Include="Infrastructure\Services\INotificationService.cs" />
     <Compile Include="Infrastructure\Services\NotificationService.cs" />
+    <Compile Include="Models\Ausencia.cs" />
     <Compile Include="Models\BI\Enumerations\EstadoObjetivo.cs" />
     <Compile Include="Models\Caja\Caja.cs" />
     <Compile Include="Models\Caja\Concepto.cs" />
@@ -526,6 +529,7 @@
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Roles\Secretaria.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Turno.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\AuditLog.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Ausencia.hbm.xml" />
     <Content Include="InstallationDummyFile.txt" />
     <Content Include="public\css\app.css" />
     <Content Include="public\css\fullcalendar.css" />
@@ -759,6 +763,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\TurnosPorProfesional.rdlc" />
     <Content Include="Views\Secretaria\EdicionPaciente.cshtml" />
+    <Content Include="Views\Ausencias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

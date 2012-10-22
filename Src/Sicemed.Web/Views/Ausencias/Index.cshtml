@@ -1,0 +1,110 @@
+﻿@using Sicemed.Web.Models
+@model IEnumerable<Sicemed.Web.Models.Roles.Profesional>
+@{
+    ViewBag.Title = "Administración De Ausencias Profesionales";
+}
+<h2>
+    Administraci&oacute;n de Ausencias Profesionales
+</h2>
+
+@Html.AntiForgeryToken()
+<table id="data">
+</table>
+<div id="pager">
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            app.grid.initialize({
+                    url: {
+                        edit: '@Url.Action("Editar")',
+                    add: '@Url.Action("Nuevo")',
+                    del: '@Url.Action("Eliminar")',
+                    list: '@Url.Action("List")'
+                },
+                params: {
+                    caption: 'Gesti&oacute;n De Ausencias Profesionales',
+                    emptyrecords: 'No hay Ausencias cargadas.',
+                    colNames: ['Id', 'Fecha', 'Desde', 'Hasta', 'Profesional'],
+                    colModel: [
+                            {
+                                name: 'Id',
+                                index: 'Id',
+                                width: 55,
+                                sortable: false,
+                                hidden: true
+                            },
+                            {
+                                name: 'Fecha',
+                                index: 'Fecha',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                formatter: 'date',
+                                formatoptions: {
+                                    newformat: 'd/m/Y'
+                                },
+                                editoptions: {
+                                    dataInit: function(element) {
+                                        $(element).datepicker();
+                                    }   
+                                },
+                                editrules: {
+                                    date: true,
+                                    required: true
+                                },
+                                formoptions: {
+                                    label: 'Fecha (*)',
+                                    maxlength: '10',
+                                    size: '10'
+                                }
+                            },
+                            {
+                                name: 'Desde',
+                                index: 'Desde',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                formoptions: {
+                                    label: 'Horario Desde',
+                                    maxlength: '10',
+                                    size: '10'
+                                }
+                            },
+                            {
+                                name: 'Hasta',
+                                index: 'Hasta',
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                formoptions: {
+                                    label: 'Horario Hasta',
+                                    maxlength: '10',
+                                    size: '10'
+                                }
+                            },
+                            {
+                                name: 'ProfesionalId',
+                                index: 'Profesional',
+                                formatter: function ( cellvalue, options, rowObject )
+                                {                                
+                                    return rowObject.Profesional.NombreCompleto;
+                                },
+                                width: 90,
+                                editable: true,
+                                sortable: false,
+                                edittype: 'select',
+                                editoptions: {
+                                    value: @Html.SelectJsonValues(x => x.Id, x => x.Matricula)
+                                },
+                                formoptions: {
+                                    label: 'Profesional (*)'
+                                }
+                            }                        
+                        ]
+                }
+            });
+        });
+    </script>
+}
