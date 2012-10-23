@@ -136,7 +136,7 @@
             getEditOptions(),
             getAddOptions(),
             getDeleteOptions(),
-            {closeOnEscape: true, multipleSearch: false }
+            {width: 685, closeOnEscape: true, multipleSearch: false }
         );
 
         if (settings.buttons) {

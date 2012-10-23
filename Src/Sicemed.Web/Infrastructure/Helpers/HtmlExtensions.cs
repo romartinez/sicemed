@@ -49,6 +49,26 @@ namespace System.Web.Mvc.Html
             return new MvcHtmlString(JsonConvert.SerializeObject(list));
         }
 
+        public static MvcHtmlString SelectJsonValues(this HtmlHelper<IEnumerable<dynamic>> htmlHelper,
+                                                        IEnumerable<dynamic> models, 
+                                                        string emptySelectionText = null)
+        {
+            if (models == null) throw new ArgumentNullException("models");
+
+            var list = new ListDictionary();
+
+            if (emptySelectionText != null)
+            {
+                list.Add(string.Empty, emptySelectionText);
+            }
+
+            foreach (var model in models)
+            {
+                list.Add(model.Id, model.Text);
+            }
+            return new MvcHtmlString(JsonConvert.SerializeObject(list));
+        }
+
         public static MvcHtmlString SelectJsonValues(this HtmlHelper htmlHelper, IEnumerable<Enumeration> models)
         {
             if (models == null) throw new ArgumentNullException("models");

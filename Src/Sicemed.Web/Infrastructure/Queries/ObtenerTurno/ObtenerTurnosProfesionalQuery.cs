@@ -80,11 +80,11 @@ namespace Sicemed.Web.Infrastructure.Queries.ObtenerTurno
 
             //Quito los feriados y ausencias
             var feriados = session.QueryOver<Feriado>()
-                .Where(x => x.Fecha > lunesDeEstaSemana && x.Fecha < maximoTurnosFuturos)
+                .Where(x => x.Fecha >= lunesDeEstaSemana && x.Fecha <= maximoTurnosFuturos)
                 .Future();
 
             var ausencias = session.QueryOver<Ausencia>()
-                .Where(x => x.Fecha > lunesDeEstaSemana && x.Fecha < maximoTurnosFuturos)
+                .Where(x => x.Fecha >= lunesDeEstaSemana && x.Fecha <= maximoTurnosFuturos)
                 .Future();
 
             var feriadosSoloFecha = feriados.Select(x => x.Fecha.ToMidnigth());
