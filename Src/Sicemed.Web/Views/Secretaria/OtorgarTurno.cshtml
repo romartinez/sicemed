@@ -245,9 +245,9 @@
                 weekends: false,
                 defaultView: 'agendaWeek',
                 allDaySlot: false,
-                minTime: '7:00', //Horario apertura clinica
-                maxTime: '20:00', //Horario cierre clinica
-                slotMinutes: 10, //Duracion por defecto turno
+                minTime: '@MvcApplication.Clinica.HorarioMatutinoDesde.Subtract(TimeSpan.FromMinutes(30)).ToString(@"hh\:mm")', //Horario apertura clinica
+                maxTime: '@MvcApplication.Clinica.HorarioHasta.Add(TimeSpan.FromMinutes(30)).ToString(@"hh\:mm")', //Horario cierre clinica
+                slotMinutes: @MvcApplication.Clinica.DuracionTurnoPorDefecto.TotalMinutes, //Duracion por defecto turno
                 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
                 dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab'],
                 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',

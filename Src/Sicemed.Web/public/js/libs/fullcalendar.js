@@ -1989,7 +1989,7 @@ function MonthView(element, calendar) {
 		var nwe = opt('weekends') ? 0 : 1;
 		if (nwe) {
 			skipWeekend(visStart);
-			skipWeekend(visEnd, -1, true);
+			//skipWeekend(visEnd, -1, true);
 		}
 		addDays(visStart, -((visStart.getDay() - Math.max(firstDay, nwe) + 7) % 7));
 		addDays(visEnd, (7 - visEnd.getDay() + Math.max(firstDay, nwe)) % 7);
@@ -2038,7 +2038,7 @@ function BasicWeekView(element, calendar) {
 		var weekends = opt('weekends');
 		if (!weekends) {
 			skipWeekend(visStart);
-			skipWeekend(visEnd, -1, true);
+			//skipWeekend(visEnd, -1, true);
 		}
 		t.title = formatDates(
 			visStart,
@@ -2049,7 +2049,7 @@ function BasicWeekView(element, calendar) {
 		t.end = end;
 		t.visStart = visStart;
 		t.visEnd = visEnd;
-		renderBasic(1, 1, weekends ? 7 : 5, false);
+		renderBasic(1, 1, weekends ? 7 : 6, false);
 	}
 	
 	
@@ -2747,7 +2747,7 @@ function AgendaWeekView(element, calendar) {
 		var weekends = opt('weekends');
 		if (!weekends) {
 			skipWeekend(visStart);
-			skipWeekend(visEnd, -1, true);
+			//skipWeekend(visEnd, -1, true);
 		}
 		t.title = formatDates(
 			visStart,
@@ -2758,7 +2758,7 @@ function AgendaWeekView(element, calendar) {
 		t.end = end;
 		t.visStart = visStart;
 		t.visEnd = visEnd;
-		renderAgenda(weekends ? 7 : 5);
+		renderAgenda(weekends ? 7 : 6);
 	}
 	
 

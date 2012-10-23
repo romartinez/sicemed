@@ -25,6 +25,11 @@ namespace Sicemed.Web.Models.ViewModels
 
         public TimeSpan? HorarioVespertinoDesde { get; set; }
         public TimeSpan? HorarioVespertinoHasta { get; set; }
+        
+	    public TimeSpan HorarioHasta
+	    {
+	        get { return HorarioVespertinoHasta.HasValue ? HorarioVespertinoHasta.Value : HorarioMatutinoHasta; }
+	    }
 
         public bool EsHorarioCorrido { get; set; }
 
