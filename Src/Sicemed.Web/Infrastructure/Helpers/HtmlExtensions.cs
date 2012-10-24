@@ -50,7 +50,7 @@ namespace System.Web.Mvc.Html
         }
 
         public static MvcHtmlString SelectJsonValues(this HtmlHelper<IEnumerable<dynamic>> htmlHelper,
-                                                        IEnumerable<dynamic> models, 
+                                                        IEnumerable<dynamic> models,
                                                         string emptySelectionText = null)
         {
             if (models == null) throw new ArgumentNullException("models");
@@ -67,6 +67,27 @@ namespace System.Web.Mvc.Html
                 list.Add(model.Id, model.Text);
             }
             return new MvcHtmlString(JsonConvert.SerializeObject(list));
+        }
+
+        public static MvcHtmlString SelectItemValues(this HtmlHelper<IEnumerable<dynamic>> htmlHelper,
+                                                        IEnumerable<dynamic> models,
+                                                        string emptySelectionText = null)
+        {
+            if (models == null) throw new ArgumentNullException("models");
+
+            var list = new List<string>();
+
+            if (emptySelectionText != null)
+            {
+                list.Add(string.Format("{0}:{1}", string.Empty, emptySelectionText));
+            }
+
+            foreach (var model in models.OrderBy(x => x.Text))
+            {
+                list.Add(string.Format("{0}:{1}", model.Id, model.Text));
+            }
+
+            return new MvcHtmlString(string.Join(";", list));
         }
 
         public static MvcHtmlString SelectJsonValues(this HtmlHelper htmlHelper, IEnumerable<Enumeration> models)
@@ -143,7 +164,7 @@ namespace System.Web.Mvc.Html
             }
             return realModelType;
         }
-        
+
         public static MvcHtmlString EnumDropDownListFor<TModel, TEnum>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TEnum>> expression)
         {
             var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
@@ -155,7 +176,7 @@ namespace System.Web.Mvc.Html
             var items = values.Select(v =>
             {
                 var value = converter.ConvertToString(v);
-                if(value.Equals(v.ToString()))
+                if (value.Equals(v.ToString()))
                 {
                     //El converter no hizo nada pruevo con el resource
                     var rex = Sicemed.Web.Properties.Resources.ResourceManager.GetString(string.Format("{0}_{1}", enumType.Name, value));
