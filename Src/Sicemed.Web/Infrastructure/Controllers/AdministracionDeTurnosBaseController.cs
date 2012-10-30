@@ -35,8 +35,16 @@ namespace Sicemed.Web.Infrastructure.Controllers
             }
 
             turno.CancelarTurno(User, prompt);
-            var mail = NotificationService.CancelacionTurno(User, turno);
-            if (mail != null) mail.Send();
+
+            try
+            {
+                var mail = NotificationService.CancelacionTurno(User, turno);
+                if (mail != null) mail.Send();                
+            }
+            catch(Exception ex)
+            {
+                Logger.Error("Error al enviar el mail de cancelación.", ex);    
+            }
 
             //Actualizamos la cache de turnos
             var cached = QueryFactory.Create<IObtenerTurnosProfesionalQuery>();
@@ -78,8 +86,16 @@ namespace Sicemed.Web.Infrastructure.Controllers
             foreach (var turno in turnos)
             {
                 turno.CancelarTurno(User, prompt);
-                var mail = NotificationService.CancelacionTurno(User, turno);
-                if (mail != null) mail.Send();
+
+                try
+                {
+                    var mail = NotificationService.CancelacionTurno(User, turno);
+                    if (mail != null) mail.Send();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error("Error al enviar el mail de cancelación.", ex);
+                }
 
                 cached.ProfesionalId = turno.Profesional.Id;
                 cached.ClearCache();
