@@ -38,6 +38,10 @@ namespace Sicemed.Web.Models
 
         public virtual DateTime? FechaNacimiento { get; set; }
 
+        public virtual decimal? Peso { get; set; }
+
+        public virtual decimal? Altura { get; set; }
+
         public virtual Documento Documento { get; set; }
 
         public virtual Domicilio Domicilio { get; set; }
@@ -69,9 +73,18 @@ namespace Sicemed.Web.Models
 
         #endregion
 
+        public virtual int? Edad
+        {
+            get
+            {
+                if (!FechaNacimiento.HasValue) return null;
+                return Convert.ToInt32(Math.Abs(DateTime.Now.Subtract(FechaNacimiento.Value).TotalDays / 365));
+            }
+        }
+
         public virtual bool IsInRole<T>() where T : Rol
         {
-            return IsInRole(typeof (T));
+            return IsInRole(typeof(T));
         }
 
         public virtual bool IsInRole(Type rolType)
@@ -83,7 +96,7 @@ namespace Sicemed.Web.Models
         {
             var personaAs = _roles.FirstOrDefault(x => x is T) as T;
             if (personaAs == default(T))
-                throw new IdentityNotMappedException("El usuario no es del tipo " + typeof (T).Name);
+                throw new IdentityNotMappedException("El usuario no es del tipo " + typeof(T).Name);
             return personaAs;
         }
 
