@@ -44,7 +44,6 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
         [DataType(DataType.Date)]
         public DateTime? FechaNacimiento { get; set; }
 
-        [Requerido]
         [Correo]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]

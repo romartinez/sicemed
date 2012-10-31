@@ -167,6 +167,10 @@ namespace Sicemed.Web.Controllers
                 var pacienteRol = Paciente.Create(editModel.NumeroAfiliado);
                 if (editModel.PlanId.HasValue) pacienteRol.Plan = session.Load<Plan>(editModel.PlanId);
                 model.AgregarRol(pacienteRol);
+
+                if (string.IsNullOrWhiteSpace(model.Membership.Email))
+                    model.Membership.Email = string.Format("{0}.{1}@cqr.com.ar", model.Nombre, model.Apellido);
+
                 //Seteo un password cualquiera y luego le mando mail re recupero
                 var status = _membershipService.CreateUser(model, editModel.Email, Guid.NewGuid().ToString());
                 if (status == MembershipStatus.USER_CREATED)
@@ -278,6 +282,10 @@ namespace Sicemed.Web.Controllers
                 {
                     model.Domicilio.Localidad = null;
                 }
+
+                if (string.IsNullOrWhiteSpace(model.Membership.Email))
+                    model.Membership.Email = string.Format("{0}.{1}@cqr.com.ar", model.Nombre, model.Apellido);
+
                 ShowMessages(ResponseMessage.Success("Paciente '{0}' modificado correctamente.", model.NombreCompleto));
                 return RedirectToAction("OtorgarTurno");
             }
