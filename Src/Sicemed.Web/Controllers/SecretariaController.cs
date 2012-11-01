@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using Sicemed.Web.Infrastructure;
@@ -90,7 +91,14 @@ namespace Sicemed.Web.Controllers
             queryTurnos.ProfesionalId = profesionalId;
             queryTurnos.EspecialidadId = especialidadId;
             queryTurnos.AgregarOtorgados = true;
-            var result = queryTurnos.Execute();
+            var turnos = queryTurnos.Execute().ToList();
+            var result = new
+                {
+                    Turnos = turnos,
+                    MinimoHorario = turnos.Min(x => x.FechaTurnoInicial.Hour),
+                    MaximoHorario = turnos.Max(x => x.FechaTurnoFinal.Hour) + 1, // +1 así ve el final
+                    MinimoDuracion = Math.Abs(turnos.Min(x => x.DuracionTurno).TotalMinutes / 2)
+                };
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -148,17 +156,17 @@ namespace Sicemed.Web.Controllers
                 // Attempt to register the user                
                 var model = _mappingEngine.Map<Persona>(editModel);
                 //Update not automapped properties
-                if(editModel.TipoDocumentoId.HasValue)
+                if (editModel.TipoDocumentoId.HasValue)
                 {
                     model.Documento = new Documento
                     {
                         Numero = editModel.DocumentoNumero.Value,
                         TipoDocumento = Enumeration.FromValue<TipoDocumento>(editModel.TipoDocumentoId.Value)
-                    };                    
+                    };
                 }
                 model.Domicilio = new Domicilio
                 {
-                    Direccion = editModel.DomicilioDireccion,                    
+                    Direccion = editModel.DomicilioDireccion,
                 };
                 if (editModel.DomicilioLocalidadId.HasValue)
                 {
@@ -203,22 +211,22 @@ namespace Sicemed.Web.Controllers
         public ActionResult EdicionPaciente(long? id = null)
         {
             EdicionPacienteEditModel editModel = null;
-            if(id.HasValue)
+            if (id.HasValue)
             {
                 var paciente = SessionFactory.GetCurrentSession().Load<Paciente>(id.Value);
                 if (paciente != null)
                 {
                     editModel = MappingEngine.Map<EdicionPacienteEditModel>(paciente.Persona);
-                    if(paciente.Plan != null)
+                    if (paciente.Plan != null)
                     {
                         editModel.PlanId = paciente.Plan.Id;
                         editModel.ObraSocialId = paciente.Plan.ObraSocial.Id;
                     }
-                    if(paciente.Persona.Documento != null && paciente.Persona.Documento.TipoDocumento != null)
+                    if (paciente.Persona.Documento != null && paciente.Persona.Documento.TipoDocumento != null)
                     {
                         editModel.TipoDocumentoId = paciente.Persona.Documento.TipoDocumento.Value;
                     }
-                    if(paciente.Persona.Domicilio != null && paciente.Persona.Domicilio.Localidad != null)
+                    if (paciente.Persona.Domicilio != null && paciente.Persona.Domicilio.Localidad != null)
                     {
                         editModel.DomicilioLocalidadProvinciaId = paciente.Persona.Domicilio.Localidad.Provincia.Id;
                         editModel.DomicilioLocalidadId = paciente.Persona.Domicilio.Localidad.Id;
@@ -227,7 +235,7 @@ namespace Sicemed.Web.Controllers
                 }
             }
 
-            if(editModel == null) editModel = new EdicionPacienteEditModel();
+            if (editModel == null) editModel = new EdicionPacienteEditModel();
 
             AppendLists(editModel);
             return View(editModel);
@@ -247,7 +255,7 @@ namespace Sicemed.Web.Controllers
                 var model = _mappingEngine.Map(editModel, paciente.Persona);
                 //Update not automapped properties
                 model.Membership.Email = editModel.Email;
-                if(editModel.PlanId.HasValue)
+                if (editModel.PlanId.HasValue)
                 {
                     paciente.Plan = session.Load<Plan>(editModel.PlanId.Value);
                 }
@@ -259,7 +267,7 @@ namespace Sicemed.Web.Controllers
                 if (editModel.TipoDocumentoId.HasValue || editModel.DocumentoNumero.HasValue)
                 {
                     model.Documento = new Documento();
-                    if(editModel.DocumentoNumero.HasValue) model.Documento.Numero = editModel.DocumentoNumero.Value;
+                    if (editModel.DocumentoNumero.HasValue) model.Documento.Numero = editModel.DocumentoNumero.Value;
                     model.Documento.TipoDocumento = Enumeration.FromValue<TipoDocumento>(editModel.TipoDocumentoId.Value);
                 }
                 else
