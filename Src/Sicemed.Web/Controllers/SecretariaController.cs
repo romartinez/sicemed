@@ -172,7 +172,7 @@ namespace Sicemed.Web.Controllers
                     model.Membership.Email = string.Format("{0}.{1}@cqr.com.ar", model.Nombre, model.Apellido);
 
                 //Seteo un password cualquiera y luego le mando mail re recupero
-                var status = _membershipService.CreateUser(model, editModel.Email, Guid.NewGuid().ToString());
+                var status = _membershipService.CreateUser(model, model.Membership.Email, Guid.NewGuid().ToString());
                 if (status == MembershipStatus.USER_CREATED)
                 {
                     _membershipService.RecoverPassword(editModel.Email);
