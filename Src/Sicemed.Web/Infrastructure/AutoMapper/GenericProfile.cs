@@ -28,6 +28,8 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
 
             CreateMap<RegistroPersonaViewModel, Persona>()
                 .ForMember(d => d.Id, m => m.Ignore())
+                .ForMember(d => d.Peso, m => m.Ignore())
+                .ForMember(d => d.Altura, m => m.Ignore())
                 .ForMember(d => d.Membership, m => m.Ignore())
                 .ForMember(d => d.Documento, m => m.Ignore())
                 .ForMember(d => d.Domicilio, m => m.Ignore())

@@ -47,6 +47,9 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
         [DataType(DataType.Date)]
         public DateTime? FechaNacimiento { get; set; }
 
+        public decimal? Peso { get; set; }
+        public decimal? Altura { get; set; }
+
         [Requerido]
         [Correo]
         [DataType(DataType.EmailAddress)]

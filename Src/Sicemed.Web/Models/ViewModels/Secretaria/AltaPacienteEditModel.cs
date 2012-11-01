@@ -40,7 +40,9 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
         [DataType(DataType.Date)]
         public DateTime? FechaNacimiento { get; set; }
 
-        [Requerido]
+        public decimal? Peso { get; set; }
+        public decimal? Altura { get; set; }
+
         [Correo]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]

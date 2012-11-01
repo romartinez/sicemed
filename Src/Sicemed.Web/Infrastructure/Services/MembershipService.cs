@@ -248,9 +248,9 @@ namespace Sicemed.Web.Infrastructure.Services
             var session = _sessionFactory.GetCurrentSession();
             using (var tx = session.BeginTransaction())
             {
-                var exists = session.QueryOver<Persona>().Where(x => x.Membership.Email == email).RowCount() > 0;
+                //var exists = session.QueryOver<Persona>().Where(x => x.Membership.Email == email).RowCount() > 0;
 
-                if (exists) return MembershipStatus.DUPLICATED_USER;
+                //if (exists) return MembershipStatus.DUPLICATED_USER;
 
                 user.Membership.FailedPasswordAttemptCount = 0;
                 user.Membership.IsLockedOut = false;

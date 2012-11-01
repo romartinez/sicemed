@@ -13,6 +13,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Property(x => x.Apellido, map => map.NotNullable(true));
             Property(x => x.SegundoNombre);
             Property(x => x.FechaNacimiento);
+            Property(x => x.Peso);
+            Property(x => x.Altura);
 
             Component(x => x.Membership, map => map.Access(Accessor.NoSetter));
             Component(x => x.Documento);

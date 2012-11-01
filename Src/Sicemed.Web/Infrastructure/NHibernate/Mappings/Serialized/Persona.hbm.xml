@@ -22,6 +22,8 @@
     <property name="SegundoNombre" />
     <property name="Apellido" not-null="true" />
     <property name="FechaNacimiento" />
+    <property name="Peso" />
+    <property name="Altura" />
     <component class="Sicemed.Web.Models.Components.Documento" name="Documento">
       <property name="TipoDocumento" type="Sicemed.Web.Infrastructure.NHibernate.EnumerationType`1[[Sicemed.Web.Models.Enumerations.Documentos.TipoDocumento, Sicemed.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Sicemed.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" column="DocumentoTipoDocumento" />
       <property name="Numero" column="DocumentoNumero" />
