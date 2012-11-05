@@ -34,6 +34,9 @@
                     <a href="@Url.Action("AltaPaciente")" target="_blank" class="button_link btn_blue">
                         <span>Alta Paciente</span>
                     </a>
+                    <a data-url="@Url.Action("EdicionPaciente")?id=" id="lnkEdicionPaciente"  target="_blank" class="button_link btn_yellow" style="display: none;">
+                        <span>Edici&oacute;n Paciente</span>
+                    </a>
                 </div>
                 <div class="editor-validator">
                     @Html.ValidationMessageFor(x => x.PacienteId)
@@ -188,6 +191,16 @@
             });
         };
 
+        var pacienteSelect = function() {
+            var paciente = $("#PacienteId").val();
+            var lnkEdicionPaciente = $("#lnkEdicionPaciente");
+            if(!paciente) {
+                lnkEdicionPaciente.fadeOut();                
+                return;
+            }            
+            lnkEdicionPaciente.attr("href", lnkEdicionPaciente.data("url") + paciente).fadeIn();
+        };
+
         var especialidadSelect = function () {
             var val = $("#EspecialidadId").val();
             if (!val) {
@@ -228,6 +241,7 @@
 
             $("#cmdSobreTurno").click(otorgarSobreTurno);
             $("#ProfesionalId").change(profesionalSelect);
+            $("#PacienteId").change(pacienteSelect);
             $("#EspecialidadId").select2({
                 data: { results: [] },
                 width: '300px',
