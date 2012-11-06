@@ -67,6 +67,9 @@ namespace Sicemed.Web.Infrastructure.Queries.Profesional
             paciente.Descripcion = turno.Paciente.Persona.NombreCompleto;
             paciente.Id = turno.Paciente.Id;
             paciente.NumeroAfiliado = turno.Paciente.NumeroAfiliado;
+            paciente.Edad = turno.Paciente.Persona.Edad;
+            paciente.Altura = turno.Paciente.Persona.Peso;
+            paciente.Peso = turno.Paciente.Persona.Altura;
             if (turno.Paciente.Plan != null)
             {
                 paciente.Plan = turno.Paciente.Plan.Nombre;

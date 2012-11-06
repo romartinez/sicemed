@@ -40,7 +40,10 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
         [DataType(DataType.Date)]
         public DateTime? FechaNacimiento { get; set; }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:0.00}", NullDisplayText = "")]
         public decimal? Peso { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:0.00}", NullDisplayText = "")]
         public decimal? Altura { get; set; }
 
         [Correo]

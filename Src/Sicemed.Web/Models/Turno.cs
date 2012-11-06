@@ -220,6 +220,14 @@ namespace Sicemed.Web.Models
             return this;
         }
 
+        public virtual Turno RegistrarNota(Profesional profesional, string nota = null)
+        {            
+            Nota += Environment.NewLine 
+                + new string('-', 32)
+                + Environment.NewLine + nota;
+            return this;
+        }
+
         private CambioEstadoTurno ObtenerCambioEstado(EventoTurno evento)
         {
             return CambiosDeEstado.SingleOrDefault(x => x.Evento == evento);
@@ -238,6 +246,7 @@ namespace Sicemed.Web.Models
             if (cambioEstado == null) return null;
             return cambioEstado.Responsable;
         }
+
 
         #region Creates
         /// <summary>
