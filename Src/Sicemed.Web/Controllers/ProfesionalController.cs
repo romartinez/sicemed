@@ -43,13 +43,13 @@ namespace Sicemed.Web.Controllers
             return RedirectToAction("Agenda", new { fecha = turno.FechaTurno.ToShortDateString() });
         }
 
-        //public ActionResult Report()
-        //{
-        //    var report = new ServiceReport();
-        //    var reportData = MvcApplication.Container.Resolve<ITurnosPorProfesionalReporte>();
-        //    var reportInfo = new ReportInfo("TurnosPorProfesional", "Turnos", "", reportData.Execute);
-        //    var reportBytes = report.BuildReport(reportInfo, "PDF");
-        //    return File(reportBytes, "application/pdf", "reporte.pdf");
-        //}
+        public ActionResult Report()
+        {
+            var report = new ServiceReport();
+            var reportData = MvcApplication.Container.Resolve<ITurnosDelDiaReporte>();
+            var reportInfo = new ReportInfo("TurnosDelDia", "Turnos", "", reportData.Execute);
+            var reportBytes = report.BuildReport(reportInfo, "PDF");
+            return File(reportBytes, "application/pdf", "reporte.pdf");
+        }
     }
 }
