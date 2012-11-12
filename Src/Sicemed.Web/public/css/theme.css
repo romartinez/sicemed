@@ -827,7 +827,7 @@ button:hover,button:focus{
 	line-height:32px;
 	padding:0 10px 0 12px;
 	color:#737373;
-	min-width:100px;
+	/*min-width:100px;*/
 	cursor:pointer;
 	text-shadow:0 1px 1px #fff;
 	text-transform:uppercase}

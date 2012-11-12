@@ -22,8 +22,8 @@ namespace Sicemed.Web.Models.ViewModels
 
         public SearchFiltersViewModel()
         {
-            Desde = DateTime.Now.AddMonths(-3).ToMidnigth();
-            Hasta = DateTime.Now.AddDays(1).ToMidnigth();
+            Desde = DateTime.Now.AddMonths(-3).StartOfWeek(DayOfWeek.Monday).ToMidnigth();
+            Hasta = DateTime.Now.AddDays(1).EndOfWeek(DayOfWeek.Saturday).ToMidnigth();
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

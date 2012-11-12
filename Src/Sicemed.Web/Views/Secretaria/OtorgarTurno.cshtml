@@ -1,4 +1,5 @@
 ﻿@using SICEMED.Web
+@using Sicemed.Web.Infrastructure.Helpers
 @model Sicemed.Web.Models.ViewModels.Secretaria.OtorgarTurnoEditModel
 @{
     ViewBag.Title = "Otorgar Turno";
@@ -33,6 +34,12 @@
                     @Html.EditorFor(x => x.PacienteId)
                     <a href="@Url.Action("AltaPaciente")" target="_blank" class="button_link btn_blue">
                         <span>Alta Paciente</span>
+                    </a>
+                    <a data-url="@Url.Action("EdicionPaciente")?id=" id="lnkEdicionPaciente"  target="_blank" class="button_link btn_yellow" style="display: none;">
+                        <span>Edici&oacute;n Paciente</span>
+                    </a>
+                    <a data-url="@Url.Action("TurnosPorPaciente","Historial")?SeleccionPaciente.PacienteSeleccionado.Id=" id="lnkTurnosPaciente"  target="_blank" class="button_link btn_pink" style="display: none;">
+                        <span>Turnos</span>
                     </a>
                 </div>
                 <div class="editor-validator">
@@ -188,6 +195,19 @@
             });
         };
 
+        var pacienteSelect = function() {
+            var paciente = $("#PacienteId").val();
+            var lnkEdicionPaciente = $("#lnkEdicionPaciente");
+            var lnkTurnosPaciente = $("#lnkTurnosPaciente");
+            if(!paciente) {
+                lnkEdicionPaciente.fadeOut();
+                lnkTurnosPaciente.fadeOut();
+                return;
+            }            
+            lnkEdicionPaciente.attr("href", lnkEdicionPaciente.data("url") + paciente).fadeIn();
+            lnkTurnosPaciente.attr("href", lnkTurnosPaciente.data("url") + paciente).fadeIn();
+        };
+
         var especialidadSelect = function () {
             var val = $("#EspecialidadId").val();
             if (!val) {
@@ -228,6 +248,7 @@
 
             $("#cmdSobreTurno").click(otorgarSobreTurno);
             $("#ProfesionalId").change(profesionalSelect);
+            $("#PacienteId").change(pacienteSelect);
             $("#EspecialidadId").select2({
                 data: { results: [] },
                 width: '300px',

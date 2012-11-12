@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using SICEMED.Web;
 using Sicemed.Web.Infrastructure;
@@ -50,6 +51,27 @@ namespace Sicemed.Web.Controllers
             var reportInfo = new ReportInfo("TurnosDelDia", "Turnos", "", reportData.Execute);
             var reportBytes = report.BuildReport(reportInfo, "PDF");
             return File(reportBytes, "application/pdf", "reporte.pdf");
+        }
+
+        [HttpPost]
+        [AjaxHandleError]
+        [ValidateAntiForgeryToken]
+        public ActionResult AgregarNota(long turnoId, string nota)
+        {
+            if(string.IsNullOrWhiteSpace(nota)) throw new ValidationException("Debe ingresa una nota.");
+
+            var session = SessionFactory.GetCurrentSession();
+            var turno = session.Get<Turno>(turnoId);
+            if (turno == null)
+            {
+                ShowMessages(ResponseMessage.Error("No se encuentra el turno."));
+                return RedirectToAction("Agenda");
+            }
+
+            turno.RegistrarNota(User.As<Profesional>(), nota);
+
+            ShowMessages(ResponseMessage.Success());
+            return RedirectToAction("Agenda", new { fecha = turno.FechaTurno.ToShortDateString() });
         }
     }
 }

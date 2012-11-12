@@ -125,10 +125,16 @@ div.ctl-collapsible
         margin: 0 !important;
     }
 
-input.time, input.date, input[type=date], input[type=time], input.ctl-timespan
+input.time, input.date, input[type=date], input[type=time], input.ctl-timespan, input.decimal
 {
     width: 75px;
 }
+
+input.decimal {
+    text-align: right;
+}
+
+
 
 /* TURNOS
 **/

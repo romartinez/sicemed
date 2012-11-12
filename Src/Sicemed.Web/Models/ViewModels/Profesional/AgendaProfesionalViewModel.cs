@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Models.Enumerations;
 
 namespace Sicemed.Web.Models.ViewModels.Profesional
@@ -48,11 +49,21 @@ namespace Sicemed.Web.Models.ViewModels.Profesional
             public InfoViewModel Especialidad { get; set; }
             public EstadoTurno Estado { get; set; }
             public DateTime FechaEstado { get; set; }
+            public string Nota { get; set; }
             public bool PuedoCancelar { get; set; }
 
             public DateTime FechaTurnoFinal
             {
                 get { return FechaTurno.Add(DuracionTurno); }
+            }
+
+            public bool PuedeEditarNota
+            {
+                get
+                {
+                    return Estado == EstadoTurno.Presentado ||
+                           (Estado == EstadoTurno.Atendido && FechaTurno.ToMidnigth() == DateTime.Now.ToMidnigth());
+                }
             }
         }
 
@@ -63,6 +74,9 @@ namespace Sicemed.Web.Models.ViewModels.Profesional
             public string NumeroAfiliado { get; set; }
             public string Plan { get; set; }
             public string ObraSocial { get; set; }
+            public long? Edad { get; set; }
+            public decimal? Peso { get; set; }
+            public decimal? Altura { get; set; }
             public bool EsPrimeraVez { get; set; }
         }
     }

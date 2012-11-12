@@ -779,6 +779,7 @@
     <EmbeddedResource Include="Reports\TurnosPorProfesional.rdlc" />
     <Content Include="Views\Secretaria\EdicionPaciente.cshtml" />
     <Content Include="Views\Ausencias\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
