@@ -52,9 +52,9 @@ namespace Sicemed.Web.Infrastructure.Reports
                             "  <MarginBottom>1cm</MarginBottom>" +
                             "</DeviceInfo>";
 
-                case ReportOutputType.CSV:
+                case ReportOutputType.Excel:
                     return "<DeviceInfo>" +
-                                         "  <OutputFormat>CSV</OutputFormat>" +
+                                         "  <OutputFormat>XLS</OutputFormat>" +
                                          "<Encoding>UTF-8</Encoding>" +
                                          "<ExcelMode>true</ExcelMode>" +
                                          "</DeviceInfo>";

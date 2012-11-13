@@ -8,7 +8,7 @@
         Turnos del d&iacute;a -
         <input class="fecha-filtro date" id="fecha" name="fecha" value="@Model.FechaTurnos.ToShortDateString()" />
         @Html.Submit("Actualizar")
-        <a href="@Url.Action("ReporteTurnos")?fecha=" class="button_link btn_blue" id="lnkReporte"><span>Imprimir</span></a>
+        <a href="@Url.Action("ReporteTurnos")?fecha=" class="button_link btn_blue" style="margin: 0; vertical-align: middle;" id="lnkReporte"><span>Imprimir</span></a>
     </h2>
 }
 @if (Model.ProfesionalesConTurnos.Any())

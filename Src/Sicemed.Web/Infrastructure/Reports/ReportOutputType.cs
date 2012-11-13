@@ -3,6 +3,6 @@
     public enum ReportOutputType
     {
         PDF,
-        CSV
+        Excel
     }
 }
