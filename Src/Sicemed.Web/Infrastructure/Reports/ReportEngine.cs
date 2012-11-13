@@ -41,14 +41,15 @@ namespace Sicemed.Web.Infrastructure.Reports
             switch (reportOutputType)
             {
                 case ReportOutputType.PDF:
+                    //A4 Page
                     return "<DeviceInfo>" +
                             "  <OutputFormat>PDF</OutputFormat>" +
-                            "  <PageWidth>8.5in</PageWidth>" +
-                            "  <PageHeight>11in</PageHeight>" +
-                            "  <MarginTop>0.5in</MarginTop>" +
-                            "  <MarginLeft>1in</MarginLeft>" +
-                            "  <MarginRight>1in</MarginRight>" +
-                            "  <MarginBottom>0.5in</MarginBottom>" +
+                            "  <PageWidth>21cm</PageWidth>" +
+                            "  <PageHeight>29.7cm</PageHeight>" +
+                            "  <MarginTop>1cm</MarginTop>" +
+                            "  <MarginLeft>2cm</MarginLeft>" +
+                            "  <MarginRight>1cm</MarginRight>" +
+                            "  <MarginBottom>1cm</MarginBottom>" +
                             "</DeviceInfo>";
 
                 case ReportOutputType.CSV:

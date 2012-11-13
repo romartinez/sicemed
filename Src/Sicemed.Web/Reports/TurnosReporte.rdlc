@@ -6,16 +6,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>8.3472cm</Width>
+              <Width>7.79158cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.24037cm</Width>
+              <Width>3.68475cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.19325cm</Width>
+              <Width>3.63763cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.37304cm</Width>
+              <Width>2.81742cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -243,10 +243,9 @@
             <Value>=Fields!Profesional.Value</Value>
           </SortExpression>
         </SortExpressions>
-        <Top>0.32632cm</Top>
-        <Left>0.57891cm</Left>
-        <Height>1.84382cm</Height>
-        <Width>20.15386cm</Width>
+        <Top>0.17639cm</Top>
+        <Height>1.84383cm</Height>
+        <Width>17.93138cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -254,10 +253,10 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2.28125in</Height>
+    <Height>0.79536in</Height>
     <Style />
   </Body>
-  <Width>8.37084in</Width>
+  <Width>7.0596in</Width>
   <Page>
     <PageHeader>
       <Height>1.12599cm</Height>
@@ -293,7 +292,7 @@
           </Paragraphs>
           <rd:DefaultName>ReportName</rd:DefaultName>
           <Top>0.06456cm</Top>
-          <Left>15.22944cm</Left>
+          <Left>12.42803cm</Left>
           <Height>0.99687cm</Height>
           <Width>5.50333cm</Width>
           <Style>
@@ -325,7 +324,6 @@
           </Paragraphs>
           <rd:DefaultName>Title</rd:DefaultName>
           <Top>0.06456cm</Top>
-          <Left>0.57891cm</Left>
           <Height>0.92032cm</Height>
           <Width>9.56438cm</Width>
           <ZIndex>1</ZIndex>
@@ -347,7 +345,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.84667cm</Height>
+      <Height>0.6cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -386,7 +384,7 @@
           <rd:DefaultName>Textbox6</rd:DefaultName>
           <Top>0cm</Top>
           <Height>0.6cm</Height>
-          <Width>20.73277cm</Width>
+          <Width>17.93136cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -406,10 +404,10 @@
     </PageFooter>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
+    <LeftMargin>0cm</LeftMargin>
+    <RightMargin>0cm</RightMargin>
+    <TopMargin>0cm</TopMargin>
+    <BottomMargin>0cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>
