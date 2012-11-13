@@ -6,8 +6,9 @@
 {
     <h2>
         Turnos del d&iacute;a -
-        <input class="fecha-filtro date" name="fecha" value="@Model.FechaTurnos.ToShortDateString()" />
+        <input class="fecha-filtro date" id="fecha" name="fecha" value="@Model.FechaTurnos.ToShortDateString()" />
         @Html.Submit("Actualizar")
+        <a href="@Url.Action("ReporteTurnos")?fecha=" class="button_link btn_blue" id="lnkReporte"><span>Imprimir</span></a>
     </h2>
 }
 @if (Model.ProfesionalesConTurnos.Any())
@@ -46,4 +47,16 @@ else
     <div class="msg-error">
         No hay turnos otorgados para el d&iacute;a.
     </div>
+}
+
+@section Scripts
+{
+    <script language="javascript" type="text/javascript">
+        jQuery(function () {
+            $("#lnkReporte").click(function () {
+                window.open($(this).attr("href") + $("#fecha").val());
+                return false;
+            });
+        });
+    </script>
 }

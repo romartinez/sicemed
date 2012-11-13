@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
+using SICEMED.Web;
 using Sicemed.Web.Infrastructure;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
@@ -9,6 +10,7 @@ using Sicemed.Web.Infrastructure.Enums;
 using Sicemed.Web.Infrastructure.Helpers;
 using Sicemed.Web.Infrastructure.Queries.ObtenerTurno;
 using Sicemed.Web.Infrastructure.Queries.Secretaria;
+using Sicemed.Web.Infrastructure.Reports;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Components;
@@ -315,6 +317,19 @@ namespace Sicemed.Web.Controllers
                 viewModel.PlanesObraSocialHabilitados =
                     GetPlanesPorObraSocial(viewModel.ObraSocialId.Value, viewModel.PlanId);
         }
+        #endregion
+
+        #region Reportes
+        public ActionResult ReporteTurnos(DateTime? fecha = null)
+        {
+            var report = new ServiceReport();
+            var reportData = MvcApplication.Container.Resolve<ITurnosReporte>();
+            reportData.Fecha = fecha.HasValue ? fecha.Value : DateTime.Now;
+            var reportInfo = new ReportInfo("TurnosReporte", string.Format("Turnos Para El Día: {0}", reportData.Fecha.ToShortDateString()), "", reportData.Execute);
+            var reportBytes = report.BuildReport(reportInfo, "PDF");
+            return File(reportBytes, "application/pdf", string.Format("TurnosDia_{0:yy-MM-dd}.pdf", reportData.Fecha));
+        }
+
         #endregion
     }
 }

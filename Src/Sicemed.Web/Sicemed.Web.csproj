@@ -281,12 +281,12 @@
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaGeneralPacienteQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaProfesionalConEspecialidadesQuery.cs" />
     <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosPorPacienteQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Secretaria\TurnosReporteQuery.cs" />
     <Compile Include="Infrastructure\Reports\IReport.cs" />
     <Compile Include="Infrastructure\Reports\ReporteBase.cs" />
     <Compile Include="Infrastructure\Reports\ReportInfo.cs" />
     <Compile Include="Infrastructure\Reports\ServiceReport.cs" />
-    <Compile Include="Infrastructure\Reports\TurnosDelDiaReporte.cs" />
-    <Compile Include="Infrastructure\Reports\TurnosPorProfesionalReporte.cs" />
+    <Compile Include="Infrastructure\Reports\TurnosReporte.cs" />
     <Compile Include="Infrastructure\Services\INotificationService.cs" />
     <Compile Include="Infrastructure\Services\NotificationService.cs" />
     <Compile Include="Models\Ausencia.cs" />
@@ -309,7 +309,7 @@
     <Compile Include="Models\Enumerations\EventoTurno.cs" />
     <Compile Include="Models\Moneda.cs" />
     <Compile Include="Models\Proveedor.cs" />
-    <Compile Include="Models\Reports\TurnosDelDiaReportModel.cs" />
+    <Compile Include="Models\Reports\TurnosReportModel.cs" />
     <Compile Include="Models\Reports\TurnosPorProfesionalReportModel.cs" />
     <Compile Include="Models\ViewModels\Historial\TurnosPorPacienteViewModel.cs" />
     <Compile Include="Models\ViewModels\PacienteSearchViewModel.cs" />
@@ -744,6 +744,7 @@
     <Content Include="Reports\logo.png" />
     <Content Include="Reports\Report.aspx" />
     <Content Include="Models\Caja\CajaDiagram.cd" />
+    <EmbeddedResource Include="Reports\TurnosReporte.rdlc" />
     <None Include="public\js\libs\jquery.validate-vsdoc.js" />
     <Content Include="public\js\libs\jquery.validate.js" />
     <Content Include="public\js\libs\jquery.validate.min.js">
@@ -775,8 +776,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\TurnosDelDia.rdlc" />
-    <EmbeddedResource Include="Reports\TurnosPorProfesional.rdlc" />
     <Content Include="Views\Secretaria\EdicionPaciente.cshtml" />
     <Content Include="Views\Ausencias\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
