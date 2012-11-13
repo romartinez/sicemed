@@ -322,12 +322,11 @@ namespace Sicemed.Web.Controllers
         #region Reportes
         public ActionResult ReporteTurnos(DateTime? fecha = null)
         {
-            var report = new ServiceReport();
-            var reportData = MvcApplication.Container.Resolve<ITurnosReporte>();
-            reportData.Fecha = fecha.HasValue ? fecha.Value : DateTime.Now;
-            var reportInfo = new ReportInfo("TurnosReporte", string.Format("Turnos Para El Día: {0}", reportData.Fecha.ToShortDateString()), "", reportData.Execute);
-            var reportBytes = report.BuildReport(reportInfo, "PDF");
-            return File(reportBytes, "application/pdf", string.Format("TurnosDia_{0:yy-MM-dd}.pdf", reportData.Fecha));
+            var reportEngine = new ReportEngine();
+            var report = MvcApplication.Container.Resolve<ITurnosReporte>();
+            report.Fecha = fecha.HasValue ? fecha.Value : DateTime.Now;
+            var reportBytes = reportEngine.BuildReport(report);
+            return File(reportBytes, "application/pdf", string.Format("TurnosDia_{0:yy-MM-dd}.pdf", report.Fecha));
         }
 
         #endregion
