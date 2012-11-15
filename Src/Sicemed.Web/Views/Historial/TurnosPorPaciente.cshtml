@@ -1,106 +1,33 @@
-﻿@using Sicemed.Web.Infrastructure.Helpers
-@using Sicemed.Web.Models
-@using Sicemed.Web.Models.Enumerations
-@using Sicemed.Web.Models.Roles
-@model Sicemed.Web.Models.ViewModels.Historial.TurnosPorPacienteViewModel
+﻿@model Sicemed.Web.Models.ViewModels.Historial.TurnosPorPacienteViewModel
 @{
     ViewBag.Title = "Historial Turnos";
 }
 <h2>
     Historial Turnos
 </h2>
-@if (!Model.SeleccionPaciente.HayPacienteSeleccionado)
+
+<h3>
+    @Model.PacienteSeleccionado.Descripcion <a href="#" class="button_link btn_blue"><span>Imprimir</span></a>
+</h3>
+
+@using (Html.BeginForm("TurnosPorPaciente", "Historial", FormMethod.Get, new { id = "search-filters" }))
+{    
+    @Html.HiddenFor(x => x.PacienteSeleccionado.Id)
+    @Html.EditorFor(x => x.Filters)
+}
+
+@if (!Model.Turnos.Any())
 {
-    using (Html.BeginForm("BusquedaPaciente", "Historial", FormMethod.Get, new { id = "search-filters" }))
-    {
-    @Html.ValidationSummaryWithMessage()
-
-    @Html.EditorFor(x => x.SeleccionPaciente)       
-    
-    @Html.HiddenFor(x => x.SeleccionPaciente.BusquedaEfectuada)
-    
-    @Html.Submit("Buscar")    
-    }
-
-
-    if (Model.SeleccionPaciente.BusquedaEfectuada)
-    {
-        if (Model.SeleccionPaciente.PacientesEncontrados.Any())
-        {
-    <h3>
-        Se han encontrado los siguientes pacientes
-    </h3>
-    <ul>
-        @foreach (var paciente in Model.SeleccionPaciente.PacientesEncontrados)
-        {
-            <li>
-                @using (Html.BeginForm("TurnosPorPaciente", "Historial", FormMethod.Get))
-                {
-                    @Html.Hidden("SeleccionPaciente.PacienteSeleccionado.Id", paciente.Id)
-                                    
-                    <h4>
-                        @Html.LinkSubmit(paciente.Descripcion)
-                    </h4>                        
-                }
-            </li>
-        }
-    </ul>
-        }
-        else
-        {
     <div class="msg-error">
-        No se encuentran pacientes con los par&aacute;metros seleccionados.
+        El paciente no posee turnos en las fechas seleccionadas.
     </div>
-        }
-    }
 }
 else
 {
-    <h3>@Model.SeleccionPaciente.PacienteSeleccionado.Descripcion</h3>
-    using (Html.BeginForm("TurnosPorPaciente", "Historial", FormMethod.Get, new { id = "search-filters" }))
-    {
-    @Html.HiddenFor(x => x.SeleccionPaciente.BusquedaEfectuada)
-    @Html.HiddenFor(x => x.SeleccionPaciente.PacienteSeleccionado.Id)    
-
-    @Html.EditorFor(x => x.Filters)   
-    
-    }
-
-    if (!Model.Turnos.Any())
-    {
-    <div class="msg-error">
-        El paciente no posee turnos en las fechas seleccionadas.
-    </div>    
-    }
-    else
-    {
     <div class="historial">
         @foreach (var turno in Model.Turnos)
         {
-            <div class="turno turno-@turno.Estado.ToString().ToLower()">
-                <h4>@turno.FechaTurno.ToFullDate() - @turno.Profesional.Descripcion | @turno.Estado</h4>
-                <div>
-                    Especialidad: @turno.Especialidad.Descripcion
-                    
-                    @if(@turno.Consultorio != null)
-                    {
-                        <br />
-                        @:Consultorio: @turno.Consultorio.Descripcion                        
-                    }
-                </div>
-                @if (turno.Estado == EstadoTurno.Cancelado)
-                {
-                    <strong>Cancelaci&oacute;n</strong>
-                    <div>
-                        Cancelado por @turno.CanceladoPor.Descripcion el @turno.FechaCancelacion.Value.ToFullDate()
-                    </div>
-                    <strong>Motivo</strong>
-                    <div>                    
-                        @Html.Nl2Br(turno.MotivoCancelacion)
-                    </div>
-                }                
-            </div>
+            @Html.DisplayFor(x => turno)
         }
-    </div>        
-    }
+    </div>
 }

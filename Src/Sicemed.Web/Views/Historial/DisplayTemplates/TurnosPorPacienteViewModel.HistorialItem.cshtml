@@ -1,0 +1,27 @@
+﻿@using Sicemed.Web.Infrastructure.Helpers
+@using Sicemed.Web.Models.Enumerations
+@model Sicemed.Web.Models.ViewModels.Historial.TurnosPorPacienteViewModel.HistorialItem
+           
+<div class="turno turno-@Model.Estado.ToString().ToLower()">
+    <h4>@Model.FechaTurno.ToFullDate() - @Model.Profesional.Descripcion | @Model.Estado</h4>
+    <div>
+        Especialidad: @Model.Especialidad.Descripcion
+                    
+        @if(@Model.Consultorio != null)
+        {
+            <br />
+            @:Consultorio: @Model.Consultorio.Descripcion                        
+        }
+    </div>
+    @if (Model.Estado == EstadoTurno.Cancelado)
+    {
+        <strong>Cancelaci&oacute;n</strong>
+        <div>
+            Cancelado por @Model.CanceladoPor.Descripcion el @Model.FechaCancelacion.Value.ToFullDate()
+        </div>
+        <strong>Motivo</strong>
+        <div>                    
+            @Html.Nl2Br(Model.MotivoCancelacion)
+        </div>
+    }                
+</div>

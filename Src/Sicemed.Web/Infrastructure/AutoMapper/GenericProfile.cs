@@ -156,22 +156,6 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
 
             #region Historial
 
-            CreateMap<Turno, AtencionesViewModel.HistorialItem>()
-                .ForMember(d => d.Consultorio, m => m.MapFrom(o => o.Consultorio.Nombre))
-                .ForMember(d => d.Profesional, m => m.MapFrom(o => o.Profesional.Persona.NombreCompleto))
-                .ForMember(d => d.Especialidad, m => m.MapFrom(o => o.Especialidad.Nombre))
-                .ForMember(x => x.PuedoAtender, m => m.ResolveUsing(o => o.PuedeAplicar(EventoTurno.Atender)))
-                .ForMember(x => x.PuedoCancelar, m => m.ResolveUsing(o => o.PuedeAplicar(EventoTurno.Cancelar)))
-                .ForMember(x => x.PuedoPresentar, m => m.ResolveUsing(o => o.PuedeAplicar(EventoTurno.Presentar)));
-
-            CreateMap<Turno, TurnosPacienteViewModel.HistorialItem>()
-                .ForMember(d => d.Consultorio, m => m.MapFrom(o => o.Consultorio.Nombre))
-                .ForMember(d => d.Profesional, m => m.MapFrom(o => o.Profesional.Persona.NombreCompleto))
-                .ForMember(d => d.Especialidad, m => m.MapFrom(o => o.Especialidad.Nombre))
-                .ForMember(x => x.PuedoAtender, m => m.ResolveUsing(o => o.PuedeAplicar(EventoTurno.Atender)))
-                .ForMember(x => x.PuedoCancelar, m => m.ResolveUsing(o => o.PuedeAplicar(EventoTurno.Cancelar)))
-                .ForMember(x => x.PuedoPresentar, m => m.ResolveUsing(o => o.PuedeAplicar(EventoTurno.Presentar)));
-
             CreateMap<Turno, TurnosPorPacienteViewModel.HistorialItem>()
                 .ForMember(x => x.PuedoAtender, m => m.ResolveUsing(o => o.PuedeAplicar(EventoTurno.Atender)))
                 .ForMember(x => x.PuedoCancelar, m => m.ResolveUsing(o => o.PuedeAplicar(EventoTurno.Cancelar)))

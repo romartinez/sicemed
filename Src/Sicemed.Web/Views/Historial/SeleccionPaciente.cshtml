@@ -1,0 +1,34 @@
+﻿@model Sicemed.Web.Models.ViewModels.Historial.SeleccionPacienteViewModel
+@{
+    ViewBag.Title = "Historial Turnos Paciente";
+}
+
+<h2>Historial Turnos Paciente</h2>
+
+@using(Html.BeginForm("SeleccionPaciente", "Historial", FormMethod.Post))
+{
+    @Html.ValidationSummaryWithMessage()
+
+    @Html.EditorForModel()
+
+    @Html.Submit("Buscar")
+}
+
+<script id="tmplBusquedaPaciente" type="text/x-jquery-tmpl">
+    ${NombreCompleto}
+    <br />
+    <span style="font-style: italic; font-size: x-small">${TipoDocumento} ${Documento}
+    </span>
+</script>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            // Para que valide los hidden
+            $("form").data('validator').settings.ignore = "";
+            // Para que no muestre el cargando
+            $(document).unbind("ajaxStart");
+        });
+    </script>
+}

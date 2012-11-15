@@ -4,7 +4,6 @@ using NHibernate.Criterion;
 using NHibernate.Transform;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Components;
-using Sicemed.Web.Models.Enumerations;
 using Sicemed.Web.Models.ViewModels.Historial;
 
 namespace Sicemed.Web.Infrastructure.Queries.Historial
@@ -38,8 +37,7 @@ namespace Sicemed.Web.Infrastructure.Queries.Historial
                 .Fetch(t => t.Especialidad).Eager
                 .Where(t => t.FechaTurno >= FechaDesde)
                 .Where(t => t.FechaTurno <= FechaHasta)
-                .Where(t => t.Paciente == paciente)
-                .Where(t => t.Estado == EstadoTurno.Otorgado || t.Estado == EstadoTurno.Presentado)
+                .Where(t => t.Paciente == paciente)                
                 .OrderBy(t => t.FechaTurno).Desc;
 
             if (!string.IsNullOrWhiteSpace(Filtro))

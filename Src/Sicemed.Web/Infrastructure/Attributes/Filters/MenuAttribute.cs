@@ -112,7 +112,7 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
                     var paciente = user.As<Paciente>();
                     var pacienteRoot = CreateDefaultPage("Paciente", "#", order: 9100);
                     pacienteRoot.Childs.Add(CreateDefaultPage("Agenda", "Paciente/Agenda", pacienteRoot));
-                    pacienteRoot.Childs.Add(CreateDefaultPage("Historial Turnos", "Historial/Turnos", pacienteRoot));
+                    pacienteRoot.Childs.Add(CreateDefaultPage("Historial Turnos", "Historial/TurnosPorPaciente", pacienteRoot));
                     pages.Add(pacienteRoot);
                 }
 
@@ -124,7 +124,7 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
                     secretariaRoot.Childs.Add(CreateDefaultPage("Alta Paciente", "Secretaria/AltaPaciente", secretariaRoot));
                     secretariaRoot.Childs.Add(CreateDefaultPage("Edición Paciente", "Secretaria/EdicionPaciente", secretariaRoot));
                     secretariaRoot.Childs.Add(CreateDefaultPage("Administración Ausencias Profesionales", "Ausencias/", secretariaRoot));
-                    secretariaRoot.Childs.Add(CreateDefaultPage("Historial Turnos Paciente", "Historial/TurnosPorPaciente", secretariaRoot));
+                    secretariaRoot.Childs.Add(CreateDefaultPage("Historial Turnos Paciente", "Historial/SeleccionPaciente", secretariaRoot));
 
                     pages.Add(secretariaRoot);
                 }
@@ -132,6 +132,7 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
                 {
                     var profesionalRoot = CreateDefaultPage("Profesional", "#", order: 9300);
                     profesionalRoot.Childs.Add(CreateDefaultPage("Agenda", "Profesional/Agenda", profesionalRoot));
+                    profesionalRoot.Childs.Add(CreateDefaultPage("Historial Turnos Paciente", "Historial/SeleccionPaciente", profesionalRoot));
                     //profesionalRoot.Childs.Add(CreateDefaultPage("Calendario", "Profesional/Calendario", profesionalRoot));
 
                     pages.Add(profesionalRoot);

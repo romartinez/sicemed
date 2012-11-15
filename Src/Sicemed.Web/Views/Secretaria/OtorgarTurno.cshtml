@@ -38,7 +38,7 @@
                     <a data-url="@Url.Action("EdicionPaciente")?id=" id="lnkEdicionPaciente"  target="_blank" class="button_link btn_yellow" style="display: none;">
                         <span>Edici&oacute;n Paciente</span>
                     </a>
-                    <a data-url="@Url.Action("TurnosPorPaciente","Historial")?SeleccionPaciente.PacienteSeleccionado.Id=" id="lnkTurnosPaciente"  target="_blank" class="button_link btn_pink" style="display: none;">
+                    <a data-url="@Url.Action("TurnosPorPaciente","Historial")?pacienteId=" id="lnkTurnosPaciente"  target="_blank" class="button_link btn_pink" style="display: none;">
                         <span>Turnos</span>
                     </a>
                 </div>
@@ -243,7 +243,7 @@
             return false;
         };
 
-        jQuery(function () {
+        jQuery(function() {
             $("#sobreTurnoFecha").datepicker({ dateFormat: "dd/mm/yy" });
 
             $("#cmdSobreTurno").click(otorgarSobreTurno);
@@ -253,7 +253,7 @@
                 data: { results: [] },
                 width: '300px',
                 placeholder: "Seleccione un Profesional",
-                id: function (e) { return e.Id; },
+                id: function(e) { return e.Id; },
                 allowClear: true
             }).select2("disable");
             $('#calendar').fullCalendar({
@@ -272,9 +272,9 @@
                 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
                 dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab'],
                 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
-                            'Agosto', 'Septiembre', 'Ocubtre', 'Noviembre', 'Diciembre'],
+                    'Agosto', 'Septiembre', 'Ocubtre', 'Noviembre', 'Diciembre'],
                 monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-                            'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec'],
                 buttonText: {
                     today: 'hoy',
                     month: 'mes',
@@ -291,7 +291,7 @@
                     week: 'ddd d/M',
                     day: 'dddd d/M'
                 },
-                eventClick: function (calEvent, jsEvent, view) {
+                eventClick: function(calEvent, jsEvent, view) {
                     if (calEvent.libre) {
                         var fecha = app.format.fulldate(calEvent.turno.FechaTurnoInicial);
                         var duracion = calEvent.turno.DuracionTurno;
@@ -299,7 +299,7 @@
                             + " <strong>" + $("#PacienteId").select2("data").NombreCompleto + "</strong>"
                             + " un turno para el d&iacute;a <strong>" + fecha + "</strong> con una duraci&oacute;n de <strong>" + duracion + "</strong> "
                             + " para el profesional <strong>" + $("#ProfesionalId").select2("data").NombreCompleto + "</strong>?";
-                        app.ui.showConfirmation(text, function () {
+                        app.ui.showConfirmation(text, function() {
                             $("#FechaTurno").val(fecha);
                             $("#ConsultorioId").val(calEvent.turno.Consultorio.Id);
                             $("#DuracionTurno").val(calEvent.turno.DuracionTurno);
@@ -307,13 +307,13 @@
                         });
                     }
                 },
-                eventMouseout: function (event, jsEvent, view) {
+                eventMouseout: function(event, jsEvent, view) {
                     $(this).css('cursor', 'auto');
                 },
-                eventMouseover: function (event, jsEvent, view) {
+                eventMouseover: function(event, jsEvent, view) {
                     if (event.libre) $(this).css('cursor', 'pointer');
                 },
-                viewDisplay: function (view) {
+                viewDisplay: function(view) {
                     //http://code.google.com/p/fullcalendar/issues/detail?id=610#c5
                     var n = view.name,
                         body_h = $('div.fc-view-' + n + ' > div > div > div').height();
@@ -327,8 +327,10 @@
                 events: []
             }).hide();
 
-            //Quito el Cargando para esta página que queda mal.
+            // Para que valide los hidden
+            $("form").data('validator').settings.ignore = "";
+            // Que no muestre el cargando
             $(document).unbind("ajaxStart");
-        })
+        });
     </script>
 }

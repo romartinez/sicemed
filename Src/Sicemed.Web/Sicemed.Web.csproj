@@ -310,8 +310,8 @@
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\Reports\TurnosReportModel.cs" />
     <Compile Include="Models\Reports\TurnosPorProfesionalReportModel.cs" />
+    <Compile Include="Models\ViewModels\Historial\SeleccionPacienteViewModel.cs" />
     <Compile Include="Models\ViewModels\Historial\TurnosPorPacienteViewModel.cs" />
-    <Compile Include="Models\ViewModels\PacienteSearchViewModel.cs" />
     <Compile Include="Models\ViewModels\PersonaViewModel.cs" />
     <Compile Include="Models\ViewModels\Profesional\CalendarioProfesionalViewModel.cs" />
     <Compile Include="Models\ViewModels\Profesional\ProfesionalConEspecialidadesViewModel.cs" />
@@ -417,8 +417,6 @@
     <Compile Include="Infrastructure\Queries\Domain\ObtenerObrasSocialesDropDownQuery.cs" />
     <Compile Include="Infrastructure\Queries\Domain\ObtenerPlanesPorObraSocialDropDownQuery.cs" />
     <Compile Include="Infrastructure\Queries\Domain\ObtenerProvinciasDropDownQuery.cs" />
-    <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosPacienteQuery.cs" />
-    <Compile Include="Infrastructure\Queries\Historial\ObtenerAtencionesQuery.cs" />
     <Compile Include="Infrastructure\Queries\IQuery.cs" />
     <Compile Include="Infrastructure\Queries\IQueryFactory.cs" />
     <Compile Include="Infrastructure\Queries\ObtenerTurno\ObtenerTurnosProfesionalQuery.cs" />
@@ -469,8 +467,6 @@
     <Compile Include="Models\ViewModels\Cuenta\RecuperarPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\Cuenta\InciarSesionViewModel.cs" />
     <Compile Include="Models\ViewModels\Cuenta\RegistroPersonaViewModel.cs" />
-    <Compile Include="Models\ViewModels\Historial\AtencionesViewModel.cs" />
-    <Compile Include="Models\ViewModels\Historial\TurnosPacienteViewModel.cs" />
     <Compile Include="Models\ViewModels\InfoViewModel.cs" />
     <Compile Include="Models\ViewModels\Menu\PageViewModel.cs" />
     <Compile Include="Models\ViewModels\ObtenerTurno\BusquedaProfesionalViewModel.cs" />
@@ -778,6 +774,8 @@
     <Content Include="Views\Secretaria\EdicionPaciente.cshtml" />
     <Content Include="Views\Ausencias\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
+    <Content Include="Views\Historial\DisplayTemplates\TurnosPorPacienteViewModel.HistorialItem.cshtml" />
+    <Content Include="Views\Historial\SeleccionPaciente.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -927,8 +925,6 @@
     <Content Include="Views\Paciente\Agenda.cshtml" />
     <Content Include="Views\Paciente\DisplayTemplates\TurnoViewModel.cshtml" />
     <Content Include="Views\ObtenerTurno\UsuarioBloqueado.cshtml" />
-    <Content Include="Views\Historial\Atenciones.cshtml" />
-    <Content Include="Views\Historial\Turnos.cshtml" />
     <Content Include="Views\Historial\TurnosPorPaciente.cshtml" />
     <Content Include="Views\Shared\_LinkSubmit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\SearchFiltersViewModel.cshtml" />

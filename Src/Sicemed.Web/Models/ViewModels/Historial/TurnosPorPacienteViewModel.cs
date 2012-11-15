@@ -6,7 +6,7 @@ namespace Sicemed.Web.Models.ViewModels.Historial
 {
     public class TurnosPorPacienteViewModel
     {
-        public PacienteSearchViewModel SeleccionPaciente { get; set; }
+        public InfoViewModel PacienteSeleccionado { get; set; }
 
         public SearchFiltersViewModel Filters { get; set; }
 
@@ -16,7 +16,6 @@ namespace Sicemed.Web.Models.ViewModels.Historial
         {
             Turnos = new List<HistorialItem>();
             Filters = new SearchFiltersViewModel();
-            SeleccionPaciente = new PacienteSearchViewModel();
         }        
 
         public class HistorialItem
