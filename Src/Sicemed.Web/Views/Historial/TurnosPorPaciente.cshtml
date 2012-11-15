@@ -12,7 +12,7 @@
 
 @using (Html.BeginForm("TurnosPorPaciente", "Historial", FormMethod.Get, new { id = "search-filters" }))
 {    
-    @Html.HiddenFor(x => x.PacienteSeleccionado.Id)
+    @Html.Hidden("PacienteId", Model.PacienteSeleccionado.Id)
     @Html.EditorFor(x => x.Filters)
 }
 

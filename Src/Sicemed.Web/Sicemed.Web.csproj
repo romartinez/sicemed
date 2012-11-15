@@ -774,7 +774,7 @@
     <Content Include="Views\Secretaria\EdicionPaciente.cshtml" />
     <Content Include="Views\Ausencias\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
-    <Content Include="Views\Historial\DisplayTemplates\TurnosPorPacienteViewModel.HistorialItem.cshtml" />
+    <Content Include="Views\Historial\DisplayTemplates\HistorialItem.cshtml" />
     <Content Include="Views\Historial\SeleccionPaciente.cshtml" />
   </ItemGroup>
   <ItemGroup />

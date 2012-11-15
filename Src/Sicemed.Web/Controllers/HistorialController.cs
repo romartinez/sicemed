@@ -28,18 +28,17 @@ namespace Sicemed.Web.Controllers
         [AuthorizeIt(typeof(Secretaria))]
         public ActionResult SeleccionPaciente(SeleccionPacienteViewModel viewModel)
         {
-            return RedirectToAction("TurnosPorPaciente", new { pacienteId = viewModel.PacienteId });
+            return RedirectToAction("TurnosPorPaciente", new { viewModel.PacienteId });
         }
 
-        public ActionResult TurnosPorPaciente(long? pacienteId = null)
+        public ActionResult TurnosPorPaciente(TurnosPorPacienteViewModel viewModel)
         {
             //Si es sólo paciente, puede ver sus atenciones únicamente
-            if (User.IsInRole<Paciente>() && User.Roles.Count == 1) pacienteId = User.As<Paciente>().Id;
+            if (User.IsInRole<Paciente>() && User.Roles.Count == 1) viewModel.PacienteId = User.As<Paciente>().Id;
 
-            if (!pacienteId.HasValue) return RedirectToAction("SeleccionPaciente");
+            if (!viewModel.PacienteId.HasValue) return RedirectToAction("SeleccionPaciente");
 
-            var viewModel = new TurnosPorPacienteViewModel();
-            var paciente = SessionFactory.GetCurrentSession().Get<Paciente>(pacienteId);
+            var paciente = SessionFactory.GetCurrentSession().Get<Paciente>(viewModel.PacienteId);
             if (paciente == null) return HttpNotFound();
 
 
