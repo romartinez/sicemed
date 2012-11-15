@@ -343,6 +343,7 @@
                               <Value>=Fields!FechaTurno.Value</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>dd/MM/yy</Format>
                               </Style>
                             </TextRun>
                             <TextRun>
@@ -405,8 +406,7 @@
                       <rd:DefaultName>FechaTurno</rd:DefaultName>
                       <Style>
                         <Border>
-                          <Color>LightGrey</Color>
-                          <Style>Solid</Style>
+                          <Style>None</Style>
                         </Border>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -432,6 +432,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <KeepTogether>true</KeepTogether>
         <DataSetName>FichaPacienteReporte</DataSetName>
         <Top>3.24241cm</Top>
         <Height>1.46041cm</Height>
@@ -447,7 +448,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>1.85416in</Height>
+    <Height>1.85151in</Height>
     <Style />
   </Body>
   <Width>7.11167in</Width>

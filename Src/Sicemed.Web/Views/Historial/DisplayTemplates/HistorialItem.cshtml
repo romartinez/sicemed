@@ -23,5 +23,12 @@
         <div>                    
             @Html.Nl2Br(Model.MotivoCancelacion)
         </div>
+    }
+    else if (Model.Estado == EstadoTurno.Atendido)
+    {
+        <strong>Diagn&oacute;stico</strong>
+        <div>                    
+            @Html.Nl2Br(Model.Nota)
+        </div>
     }                
 </div>
