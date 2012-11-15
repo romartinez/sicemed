@@ -282,13 +282,13 @@
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaGeneralPacienteQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaProfesionalConEspecialidadesQuery.cs" />
     <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosPorPacienteQuery.cs" />
-    <Compile Include="Infrastructure\Reports\FichaPacienteReporte.cs" />
+    <Compile Include="Infrastructure\Reports\TurnosReporte.cs" />
     <Compile Include="Infrastructure\Reports\IReport.cs" />
     <Compile Include="Infrastructure\Reports\IReportFactory.cs" />
     <Compile Include="Infrastructure\Reports\ReporteBase.cs" />
     <Compile Include="Infrastructure\Reports\ReportOutputType.cs" />
     <Compile Include="Infrastructure\Reports\ReportEngine.cs" />
-    <Compile Include="Infrastructure\Reports\TurnosReporte.cs" />
+    <Compile Include="Infrastructure\Reports\FichaPacienteReporte.cs" />
     <Compile Include="Infrastructure\Services\INotificationService.cs" />
     <Compile Include="Infrastructure\Services\NotificationService.cs" />
     <Compile Include="Models\Ausencia.cs" />
