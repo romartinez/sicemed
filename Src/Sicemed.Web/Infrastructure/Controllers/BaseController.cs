@@ -12,6 +12,7 @@ using Sicemed.Web.Infrastructure.Exceptions;
 using Sicemed.Web.Infrastructure.Providers.Cache;
 using Sicemed.Web.Infrastructure.Queries;
 using Sicemed.Web.Infrastructure.Queries.Domain;
+using Sicemed.Web.Infrastructure.Reports;
 using Sicemed.Web.Infrastructure.Services;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Enumerations;
@@ -32,6 +33,7 @@ namespace Sicemed.Web.Infrastructure.Controllers
 
         public IMembershipService MembershipService { get; set; }
         public IQueryFactory QueryFactory { get; set; }
+        public IReportFactory ReportFactory { get; set; }
         public IMappingEngine MappingEngine { get; set; }
         public INotificationService NotificationService { get; set; }
         public ICacheProvider Cache { get; set; }

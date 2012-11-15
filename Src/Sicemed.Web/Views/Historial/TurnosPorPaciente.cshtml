@@ -7,7 +7,7 @@
 </h2>
 
 <h3>
-    @Model.PacienteSeleccionado.Descripcion <a href="#" class="button_link btn_blue"><span>Imprimir</span></a>
+    @Model.PacienteSeleccionado.Descripcion
 </h3>
 
 @using (Html.BeginForm("TurnosPorPaciente", "Historial", FormMethod.Get, new { id = "search-filters" }))
@@ -24,6 +24,18 @@
 }
 else
 {
+    <div>
+        @using (Html.BeginForm("FichaPacienteReporte", "Historial", FormMethod.Get, new { id = "search-filters" }))
+        {    
+            @Html.Hidden("PacienteId", Model.PacienteSeleccionado.Id)
+            @Html.HiddenFor(x => x.Filters.Desde)
+            @Html.HiddenFor(x => x.Filters.Hasta)
+            @Html.HiddenFor(x => x.Filters.Filtro)
+
+            @Html.Submit("Imprimir")
+        }        
+    </div>
+    
     <div class="historial">
         @foreach (var turno in Model.Turnos)
         {

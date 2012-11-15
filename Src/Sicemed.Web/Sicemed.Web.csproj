@@ -259,6 +259,7 @@
     <Compile Include="Infrastructure\Attributes\DataAnnotations\SearcheableDropDownPropertyAttribute.cs" />
     <Compile Include="Infrastructure\Controllers\AdministracionDeTurnosBaseController.cs" />
     <Compile Include="Infrastructure\Helpers\Dapper.cs" />
+    <Compile Include="Infrastructure\Helpers\StringExtensions.cs" />
     <Compile Include="Infrastructure\Jobs\AusentarTurnosVencidosJob.cs" />
     <Compile Include="Infrastructure\Jobs\CalculadorIndicadoresJob.cs" />
     <Compile Include="Infrastructure\Jobs\KeepAliveJob.cs" />
@@ -281,7 +282,9 @@
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaGeneralPacienteQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaProfesionalConEspecialidadesQuery.cs" />
     <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosPorPacienteQuery.cs" />
+    <Compile Include="Infrastructure\Reports\FichaPacienteReporte.cs" />
     <Compile Include="Infrastructure\Reports\IReport.cs" />
+    <Compile Include="Infrastructure\Reports\IReportFactory.cs" />
     <Compile Include="Infrastructure\Reports\ReporteBase.cs" />
     <Compile Include="Infrastructure\Reports\ReportOutputType.cs" />
     <Compile Include="Infrastructure\Reports\ReportEngine.cs" />
@@ -308,8 +311,8 @@
     <Compile Include="Models\Enumerations\EventoTurno.cs" />
     <Compile Include="Models\Moneda.cs" />
     <Compile Include="Models\Proveedor.cs" />
+    <Compile Include="Models\Reports\FichaPacienteReportModel.cs" />
     <Compile Include="Models\Reports\TurnosReportModel.cs" />
-    <Compile Include="Models\Reports\TurnosPorProfesionalReportModel.cs" />
     <Compile Include="Models\ViewModels\Historial\SeleccionPacienteViewModel.cs" />
     <Compile Include="Models\ViewModels\Historial\TurnosPorPacienteViewModel.cs" />
     <Compile Include="Models\ViewModels\PersonaViewModel.cs" />
@@ -739,6 +742,7 @@
     <Content Include="Reports\logo.png" />
     <Content Include="Reports\Report.aspx" />
     <Content Include="Models\Caja\CajaDiagram.cd" />
+    <EmbeddedResource Include="Reports\FichaPacienteReporte.rdlc" />
     <EmbeddedResource Include="Reports\TurnosReporte.rdlc" />
     <None Include="public\js\libs\jquery.validate-vsdoc.js" />
     <Content Include="public\js\libs\jquery.validate.js" />

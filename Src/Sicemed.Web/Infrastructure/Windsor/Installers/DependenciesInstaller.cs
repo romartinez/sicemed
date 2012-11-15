@@ -34,9 +34,11 @@ namespace SICEMED.Web.Infrastructure.Windsor.Installers
                 //Queries
                 AllTypes.FromThisAssembly().BasedOn<IQuery>()
                     .WithService.DefaultInterface().Configure(x => x.LifeStyle.Transient),
+                Component.For<IQueryFactory>().AsFactory(),
+                //Report
                 AllTypes.FromThisAssembly().BasedOn<IReport>()
                     .WithService.DefaultInterface().Configure(x => x.LifeStyle.Transient),
-                Component.For<IQueryFactory>().AsFactory(),
+                Component.For<IReportFactory>().AsFactory(),
                 Component.For<IApplicationInstaller>().ImplementedBy<ApplicationInstaller>().LifeStyle.Singleton,
                 //Transients
                 Component.For<IMembershipService>().ImplementedBy<MembershipService>().LifeStyle.Transient

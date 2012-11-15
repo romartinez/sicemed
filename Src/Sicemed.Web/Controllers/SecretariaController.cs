@@ -323,7 +323,7 @@ namespace Sicemed.Web.Controllers
         public ActionResult ReporteTurnos(DateTime? fecha = null)
         {
             var reportEngine = new ReportEngine();
-            var report = MvcApplication.Container.Resolve<ITurnosReporte>();
+            var report = ReportFactory.Create<ITurnosReporte>();
             report.Fecha = fecha.HasValue ? fecha.Value : DateTime.Now;
             var reportBytes = reportEngine.BuildReport(report);
             return File(reportBytes, "application/pdf", string.Format("TurnosDia_{0:yy-MM-dd}.pdf", report.Fecha));
