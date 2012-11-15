@@ -228,7 +228,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox14</rd:DefaultName>
         <Top>0.127cm</Top>
-        <Left>12.59777cm</Left>
+        <Left>12.07743cm</Left>
         <Height>1.94576cm</Height>
         <Width>5.33359cm</Width>
         <ZIndex>1</ZIndex>
@@ -297,7 +297,7 @@
         <rd:DefaultName>Textbox14</rd:DefaultName>
         <Top>2.24915cm</Top>
         <Height>0.67576cm</Height>
-        <Width>17.93136cm</Width>
+        <Width>17.41102cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -324,7 +324,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>17.93136cm</Width>
+              <Width>17.41102cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -436,7 +436,7 @@
         <DataSetName>FichaPacienteReporte</DataSetName>
         <Top>3.24241cm</Top>
         <Height>1.46041cm</Height>
-        <Width>17.93136cm</Width>
+        <Width>17.41102cm</Width>
         <ZIndex>4</ZIndex>
         <Visibility>
           <Hidden>=Iif(Fields!Profesional.Value="", true, false)</Hidden>
@@ -451,7 +451,7 @@
     <Height>1.85151in</Height>
     <Style />
   </Body>
-  <Width>7.11167in</Width>
+  <Width>7.05959in</Width>
   <Page>
     <PageHeader>
       <Height>1.32496cm</Height>
@@ -478,7 +478,7 @@
           <rd:DefaultName>Title</rd:DefaultName>
           <Top>0.0635cm</Top>
           <Height>1.12035cm</Height>
-          <Width>14.67699cm</Width>
+          <Width>14.2272cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -518,7 +518,7 @@
           </Paragraphs>
           <rd:DefaultName>ReportName</rd:DefaultName>
           <Top>0.0635cm</Top>
-          <Left>14.78282cm</Left>
+          <Left>14.26248cm</Left>
           <Height>0.99687cm</Height>
           <Width>3.14854cm</Width>
           <ZIndex>1</ZIndex>
@@ -579,7 +579,7 @@
           <rd:DefaultName>Textbox6</rd:DefaultName>
           <Top>0.09525cm</Top>
           <Height>0.6cm</Height>
-          <Width>17.93136cm</Width>
+          <Width>17.41102cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
