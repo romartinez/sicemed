@@ -50,12 +50,15 @@
         @if (Model.PuedoPresentar)
         {
             <div >
-            @using (Html.BeginForm("RegistrarIngresoPaciente", "Secretaria"))
-            {
-            @Html.AntiForgeryToken()
-            <input type="hidden" name="turnoId" value="@Model.Id"/>
-            @Html.Submit("Ingresar")
-            }
+                @using (Html.BeginForm("RegistrarIngresoPaciente", "Secretaria"))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="turnoId" value="@Model.Id"/>
+                    @Html.Submit("Ingresar")
+                }
+            </div>
+            <div>
+                <a href="@Url.Action("TurnosPorPaciente", "Historial", new { PacienteId = Model.Paciente.Id })" target="_blank" class="button_link btn_blue"><span>Historial Atenciones</span></a>
             </div>
         }
     </div>
