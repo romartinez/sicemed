@@ -42,8 +42,8 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
                     .Future();
 
                 pages = new List<PageViewModel>();
-
-                //pagesFromDb.ToList().ForEach(x => pages.Add(ConvertModelToDynamic(x)));
+                //Esto te permite ver las paginas que agregas
+                pagesFromDb.ToList().ForEach(x => pages.Add(ConvertModelToDynamic(x)));
 
                 AttachCorePages(pages);
 
@@ -102,8 +102,8 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
             //Only show the menu to anon users or Pacientess
             if (user == null || user.IsInRole<Paciente>())
             {
-                //NOTE: Deshabilitado por ahora...
-                //pages.Add(CreateDefaultPage("Obtener Turno", "ObtenerTurno", order: 9000)); //Almost at the end				                
+                //Obtener turno paciente
+                pages.Add(CreateDefaultPage("Obtener Turno", "ObtenerTurno", order: 9000)); //Almost at the end				                
             }
             if (user != null)
             {
