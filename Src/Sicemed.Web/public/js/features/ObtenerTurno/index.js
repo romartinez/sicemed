@@ -60,6 +60,7 @@ var model = (function () {
                     var description = "<div class='turno-libre'>"
                         + "<span class='text-blue'>Fecha Turno:</span><span>" + app.format.date(turno.FechaTurnoInicial) + "</span><br/>"
                         + "<span class='text-blue'>Horario:</span><span>" + app.format.hour(turno.FechaTurnoInicial) + " / " + app.format.hour(turno.FechaTurnoFinal) + "</span><br/>"
+                        + "<span class='text-blue'>Duracion:</span><span>" + turno.DuracionTurno +  "</span><br/>"
                         + "<span class='text-blue'>Consultorio:</span><span>" + turno.Consultorio.Descripcion + "</span><br/>"
                         + "<span class='text-blue'>Especialidades:</span><span>" + especialidadesAtendidasTurno + "</span>"
                         + "</div>";
@@ -67,6 +68,7 @@ var model = (function () {
                         title: turno.Paciente ? turno.Paciente.Descripcion : "Reservar...",
                         start: turno.FechaTurnoInicial,
                         end: turno.FechaTurnoFinal,
+                        duracion:turno.DuracionTurno,
                         allDay: false,
                         description: turno.Paciente ? '' : description,
                         color: turno.Paciente ? '#F00' : null,
@@ -162,13 +164,12 @@ var model = (function () {
 
         self.reservar = function () {
             $.post('/ObtenerTurno/ReservarTurno', {
-                especialidadId: self.especialidadAgendaSeleccionada() ?
-                                    self.especialidadAgendaSeleccionada().Id
-                                    : self.especialidadSeleccionada().Id,
+                especialidadId: self.especialidadAgendaSeleccionada() ? self.especialidadAgendaSeleccionada().Id : self.especialidadSeleccionada().Id,
                 profesionalId: self.profesionalSeleccionado().Id,
                 fecha: app.format.fulldate(self.turnoSeleccionado().FechaTurnoInicial),
+                duracion: self.turnoSeleccionado().DuracionTurno,
                 consultorioId: self.turnoSeleccionado().Consultorio.Id
-            }).done(function (d) {
+             }).done(function (d) {
                 self.turnoAsignado(d);
                 self.currentStep(stepComprobante);
             });

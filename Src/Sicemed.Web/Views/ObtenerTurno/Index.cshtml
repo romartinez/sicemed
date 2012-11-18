@@ -86,7 +86,9 @@
             <span class="text-blue">Horario:</span><span data-bind="text: app.format.hour(turnoSeleccionado().FechaTurnoInicial)"></span> / 
             <span data-bind="text: app.format.hour(turnoSeleccionado().FechaTurnoFinal)"></span>
             <br/>
-            <span class="text-blue">Consultorio:</span> <span data-bind="text: turnoSeleccionado().Consultorio.Descripcion"></span>
+            <span class="text-blue">Duracion:</span><span data-bind="text: turnoSeleccionado().DuracionTurno"></span>
+            <br/>
+            <span class="text-blue">Consultorio:</span><span data-bind="text: turnoSeleccionado().Consultorio.Descripcion"></span>
             <br/>
             <span class="text-blue"> Especialidad:</span>            
             <select data-bind="visible: !especialidadSeleccionada(), options: turnoSeleccionado().EspecialidadesAtendidas, optionsText: 'Descripcion', value: especialidadAgendaSeleccionada, optionsCaption: '-- Seleccione --'">

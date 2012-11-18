@@ -26,9 +26,13 @@
     }
     else if (Model.Estado == EstadoTurno.Atendido)
     {
-        <strong>Diagn&oacute;stico</strong>
-        <div>                    
-            @Html.Nl2Br(Model.Nota)
-        </div>
+        //RM: Se habilita solo al Profesional o a los pacientes visualizar el diagnóstico
+            if (User.IsInRole("Profesional") || User.IsInRole("Paciente")) 
+            {
+                <strong>Diagn&oacute;stico</strong>
+                <div>                    
+                    @Html.Nl2Br(Model.Nota)
+                </div>
+            }
     }                
 </div>

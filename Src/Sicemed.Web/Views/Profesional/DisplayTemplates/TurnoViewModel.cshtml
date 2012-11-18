@@ -52,7 +52,7 @@
                 {
                     @:El paciente ya se ha atendido con anterioridad.
                     <a href="@Url.Action("TurnosPorPaciente", "Historial", new { PacienteId = Model.Paciente.Id })" target="_blank" class="button_link btn_blue"><span>Historial Atenciones</span></a>
-                    <a href="@Url.Action("EdicionPaciente", "Secretaria", new { id = Model.Paciente.Id })" target="_blank" class="button_link btn_blue"><span>Editar Paciente</span></a>
+                    <a href="@Url.Action("EdicionPaciente", "Secretaria", new { id = Model.Paciente.Id })" target="_blank" class="button_link btn_yellow"><span>Editar Paciente</span></a>
                 }
             </div>               
         </div>
@@ -92,7 +92,23 @@
                     }                    
                 }
             }
-
+            @if (Model.Estado == EstadoTurno.Atendido)
+                {
+                    using (Html.BeginForm("AgregarNota", "Profesional"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="turnoId" value="@Model.Id"/>                        
+                        <div>
+                            <span class="text-blue">Anotaci&oacute;n Previa: </span><br/>
+                            <p>
+                                @Html.Nl2Br(Model.Nota)
+                            </p>
+                        </div>        
+                        <hr/>        
+                        <textarea cols="5" rows="10" style="width: 100%;" name="nota"></textarea>
+                        @Html.Submit("Agregar Nota")
+                    }                    
+                }
             @if (Model.PuedoCancelar)
             {
                 using (Html.BeginForm("CancelarTurno", "Profesional"))

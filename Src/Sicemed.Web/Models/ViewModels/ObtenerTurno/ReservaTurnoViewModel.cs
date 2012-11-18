@@ -7,7 +7,7 @@ namespace Sicemed.Web.Models.ViewModels.ObtenerTurno
     {
         public long Id { get; set; }
         public DateTime FechaTurnoInicial { get; set; }
-
+        public TimeSpan DuracionTurno { get; set; }        
         public InfoViewModel Consultorio { get; set; }
         public InfoViewModel Paciente { get; set; }
         public InfoViewModel Especialidad { get; set; }
@@ -19,6 +19,7 @@ namespace Sicemed.Web.Models.ViewModels.ObtenerTurno
                          {
                              Id = turno.Id,
                              FechaTurnoInicial = turno.FechaTurno,
+                             DuracionTurno= turno.DuracionTurno,
                              Consultorio =
                                  new InfoViewModel() { Id = turno.Consultorio.Id, Descripcion = turno.Consultorio.Descripcion },
                              Paciente =

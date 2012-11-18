@@ -37,7 +37,7 @@ namespace Sicemed.Web.Infrastructure.Reports
             }
         }
 
-        public override string Title { get { return string.Format("Ficha Paciente \nFechas: {0:dd/MM/yyyy} hasta {1:dd/MM/yyyy} Filtro: {2}", FechaDesde, FechaHasta, string.IsNullOrWhiteSpace(Filtro) ? "*Sin Filtro*" : Filtro); } }
+        public override string Title { get { return string.Format("Resumen de Atenciones\nFechas: {0:dd/MM/yyyy} hasta {1:dd/MM/yyyy}\nFiltro: {2}", FechaDesde, FechaHasta, string.IsNullOrWhiteSpace(Filtro) ? "*Sin Filtro*" : Filtro); } }
 
         public override string Name { get { return "FichaPacienteReporte"; } }
 

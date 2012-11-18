@@ -31,10 +31,12 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Profesional.Value</Value>
+                              <Value>="&lt;b&gt;&lt;u&gt;Profesional&lt;/u&gt;&lt;/b&gt;: &lt;i&gt;" &amp; Fields!Profesional.Value &amp; "&lt;/i&gt;&lt;b&gt;  -  &lt;u&gt;Fecha Turnos:&lt;/u&gt;&lt;/b&gt; &lt;i&gt;" &amp; FormatDateTime(Fields!FechaTurnos.Value,DateFormat.ShortDate) &amp; "&lt;/i&gt;"</Value>
+                              <MarkupType>HTML</MarkupType>
                               <Style>
+                                <FontStyle>Italic</FontStyle>
                                 <FontSize>14pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
+                                <FontWeight>Normal</FontWeight>
                                 <Color>White</Color>
                               </Style>
                             </TextRun>
@@ -242,6 +244,9 @@
           <SortExpression>
             <Value>=Fields!Profesional.Value</Value>
           </SortExpression>
+          <SortExpression>
+            <Value>=Fields!FechaTurno.Value</Value>
+          </SortExpression>
         </SortExpressions>
         <Top>0.17639cm</Top>
         <Height>1.84383cm</Height>
@@ -253,7 +258,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>0.79536in</Height>
+    <Height>1.03158in</Height>
     <Style />
   </Body>
   <Width>7.0596in</Width>
@@ -382,6 +387,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
+          <Top>-0.00001cm</Top>
           <Height>0.6cm</Height>
           <Width>17.93136cm</Width>
           <Style>

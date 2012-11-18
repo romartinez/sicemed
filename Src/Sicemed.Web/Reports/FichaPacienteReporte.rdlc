@@ -111,7 +111,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox14</rd:DefaultName>
-        <Top>0.127cm</Top>
+        <Top>0.762cm</Top>
         <Height>1.94576cm</Height>
         <Width>10.73109cm</Width>
         <Style>
@@ -227,9 +227,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox14</rd:DefaultName>
-        <Top>0.127cm</Top>
+        <Top>0.762cm</Top>
         <Left>12.07743cm</Left>
-        <Height>1.94576cm</Height>
+        <Height>2.25444cm</Height>
         <Width>5.85393cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -295,8 +295,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox14</rd:DefaultName>
-        <Top>2.24915cm</Top>
-        <Height>0.67576cm</Height>
+        <Top>3.01644cm</Top>
+        <Height>0.54347cm</Height>
         <Width>17.93136cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
@@ -310,7 +310,8 @@
         </Style>
       </Textbox>
       <Line Name="Line1">
-        <Top>3.1013cm</Top>
+        <Top>5.9588cm</Top>
+        <Left>0cm</Left>
         <Height>0cm</Height>
         <Width>17.93136cm</Width>
         <ZIndex>3</ZIndex>
@@ -418,6 +419,42 @@
                 </TablixCell>
               </TablixCells>
             </TablixRow>
+            <TablixRow>
+              <Height>0.6cm</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox5">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox5</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
@@ -429,32 +466,117 @@
           <TablixMembers>
             <TablixMember>
               <Group Name="Details" />
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
         <KeepTogether>true</KeepTogether>
         <DataSetName>FichaPacienteReporte</DataSetName>
-        <Top>3.24241cm</Top>
-        <Height>1.46041cm</Height>
+        <Top>4.35728cm</Top>
+        <Height>2.06041cm</Height>
         <Width>17.93136cm</Width>
         <ZIndex>4</ZIndex>
-        <Visibility>
-          <Hidden>=Iif(Fields!Profesional.Value="", true, false)</Hidden>
-        </Visibility>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
+      <Line Name="Line2">
+        <Left>0cm</Left>
+        <Height>0cm</Height>
+        <Width>17.93136cm</Width>
+        <ZIndex>5</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+        </Style>
+      </Line>
+      <Textbox Name="Textbox3">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>DATOS DEL PACIENTE</Value>
+                <Style>
+                  <FontStyle>Italic</FontStyle>
+                  <FontSize>15pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>Underline</TextDecoration>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Height>0.762cm</Height>
+        <Width>17.93136cm</Width>
+        <ZIndex>6</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <BackgroundColor>LightGrey</BackgroundColor>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox4">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>DETALLE DE ATENCIONES</Value>
+                <Style>
+                  <FontStyle>Italic</FontStyle>
+                  <FontSize>15pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>Underline</TextDecoration>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>3.6144cm</Top>
+        <Height>0.762cm</Height>
+        <Width>17.93136cm</Width>
+        <ZIndex>7</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <BackgroundColor>LightGrey</BackgroundColor>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>1.85151in</Height>
+    <Height>2.52665in</Height>
     <Style />
   </Body>
-  <Width>7.05959in</Width>
+  <Width>7.15334in</Width>
   <Page>
     <PageHeader>
-      <Height>1.32496cm</Height>
+      <Height>4.62208cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -476,9 +598,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Title</rd:DefaultName>
-          <Top>0.0635cm</Top>
-          <Height>1.12035cm</Height>
-          <Width>14.2272cm</Width>
+          <Top>2.6162cm</Top>
+          <Left>7.64646cm</Left>
+          <Height>1.81708cm</Height>
+          <Width>10.2849cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -517,11 +640,60 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>ReportName</rd:DefaultName>
-          <Top>0.0635cm</Top>
-          <Left>13.20415cm</Left>
+          <Left>13.35668cm</Left>
           <Height>0.99687cm</Height>
           <Width>4.72721cm</Width>
           <ZIndex>1</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Image Name="Image4">
+          <Source>Embedded</Source>
+          <Value>logo</Value>
+          <Sizing>FitProportional</Sizing>
+          <Height>4.43328cm</Height>
+          <Width>6.44771cm</Width>
+          <ZIndex>2</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Image>
+        <Textbox Name="Textbox2">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Teléfono: (0341) 438-2370
+Velez Sarsfield 825, Rosario</Value>
+                  <Style>
+                    <FontStyle>Italic</FontStyle>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>16pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                    <TextDecoration>None</TextDecoration>
+                    <Color>#000000</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox2</rd:DefaultName>
+          <Top>2.6162cm</Top>
+          <Height>1.81708cm</Height>
+          <Width>7.24537cm</Width>
+          <ZIndex>3</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -540,7 +712,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.82754cm</Height>
+      <Height>0.69525cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -584,6 +756,9 @@
             <Border>
               <Style>None</Style>
             </Border>
+            <TopBorder>
+              <Style>Solid</Style>
+            </TopBorder>
             <PaddingLeft>2pt</PaddingLeft>
             <PaddingRight>2pt</PaddingRight>
             <PaddingTop>2pt</PaddingTop>
@@ -718,6 +893,16 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
+  <EmbeddedImages>
+    <EmbeddedImage Name="logo">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>292c1ca3-e47f-4515-b429-47ad5b33d29f</rd:ReportID>
 </Report>

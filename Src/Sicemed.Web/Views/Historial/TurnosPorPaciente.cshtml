@@ -31,8 +31,11 @@ else
             @Html.HiddenFor(x => x.Filters.Desde)
             @Html.HiddenFor(x => x.Filters.Hasta)
             @Html.HiddenFor(x => x.Filters.Filtro)
-
-            @Html.Submit("Imprimir Ficha")
+//RM: Se habilita solo al Profesional o a los pacientes la impresion del historial de ateciones
+            if (User.IsInRole("Profesional") || User.IsInRole("Paciente")) 
+            {
+                 @Html.Submit("Imprimir Ficha")
+            }
         }        
     </div>
     
