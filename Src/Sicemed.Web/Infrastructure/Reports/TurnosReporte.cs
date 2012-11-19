@@ -35,7 +35,7 @@ namespace Sicemed.Web.Infrastructure.Reports
                 .Fetch(t => t.Profesional.Persona).Eager
                 .Fetch(t => t.Paciente).Eager
                 .Fetch(t => t.Paciente.Persona).Eager
-                .Where(t => t.Estado != EstadoTurno.Cancelado)
+//                .Where(t => t.Estado != EstadoTurno.Cancelado)
                 .Where(t => t.FechaTurno >= desde)
                 .And(t => t.FechaTurno <= hasta)
                 .TransformUsing(Transformers.DistinctRootEntity)                
@@ -55,7 +55,11 @@ namespace Sicemed.Web.Infrastructure.Reports
                 Consultorio = turno.Consultorio != null ? turno.Consultorio.Nombre : string.Empty,
                 Especialidad = turno.Especialidad != null ? turno.Especialidad.Nombre : string.Empty,
                 FechaTurno = turno.FechaTurno,
-                FechaTurnoFin = turno.FechaTurnoFinal
+                FechaTurnoFin = turno.FechaTurnoFinal,
+                ObraSocial=turno.Paciente.Plan.ObraSocial.RazonSocial,
+                Plan=turno.Paciente.Plan.Nombre,
+                Monto=turno.Profesional.RetencionFija.GetValueOrDefault(0),
+                EstadoTurno=turno.Estado.Get()
             };
         }
     }

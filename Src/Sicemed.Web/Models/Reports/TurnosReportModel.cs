@@ -11,5 +11,9 @@ namespace Sicemed.Web.Models.Reports
         public string Paciente { get; set; }
         public DateTime FechaTurno { get; set; }
         public DateTime FechaTurnoFin { get; set; }
+        public string ObraSocial { get; set; }
+        public string Plan { get; set; }
+        public Decimal Monto { get; set; }
+        public string EstadoTurno { get; set; }
     }
 }
