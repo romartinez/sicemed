@@ -4,7 +4,7 @@
     ui.showDialog = function (options, callback) {
         var defaults = {
             modal: true,
-            title: 'CLIP {+Soluciones} - SICEMED',
+            title: 'SICEMED',
             message: '',
             width: '400px',
             buttons: {

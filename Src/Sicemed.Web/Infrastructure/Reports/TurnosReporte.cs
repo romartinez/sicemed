@@ -35,7 +35,8 @@ namespace Sicemed.Web.Infrastructure.Reports
                 .Fetch(t => t.Profesional.Persona).Eager
                 .Fetch(t => t.Paciente).Eager
                 .Fetch(t => t.Paciente.Persona).Eager
-//                .Where(t => t.Estado != EstadoTurno.Cancelado)
+//RM: Me interesa listar todos los turnos
+//              .Where(t => t.Estado != EstadoTurno.Cancelado)
                 .Where(t => t.FechaTurno >= desde)
                 .And(t => t.FechaTurno <= hasta)
                 .TransformUsing(Transformers.DistinctRootEntity)                

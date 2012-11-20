@@ -51,9 +51,12 @@
                 else
                 {
                     @:El paciente ya se ha atendido con anterioridad.
+                }
+                 @if (Model.Estado == EstadoTurno.Presentado || Model.Estado == EstadoTurno.Atendido)
+                 {
                     <a href="@Url.Action("TurnosPorPaciente", "Historial", new { PacienteId = Model.Paciente.Id })" target="_blank" class="button_link btn_blue"><span>Historial Atenciones</span></a>
                     <a href="@Url.Action("EdicionPaciente", "Secretaria", new { id = Model.Paciente.Id })" target="_blank" class="button_link btn_yellow"><span>Editar Paciente</span></a>
-                }
+                 }
             </div>               
         </div>
         <div>
@@ -72,9 +75,10 @@
                         <input type="hidden" name="turnoId" value="@Model.Id"/>
                         <textarea cols="5" rows="10" style="width: 100%;" name="nota">@Model.Nota</textarea>
                         @Html.Submit("Atender")
+                        <a href="@Url.Action("OtorgarTurno", "Secretaria")" target="_blank" class="button_link btn_grey"><span>Otorgar Nuevo Turno</span></a>
                     }                    
                 }
-                else
+/*                else
                 {
                     using (Html.BeginForm("AgregarNota", "Profesional"))
                     {
@@ -90,7 +94,7 @@
                         <textarea cols="5" rows="10" style="width: 100%;" name="nota"></textarea>
                         @Html.Submit("Agregar Nota")
                     }                    
-                }
+                }*/
             }
             @if (Model.Estado == EstadoTurno.Atendido)
                 {
@@ -107,6 +111,7 @@
                         <hr/>        
                         <textarea cols="5" rows="10" style="width: 100%;" name="nota"></textarea>
                         @Html.Submit("Agregar Nota")
+                        <a href="@Url.Action("OtorgarTurno", "Secretaria")" target="_blank" class="button_link btn_grey"><span>Otorgar Nuevo Turno</span></a>
                     }                    
                 }
             @if (Model.PuedoCancelar)
