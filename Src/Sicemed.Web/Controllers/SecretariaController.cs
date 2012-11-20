@@ -80,7 +80,7 @@ namespace Sicemed.Web.Controllers
                 query.ClearCache();
 
                 ShowMessages(ResponseMessage.Success("Turno otorgado con éxito."));
-
+                               
                 return RedirectToAction("OtorgarTurno");
             }
             return View(editModel);
