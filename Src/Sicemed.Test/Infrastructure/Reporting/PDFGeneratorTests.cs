@@ -22,7 +22,7 @@
 //        public void CanCreateReport()
 //        {
 //            var g = new PDFGenerator();
-//            var b = g.OnTheFlyRender("WALTERPOCH", null);
+//            var b = g.OnTheFlyRender("RM", null);
 
 //            File.WriteAllBytes(@"C:\test2.pdf", b);
 //        }

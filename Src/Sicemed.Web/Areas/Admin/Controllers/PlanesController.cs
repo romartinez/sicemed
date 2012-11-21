@@ -43,6 +43,7 @@ namespace Sicemed.Web.Areas.Admin.Controllers
                                            x.Id,
                                            x.Nombre,
                                            x.Descripcion,
+                                           x.Coseguro,
                                            ObraSocial = x.ObraSocial != null
                                                             ? new
                                                               {

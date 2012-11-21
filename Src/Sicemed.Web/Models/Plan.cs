@@ -12,6 +12,8 @@ namespace Sicemed.Web.Models
 
         public virtual string Descripcion { get; set; }
 
+        public virtual decimal Coseguro { get; set; }
+
         #endregion
 
         #region Navigation Properties
@@ -19,5 +21,7 @@ namespace Sicemed.Web.Models
         public virtual ObraSocial ObraSocial { get; set; }
 
         #endregion
+
+      
     }
 }

@@ -534,7 +534,9 @@
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Pagina.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Parametro.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Persona.hbm.xml" />
-    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Plan.hbm.xml" />
+    <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Plan.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Roles\Profesional.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Provincia.hbm.xml" />
     <EmbeddedResource Include="Infrastructure\NHibernate\Mappings\Serialized\Roles\Rol.hbm.xml" />

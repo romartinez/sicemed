@@ -22,7 +22,7 @@
                 params: {
                     caption: 'Gesti&oacute;n De Planes',
                     emptyrecords: 'No hay Planes cargados.',
-                    colNames: ['Id', 'Nombre', 'Descripci&oacute;n', 'Obra Social'],
+                    colNames: ['Id', 'Nombre', 'Descripci&oacute;n','Coseguro', 'Obra Social'],
                     colModel: [
                             {
                                 name: 'Id',
@@ -59,6 +59,16 @@
                                 },
                                 formoptions: {
                                     label: 'Descripcion'
+                                }
+                            },
+                            {
+                                name: 'Coseguro',
+                                index: 'Coseguro',
+                                width: 55,
+                                editable: true,
+                                sortable: false,
+                                formoptions: {
+                                    label: 'Monto Coseguro'
                                 }
                             },
                             {
