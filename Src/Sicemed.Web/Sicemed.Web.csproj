@@ -309,6 +309,15 @@
     <Compile Include="Models\Components\CambioEstadoTurno.cs" />
     <Compile Include="Models\Enumerations\EstadoTurno.cs" />
     <Compile Include="Models\Enumerations\EventoTurno.cs" />
+    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\ABNegativo.cs" />
+    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\ABPositivo.cs" />
+    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\ANegativo.cs" />
+    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\APositivo.cs" />
+    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\BNegativo.cs" />
+    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\BPositivo.cs" />
+    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\CeroNegativo.cs" />
+    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\CeroPositivo.cs" />
+    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\GrupoFactorSanguineo.cs" />
     <Compile Include="Models\Moneda.cs" />
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\Reports\FichaPacienteReportModel.cs" />

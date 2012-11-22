@@ -97,13 +97,6 @@
   </Class>
   <Class Name="Sicemed.Web.Models.Parametro" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="0.5" Y="2.5" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="Sicemed.Web.Models.Parametro.Keys" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Models\Parametro.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>ABAAAAAAAAAABARAgAAAAAAAAAAAAIAAAAAAAAAAAiA=</HashCode>
       <FileName>Models\Parametro.cs</FileName>
@@ -154,13 +147,6 @@
     <ShowAsAssociation>
       <Property Name="Persona" />
     </ShowAsAssociation>
-  </Class>
-  <Class Name="Sicemed.Web.Models.Components.Documento">
-    <Position X="8.5" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAABAAA=</HashCode>
-      <FileName>Models\Components\Documento.cs</FileName>
-    </TypeIdentifier>
   </Class>
   <Class Name="Sicemed.Web.Models.Components.Telefono">
     <Position X="10.25" Y="3" Width="1.5" />
