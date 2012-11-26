@@ -13,10 +13,13 @@
     <property name="EsObtenidoWeb" not-null="true" />
     <property name="Estado" not-null="true" />
     <property name="FechaEstado" not-null="true" />
+    <property name="NumeroAfiliado" />
+    <property name="Coseguro" />
     <many-to-one name="Paciente" not-null="true" foreign-key="FK_Turno_PersonaRol_Paciente" />
     <many-to-one name="Profesional" not-null="true" foreign-key="FK_Turno_PersonaRol_Profesional" />
     <many-to-one name="Especialidad" not-null="true" foreign-key="FK_Turno_Especialidad" />
     <many-to-one name="Consultorio" foreign-key="FK_Turno_Consultorio" />
+    <many-to-one name="Plan" foreign-key="FK_Turno_Plan" />
     <property name="DuracionTurno" not-null="true" />
     <list name="CambiosDeEstado" table="TurnosCambioEstados" lazy="false" fetch="join">
       <key column="TurnoId" foreign-key="FK_TurnosCambioEstados_Turno" />

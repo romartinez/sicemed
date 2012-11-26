@@ -19,27 +19,25 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Property(x => x.MotivoCancelacion);
             Property(x => x.Estado, map => map.NotNullable(true));
             Property(x => x.FechaEstado, map => map.NotNullable(true));
-
+            Property(x => x.NumeroAfiliado);
+            Property(x => x.Coseguro);
             ManyToOne(x => x.Paciente, map =>
                                        {
                                            map.NotNullable(true);
                                            map.ForeignKey("FK_Turno_PersonaRol_Paciente");
                                        });
-
             ManyToOne(x => x.Profesional, map =>
                                           {
                                               map.NotNullable(true);
                                               map.ForeignKey("FK_Turno_PersonaRol_Profesional");
                                           });
-
             ManyToOne(x => x.Especialidad, map =>
                                            {
                                                map.NotNullable(true);
                                                map.ForeignKey("FK_Turno_Especialidad");
                                            });
-
             ManyToOne(x => x.Consultorio, map => map.ForeignKey("FK_Turno_Consultorio"));
-
+            ManyToOne(x => x.Plan, map => map.ForeignKey("FK_Turno_Plan"));
             List(x => x.CambiosDeEstado, collectionMap =>
                 {
                     collectionMap.Table("TurnosCambioEstados");

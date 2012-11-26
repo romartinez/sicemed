@@ -498,32 +498,44 @@ namespace Sicemed.Web.Infrastructure
 
             //Turno Ausente
             session.Save(Turno.Create(DateTime.Now.AddDays(-1).SetTimeWith(hInicio), TimeSpan.FromMinutes(15), PersonaAdminProfesionalWalter.As<Paciente>(),
-                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1")
+                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA,
+                         PersonaAdminProfesionalWalter.As<Paciente>().Plan,PersonaAdminProfesionalWalter.As<Paciente>().NumeroAfiliado,PersonaAdminProfesionalWalter.As<Paciente>().Plan.Coseguro,
+                         "127.0.0.1")
                          .MarcarAusente());
 
             //Turno Pendiente de Presentarse
             session.Save(Turno.Create(DateTime.Now.SetTimeWith(hInicio), TimeSpan.FromMinutes(15), PersonaAdminProfesionalWalter.As<Paciente>(),
-                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1"));
+                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA,
+                         PersonaAdminProfesionalWalter.As<Paciente>().Plan, PersonaAdminProfesionalWalter.As<Paciente>().NumeroAfiliado, PersonaAdminProfesionalWalter.As<Paciente>().Plan.Coseguro, 
+                         "127.0.0.1"));
 
             //Turno Presentado
             session.Save(Turno.Create(DateTime.Now.SetTimeWith(hInicio).AddMinutes(30), TimeSpan.FromMinutes(15), PersonaAdminProfesionalWalter.As<Paciente>(),
-                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1")
+                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA,
+                         PersonaAdminProfesionalWalter.As<Paciente>().Plan, PersonaAdminProfesionalWalter.As<Paciente>().NumeroAfiliado, PersonaAdminProfesionalWalter.As<Paciente>().Plan.Coseguro, 
+                         "127.0.0.1")
                          .RegistrarIngreso(PersonaAdminProfesionalWalter.As<Secretaria>()));
 
             //Turno Atendido
             session.Save(Turno.Create(DateTime.Now.SetTimeWith(hInicio).AddMinutes(60), TimeSpan.FromMinutes(15), PersonaAdminProfesionalWalter.As<Paciente>(),
-                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1")
+                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA,
+                         PersonaAdminProfesionalWalter.As<Paciente>().Plan, PersonaAdminProfesionalWalter.As<Paciente>().NumeroAfiliado, PersonaAdminProfesionalWalter.As<Paciente>().Plan.Coseguro, 
+                         "127.0.0.1")
                          .RegistrarIngreso(PersonaAdminProfesionalWalter.As<Secretaria>())
                          .RegistrarAtencion(PersonaAdminProfesionalWalter.As<Profesional>(), "El paciente se presentó con dolor de cabeza. \n Se le recetaron 2mg de Ibuprofeno cada 8hs."));
 
             //Turno Cancelado antes de presentarse
             session.Save(Turno.Create(DateTime.Now.SetTimeWith(hInicio).AddMinutes(90), TimeSpan.FromMinutes(15), PersonaAdminProfesionalWalter.As<Paciente>(),
-                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1")
+                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA,
+                         PersonaAdminProfesionalWalter.As<Paciente>().Plan, PersonaAdminProfesionalWalter.As<Paciente>().NumeroAfiliado, PersonaAdminProfesionalWalter.As<Paciente>().Plan.Coseguro, 
+                         "127.0.0.1")
                          .CancelarTurno(PersonaAdminProfesionalWalter, "No me puedo presentar"));
 
             //Turno Cancelado luego de ingresar a la sala de espera
             session.Save(Turno.Create(DateTime.Now.SetTimeWith(hInicio).AddMinutes(120), TimeSpan.FromMinutes(15), PersonaAdminProfesionalWalter.As<Paciente>(),
-                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA, "127.0.0.1")
+                         PersonaAdminProfesionalWalter.As<Profesional>(), EspecialidadClinico, ConsultorioA,
+                         PersonaAdminProfesionalWalter.As<Paciente>().Plan, PersonaAdminProfesionalWalter.As<Paciente>().NumeroAfiliado, PersonaAdminProfesionalWalter.As<Paciente>().Plan.Coseguro, 
+                         "127.0.0.1")
                          .RegistrarIngreso(PersonaAdminProfesionalWalter.As<Secretaria>())
                          .CancelarTurno(PersonaAdminProfesionalWalter, "Me tuve que ir\n Saludos."));
 

@@ -20,6 +20,7 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
         {
             public long Id { get; set; }
             public string PersonaNombreCompleto { get; set; }
+            public decimal RetencionFija { get; set; }
 
             public long PacientesPendientes
             {
@@ -64,6 +65,11 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
             public bool PuedoCancelar { get; set; }
             public bool PuedoPresentar { get; set; }
             public bool PuedoAtender { get; set; }
+            public string NumeroAfiliado { get; set; }
+            public decimal Coseguro { get; set; }
+            public Plan Plan { get; set; }
+            public ProfesionalViewModel Profesional { get; set; }
+           
         }
     }
 }

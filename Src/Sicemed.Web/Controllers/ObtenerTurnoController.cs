@@ -88,7 +88,7 @@ namespace Sicemed.Web.Controllers
             if (!paciente.EstaHabilitadoTurnosWeb(MvcApplication.Clinica.NumeroInasistenciasConsecutivasGeneranBloqueo))
                 throw new ValidationErrorException("Su usuario no se encuentra habilitado para obtener turnos web, por favor hágalo llamando a nuestros teléfonos.");
 
-            var turno = Turno.Create(fecha, duracion, paciente, profesional, especialidad, consultorio, Request.UserHostAddress);
+            var turno = Turno.Create(fecha, duracion, paciente, profesional, especialidad, consultorio,paciente.Plan,paciente.NumeroAfiliado,paciente.Plan.Coseguro, Request.UserHostAddress);
 
             session.Save(turno);
 

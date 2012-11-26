@@ -1,0 +1,17 @@
+﻿@model Sicemed.Web.Models.ViewModels.Secretaria.EdicionObraSocialTurno
+@{
+    ViewBag.Title = "Modificar Forma Pago Atención";
+}
+
+<h3>Modificar Forma Pago Atenci&oacute;n</h3>
+    @using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+    
+    @Html.ValidationSummaryWithMessage()
+
+    @Html.EditorForModel()
+
+    @Html.Submit("Guardar")        
+    }
+

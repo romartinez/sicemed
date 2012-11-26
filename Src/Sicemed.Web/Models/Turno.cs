@@ -33,6 +33,9 @@ namespace Sicemed.Web.Models
         public virtual EstadoTurno Estado { get; protected set; }
 
         public virtual DateTime FechaEstado { get; protected set; }
+        public virtual string NumeroAfiliado { get; set; }
+        public virtual Plan Plan { get; set; }
+        public virtual decimal Coseguro { get; set; }
 
         #endregion
 
@@ -123,6 +126,7 @@ namespace Sicemed.Web.Models
 
         #endregion
 
+      
         static Turno()
         {
             Transiciones = new Dictionary<CambioEstadoTurno, EstadoTurno>
@@ -260,6 +264,10 @@ namespace Sicemed.Web.Models
             Profesional profesional,
             Especialidad especialidad,
             Consultorio consultorio,
+//RM SE AGREGA DATOS DE LA FORMA DE PAGO AL TURNO
+            Plan plan,
+            String numeroAfiliado,
+            Decimal coseguro,
             string ipPaciente)
         {
             if (paciente == null) throw new ArgumentNullException("paciente");
@@ -277,6 +285,10 @@ namespace Sicemed.Web.Models
                 Especialidad = especialidad,
                 IpPaciente = ipPaciente,
                 Consultorio = consultorio,
+//RM SE AGREGA DATOS DE LA FORMA DE PAGO AL TURNO
+                Plan=plan,
+                NumeroAfiliado=numeroAfiliado,
+                Coseguro=coseguro,
                 EsObtenidoWeb = true
             };
 
@@ -294,7 +306,12 @@ namespace Sicemed.Web.Models
             Especialidad especialidad,
             Secretaria secretariaReservadoraTurno,
             Consultorio consultorio,
-            bool esTelefonico = false)
+//RM SE AGREGA DATOS DE LA FORMA DE PAGO AL TURNO            
+            Plan plan,
+            String numeroAfiliado,
+            Decimal coseguro,
+            bool esTelefonico = false
+            )
         {
             if (paciente == null) throw new ArgumentNullException("paciente");
             if (profesional == null) throw new ArgumentNullException("profesional");
@@ -313,6 +330,10 @@ namespace Sicemed.Web.Models
                 Profesional = profesional,
                 Especialidad = especialidad,
                 Consultorio = consultorio,
+//RM SE AGREGA DATOS DE LA FORMA DE PAGO AL TURNO
+                Plan = plan,
+                NumeroAfiliado = numeroAfiliado,
+                Coseguro = coseguro,
                 EsTelefonico = esTelefonico,
                 EsSobreTurno = false,
                 EsObtenidoWeb = false
@@ -322,7 +343,7 @@ namespace Sicemed.Web.Models
         }
         #endregion
 
-        public static Turno CreateSobreTurno(DateTime fechaTurno, TimeSpan duracionTurno, Paciente paciente, Profesional profesional, Especialidad especialidad, Secretaria secretariaReservadoraTurno, bool esTelefonico)
+        public static Turno CreateSobreTurno(DateTime fechaTurno, TimeSpan duracionTurno, Paciente paciente, Profesional profesional, Especialidad especialidad, Secretaria secretariaReservadoraTurno, Plan plan,String numeroAfiliado,Decimal coseguro, bool esTelefonico)
         {
             if (paciente == null) throw new ArgumentNullException("paciente");
             if (profesional == null) throw new ArgumentNullException("profesional");
@@ -339,6 +360,10 @@ namespace Sicemed.Web.Models
                 Paciente = paciente,
                 Profesional = profesional,
                 Especialidad = especialidad,
+//RM SE AGREGA DATOS DE LA FORMA DE PAGO AL TURNO
+                Plan = plan,
+                NumeroAfiliado = numeroAfiliado,
+                Coseguro = coseguro,
                 EsTelefonico = esTelefonico,
                 EsSobreTurno = true,
                 EsObtenidoWeb = false

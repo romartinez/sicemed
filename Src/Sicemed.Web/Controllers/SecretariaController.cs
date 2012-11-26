@@ -60,16 +60,22 @@ namespace Sicemed.Web.Controllers
                 var profesional = session.Get<Profesional>(editModel.ProfesionalId.Value);
                 var especialidad = session.Get<Especialidad>(editModel.EspecialidadId);
                 var fechaTurno = editModel.FechaTurno;
+//RM SE AGREGA DATOS DE LA FORMA DE PAGO AL TURNO
+                var plan = paciente.Plan;
+                var numeroAfiliado = paciente.NumeroAfiliado;
+                var coseguro = paciente.Plan.Coseguro;
 
                 Turno turno;
                 if (!editModel.EsSobreTurno)
                 {
                     var consultorio = session.Load<Consultorio>(editModel.ConsultorioId);
-                    turno = Turno.Create(fechaTurno, editModel.DuracionTurno, paciente, profesional, especialidad, User.As<Secretaria>(), consultorio, editModel.EsTelefonico);
+//RM SE AGREGA DATOS DE LA FORMA DE PAGO AL TURNO
+                    turno = Turno.Create(fechaTurno, editModel.DuracionTurno, paciente, profesional, especialidad, User.As<Secretaria>(), consultorio, plan, numeroAfiliado,coseguro, editModel.EsTelefonico);
                 }
                 else
                 {
-                    turno = Turno.CreateSobreTurno(fechaTurno, editModel.DuracionTurno, paciente, profesional, especialidad, User.As<Secretaria>(), editModel.EsTelefonico);
+//RM SE AGREGA DATOS DE LA FORMA DE PAGO AL TURNO
+                    turno = Turno.CreateSobreTurno(fechaTurno, editModel.DuracionTurno, paciente, profesional, especialidad, User.As<Secretaria>(),plan, numeroAfiliado,coseguro, editModel.EsTelefonico);
                 }
 
                 session.Save(turno);
@@ -313,6 +319,92 @@ namespace Sicemed.Web.Controllers
                 viewModel.LocalidadesHabilitadas =
                     GetLocalidadesPorProvincia(viewModel.DomicilioLocalidadProvinciaId.Value, viewModel.DomicilioLocalidadId);
 
+            if (viewModel.ObraSocialId.HasValue)
+                viewModel.PlanesObraSocialHabilitados =
+                    GetPlanesPorObraSocial(viewModel.ObraSocialId.Value, viewModel.PlanId);
+        }
+        #endregion
+
+        #region Edicion Obra Social Turno
+
+        [HttpGet]
+        public ActionResult EditarObraSocialTurno(long? id = null)
+        {
+            EdicionObraSocialTurno editModel = null;
+            if (id.HasValue)
+            {
+                var turno = SessionFactory.GetCurrentSession().Load<Turno>(id.Value);
+                if (turno != null)
+                {
+                    editModel = MappingEngine.Map<EdicionObraSocialTurno>(turno.Plan);
+                    if (turno.Plan != null)
+                    {
+                        editModel.PlanId = turno.Plan.Id;
+                        editModel.ObraSocialId = turno.Plan.ObraSocial.Id;
+                    }
+                    editModel.NumeroAfiliado = turno.NumeroAfiliado;
+                }
+            }
+
+            if (editModel == null) editModel = new EdicionObraSocialTurno();
+            AppendLists(editModel);
+            return View(editModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarObraSocialTurno(EdicionObraSocialTurno editModel)
+        {
+            AppendLists(editModel);
+
+            if (ModelState.IsValid)
+            {
+                var session = SessionFactory.GetCurrentSession();
+                var turno = session.Load<Turno>(editModel.Id);
+                var model = _mappingEngine.Map(editModel, turno.Plan);
+                var planParticular=session.Load<Plan>(GetPlanParticular());
+                
+//Modifica Plan Obra Social
+                if (editModel.PlanId.HasValue)
+                {
+                    turno.Plan = session.Load<Plan>(editModel.PlanId.Value);
+                }
+                else
+                {
+//RM: Ver de reemplazar el null por la OS Consulta Particular para que sea el default
+                    //turno.Plan = null;
+                    turno.Plan=planParticular;
+                }
+
+//Modifica Numero Afiliado
+                if (string.IsNullOrWhiteSpace(editModel.NumeroAfiliado))
+                    {turno.NumeroAfiliado = "999999";}
+                else
+                    {turno.NumeroAfiliado = editModel.NumeroAfiliado;}
+
+//Modifica Coseguro si es OS o la tarifa del profesional si es consulta particular
+                if (session.Load<Plan>(editModel.PlanId.Value).Nombre=="Consulta Particular")
+                    {
+                        if (session.Load<Turno>(editModel.Id).Profesional.RetencionFija.HasValue)
+                            { turno.Coseguro = 0; }
+                        else
+                            { turno.Coseguro = session.Load<Turno>(editModel.Id).Profesional.RetencionFija.Value; }
+                    }
+                else
+                    {
+                        turno.Coseguro=session.Load<Plan>(editModel.PlanId.Value).Coseguro;
+                    }
+
+                ShowMessages(ResponseMessage.Success("Turno modificado correctamente."));
+                return RedirectToAction("Agenda");
+            }
+
+            return View(editModel);
+        }
+
+        private void AppendLists(EdicionObraSocialTurno viewModel)
+        {
+            viewModel.ObrasSocialesHabilitadas = GetObrasSociales(viewModel.ObraSocialId);
             if (viewModel.ObraSocialId.HasValue)
                 viewModel.PlanesObraSocialHabilitados =
                     GetPlanesPorObraSocial(viewModel.ObraSocialId.Value, viewModel.PlanId);

@@ -281,6 +281,7 @@
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaPacienteQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaGeneralPacienteQuery.cs" />
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaProfesionalConEspecialidadesQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Domain\ObtenerPlanAtencionParticular.cs" />
     <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosPorPacienteQuery.cs" />
     <Compile Include="Infrastructure\Reports\TurnosReporte.cs" />
     <Compile Include="Infrastructure\Reports\IReport.cs" />
@@ -309,15 +310,6 @@
     <Compile Include="Models\Components\CambioEstadoTurno.cs" />
     <Compile Include="Models\Enumerations\EstadoTurno.cs" />
     <Compile Include="Models\Enumerations\EventoTurno.cs" />
-    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\ABNegativo.cs" />
-    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\ABPositivo.cs" />
-    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\ANegativo.cs" />
-    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\APositivo.cs" />
-    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\BNegativo.cs" />
-    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\BPositivo.cs" />
-    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\CeroNegativo.cs" />
-    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\CeroPositivo.cs" />
-    <Compile Include="Models\Enumerations\GrupoFactorSanguineo\GrupoFactorSanguineo.cs" />
     <Compile Include="Models\Moneda.cs" />
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\Reports\FichaPacienteReportModel.cs" />
@@ -504,6 +496,7 @@
     <Compile Include="Models\Turno.cs" />
     <Compile Include="Models\ViewModels\Profesional\AgendaProfesionalViewModel.cs" />
     <Compile Include="Models\ViewModels\Secretaria\AltaPacienteEditModel.cs" />
+    <Compile Include="Models\ViewModels\Secretaria\EdicionObraSocialTurno.cs" />
     <Compile Include="Models\ViewModels\Secretaria\EdicionPacienteEditModel.cs" />
     <Compile Include="Models\ViewModels\Secretaria\OtorgarTurnoEditModel.cs" />
     <Compile Include="Models\ViewModels\Secretaria\TurnosDelDiaViewModel.cs" />
@@ -791,6 +784,7 @@
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
     <Content Include="Views\Historial\DisplayTemplates\HistorialItem.cshtml" />
     <Content Include="Views\Historial\SeleccionPaciente.cshtml" />
+    <Content Include="Views\Secretaria\EdicionObraSocialTurno.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

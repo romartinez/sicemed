@@ -14,6 +14,41 @@
         <br />
         Especialidad: @Model.Especialidad.Descripcion
         <br />
+
+        @if (@Model.Plan != null)
+        {
+            @:Obra Social:@Model.Plan.ObraSocial.RazonSocial
+            <br />
+            @:Plan:@Model.Plan.Nombre
+            <br />
+            @:Numero Afiliado:@Model.NumeroAfiliado
+            <br />
+            @:Monto Abonar: $  @Math.Round(Model.Coseguro,2)
+        }
+        else
+        {
+            @:Obra Social:"Consulta Particular"
+            <br />
+            @:Plan:"Consulta Particular"
+            <br />
+            @:Numero Afiliado:"9999999"
+            <br />
+            @:Monto Abonar: $  @Math.Round(Model.Profesional.RetencionFija,2)
+        }
+        <br />
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+    
+            @Html.ValidationSummaryWithMessage()
+            <input type="hidden" name="id" value="@Model.Id"/>
+            @Html.EditorForModel()
+
+            @Html.Submit("Guardar")        
+        }
+
+
     </div>        
     }
     <div>
