@@ -363,8 +363,8 @@ namespace Sicemed.Web.Controllers
                 var session = SessionFactory.GetCurrentSession();
                 var turno = session.Load<Turno>(editModel.Id);
                 var model = _mappingEngine.Map(editModel, turno.Plan);
-                var pp = GetPlanParticular("Consulta Particular").First(x => x.Selected);
-                //var planParticular = session.Load<Plan>(GetPlanParticular("Consulta Particular").First(x=>x.Selected).);
+                
+                var planParticular = session.Load<Plan>(long.Parse(GetPlanParticular(null).First(x => x.Selected).Value));
 
                 
 //Modifica Plan Obra Social
@@ -374,9 +374,9 @@ namespace Sicemed.Web.Controllers
                 }
                 else
                 {
-//RM: Ver de reemplazar el null por la OS Consulta Particular para que sea el default
-                    turno.Plan = null;
-                    //turno.Plan=planParticular;
+//RM: OS Consulta Particular para que sea el default en caso de que no haya ningun plan elegido
+                    //turno.Plan = null;
+                    turno.Plan=planParticular;
                 }
 
 //Modifica Numero Afiliado

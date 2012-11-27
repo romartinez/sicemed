@@ -33,7 +33,8 @@ namespace Sicemed.Web.Infrastructure.Services
         {
             if (user == null) throw new ArgumentNullException("user");
             if (actionDescriptor == null) throw new ArgumentNullException("actionDescriptor");
-
+//RM: Se agrega al perfil del profesional acceso a las funciones EDITAR PACIENTE y Otorgar Turno de la secretaria. La variable rta es para dar soporte a esto
+            bool rta;
             var controllerAttributes =
                 actionDescriptor.ControllerDescriptor.GetCustomAttributes(typeof (AuthorizeItAttribute), true).Cast
                     <AuthorizeItAttribute>();
@@ -49,7 +50,13 @@ namespace Sicemed.Web.Infrastructure.Services
                     string.Format("The action '{0}/{1}' doesn't have permissions defined. " +
                     "By default the methods are secured, you must be explicit on permissions.",actionDescriptor.ControllerDescriptor.ControllerName, actionDescriptor.ActionName));
 
-            return attributes.Any(attr => user.IsInRole(attr.Rol));
+//RM: Se agrega al perfil del profesional acceso a las funciones EDITAR PACIENTE y Otorgar Turno de la secretaria
+            if (user.IsInRole("Profesional") && (actionDescriptor.ActionName.Equals("EdicionPaciente") || actionDescriptor.ActionName.Equals("OtorgarTurno")))
+                rta = true;
+            else
+                rta= attributes.Any(attr => user.IsInRole(attr.Rol));
+
+            return rta;
         }
 
         #endregion

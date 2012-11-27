@@ -7,12 +7,12 @@ namespace Sicemed.Web.Infrastructure.Queries.Domain
 {
     public interface IObtenerPlanAtencionParticular : IQuery<IEnumerable<SelectListItem>>
     {
-        string SelectedValue { get; set; }
+        long? SelectedValue { get; set; }
     }
 
     public class ObtenerPlanAtencionParticular : Query<IEnumerable<SelectListItem>>, IObtenerPlanAtencionParticular
     {
-        public string SelectedValue { get; set; }
+        public long? SelectedValue { get; set; }
 
         protected override IEnumerable<SelectListItem> CoreExecute()
         {
@@ -23,7 +23,7 @@ namespace Sicemed.Web.Infrastructure.Queries.Domain
                 {
                     Value = x.Id.ToString(),
                     Text = x.Nombre,
-                    Selected = x.Nombre == SelectedValue && x.Nombre == "Consulta Particular"
+                    Selected = x.Id == SelectedValue | x.Nombre == "Consulta Particular"
                 });
 
         }

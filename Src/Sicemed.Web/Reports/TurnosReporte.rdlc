@@ -366,7 +366,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Iif(Fields!EstadoTurno.Value&lt;&gt;"Atendido",Fields!EstadoTurno.Value,"&lt;b&gt;Obra Social:&lt;/b&gt; " &amp; Fields!ObraSocial.Value)</Value>
+                              <Value>=Iif(Fields!EstadoTurno.Value&lt;&gt;"Atendido","","&lt;b&gt;Obra Social:&lt;/b&gt; " &amp; Fields!ObraSocial.Value)</Value>
                               <MarkupType>HTML</MarkupType>
                               <Style />
                             </TextRun>
@@ -409,7 +409,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Iif(Fields!EstadoTurno.Value&lt;&gt;"Atendido",Fields!EstadoTurno.Value,Iif(Fields!Monto.Value=0,"N/A",Fields!Monto.Value))</Value>
+                              <Value>=Iif(Fields!EstadoTurno.Value&lt;&gt;"Atendido","",Fields!Monto.Value)</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                                 <Format>'$'0.00;('$'0.00)</Format>

@@ -57,9 +57,9 @@ namespace Sicemed.Web.Infrastructure.Reports
                 Especialidad = turno.Especialidad != null ? turno.Especialidad.Nombre : string.Empty,
                 FechaTurno = turno.FechaTurno,
                 FechaTurnoFin = turno.FechaTurnoFinal,
-                ObraSocial=turno.Paciente.Plan.ObraSocial.RazonSocial,
-                Plan=turno.Paciente.Plan.Nombre,
-                Monto=turno.Profesional.RetencionFija.GetValueOrDefault(0),
+                ObraSocial=turno.Plan.ObraSocial.RazonSocial,
+                Plan=turno.Plan.Nombre,
+                Monto=turno.Coseguro,
                 EstadoTurno=turno.Estado.Get()
             };
         }

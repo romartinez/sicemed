@@ -37,7 +37,10 @@
                 @:Monto Abonar: $  @Math.Round(0.00,2)
             }
         <br />
-         <a href="@Url.Action("EditarObraSocialTurno", "Secretaria", new { id = Model.Id })" target="_blank" class="button_link btn_yellow"><span>Modificar Forma Pago</span></a>
+         @if (Model.PuedoPresentar)
+         {
+             <a href="@Url.Action("EditarObraSocialTurno", "Secretaria", new { id = Model.Id })"  class="button_link btn_yellow"><span>Modificar Forma Pago</span></a>
+         }
     </div>        
 /* ESTO ES LO QUE QUIERO HACER APARECER
             <div>
