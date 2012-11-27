@@ -93,11 +93,13 @@ namespace Sicemed.Web.Infrastructure.Controllers
             return query.Execute();
         }
 //RM Devuelve el plan correspondientes a la Consulta Particular
-        protected virtual IEnumerable<Plan> GetPlanParticular()
+        protected virtual IEnumerable<SelectListItem> GetPlanParticular(string selectedValue)
         {
             var query = QueryFactory.Create<IObtenerPlanAtencionParticular>();
+            query.SelectedValue = selectedValue;
             return query.Execute();
         }
+
 
         protected virtual IEnumerable<SelectListItem> GetEspecialidades(params long[] selectedValues)
         {

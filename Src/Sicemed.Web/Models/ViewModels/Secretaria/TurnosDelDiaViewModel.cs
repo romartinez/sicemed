@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Sicemed.Web.Models.Enumerations;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using Sicemed.Web.Infrastructure.Attributes.DataAnnotations;
+using Sicemed.Web.Models.Components;
 
 namespace Sicemed.Web.Models.ViewModels.Secretaria
 {
@@ -69,7 +74,9 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
             public decimal Coseguro { get; set; }
             public Plan Plan { get; set; }
             public ProfesionalViewModel Profesional { get; set; }
-           
         }
+
+
+
     }
 }

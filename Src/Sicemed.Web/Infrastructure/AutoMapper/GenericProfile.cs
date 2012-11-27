@@ -112,6 +112,22 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                 .ForMember(d => d.Domicilio, m => m.Ignore())
                 .ForMember(d => d.Roles, m => m.Ignore());
 
+            //rm Agregado por el tema de turnos
+            CreateMap<Plan, EdicionObraSocialTurnoEditModel>()
+            .ForMember(d => d.Id, m => m.Ignore())
+            .ForMember(d => d.ObrasSocialesHabilitadas, m => m.Ignore())
+            .ForMember(d => d.PlanesObraSocialHabilitados, m => m.Ignore())
+            .ForMember(d => d.PlanId, m => m.Ignore())
+            .ForMember(d => d.ObraSocialId, m => m.Ignore())
+            .ForMember(d => d.NumeroAfiliado, m => m.Ignore());
+
+            CreateMap<EdicionObraSocialTurnoEditModel, Plan>()
+            .ForMember(d => d.Id, m => m.Ignore())
+            .ForMember(d => d.Nombre, m => m.Ignore())
+            .ForMember(d => d.ObraSocial, m => m.Ignore())
+            .ForMember(d => d.Coseguro, m => m.Ignore())
+            .ForMember(d => d.Descripcion, m => m.Ignore());
+
             CreateMap<Paciente, SelectListItem>()
                 .ForMember(d => d.Selected, m => m.Ignore())
                 .ForMember(d => d.Text, m => m.MapFrom(o =>
@@ -125,6 +141,7 @@ namespace Sicemed.Web.Infrastructure.AutoMapper
                     string.Format("{0} - {1}",
                         o.Persona.NombreCompleto, string.Join(", ", o.Especialidades.Select(e => e.Nombre).ToArray()))))
                 .ForMember(d => d.Value, m => m.MapFrom(o => o.Id));
+
             #endregion
 
             #region Profesional

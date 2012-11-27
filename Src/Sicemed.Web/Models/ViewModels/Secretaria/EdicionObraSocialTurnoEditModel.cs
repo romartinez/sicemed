@@ -8,9 +8,8 @@ using Sicemed.Web.Models.Components;
 
 namespace Sicemed.Web.Models.ViewModels.Secretaria
 {
-    public class EdicionObraSocialTurno
+    public class EdicionObraSocialTurnoEditModel
     {
-        [Requerido]
         [HiddenInput]
         public long? Id { get; set; }
 

@@ -1,37 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Sicemed.Web.Infrastructure.Helpers;
+using System.Web.Mvc;
 using Sicemed.Web.Models;
-using Sicemed.Web.Models.Enumerations;
-using Sicemed.Web.Models.ViewModels.Profesional;
 
 namespace Sicemed.Web.Infrastructure.Queries.Domain
 {
-    public interface IObtenerPlanAtencionParticular : IQuery<IEnumerable<Plan>>
+    public interface IObtenerPlanAtencionParticular : IQuery<IEnumerable<SelectListItem>>
     {
-        long PlanId { get; set; }
+        string SelectedValue { get; set; }
     }
 
-    public class ObtenerPlanAtencionParticular : Query<IEnumerable<Plan>>, IObtenerPlanAtencionParticular
+    public class ObtenerPlanAtencionParticular : Query<IEnumerable<SelectListItem>>, IObtenerPlanAtencionParticular
     {
-        public virtual long PlanId { get; set; }
+        public string SelectedValue { get; set; }
 
-        protected override IEnumerable<Plan> CoreExecute()
+        protected override IEnumerable<SelectListItem> CoreExecute()
         {
-            var descripcion = "Consulta Particular";
-            var session = SessionFactory.GetCurrentSession();
+            var consultorios = SessionFactory.GetCurrentSession().QueryOver<Plan>()
+                .OrderBy(x => x.Nombre).Asc.Future();
+            return consultorios.Select(x =>
+                new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Nombre,
+                    Selected = x.Nombre == SelectedValue && x.Nombre == "Consulta Particular"
+                });
 
-            var plan = session.QueryOver<Plan>()
-                .Fetch(t => t.Id).Eager
-                .Fetch(t => t.Nombre).Eager
-                .Fetch(t => t.Descripcion).Eager
-                .Fetch(t => t.Coseguro).Eager
-                .Fetch(t => t.ObraSocial).Eager
-                .Where(t => t.Nombre == descripcion)
-                .List();
-
-            return plan;
         }
     }
 }

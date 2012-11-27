@@ -496,7 +496,7 @@
     <Compile Include="Models\Turno.cs" />
     <Compile Include="Models\ViewModels\Profesional\AgendaProfesionalViewModel.cs" />
     <Compile Include="Models\ViewModels\Secretaria\AltaPacienteEditModel.cs" />
-    <Compile Include="Models\ViewModels\Secretaria\EdicionObraSocialTurno.cs" />
+    <Compile Include="Models\ViewModels\Secretaria\EdicionObraSocialTurnoEditModel.cs" />
     <Compile Include="Models\ViewModels\Secretaria\EdicionPacienteEditModel.cs" />
     <Compile Include="Models\ViewModels\Secretaria\OtorgarTurnoEditModel.cs" />
     <Compile Include="Models\ViewModels\Secretaria\TurnosDelDiaViewModel.cs" />
@@ -784,7 +784,7 @@
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
     <Content Include="Views\Historial\DisplayTemplates\HistorialItem.cshtml" />
     <Content Include="Views\Historial\SeleccionPaciente.cshtml" />
-    <Content Include="Views\Secretaria\EdicionObraSocialTurno.cshtml" />
+    <Content Include="Views\Secretaria\EditarObraSocialTurno.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

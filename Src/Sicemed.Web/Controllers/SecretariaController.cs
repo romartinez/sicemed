@@ -330,30 +330,31 @@ namespace Sicemed.Web.Controllers
         [HttpGet]
         public ActionResult EditarObraSocialTurno(long? id = null)
         {
-            EdicionObraSocialTurno editModel = null;
-            if (id.HasValue)
-            {
-                var turno = SessionFactory.GetCurrentSession().Load<Turno>(id.Value);
-                if (turno != null)
-                {
-                    editModel = MappingEngine.Map<EdicionObraSocialTurno>(turno.Plan);
-                    if (turno.Plan != null)
-                    {
-                        editModel.PlanId = turno.Plan.Id;
-                        editModel.ObraSocialId = turno.Plan.ObraSocial.Id;
-                    }
-                    editModel.NumeroAfiliado = turno.NumeroAfiliado;
-                }
-            }
-
-            if (editModel == null) editModel = new EdicionObraSocialTurno();
+            EdicionObraSocialTurnoEditModel editModel = null;
+                        if (id.HasValue)
+                        {
+                            var turno = SessionFactory.GetCurrentSession().Load<Turno>(id.Value);
+                            if (turno != null)
+                            {
+                                editModel = MappingEngine.Map<EdicionObraSocialTurnoEditModel>(turno.Plan);
+                                if (turno.Plan != null)
+                                {
+                                    editModel.PlanId = turno.Plan.Id;
+                                    editModel.ObraSocialId = turno.Plan.ObraSocial.Id;
+                                }
+                                editModel.NumeroAfiliado = turno.NumeroAfiliado;
+                            }
+                        }
+            
+            if (editModel == null) editModel = new EdicionObraSocialTurnoEditModel();
+//            var editModel = new EdicionObraSocialTurnoEditModel();
             AppendLists(editModel);
             return View(editModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditarObraSocialTurno(EdicionObraSocialTurno editModel)
+        public ActionResult EditarObraSocialTurno(EdicionObraSocialTurnoEditModel editModel)
         {
             AppendLists(editModel);
 
@@ -362,7 +363,9 @@ namespace Sicemed.Web.Controllers
                 var session = SessionFactory.GetCurrentSession();
                 var turno = session.Load<Turno>(editModel.Id);
                 var model = _mappingEngine.Map(editModel, turno.Plan);
-                var planParticular=session.Load<Plan>(GetPlanParticular());
+                var pp = GetPlanParticular("Consulta Particular").First(x => x.Selected);
+                //var planParticular = session.Load<Plan>(GetPlanParticular("Consulta Particular").First(x=>x.Selected).);
+
                 
 //Modifica Plan Obra Social
                 if (editModel.PlanId.HasValue)
@@ -372,27 +375,27 @@ namespace Sicemed.Web.Controllers
                 else
                 {
 //RM: Ver de reemplazar el null por la OS Consulta Particular para que sea el default
-                    //turno.Plan = null;
-                    turno.Plan=planParticular;
+                    turno.Plan = null;
+                    //turno.Plan=planParticular;
                 }
 
 //Modifica Numero Afiliado
-                if (string.IsNullOrWhiteSpace(editModel.NumeroAfiliado))
+                if ((string.IsNullOrWhiteSpace(editModel.NumeroAfiliado)) || turno.Plan.Nombre.Equals("Consulta Particular"))
                     {turno.NumeroAfiliado = "999999";}
                 else
                     {turno.NumeroAfiliado = editModel.NumeroAfiliado;}
 
 //Modifica Coseguro si es OS o la tarifa del profesional si es consulta particular
-                if (session.Load<Plan>(editModel.PlanId.Value).Nombre=="Consulta Particular")
+                if (turno.Plan.Nombre.Equals("Consulta Particular"))
                     {
-                        if (session.Load<Turno>(editModel.Id).Profesional.RetencionFija.HasValue)
-                            { turno.Coseguro = 0; }
+                        if (turno.Profesional.RetencionFija.HasValue)
+                            { turno.Coseguro = turno.Profesional.RetencionFija.Value; }
                         else
-                            { turno.Coseguro = session.Load<Turno>(editModel.Id).Profesional.RetencionFija.Value; }
+                            { turno.Coseguro = 0; }
                     }
                 else
                     {
-                        turno.Coseguro=session.Load<Plan>(editModel.PlanId.Value).Coseguro;
+                        turno.Coseguro = turno.Plan.Coseguro;
                     }
 
                 ShowMessages(ResponseMessage.Success("Turno modificado correctamente."));
@@ -402,7 +405,7 @@ namespace Sicemed.Web.Controllers
             return View(editModel);
         }
 
-        private void AppendLists(EdicionObraSocialTurno viewModel)
+        private void AppendLists(EdicionObraSocialTurnoEditModel viewModel)
         {
             viewModel.ObrasSocialesHabilitadas = GetObrasSociales(viewModel.ObraSocialId);
             if (viewModel.ObraSocialId.HasValue)
