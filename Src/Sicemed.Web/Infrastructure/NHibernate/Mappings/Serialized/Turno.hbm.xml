@@ -5,8 +5,8 @@
       <generator class="hilo" />
     </id>
     <property name="FechaTurno" not-null="true" />
-    <property name="Nota" />
-    <property name="MotivoCancelacion" />
+    <property name="Nota" type="string" length="8000"/>
+    <property name="MotivoCancelacion" type="string" length="8000"/>
     <property name="IpPaciente" />
     <property name="EsTelefonico" not-null="true" />
     <property name="EsSobreTurno" not-null="true" />

@@ -62,8 +62,23 @@ namespace Sicemed.Web.Controllers
                 var fechaTurno = editModel.FechaTurno;
 //RM SE AGREGA DATOS DE LA FORMA DE PAGO AL TURNO
                 var plan = paciente.Plan;
-                var numeroAfiliado = paciente.NumeroAfiliado;
-                var coseguro = paciente.Plan.Coseguro;
+                var numeroAfiliado = "";
+                var coseguro = decimal.Parse("0.00");
+
+                if (plan != null)
+                {
+                    numeroAfiliado = paciente.NumeroAfiliado;
+                    coseguro = decimal.Parse("0.00");
+                    if (paciente.Plan.Coseguro != null)
+                    {
+                        coseguro = paciente.Plan.Coseguro;
+                    }
+                    else
+                    {
+                        coseguro = decimal.Parse("0.00");
+                    }
+
+                }
 
                 Turno turno;
                 if (!editModel.EsSobreTurno)
@@ -341,8 +356,8 @@ namespace Sicemed.Web.Controllers
                                 {
                                     editModel.PlanId = turno.Plan.Id;
                                     editModel.ObraSocialId = turno.Plan.ObraSocial.Id;
+                                    editModel.NumeroAfiliado = turno.NumeroAfiliado;
                                 }
-                                editModel.NumeroAfiliado = turno.NumeroAfiliado;
                             }
                         }
             

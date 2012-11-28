@@ -1,4 +1,5 @@
-﻿using NHibernate.Mapping.ByCode;
+﻿using NHibernate.Driver;
+using NHibernate.Mapping.ByCode;
 using Sicemed.Web.Models;
 
 namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
@@ -15,8 +16,8 @@ namespace Sicemed.Web.Infrastructure.NHibernate.Mappings
             Property(x => x.EsTelefonico, map => map.NotNullable(true));
             Property(x => x.EsSobreTurno, map => map.NotNullable(true));
             Property(x => x.EsObtenidoWeb, map => map.NotNullable(true));
-            Property(x => x.Nota);
-            Property(x => x.MotivoCancelacion);
+            Property(x => x.Nota, map => map.Length(SqlClientDriver.MaxSizeForLengthLimitedString + 1));  //map => { map.Column(c => {c.SqlType("varchar(8000)");}); });
+            Property(x => x.MotivoCancelacion, map => map.Length(SqlClientDriver.MaxSizeForLengthLimitedString + 1));//{ map.Column(c => { c.SqlType("varchar(8000)"); }); });
             Property(x => x.Estado, map => map.NotNullable(true));
             Property(x => x.FechaEstado, map => map.NotNullable(true));
             Property(x => x.NumeroAfiliado);

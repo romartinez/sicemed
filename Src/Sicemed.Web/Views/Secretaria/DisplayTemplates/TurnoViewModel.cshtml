@@ -8,100 +8,112 @@
     @if (Model.Estado == EstadoTurno.Otorgado || Model.Estado == EstadoTurno.Presentado)
     {
     <div>
-        @if (@Model.Consultorio != null)
-        {
-            @:Consultorio: @Model.Consultorio.Descripcion
-        }
-        <br />
-        Especialidad: @Model.Especialidad.Descripcion
-        <br />
 
-        @if (@Model.Plan != null)
-            {
-                @:Obra Social: @Model.Plan.ObraSocial.RazonSocial
-                <br />
-                @:Plan:@Model.Plan.Nombre
-                <br />
-                @:Numero Afiliado: @Model.NumeroAfiliado
-                <br />
-                @:Monto Abonar: $  @Math.Round(Model.Coseguro,2)
-            }            
-        else
-            {
-                @:Obra Social: N/A - Modifique los Datos
-                <br />
-                @:Plan: N/A - Modifique los Datos
-                <br />
-                @:Numero Afiliado: N/A - Modifique los Datos
-                <br />
-                @:Monto Abonar: $  @Math.Round(0.00,2)
-            }
-        <br />
-         @if (Model.PuedoPresentar)
-         {
-             <a href="@Url.Action("EditarObraSocialTurno", "Secretaria", new { id = Model.Id })"  class="button_link btn_yellow"><span>Modificar Forma Pago</span></a>
-         }
-    </div>        
-/* ESTO ES LO QUE QUIERO HACER APARECER
-            <div>
-                <br />
-                @using (Html.BeginForm("EditarObraSocialTurno", "Secretaria", FormMethod.Get, new { id = Model.Id }))
-                {    
-                    @Html.AntiForgeryToken()
-    
-                    @Html.ValidationSummaryWithMessage()
-
-                    @Html.EditorForModel("EditarObraSocialTurno","id?="+Model.Id)
-
-                    @Html.Submit("Guardar")  
+        <TABLE>
+          <TR>
+            <TD style="text-align:left;width:60%" >  
+                @if (@Model.Consultorio != null)
+                {
+                    <span class="text-blue-negrita-subrayada" >Consultorio:</span><span class="text-black-negrita"> @Model.Consultorio.Descripcion</span> 
                 }
-            </div>
-*/        
+                <br />
+                <br />
+                <span class="text-blue-negrita-subrayada" >Especialidad:</span><span class="text-black-negrita"> @Model.Especialidad.Descripcion</span> 
+                <br />
+                <br />
+
+                @if (@Model.Plan != null)
+                    {
+                        <span class="text-blue-negrita-subrayada" >Obra Social:</span><span class="text-black-negrita"> @Model.Plan.ObraSocial.RazonSocial</span> 
+                        <br />
+                        <br />  
+                        <span class="text-blue-negrita-subrayada" >Plan:</span><span class="text-black-negrita"> @Model.Plan.Nombre</span> 
+                        <br />
+                        <br />
+                        <span class="text-blue-negrita-subrayada" >Numero Afiliado:</span><span class="text-black-negrita"> @Model.NumeroAfiliado</span> 
+                        <br />
+                        <br />
+                        <span class="text-blue-negrita-subrayada" >Monto Abonar:</span><span class="text-black-negrita"> $  @Math.Round(Model.Coseguro,2)</span> 
+                    }            
+                else
+                    {
+                        <span class="text-blue-negrita-subrayada" >Obra Social:</span><span class="text-red-negrita"> N/A - Modifique los Datos</span> 
+                        <br />
+                        <br />
+                        <span class="text-blue-negrita-subrayada" >Plan:</span><span class="text-red-negrita"> N/A - Modifique los Datos</span> 
+                        <br />
+                        <br />
+                        <span class="text-blue-negrita-subrayada" >Numero Afiliado:</span><span class="text-red-negrita"> N/A - Modifique los Datos</span> 
+                        <br />
+                        <br />
+                        <span class="text-blue-negrita-subrayada" >Monto Abonar:</span><span class="text-red-negrita"> $  @Math.Round(0.00,2)</span> 
+                    }
+                <br />
+            </TD>
+            <td></td><td></td><td></td><td></td><td></td><td></td>
+            <TD style="text-align:left;width:40%">          
+                @if (Model.PuedoPresentar)
+                 {
+                     <a href="@Url.Action("EditarObraSocialTurno", "Secretaria", new { id = Model.Id })"  class="button_link btn_yellow"><span>Modificar Forma Pago</span></a>
+                 }
+                 @if (Model.PuedoCancelar)
+                {
+                    <div>
+                    @using (Html.BeginForm("CancelarTurno", "Secretaria"))
+                    {
+                        @Html.Partial("_CancelarTurno")
+                    }                
+                    </div>
+                }
+                @if (Model.PuedoPresentar)
+                {
+                    <div >
+                        @using (Html.BeginForm("RegistrarIngresoPaciente", "Secretaria"))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="turnoId" value="@Model.Id"/>
+                            @Html.Submit("Ingresar")
+                        }
+                    </div>
+                    <div>
+                        <a href="@Url.Action("TurnosPorPaciente", "Historial", new { PacienteId = Model.Paciente.Id })" target="_blank" class="button_link btn_blue"><span>Historial Atenciones</span></a>
+                    </div>
+                }
+
+            </TD>
+          </TR>
+        </TABLE>
+
+    </div>        
     }
+    <br />
     <div>
         @if (Model.Estado == EstadoTurno.Presentado)
         {
-            <div>El usuario se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
-                minutos.</div>            
-        }
-        @if (Model.Estado == EstadoTurno.Presentado)
-        {
-            <span>Se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
+            <div>
+            <span class="text-green-negrita">El paciente se encuentra esperando hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
                 minutos.</span>
+             <br>            
+            </div>
         }
         @if (Model.Estado == EstadoTurno.Cancelado)
         {
-            <strong>Cancelaci&oacute;n</strong>
             <div>
-                Cancelado por @Model.CanceladoPor.Descripcion el @Model.FechaCancelacion.Value.ToFullDate()
+                <SPAN class="text-red-negrita-subrayada">Cancelaci&oacute;n</SPAN>
+                <div>
+                 <span class="text-red">
+                    Cancelado por @Model.CanceladoPor.Descripcion el @Model.FechaCancelacion.Value.ToFullDate()
+                </span>
+                 </div>
+                <br>
+                <span class="text-red-negrita-subrayada">Motivo</span>
+                <div>
+                    <span class="text-red">                    
+                        @Html.Nl2Br(Model.MotivoCancelacion)
+                    </span>
+                </div>
+                <br>
             </div>
-            <strong>Motivo</strong>
-            <div>                    
-                @Html.Nl2Br(Model.MotivoCancelacion)
-            </div>
-        }                 
-        @if (Model.PuedoCancelar)
-        {
-            <div>
-            @using (Html.BeginForm("CancelarTurno", "Secretaria"))
-            {
-                @Html.Partial("_CancelarTurno")
-            }                
-            </div>
-        }
-        @if (Model.PuedoPresentar)
-        {
-            <div >
-                @using (Html.BeginForm("RegistrarIngresoPaciente", "Secretaria"))
-                {
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" name="turnoId" value="@Model.Id"/>
-                    @Html.Submit("Ingresar")
-                }
-            </div>
-            <div>
-                <a href="@Url.Action("TurnosPorPaciente", "Historial", new { PacienteId = Model.Paciente.Id })" target="_blank" class="button_link btn_blue"><span>Historial Atenciones</span></a>
-            </div>
-        }
+        }     
     </div>
 </li>

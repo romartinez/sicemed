@@ -173,12 +173,12 @@ input.decimal {
 }
 
 .paciente-primera-vez {
-    color: #33CC52 !important;
+    color: #f30606 !important;
     font-weight: bold;
 }
 .paciente-control {
-    color: #36C !important;
-    font-style: italic;
+    color: #a700e8 !important;
+    font-weight: bold;
 }
 
 .turno-duracion-corto {

@@ -17,47 +17,58 @@
 </h3>
 <div>
     <div class="turno turno-@Model.Estado.ToString().ToLower()">
-        <div>            
-            @if (Model.Especialidad != null && !string.IsNullOrWhiteSpace(Model.Especialidad.Descripcion))
+        <div>
+            <TABLE>
+              <TR>
+                <TD style="text-align:left;width:60%" >  
+                    @if (Model.Especialidad != null && !string.IsNullOrWhiteSpace(Model.Especialidad.Descripcion))
+                    {
+                        @:<span class="text-blue-negrita-subrayada">Especialidad:</span><span class="text-black-negrita"> @Model.Especialidad.Descripcion</span>
+                        <br/><br />            
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.Paciente.NumeroAfiliado))
+                    {
+                        @:<span class="text-blue-negrita-subrayada">N&uacute;mero de Afiliado:</span><span class="text-black-negrita"> @Model.Paciente.NumeroAfiliado</span><br/><br/>
+                    }
+                    @if(!string.IsNullOrWhiteSpace(Model.Paciente.Plan))
+                    {
+                        @:<span class="text-blue-negrita-subrayada">Obra Social:</span><span class="text-black-negrita"> @Model.Paciente.Plan, @Model.Paciente.ObraSocial</span><br/><br/>                
+                    }
+                    @if(Model.Paciente.Edad.HasValue)
+                    {
+                        @:<span class="text-blue-negrita-subrayada">Edad:</span><span class="text-black-negrita"> @Model.Paciente.Edad.Value a&ntilde;os</span><br/><br/>
+                    }
+                    @if(Model.Paciente.Peso.HasValue)
+                    {
+                        @:<span class="text-blue-negrita-subrayada">Peso:</span><span class="text-black-negrita"> @Model.Paciente.Peso.Value.ToString("0.00") </span><br/><br/>
+                    }
+                    @if(Model.Paciente.Altura.HasValue)
+                    {
+                        @:<span class="text-blue-negrita-subrayada">Altura:</span><span class="text-black-negrita"> @Model.Paciente.Altura.Value.ToString("0.00") </span><br/><br/>
+                    }
+                </TD>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
+                <TD style="text-align:left;width:40%">          
+                    @if (Model.Estado == EstadoTurno.Presentado || Model.Estado == EstadoTurno.Atendido)
+                    {
+                    <div><a href="@Url.Action("TurnosPorPaciente", "Historial", new { PacienteId = Model.Paciente.Id })" target="_blank" class="button_link btn_blue"><span>Historial Atenciones</span></a></div>
+                    <div><a href="@Url.Action("EdicionPaciente", "Secretaria", new { id = Model.Paciente.Id })" target="_blank" class="button_link btn_yellow"><span>Editar Paciente</span></a></div>
+                    <div><a href="@Url.Action("OtorgarTurno", "Secretaria")" target="_blank" class="button_link btn_grey"><span>Otorgar Nuevo Turno</span></a></div>
+                    }
+                </td>
+              </TR>
+            </TABLE>
+        </div>
+        <br /><br />
+        <div class="@(Model.Paciente.EsPrimeraVez? "paciente-primera-vez": "paciente-control")">
+            @if(Model.Paciente.EsPrimeraVez)
             {
-                @:<span class="text-blue">Especialidad:</span> @Model.Especialidad.Descripcion<br/>            
+                @:El paciente es la primera vez que se atiende.    
             }
-            @if (!string.IsNullOrWhiteSpace(Model.Paciente.NumeroAfiliado))
+            else
             {
-                @:<span class="text-blue">N&uacute;mero de Afiliado:</span> @Model.Paciente.NumeroAfiliado<br/>
+                @:El paciente ya se ha atendido con anterioridad.
             }
-            @if(!string.IsNullOrWhiteSpace(Model.Paciente.Plan))
-            {
-                @:<span class="text-blue">Obra Social:</span> @Model.Paciente.Plan, @Model.Paciente.ObraSocial<br/>                
-            }
-            @if(Model.Paciente.Edad.HasValue)
-            {
-                @:<span class="text-blue">Edad:</span> @Model.Paciente.Edad.Value a&ntilde;os<br/>
-            }
-            @if(Model.Paciente.Peso.HasValue)
-            {
-                @:<span class="text-blue">Peso:</span> @Model.Paciente.Peso.Value.ToString("0.00") <br/>
-            }
-            @if(Model.Paciente.Altura.HasValue)
-            {
-                @:<span class="text-blue">Altura:</span> @Model.Paciente.Altura.Value.ToString("0.00") <br/>
-            }
-
-            <div class="@(Model.Paciente.EsPrimeraVez? "paciente-primera-vez": "paciente-control")">
-                @if(Model.Paciente.EsPrimeraVez)
-                {
-                    @:El paciente es la primera vez que se atiende.    
-                }
-                else
-                {
-                    @:El paciente ya se ha atendido con anterioridad.
-                }
-                 @if (Model.Estado == EstadoTurno.Presentado || Model.Estado == EstadoTurno.Atendido)
-                 {
-                    <a href="@Url.Action("TurnosPorPaciente", "Historial", new { PacienteId = Model.Paciente.Id })" target="_blank" class="button_link btn_blue"><span>Historial Atenciones</span></a>
-                    <a href="@Url.Action("EdicionPaciente", "Secretaria", new { id = Model.Paciente.Id })" target="_blank" class="button_link btn_yellow"><span>Editar Paciente</span></a>
-                 }
-            </div>               
         </div>
         <div>
             @if (Model.PuedeEditarNota)
@@ -65,8 +76,10 @@
                 if(Model.Estado == EstadoTurno.Presentado)
                 {
                     <div>
-                        <span>El usuario ingres&oacute; hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
+                        <br />
+                        <span class="text-green-negrita">El paciente ingres&oacute; hace @(DateTime.Now.Subtract(Model.FechaIngreso.Value).Minutes)
                                   minutos.</span>
+                        <br />
                     </div> 
                     
                     using (Html.BeginForm("RegistrarAtencionPaciente", "Profesional"))
@@ -75,52 +88,36 @@
                         <input type="hidden" name="turnoId" value="@Model.Id"/>
                         <textarea cols="5" rows="10" style="width: 100%;" name="nota">@Model.Nota</textarea>
                         @Html.Submit("Atender")
-                        <a href="@Url.Action("OtorgarTurno", "Secretaria")" target="_blank" class="button_link btn_grey"><span>Otorgar Nuevo Turno</span></a>
                     }                    
                 }
-/*                else
-                {
-                    using (Html.BeginForm("AgregarNota", "Profesional"))
-                    {
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="turnoId" value="@Model.Id"/>                        
-                        <div>
-                            <span class="text-blue">Anotaci&oacute;n Previa: </span><br/>
-                            <p>
-                                @Html.Nl2Br(Model.Nota)
-                            </p>
-                        </div>        
-                        <hr/>        
-                        <textarea cols="5" rows="10" style="width: 100%;" name="nota"></textarea>
-                        @Html.Submit("Agregar Nota")
-                    }                    
-                }*/
             }
+        </div>
+
+        <div>
             @if (Model.Estado == EstadoTurno.Atendido)
+            {
+                using (Html.BeginForm("AgregarNota", "Profesional"))
                 {
-                    using (Html.BeginForm("AgregarNota", "Profesional"))
-                    {
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="turnoId" value="@Model.Id"/>                        
-                        <div>
-                            <span class="text-blue">Anotaci&oacute;n Previa: </span><br/>
-                            <p>
-                                @Html.Nl2Br(Model.Nota)
-                            </p>
-                        </div>        
-                        <hr/>        
-                        <textarea cols="5" rows="10" style="width: 100%;" name="nota"></textarea>
-                        @Html.Submit("Agregar Nota")
-                        <a href="@Url.Action("OtorgarTurno", "Secretaria")" target="_blank" class="button_link btn_grey"><span>Otorgar Nuevo Turno</span></a>
-                    }                    
-                }
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="turnoId" value="@Model.Id"/>                        
+                    <div>
+                        <span class="text-blue">Anotaci&oacute;n Previa: </span><br/>
+                        <p>
+                            @Html.Nl2Br(Model.Nota)
+                        </p>
+                    </div>        
+                    <hr/>        
+                    <textarea cols="5" rows="10" style="width: 100%;" name="nota"></textarea>
+                    @Html.Submit("Agregar Nota")
+                }                    
+            }
             @if (Model.PuedoCancelar)
             {
                 using (Html.BeginForm("CancelarTurno", "Profesional"))
                 {
                     @Html.Partial("_CancelarTurno")
                 }
-            }                       
+            }          
         </div>
     </div>
 </div>

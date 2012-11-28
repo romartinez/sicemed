@@ -215,8 +215,59 @@ div.aligncenter {
 	 color:#808080}
 	 	
 .text-blue {
-	 color:#12a0a9}	
+	 color:#12a0a9}
+.text-red {
+    color: #f21a1a}	
 
+.text-green-negrita {
+	 color:#23b60d;
+     font-weight:bold
+}
+
+.text-gray-negrita{
+	 color:#808080;
+     font-weight:bold
+}
+	 	
+.text-blue-negrita{
+	 color:#12a0a9;
+     font-weight:bold
+}
+.text-red-negrita {
+    color: #f21a1a;
+    font-weight:bold
+}	
+.text-black-negrita {
+    color: #000;
+    font-weight:bold
+}	
+
+.text-green-negrita-subrayada {
+	 color:#12a0a9;
+     font-weight:bold;
+     text-decoration:underline
+}
+
+.text-gray-negrita-subrayada{
+	 color:#808080;
+     font-weight:bold;
+     text-decoration:underline
+}
+	 	
+.text-blue-negrita-subrayada{
+	 color:#12a0a9;
+     font-weight:bold;
+     text-decoration:underline
+
+}
+.text-red-negrita-subrayada{
+    color: #f21a1a;
+    font-weight:bold;
+    text-decoration:underline
+}	
+.text-negrita{
+    font-weight:bold
+}
 /* Clear Floats */
 .clear {
 	clear: both;
