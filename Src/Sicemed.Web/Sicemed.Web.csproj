@@ -746,6 +746,7 @@
     <Content Include="Reports\logo.png" />
     <Content Include="Reports\Report.aspx" />
     <Content Include="Models\Caja\CajaDiagram.cd" />
+    <EmbeddedResource Include="Reports\OLD_TurnosReporte.rdlc" />
     <EmbeddedResource Include="Reports\FichaPacienteReporte.rdlc" />
     <EmbeddedResource Include="Reports\TurnosReporte.rdlc" />
     <None Include="public\js\libs\jquery.validate-vsdoc.js" />
@@ -786,7 +787,9 @@
     <Content Include="Views\Historial\SeleccionPaciente.cshtml" />
     <Content Include="Views\Secretaria\EditarObraSocialTurno.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\App_LocalResources\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
