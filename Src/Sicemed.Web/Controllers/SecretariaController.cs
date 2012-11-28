@@ -101,8 +101,7 @@ namespace Sicemed.Web.Controllers
                 query.ClearCache();
 
                 ShowMessages(ResponseMessage.Success("Turno otorgado con éxito."));
-                               
-                return RedirectToAction("OtorgarTurno");
+                return RedirectToAction("OtorgarTurno"); 
             }
             return View(editModel);
         }
@@ -318,7 +317,11 @@ namespace Sicemed.Web.Controllers
                     model.Membership.Email = string.Format("{0}.{1}@cqr.com.ar", model.Nombre, model.Apellido);
 
                 ShowMessages(ResponseMessage.Success("Paciente '{0}' modificado correctamente.", model.NombreCompleto));
-                return RedirectToAction("OtorgarTurno");
+                
+                if (_membershipService.GetCurrentUser().IsInRole(Rol.SECRETARIA))
+                { return RedirectToAction("OtorgarTurno"); }
+                else
+                {return RedirectToAction("Agenda","Profesional");}
             }
 
             return View(editModel);

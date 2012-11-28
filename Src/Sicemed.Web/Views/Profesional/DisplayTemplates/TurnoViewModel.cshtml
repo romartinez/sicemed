@@ -26,13 +26,13 @@
                         @:<span class="text-blue-negrita-subrayada">Especialidad:</span><span class="text-black-negrita"> @Model.Especialidad.Descripcion</span>
                         <br/><br />            
                     }
-                    @if (!string.IsNullOrWhiteSpace(Model.Paciente.NumeroAfiliado))
+                    @if (!string.IsNullOrWhiteSpace(Model.NumeroAfiliado))
                     {
-                        @:<span class="text-blue-negrita-subrayada">N&uacute;mero de Afiliado:</span><span class="text-black-negrita"> @Model.Paciente.NumeroAfiliado</span><br/><br/>
+                        @:<span class="text-blue-negrita-subrayada">N&uacute;mero de Afiliado:</span><span class="text-black-negrita"> @Model.NumeroAfiliado</span><br/><br/>
                     }
-                    @if(!string.IsNullOrWhiteSpace(Model.Paciente.Plan))
+                    @if(Model.Plan!=null)
                     {
-                        @:<span class="text-blue-negrita-subrayada">Obra Social:</span><span class="text-black-negrita"> @Model.Paciente.Plan, @Model.Paciente.ObraSocial</span><br/><br/>                
+                        @:<span class="text-blue-negrita-subrayada">Obra Social:</span><span class="text-black-negrita"> @Model.Plan.Nombre, @Model.Plan.ObraSocial.RazonSocial</span><br/><br/>                
                     }
                     @if(Model.Paciente.Edad.HasValue)
                     {
@@ -52,8 +52,7 @@
                     @if (Model.Estado == EstadoTurno.Presentado || Model.Estado == EstadoTurno.Atendido)
                     {
                     <div><a href="@Url.Action("TurnosPorPaciente", "Historial", new { PacienteId = Model.Paciente.Id })" target="_blank" class="button_link btn_blue"><span>Historial Atenciones</span></a></div>
-                    <div><a href="@Url.Action("EdicionPaciente", "Secretaria", new { id = Model.Paciente.Id })" target="_blank" class="button_link btn_yellow"><span>Editar Paciente</span></a></div>
-                    <div><a href="@Url.Action("OtorgarTurno", "Secretaria")" target="_blank" class="button_link btn_grey"><span>Otorgar Nuevo Turno</span></a></div>
+                    <div><a href="@Url.Action("EdicionPaciente", "Secretaria", new { id = Model.Paciente.Id})" class="button_link btn_yellow"><span>Editar Paciente</span></a></div>
                     }
                 </td>
               </TR>
@@ -70,6 +69,7 @@
                 @:El paciente ya se ha atendido con anterioridad.
             }
         </div>
+        <br />
         <div>
             @if (Model.PuedeEditarNota)
             {            
@@ -101,7 +101,7 @@
                     @Html.AntiForgeryToken()
                     <input type="hidden" name="turnoId" value="@Model.Id"/>                        
                     <div>
-                        <span class="text-blue">Anotaci&oacute;n Previa: </span><br/>
+                        <span class="text-blue-subrayada">Anotaci&oacute;n Previa: </span><br/>
                         <p>
                             @Html.Nl2Br(Model.Nota)
                         </p>

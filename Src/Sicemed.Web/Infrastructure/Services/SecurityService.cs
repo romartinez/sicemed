@@ -51,7 +51,7 @@ namespace Sicemed.Web.Infrastructure.Services
                     "By default the methods are secured, you must be explicit on permissions.",actionDescriptor.ControllerDescriptor.ControllerName, actionDescriptor.ActionName));
 
 //RM: Se agrega al perfil del profesional acceso a las funciones EDITAR PACIENTE y Otorgar Turno de la secretaria
-            if (user.IsInRole("Profesional") && (actionDescriptor.ActionName.Equals("EdicionPaciente") || actionDescriptor.ActionName.Equals("OtorgarTurno")))
+            if (user.IsInRole("Profesional") && (actionDescriptor.ActionName.Equals("EdicionPaciente") || actionDescriptor.ActionName.Equals("GetTurnosProfesional") || actionDescriptor.ActionName.Equals("GetEspecialidadesProfesional") || actionDescriptor.ActionName.Equals("OtorgarTurno")))
                 rta = true;
             else
                 rta= attributes.Any(attr => user.IsInRole(attr.Rol));

@@ -265,6 +265,26 @@ div.aligncenter {
     font-weight:bold;
     text-decoration:underline
 }	
+.text-green-subrayada {
+	 color:#12a0a9;
+     text-decoration:underline
+}
+
+.text-gray-subrayada{
+	 color:#808080;
+     text-decoration:underline
+}
+	 	
+.text-blue-subrayada{
+	 color:#12a0a9;
+     text-decoration:underline
+
+}
+.text-red-subrayada{
+    color: #f21a1a;
+    text-decoration:underline
+}	
+
 .text-negrita{
     font-weight:bold
 }

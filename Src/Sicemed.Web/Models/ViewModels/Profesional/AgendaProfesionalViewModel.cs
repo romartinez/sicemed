@@ -51,7 +51,10 @@ namespace Sicemed.Web.Models.ViewModels.Profesional
             public DateTime FechaEstado { get; set; }
             public string Nota { get; set; }
             public bool PuedoCancelar { get; set; }
-
+            public InfoViewModel Profesional { get; set; }
+            public string NumeroAfiliado { get; set; }
+            public decimal Coseguro { get; set; }
+            public Plan Plan { get; set; }
             public DateTime FechaTurnoFinal
             {
                 get { return FechaTurno.Add(DuracionTurno); }

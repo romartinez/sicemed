@@ -32,6 +32,8 @@
                 </div>
                 <div class="editor-field">
                     @Html.EditorFor(x => x.PacienteId)
+                    @if (User.IsInRole("Secretaria"))
+                    {    
                     <a href="@Url.Action("AltaPaciente")" target="_blank" class="button_link btn_blue">
                         <span>Alta Paciente</span>
                     </a>
@@ -41,6 +43,7 @@
                     <a data-url="@Url.Action("TurnosPorPaciente","Historial")?PacienteId=" id="lnkTurnosPaciente"  target="_blank" class="button_link btn_pink" style="display: none;">
                         <span>Turnos</span>
                     </a>
+                    }
                 </div>
                 <div class="editor-validator">
                     @Html.ValidationMessageFor(x => x.PacienteId)

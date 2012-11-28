@@ -43,8 +43,10 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
 
                 pages = new List<PageViewModel>();
                 //Esto te permite ver las paginas que agregas
-                pagesFromDb.ToList().ForEach(x => pages.Add(ConvertModelToDynamic(x)));
-
+//                if (currentUser != null && currentUser.IsInRole(Rol.PACIENTE))
+//                {
+                    pagesFromDb.ToList().ForEach(x => pages.Add(ConvertModelToDynamic(x)));
+//                }
                 AttachCorePages(pages);
 
                 if (currentUser != null && currentUser.IsInRole(Rol.ADMINISTRADOR))
