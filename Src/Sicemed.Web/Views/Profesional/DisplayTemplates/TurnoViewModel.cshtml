@@ -5,7 +5,7 @@
 
     var css = Model.Estado == EstadoTurno.Cancelado ? "ui-state-disabled " : string.Empty;
     css += Model.Estado == EstadoTurno.Presentado ? "ui-state-highlight" : string.Empty;
-
+   
     var cssDuracion = Model.DuracionTurno <= TimeSpan.FromMinutes(10) ? "turno-duracion-corto" : (Model.DuracionTurno <= TimeSpan.FromMinutes(20) ? "turno-duracion-mediano" : "turno-duracion-largo");
 }
 <h3 class="@css">
@@ -40,11 +40,19 @@
                     }
                     @if(Model.Paciente.Peso.HasValue)
                     {
-                        @:<span class="text-blue-negrita-subrayada">Peso:</span><span class="text-black-negrita"> @Model.Paciente.Peso.Value.ToString("0.00") </span><br/><br/>
+                        @:<span class="text-blue-negrita-subrayada">Peso:</span><span class="text-black-negrita"> @Model.Paciente.Peso.Value.ToString("0.00") KG </span><br/><br/>
+                    }
+                    else
+                    {
+                        @:<span class="text-blue-negrita-subrayada">Peso:</span><span class="text-red-negrita"> N/A - Completar la ficha del Paciente</span><br/><br/>
                     }
                     @if(Model.Paciente.Altura.HasValue)
                     {
-                        @:<span class="text-blue-negrita-subrayada">Altura:</span><span class="text-black-negrita"> @Model.Paciente.Altura.Value.ToString("0.00") </span><br/><br/>
+                        @:<span class="text-blue-negrita-subrayada">Altura:</span><span class="text-black-negrita"> @Model.Paciente.Altura.Value.ToString("0.00") CM </span><br/><br/>
+                    }
+                    else
+                    {
+                        @:<span class="text-blue-negrita-subrayada">Altura:</span><span class="text-red-negrita"> N/A - Completar la ficha del Paciente</span><br/><br/>
                     }
                 </TD>
                 <td></td><td></td><td></td><td></td><td></td><td></td>

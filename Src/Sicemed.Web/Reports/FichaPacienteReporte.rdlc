@@ -112,6 +112,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox14</rd:DefaultName>
         <Top>0.762cm</Top>
+        <Left>0cm</Left>
         <Height>1.94576cm</Height>
         <Width>10.73109cm</Width>
         <Style>
@@ -296,6 +297,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox14</rd:DefaultName>
         <Top>3.01644cm</Top>
+        <Left>0cm</Left>
         <Height>0.54347cm</Height>
         <Width>17.93136cm</Width>
         <ZIndex>2</ZIndex>
@@ -309,17 +311,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Line Name="Line1">
-        <Top>5.9588cm</Top>
-        <Height>0cm</Height>
-        <Width>17.93136cm</Width>
-        <ZIndex>3</ZIndex>
-        <Style>
-          <Border>
-            <Style>Dashed</Style>
-          </Border>
-        </Style>
-      </Line>
       <Tablix Name="Tablix1">
         <TablixBody>
           <TablixColumns>
@@ -329,7 +320,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>1.46041cm</Height>
+              <Height>2.06041cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -358,13 +349,21 @@
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                        <Paragraph>
-                          <TextRuns>
                             <TextRun>
-                              <Value>Especialidad: </Value>
+                              <Value> - </Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>Especialidad</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>: </Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                               </Style>
@@ -376,7 +375,20 @@
                               </Style>
                             </TextRun>
                             <TextRun>
-                              <Value> / Consultorio: </Value>
+                              <Value> / </Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>Consultorio</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>: </Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
                               </Style>
@@ -393,13 +405,47 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Nota.Value</Value>
+                              <Value />
                               <Style>
-                                <FontStyle>Italic</FontStyle>
+                                <FontStyle>Normal</FontStyle>
+                                <TextDecoration>Underline</TextDecoration>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <ListLevel>1</ListLevel>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Resumen Atención Médica:</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Nota.Value</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
@@ -408,42 +454,11 @@
                         <Border>
                           <Style>None</Style>
                         </Border>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
-            <TablixRow>
-              <Height>0.6cm</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox5">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox5</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>None</Style>
-                        </Border>
+                        <BottomBorder>
+                          <Color>Black</Color>
+                          <Style>Dotted</Style>
+                          <Width>0.25pt</Width>
+                        </BottomBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -467,17 +482,16 @@
               <Group Name="Details" />
               <TablixMembers>
                 <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <KeepTogether>true</KeepTogether>
         <DataSetName>FichaPacienteReporte</DataSetName>
         <Top>4.35728cm</Top>
+        <Left>0cm</Left>
         <Height>2.06041cm</Height>
         <Width>17.93136cm</Width>
-        <ZIndex>4</ZIndex>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -485,9 +499,10 @@
         </Style>
       </Tablix>
       <Line Name="Line2">
+        <Left>0cm</Left>
         <Height>0cm</Height>
         <Width>17.93136cm</Width>
-        <ZIndex>5</ZIndex>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -516,9 +531,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Left>0cm</Left>
         <Height>0.762cm</Height>
         <Width>17.93136cm</Width>
-        <ZIndex>6</ZIndex>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -553,9 +569,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>3.6144cm</Top>
+        <Left>0cm</Left>
         <Height>0.762cm</Height>
         <Width>17.93136cm</Width>
-        <ZIndex>7</ZIndex>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -656,6 +673,7 @@
           <Source>Embedded</Source>
           <Value>logo2</Value>
           <Sizing>FitProportional</Sizing>
+          <Left>0cm</Left>
           <Height>4.43328cm</Height>
           <Width>6.44771cm</Width>
           <ZIndex>2</ZIndex>
@@ -689,6 +707,7 @@ Velez Sarsfield 825, Rosario</Value>
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
           <Top>2.6162cm</Top>
+          <Left>0cm</Left>
           <Height>1.81708cm</Height>
           <Width>7.24537cm</Width>
           <ZIndex>3</ZIndex>
@@ -710,7 +729,7 @@ Velez Sarsfield 825, Rosario</Value>
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.69525cm</Height>
+      <Height>0.77639cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -747,7 +766,7 @@ Velez Sarsfield 825, Rosario</Value>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
-          <Top>0.09525cm</Top>
+          <Top>0.17639cm</Top>
           <Height>0.6cm</Height>
           <Width>17.93136cm</Width>
           <Style>
