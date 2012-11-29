@@ -17,7 +17,6 @@ namespace Sicemed.Web.Models.Reports
         public string ObraSocial { get; set; }
         public string Plan { get; set; }
         public string NumeroAfiliado { get; set; }
-
         public DateTime FechaTurno { get; set; }
         public string Profesional { get; set; }
         public string Consultorio { get; set; }

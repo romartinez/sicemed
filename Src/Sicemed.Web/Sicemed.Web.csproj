@@ -746,8 +746,9 @@
     <Content Include="Reports\logo.png" />
     <Content Include="Reports\Report.aspx" />
     <Content Include="Models\Caja\CajaDiagram.cd" />
-    <EmbeddedResource Include="Reports\OLD_TurnosReporte.rdlc" />
     <EmbeddedResource Include="Reports\FichaPacienteReporte.rdlc" />
+    <EmbeddedResource Include="Reports\OLD_TurnosReporte.rdlc" />
+    <EmbeddedResource Include="Reports\OLD_FichaPacienteReporte.rdlc" />
     <EmbeddedResource Include="Reports\TurnosReporte.rdlc" />
     <None Include="public\js\libs\jquery.validate-vsdoc.js" />
     <Content Include="public\js\libs\jquery.validate.js" />

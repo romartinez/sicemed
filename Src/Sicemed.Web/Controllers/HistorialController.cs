@@ -74,6 +74,7 @@ namespace Sicemed.Web.Controllers
             report.FechaHasta = viewModel.Filters.Hasta;
             report.Filtro = viewModel.Filters.Filtro;
             report.PacienteId = paciente.Id;
+            
 
             var reportEngine = new ReportEngine();
             var reportBytes = reportEngine.BuildReport(report);

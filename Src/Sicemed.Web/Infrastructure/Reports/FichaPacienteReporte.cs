@@ -90,10 +90,9 @@ namespace Sicemed.Web.Infrastructure.Reports
                 FechaTurno = turno.FechaTurno,
                 Profesional = turno.Profesional.Persona.NombreCompleto,
                 Consultorio = turno.Consultorio != null ? turno.Consultorio.Nombre : string.Empty,
-                Especialidad = turno.Especialidad != null ? turno.Especialidad.Descripcion : string.Empty,
+                Especialidad = turno.Especialidad != null ? turno.Especialidad.Nombre : string.Empty,
                 Nota = turno.Nota
             };
-
             return AppendPacienteInfo(model);
         }
 
@@ -145,7 +144,6 @@ namespace Sicemed.Web.Infrastructure.Reports
                 model.Plan = _paciente.Plan.Nombre;
                 model.ObraSocial = _paciente.Plan.ObraSocial.RazonSocial;
             }
-
             return model;
         }
     }

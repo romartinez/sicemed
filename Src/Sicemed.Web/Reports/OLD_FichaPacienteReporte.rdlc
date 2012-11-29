@@ -9,43 +9,111 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Apellido y Nombre</Value>
-                <Style>
-                  <FontSize>14pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                  <TextDecoration>Underline</TextDecoration>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>: </Value>
-                <Style>
-                  <FontSize>14pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-              <TextRun>
                 <Value>=First(Fields!NombrePaciente.Value)</Value>
                 <Style>
-                  <FontSize>14pt</FontSize>
+                  <FontSize>12pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
               <TextRun>
                 <Value xml:space="preserve"> </Value>
                 <Style>
-                  <FontSize>14pt</FontSize>
+                  <FontSize>12pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!DocumentoTipo.Value)</Value>
+                <Style>
+                  <FontStyle>Italic</FontStyle>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value xml:space="preserve"> </Value>
+                <Style>
+                  <FontStyle>Italic</FontStyle>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!DocumentoNumero.Value)</Value>
+                <Style>
+                  <FontStyle>Italic</FontStyle>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value xml:space="preserve"> </Value>
+                <Style>
+                  <FontStyle>Italic</FontStyle>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Email.Value)</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value> / </Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!Telefono.Value)</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value xml:space="preserve"> </Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Domicilio.Value)</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value xml:space="preserve"> </Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox14</rd:DefaultName>
-        <Top>1.0795cm</Top>
-        <Left>0.3175cm</Left>
-        <Height>0.74083cm</Height>
-        <Width>15.52365cm</Width>
+        <Top>0.762cm</Top>
+        <Height>1.94576cm</Height>
+        <Width>10.73109cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -63,63 +131,21 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>E-mail</Value>
+                <Value>Fecha Nacimiento: </Value>
                 <Style>
-                  <TextDecoration>Underline</TextDecoration>
+                  <FontStyle>Normal</FontStyle>
                 </Style>
               </TextRun>
               <TextRun>
-                <Value>: </Value>
-                <Style />
-              </TextRun>
-              <TextRun>
-                <Value>=First(Fields!Email.Value)</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
+                <Value>=First(Fields!FechaNacimiento.Value)</Value>
                 <Style>
-                  <FontSize>4pt</FontSize>
+                  <FontStyle>Normal</FontStyle>
                 </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Tel</Value>
-                <Style>
-                  <TextDecoration>Underline</TextDecoration>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>: </Value>
-                <Style />
-              </TextRun>
-              <TextRun>
-                <Value>=First(Fields!Telefono.Value)</Value>
-                <Style />
               </TextRun>
               <TextRun>
                 <Value xml:space="preserve"> </Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
                 <Style>
-                  <FontSize>4pt</FontSize>
-                  <TextDecoration>Underline</TextDecoration>
+                  <FontStyle>Normal</FontStyle>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -128,22 +154,62 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Dirección</Value>
+                <Value>Edad: </Value>
                 <Style>
-                  <TextDecoration>Underline</TextDecoration>
+                  <FontStyle>Normal</FontStyle>
                 </Style>
               </TextRun>
               <TextRun>
-                <Value>: </Value>
-                <Style />
-              </TextRun>
-              <TextRun>
-                <Value>=First(Fields!Domicilio.Value)</Value>
-                <Style />
+                <Value>=First(Fields!Edad.Value)</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                </Style>
               </TextRun>
               <TextRun>
                 <Value xml:space="preserve"> </Value>
-                <Style />
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Altura: </Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!Altura.Value)</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value xml:space="preserve"> </Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Peso: </Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!Peso.Value)</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
@@ -153,24 +219,64 @@
               <TextRun>
                 <Value />
                 <Style>
-                  <FontSize>4pt</FontSize>
-                  <TextDecoration>Underline</TextDecoration>
+                  <FontStyle>Normal</FontStyle>
                 </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox14</rd:DefaultName>
+        <Top>0.762cm</Top>
+        <Left>12.07743cm</Left>
+        <Height>2.25444cm</Height>
+        <Width>5.85393cm</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox16">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Obra Social</Value>
+                <Value>Número Afiliado: </Value>
                 <Style>
-                  <TextDecoration>Underline</TextDecoration>
+                  <FontStyle>Normal</FontStyle>
                 </Style>
               </TextRun>
               <TextRun>
-                <Value>: </Value>
-                <Style />
+                <Value>=First(Fields!NumeroAfiliado.Value)</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>  / Plan: </Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=First(Fields!Plan.Value)</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>  / Obra Social: </Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                </Style>
               </TextRun>
               <TextRun>
                 <Value>=First(Fields!ObraSocial.Value)</Value>
@@ -187,81 +293,12 @@
             </TextRuns>
             <Style />
           </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontSize>4pt</FontSize>
-                  <TextDecoration>Underline</TextDecoration>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Plan</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <TextDecoration>Underline</TextDecoration>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>: </Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>=First(Fields!Plan.Value)</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value> - </Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>N° Afiliado</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <TextDecoration>Underline</TextDecoration>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>: </Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>=First(Fields!NumeroAfiliado.Value)</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value xml:space="preserve"> </Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox14</rd:DefaultName>
-        <Top>1.85561cm</Top>
-        <Left>6.1243cm</Left>
-        <Height>2.38497cm</Height>
-        <Width>11.56893cm</Width>
-        <ZIndex>1</ZIndex>
+        <Top>3.01644cm</Top>
+        <Height>0.54347cm</Height>
+        <Width>17.93136cm</Width>
+        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -292,74 +329,22 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                                <Format>dd/MM/yy</Format>
-                                <TextDecoration>Underline</TextDecoration>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>Fecha Atención</Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                                <Format>dd/MM/yy</Format>
-                                <TextDecoration>Underline</TextDecoration>
-                              </Style>
-                            </TextRun>
-                            <TextRun>
-                              <Value>: </Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                                <Format>dd/MM/yy</Format>
-                                <TextDecoration>None</TextDecoration>
-                              </Style>
-                            </TextRun>
-                            <TextRun>
                               <Value>=Fields!FechaTurno.Value</Value>
                               <Style>
-                                <FontWeight>Normal</FontWeight>
-                                <Format>dd/MM/yy</Format>
-                              </Style>
-                            </TextRun>
-                            <TextRun>
-                              <Value xml:space="preserve"> </Value>
-                              <Style>
-                                <FontWeight>Normal</FontWeight>
-                                <Format>dd/MM/yy</Format>
-                              </Style>
-                            </TextRun>
-                            <TextRun>
-                              <Value>- </Value>
-                              <Style>
                                 <FontWeight>Bold</FontWeight>
                                 <Format>dd/MM/yy</Format>
                               </Style>
                             </TextRun>
                             <TextRun>
-                              <Value>Profesional</Value>
+                              <Value> - </Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>dd/MM/yy</Format>
-                                <TextDecoration>Underline</TextDecoration>
-                              </Style>
-                            </TextRun>
-                            <TextRun>
-                              <Value>: </Value>
-                              <Style>
-                                <FontWeight>Bold</FontWeight>
-                                <Format>dd/MM/yy</Format>
                               </Style>
                             </TextRun>
                             <TextRun>
                               <Value>=Fields!Profesional.Value</Value>
                               <Style>
-                                <FontWeight>Normal</FontWeight>
+                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                             <TextRun>
@@ -372,7 +357,6 @@
                               <Value>Especialidad</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontWeight>Bold</FontWeight>
                                 <TextDecoration>Underline</TextDecoration>
                               </Style>
                             </TextRun>
@@ -380,14 +364,37 @@
                               <Value>: </Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                             <TextRun>
                               <Value>=Fields!Especialidad.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontWeight>Normal</FontWeight>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value> / </Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>Consultorio</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>: </Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                              </Style>
+                            </TextRun>
+                            <TextRun>
+                              <Value>=Fields!Consultorio.Value</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -411,21 +418,6 @@
                               <Value>Resumen Atención Médica:</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontWeight>Bold</FontWeight>
-                                <TextDecoration>Underline</TextDecoration>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontStyle>Normal</FontStyle>
-                                <FontSize>4pt</FontSize>
-                                <FontWeight>Bold</FontWeight>
                                 <TextDecoration>Underline</TextDecoration>
                               </Style>
                             </TextRun>
@@ -462,8 +454,8 @@
                         </Border>
                         <BottomBorder>
                           <Color>Black</Color>
-                          <Style>Dashed</Style>
-                          <Width>2pt</Width>
+                          <Style>Dotted</Style>
+                          <Width>0.25pt</Width>
                         </BottomBorder>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
@@ -493,16 +485,26 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>FichaPacienteReporte</DataSetName>
-        <Top>5.23922cm</Top>
+        <Top>4.35728cm</Top>
         <Height>2.06041cm</Height>
         <Width>17.93136cm</Width>
-        <ZIndex>2</ZIndex>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
+      <Line Name="Line2">
+        <Height>0cm</Height>
+        <Width>17.93136cm</Width>
+        <ZIndex>4</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+        </Style>
+      </Line>
       <Textbox Name="Textbox3">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -512,10 +514,10 @@
               <TextRun>
                 <Value>DATOS DEL PACIENTE</Value>
                 <Style>
-                  <FontStyle>Normal</FontStyle>
+                  <FontStyle>Italic</FontStyle>
                   <FontSize>15pt</FontSize>
                   <FontWeight>Bold</FontWeight>
-                  <TextDecoration>None</TextDecoration>
+                  <TextDecoration>Underline</TextDecoration>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -525,10 +527,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>0.3175cm</Top>
         <Height>0.762cm</Height>
         <Width>17.93136cm</Width>
-        <ZIndex>3</ZIndex>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -549,10 +550,10 @@
               <TextRun>
                 <Value>DETALLE DE ATENCIONES</Value>
                 <Style>
-                  <FontStyle>Normal</FontStyle>
+                  <FontStyle>Italic</FontStyle>
                   <FontSize>15pt</FontSize>
                   <FontWeight>Bold</FontWeight>
-                  <TextDecoration>None</TextDecoration>
+                  <TextDecoration>Underline</TextDecoration>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -562,10 +563,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>4.39051cm</Top>
+        <Top>3.6144cm</Top>
         <Height>0.762cm</Height>
         <Width>17.93136cm</Width>
-        <ZIndex>4</ZIndex>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -577,235 +578,14 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox17">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Fecha Nacimiento</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <TextDecoration>Underline</TextDecoration>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>: </Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>=First(Fields!FechaNacimiento.Value)</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value xml:space="preserve"> </Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontSize>4pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Edad</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <TextDecoration>Underline</TextDecoration>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>: </Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>=First(Fields!Edad.Value)</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value> Años</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontSize>4pt</FontSize>
-                  <TextDecoration>Underline</TextDecoration>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Altura</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <TextDecoration>Underline</TextDecoration>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>: </Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>=FormatNumber(First(Fields!Altura.Value, "FichaPacienteReporte"),2)</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value> cm</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontSize>4pt</FontSize>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Peso</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <TextDecoration>Underline</TextDecoration>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>: </Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>=FormatNumber(First(Fields!Peso.Value, "FichaPacienteReporte"),2)</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value> Kg</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value />
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontSize>4pt</FontSize>
-                  <TextDecoration>Underline</TextDecoration>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=First(Fields!DocumentoTipo.Value)</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <TextDecoration>Underline</TextDecoration>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value> :</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>=First(Fields!DocumentoNumero.Value)</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value xml:space="preserve"> </Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox14</rd:DefaultName>
-        <Top>1.85561cm</Top>
-        <Left>0.36739cm</Left>
-        <Height>2.35851cm</Height>
-        <Width>5.39631cm</Width>
-        <ZIndex>5</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
     </ReportItems>
-    <Height>3.03707in</Height>
+    <Height>2.52665in</Height>
     <Style />
   </Body>
-  <Width>7.05959in</Width>
+  <Width>7.15334in</Width>
   <Page>
     <PageHeader>
-      <Height>4.63916cm</Height>
+      <Height>4.62208cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -818,7 +598,7 @@
                 <TextRun>
                   <Value>=Parameters!Title.Value</Value>
                   <Style>
-                    <FontSize>12pt</FontSize>
+                    <FontSize>14pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
@@ -827,47 +607,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Title</rd:DefaultName>
-          <Top>2.58396cm</Top>
-          <Left>8.51959cm</Left>
+          <Top>2.6162cm</Top>
+          <Left>7.64646cm</Left>
           <Height>1.81708cm</Height>
-          <Width>9.09428cm</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox2">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>Teléfono: (0341) 438-2370
-Velez Sarsfield 825, Rosario</Value>
-                  <Style>
-                    <FontStyle>Italic</FontStyle>
-                    <FontFamily>Calibri</FontFamily>
-                    <FontSize>15pt</FontSize>
-                    <FontWeight>Normal</FontWeight>
-                    <TextDecoration>None</TextDecoration>
-                    <Color>#000000</Color>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox2</rd:DefaultName>
-          <Top>2.58396cm</Top>
-          <Height>1.81708cm</Height>
-          <Width>7.24537cm</Width>
-          <ZIndex>1</ZIndex>
+          <Width>10.2849cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -885,18 +628,6 @@ Velez Sarsfield 825, Rosario</Value>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Generado por</Value>
-                  <Style>
-                    <TextDecoration>Underline</TextDecoration>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value>:   </Value>
-                  <Style>
-                    <TextDecoration>None</TextDecoration>
-                  </Style>
-                </TextRun>
-                <TextRun>
                   <Value>=Parameters!User.Value</Value>
                   <Style />
                 </TextRun>
@@ -908,16 +639,6 @@ Velez Sarsfield 825, Rosario</Value>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Fecha Emisión</Value>
-                  <Style>
-                    <TextDecoration>Underline</TextDecoration>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value>: </Value>
-                  <Style />
-                </TextRun>
-                <TextRun>
                   <Value>=Parameters!Date.Value</Value>
                   <Style />
                 </TextRun>
@@ -928,11 +649,10 @@ Velez Sarsfield 825, Rosario</Value>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>ReportName</rd:DefaultName>
-          <Top>0.11459cm</Top>
-          <Left>10.90228cm</Left>
+          <Left>13.35668cm</Left>
           <Height>0.99687cm</Height>
-          <Width>6.79096cm</Width>
-          <ZIndex>2</ZIndex>
+          <Width>4.72721cm</Width>
+          <ZIndex>1</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -943,32 +663,65 @@ Velez Sarsfield 825, Rosario</Value>
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
-        <Image Name="Image2">
+        <Image Name="Image4">
           <Source>Embedded</Source>
-          <Value>logo</Value>
+          <Value>logo2</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>0.3175cm</Top>
-          <Height>2.38111cm</Height>
-          <Width>6.18704cm</Width>
-          <ZIndex>3</ZIndex>
+          <Height>4.43328cm</Height>
+          <Width>6.44771cm</Width>
+          <ZIndex>2</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
             </Border>
           </Style>
         </Image>
+        <Textbox Name="Textbox2">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Teléfono: (0341) 438-2370
+Velez Sarsfield 825, Rosario</Value>
+                  <Style>
+                    <FontStyle>Italic</FontStyle>
+                    <FontFamily>Calibri</FontFamily>
+                    <FontSize>16pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                    <TextDecoration>None</TextDecoration>
+                    <Color>#000000</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox2</rd:DefaultName>
+          <Top>2.6162cm</Top>
+          <Height>1.81708cm</Height>
+          <Width>7.24537cm</Width>
+          <ZIndex>3</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>
           <Style>None</Style>
         </Border>
-        <BottomBorder>
-          <Style>Solid</Style>
-        </BottomBorder>
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1.05833cm</Height>
+      <Height>0.77639cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1005,7 +758,7 @@ Velez Sarsfield 825, Rosario</Value>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
-          <Top>0.45833cm</Top>
+          <Top>0.17639cm</Top>
           <Height>0.6cm</Height>
           <Width>17.93136cm</Width>
           <Style>
@@ -1044,7 +797,7 @@ Velez Sarsfield 825, Rosario</Value>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>b66be000-2546-44be-8cb4-64a01f8b977b</rd:DataSourceID>
+      <rd:DataSourceID>673d02ab-7d8b-4fcf-abbf-ae2c4709e0a7</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -1152,6 +905,24 @@ Velez Sarsfield 825, Rosario</Value>
   <EmbeddedImages>
     <EmbeddedImage Name="logo">
       <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="logo1">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="logo2">
+      <MIMEType>image/png</MIMEType>
       <ImageData>iVBORw0KGgoAAAANSUhEUgAAANIAAABQCAYAAABs4SuRAAAShUlEQVR42u1d+VcU17a+/8L76f3w1o1DRGYQlFk0EhVknmlknmdkknkU0IjXKDjgjIoKGuViokYTjc8hTgmOOASNRkyMcSXvrnfX+32/s6s5TXX1qaabLqCF8631LaA5dcb9nb33qaL42984ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODhmEk58+TWUNLZBSnE9dB4+AXxGODhG8OODQbj8/W14+/69n1yZU2cuwLLIVLBcGg52fgmwICQTnEKzIbZoHRcTx8zGxWs3YaFfNFgsDQXr5SqwWRkLy1Q5kFHRDJs6D8KWvd1Q1NAG7kEJMP8TIiD/JFgYVQjuCVXglVpP2ADuiVXgn1kDw7+9O85nlGPG4d6jJ2C5JBhsfeMEcbjFVxCBVIJb3FpYFFMETuG54BiSAY7B6eAUlgMuMcXgkVQNi9ObYElW6ygzWwRRrcyogcs3B7h34phZ8IvNApsVseCiKoXFaUQcma0aeqc3w+LURvBKrgfP5DoilEbhM3EZKbEMii21YgOcPHsRHj4ZmtaievvX//oNPHsFlNyiZiA2d3aBxZIwcI7IE8Izb+JVlKBXWqPg2ZxIvRgGYrg4/5MIWBSYAMnF9XDr7sMP2uBQMC0HToNvYRsszmjWYXLTHtjaewF+ev271jjxs/xNh4yitA4x5K5BcY81hv2n/5t57dnr9/WuDf5+PNdNW5w8cwHmeweDQ2AaCeWqBU/jndGiHEl9XikNQt1uq8vBNbaMeKoSEj6uARcisEc//fzBTTwaNRoNSzwsYlmp4Rt6LaWcl8PP5a45/u2tMedWbhOQ9pklQNZ1+PmME9GGbXvgY89AsF2VBK7EyL3S1pHJaJkUYlseJFSMKtnwQU087rjGimAihaSvP5GVHTDesaA35ULSdzJ39Qa0tu8GZ98YIcxyCEonIlor
 hGHGLq4S9Eyph6FXv34Qky9nPFMppLH6pC8kRLHou5YLiYF1m3eCw6cRQi5kvWI12BMBOZPwyi2xBjzTmsALQ7CpIPFMXacvwXT0RJMhpLHqwhxOLjzVLkuikfR1ZE2a1CQ28favv/y4kETIKK2HeYtDSMKfIojHNa4C3BNrwTN1CgUkYmbzbrOefEza5XIJ6cECGhJN4I0V0nhO+zB809cv7Dfrupb9/UIUQumZ2qAmiRCQHil1MPD0JXAhjeDH+4MwxyMA7ALSwIUIyCOFTBrxAuZEd5IrDTx+brYLgLu6PgHJCQAFWLn9+IQKieVVNJ4FIw0ikrPX7+nUuzJ3vSAWj2RkLXgkqemeVKNmYjX0nL/OhUTRse8IWPpEw8KYEvAgHsjcRCSQ9CuqbJPZLsB4E3LxydpECGng6SuNWFhehXqW8vajWvV+dXVAIxakW0LVCCvBLV5N1/gK2HPyGy4kis+27wMb3wQSzlUKBmuudE+qg/iKNrNbBLncSC5kMgRKCenMtbsirzLqWcRehfLX938m0+viq9sFoWCIr2a5mqvXggsSb1HElkLWuh1cSBTNW3eD7apkMnFVgkcyW5KQ0zWhGpYmlcOZS9fNZjEw72EZDH5ukpC0wi+1V0lq7ITcjQfU/GyUW46eZba1t+8i26skjHoVKhTqXZ69+lVLLMhFqpJRxhQLXBhTBKq1bVxIFDmVLWDrnwIuREjuxFjNmskNpJ/V4BieDzn1m81iQeS8x5W7T8fdPxSKNLHX51Vy1u9ltpXVsktLLNSrlG7uGhHKqFiC8tXH2Q07jmmJZWF0EQTmNoKqbCM4RxWOMrJAIBfSCDxDEsEuKIPs9jWKGXwpibmPf3MD6nceFx4pckuuV1RQbol1sFBVBoUt28FchWTK83S56/eNCoWZq1RpeZWs5l3MtoIKWjVCEXuWHwafawlFzTXw3e0HsIR4fLFQkEe++g7S67YKj3I5hecJDygjF4Tlwpt3f1bO
 eCHdHngAc72CwSEsD1yJcbolN5jMnvM3tCbq0fNX4EF2QhciVCXqp3RNqoeFseXw08vhKV2Y/LZDWidglPqOhsdCduse7fArXiZXGQnB5HIVbbGsER67Sm9QP80QQLwMFYpTRL5A/+x6LbGgUBaE5Qjl2/adgAWh2eCIDMkaYSbcefgMZryQghLywMJHBU7RpcQwG0ym/5p/MCepqaMLFkQWgQsRqxLtULok1sPFm1P7EGTzvj5GCFYLe/vGfxMZPYw0sdfJV0ThV0bjNp22nr18o+VVqFiKP1Pfkzvy5SUtsQikQhGJpXZrl1B+57HTwlMulPZBaWAfmAaH+y/oEZLuTdx9/Zenl5Cat+yEOZ5BJKzLhEVxVcIObypV1duYk7Tj0HGwDUgj7VQq0o6YD4d+mdKFwXsprBAspHjjuPuV2bRDRyzoVX4YNPxPTb67dV9XKISdPV9p6hB7FofgDDXFQiF8+uK1UP7ijQGwC0hR0z9Zw+3dfcw+oWBYN3H3/vPS9BHS57u6YJbbKrDyTQKnGLLrJdQJu7upjK5kC2l7Vw9YrkwAZ1W5Iu1Q4pPjUz2XeGysfQI2GoI1dfaOq38ZJPxiJfY/PPrJ4Pp2EsGwhHLp5l1NHTVb9gtexT4wVc2AVC2xROTVacrefvAEbFclgq0fMkG4ZWLjGw+JZS3sE0MiGNbBCJ4kTgsRdX9xGma5+hLDjocFUWTHI7kLhlxKUCXzNLEgpBXx4KRaq1hbyKLNh81iUbKaO2WPi/EUTN+1R85chvT6dq0y0sRe7VVy4Y4RQsKDGOpVNGIhQrn94KmWOFAw+HS/mlQoarH0Xbii1Z71yjgQuGL1CGMhJLOC2ac9p75lHrfru4n7QcFuWZiQFzlGkHAhvoYIqU4xxsgIaQcR0vzl8YL3U7K9LUfPmcWi6J6CqRN76lHwJGzTgZPCqRh6FWRn7xmS3NcJYkmv3aI1jrTaz41K7FmIyK/XCsGoWKTllicUC55F
@@ -1162,5 +933,5 @@ KXot/Dz8m1kvDuYsKJZth77QUOxBOD7gQ4d5PquJVyqGBcQYDeW5qz9O2OJbLwsDy1Wp4EiEYUyfHFWV
     </EmbeddedImage>
   </EmbeddedImages>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>4652996a-5a41-4c0e-a6bc-d2509971e48e</rd:ReportID>
+  <rd:ReportID>292c1ca3-e47f-4515-b429-47ad5b33d29f</rd:ReportID>
 </Report>

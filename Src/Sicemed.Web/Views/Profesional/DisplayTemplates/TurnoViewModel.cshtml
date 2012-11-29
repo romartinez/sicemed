@@ -70,11 +70,11 @@
         <div class="@(Model.Paciente.EsPrimeraVez? "paciente-primera-vez": "paciente-control")">
             @if(Model.Paciente.EsPrimeraVez)
             {
-                @:El paciente es la primera vez que se atiende.    
+                @:El paciente es la primera vez que se atiende con Ud. para la especialidad @Model.Especialidad.Descripcion    
             }
             else
             {
-                @:El paciente ya se ha atendido con anterioridad.
+                @:El paciente ya se ha atendido con anterioridad con Ud. para la especialidad @Model.Especialidad.Descripcion
             }
         </div>
         <br />
