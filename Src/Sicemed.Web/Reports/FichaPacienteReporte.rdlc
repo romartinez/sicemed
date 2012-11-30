@@ -962,9 +962,7 @@ Velez Sarsfield 825, Rosario</Value>
         <Border>
           <Style>None</Style>
         </Border>
-        <BottomBorder>
-          <Style>Solid</Style>
-        </BottomBorder>
+        <BackgroundColor>PaleTurquoise</BackgroundColor>
       </Style>
     </PageHeader>
     <PageFooter>
