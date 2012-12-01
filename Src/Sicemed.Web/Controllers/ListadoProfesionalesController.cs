@@ -7,18 +7,18 @@ using SICEMED.Web;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Exceptions;
-using Sicemed.Web.Infrastructure.Queries.ObtenerTurno;
+//using Sicemed.Web.Infrastructure.Queries.ObtenerTurno;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Roles;
-using Sicemed.Web.Models.ViewModels.ObtenerTurno;
+using Sicemed.Web.Models.ViewModels.ListadoProfesionales;
 using iTextSharp.text.pdf;
 
 namespace Sicemed.Web.Controllers
 {
     [AuthorizeIt(typeof(Paciente))]
-    public class ObtenerTurnoController : NHibernateController
+    public class ListadoProfesionalesController : NHibernateController
     {
-        public virtual ActionResult Index()
+/*        public virtual ActionResult Index()
         {
             if (!User.As<Paciente>().EstaHabilitadoTurnosWeb(MvcApplication.Clinica.NumeroInasistenciasConsecutivasGeneranBloqueo))
                 return View("UsuarioBloqueado");
@@ -84,20 +84,11 @@ namespace Sicemed.Web.Controllers
             var consultorio = session.Get<Consultorio>(consultorioId);
 
             var paciente = User.As<Paciente>();
-            var plan = session.Load<Paciente>(paciente.Id).Plan;
-            var numAfiliado = paciente.NumeroAfiliado;
 
             if (!paciente.EstaHabilitadoTurnosWeb(MvcApplication.Clinica.NumeroInasistenciasConsecutivasGeneranBloqueo))
                 throw new ValidationErrorException("Su usuario no se encuentra habilitado para obtener turnos web, por favor hágalo llamando a nuestros teléfonos.");
-            if (plan == null)
-            {
-                plan = session.Load<Plan>(long.Parse(GetPlanParticular(null).First(x => x.Selected).Value));
-            };
-            if (string.IsNullOrWhiteSpace(numAfiliado))
-            {
-                numAfiliado = "";
-            };
-            var turno = Turno.Create(fecha, duracion, paciente, profesional, especialidad, consultorio,plan,numAfiliado,plan.Coseguro, Request.UserHostAddress);
+
+            var turno = Turno.Create(fecha, duracion, paciente, profesional, especialidad, consultorio,paciente.Plan,paciente.NumeroAfiliado,paciente.Plan.Coseguro, Request.UserHostAddress);
 
             session.Save(turno);
 
@@ -141,5 +132,5 @@ namespace Sicemed.Web.Controllers
             //Close the stamper instance
             stamper.Close();
         }
-    }
+  */  }
 }
