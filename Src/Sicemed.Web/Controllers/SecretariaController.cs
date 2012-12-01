@@ -277,6 +277,7 @@ namespace Sicemed.Web.Controllers
             {
                 var session = SessionFactory.GetCurrentSession();
                 var paciente = session.Load<Paciente>(editModel.Id);
+                
                 // Attempt to register the user                
                 var model = _mappingEngine.Map(editModel, paciente.Persona);
                 //Update not automapped properties
@@ -317,11 +318,16 @@ namespace Sicemed.Web.Controllers
                     model.Membership.Email = string.Format("{0}.{1}@cqr.com.ar", model.Nombre, model.Apellido);
 
                 ShowMessages(ResponseMessage.Success("Paciente '{0}' modificado correctamente.", model.NombreCompleto));
-                
+
                 if (_membershipService.GetCurrentUser().IsInRole(Rol.SECRETARIA))
                 { return RedirectToAction("OtorgarTurno"); }
                 else
-                {return RedirectToAction("Agenda","Profesional");}
+                {
+                    if (_membershipService.GetCurrentUser().IsInRole(Rol.PROFESIONAL))
+                    { return RedirectToAction("Agenda", "Profesional"); }
+                    else
+                    { return RedirectToAction("Agenda", "Paciente"); }
+                }
             }
 
             return View(editModel);
