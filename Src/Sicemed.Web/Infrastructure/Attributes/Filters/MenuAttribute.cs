@@ -107,8 +107,8 @@ namespace Sicemed.Web.Infrastructure.Attributes.Filters
                 //Obtener turno paciente
                 pages.Add(CreateDefaultPage("Obtener Turno", "ObtenerTurno", order: 9002)); //Almost at the end	
 //RM: Se agrega para usuarios GUEST, Pacientes dos nuevo menú. El listado de Obras Sociales - El listado de profesionales
-                pages.Add(CreateDefaultPage("Profesionales", "ListadoProfesionales/ListadoProfesionales", order: 9000)); 
-                pages.Add(CreateDefaultPage("Obras Sociales", "ObtenerTurno", order: 9001)); 
+                pages.Add(CreateDefaultPage("Profesionales", "ListadoProfesionales/ListadoProfesionales", order: 9000));
+                pages.Add(CreateDefaultPage("Obras Sociales", "ListadoObraSociales/ListadoObraSociales", order: 9001)); 
             }
             if (user != null)
             {

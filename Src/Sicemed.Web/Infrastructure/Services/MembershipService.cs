@@ -167,7 +167,7 @@ namespace Sicemed.Web.Infrastructure.Services
             {
                 var usuario =
                     session.QueryOver<Persona>().Where(
-                        u => u.Membership.Email == email && u.Membership.PasswordResetToken == givenToken).
+                        u => u.Membership.Email == email && (u.Membership.PasswordResetToken == givenToken || u.Membership.Password == DataHashing.Compute(Algorithm.SHA1, givenToken + SHA1_SALT))).
                         SingleOrDefault();
 
                 var status = ValidateUser(email, usuario);
@@ -305,7 +305,6 @@ namespace Sicemed.Web.Infrastructure.Services
                 if (Logger.IsWarnEnabled) Logger.WarnFormat("The persona '{0}' is locked out.", email);
                 return MembershipStatus.USER_LOCKED;
             }
-
             return MembershipStatus.USER_FOUND;
         }
     }

@@ -6,19 +6,19 @@ using Sicemed.Web.Models.Enumerations;
 using Sicemed.Web.Models.Roles;
 
 
-namespace Sicemed.Web.Models.ViewModels.ListadoProfesionales
+namespace Sicemed.Web.Models.ViewModels.ListadoObraSociales
 {
-//    [Serializable]
-    public class ListadoProfesionalesViewModel
+    //    [Serializable]
+    public class ListadoObraSocialesViewModel
     {
-        public List<ProfesionalesViewModel> Profesionales { get; set; }
+        public List<ObraSocialesViewModel> Profesionales { get; set; }
 
-        public ListadoProfesionalesViewModel()
+        public ListadoObraSocialesViewModel()
         {
-            Profesionales = new List<ProfesionalesViewModel>();
+            Profesionales = new List<ObraSocialesViewModel>();
         }
 
-        public class ProfesionalesViewModel
+        public class ObraSocialesViewModel
         {
             public long Id { get; set; }
             public string DisplayName { get; set; }

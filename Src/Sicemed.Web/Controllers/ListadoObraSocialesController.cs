@@ -7,18 +7,18 @@ using SICEMED.Web;
 using Sicemed.Web.Infrastructure.Attributes.Filters;
 using Sicemed.Web.Infrastructure.Controllers;
 using Sicemed.Web.Infrastructure.Exceptions;
-using Sicemed.Web.Infrastructure.Queries.ListadoProfesionales;
+//using Sicemed.Web.Infrastructure.Queries.ListadoProfesionales;
 using Sicemed.Web.Models;
 using Sicemed.Web.Models.Roles;
-using Sicemed.Web.Models.ViewModels.ListadoProfesionales;
+using Sicemed.Web.Models.ViewModels.ListadoObraSociales;
 using iTextSharp.text.pdf;
 
 namespace Sicemed.Web.Controllers
 {
-//    [AuthorizeIt(typeof(Paciente))]
-    public class ListadoProfesionalesController : NHibernateController
+    //    [AuthorizeIt(typeof(Paciente))]
+    public class ListadoObraSocialesController : NHibernateController
     {
-        public virtual ActionResult ListadoProfesionales(long? idProf)
+        public virtual ActionResult ListadoObraSociales(long? idOS)
         {
 
             //var query = QueryFactory.Create<IObtenerProfesionalesQuery>();
@@ -27,8 +27,8 @@ namespace Sicemed.Web.Controllers
             //ListadoProfesionalesViewModel editModel;
             //editModel = new ListadoProfesionalesViewModel();
 
-//            editModel.Profesionales.f.Add(viewModel.ToList);
-            
+            //            editModel.Profesionales.f.Add(viewModel.ToList);
+
 
             //return View(viewModel);      
             return View();
@@ -142,6 +142,6 @@ namespace Sicemed.Web.Controllers
                     //Close the stamper instance
                     stamper.Close();
                 }
-          */  
+          */
     }
 }

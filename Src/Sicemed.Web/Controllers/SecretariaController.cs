@@ -21,6 +21,8 @@ using Sicemed.Web.Models.ViewModels.Secretaria;
 
 namespace Sicemed.Web.Controllers
 {
+    [AuthorizeIt(typeof(Profesional))]
+    [AuthorizeIt(typeof(Paciente))]
     [AuthorizeIt(typeof(Secretaria))]
     public class SecretariaController : AdministracionDeTurnosBaseController
     {
