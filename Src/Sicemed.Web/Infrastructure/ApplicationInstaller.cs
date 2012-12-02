@@ -284,10 +284,10 @@ namespace Sicemed.Web.Infrastructure
 
         private void CrearPaginas(ISession session)
         {
-            PaginaHome = new Pagina { Nombre = "Home", Contenido = "p<>.El Centro Médico Integral Velez Sarsfield es un centro médico de atención ambulatoria" + System.Environment.NewLine + "Establecido hace ya más de 30 años en la zona Norte de la ciudad de Rosario, brinda servicios de alta calidad en las diferentes especialidades con las que cuenta." + System.Environment.NewLine + "p=.!/public/images/theme/frente_cemi.png(CeMI)!", Url = "", Orden = 0 };
+            PaginaHome = new Pagina { Id = 0, Nombre = "Home", Contenido = "p<>.El Centro Médico Integral Velez Sarsfield es un centro médico de atención ambulatoria\n\np<>.Establecido hace ya más de 30 años en la zona Norte de la ciudad de Rosario, brinda servicios de alta calidad en las diferentes especialidades con las que cuenta.\n\np=.!/public/images/theme/frente_cemi.png(CeMI)!", Url = "Home", Orden = 0 };
             PaginaAboutUs = new Pagina { Nombre = "About Us", Contenido = "Somos una empresa en pleno crecimiento.", Url = "AboutUs", Orden = 999 };
-            var paginaPadre = new Pagina { Nombre = "Con Hijos", Contenido = "Una pagina de prueba.", Url = "Padre", Orden = 50 };
-            for (var i = 0; i < 5; i++)
+            var paginaPadre = new Pagina { Nombre = "Con Hijos", Contenido = "Una pagina de prueba.", Url = "Padre", Orden = 1 };
+            for (var i = 1; i < 6; i++)
             {
                 var hijo = new Pagina()
                                {
@@ -296,22 +296,22 @@ namespace Sicemed.Web.Infrastructure
                                    Url = "Padre/Hijo-" + i,
                                    Orden = i * 10
                                };
-                if (i == 0)
+                if (i == 1)
                 {
                     hijo.AgregarHijo(new Pagina()
                     {
                         Nombre = "SubHijo",
                         Contenido = "Una pagina de prueba.",
                         Url = "Padre/Hijo-" + i + "/SubHijo",
-                        Orden = 0
+                        Orden = i*10+i
                     });
                 }
                 paginaPadre.AgregarHijo(hijo);
             }
 
+            session.Save(PaginaHome);
             session.Save(paginaPadre);
             session.Save(PaginaAboutUs);
-            session.Save(PaginaHome);
         }
 
         private void CrearObrasSociales(ISession session)
@@ -387,8 +387,8 @@ namespace Sicemed.Web.Infrastructure
             PlanOsdeGold = new Plan { Nombre = "Gold", ObraSocial = ObraSocialOsde, Coseguro=0 };
             PlanOsdeSilver = new Plan { Nombre = "Silver", ObraSocial = ObraSocialOsde, Coseguro = 10 };
             PlanOsdeNeo = new Plan { Nombre = "Neo", ObraSocial = ObraSocialOsde, Coseguro = 30 };
-            PlanParticular = new Plan { Nombre = "Consulta Particular", ObraSocial = ObraSocialParticular, Coseguro = 0 };
-            PlanSwissNbsf = new Plan { Nombre = "Convenio Nuevo Banco De Santa Fe",Descripcion="Consulta Particular - NO MODIFICABLE", ObraSocial = ObraSocialSwissMedical, Coseguro = 60 };
+            PlanParticular = new Plan { Nombre = "Consulta Particular", Descripcion = "Consulta Particular - NO MODIFICABLE - Monto Abonar según Profesional", ObraSocial = ObraSocialParticular, Coseguro = 0 };
+            PlanSwissNbsf = new Plan { Nombre = "Convenio Nuevo Banco De Santa Fe", ObraSocial = ObraSocialSwissMedical, Coseguro = 60 };
             PlanSwissSb64 = new Plan { Nombre = "SB64", ObraSocial = ObraSocialSwissMedical, Coseguro = 35 };
 
             session.Save(PlanOsdeGold);
@@ -492,8 +492,8 @@ namespace Sicemed.Web.Infrastructure
             PersonaAdminProfesionalWalter.As<Profesional>().AgregarAgenda(DayOfWeek.Wednesday, TimeSpan.FromMinutes(30), hInicio, hfin, ConsultorioA, EspecialidadClinico);
             PersonaAdminProfesionalWalter.As<Profesional>().AgregarAgenda(DayOfWeek.Thursday, TimeSpan.FromMinutes(30), hInicio, hfin, ConsultorioA, EspecialidadClinico);
             PersonaAdminProfesionalWalter.As<Profesional>().AgregarAgenda(DayOfWeek.Friday, TimeSpan.FromMinutes(30), hInicio, hfin, ConsultorioA, EspecialidadClinico);
-
-            MembershipService.CreateUser(PersonaAdminProfesionalWalter, "Roles.Full@gmail.com", "sicemedRolesfull");
+            PersonaAdminProfesionalWalter.As<Profesional>().RetencionFija = 50;
+            MembershipService.CreateUser(PersonaAdminProfesionalWalter, "todos.losroles@gmail.com", "sicemedTodoslosroles");
             session.Update(PersonaAdminProfesionalWalter);
 
             //Turno Ausente
@@ -551,6 +551,7 @@ namespace Sicemed.Web.Infrastructure
                                        Telefono = new Telefono { Prefijo = "0341", Numero = "1534665" }
                                    };
             PersonaPacientePablo.AgregarRol(Paciente.Create("9798798"));
+            PersonaPacientePablo.As<Paciente>().Plan =PlanOsdeNeo;
             MembershipService.CreateUser(PersonaPacientePablo, "paciente.uno@gmail.com", "sicemedPaciente");
             session.Update(PersonaPacientePablo);
 
@@ -565,6 +566,7 @@ namespace Sicemed.Web.Infrastructure
                                        Telefono = new Telefono { Prefijo = "0341", Numero = "156333456" }
                                    };
             PersonaPacientePedro.AgregarRol(Paciente.Create("9798798"));
+            PersonaPacientePedro.As<Paciente>().Plan = PlanSwissNbsf;
             MembershipService.CreateUser(PersonaPacientePedro, "paciente.dos@gmail.com", "sicemedPaciente");
             session.Update(PersonaPacientePedro);
 
@@ -601,6 +603,7 @@ namespace Sicemed.Web.Infrastructure
             PersonaProfesionalBernardoClinico.As<Profesional>().AgregarAgenda(DayOfWeek.Monday, TimeSpan.FromMinutes(30), horarioComienzo, horarioFin, ConsultorioA, EspecialidadClinico);
             PersonaProfesionalBernardoClinico.As<Profesional>().AgregarAgenda(DayOfWeek.Wednesday, TimeSpan.FromMinutes(30), horarioComienzo, horarioFin, ConsultorioA, EspecialidadClinico);
             PersonaProfesionalBernardoClinico.As<Profesional>().AgregarAgenda(DayOfWeek.Friday, TimeSpan.FromMinutes(30), horarioComienzo, horarioFin, ConsultorioA, EspecialidadClinico);
+            PersonaProfesionalBernardoClinico.As<Profesional>().RetencionFija = 100;
             MembershipService.CreateUser(PersonaProfesionalBernardoClinico, "dr.house@gmail.com", "sicemedProfesional");
             session.Update(PersonaProfesionalBernardoClinico);
             session.Update(PersonaProfesionalBernardoClinico.As<Profesional>());
@@ -628,6 +631,7 @@ namespace Sicemed.Web.Infrastructure
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Monday, TimeSpan.FromMinutes(10), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadDermatologo);
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Wednesday, TimeSpan.FromMinutes(10), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadDermatologo);
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Friday, TimeSpan.FromMinutes(10), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadDermatologo);
+            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().RetencionFija = 80;
             MembershipService.CreateUser(PersonaProfesionalJoseClinicoYDermatologo, "dr.green@gmail.com", "sicemed.Profesional");
             session.Update(PersonaProfesionalJoseClinicoYDermatologo);
         }

@@ -328,7 +328,7 @@ namespace Sicemed.Web.Controllers
                     if (_membershipService.GetCurrentUser().IsInRole(Rol.PROFESIONAL))
                     { return RedirectToAction("Agenda", "Profesional"); }
                     else
-                    { return RedirectToAction("Agenda", "Paciente"); }
+                    { return RedirectToAction("Index", "Content"); }
                 }
             }
 
