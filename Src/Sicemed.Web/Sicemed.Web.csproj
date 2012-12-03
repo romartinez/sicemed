@@ -249,8 +249,7 @@
     <Compile Include="Areas\Admin\Models\Personas\SecretariaEditModel.cs" />
     <Compile Include="Controllers\BusquedaController.cs" />
     <Compile Include="Controllers\AusenciasController.cs" />
-    <Compile Include="Controllers\ListadoObraSocialesController.cs" />
-    <Compile Include="Controllers\ListadoProfesionalesController.cs" />
+    <Compile Include="Controllers\ListadosController.cs" />
     <Compile Include="Controllers\PingController.cs" />
     <Compile Include="Infrastructure\Attributes\DataAnnotations\CorreoAttribute.cs" />
     <Compile Include="Infrastructure\Attributes\DataAnnotations\LargoCadenaAttribute.cs" />
@@ -285,7 +284,8 @@
     <Compile Include="Infrastructure\Queries\Busqueda\BusquedaProfesionalConEspecialidadesQuery.cs" />
     <Compile Include="Infrastructure\Queries\Domain\ObtenerPlanAtencionParticular.cs" />
     <Compile Include="Infrastructure\Queries\Historial\ObtenerTurnosPorPacienteQuery.cs" />
-    <Compile Include="Infrastructure\Queries\ListadoProfesionales\ObtenerProfesionalesQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Listados\ListadoObraSocialesQuery.cs" />
+    <Compile Include="Infrastructure\Queries\Listados\ListadoProfesionalesQuery.cs" />
     <Compile Include="Infrastructure\Reports\TurnosReporte.cs" />
     <Compile Include="Infrastructure\Reports\IReport.cs" />
     <Compile Include="Infrastructure\Reports\IReportFactory.cs" />
@@ -319,8 +319,8 @@
     <Compile Include="Models\Reports\TurnosReportModel.cs" />
     <Compile Include="Models\ViewModels\Historial\SeleccionPacienteViewModel.cs" />
     <Compile Include="Models\ViewModels\Historial\TurnosPorPacienteViewModel.cs" />
-    <Compile Include="Models\ViewModels\ListadoObraSociales\ListadoObraSocialesViewModel.cs" />
-    <Compile Include="Models\ViewModels\ListadoProfesionales\ListadoProfesionalesViewModel.cs" />
+    <Compile Include="Models\ViewModels\Listados\ListadoObraSocialesViewModel.cs" />
+    <Compile Include="Models\ViewModels\Listados\ListadoProfesionalViewModel.cs" />
     <Compile Include="Models\ViewModels\PersonaViewModel.cs" />
     <Compile Include="Models\ViewModels\Profesional\CalendarioProfesionalViewModel.cs" />
     <Compile Include="Models\ViewModels\Profesional\ProfesionalConEspecialidadesViewModel.cs" />
@@ -793,8 +793,8 @@
     <Content Include="Views\Historial\DisplayTemplates\HistorialItem.cshtml" />
     <Content Include="Views\Historial\SeleccionPaciente.cshtml" />
     <Content Include="Views\Secretaria\EditarObraSocialTurno.cshtml" />
-    <Content Include="Views\ListadoProfesionales\ListadoProfesionales.cshtml" />
-    <Content Include="Views\ListadoObraSociales\ListadoObraSociales.cshtml" />
+    <Content Include="Views\Listados\Profesionales.cshtml" />
+    <Content Include="Views\Listados\ObraSociales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\App_LocalResources\" />

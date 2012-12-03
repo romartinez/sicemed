@@ -1,0 +1,22 @@
+﻿@model List<Sicemed.Web.Models.ViewModels.Listados.ListadoObraSocialesViewModel>
+
+@{
+    ViewBag.Title = "Obra Sociales";
+}
+
+<h2>Obras Sociales</h2>
+<br />
+<h3>Estas son las Obras Sociales que se atienden en la institución</h3>
+<br />
+<div>
+    @foreach(var obrasocial in Model)
+    {
+        <h4>@obrasocial.Nombre</h4>
+        <ul> Planes:
+            @foreach (var planes in obrasocial.Planes)
+            {
+                <li>@planes</li>
+            }
+        </ul>
+    }
+</div>

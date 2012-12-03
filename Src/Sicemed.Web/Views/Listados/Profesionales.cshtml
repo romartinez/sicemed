@@ -1,0 +1,22 @@
+﻿@model List<Sicemed.Web.Models.ViewModels.Listados.ListadoProfesionalViewModel>
+
+@{
+    ViewBag.Title = "Profesionales";
+}
+
+<h2>Profesionales</h2>
+<br />
+<h3>Estos son los profesionales que atienden en nuestra institución</h3>
+<br />
+<div>
+    @foreach(var profesional in Model)
+    {
+        <h4>@profesional.Nombre</h4>
+        <ul> Especialidades:
+            @foreach(var especialidad in profesional.Especialidades)
+            {
+                <li>@especialidad</li>
+            }
+        </ul>
+    }
+</div>
