@@ -342,12 +342,10 @@ namespace Sicemed.Web.Controllers
             viewModel.ObrasSocialesHabilitadas = GetObrasSociales(viewModel.ObraSocialId);
 
             if (viewModel.DomicilioLocalidadProvinciaId.HasValue)
-                viewModel.LocalidadesHabilitadas =
-                    GetLocalidadesPorProvincia(viewModel.DomicilioLocalidadProvinciaId.Value, viewModel.DomicilioLocalidadId);
+                viewModel.LocalidadesHabilitadas = GetLocalidadesPorProvincia(viewModel.DomicilioLocalidadProvinciaId.Value, viewModel.DomicilioLocalidadId);
 
             if (viewModel.ObraSocialId.HasValue)
-                viewModel.PlanesObraSocialHabilitados =
-                    GetPlanesPorObraSocial(viewModel.ObraSocialId.Value, viewModel.PlanId);
+                viewModel.PlanesObraSocialHabilitados = GetPlanesPorObraSocial(viewModel.ObraSocialId.Value, viewModel.PlanId);
         }
         #endregion
 
