@@ -4,7 +4,8 @@ namespace Sicemed.Web.Models.ViewModels.Listados
 {
     public class ListadoProfesionalViewModel
     {
-        public string Nombre { get; set; }
-        public List<string> Especialidades { get; set; }
+        public long? IdEspecialidad { get; set; }
+        public string Especialidad { get; set; }
+        public IEnumerable<Models.Roles.Profesional> Profesional { get; set; }
     }
 }

@@ -3,20 +3,52 @@
 @{
     ViewBag.Title = "Obra Sociales";
 }
+@{
 
+    var i=1;
+}
 <h2>Obras Sociales</h2>
-<br />
-<h3>Estas son las Obras Sociales que se atienden en la institución</h3>
-<br />
 <div>
-    @foreach(var obrasocial in Model)
-    {
-        <h4>@obrasocial.Nombre</h4>
-        <ul> Planes:
-            @foreach (var planes in obrasocial.Planes)
+<p>Estas son las Obras Sociales que se atienden en la institución</p>
+    <table>
+        @foreach(var obrasocial in Model)
+        {
             {
-                <li>@planes</li>
+              if (!(i % 2 == 0))
+              {
+                  @:<tr><td style="text-align:left;vertical-align:text-top;width:50%" >
+              }
+              else
+              {
+                 @:</td><td style="text-align:left;vertical-align:text-top;width:50%">
+              }
+                @:<h5>@obrasocial.Nombre</h5> 
+                @:<div>
+                    if(!obrasocial.Nombre.Equals("Consulta Particular"))
+                    {
+                        @:<span class="text-gray-negrita-subrayada-margen"> Planes:</span>
+                    }
+                    @:<ul class="list_arrows_pink">
+                    foreach (var planes in obrasocial.Planes)
+                    {
+                        if (@planes.Nombre.Equals("Consulta Particular"))
+                        {
+                            @:<li>El monto a abonar se establece en función del profesional que realiza la atención
+                        }
+                        else
+                        {
+                            @:<li>@planes.Nombre - Coseguro: $ @decimal.Round(@planes.Coseguro,2)</li>
+                        }
+                    } 
+                    @:</ul>
+                @:</div>
+              if (i % 2 == 0)
+              {
+                  @:</td></tr>
+              }
+              i=i+1;
+
             }
-        </ul>
-    }
+        }   
+    </table>
 </div>

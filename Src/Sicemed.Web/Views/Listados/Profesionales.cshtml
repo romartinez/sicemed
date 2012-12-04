@@ -4,19 +4,49 @@
     ViewBag.Title = "Profesionales";
 }
 
+@{
+
+    var i=1;
+}
 <h2>Profesionales</h2>
-<br />
-<h3>Estos son los profesionales que atienden en nuestra institución</h3>
-<br />
 <div>
-    @foreach(var profesional in Model)
-    {
-        <h4>@profesional.Nombre</h4>
-        <ul> Especialidades:
-            @foreach(var especialidad in profesional.Especialidades)
+<p>Estos son los profesionales que atienden en nuestra institución</p>
+    <table>
+        @foreach (var especialidad in Model)
+        {
             {
-                <li>@especialidad</li>
+              if (!(i % 2 == 0))
+              {
+                  @:<tr><td style="text-align:left;vertical-align:text-top;width:33%" >
+              }
+              else
+              {
+                 @:</td><td style="text-align:left;vertical-align:text-top;width:33%">
+              }
+                @:<h5>@especialidad.Especialidad</h5> 
+                @:<div>
+                    @:<ul class="list_arrows_pink">
+                    
+                    foreach(var profesional in especialidad.Profesional)
+                    {
+                            @:<li><a href="@Url.Action("Index", "ObtenerTurno")">@profesional.Persona.NombreCompleto - Costo Consulta Particular: $ @decimal.Round(@profesional.RetencionFija.Value,2)</a>
+                            @:</li>
+                    }
+                    if (especialidad.Profesional.Count()==0)
+                    {
+                            @:<li>Por el momento no hay profesionales que atiendan esta especialidad</li>                            
+                    }
+                    @:</ul>
+                @:</div>
+              if (i % 2 == 0)
+              {
+                  @:</td></tr>
+              }
+              i=i+1;
+
             }
-        </ul>
-    }
+        }   
+    </table>
 </div>
+
+

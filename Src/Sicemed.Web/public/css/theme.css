@@ -253,7 +253,12 @@ div.aligncenter {
      font-weight:bold;
      text-decoration:underline
 }
-	 	
+.text-gray-negrita-subrayada-margen{
+	 color:#808080;
+     font-weight:bold;
+     margin-left:20px;
+     text-decoration:underline
+}	 	
 .text-blue-negrita-subrayada{
 	 color:#12a0a9;
      font-weight:bold;
@@ -1986,9 +1991,16 @@ h3.toggle.box {
 
 .list_arrows li {
 	list-style:none;
-	background:url(../images/theme/arrow_green_right.png) 5px 7px no-repeat;
+	background:url(../images/theme/navi_arrow_right.png) 2px 2px no-repeat;
 	margin:0 0 10px 0;
 	line-height:25px;
+	padding:0 0 0 22px}
+
+.list_arrows_pink li {
+	list-style:none;
+	background:url(../images/theme/arrow_pink_right.png) 7px 7px no-repeat;
+    margin-left:30px;
+	line-height:20px;
 	padding:0 0 0 22px}
 
 .list_dots_blue li{
@@ -3809,3 +3821,12 @@ h3.toggle.box {
 	text-shadow:0 1px 1px #fff;
 	padding:0;
 	text-align:center}
+
+.tabla_utn {
+    border:none;
+    padding:0px;
+    border-collapse:collapse;
+    border-spacing:0px 0px;
+    text-align:left;
+    vertical-align:text-top
+}

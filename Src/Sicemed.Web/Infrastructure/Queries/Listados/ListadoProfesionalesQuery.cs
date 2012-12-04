@@ -10,12 +10,14 @@ namespace Sicemed.Web.Infrastructure.Queries.Listados
     {
         protected override List<ListadoProfesionalViewModel> CoreExecute()
         {
-            var profesionalesDb = SessionFactory.GetCurrentSession().QueryOver<Models.Roles.Profesional>().List();
+            var profesionalesDb = SessionFactory.GetCurrentSession().QueryOver<Models.Especialidad>().OrderBy(p => p.Nombre).Asc.List();
 
             return profesionalesDb.Select(p => new ListadoProfesionalViewModel
             {
-                Nombre = p.Persona.NombreCompleto,
-                Especialidades = p.Especialidades.Select(e => e.Nombre).ToList()
+
+                IdEspecialidad = p.Id,
+                Especialidad = p.Nombre,
+                Profesional = p.Profesionales
             }).ToList();
         }
     }

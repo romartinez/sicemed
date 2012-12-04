@@ -10,12 +10,12 @@ namespace Sicemed.Web.Infrastructure.Queries.Listados
     {
         protected override List<ListadoObraSocialesViewModel> CoreExecute()
         {
-            var profesionalesDb = SessionFactory.GetCurrentSession().QueryOver<Models.ObraSocial>().List();
+            var profesionalesDb = SessionFactory.GetCurrentSession().QueryOver<Models.ObraSocial>().OrderBy(p => p.RazonSocial).Asc.List();
 
             return profesionalesDb.Select(p => new ListadoObraSocialesViewModel
             {
                 Nombre = p.RazonSocial,
-                Planes = p.Planes.Select(e => e.Nombre).ToList()
+                Planes = p.Planes
             }).ToList();
         }
     }
