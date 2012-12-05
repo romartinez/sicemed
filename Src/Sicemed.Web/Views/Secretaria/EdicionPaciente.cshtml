@@ -52,3 +52,28 @@ else
     <span style="font-style: italic; font-size: x-small">${TipoDocumento} ${Documento}
     </span>
 </script>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#PlanId").change(function () {
+                var op = $(this).find("option:selected").text();
+                if (op=="Consulta Particular")
+                {
+                    $('#NumeroAfiliado').val("99999999");
+                }
+                else
+                {
+                    $('#NumeroAfiliado').val("");
+                };
+            });
+        });
+    </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#ObraSocialId").change(function () {
+                    $('#NumeroAfiliado').val("");
+                });
+            });
+    </script>
+}
