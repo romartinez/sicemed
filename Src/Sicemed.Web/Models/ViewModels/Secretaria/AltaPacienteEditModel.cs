@@ -41,9 +41,11 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
         public DateTime? FechaNacimiento { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:0.00}", NullDisplayText = "")]
+        [DisplayName("Peso (kg)")]
         public decimal? Peso { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:0.00}", NullDisplayText = "")]
+        [DisplayName("Altura (cm)")]
         public decimal? Altura { get; set; }
 
         [Correo]

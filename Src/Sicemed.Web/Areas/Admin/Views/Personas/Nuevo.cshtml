@@ -58,4 +58,25 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Paciente_PlanId").change(function () {
+                var op = $(this).find("option:selected").text();
+                if (op == "Consulta Particular") {
+                    $('#Paciente_NumeroAfiliado').val("99999999");
+                }
+                else {
+                    $('#Paciente_NumeroAfiliado').val("");
+                };
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Paciente_ObraSocialId").change(function () {
+                $('#Paciente_NumeroAfiliado').val("");
+            });
+        });
+    </script>
+
 }
