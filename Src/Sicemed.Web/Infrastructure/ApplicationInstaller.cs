@@ -43,16 +43,22 @@ namespace Sicemed.Web.Infrastructure
 
         public static Consultorio ConsultorioA;
         public static Consultorio ConsultorioB;
+        public static Consultorio ConsultorioC;
 
         public static Especialidad EspecialidadPediatra;
         public static Especialidad EspecialidadClinico;
         public static Especialidad EspecialidadDermatologo;
+        public static Especialidad EspecialidadOtorrino;
+        public static Especialidad EspecialidadNutricion;
 
         public static Pagina PaginaHome;
         public static Pagina PaginaAboutUs;
 
         public static Feriado FeriadoCarnaval;
         public static Feriado FeriadoDiaIndependencia;
+        public static Feriado FeriadoNocheBuena;
+        public static Feriado FeriadoNavidad;
+        public static Feriado FeriadoAnioNuevo;
 
         public static ObraSocial ObraSocialOsde;
         public static ObraSocial ObraSocialSwissMedical;
@@ -72,6 +78,10 @@ namespace Sicemed.Web.Infrastructure
         public static Persona PersonaProfesionalBernardoClinico;
         public static Persona PersonaProfesionalJoseClinicoYDermatologo;
         public static Persona PersonaAdminProfesionalWalter;
+        public static Persona PersonaProfesionalPediatra;
+        public static Persona PersonaProfesionalNutricion;
+        public static Persona PersonaProfesionalOtorrino;
+        public static Persona PersonaProfesionalDermatologo;
 
         public static CategoriaIndicador CategoriaIndicadorOperativo;
         public static CategoriaIndicador CategoriaIndicadorGerencial;
@@ -401,11 +411,17 @@ namespace Sicemed.Web.Infrastructure
 
         private void CrearFeriados(ISession session)
         {
-            FeriadoCarnaval = new Feriado { Nombre = "Carnaval", Fecha = new DateTime(2011, 03, 07) };
-            FeriadoDiaIndependencia = new Feriado { Nombre = "Día De La Independencia", Fecha = new DateTime(2011, 07, 11) };
+            FeriadoCarnaval = new Feriado { Nombre = "Carnaval", Fecha = new DateTime(2012, 03, 07) };
+            FeriadoDiaIndependencia = new Feriado { Nombre = "Día De La Independencia", Fecha = new DateTime(2012, 07, 09) };
+            FeriadoAnioNuevo = new Feriado { Nombre = "Año Nuevo", Fecha = new DateTime(2012, 12, 31) };
+            FeriadoNavidad = new Feriado { Nombre = "Navidad", Fecha = new DateTime(2012, 12, 25) };
+            FeriadoNocheBuena = new Feriado { Nombre = "Noche Buena", Fecha = new DateTime(2012, 12, 24) };
 
             session.Save(FeriadoCarnaval);
             session.Save(FeriadoDiaIndependencia);
+            session.Save(FeriadoAnioNuevo);
+            session.Save(FeriadoNavidad);
+            session.Save(FeriadoNocheBuena);
         }
 
         private void CrearProvincias(ISession session)
@@ -441,20 +457,25 @@ namespace Sicemed.Web.Infrastructure
         {
             ConsultorioA = new Consultorio { Nombre = "Consultorio A" };
             ConsultorioB = new Consultorio { Nombre = "Consultorio B" };
-
+            ConsultorioC = new Consultorio { Nombre = "Consultorio C" };
             session.Save(ConsultorioA);
             session.Save(ConsultorioB);
+            session.Save(ConsultorioC);
         }
 
         private void CrearEspecialidades(ISession session)
         {
             EspecialidadClinico = new Especialidad { Nombre = "Clínico" };
-            EspecialidadDermatologo = new Especialidad { Nombre = "Dermatólogo" };
-            EspecialidadPediatra = new Especialidad { Nombre = "Pediatra" };
-
+            EspecialidadDermatologo = new Especialidad { Nombre = "Dermatólogía" };
+            EspecialidadPediatra = new Especialidad { Nombre = "Pediatría" };
+            EspecialidadOtorrino = new Especialidad { Nombre = "Otorrinolarongología" };
+            EspecialidadNutricion = new Especialidad { Nombre = "Nutricionista" };
             session.Save(EspecialidadClinico);
             session.Save(EspecialidadDermatologo);
             session.Save(EspecialidadPediatra);
+            session.Save(EspecialidadOtorrino);
+            session.Save(EspecialidadNutricion);
+
         }
 
         private void CrearPersonas(ISession session)
@@ -624,16 +645,97 @@ namespace Sicemed.Web.Infrastructure
             var horarioComienzo2 = new TimeSpan(11, 00, 00);
             var horarioFin2 = new TimeSpan(16, 00, 00);
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarEspecialidad(EspecialidadClinico);
-            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Tuesday, TimeSpan.FromMinutes(15), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadClinico);
-            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Thursday, TimeSpan.FromMinutes(15), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadClinico);
+            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Tuesday, TimeSpan.FromMinutes(30), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadClinico);
+            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Thursday, TimeSpan.FromMinutes(30), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadClinico);
 
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarEspecialidad(EspecialidadDermatologo);
-            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Monday, TimeSpan.FromMinutes(10), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadDermatologo);
-            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Wednesday, TimeSpan.FromMinutes(10), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadDermatologo);
-            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Friday, TimeSpan.FromMinutes(10), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadDermatologo);
+            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Monday, TimeSpan.FromMinutes(30), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadDermatologo);
+            PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Friday, TimeSpan.FromMinutes(30), horarioComienzo2, horarioFin2, ConsultorioB, EspecialidadDermatologo);
             PersonaProfesionalJoseClinicoYDermatologo.As<Profesional>().RetencionFija = 80;
             MembershipService.CreateUser(PersonaProfesionalJoseClinicoYDermatologo, "dr.green@gmail.com", "sicemed.Profesional");
             session.Update(PersonaProfesionalJoseClinicoYDermatologo);
+
+            
+            PersonaProfesionalPediatra = new Persona
+            {
+                Nombre = "Duglas",
+                Apellido = "Ross",
+                FechaNacimiento = new DateTime(1965, 6, 14),
+                Domicilio =
+                    new Domicilio { Direccion = "España 1243", Localidad = LocalidadRosario },
+                Documento =
+                    new Documento { Numero = 23456789, TipoDocumento = TipoDocumento.Dni },
+                Telefono = new Telefono { Prefijo = "0341", Numero = "4471010" }
+            };
+            PersonaProfesionalPediatra.AgregarRol(Profesional.Create("45678"));
+            PersonaProfesionalPediatra.As<Profesional>().AgregarEspecialidad(EspecialidadPediatra);
+            var horarioComienzo3 = new TimeSpan(10, 00, 00);
+            var horarioFin3 = new TimeSpan(20, 00, 00);
+            PersonaProfesionalPediatra.As<Profesional>().AgregarAgenda(DayOfWeek.Wednesday, TimeSpan.FromMinutes(30), horarioComienzo3, horarioFin3, ConsultorioB, EspecialidadPediatra);
+            PersonaProfesionalPediatra.As<Profesional>().RetencionFija = 110;
+            MembershipService.CreateUser(PersonaProfesionalPediatra, "dr.ross@gmail.com", "sicemedProfesional");
+            session.Update(PersonaProfesionalPediatra);
+            session.Update(PersonaProfesionalPediatra.As<Profesional>());
+
+            PersonaProfesionalNutricion = new Persona
+            {
+                Nombre = "Eliana",
+                Apellido = "Jimenez",
+                FechaNacimiento = new DateTime(1984, 05, 14),
+                Domicilio =
+                    new Domicilio { Direccion = "Suipacha 1243", Localidad = LocalidadRosario },
+                Documento =
+                    new Documento { Numero = 30467934, TipoDocumento = TipoDocumento.Dni },
+                Telefono = new Telefono { Prefijo = "0341", Numero = "4471010" }
+            };
+            PersonaProfesionalNutricion.AgregarRol(Profesional.Create("667788"));
+            PersonaProfesionalNutricion.As<Profesional>().AgregarEspecialidad(EspecialidadNutricion);
+            PersonaProfesionalNutricion.As<Profesional>().AgregarAgenda(DayOfWeek.Monday, TimeSpan.FromMinutes(30), horarioComienzo3, horarioFin3, ConsultorioC, EspecialidadNutricion);
+            PersonaProfesionalNutricion.As<Profesional>().RetencionFija = 150;
+            MembershipService.CreateUser(PersonaProfesionalNutricion, "dr.jimenez@gmail.com", "sicemedProfesional");
+            session.Update(PersonaProfesionalNutricion);
+            session.Update(PersonaProfesionalNutricion.As<Profesional>());
+
+            PersonaProfesionalOtorrino = new Persona
+            {
+                Nombre = "Juan",
+                SegundoNombre="Carlos",
+                Apellido = "Napio",
+                FechaNacimiento = new DateTime(1984, 05, 14),
+                Domicilio =
+                    new Domicilio { Direccion = "Suipacha 1243", Localidad = LocalidadRosario },
+                Documento =
+                    new Documento { Numero = 30467934, TipoDocumento = TipoDocumento.Dni },
+                Telefono = new Telefono { Prefijo = "0341", Numero = "4471010" }
+            };
+            PersonaProfesionalOtorrino.AgregarRol(Profesional.Create("23231"));
+            PersonaProfesionalOtorrino.As<Profesional>().AgregarEspecialidad(EspecialidadOtorrino);
+            PersonaProfesionalOtorrino.As<Profesional>().AgregarAgenda(DayOfWeek.Tuesday, TimeSpan.FromMinutes(30), horarioComienzo3, horarioFin3, ConsultorioC, EspecialidadOtorrino);
+            PersonaProfesionalOtorrino.As<Profesional>().AgregarAgenda(DayOfWeek.Friday, TimeSpan.FromMinutes(30), horarioComienzo3, horarioFin3, ConsultorioC, EspecialidadOtorrino);
+            PersonaProfesionalOtorrino.As<Profesional>().RetencionFija = 80;
+            MembershipService.CreateUser(PersonaProfesionalOtorrino, "dr.napio@gmail.com", "sicemedProfesional");
+            session.Update(PersonaProfesionalOtorrino);
+            session.Update(PersonaProfesionalOtorrino.As<Profesional>());
+
+            PersonaProfesionalDermatologo = new Persona
+            {
+                Nombre = "José",
+                Apellido = "Mercau",
+                FechaNacimiento = new DateTime(1955, 05, 14),
+                Domicilio =
+                    new Domicilio { Direccion = "Suipacha 1243", Localidad = LocalidadRosario },
+                Documento =
+                    new Documento { Numero = 6812345, TipoDocumento = TipoDocumento.Dni },
+                Telefono = new Telefono { Prefijo = "0341", Numero = "4471010" }
+            };
+            PersonaProfesionalDermatologo.AgregarRol(Profesional.Create("14356"));
+            PersonaProfesionalDermatologo.As<Profesional>().AgregarEspecialidad(EspecialidadDermatologo);
+            PersonaProfesionalDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Thursday, TimeSpan.FromMinutes(30), horarioComienzo3, horarioFin3, ConsultorioC, EspecialidadDermatologo);
+            PersonaProfesionalDermatologo.As<Profesional>().AgregarAgenda(DayOfWeek.Wednesday, TimeSpan.FromMinutes(30), horarioComienzo3, horarioFin3, ConsultorioC, EspecialidadDermatologo);
+            PersonaProfesionalDermatologo.As<Profesional>().RetencionFija = 180;
+            MembershipService.CreateUser(PersonaProfesionalDermatologo, "dr.mercau@gmail.com", "sicemedProfesional");
+            session.Update(PersonaProfesionalDermatologo);
+            session.Update(PersonaProfesionalDermatologo.As<Profesional>());
         }
 
         #endregion
