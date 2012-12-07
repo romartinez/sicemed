@@ -69,17 +69,23 @@ namespace Sicemed.Web.Controllers
 
                 if (plan != null)
                 {
-                    numeroAfiliado = paciente.NumeroAfiliado;
-                    coseguro = decimal.Parse("0.00");
-                    if (paciente.Plan.Coseguro != null)
+                    if (plan.Nombre.Equals("Consulta Particular"))
                     {
-                        coseguro = paciente.Plan.Coseguro;
+                        numeroAfiliado = "99999999";
+                        coseguro = profesional.RetencionFija.Value;
                     }
                     else
                     {
-                        coseguro = decimal.Parse("0.00");
+                        numeroAfiliado = paciente.NumeroAfiliado;
+                        if (paciente.Plan.Coseguro != null)
+                        {
+                            coseguro = paciente.Plan.Coseguro;
+                        }
+                        else
+                        {
+                            coseguro = decimal.Parse("0.00");
+                        }
                     }
-
                 }
 
                 Turno turno;
