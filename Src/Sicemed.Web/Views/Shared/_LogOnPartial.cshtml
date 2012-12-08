@@ -5,8 +5,8 @@
 @if (User.Identity.IsAuthenticated)
 {
     @usuario.Apellido@:, @usuario.Nombre
+        @:[ @Html.ActionLink("Cambiar Contraseña", "CambiarPassword", "Cuenta", new {Area = ""}, new {})]    
         @:[ @Html.ActionLink("Salir", "Salir", "Cuenta", new {Area = ""}, new {})]
-        @:[ @Html.ActionLink("Cambiar Contraseña", "CambiarPassword", "Cuenta", new {Area = ""}, new {})]
 } else
 {
     @:[ @Html.ActionLink("Iniciar Sesión", "IniciarSesion", "Cuenta", new {Area = ""}, new {}) ]
