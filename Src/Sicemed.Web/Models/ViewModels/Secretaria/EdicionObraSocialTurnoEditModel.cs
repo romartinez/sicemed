@@ -10,7 +10,7 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
 {
     public class EdicionObraSocialTurnoEditModel
     {
-        [HiddenInput]
+        [HiddenInput(DisplayValue = false)]
         public long? Id { get; set; }
 
         [UIHint("DropDownList")]

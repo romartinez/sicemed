@@ -11,7 +11,7 @@ namespace Sicemed.Web.Models.ViewModels.Secretaria
     public class EdicionPacienteEditModel
     {
         [Requerido]
-        [HiddenInput]
+        [HiddenInput(DisplayValue=false)]
         public long? Id { get; set; }
 
         [Requerido]
