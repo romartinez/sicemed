@@ -1,7 +1,32 @@
 ﻿@using Sicemed.Web.Models
 @{
     var usuario = User as Persona;
+    var ruta = "";
 }
+
+@*RM: Agregado manuales de usuarios*@
+@if (User.Identity.IsAuthenticated)
+{
+    if (User.IsInRole("Paciente") && !User.IsInRole("Profesional") && !User.IsInRole("Secretaria") && !User.IsInRole("Administrador"))
+    {
+        //ES PACIENTE        
+        ruta = "/public/manual/ManualGuestPaciente.pdf";
+    }
+    else
+    {
+        //EMPLEADO CLINICA
+        ruta = "/public/manual/ManualCompleto.pdf";
+    }
+}
+else
+{
+//GUEST 
+    ruta = "/public/manual/ManualGuestPaciente.pdf";
+}
+
+<a href="@ruta" target="_blank"><img src="/public/images/theme/icons/help.png" alt="ayuda" height="18" width="18">Manual de Usuario</a>
+</br>
+
 @if (User.Identity.IsAuthenticated)
 {
     @usuario.Apellido@:, @usuario.Nombre

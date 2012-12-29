@@ -906,6 +906,8 @@
     <None Include="public\fonts\cartogothicstd-italic-webfont.eot" />
     <None Include="public\fonts\cartogothicstd-italic-webfont.ttf" />
     <None Include="public\fonts\cartogothicstd-italic-webfont.woff" />
+    <Content Include="public\manual\ManualCompleto.pdf" />
+    <Content Include="public\manual\ManualGuestPaciente.pdf" />
     <None Include="Reports\ComprobanteTurno.docx" />
     <Content Include="Reports\ComprobanteTurno.pdf" />
     <Content Include="Views\Shared\EditorTemplates\Week.cshtml" />
