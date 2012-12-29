@@ -9,7 +9,7 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
     [DisplayName("paciente")]
     public class PacienteEditModel
     {
-        [HiddenInput]
+        [HiddenInput(DisplayValue = false)]
         public virtual long? Id { get; set; }
 
         [UIHint("DropDownList")]

@@ -41,6 +41,8 @@ else
     @Html.ValidationSummaryWithMessage()
 
     @Html.EditorForModel()
+    
+    @Html.HiddenFor(model => model.Id)
 
     @Html.Submit("Guardar")        
     }

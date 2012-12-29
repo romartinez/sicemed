@@ -9,7 +9,7 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
     [DisplayName("secretaria")]
     public class SecretariaEditModel
     {
-        [HiddenInput]
+        [HiddenInput(DisplayValue = false)]
         public virtual long? Id { get; set; }
 
         [Display(Name = "Fecha Ingreso")]

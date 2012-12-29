@@ -9,7 +9,7 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
     [DisplayName("profesional")]
     public class ProfesionalEditModel
     {
-        [HiddenInput]
+        [HiddenInput(DisplayValue = false)]
         public virtual long? Id { get; set; }
 
         [Requerido]

@@ -13,6 +13,11 @@
 
     @Html.EditorForModel()
 
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.Paciente.Id)
+    @Html.HiddenFor(model => model.Secretaria.Id)
+    @Html.HiddenFor(model => model.Profesional.Id)
+
     @Html.Submit()        
 }
 @section Scripts

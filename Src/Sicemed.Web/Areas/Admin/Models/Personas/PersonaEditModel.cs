@@ -12,7 +12,7 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
 {
     public class PersonaEditModel : ICustomBindeableProperties
     {
-        [HiddenInput]
+        [HiddenInput(DisplayValue = false)]
         public virtual long? Id { get; set; }
 
         [Requerido]        
