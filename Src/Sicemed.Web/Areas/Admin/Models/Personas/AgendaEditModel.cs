@@ -12,7 +12,7 @@ namespace Sicemed.Web.Areas.Admin.Models.Personas
 {
     public class AgendaEditModel : IValidatableObject
     {
-        [HiddenInput]
+        [HiddenInput(DisplayValue=false)]
         public virtual long? Id { get; set; }
 
         [Requerido]
