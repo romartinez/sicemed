@@ -2,7 +2,7 @@
 <div class="ctl-collapsible">
     <h3>
         <a href="#">
-            Filtros
+            Buscar por:
         </a>
     </h3>
     <div>
@@ -18,11 +18,11 @@
                     @Html.EditorFor(x => x.Hasta)
                 </td>
                 <td>
-                    @Html.LabelFor(x => x.Filtro)
+                    @Html.LabelFor(x => x.Filtro, "Valor Buscado")
                     @Html.EditorFor(x => x.Filtro)
                 </td>
                 <td>
-                    @Html.Submit("Filtrar")
+                    @Html.Submit("Buscar")
                 </td>
             </tr>
             <tr>
