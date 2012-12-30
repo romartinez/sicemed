@@ -248,6 +248,7 @@ namespace Sicemed.Web.Infrastructure.Services
             var session = _sessionFactory.GetCurrentSession();
             using (var tx = session.BeginTransaction())
             {
+//RM - PUNTO DE VALIDACION
                 //var exists = session.QueryOver<Persona>().Where(x => x.Membership.Email == email).RowCount() > 0;
 
                 //if (exists) return MembershipStatus.DUPLICATED_USER;
