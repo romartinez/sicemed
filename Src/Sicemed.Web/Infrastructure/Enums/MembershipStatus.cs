@@ -8,6 +8,7 @@ namespace Sicemed.Web.Infrastructure.Enums
         BAD_PASSWORD,
         TOKEN_EXPIRED,
         DUPLICATED_USER,
+        DUPLICATED_USER_MAIL,
         USER_CREATED
     }
 }

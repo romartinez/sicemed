@@ -138,9 +138,13 @@
   <data name="MembershipStatus_BAD_PASSWORD" xml:space="preserve">
     <value>Email o Password no válido.</value>
   </data>
-  <data name="MembershipStatus_DUPLICATED_USER" xml:space="preserve">
+  <data name="MembershipStatus_DUPLICATED_USER_MAIL" xml:space="preserve">
     <value>El Email ingresado ya se encuentra registrado.</value>
   </data>
+  <data name="MembershipStatus_DUPLICATED_USER" xml:space="preserve">
+    <value>Ya existe un usuario creado con el DNI ingresado.</value>
+  </data>
+
   <data name="MembershipStatus_TOKEN_EXPIRED" xml:space="preserve">
     <value>Su token ha expirado, por favor solicite un nuevo reinicio de clave.</value>
   </data>

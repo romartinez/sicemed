@@ -246,12 +246,18 @@ namespace Sicemed.Web.Infrastructure.Services
                     "Password is shorter than the MinPasswordLength value (" + MinPasswordLength + ").", "password");
 
             var session = _sessionFactory.GetCurrentSession();
+
+            //RM - PUNTO DE VALIDACION
+            var mailRepetido = session.QueryOver<Persona>().Where(x => x.Membership.Email == email).RowCount();
+            if (mailRepetido > 0) return MembershipStatus.DUPLICATED_USER_MAIL;
+            
+            var nombreRepetido = session.QueryOver<Persona>().Where(x => x.Documento.TipoDocumento.Value == user.Documento.TipoDocumento.Value && x.Documento.Numero==user.Documento.Numero).RowCount();
+            if (nombreRepetido > 0) return MembershipStatus.DUPLICATED_USER;
+
+
+
             using (var tx = session.BeginTransaction())
             {
-//RM - PUNTO DE VALIDACION
-                //var exists = session.QueryOver<Persona>().Where(x => x.Membership.Email == email).RowCount() > 0;
-
-                //if (exists) return MembershipStatus.DUPLICATED_USER;
 
                 user.Membership.FailedPasswordAttemptCount = 0;
                 user.Membership.IsLockedOut = false;

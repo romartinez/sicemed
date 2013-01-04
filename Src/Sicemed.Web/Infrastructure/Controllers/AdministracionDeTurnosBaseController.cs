@@ -33,19 +33,19 @@ namespace Sicemed.Web.Infrastructure.Controllers
                 ShowMessages(ResponseMessage.Error("No se encuentra el turno o no se puede cancelar el mismo."));
                 return RedirectToAction("Agenda");
             }
-
-            turno.CancelarTurno(User, prompt);
-
-            try
+            if (turno.Estado != EstadoTurno.Cancelado)
             {
-                var mail = NotificationService.CancelacionTurno(User, turno);
-                if (mail != null) mail.Send();                
+                turno.CancelarTurno(User, prompt);
+                try
+                {
+                    var mail = NotificationService.CancelacionTurno(User, turno);
+                    if (mail != null) mail.Send();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error("Error al enviar el mail de cancelación.", ex);
+                }
             }
-            catch(Exception ex)
-            {
-                Logger.Error("Error al enviar el mail de cancelación.", ex);    
-            }
-
             //Actualizamos la cache de turnos
             var cached = QueryFactory.Create<IObtenerTurnosProfesionalQuery>();
             cached.ProfesionalId = turno.Profesional.Id;
@@ -85,18 +85,22 @@ namespace Sicemed.Web.Infrastructure.Controllers
 
             foreach (var turno in turnos)
             {
-                turno.CancelarTurno(User, prompt);
-
-                try
+                if (turno.Estado != EstadoTurno.Cancelado)
                 {
-                    var mail = NotificationService.CancelacionTurno(User, turno);
-                    if (mail != null) mail.Send();
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error("Error al enviar el mail de cancelación.", ex);
-                }
 
+
+                    turno.CancelarTurno(User, prompt);
+
+                    try
+                    {
+                        var mail = NotificationService.CancelacionTurno(User, turno);
+                        if (mail != null) mail.Send();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error("Error al enviar el mail de cancelación.", ex);
+                    }
+                }
                 cached.ProfesionalId = turno.Profesional.Id;
                 cached.ClearCache();
             }
