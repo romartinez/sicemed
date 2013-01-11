@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Sicemed.Web.Models.Consultorio">
-    <Position X="14.25" Y="12.75" Width="1.5" />
+    <Position X="12" Y="13.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAgAABAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Consultorio.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Sicemed.Web.Models.Especialidad">
-    <Position X="9.5" Y="12.25" Width="1.5" />
+    <Position X="7.25" Y="11.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAAAAAAAAAAAgAABACAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Especialidad.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sicemed.Web.Models.Feriado" Collapsed="true">
+  <Class Name="Sicemed.Web.Models.Feriado">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -22,7 +22,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Sicemed.Web.Models.Localidad">
-    <Position X="12" Y="0.5" Width="1.5" />
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAgAAACAQAQAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Localidad.cs</FileName>
@@ -32,7 +32,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Sicemed.Web.Models.ObraSocial">
-    <Position X="5.5" Y="0.5" Width="1.5" />
+    <Position X="9.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAAAAAAAAEIAAAAAAAAAAAAACAAIAAgAAAAA=</HashCode>
       <FileName>Models\ObraSocial.cs</FileName>
@@ -42,7 +42,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Sicemed.Web.Models.Pagina">
-    <Position X="12" Y="3" Width="1.5" />
+    <Position X="10.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAgAAAAIAAAAAAAAgABAAAAAAAAACAAAAEAQAAA=</HashCode>
       <FileName>Models\Pagina.cs</FileName>
@@ -55,7 +55,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Sicemed.Web.Models.Persona" BaseTypeListCollapsed="true">
-    <Position X="3.5" Y="5" Width="1.5" />
+    <Position X="3.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAAADAFAAQQEEAAAgABAQgAAQgACAEABAgAAAAA=</HashCode>
       <FileName>Models\Persona.cs</FileName>
@@ -69,23 +69,23 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Sicemed.Web.Models.Plan">
-    <Position X="7.5" Y="0.5" Width="1.5" />
+    <Position X="11.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAAAAAAAAAAAAgAABAAAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>Models\Plan.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Sicemed.Web.Models.Provincia">
-    <Position X="14.5" Y="0.5" Width="1.5" />
+    <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AiAAAAAAAAAAAAACAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Provincia.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Sicemed.Web.Models.Turno">
-    <Position X="5.25" Y="12.5" Width="2.25" />
+    <Position X="3.5" Y="8" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>ZAEoBAAiEDAIAMEAAAABQAEAEABBAEioCAQgEAEBwCk=</HashCode>
+      <HashCode>ZAEoBAAiEDAIAMEAAAABQAEAEABBAEipCAQiEAEBwCk=</HashCode>
       <FileName>Models\Turno.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -95,8 +95,15 @@
       <Property Name="Consultorio" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Sicemed.Web.Models.Parametro" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="0.5" Y="2.5" Width="1.5" />
+  <Class Name="Sicemed.Web.Models.Parametro" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="12.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Sicemed.Web.Models.Parametro.Keys" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Parametro.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>ABAAAAAAAAAABARAgAAAAAAAAAAAAIAAAAAAAAAAAiA=</HashCode>
       <FileName>Models\Parametro.cs</FileName>
@@ -104,21 +111,21 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Sicemed.Web.Models.Roles.Secretaria">
-    <Position X="7.25" Y="8.75" Width="1.5" />
+    <Position X="7.25" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAACAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Roles\Secretaria.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Sicemed.Web.Models.Roles.Administrador">
-    <Position X="9.5" Y="8.75" Width="1.5" />
+    <Position X="9.5" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Roles\Administrador.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Sicemed.Web.Models.Roles.Paciente">
-    <Position X="5.25" Y="8.75" Width="1.5" />
+    <Position X="0.75" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAQAFAAAAAAQAAAAAAAAAAAEAAAAAEARAAACBAAAAAA=</HashCode>
       <FileName>Models\Roles\Paciente.cs</FileName>
@@ -128,7 +135,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Sicemed.Web.Models.Roles.Profesional">
-    <Position X="11.5" Y="8.75" Width="1.5" />
+    <Position X="11.5" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAoAEAAAEAAAAAAQAAAAAAACAAIAAEAAIACAggAAAAA=</HashCode>
       <FileName>Models\Roles\Profesional.cs</FileName>
@@ -139,7 +146,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Sicemed.Web.Models.Roles.Rol">
-    <Position X="8" Y="5" Width="1.5" />
+    <Position X="6.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAMAAAAAAAAAAEAAEAAAAAgRAAAAAAAAAEAAAAAAA=</HashCode>
       <FileName>Models\Roles\Rol.cs</FileName>
@@ -149,14 +156,14 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Sicemed.Web.Models.Components.Telefono">
-    <Position X="10.25" Y="3" Width="1.5" />
+    <Position X="8.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAAgAAAAAAAAIAAAIAAAAAEAAABAAA=</HashCode>
       <FileName>Models\Components\Telefono.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Sicemed.Web.Models.Components.Domicilio">
-    <Position X="9.5" Y="0.5" Width="1.5" />
+    <Position X="2.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAAAACAAAAAAAAAAAAAAAAAAAAAAEgA=</HashCode>
       <FileName>Models\Components\Domicilio.cs</FileName>
@@ -166,14 +173,14 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Sicemed.Web.Models.Components.Membership">
-    <Position X="0.75" Y="5" Width="1.5" />
+    <Position X="0.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAECgIBAAEAAAAAEAQABCAAAACAAABAAAAgAA=</HashCode>
       <FileName>Models\Components\Membership.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Sicemed.Web.Models.Agenda">
-    <Position X="14.25" Y="7.75" Width="1.5" />
+    <Position X="12.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAEgAAAAAAEAAAIAAIABAAAAgRAAAAA=</HashCode>
       <FileName>Models\Agenda.cs</FileName>
