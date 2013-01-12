@@ -285,6 +285,7 @@ namespace Sicemed.Web.Models
                 Especialidad = especialidad,
                 IpPaciente = ipPaciente,
                 Consultorio = consultorio,
+                DuracionTurno=duracionTurno,
 //RM SE AGREGA DATOS DE LA FORMA DE PAGO AL TURNO
                 Plan=plan,
                 NumeroAfiliado=numeroAfiliado,
