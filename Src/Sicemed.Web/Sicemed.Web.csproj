@@ -569,6 +569,7 @@
     <Content Include="public\fonts\cartogothicstd-italic-webfont.svg" />
     <Content Include="public\images\doctor_256.png" />
     <Content Include="public\images\doctor_64.png" />
+    <Content Include="public\images\frente.jpg" />
     <Content Include="public\images\jquery-ui\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="public\images\jquery-ui\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="public\images\jquery-ui\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -631,7 +632,9 @@
     <Content Include="public\images\theme\dropdown_1_line.png" />
     <Content Include="public\images\theme\dropdown_1_line2.png" />
     <Content Include="public\images\theme\dropdown_1_line3.png" />
+    <Content Include="public\images\theme\frente_cemi.png" />
     <Content Include="public\images\theme\header_image_2.jpg" />
+    <Content Include="public\images\theme\header_image_cemi.png" />
     <Content Include="public\images\theme\header_image_shadow.jpg" />
     <Content Include="public\images\theme\header_menu_bg.png" />
     <Content Include="public\images\theme\header_slider_shadow.jpg" />
@@ -678,6 +681,8 @@
     <Content Include="public\images\theme\logo.png" />
     <Content Include="public\images\theme\logo2.png" />
     <Content Include="public\images\theme\logo_footer.png" />
+    <Content Include="public\images\theme\logo_old.png" />
+    <Content Include="public\images\theme\logo_original.png" />
     <Content Include="public\images\theme\map.jpg" />
     <Content Include="public\images\theme\navi_arrow_left.png" />
     <Content Include="public\images\theme\navi_arrow_right.png" />
