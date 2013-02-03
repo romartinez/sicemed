@@ -91,14 +91,15 @@ namespace Sicemed.Web.Controllers
                 Turno turno;
                 if (!editModel.EsSobreTurno)
                 {
-                    var consultorio = session.Load<Consultorio>(editModel.ConsultorioId);
 //RM SE AGREGA DATOS DE LA FORMA DE PAGO AL TURNO
+                    var consultorio = session.Load<Consultorio>(editModel.ConsultorioId);
                     turno = Turno.Create(fechaTurno, editModel.DuracionTurno, paciente, profesional, especialidad, User.As<Secretaria>(), consultorio, plan, numeroAfiliado,coseguro, editModel.EsTelefonico);
                 }
                 else
                 {
 //RM SE AGREGA DATOS DE LA FORMA DE PAGO AL TURNO
-                    turno = Turno.CreateSobreTurno(fechaTurno, editModel.DuracionTurno, paciente, profesional, especialidad, User.As<Secretaria>(),plan, numeroAfiliado,coseguro, editModel.EsTelefonico);
+                    var consultorioSobreturno = profesional.Agendas.First().Consultorio;
+                    turno = Turno.CreateSobreTurno(fechaTurno, editModel.DuracionTurno, paciente, profesional, especialidad, User.As<Secretaria>(), consultorioSobreturno, plan, numeroAfiliado, coseguro, editModel.EsTelefonico);
                 }
 
                 session.Save(turno);

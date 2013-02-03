@@ -251,7 +251,7 @@ namespace Sicemed.Web.Infrastructure.Services
             var mailRepetido = session.QueryOver<Persona>().Where(x => x.Membership.Email == email).RowCount();
             if (mailRepetido > 0) return MembershipStatus.DUPLICATED_USER_MAIL;
             
-            var nombreRepetido = session.QueryOver<Persona>().Where(x => x.Documento.TipoDocumento.Value == user.Documento.TipoDocumento.Value && x.Documento.Numero==user.Documento.Numero).RowCount();
+            var nombreRepetido = session.QueryOver<Persona>().Where(x => x.Documento.TipoDocumento == user.Documento.TipoDocumento && x.Documento.Numero==user.Documento.Numero).RowCount();
             if (nombreRepetido > 0) return MembershipStatus.DUPLICATED_USER;
 
 

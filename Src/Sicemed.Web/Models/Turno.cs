@@ -344,7 +344,7 @@ namespace Sicemed.Web.Models
         }
         #endregion
 
-        public static Turno CreateSobreTurno(DateTime fechaTurno, TimeSpan duracionTurno, Paciente paciente, Profesional profesional, Especialidad especialidad, Secretaria secretariaReservadoraTurno, Plan plan,String numeroAfiliado,Decimal coseguro, bool esTelefonico)
+        public static Turno CreateSobreTurno(DateTime fechaTurno, TimeSpan duracionTurno, Paciente paciente, Profesional profesional, Especialidad especialidad, Secretaria secretariaReservadoraTurno, Consultorio consultorio, Plan plan,String numeroAfiliado,Decimal coseguro, bool esTelefonico)
         {
             if (paciente == null) throw new ArgumentNullException("paciente");
             if (profesional == null) throw new ArgumentNullException("profesional");
@@ -362,6 +362,7 @@ namespace Sicemed.Web.Models
                 Profesional = profesional,
                 Especialidad = especialidad,
 //RM SE AGREGA DATOS DE LA FORMA DE PAGO AL TURNO
+                Consultorio=consultorio,
                 Plan = plan,
                 NumeroAfiliado = numeroAfiliado,
                 Coseguro = coseguro,

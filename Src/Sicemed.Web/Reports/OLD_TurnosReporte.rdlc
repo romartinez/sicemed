@@ -482,7 +482,6 @@
           </SortExpression>
         </SortExpressions>
         <Top>0.17639cm</Top>
-        <Left>0cm</Left>
         <Height>2.58521cm</Height>
         <Width>17.93136cm</Width>
         <Style>
@@ -561,7 +560,6 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Title</rd:DefaultName>
-          <Left>0cm</Left>
           <Height>0.71747cm</Height>
           <Width>12.35747cm</Width>
           <ZIndex>1</ZIndex>
