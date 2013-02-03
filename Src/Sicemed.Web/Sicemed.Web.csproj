@@ -761,7 +761,7 @@
     <Content Include="Reports\OLD_FichaPacienteReporte.rdlc" />
     <Content Include="Reports\OLD_TurnosReporte.rdlc" />
     <Content Include="Reports\TurnosReporte.rdlc" />
-    <None Include="public\js\libs\jquery.validate-vsdoc.js" />
+    <Content Include="public\js\libs\jquery.validate-vsdoc.js" />
     <Content Include="public\js\libs\jquery.validate.js" />
     <Content Include="public\js\libs\jquery.validate.min.js">
       <DependentUpon>jquery.validate.js</DependentUpon>
